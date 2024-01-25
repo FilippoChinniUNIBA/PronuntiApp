@@ -1,12 +1,12 @@
 # ABCD
 
-Homeworks del Caso di Studio di gruppo di **Integrazione e Test di Sistemi Software**
+Homeworks del Caso di Studio di gruppo di **Sviluppo di Mobile Software**
 
 ### Membri del Gruppo
-- Filippo Chinni Carella&nbsp;&nbsp;&nbsp;    - 764471 - f.chinnicarella@studenti.uniba.it
-- Pasquale Di Gennaro
+- Filippo Chinni Carella&nbsp;&nbsp;&nbsp;                                                                           - 764471 - f.chinnicarella@studenti.uniba.it
+- Pasquale Di Gennaro&nbsp;&nbsp;&nbsp;&nbsp;                                                                        - 758195 - p.digennaro5@studenti.uniba.it
 - Diego Amati&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - 764467 - d.amati6@studenti.uniba.it
-- Nicola Balzano
+- Nicola Balzano&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       - 754694 - n.balzano2@studenti.uniba.it
 
 #### Altre Info
 - Si sconsiglia di aprire il pdf della relazione da GitHub in quanto i link non sono cliccabili, piuttosto scaricare il pdf oppure utilizzare la versione della relazione su Google Docs.
