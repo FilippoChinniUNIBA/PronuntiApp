@@ -4,7 +4,9 @@ Homeworks del Caso di Studio di gruppo di **Integrazione e Test di Sistemi Softw
 
 ### Membri del Gruppo
 - Filippo Chinni Carella&nbsp;&nbsp;&nbsp;    - 764471 - f.chinnicarella@studenti.uniba.it
+- Pasquale Di Gennaro
 - Diego Amati&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - 764467 - d.amati6@studenti.uniba.it
+- Nicola Balzano
 
 #### Altre Info
 - Si sconsiglia di aprire il pdf della relazione da GitHub in quanto i link non sono cliccabili, piuttosto scaricare il pdf oppure utilizzare la versione della relazione su Google Docs.
@@ -14,5 +16,3 @@ Homeworks del Caso di Studio di gruppo di **Integrazione e Test di Sistemi Softw
 [Versione Google Docs della Relazione](https://docs.google.com/document/d/1IaBefEuKvhNBYfPm7UxyvfL5H7FyO2dwuHv_zf9OEa4/edit?usp=drive_link)<br>
 [Versione Google Sheets della tabella dei Test Case](https://docs.google.com/spreadsheets/d/1lcxD7iXDNF8gW1WdDoiVh9VZZz4snZT-RUYLyw690OQ/edit?usp=drive_link)
 
-<br>
-[NOTA 10/01/2024]: Repo clonato con IntelliJ su 2 macchine differenti, i Test e la Coverage vengono eseguiti correttamente.
