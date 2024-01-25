@@ -1,6 +1,6 @@
 # ABCD
 
-Homeworks del Caso di Studio di gruppo di **Sviluppo di Mobile Software**
+Caso di Studio di gruppo di **Sviluppo di Mobile Software**
 
 ### Membri del Gruppo
 - Filippo Chinni Carella&nbsp;&nbsp;&nbsp;                                                                           - 764471 - f.chinnicarella@studenti.uniba.it
@@ -9,10 +9,11 @@ Homeworks del Caso di Studio di gruppo di **Sviluppo di Mobile Software**
 - Nicola Balzano&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       - 754694 - n.balzano2@studenti.uniba.it
 
 #### Altre Info
-- Si sconsiglia di aprire il pdf della relazione da GitHub in quanto i link non sono cliccabili, piuttosto scaricare il pdf oppure utilizzare la versione della relazione su Google Docs.
-- Si sconsiglia di utilizzare il file Excel "Test Case - Homeworks", in quanto la formattazione delle celle non è stata riportata correttamente dal passaggio da Google Sheets a Excel. Piuttosto utilizzare i link presenti all'interno della relazione per accedere al file su Google Sheets.
+- temp
+- temp
 
-#### Link Utili
-[Versione Google Docs della Relazione](https://docs.google.com/document/d/1IaBefEuKvhNBYfPm7UxyvfL5H7FyO2dwuHv_zf9OEa4/edit?usp=drive_link)<br>
-[Versione Google Sheets della tabella dei Test Case](https://docs.google.com/spreadsheets/d/1lcxD7iXDNF8gW1WdDoiVh9VZZz4snZT-RUYLyw690OQ/edit?usp=drive_link)
+#### Link Utili (Versioni Google Docs delle Documentazioni)
+[Documentazione SMS - Sviluppo](https://docs.google.com/document/d/1MxPoTQ4-u34BvvMwY7dz4-nAXZBiK7o3bSSQS1MC34k/edit?usp=drive_link)<br>
+[Documentazione SMS - Progettazione Icona](https://docs.google.com/document/d/1THEak-fdt5yi9-NPtGX5_4eC0jSdUH3LI5cWFlz5MNc/edit?usp=drive_link)<br>
+[Documentazione SMS - Manuale Utente](https://docs.google.com/document/d/1MxPoTQ4-u34BvvMwY7dz4-nAXZBiK7o3bSSQS1MC34k/edit?usp=drive_link)<br>
 
