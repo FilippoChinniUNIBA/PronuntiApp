@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,18 +21,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("pasquale nodo1");
+        myRef.setValue("Prova pasq");
+        FirebaseApp.initializeApp(this);
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword("tnbwlov@gmail.com", "password")
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("Success","Login avvenuto con successo");
+                    } else {
+                        Log.e("Faild",task.getException().toString());
+                    }
+                });
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        myRef.setValue("Hello, dadda!");
-
-        myRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DataSnapshot snapshot = task.getResult();
-                Log.d("Ciao", "Value: " + snapshot.getValue());
-            } else {
-                Log.e("Errore", "Error: ", task.getException());
-            }
-        });
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            // Ora puoi utilizzare l'ID dell'utente come necessario
+            Log.d("UserID", "UserID: " + userId);
+        } else {
+            // L'utente non è attualmente autenticato
+            Log.d("UserID", "Utente non autenticato");
+        }
+        /*
+        firebaseAuth.createUserWithEmailAndPassword("tnbwlov@gmail.com", "password").addOnCompleteListener(this,
+                task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("success","done");
+                    } else {
+                        Exception exception = task.getException();
+                        // Puoi stampare l'errore o utilizzarlo per ulteriori debug
+                        Log.e("TAG", "Errore durante la creazione dell'utente", exception);
+                    }
+                });*/
     }
 
 }
