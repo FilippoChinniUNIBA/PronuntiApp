@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "910097971832",
+    "firebase_url": "https://pronuntiapp-32bf6-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pronuntiapp-32bf6",
+    "storage_bucket": "pronuntiapp-32bf6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910097971832:android:4d834ec6af3f5437f20b8d",
+        "android_client_info": {
+          "package_name": "it.uniba.dib.sms2324.num15.PronuntiApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOKcZ-ncWbqfERqUHkULTVAPz3p35uixk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
