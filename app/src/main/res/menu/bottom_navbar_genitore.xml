@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/monitoraggio_bambino"
+        android:title="Monitoraggio"
+        android:icon="@drawable/ic_bambino"/>
+    <item
+        android:id="@+id/scenari_genitori"
+        android:title="Giochi"
+        android:icon="@drawable/ic_game"/>
+    <item
+        android:id="@+id/results"
+        android:title="Classifica"
+        android:icon="@drawable/ic_classifica"/>
+    <item
+        android:id="@+id/calendarPaziente"
+        android:title="Visite"
+        android:icon="@drawable/ic_calendar"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profilo"
+        android:icon="@drawable/ic_profile"/>
+</menu>
