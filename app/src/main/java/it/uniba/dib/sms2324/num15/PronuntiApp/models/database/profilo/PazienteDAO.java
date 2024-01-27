@@ -31,7 +31,12 @@ public class PazienteDAO implements DAO<Paziente> {
 	}
 
 	@Override
-	public Paziente getById(Paziente paziente) {
+	public List<Paziente> get(String field, Object value) {
+		return null;
+	}
+
+	@Override
+	public Paziente getById(String IdPaziente) {
 		return null;
 	}
 
