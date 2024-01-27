@@ -1,22 +1,62 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.HomeFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.RisultatiFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ProfileFragment;
+    public class MainActivity extends AppCompatActivity
+            implements BottomNavigationView
+            .OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity {
+        BottomNavigationView bottomNavigationView;
 
-    @Override
+        @Override
+        protected void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            bottomNavigationView
+                    = findViewById(R.id.bottomNavigationView);
+
+            bottomNavigationView
+                    .setOnNavigationItemSelectedListener(this);
+            bottomNavigationView.setSelectedItemId(R.id.home);
+        }
+        HomeFragment firstFragment = new HomeFragment();
+        RisultatiFragment secondFragment = new RisultatiFragment();
+        ProfileFragment thirdFragment = new ProfileFragment();
+
+        @Override
+        public boolean
+        onNavigationItemSelected(@NonNull MenuItem item)
+        {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.home) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, firstFragment).commit();
+                return true;
+            } else if (itemId == R.id.results) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, secondFragment).commit();
+                return true;
+            } else if (itemId == R.id.profile) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, thirdFragment).commit();
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -43,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             // L'utente non è attualmente autenticato
             Log.d("UserID", "Utente non autenticato");
         }
-        /*
+
         firebaseAuth.createUserWithEmailAndPassword("tnbwlov@gmail.com", "password").addOnCompleteListener(this,
                 task -> {
                     if (task.isSuccessful()) {
@@ -54,6 +94,3 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("TAG", "Errore durante la creazione dell'utente", exception);
                     }
                 });*/
-    }
-
-}
