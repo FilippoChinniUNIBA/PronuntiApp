@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
 public class Genitore extends AbstractProfilo {
 	private String telefono;
+	private Paziente figlio;
 
 	public Genitore(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono) {
 		super(idProfilo, nome, cognome, username, email, password);
@@ -10,6 +11,10 @@ public class Genitore extends AbstractProfilo {
 
 	public String getTelefono() {
 		return telefono;
+	}
+
+	public Paziente getFiglio() {
+		return figlio;
 	}
 
 }
