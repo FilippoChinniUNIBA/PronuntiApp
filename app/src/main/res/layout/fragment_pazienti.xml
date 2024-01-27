@@ -8,10 +8,10 @@
     tools:context=".views.activity.MainActivity">
 
     <TextView
-        android:id="@+id/profileFragment"
+        android:id="@+id/pazientiFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profilo"
+        android:text="Lista Pazienti"
         android:textColor="#43a047"
         android:textSize="40sp"
         android:textStyle="italic|bold"
