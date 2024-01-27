@@ -1,15 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi;
 
-import android.Manifest;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.widget.Toast;
-
-import androidx.core.app.ActivityCompat;
-
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.speech.v1.RecognitionAudio;
 import com.google.cloud.speech.v1.RecognitionConfig;
@@ -18,7 +14,6 @@ import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1.SpeechSettings;
 import com.google.protobuf.ByteString;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,19 +37,16 @@ public class AudioRecognizer {
     public File getAudioFile() {
         return audioFile;
     }
+    @SuppressLint("MissingPermission")
     public void startRecording(Context context) {
+
         int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            throw new RuntimeException();
-        }
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, bufferSize);
-
         byte[] audioBuffer = new byte[bufferSize];
-        audioRecord.startRecording();
 
+        audioRecord.startRecording();
         isRecording = true;
 
-        // Avviare un thread per la registrazione e il salvataggio dell'audio
         new Thread(() -> {
             try {
                 FileOutputStream outputStream = new FileOutputStream(audioFile);
@@ -68,16 +60,14 @@ public class AudioRecognizer {
             }
         }).start();
 
-        Toast.makeText(context, "Registrazione audio avviata", Toast.LENGTH_SHORT).show();
     }
 
-    public void stopRecording(Context context) {
+    public void stopRecording() {
         if (audioRecord != null && isRecording) {
             isRecording = false;
             audioRecord.stop();
             audioRecord.release();
             audioRecord = null;
-            Toast.makeText(context, "Registrazione audio completata", Toast.LENGTH_SHORT).show();
         }
     }
     public static List<String> syncRecognizeFile(File fileName,Context context) throws Exception {
@@ -102,25 +92,4 @@ public class AudioRecognizer {
                     .collect(Collectors.toList());
         }
     }
-    /*
-    public static void setCredentialsFile(Context context) throws IOException {
-        AssetManager assetManager = context.getAssets();
-        String internalFileName = "google-cloud-credentials.json";  //Da sostituire con quello della classe utilities
-        InputStream inputStream = assetManager.open(internalFileName);
-        File internalFile = new File(context.getFilesDir(), internalFileName);
-        saveInStorage(inputStream,internalFile);
-    }
-    private static void saveInStorage(InputStream inputStream,File internalFile) throws IOException {
-        if(!internalFile.exists()) {
-            OutputStream outputStream = Files.newOutputStream(internalFile.toPath());
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
-            }
-            inputStream.close();
-            outputStream.close();
-        }
-    }
-    */
 }
