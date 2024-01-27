@@ -7,6 +7,13 @@ android {
     namespace = "it.uniba.dib.sms2324.num15.PronuntiApp"
     compileSdk = 34
 
+    packaging {
+        resources {
+            pickFirsts.add("META-INF/INDEX.LIST")
+            pickFirsts.add("META-INF/DEPENDENCIES")
+        }
+    }
+
     defaultConfig {
         applicationId = "it.uniba.dib.sms2324.num15.PronuntiApp"
         minSdk = 28
@@ -39,5 +46,10 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation (enforcedPlatform("com.google.cloud:libraries-bom:26.0.0"))
+    implementation ("com.google.cloud:google-cloud-speech")
+    implementation ("com.google.cloud:google-cloud-core:2.8.0")
+    implementation ("com.google.cloud:google-cloud-speech:2.5.1")
+    implementation ("io.grpc:grpc-okhttp:1.49.0")
 
 }
