@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioFormat;
@@ -13,13 +12,14 @@ import com.google.cloud.speech.v1.RecognizeResponse;
 import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1.SpeechSettings;
+import com.google.cloud.speech.v1.WordInfo;
 import com.google.protobuf.ByteString;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.io.FileOutputStream;
 
 public class AudioRecognizer {
@@ -30,9 +30,11 @@ public class AudioRecognizer {
     private AudioRecord audioRecord;
     private boolean isRecording = false;
     private File audioFile;
+    private Context context;
 
-    public AudioRecognizer(File audioFile) {
+    public AudioRecognizer(File audioFile, Context context) {
         this.audioFile = audioFile;
+        this.context=context;
     }
     public File getAudioFile() {
         return audioFile;
@@ -70,26 +72,37 @@ public class AudioRecognizer {
             audioRecord = null;
         }
     }
-    public static List<String> syncRecognizeFile(File fileName,Context context) throws Exception {
-        InputStream inputStream = context.getAssets().open("google-cloud-credentials.json");
-        GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
+    //L'AUDIO DEVE ESSERE AL MASSIMO DI 60 SECONDI ALTRIMENTI GOOGLE LO DEVE FARE IN MODO ASINCRONO
+    public  List<String> getText() throws Exception {
+        if(audioFile.exists()) {
+            InputStream inputStream = context.getAssets().open("google-cloud-credentials.json");
+            GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
 
-        try (SpeechClient speech = SpeechClient.create(SpeechSettings.newBuilder().setCredentialsProvider(() -> credentials).build())) {
-            byte[] data = Files.readAllBytes(fileName.toPath());
-            ByteString audioBytes = ByteString.copyFrom(data);
+            try (SpeechClient speech = SpeechClient.create(SpeechSettings.newBuilder().setCredentialsProvider(() -> credentials).build())) {
+                byte[] data = Files.readAllBytes(audioFile.toPath());
+                ByteString audioBytes = ByteString.copyFrom(data);
 
-            RecognitionConfig config = RecognitionConfig.newBuilder()
-                                                        .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
-                                                        .setLanguageCode("it-IT")
-                                                        .setSampleRateHertz(16000)
-                                                        .build();
+                //CAPIRE COME SETTARE LE IMPOSTAZIONI
+                RecognitionConfig config = RecognitionConfig.newBuilder()
+                        .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                        .setLanguageCode("it-IT")
+                        .setSampleRateHertz(16000)
+                        .build();
 
-            RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(audioBytes).build();
-            RecognizeResponse response = speech.recognize(config, audio);
-            List<SpeechRecognitionResult> results = response.getResultsList();
-            return response.getResultsList().stream()
-                    .map(result -> result.getAlternativesList().get(0).getTranscript())
-                    .collect(Collectors.toList());
+                RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(audioBytes).build();
+                RecognizeResponse response = speech.recognize(config, audio);
+                List<SpeechRecognitionResult> results = response.getResultsList();
+                List<String> words = new ArrayList<>();
+                for (SpeechRecognitionResult result : results) {
+                    List<WordInfo> listofwords = result.getAlternativesList().get(0).getWordsList();
+                    for(WordInfo word: listofwords){
+                        words.add(word.getWord());
+                    }
+                }
+                return words;
+            }
+        }else{
+            throw new RuntimeException();
         }
     }
 }
