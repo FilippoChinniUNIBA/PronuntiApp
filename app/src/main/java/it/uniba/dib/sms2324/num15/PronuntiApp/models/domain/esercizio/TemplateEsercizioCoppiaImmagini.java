@@ -25,7 +25,7 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio {
         return immagineEsercizioErrata;
     }
 
-    public void setimmagineEsercizioErrata(File immagineEsercizioErrata) {
+    public void setImmagineEsercizioErrata(File immagineEsercizioErrata) {
         this.immagineEsercizioErrata = immagineEsercizioErrata;
     }
 
