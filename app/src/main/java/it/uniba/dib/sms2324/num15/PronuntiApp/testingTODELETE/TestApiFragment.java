@@ -12,38 +12,30 @@ import androidx.fragment.app.Fragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class TestApiFragment extends Fragment {
-    private Button buttonAvviaRegistrazione;
-    private Button buttonStopRegistrazione;
-    private TextView textViewSpeechToTextView;
+	private Button buttonAvviaRegistrazione;
+	private Button buttonStopRegistrazione;
+	private TextView textViewSpeechToTextView;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.test_fragment_test_api, container, false);
+		View view = inflater.inflate(R.layout.test_fragment_test_api, container, false);
 
-        buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
-        buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
-        textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
-        setupButtons();
+		buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
+		buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
+		textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
+		setupButtons();
 
-        return view;
-    }
+		return view;
+	}
 
-    private void setupButtons() {
-        buttonAvviaRegistrazione.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Azione per il bottone 1
-            }
+	private void setupButtons() {
+		buttonAvviaRegistrazione.setOnClickListener(v -> {
+            // Azione per il bottone 1
         });
 
-        buttonStopRegistrazione.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewSpeechToTextView.setText("Prova");
-            }
-        });
+		buttonStopRegistrazione.setOnClickListener(v -> textViewSpeechToTextView.setText("Prova"));
 
-    }
+	}
 
 }
