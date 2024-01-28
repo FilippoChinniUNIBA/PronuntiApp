@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PronuntiApp</string>
+    <string name="first_name_hint">Nome</string>
+    <string name="last_name_hint">Cognome</string>
+    <string name="email_hint">Email</string>
+    <string name="username_hint">Username</string>
+    <string name="phone_hint">Telefono</string>
+    <string name="address_hint">Indirizzo</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Conferma Password</string>
+    <string name="register">Registrati</string>
+    <string name="not_register">Non hai un account? Registrati</string>
+    <string name="already_registered">Hai già un account? Accedi</string>
+    <string name="login">Accedi</string>
 
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
+
 </resources>

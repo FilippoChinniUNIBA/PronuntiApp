@@ -6,20 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AppActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LoginActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationLogin;
 
 public class LoginFragment extends Fragment {
 
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    private TextInputEditText textInputEditTextUsername;
+    private TextInputEditText textInputEditTextPassword;
     private Button buttonLogin;
     private Button buttonToRegister;
+    private TextView textViewTitle;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -30,8 +33,9 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        editTextEmail = view.findViewById(R.id.editTextEmailLogin);
-        editTextPassword = view.findViewById(R.id.editTextPasswordLogin);
+        textViewTitle = view.findViewById(R.id.textViewTitoloLogin);
+        textInputEditTextUsername = view.findViewById(R.id.textInputEditTextUsernameLogin);
+        textInputEditTextPassword = view.findViewById(R.id.textInputEditTextPasswordLogin);
         buttonLogin = view.findViewById(R.id.buttonLogin);
         buttonToRegister = view.findViewById(R.id.buttonToRegister);
         setUpListeners();
