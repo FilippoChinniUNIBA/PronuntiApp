@@ -3,16 +3,24 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.File;
+import java.util.List;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigatioItemSelectorLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationItemSelector;
 
@@ -35,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         //BUTTONS FOR TEST
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
-        setupButtons();
+
+        //CREAZIONE ISTANZA DI AUDIORECOGNIZER
+        AudioRecognizer audioRecognizer = new AudioRecognizer(new File (getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.wav"),this);
+
+        setupButtons(audioRecognizer);
 
         //--->ASSEGNAZIONE NAV BAR
 
@@ -66,18 +78,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setupButtons() {
+    private void setupButtons(AudioRecognizer audioRecognizer) {
         buttonAvviaRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Azione per il bottone 1
+                audioRecognizer.startRecording();
+                Toast.makeText(getApplicationContext(), "Registrazione avviata", Toast.LENGTH_SHORT).show();
             }
         });
 
         buttonStopRegistrazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewSpeechToTextView.setText("Prova");
+                Toast.makeText(getApplicationContext(), "Registrazione interrota", Toast.LENGTH_SHORT).show();
+                audioRecognizer.stopRecording();
+                try {
+                    Thread.sleep(5000);
+                    List<String> words =audioRecognizer.getText();
+                    textViewSpeechToTextView.setText(words.toString());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         });
 
