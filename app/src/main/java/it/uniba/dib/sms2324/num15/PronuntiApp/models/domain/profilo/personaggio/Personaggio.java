@@ -9,13 +9,13 @@ public class Personaggio implements Persistente {
 	private String idPersonaggio;
 	private String nomePersonaggio;
 	private int costoSblocco;
-	private File texture;
+	private File texturePersonaggio;
 
-	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, File texture) {
+	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, File texturePersonaggio) {
 		this.idPersonaggio = idPersonaggio;
 		this.nomePersonaggio = nomePersonaggio;
 		this.costoSblocco = costoSblocco;
-		this.texture = texture;
+		this.texturePersonaggio = texturePersonaggio;
 	}
 
 	public String getIdPersonaggio() {
@@ -30,8 +30,8 @@ public class Personaggio implements Persistente {
 		return costoSblocco;
 	}
 
-	public File getTexture() {
-		return texture;
+	public File getTexturePersonaggio() {
+		return texturePersonaggio;
 	}
 
 	@Override
