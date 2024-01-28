@@ -19,6 +19,7 @@ public class TestMenuTestFragment extends Fragment {
 
     private Button buttonToTestDB;
 
+    private Button buttonFragmentFilePicker;
     public TestMenuTestFragment() {
 
     }
