@@ -7,7 +7,8 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio {
     private File immagineEsercizioErrata;
     private File audio;
 
-    public TemplateEsercizioCoppiaImmagini(File immagineEsercizioCorretta, File immagineEsercizioErrata, File audio) {
+    public TemplateEsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizioCorretta, File immagineEsercizioErrata, File audio) {
+        super(ricompensaCorretto, ricompensaErrato);
         this.immagineEsercizioCorretta = immagineEsercizioCorretta;
         this.immagineEsercizioErrata = immagineEsercizioErrata;
         this.audio = audio;

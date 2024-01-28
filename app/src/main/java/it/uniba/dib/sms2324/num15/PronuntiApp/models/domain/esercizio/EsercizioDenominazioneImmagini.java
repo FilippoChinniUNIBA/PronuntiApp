@@ -2,10 +2,12 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
 
-public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazioneImmagini {
+public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazioneImmagini implements Esercizio{
     private int countAiuti;
-    public EsercizioDenominazioneImmagini(File immagineEsercizio) {
-        super(immagineEsercizio);
+
+    public EsercizioDenominazioneImmagini(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti) {
+        super(ricompensaCorretto, ricompensaErrato, immagineEsercizio);
+        this.countAiuti = countAiuti;
     }
 
     public int getCountAiuti() {

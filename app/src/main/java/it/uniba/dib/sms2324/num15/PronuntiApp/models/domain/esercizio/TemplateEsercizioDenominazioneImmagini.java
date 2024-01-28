@@ -6,7 +6,8 @@ public class TemplateEsercizioDenominazioneImmagini extends AbstractEsercizio {
 
    private File immagineEsercizio;
 
-    public TemplateEsercizioDenominazioneImmagini(File immagineEsercizio) {
+    public TemplateEsercizioDenominazioneImmagini(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio) {
+        super(ricompensaCorretto, ricompensaErrato);
         this.immagineEsercizio = immagineEsercizio;
     }
 

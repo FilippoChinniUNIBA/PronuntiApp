@@ -7,11 +7,16 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio {
     private File audioEsercizio;
     private String parola1,parola2,parola3;
 
-    public TemplateEsercizioSequenzaParole(File audioEsercizio, String parola1, String parola2, String parola3) {
+    public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
+        super(ricompensaCorretto, ricompensaErrato);
         this.audioEsercizio = audioEsercizio;
         this.parola1 = parola1;
         this.parola2 = parola2;
         this.parola3 = parola3;
+    }
+
+    public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato) {
+        super(ricompensaCorretto, ricompensaErrato);
     }
 
     public File getAudioEsercizio() {
