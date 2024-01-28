@@ -19,7 +19,7 @@ public class TestApiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.fragment_test_api, container, false);
+        View view= inflater.inflate(R.layout.test_fragment_test_api, container, false);
 
         buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
         buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
