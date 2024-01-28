@@ -1,7 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase;
 
-public class CostantiNodiDB {
+public final class CostantiNodiDB {
 	public static final String LOGOPEDISTI = "logopedisti";
+	public static final String CLASSIFICHE = "classifiche";
 	public static final String GENITORI = "genitori";
 	public static final String APPUNTAMENTI = "appuntamenti";
 	public static final String PAZIENTI = "pazienti";
