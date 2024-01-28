@@ -5,6 +5,8 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.util.Log;
+
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.speech.v1.RecognitionAudio;
 import com.google.cloud.speech.v1.RecognitionConfig;
@@ -12,13 +14,14 @@ import com.google.cloud.speech.v1.RecognizeResponse;
 import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.cloud.speech.v1.SpeechSettings;
-import com.google.cloud.speech.v1.WordInfo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import com.google.protobuf.ByteString;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.FileOutputStream;
 
@@ -40,7 +43,7 @@ public class AudioRecognizer {
         return audioFile;
     }
     @SuppressLint("MissingPermission")
-    public void startRecording(Context context) {
+    public void startRecording() {
 
         int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, bufferSize);
@@ -82,7 +85,6 @@ public class AudioRecognizer {
                 byte[] data = Files.readAllBytes(audioFile.toPath());
                 ByteString audioBytes = ByteString.copyFrom(data);
 
-                //CAPIRE COME SETTARE LE IMPOSTAZIONI
                 RecognitionConfig config = RecognitionConfig.newBuilder()
                         .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
                         .setLanguageCode("it-IT")
@@ -94,10 +96,8 @@ public class AudioRecognizer {
                 List<SpeechRecognitionResult> results = response.getResultsList();
                 List<String> words = new ArrayList<>();
                 for (SpeechRecognitionResult result : results) {
-                    List<WordInfo> listofwords = result.getAlternativesList().get(0).getWordsList();
-                    for(WordInfo word: listofwords){
-                        words.add(word.getWord());
-                    }
+                    String word = result.getAlternativesList().get(0).getTranscript();
+                    words.addAll(Arrays.asList(word.split("\\s+"))) ;
                 }
                 return words;
             }
