@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
@@ -9,18 +9,16 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiLogoped
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ProfileFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.AbstractNavigationSelector;
 
-public class NavigatioItemSelectorLogopedista implements NavigationItemSelector{
-    private final FragmentManager fragmentManager;
-    private final int fragmentContainerId;
+public class NavigatioSelectorLogopedista extends AbstractNavigationSelector implements NavigationItemSelector{
     private final PazientiFragment pazientiFragment = new PazientiFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
     private final AppuntamentiLogopedistaFragment appuntamentiLogopedistaFragment = new AppuntamentiLogopedistaFragment();
 
-    public NavigatioItemSelectorLogopedista(FragmentManager fragmentManager, @IdRes int fragmentContainerId) {
-        this.fragmentManager = fragmentManager;
-        this.fragmentContainerId = fragmentContainerId;
+    public NavigatioSelectorLogopedista(FragmentManager fragmentManager, @IdRes int fragmentContainerId) {
+        super( fragmentManager, fragmentContainerId);
     }
 
     public boolean selectItem(@IdRes int itemId) {

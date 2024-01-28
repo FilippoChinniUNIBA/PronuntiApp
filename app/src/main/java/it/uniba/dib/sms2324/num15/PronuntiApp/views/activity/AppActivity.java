@@ -1,41 +1,32 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigatioItemSelectorLogopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationItemSelector;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.BottoniSchermateDiTestFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigatioSelectorLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigationItemSelector;
 
-public class MainActivity extends AppCompatActivity {
+public class AppActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private NavigationItemSelector navigationItemSelector;
 
-    private Button buttonAvviaRegistrazione;
-    private Button buttonStopRegistrazione;
-    private TextView textViewSpeechToTextView;
+    private Button buttonToTest;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_app);
 
-        buttonAvviaRegistrazione = findViewById(R.id.avviaRegistrazione);
-        buttonStopRegistrazione = findViewById(R.id.stopRegistrazione);
-        textViewSpeechToTextView = findViewById(R.id.speechToText);
 
         //BUTTONS FOR TEST
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
-        setupButtons();
 
         //--->ASSEGNAZIONE NAV BAR
 
@@ -50,38 +41,28 @@ public class MainActivity extends AppCompatActivity {
 
         //LOGOPEDISTA
         bottomNavigationView.inflateMenu(R.menu.bottom_navbar_logopedista);
-        navigationItemSelector = new NavigatioItemSelectorLogopedista(getSupportFragmentManager(), R.id.flFragment);
+        navigationItemSelector = new NavigatioSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout);
 
 
         //first fragment selected
         //bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(0).getItemId());
 
+        bottomNavigationView.setOnItemSelectedListener(item -> navigationItemSelector.selectItem(item.getItemId()));
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return navigationItemSelector.selectItem(item.getItemId());
-            }
-        });
-    }
-
-
-    private void setupButtons() {
-        buttonAvviaRegistrazione.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Azione per il bottone 1
-            }
-        });
-
-        buttonStopRegistrazione.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textViewSpeechToTextView.setText("Prova");
-            }
+        //BUTTONS FOR TEST
+        buttonToTest = findViewById(R.id.buttonTest);
+        buttonToTest.setOnClickListener(v -> {
+            BottoniSchermateDiTestFragment bottoniSchermateDiTestFragment = new BottoniSchermateDiTestFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.appFrameLayout, bottoniSchermateDiTestFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
 
     }
+
+
+
 }
 
     /*@Override

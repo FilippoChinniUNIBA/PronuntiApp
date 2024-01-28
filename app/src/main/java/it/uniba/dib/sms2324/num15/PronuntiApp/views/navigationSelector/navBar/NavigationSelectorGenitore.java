@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
@@ -10,19 +10,17 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ProfileFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenariGenitoriFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.AbstractNavigationSelector;
 
-public class NavigationItemSelectorGenitore implements NavigationItemSelector{
-    private final FragmentManager fragmentManager;
-    private final int fragmentContainerId;
+public class NavigationSelectorGenitore extends AbstractNavigationSelector implements NavigationItemSelector{
     private final MonitoraggioFragment monitoraggioFragment = new MonitoraggioFragment();
     private final ScenariGenitoriFragment scenariGenitoriFragment = new ScenariGenitoriFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
     private final AppuntamentiGenitoreFragment appuntamentiGenitoreFragment = new AppuntamentiGenitoreFragment();
 
-    public NavigationItemSelectorGenitore(FragmentManager fragmentManager, @IdRes int fragmentContainerId) {
-        this.fragmentManager = fragmentManager;
-        this.fragmentContainerId = fragmentContainerId;
+    public NavigationSelectorGenitore(FragmentManager fragmentManager, @IdRes int fragmentContainerId) {
+        super( fragmentManager, fragmentContainerId);
     }
 
     public boolean selectItem(@IdRes int itemId) {
