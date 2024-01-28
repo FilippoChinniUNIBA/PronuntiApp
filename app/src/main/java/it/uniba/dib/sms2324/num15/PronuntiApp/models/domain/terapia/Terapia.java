@@ -36,6 +36,7 @@ public class Terapia implements Persistente {
 		return scenariGioco;
 	}
 
+
 	@Override
 	public Map<String, Object> toMap() {
 		return null;
