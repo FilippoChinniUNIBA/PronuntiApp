@@ -88,7 +88,7 @@ public class AudioRecognizer {
                 RecognitionConfig config = RecognitionConfig.newBuilder()
                         .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
                         .setLanguageCode("it-IT")
-                        .setSampleRateHertz(16000)
+                        .setSampleRateHertz(SAMPLE_RATE)
                         .build();
 
                 RecognitionAudio audio = RecognitionAudio.newBuilder().setContent(audioBytes).build();
