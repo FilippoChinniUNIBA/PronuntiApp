@@ -12,16 +12,14 @@ import androidx.fragment.app.FragmentManager;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.LoginFragment;
 
-public class TestMenuTest extends Fragment {
+public class TestMenuTestFragment extends Fragment {
 
     private Button buttonToTestApi;
     private Button buttonToTestLogin;
 
     private Button buttonToTestDB;
 
-    private Button buttonFragmentFilePicker;
-
-    public TestMenuTest() {
+    public TestMenuTestFragment() {
 
     }
 

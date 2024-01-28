@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTest;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigatioSelectorLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigationItemSelector;
 
@@ -52,9 +52,9 @@ public class AppActivity extends AppCompatActivity {
         //BUTTONS FOR TEST
         buttonToTest = findViewById(R.id.buttonTest);
         buttonToTest.setOnClickListener(v -> {
-            TestMenuTest testMenuTest = new TestMenuTest();
+            TestMenuTestFragment testMenuTestFragment = new TestMenuTestFragment();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.appFrameLayout, testMenuTest)
+                    .replace(R.id.appFrameLayout, testMenuTestFragment)
                     .addToBackStack(null)
                     .commit();
         });

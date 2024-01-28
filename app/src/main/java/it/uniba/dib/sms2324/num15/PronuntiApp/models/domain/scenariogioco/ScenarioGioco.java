@@ -9,18 +9,35 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 
 public class ScenarioGioco extends TemplateScenarioGioco implements Persistente {
-	private int idScenarioGioco;
+	private String idScenarioGioco;
 	private LocalDate dataInizio;
 	private int ricompensaFinale;
 	private List<Esercizio> esercizi;
 
-	public ScenarioGioco(File immagineSfondo, int idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
+	public ScenarioGioco(File immagineSfondo, String idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
 		super(immagineSfondo);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
 		this.esercizi = esercizi;
 	}
+
+	public String getIdScenarioGioco() {
+		return idScenarioGioco;
+	}
+
+	public LocalDate getDataInizio() {
+		return dataInizio;
+	}
+
+	public int getRicompensaFinale() {
+		return ricompensaFinale;
+	}
+
+	public List<Esercizio> getEsercizi() {
+		return esercizi;
+	}
+
 
 	@Override
 	public Map<String, Object> toMap() {

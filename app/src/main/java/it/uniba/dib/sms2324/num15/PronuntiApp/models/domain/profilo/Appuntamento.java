@@ -8,14 +8,14 @@ import java.util.Objects;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class Appuntamento implements Persistente {
-	private int idAppuntamento;
+	private String idAppuntamento;
 	private int refIdGenitore;
 	private int refIdLogopedista;
 	private LocalDate data;
 	private LocalTime time;
 	private String luogo;
 
-	public Appuntamento(int idAppuntamento, int refIdGenitore, int refIdLogopedista, LocalDate data, LocalTime time, String luogo) {
+	public Appuntamento(String idAppuntamento, int refIdGenitore, int refIdLogopedista, LocalDate data, LocalTime time, String luogo) {
 		this.idAppuntamento = idAppuntamento;
 		this.refIdGenitore = refIdGenitore;
 		this.refIdLogopedista = refIdLogopedista;
@@ -24,7 +24,7 @@ public class Appuntamento implements Persistente {
 		this.luogo = luogo;
 	}
 
-	public int getIdAppuntamento() {
+	public String getIdAppuntamento() {
 		return idAppuntamento;
 	}
 
@@ -48,19 +48,6 @@ public class Appuntamento implements Persistente {
 		return luogo;
 	}
 
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Appuntamento that = (Appuntamento) o;
-		return idAppuntamento == that.idAppuntamento;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(idAppuntamento);
-	}
 
 	@Override
 	public Map<String, Object> toMap() {
