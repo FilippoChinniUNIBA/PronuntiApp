@@ -1,7 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase;
 
 public final class CostantiDBPaziente {
-	public static final String ID_PAZIENTE = "idPaziente";
+	public static final String ID_PROFILO = "idProfilo";
 	public static final String NOME = "nome";
 	public static final String COGNOME = "cognome";
 	public static final String USERNAME = "username";

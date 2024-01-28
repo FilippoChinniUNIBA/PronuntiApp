@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase;
 public class CostantiNodiDB {
 	public static final String LOGOPEDISTI = "logopedisti";
 	public static final String GENITORI = "genitori";
+	public static final String APPUNTAMENTI = "appuntamenti";
 	public static final String PAZIENTI = "pazienti";
 	public static final String TERAPIE = "terapie";
 	public static final String TEMPLATE_SCENARIGIOCO = "templateScenariGioco";
