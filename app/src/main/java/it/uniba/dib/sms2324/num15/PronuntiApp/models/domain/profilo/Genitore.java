@@ -1,6 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
-public class Genitore extends AbstractProfilo {
+import java.util.Map;
+
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class Genitore extends AbstractProfilo implements Persistente {
 	private String telefono;
 	private Paziente figlio;
 
@@ -17,4 +21,8 @@ public class Genitore extends AbstractProfilo {
 		return figlio;
 	}
 
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
+	}
 }

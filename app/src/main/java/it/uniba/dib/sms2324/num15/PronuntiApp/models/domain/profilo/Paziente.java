@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
-public class Paziente extends AbstractProfilo {
+public class Paziente extends AbstractProfilo implements Persistente {
 	private int refIdLogopedista;
 	private int refIdGenitore;
 	private int eta;
@@ -58,5 +59,10 @@ public class Paziente extends AbstractProfilo {
 
 	public List<Terapia> getTerapie() {
 		return terapie;
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 }

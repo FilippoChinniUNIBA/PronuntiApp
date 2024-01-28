@@ -2,10 +2,12 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 
-public class Terapia {
+public class Terapia implements Persistente {
 	private String idTerapia;
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
@@ -32,5 +34,10 @@ public class Terapia {
 
 	public List<ScenarioGioco> getScenariGioco() {
 		return scenariGioco;
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 }
