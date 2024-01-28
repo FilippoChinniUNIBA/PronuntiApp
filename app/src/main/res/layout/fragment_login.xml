@@ -1,33 +1,75 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@+id/editTextEmailLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"/>
-
-    <EditText
-        android:id="@+id/editTextPasswordLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/buttonLogin"
+    <TextView
+        android:id="@+id/textViewTitoloLogin"
+        android:textColor="@color/primaryTextColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"/>
+        android:fontFamily="sans-serif-black"
+        android:text="@string/app_name"
+        android:textSize="@dimen/headerTextSize"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutLogin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/buttonToRegister"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Register"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <!-- TextInputLayout e TextInputEditText per Username -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextUsernameLogin"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username_hint"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TextInputLayout e TextInputEditText per Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextPasswordLogin"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/login" />
+
+        <Button
+            android:id="@+id/buttonToRegister"
+            style="@style/TrasparentButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/not_register"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

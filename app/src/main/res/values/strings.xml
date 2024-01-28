@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">PronuntiApp</string>
 
-    <string name="login_email_hint">Email</string>
-    <string name="login_password_hint">Password</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="email_hint">Email</string>
+    <string name="username_hint">Username</string>
+    <string name="phone_hint">Phone</string>
+    <string name="address_hint">Address</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="register">Sign Up</string>
+    <string name="not_register">Don\'t have an account? Register</string>
+    <string name="already_registered">Already have an account? Login</string>
+    <string name="login">Sign in</string>
+
+
 </resources>
