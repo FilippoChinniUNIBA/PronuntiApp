@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +26,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class TestFilePickerFragment extends Fragment {
     private Button buttonfilePicker;
-
     private TextView filepath;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.test_file_picker_fragment, container, false);
 
-        buttonfilePicker = view.findViewById(R.id.idfilepickerbutton);
-
+        this.buttonfilePicker = view.findViewById(R.id.idfilepickerbutton);
+        this.filepath = view.findViewById(R.id.filepathsceltoid);
 
         this.buttonfilePicker.setOnClickListener(v -> openFile());
         return view;
@@ -49,6 +49,9 @@ public class TestFilePickerFragment extends Fragment {
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == RESULT_OK) {
                 Intent data = result.getData();
+
+                //Log.d("data",data.getData().getPath().toString());
+
                 Uri uri = data.getData();
                 String path = uri.getPath();
                 filepath.setText(path);
