@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 	private int ricompensaFinale;
 	private List<Esercizio> esercizi;
 
-	public ScenarioGioco(String immagineSfondo, int idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
+	public ScenarioGioco(File immagineSfondo, int idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
 		super(immagineSfondo);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
