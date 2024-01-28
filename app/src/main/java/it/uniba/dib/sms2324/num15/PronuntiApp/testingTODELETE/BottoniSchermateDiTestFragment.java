@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestApiFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.LoginFragment;
 
 public class BottoniSchermateDiTestFragment extends Fragment {
 
