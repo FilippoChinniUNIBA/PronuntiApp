@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -33,18 +37,24 @@ public class TestFilePickerFragment extends Fragment {
         this.buttonfilePicker.setOnClickListener(v -> openFile());
         return view;
     }
-    public void onActivityResult(int requestcode, int resultcode, Intent data) {
-        super.onActivityResult(requestcode,resultcode,data);
-         Uri uri=data.getData();
-         String path= uri.getPath();
-         filepath.setText(path);
-    }
-
     private void openFile() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        startActivityForResult(intent, 1);
+        intent=Intent.createChooser(intent,"choose a file");
+        sActivityLauncher.launch(intent);
     }
+
+    ActivityResultLauncher<Intent> sActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == RESULT_OK) {
+                Intent data = result.getData();
+                Uri uri = data.getData();
+                String path = uri.getPath();
+                filepath.setText(path);
+            }
+        }
+    });
 
 
 
