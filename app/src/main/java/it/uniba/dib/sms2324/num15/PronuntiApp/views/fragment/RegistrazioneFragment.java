@@ -8,19 +8,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationLogin;
 
 public class RegistrazioneFragment extends Fragment {
 
-    private EditText editTextNome;
-    private EditText editTextCognome;
-    private EditText editTextEmail;
-    private EditText editTextUsername;
-    private EditText editTextPassword;
-    private EditText editTextConfermaPassword;
-    private EditText editTextTelefono;
-    private EditText editTextIndirizzo;
+    private TextInputEditText editTextNome;
+    private TextInputEditText editTextCognome;
+    private TextInputEditText editTextEmail;
+    private TextInputEditText editTextUsername;
+    private TextInputEditText editTextPassword;
+    private TextInputEditText editTextConfermaPassword;
+    private TextInputEditText editTextTelefono;
+    private TextInputEditText editTextIndirizzo;
     private Button buttonRegistrati;
     private Button buttonVaiAlLogin;
 
@@ -33,14 +35,14 @@ public class RegistrazioneFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registrazione, container, false);
 
-        editTextNome = view.findViewById(R.id.editTextNome);
-        editTextCognome = view.findViewById(R.id.editTextCognome);
-        editTextEmail = view.findViewById(R.id.editTextEmail);
-        editTextUsername = view.findViewById(R.id.editTextUsername);
-        editTextPassword = view.findViewById(R.id.editTextPassword);
-        editTextConfermaPassword = view.findViewById(R.id.editTextConfermaPassword);
-        editTextTelefono = view.findViewById(R.id.editTextTelefono);
-        editTextIndirizzo = view.findViewById(R.id.editTextIndirizzo);
+        editTextNome = (TextInputEditText) view.findViewById(R.id.textInputEditTextNome);
+        editTextCognome = view.findViewById(R.id.textInputEditTextCognome);
+        editTextEmail = view.findViewById(R.id.textInputEditTextEmail);
+        editTextUsername = view.findViewById(R.id.textInputEditTextUsername);
+        editTextPassword = view.findViewById(R.id.textInputEditTextPassword);
+        editTextConfermaPassword = view.findViewById(R.id.textInputEditTextConfermaPassword);
+        editTextTelefono = view.findViewById(R.id.textInputEditTextTelefono);
+        editTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzo);
         buttonRegistrati = view.findViewById(R.id.buttonRegistrati);
         buttonVaiAlLogin = view.findViewById(R.id.buttonVaiAlLogin);
 
