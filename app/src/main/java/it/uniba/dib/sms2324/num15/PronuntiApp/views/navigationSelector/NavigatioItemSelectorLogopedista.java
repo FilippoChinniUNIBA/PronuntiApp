@@ -1,11 +1,10 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitoreFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiLogopedistaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;

@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector;
 
 import androidx.annotation.IdRes;
 

@@ -5,55 +5,84 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.NavigatioItemSelectorLogopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.NavigationItemSelector;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.NavigationItemSelectorGenitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.NavigationItemSelectorPaziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigatioItemSelectorLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationItemSelector;
+
 public class MainActivity extends AppCompatActivity {
-        BottomNavigationView bottomNavigationView;
-        NavigationItemSelector navigationItemSelector;
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+    private BottomNavigationView bottomNavigationView;
+    private NavigationItemSelector navigationItemSelector;
 
-            bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
+    private Button buttonAvviaRegistrazione;
+    private Button buttonStopRegistrazione;
+    private TextView textViewSpeechToTextView;
 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-            //--->ASSEGNAZIONE NAV BAR
+        buttonAvviaRegistrazione = findViewById(R.id.avviaRegistrazione);
+        buttonStopRegistrazione = findViewById(R.id.stopRegistrazione);
+        textViewSpeechToTextView = findViewById(R.id.speechToText);
 
+        //BUTTONS FOR TEST
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
+        setupButtons();
 
-            //GENITORE
-            //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_genitore);
-            //navigationItemSelector = new NavigationItemSelectorGenitore(getSupportFragmentManager(), R.id.flFragment);
-
-            //PAZIENTE
-            //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_paziente);
-            //navigationItemSelector = new NavigationItemSelectorPaziente(getSupportFragmentManager(), R.id.flFragment);
-
-            //LOGOPEDISTA
-            bottomNavigationView.inflateMenu(R.menu.bottom_navbar_logopedista);
-            navigationItemSelector = new NavigatioItemSelectorLogopedista(getSupportFragmentManager(), R.id.flFragment);
+        //--->ASSEGNAZIONE NAV BAR
 
 
-            //first fragment selected
-            bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(0).getItemId());
+        //GENITORE
+        //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_genitore);
+        //navigationItemSelector = new NavigationItemSelectorGenitore(getSupportFragmentManager(), R.id.flFragment);
+
+        //PAZIENTE
+        //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_paziente);
+        //navigationItemSelector = new NavigationItemSelectorPaziente(getSupportFragmentManager(), R.id.flFragment);
+
+        //LOGOPEDISTA
+        bottomNavigationView.inflateMenu(R.menu.bottom_navbar_logopedista);
+        navigationItemSelector = new NavigatioItemSelectorLogopedista(getSupportFragmentManager(), R.id.flFragment);
 
 
-            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    return navigationItemSelector.selectItem(item.getItemId());
-                }
-            });
+        //first fragment selected
+        //bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(0).getItemId());
 
-        }
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                return navigationItemSelector.selectItem(item.getItemId());
+            }
+        });
     }
+
+
+    private void setupButtons() {
+        buttonAvviaRegistrazione.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Azione per il bottone 1
+            }
+        });
+
+        buttonStopRegistrazione.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewSpeechToTextView.setText("Prova");
+            }
+        });
+
+    }
+}
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
