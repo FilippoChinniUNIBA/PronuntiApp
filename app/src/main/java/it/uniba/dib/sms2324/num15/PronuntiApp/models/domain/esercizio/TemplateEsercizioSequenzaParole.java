@@ -2,10 +2,12 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
 
-public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio{
+public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio {
 
     private File audioEsercizio;
-    private String parola1,parola2,parola3;
+    private String parola1;
+    private String parola2;
+    private String parola3;
 
     public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
         super(ricompensaCorretto, ricompensaErrato);
