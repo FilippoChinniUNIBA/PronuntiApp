@@ -8,7 +8,11 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class TestDBFragment extends Fragment {
 	private TextView textViewTestDB;
@@ -21,13 +25,23 @@ public class TestDBFragment extends Fragment {
 
 		this.textViewTestDB = view.findViewById(R.id.textRisultatoTestDB);
 
-		bottoneTestDB.setOnClickListener(v -> azioneBottoneTestDB());
+		bottoneTestDB.setOnClickListener(v -> testDAOPersonaggio());
 
 		return view;
 	}
 
-	private void azioneBottoneTestDB() {
-		this.textViewTestDB.setText("TestDBFunzionante");
+	private void testDAOPersonaggio() {
+		// PER FAR FUNZIONARE AGGIUNGERE UN METODO getDb() ALLA CLASSE PersonaggioDAO
+
+//		PersonaggioDAO daoP = new PersonaggioDAO();
+//		Personaggio p = new Personaggio("1", "abcde", 500, "texture");
+//		DatabaseReference ref = daoP.getDb().getReference("personaggi");
+//
+//		String chiave = ref.push().getKey();
+//
+//		ref.child(chiave).setValue(p);
+//
+//		textViewTestDB.setText(chiave);
 	}
 
 

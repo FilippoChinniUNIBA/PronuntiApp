@@ -12,14 +12,16 @@ import androidx.fragment.app.FragmentManager;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.LoginFragment;
 
-public class TestMenuTest extends Fragment {
+public class TestMenuTestFragment extends Fragment {
 
     private Button buttonToTestApi;
     private Button buttonToTestLogin;
 
     private Button buttonToTestDB;
 
-    public TestMenuTest() {
+    private Button buttonFragmentFilePicker;
+
+    public TestMenuTestFragment() {
 
     }
 
@@ -30,6 +32,7 @@ public class TestMenuTest extends Fragment {
         buttonToTestApi= view.findViewById(R.id.buttonTestApi);
         buttonToTestLogin= view.findViewById(R.id.buttonTestLoginRegistrazione);
         buttonToTestDB= view.findViewById(R.id.buttonToTestDB);
+        buttonFragmentFilePicker=view.findViewById(R.id.idfilepickerfragment);
 
         this.buttonToTestApi.setOnClickListener(v -> {
             TestApiFragment testApiFragment = new TestApiFragment();
@@ -49,6 +52,7 @@ public class TestMenuTest extends Fragment {
                     .commit();
         });
 
+
         this.buttonToTestDB.setOnClickListener(v -> {
             TestDBFragment testDBFragment = new TestDBFragment();
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -57,6 +61,16 @@ public class TestMenuTest extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+
+        this.buttonFragmentFilePicker.setOnClickListener(v -> {
+                    TestFilePickerFragment testFilePickerFragment = new TestFilePickerFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.appFrameLayout, testFilePickerFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                );
 
         return view;
 

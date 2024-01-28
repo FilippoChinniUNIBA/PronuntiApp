@@ -5,10 +5,10 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazioneImmagini implements EsercizioEseguibile, Persistente {
+public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazioneImmagine implements EsercizioEseguibile, Persistente {
     private int countAiuti;
 
-    public EsercizioDenominazioneImmagini(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti) {
+    public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti) {
         super(ricompensaCorretto, ricompensaErrato, immagineEsercizio);
         this.countAiuti = countAiuti;
     }
