@@ -2,7 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
 
-public class TemplateEsercizioDenominazioneImmagini extends AbstractEsercizio {
+public class TemplateEsercizioDenominazioneImmagini extends AbstractEsercizio implements Esercizio{
 
    private File immagineEsercizio;
 
