@@ -3,7 +3,6 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -19,14 +18,16 @@ import androidx.fragment.app.Fragment;
 
 import java.io.File;
 import java.util.List;
-import java.util.Objects;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.UploadTask;
 
 public class TestApiFragment extends Fragment {
 	private Button buttonAvviaRegistrazione;
 	private Button buttonStopRegistrazione;
+
+	private Button buttonUploadFile;
 	private TextView textViewSpeechToTextView;
 
 	@Override
@@ -36,21 +37,23 @@ public class TestApiFragment extends Fragment {
 
 		buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
 		buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
+		buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
 		textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
 
 		Activity curretactivity = requireActivity();
 		AudioRecognizer audioRecognizer = new AudioRecognizer(new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.wav"),getContext());
+		UploadTask uploadObject = new UploadTask(audioRecognizer.getAudioFile(),curretactivity,"test.wav");
 
 		if (checkPermissions(curretactivity)) {
-			setupButtons(audioRecognizer,curretactivity);
+			setupButtons(audioRecognizer,curretactivity,uploadObject);
 		} else {
 			requestPermissions(curretactivity);
-			setupButtons(audioRecognizer,curretactivity);
+			setupButtons(audioRecognizer,curretactivity,uploadObject);
 		}
 		return view;
 	}
 
-	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity) {
+	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, UploadTask uploadObject) {
 		buttonAvviaRegistrazione.setOnClickListener(v -> {
 			audioRecognizer.startRecording();
 			Toast.makeText(currentactivity, "Registrazione avviata", Toast.LENGTH_SHORT).show();
@@ -67,7 +70,19 @@ public class TestApiFragment extends Fragment {
 			}
 
 		});
+
+		buttonUploadFile.setOnClickListener(v -> {
+			try {
+				uploadObject.execute();
+				Toast.makeText(currentactivity, "Upload riuscito", Toast.LENGTH_SHORT).show();
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		});
+
 	}
+
+
 	private boolean checkPermissions(Activity currentactivity) {
 		int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
 		int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);

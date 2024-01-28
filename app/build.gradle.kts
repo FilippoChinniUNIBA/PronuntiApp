@@ -51,5 +51,6 @@ dependencies {
     implementation ("com.google.cloud:google-cloud-core:2.8.0")
     implementation ("com.google.cloud:google-cloud-speech:2.5.1")
     implementation ("io.grpc:grpc-okhttp:1.49.0")
+    implementation ("com.google.cloud:google-cloud-storage");
 
 }
