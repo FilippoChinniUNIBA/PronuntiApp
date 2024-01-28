@@ -16,7 +16,6 @@ public class TestMenuTestFragment extends Fragment {
 
     private Button buttonToTestApi;
     private Button buttonToTestLogin;
-
     private Button buttonToTestDB;
 
     public TestMenuTestFragment() {
