@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio;
 
+import java.io.File;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
@@ -8,9 +9,9 @@ public class Personaggio implements Persistente {
 	private String idPersonaggio;
 	private String nomePersonaggio;
 	private int costoSblocco;
-	private String texture;
+	private File texture;
 
-	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, String texture) {
+	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, File texture) {
 		this.idPersonaggio = idPersonaggio;
 		this.nomePersonaggio = nomePersonaggio;
 		this.costoSblocco = costoSblocco;
@@ -29,7 +30,7 @@ public class Personaggio implements Persistente {
 		return costoSblocco;
 	}
 
-	public String getTexture() {
+	public File getTexture() {
 		return texture;
 	}
 
