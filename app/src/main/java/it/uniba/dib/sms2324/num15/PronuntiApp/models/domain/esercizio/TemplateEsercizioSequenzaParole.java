@@ -1,8 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
+import java.util.Map;
 
-public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio {
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio, Persistente {
 
     private File audioEsercizio;
     private String parola1;
@@ -51,5 +54,10 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 
     public void setParola3(String parola3) {
         this.parola3 = parola3;
+    }
+
+    @Override
+    public Map<String, Object> toMap() {
+        return null;
     }
 }

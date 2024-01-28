@@ -1,8 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
+import java.util.Map;
 
-public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implements Esercizio {
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implements Esercizio, Persistente {
     private File immagineEsercizioCorretta;
     private File immagineEsercizioErrata;
     private File audio;
@@ -39,4 +42,8 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
     }
 
 
+    @Override
+    public Map<String, Object> toMap() {
+        return null;
+    }
 }

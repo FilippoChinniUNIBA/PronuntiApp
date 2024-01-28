@@ -1,8 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco;
 
 import java.io.File;
+import java.util.Map;
 
-public class TemplateScenarioGioco extends AbstractScenarioGioco {
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class TemplateScenarioGioco extends AbstractScenarioGioco implements Persistente {
 	private int idTemplateScenarioGioco;
 
 	public TemplateScenarioGioco(File immagineSfondo, int idTemplateScenarioGioco) {
@@ -16,5 +19,10 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 
 	public int getIdTemplateScenarioGioco() {
 		return idTemplateScenarioGioco;
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 }

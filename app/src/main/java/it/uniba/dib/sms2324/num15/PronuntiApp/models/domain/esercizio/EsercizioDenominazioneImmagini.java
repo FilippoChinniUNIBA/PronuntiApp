@@ -1,8 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
 import java.io.File;
+import java.util.Map;
 
-public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazioneImmagini implements EsercizioEseguibile {
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazioneImmagini implements EsercizioEseguibile, Persistente {
     private int countAiuti;
 
     public EsercizioDenominazioneImmagini(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti) {
@@ -16,5 +19,9 @@ public class EsercizioDenominazioneImmagini extends TemplateEsercizioDenominazio
 
     public void setCountAiuti(int countAiuti) {
         this.countAiuti = countAiuti;
+    }
+    @Override
+    public Map<String, Object> toMap() {
+        return null;
     }
 }

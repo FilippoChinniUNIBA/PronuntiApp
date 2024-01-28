@@ -1,6 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio;
 
-public class Personaggio {
+import java.util.Map;
+
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class Personaggio implements Persistente {
 	private String idPersonaggio;
 	private String nomePersonaggio;
 	private int costoSblocco;
@@ -27,5 +31,10 @@ public class Personaggio {
 
 	public String getTexture() {
 		return texture;
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 }

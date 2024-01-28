@@ -2,9 +2,12 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Objects;
 
-public class Appuntamento {
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public class Appuntamento implements Persistente {
 	private int idAppuntamento;
 	private int refIdGenitore;
 	private int refIdLogopedista;
@@ -57,5 +60,10 @@ public class Appuntamento {
 	@Override
 	public int hashCode() {
 		return Objects.hash(idAppuntamento);
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 }
