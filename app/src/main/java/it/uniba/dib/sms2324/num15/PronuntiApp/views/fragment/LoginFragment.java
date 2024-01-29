@@ -38,27 +38,27 @@ public class LoginFragment extends Fragment {
         textInputEditTextPassword = view.findViewById(R.id.textInputEditTextPasswordLogin);
         buttonLogin = view.findViewById(R.id.buttonLogin);
         buttonToRegister = view.findViewById(R.id.buttonToRegister);
-        setUpListeners();
+
+        buttonLogin.setOnClickListener(v -> startAppActivity());
+        buttonToRegister.setOnClickListener(v -> navigationToRegister());
 
         return view;
     }
 
-    private void setUpListeners() {
-        buttonLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AppActivity.class);
-            startActivity(intent);
-            if (getActivity() != null) {
-                getActivity().finish(); // Chiude l'Activity corrente
-            }
-        });
-
-        buttonToRegister.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                NavigationLogin.replaceFragment(getActivity().getSupportFragmentManager(),
-                        R.id.loginFrameLayout,
-                        new RegistrazioneFragment());
-            }
-        });
-
+    private void startAppActivity() {
+        Intent intent = new Intent(getActivity(), AppActivity.class);
+        startActivity(intent);
+        if (getActivity() != null) {
+            getActivity().finish(); // Chiude l'Activity corrente
+        }
     }
+
+    private void navigationToRegister() {
+        if (getActivity() != null) {
+            NavigationLogin.replaceFragment(getActivity().getSupportFragmentManager(),
+                    R.id.loginFrameLayout,
+                    new RegistrazioneFragment());
+        }
+    }
+
 }

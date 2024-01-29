@@ -46,18 +46,22 @@ public class RegistrazioneFragment extends Fragment {
         buttonRegistrati = view.findViewById(R.id.buttonRegistrati);
         buttonVaiAlLogin = view.findViewById(R.id.buttonVaiAlLogin);
 
-        buttonRegistrati.setOnClickListener(v -> {
-            // Implement registration logic
-        });
+        buttonRegistrati.setOnClickListener(v -> registration());
 
-        buttonVaiAlLogin.setOnClickListener(v -> {
-            if (getActivity() != null) {
-                NavigationLogin.replaceFragment(getActivity().getSupportFragmentManager(),
-                        R.id.loginFrameLayout,
-                        new LoginFragment());
-            }
-        });
+        buttonVaiAlLogin.setOnClickListener(v -> navigationToLogin());
 
         return view;
+    }
+
+    private void navigationToLogin() {
+        if (getActivity() != null) {
+            NavigationLogin.replaceFragment(getActivity().getSupportFragmentManager(),
+                    R.id.loginFrameLayout,
+                    new LoginFragment());
+        }
+    }
+
+    private void registration(){
+
     }
 }

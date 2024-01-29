@@ -13,6 +13,5 @@
     <string name="not_register">Don\'t have an account? Register</string>
     <string name="already_registered">Already have an account? Login</string>
     <string name="login">Sign in</string>
-
-
+    <string name="subtitle_registration">Welcome, enter your data to start using the application!</string>
 </resources>
