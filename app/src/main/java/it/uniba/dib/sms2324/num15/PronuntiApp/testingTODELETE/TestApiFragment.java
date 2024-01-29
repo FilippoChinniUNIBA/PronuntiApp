@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,19 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.CloudTask;
@@ -26,7 +38,7 @@ public class TestApiFragment extends Fragment {
 	private Button buttonAvviaRegistrazione;
 	private Button buttonStopRegistrazione;
 	private Button buttonUploadFile;
-
+	private Button buttonUploadFileFirebase;
 	private Button buttonDownloadFile;
 	private TextView textViewSpeechToTextView;
 
@@ -39,6 +51,7 @@ public class TestApiFragment extends Fragment {
 		buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
 		buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
 		buttonDownloadFile = view.findViewById(R.id.buttonDownloadFile);
+		buttonUploadFileFirebase = view.findViewById(R.id.buttonUpdloadinfirebase);
 		textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
 
 
@@ -72,6 +85,10 @@ public class TestApiFragment extends Fragment {
 
 		buttonDownloadFile.setOnClickListener(v -> {
 			downloadFile(cloudTaskDownload, currentactivity);
+		});
+
+		buttonUploadFileFirebase.setOnClickListener(v -> {
+			uploadInFirebase(audioRecognizer);
 		});
 
 	}
@@ -113,6 +130,27 @@ public class TestApiFragment extends Fragment {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	private void uploadInFirebase(AudioRecognizer audioRecognizer){
+		FirebaseStorage storage = FirebaseStorage.getInstance();
+		StorageReference mountainImagesRef = storage.getReference("test.wav");
+		InputStream stream = null;
+		UploadTask uploadTask =null;
+		try {
+			stream = new FileInputStream(audioRecognizer.getAudioFile());
+			uploadTask = mountainImagesRef.putStream(stream);
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		uploadTask.addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				Log.d("Success","Upload done");
+			} else {
+				Exception exception = task.getException();
+				Log.d("Fail", Objects.requireNonNull(exception.getMessage()));
+			}
+		});
 	}
 
 	private boolean checkPermissions(Activity currentactivity) {
