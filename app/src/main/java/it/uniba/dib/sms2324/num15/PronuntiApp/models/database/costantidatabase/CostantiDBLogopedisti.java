@@ -10,8 +10,6 @@ public final class CostantiDBLogopedisti {
 	public static final String TELEFONO = "telefono";
 	public static final String INDIRIZZO = "indirizzo";
 
-	private CostantiDBLogopedisti() {
-
-	}
+	private CostantiDBLogopedisti() {}
 
 }

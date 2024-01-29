@@ -6,8 +6,6 @@ public final class CostantiDBPersonaggio {
 	public static final String COSTO_SBLOCCO = "costoSblocco";
 	public static final String TEXTURE_PERSONAGGIO = "texturePersonaggio";
 
-	private CostantiDBPersonaggio() {
-
-	}
+	private CostantiDBPersonaggio() {}
 
 }

@@ -9,7 +9,6 @@ public final class CostantiDBGenitore {
 	public static final String PASSWORD = "password";
 	public static final String TELEFONO = "telefono";
 
-	private CostantiDBGenitore() {
-	}
+	private CostantiDBGenitore() {}
 
 }

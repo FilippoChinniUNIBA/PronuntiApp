@@ -8,8 +8,6 @@ public final class CostantiDBAppuntamento {
 	public static final String ORA = "ora";
 	public static final String LUOGO = "luogo";
 
-	private CostantiDBAppuntamento() {
-
-	}
+	private CostantiDBAppuntamento() {}
 
 }

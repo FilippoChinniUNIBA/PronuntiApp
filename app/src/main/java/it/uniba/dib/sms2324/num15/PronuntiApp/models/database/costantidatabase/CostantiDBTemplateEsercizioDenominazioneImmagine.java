@@ -6,8 +6,6 @@ public final class CostantiDBTemplateEsercizioDenominazioneImmagine {
 	public static final String RICOMPENSA_CORRETTO = "ricompensaCorretto";
 	public static final String RICOMPENSA_ERRATO = "ricompensaErrato";
 
-	private CostantiDBTemplateEsercizioDenominazioneImmagine() {
-
-	}
+	private CostantiDBTemplateEsercizioDenominazioneImmagine() {}
 
 }

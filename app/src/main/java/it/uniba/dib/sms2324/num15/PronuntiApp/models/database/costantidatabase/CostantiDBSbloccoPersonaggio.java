@@ -5,8 +5,6 @@ public final class CostantiDBSbloccoPersonaggio {
 	public static final String ID_PAZIENTE = "idPaziente";
 	public static final String SBLOCCATO = "sbloccato";
 
-	private CostantiDBSbloccoPersonaggio() {
-
-	}
+	private CostantiDBSbloccoPersonaggio() {}
 
 }

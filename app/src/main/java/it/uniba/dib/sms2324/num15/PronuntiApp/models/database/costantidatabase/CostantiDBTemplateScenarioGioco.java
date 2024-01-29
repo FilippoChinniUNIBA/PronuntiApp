@@ -4,8 +4,6 @@ public final class CostantiDBTemplateScenarioGioco {
 	public static final String ID_TEMPLATE_SCENARIOGIOCO = "idTemplateScenarioGioco";
 	public static final String IMMAGINE_SFONDO = "immagineSfondo";
 
-	private CostantiDBTemplateScenarioGioco() {
-
-	}
+	private CostantiDBTemplateScenarioGioco() {}
 
 }

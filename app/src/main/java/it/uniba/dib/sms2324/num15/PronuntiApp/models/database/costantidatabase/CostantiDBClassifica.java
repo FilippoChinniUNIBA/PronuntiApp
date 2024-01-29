@@ -4,8 +4,6 @@ public final class CostantiDBClassifica {
 	public static final String ID_LOGOPEDISTA = "idLogopedista";
 	public static final String CLASSIFICA_PAZIENTI = "classificaPazienti";
 
-	private CostantiDBClassifica() {
-
-	}
+	private CostantiDBClassifica() {}
 
 }

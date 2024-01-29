@@ -15,7 +15,6 @@ public final class CostantiDBPaziente {
 	public static final String ID_LOGOPEDISTA = "idLogopedista";
 	public static final String ID_GENITORE = "idGenitore";
 
-	private CostantiDBPaziente() {
-	}
+	private CostantiDBPaziente() {}
 
 }

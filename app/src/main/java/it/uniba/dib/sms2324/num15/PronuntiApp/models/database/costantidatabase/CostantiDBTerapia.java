@@ -6,7 +6,6 @@ public final class CostantiDBTerapia {
 	public static final String DATA_FINE = "dataFine";
 	public static final String ID_PAZIENTE = "idPaziente";
 
-	private CostantiDBTerapia() {
-	}
+	private CostantiDBTerapia() {}
 
 }
