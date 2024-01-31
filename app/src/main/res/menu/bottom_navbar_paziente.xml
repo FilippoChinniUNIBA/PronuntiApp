@@ -9,7 +9,7 @@
         android:title="Personaggi"
         android:icon="@drawable/ic_personaggi"/>
     <item
-        android:id="@+id/results"
+        android:id="@+id/classificaLogopedista"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
     <item
@@ -17,7 +17,7 @@
         android:title="Visite"
         android:icon="@drawable/ic_calendar"/>
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profiloLogopedista"
         android:title="Profilo"
         android:icon="@drawable/ic_profile"/>
 </menu>

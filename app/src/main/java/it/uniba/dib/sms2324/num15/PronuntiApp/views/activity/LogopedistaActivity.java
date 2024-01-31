@@ -3,6 +3,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,12 +12,12 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigatioSelectorLogopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBar.NavigationItemSelector;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigatioSelectorLogopedistaNavBar;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarItemSelector;
 
-public class AppActivity extends AppCompatActivity {
+public class LogopedistaActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
-    private NavigationItemSelector navigationItemSelector;
+    private NavigationNavBarItemSelector navigationNavBarItemSelector;
 
     private Button buttonToTest;
 
@@ -23,6 +25,12 @@ public class AppActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app);
 
+
+
+        // Abilita il tasto Up nella ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //BUTTONS FOR TEST
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -33,21 +41,21 @@ public class AppActivity extends AppCompatActivity {
 
         //GENITORE
         //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_genitore);
-        //navigationItemSelector = new NavigationItemSelectorGenitore(getSupportFragmentManager(), R.id.flFragment);
+        //navigationItemSelector = new NavigationItemSelectorGenitore(getSupportFragmentManager(), R.id.flFragment, bottomNavigationView);
 
         //PAZIENTE
         //bottomNavigationView.inflateMenu(R.menu.bottom_navbar_paziente);
-        //navigationItemSelector = new NavigationItemSelectorPaziente(getSupportFragmentManager(), R.id.flFragment);
+        //navigationItemSelector = new NavigationItemSelectorPaziente(getSupportFragmentManager(), R.id.flFragment, bottomNavigationView);
 
         //LOGOPEDISTA
         bottomNavigationView.inflateMenu(R.menu.bottom_navbar_logopedista);
-        navigationItemSelector = new NavigatioSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout);
+        navigationNavBarItemSelector = new NavigatioSelectorLogopedistaNavBar(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView);
 
 
         //first fragment selected
         //bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(0).getItemId());
 
-        bottomNavigationView.setOnItemSelectedListener(item -> navigationItemSelector.selectItem(item.getItemId()));
+        bottomNavigationView.setOnItemSelectedListener(item -> navigationNavBarItemSelector.selectItem(item.getItemId()));
 
         //BUTTONS FOR TEST
         buttonToTest = findViewById(R.id.buttonTest);
@@ -59,6 +67,19 @@ public class AppActivity extends AppCompatActivity {
                     .commit();
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Controlla se il tasto up è stato premuto
+        if (item.getItemId() == android.R.id.home) {
+            // Sostituisci il fragment corrente con il fragment precedente
+            Log.d("Back","Back");
+            getSupportFragmentManager().popBackStack();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

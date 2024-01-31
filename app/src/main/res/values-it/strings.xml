@@ -14,6 +14,8 @@
     <string name="already_registered">Hai già un account? Accedi</string>
     <string name="login">Accedi</string>
     <string name="subtitle_registration">Benvenuto, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>
+    <string name="modify_profile"> Modifica profilo </string>
+    <string name="confirm_modify_profile"> Conferma modifiche</string>
 
 
 </resources>

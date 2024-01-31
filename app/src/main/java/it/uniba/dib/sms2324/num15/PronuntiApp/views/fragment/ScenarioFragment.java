@@ -20,4 +20,12 @@ public class ScenarioFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_scenario, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Giochi del bambino");
+        }
+    }
 }

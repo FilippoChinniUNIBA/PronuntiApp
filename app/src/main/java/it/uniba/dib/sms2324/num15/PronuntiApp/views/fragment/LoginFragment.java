@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AppActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.NavigationLogin;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends AbstractFragmentSignInUp {
 
     private TextInputEditText textInputEditTextUsername;
     private TextInputEditText textInputEditTextPassword;
@@ -40,24 +40,16 @@ public class LoginFragment extends Fragment {
         buttonToRegister = view.findViewById(R.id.buttonToRegister);
 
         buttonLogin.setOnClickListener(v -> startAppActivity());
-        buttonToRegister.setOnClickListener(v -> navigationToRegister());
+        buttonToRegister.setOnClickListener(v -> navigateTo(view.getId(), new RegistrazioneFragment()));
 
         return view;
     }
 
     private void startAppActivity() {
-        Intent intent = new Intent(getActivity(), AppActivity.class);
+        Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
         startActivity(intent);
         if (getActivity() != null) {
             getActivity().finish(); // Chiude l'Activity corrente
-        }
-    }
-
-    private void navigationToRegister() {
-        if (getActivity() != null) {
-            NavigationLogin.replaceFragment(getActivity().getSupportFragmentManager(),
-                    R.id.loginFrameLayout,
-                    new RegistrazioneFragment());
         }
     }
 

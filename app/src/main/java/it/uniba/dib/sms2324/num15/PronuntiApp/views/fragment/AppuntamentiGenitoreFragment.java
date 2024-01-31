@@ -27,4 +27,12 @@ public class AppuntamentiGenitoreFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_appuntamenti_genitore, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Apppuntamenti");
+        }
+    }
 }

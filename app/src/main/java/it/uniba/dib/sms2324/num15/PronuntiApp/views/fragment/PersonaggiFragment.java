@@ -20,4 +20,12 @@ public class PersonaggiFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_personaggi, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Personaggi");
+        }
+    }
 }

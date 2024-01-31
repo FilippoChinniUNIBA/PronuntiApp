@@ -44,6 +44,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation ("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -52,10 +55,10 @@ dependencies {
     implementation ("com.google.cloud:google-cloud-core:2.8.0")
     implementation ("com.google.cloud:google-cloud-speech:2.5.1")
     implementation ("io.grpc:grpc-okhttp:1.49.0")
-    implementation ("com.google.cloud:google-cloud-storage")
+    implementation ("com.google.cloud:google-cloud-storage");
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("com.arthenica:ffmpeg-kit-full:6.0-2")
-
-
 
 
 

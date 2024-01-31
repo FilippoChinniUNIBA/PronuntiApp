@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/textViewTitoloRegistrazione"
-        android:textColor="@color/primaryTextColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="@string/app_name"
+        android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/headerTextSize"
         app:layout_constraintBottom_toTopOf="@id/textViewSubTitoloBenvenuti"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewSubTitoloBenvenuti"
@@ -27,20 +27,34 @@
         android:text="@string/subtitle_registration"
         android:textSize="@dimen/subHeaderTextSize"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@id/linearLayoutRegistrazione"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazione"
         app:layout_constraintTop_toBottomOf="@id/textViewTitoloRegistrazione"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewDataRegistrazione"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="5dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtonsRegistrazione"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenuti"
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        >
+
+
     <LinearLayout
         android:id="@+id/linearLayoutRegistrazione"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="16dp"
+        android:padding="16dp"
         android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         >
 
         <!-- TextInputLayout e TextInputEditText per Nome -->
@@ -156,7 +170,18 @@
                 android:hint="@string/confirm_password_hint"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutButtonsRegistrazione"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazione">
         <Button
             android:id="@+id/buttonRegistrati"
             android:layout_width="296dp"
@@ -169,8 +194,8 @@
             style="@style/TrasparentButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="@string/already_registered"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:layout_gravity="center"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

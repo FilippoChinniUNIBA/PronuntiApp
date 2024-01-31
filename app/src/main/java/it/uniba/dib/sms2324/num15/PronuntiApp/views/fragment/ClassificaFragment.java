@@ -21,4 +21,12 @@ public class ClassificaFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_classifica, container, false);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Classifica");
+        }
+    }
 }
