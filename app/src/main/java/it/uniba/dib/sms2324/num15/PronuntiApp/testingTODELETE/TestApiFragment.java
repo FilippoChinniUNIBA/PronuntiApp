@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -23,13 +24,14 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.CloudTask;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.DownloadAction;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.UploadAction;
@@ -40,6 +42,8 @@ public class TestApiFragment extends Fragment {
 	private Button buttonUploadFile;
 	private Button buttonUploadFileFirebase;
 	private Button buttonDownloadFile;
+	private Button buttonAvviaVocale;
+	private Button buttonStoppaVocale;
 	private TextView textViewSpeechToTextView;
 
 	@Override
@@ -52,24 +56,41 @@ public class TestApiFragment extends Fragment {
 		buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
 		buttonDownloadFile = view.findViewById(R.id.buttonDownloadFile);
 		buttonUploadFileFirebase = view.findViewById(R.id.buttonUpdloadinfirebase);
+		buttonAvviaVocale = view.findViewById(R.id.buttonAvviaVocale);
+		buttonStoppaVocale= view.findViewById(R.id.buttonStoppaVocale);
 		textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
 
 
 		Activity curretactivity = requireActivity();
-		AudioRecognizer audioRecognizer = new AudioRecognizer(new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.wav"),getContext());
-		CloudTask cloudTaskUpload = new CloudTask(audioRecognizer.getAudioFile(),curretactivity,"test.wav",new UploadAction());
-		CloudTask cloudTaskDownload = new CloudTask(new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),"test.wav"),curretactivity,"test.wav", new DownloadAction());
+
+		File directoryMusic = curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+		File directoryDownloads = curretactivity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+
+		File fileRegistrazione = new File(directoryMusic,"test");
+		File fileConvertito = new File(directoryMusic,"test.mp3");
+		File downloadFileConvertito = new File(directoryDownloads,"test.mp3");
+
+		String nomeFileUploadDownload = "test.mp3";
+
+		UploadAction uploadAction = new UploadAction();
+		DownloadAction downloadAction = new DownloadAction();
+		MediaPlayer mediaPlayer = new MediaPlayer();
+
+		AudioRecognizer audioRecognizer = new AudioRecognizer(fileRegistrazione,curretactivity);
+		CloudTask cloudTaskUpload = new CloudTask(fileConvertito,curretactivity,nomeFileUploadDownload,uploadAction);
+		CloudTask cloudTaskDownload = new CloudTask(downloadFileConvertito,curretactivity,nomeFileUploadDownload, downloadAction);
+		AudioTest audioTest = new AudioTest(mediaPlayer,fileConvertito,curretactivity);
 
 		if (checkPermissions(curretactivity)) {
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload);
+			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest);
 		} else {
 			requestPermissions(curretactivity);
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload);
+			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest);
 		}
 		return view;
 	}
 
-	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, CloudTask cloudTaskUpload ,CloudTask cloudTaskDownload) {
+	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, CloudTask cloudTaskUpload ,CloudTask cloudTaskDownload,AudioTest audioTest) {
 
 		buttonAvviaRegistrazione.setOnClickListener(v -> {
 			startRecording(audioRecognizer,currentactivity);
@@ -91,13 +112,21 @@ public class TestApiFragment extends Fragment {
 			uploadInFirebase(audioRecognizer);
 		});
 
+		buttonAvviaVocale.setOnClickListener(v -> {
+			startVocal(audioTest);
+		});
+
+		buttonStoppaVocale.setOnClickListener(v -> {
+			stopVocal(audioTest);
+		});
+
 	}
 
 
 	private void startRecording(AudioRecognizer audioRecognizer, Activity currentactivity){
 		try{
 		audioRecognizer.startRecording();
-		Toast.makeText(currentactivity, "Registrazione avviata", Toast.LENGTH_SHORT).show();
+			textViewSpeechToTextView.setText("Registrazione in corso . . .");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,10 +134,11 @@ public class TestApiFragment extends Fragment {
 
 	private void stopRecording(AudioRecognizer audioRecognizer, Activity currentactivity){
 		try {
+			textViewSpeechToTextView.setText("Salvataggio in corso . . .");
 			audioRecognizer.stopRecording();
-			Toast.makeText(currentactivity, "Registrazione interrotta", Toast.LENGTH_SHORT).show();
 			List<String> words = audioRecognizer.getText();
-			textViewSpeechToTextView.setText(words.toString());
+			textViewSpeechToTextView.setText("parole dette: " + words.toString());
+			AudioConverter.convertFile(audioRecognizer.getAudioFile(),new File(currentactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.mp3"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,7 +147,7 @@ public class TestApiFragment extends Fragment {
 	private void uploadFile(CloudTask uploadTask,Activity currentactivity){
 		try {
 			uploadTask.execute();
-			Toast.makeText(currentactivity, "Upload riuscito", Toast.LENGTH_SHORT).show();
+			textViewSpeechToTextView.setText("Upload completato");
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -126,7 +156,7 @@ public class TestApiFragment extends Fragment {
 	private void downloadFile(CloudTask downloadTask,Activity currentactivity){
 		try {
 			downloadTask.execute();
-			Toast.makeText(currentactivity, "Download riuscito", Toast.LENGTH_SHORT).show();
+			textViewSpeechToTextView.setText("Download Riuscito");
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -134,7 +164,7 @@ public class TestApiFragment extends Fragment {
 
 	private void uploadInFirebase(AudioRecognizer audioRecognizer){
 		FirebaseStorage storage = FirebaseStorage.getInstance();
-		StorageReference mountainImagesRef = storage.getReference("test.wav");
+		StorageReference mountainImagesRef = storage.getReference("test");
 		InputStream stream = null;
 		UploadTask uploadTask =null;
 		try {
@@ -153,6 +183,23 @@ public class TestApiFragment extends Fragment {
 		});
 	}
 
+	private void startVocal(AudioTest audioTest){
+		try {
+			audioTest.playAudio();
+		}catch (Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void stopVocal(AudioTest audioTest){
+		try {
+			audioTest.stopAudio();
+		}catch (Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+
+
 	private boolean checkPermissions(Activity currentactivity) {
 		int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
 		int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -170,4 +217,5 @@ public class TestApiFragment extends Fragment {
 				Manifest.permission.RECORD_AUDIO
 		}, 1000);
 	}
+
 }

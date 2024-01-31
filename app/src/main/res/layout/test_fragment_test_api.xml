@@ -10,34 +10,34 @@
         android:layout_width="154dp"
         android:layout_height="53dp"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="159dp"
         android:text="Avvia reg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonStopRegistrazione"
-        android:layout_width="153dp"
-        android:layout_height="51dp"
+        android:layout_width="154dp"
+        android:layout_height="55dp"
         android:layout_marginStart="158dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="159dp"
         android:text="Stop REG"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAvviaRegistrazione" />
 
     <TextView
         android:id="@+id/textViewSpeechToText"
-        android:layout_width="321dp"
-        android:layout_height="59dp"
+        android:layout_width="364dp"
+        android:layout_height="94dp"
         android:layout_marginStart="176dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="177dp"
-        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -69,10 +69,36 @@
         android:id="@+id/buttonUpdloadinfirebase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="28dp"
         android:text="upload in firebase"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonDownloadFile" />
+
+    <Button
+        android:id="@+id/buttonAvviaVocale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
+        android:text="Avvia vocale"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSpeechToText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStopRegistrazione"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonStoppaVocale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="32dp"
+        android:text="Ferma audio"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSpeechToText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStopRegistrazione"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
