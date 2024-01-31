@@ -4,9 +4,8 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class Genitore extends AbstractProfilo implements Persistente {
+public class Genitore extends AbstractProfilo implements Persistente<Genitore> {
 	private String telefono;
-	private Paziente figlio;
 
 	public Genitore(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono) {
 		super(idProfilo, nome, cognome, username, email, password);
@@ -17,12 +16,13 @@ public class Genitore extends AbstractProfilo implements Persistente {
 		return telefono;
 	}
 
-	public Paziente getFiglio() {
-		return figlio;
+	@Override
+	public Map<String, Object> toMap() {
+		return null;
 	}
 
 	@Override
-	public Map<String, Object> toMap() {
+	public Genitore fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

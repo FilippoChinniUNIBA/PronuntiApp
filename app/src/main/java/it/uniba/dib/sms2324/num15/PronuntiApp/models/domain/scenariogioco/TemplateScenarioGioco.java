@@ -5,7 +5,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class TemplateScenarioGioco extends AbstractScenarioGioco implements Persistente {
+public class TemplateScenarioGioco extends AbstractScenarioGioco implements Persistente<TemplateScenarioGioco> {
 	private String idTemplateScenarioGioco;
 
 	public TemplateScenarioGioco(File immagineSfondo, String idTemplateScenarioGioco) {
@@ -24,6 +24,11 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public TemplateScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 
-public class ScenarioGioco extends TemplateScenarioGioco implements Persistente {
+public class ScenarioGioco extends TemplateScenarioGioco {
 	private String idScenarioGioco;
 	private LocalDate dataInizio;
 	private int ricompensaFinale;
@@ -41,6 +41,11 @@ public class ScenarioGioco extends TemplateScenarioGioco implements Persistente 
 
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public ScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

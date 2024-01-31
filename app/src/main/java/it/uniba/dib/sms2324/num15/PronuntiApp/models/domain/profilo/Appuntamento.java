@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class Appuntamento implements Persistente {
+public class Appuntamento implements Persistente<Appuntamento> {
 	private String idAppuntamento;
 	private int refIdGenitore;
 	private int refIdLogopedista;
@@ -51,6 +51,11 @@ public class Appuntamento implements Persistente {
 
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public Appuntamento fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }
