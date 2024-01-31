@@ -10,7 +10,7 @@
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Conferma Password</string>
     <string name="register">Registrati</string>
-    <string name="not_register">Non hai un account? Registrati</string>
+    <string name="not_register">Non hai un account? <b>Registrati</b></string>
     <string name="already_registered">Hai già un account? Accedi</string>
     <string name="login">Accedi</string>
     <string name="subtitle_registration">Benvenuto, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>

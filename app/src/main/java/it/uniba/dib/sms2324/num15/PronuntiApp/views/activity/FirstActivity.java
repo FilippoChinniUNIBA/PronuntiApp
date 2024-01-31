@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.LoginFragment;
 
-public class LoginActivity extends AppCompatActivity {
+public class FirstActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_registrazione);
 
         if (savedInstanceState == null) {
             // Crea un'istanza del Fragment
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // Aggiungi il Fragment al FrameLayout
-            fragmentTransaction.add(R.id.loginFrameLayout, loginFragment);
+            fragmentTransaction.add(R.id.loginRegistrazioneFrameLayout, loginFragment);
             fragmentTransaction.commit();
         }
     }
