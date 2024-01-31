@@ -47,43 +47,68 @@ public class TestDBFragment extends Fragment {
 		textViewTestDB_3 = view.findViewById(R.id.test_DB_Action_TextView_3);
 		textViewTestDB_4 = view.findViewById(R.id.test_DB_Action_TextView_4);
 
-		//buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
+		buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
 		buttonTestDB_2.setOnClickListener(v -> testDAOPersonaggioGet());
+		buttonTestDB_3.setOnClickListener(v -> testDAOPersonaggioUpdate());
+		buttonTestDB_4.setOnClickListener(v -> testDAOPersonaggioDelete());
 
 		return view;
 	}
 
 	private void testDAOPersonaggioSave() {
-		// PER FAR FUNZIONARE AGGIUNGERE UN METODO getDb() ALLA CLASSE PersonaggioDAO
-
 		String idPersonaggio = "1234567890";
-		String nomePersonaggio = "erger";
+		String nomePersonaggio = "nome prova 1";
 		int costoSblocco = 600;
 		File texturePersonaggio = new File("folder/texture/texture.png");
 
 		Personaggio p = new Personaggio(nomePersonaggio, costoSblocco, texturePersonaggio);
 
 		PersonaggioDAO daoP = new PersonaggioDAO();
-		DatabaseReference ref = daoP.getDb().getReference(CostantiNodiDB.PERSONAGGI);
+		daoP.save(p);
 
-		String chiave = ref.push().getKey();
-		ref.child(chiave).setValue(p.toMap());
+		//List<Personaggio> list = daoP.get(CostantiDBPersonaggio.NOME_PERSONAGGIO, "nome prova 1");
+		Log.d("Test DAO - Save", p.toString());
+		textViewTestDB_1.setText(p.toString());
+	}
 
-		textViewTestDB_1.setText(chiave);
+	private void testDAOPersonaggioUpdate() {
+		String idPersonaggio = "-NpTuTGI9QUg0y5XoeJO";
+		String nomePersonaggio = "abcde";
+		int costoSblocco = 500;
+		File texturePersonaggio = new File("folder/cambioProva/texture.png");
+
+		Personaggio p = new Personaggio(idPersonaggio, nomePersonaggio, costoSblocco, texturePersonaggio);
+
+		PersonaggioDAO daoP = new PersonaggioDAO();
+		daoP.update(p);
+
+		Log.d("Test DAO - Update", p.toString());
+		textViewTestDB_3.setText(p.toString());
+	}
+
+	private void testDAOPersonaggioDelete() {
+		String idPersonaggio = "-NpWKFqa3yzinrW3acKT";
+		String nomePersonaggio = "weggrrgrg";
+		int costoSblocco = 1000;
+		File texturePersonaggio = new File("folder/cambioSbaglio/texture.png");
+
+		Personaggio p = new Personaggio(idPersonaggio, nomePersonaggio, costoSblocco, texturePersonaggio);
+
+		PersonaggioDAO daoP = new PersonaggioDAO();
+		daoP.delete(p);
+
+		Log.d("Test DAO - Delete", p.toString());
+		textViewTestDB_4.setText(p.toString());
 	}
 
 	private void testDAOPersonaggioGet() {
-		// PER FAR FUNZIONARE AGGIUNGERE UN METODO getDb() ALLA CLASSE PersonaggioDAO
-
 		PersonaggioDAO daoP = new PersonaggioDAO();
-		DatabaseReference ref = daoP.getDb().getReference(CostantiNodiDB.PERSONAGGI);
 
 		List<Personaggio> lista = new ArrayList<>();
 		lista = daoP.get(CostantiDBPersonaggio.NOME_PERSONAGGIO, "erger");
 
-		Log.d("PROVA PERSONAGGIO - Dao", (lista == null) ? "lista null" : lista.toString());
+		Log.d("Test DAO - Get", (lista == null) ? "lista null" : lista.toString());
 		textViewTestDB_2.setText(lista.toString());
-
 	}
 
 

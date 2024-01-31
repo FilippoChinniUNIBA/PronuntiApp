@@ -2,6 +2,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,15 @@ public class Personaggio implements Persistente<Personaggio> {
 		this.nomePersonaggio = nomePersonaggio;
 		this.costoSblocco = costoSblocco;
 		this.texturePersonaggio = texturePersonaggio;
+	}
+
+	public Personaggio(Map<String, Object> fromDatabaseMap) {
+		Personaggio p = this.fromMap(fromDatabaseMap);
+
+		this.idPersonaggio = p.getIdPersonaggio();
+		this.nomePersonaggio = p.getNomePersonaggio();
+		this.costoSblocco = p.getCostoSblocco();
+		this.texturePersonaggio = p.getTexturePersonaggio();
 	}
 
 	public String getIdPersonaggio() {
@@ -82,7 +93,7 @@ public class Personaggio implements Persistente<Personaggio> {
 
 	@Override
 	public Personaggio fromMap(Map<String, Object> fromDatabaseMap) {
-		Log.d("Debug - Personaggio.fromMap()", fromDatabaseMap.toString());
+		Log.d("Personaggio.fromMap()", fromDatabaseMap.toString());
 		return new Personaggio(
 				(String) fromDatabaseMap.get(CostantiDBPersonaggio.NOME_PERSONAGGIO),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPersonaggio.COSTO_SBLOCCO)),
