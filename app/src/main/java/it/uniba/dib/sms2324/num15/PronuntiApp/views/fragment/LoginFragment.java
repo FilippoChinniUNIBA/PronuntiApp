@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.GenitoreActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
 
 public class LoginFragment extends AbstractFragmentSignInUp {
@@ -40,14 +42,22 @@ public class LoginFragment extends AbstractFragmentSignInUp {
         buttonToRegister = view.findViewById(R.id.buttonToRegister);
 
         buttonLogin.setOnClickListener(v -> startAppActivity());
-        buttonToRegister.setOnClickListener(v -> navigateTo(view.getId(), new RegistrazioneFragment()));
+        buttonToRegister.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new RegistrazioneFragment()));
 
         return view;
     }
 
     private void startAppActivity() {
-        Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
-        startActivity(intent);
+
+        //controllo che tipo di utente è
+
+        //se è un logopedista
+        //startActivity(new Intent(getActivity(), LogopedistaActivity.class));
+        //se è un genitore
+        startActivity(new Intent(getActivity(), GenitoreActivity.class));
+        //se è un paziente
+        //startActivity(new Intent(getActivity(), PazienteActivity.class));
+
         if (getActivity() != null) {
             getActivity().finish(); // Chiude l'Activity corrente
         }

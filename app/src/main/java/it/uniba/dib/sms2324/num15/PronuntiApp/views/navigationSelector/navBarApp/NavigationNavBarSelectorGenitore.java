@@ -22,6 +22,20 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
 
     public NavigationNavBarSelectorGenitore(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
         super( fragmentManager, fragmentContainerId, bottomNavigationView);
+        fragmentManager.addOnBackStackChangedListener(() -> {
+            Fragment currentFragment = fragmentManager.findFragmentById(fragmentContainerId);
+            if (currentFragment instanceof MonitoraggioFragment) {
+                bottomNavigationView.getMenu().getItem(0).setChecked(true);
+            } else if (currentFragment instanceof ScenariGenitoriFragment) {
+                bottomNavigationView.getMenu().getItem(1).setChecked(true);
+            } else if (currentFragment instanceof ClassificaFragment) {
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
+                bottomNavigationView.getMenu().getItem(3).setChecked(true);
+            } else if (currentFragment instanceof ProfileFragment) {
+                bottomNavigationView.getMenu().getItem(4).setChecked(true);
+            }
+        });
     }
 
     public boolean selectItem(@IdRes int itemId) {
@@ -30,7 +44,7 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
             fragment = monitoraggioFragment;
         else if (itemId == R.id.scenari_genitori)
             fragment = scenariGenitoriFragment;
-        else if (itemId == R.id.classificaLogopedista)
+        else if (itemId == R.id.classificaGenitore)
             fragment = classificaFragment;
         else if (itemId == R.id.calendarPaziente)
             fragment = appuntamentiGenitoreFragment;

@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name=".views.activity.LoginActivity"
+            android:name=".views.activity.FirstActivity"
             android:exported="true"
             android:theme="@style/Theme.PronuntiAppNoActionBar"
             >
@@ -29,6 +29,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.activity.LogopedistaActivity"
+            android:theme="@style/Theme.PronuntiAppActionBar"
+            />
+        <activity android:name=".views.activity.GenitoreActivity"
+            android:theme="@style/Theme.PronuntiAppActionBar"
+            />
+        <activity android:name=".views.activity.PazienteActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             />
     </application>

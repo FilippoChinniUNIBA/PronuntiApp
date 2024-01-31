@@ -5,7 +5,7 @@
         android:title="Pazienti"
         android:icon="@drawable/ic_pazienti"/>
     <item
-        android:id="@+id/classificaLogopedista"
+        android:id="@+id/classificaGenitore"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
     <item

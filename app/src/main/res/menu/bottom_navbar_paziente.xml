@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/scenario"
+        android:id="@+id/giochiPaziente"
         android:title="Giochi"
         android:icon="@drawable/ic_game" />
     <item
@@ -9,7 +9,7 @@
         android:title="Personaggi"
         android:icon="@drawable/ic_personaggi"/>
     <item
-        android:id="@+id/classificaLogopedista"
+        android:id="@+id/classificaGenitore"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
     <item
