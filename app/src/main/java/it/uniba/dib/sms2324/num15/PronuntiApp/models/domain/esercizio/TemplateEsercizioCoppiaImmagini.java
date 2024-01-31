@@ -5,7 +5,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implements Esercizio, Persistente {
+public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implements Esercizio {
     private File immagineEsercizioCorretta;
     private File immagineEsercizioErrata;
     private File audio;
@@ -41,9 +41,13 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         this.audio = audio;
     }
 
-
     @Override
     public Map<String, Object> toMap() {
+        return null;
+    }
+
+    @Override
+    public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
 }

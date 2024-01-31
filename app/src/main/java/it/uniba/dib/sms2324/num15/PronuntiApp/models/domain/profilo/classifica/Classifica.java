@@ -4,7 +4,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class Classifica implements Persistente {
+public class Classifica implements Persistente<Classifica> {
 	private Map<String, Integer> classificaPazienti;
 
 	public Classifica(Map<String, Integer> classificaPazienti) {
@@ -15,8 +15,14 @@ public class Classifica implements Persistente {
 		return classificaPazienti;
 	}
 
+
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public Classifica fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

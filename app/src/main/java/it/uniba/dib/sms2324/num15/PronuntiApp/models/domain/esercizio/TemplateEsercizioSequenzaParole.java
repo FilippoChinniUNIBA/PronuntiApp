@@ -5,7 +5,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio, Persistente {
+public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio {
 
     private File audioEsercizio;
     private String parola1;
@@ -58,6 +58,11 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 
     @Override
     public Map<String, Object> toMap() {
+        return null;
+    }
+
+    @Override
+    public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
 }

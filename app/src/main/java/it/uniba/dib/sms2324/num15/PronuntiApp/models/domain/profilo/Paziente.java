@@ -7,9 +7,8 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
-public class Paziente extends AbstractProfilo implements Persistente {
+public class Paziente extends AbstractProfilo implements Persistente<Paziente> {
 	private String refIdLogopedista;
-	private String refIdGenitore;
 	private int eta;
 	private LocalDate dataNascita;
 	private char sesso;
@@ -25,10 +24,9 @@ public class Paziente extends AbstractProfilo implements Persistente {
 		this.sesso = sesso;
 	}
 
-	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, String refIdLogopedista, String refIdGenitore, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot) {
+	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, String refIdLogopedista, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.refIdLogopedista = refIdLogopedista;
-		this.refIdGenitore = refIdGenitore;
 		this.eta = eta;
 		this.dataNascita = dataNascita;
 		this.sesso = sesso;
@@ -38,10 +36,6 @@ public class Paziente extends AbstractProfilo implements Persistente {
 
 	public String getRefIdLogopedista() {
 		return refIdLogopedista;
-	}
-
-	public String getRefIdGenitore() {
-		return refIdGenitore;
 	}
 
 	public int getEta() {
@@ -75,6 +69,11 @@ public class Paziente extends AbstractProfilo implements Persistente {
 
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public Paziente fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

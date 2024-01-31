@@ -7,7 +7,7 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 
-public class Terapia implements Persistente {
+public class Terapia implements Persistente<Terapia> {
 	private String idTerapia;
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
@@ -39,6 +39,11 @@ public class Terapia implements Persistente {
 
 	@Override
 	public Map<String, Object> toMap() {
+		return null;
+	}
+
+	@Override
+	public Terapia fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
 }

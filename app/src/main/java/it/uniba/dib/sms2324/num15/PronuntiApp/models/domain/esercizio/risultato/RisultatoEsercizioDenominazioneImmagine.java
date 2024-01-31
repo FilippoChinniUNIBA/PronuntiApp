@@ -5,7 +5,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEsercizioConAudio implements Persistente {
+public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEsercizioConAudio {
 	public RisultatoEsercizioDenominazioneImmagine(boolean esercizioCorretto, File audioRegistrati) {
 		super(esercizioCorretto, audioRegistrati);
 	}
