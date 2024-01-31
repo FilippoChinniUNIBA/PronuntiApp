@@ -34,7 +34,8 @@ public class LogopedistaActivity extends AbstractAppActivity {
                     .replace(R.id.appFrameLayout, testMenuTestFragment)
                     .addToBackStack(null)
                     .commit();
-        });
+            }
+        );
 
     }
 

@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarItemSelector;
 
-public class AbstractAppActivity extends AppCompatActivity {
+public abstract class AbstractAppActivity extends AppCompatActivity {
 
     protected BottomNavigationView bottomNavigationView;
     protected NavigationNavBarItemSelector navigationNavBarItemSelector;

@@ -38,7 +38,6 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 			ref.child(dbKey).setValue(obj.toMap());
 		}
 		else {
-			//MessaggioErrore.CHIAVE_NULL_DATABASE.stampaErrore("Personaggio DAO");
 			Log.e("Personaggio DAO", MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
 			throw new NullPointerException(MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
 		}
