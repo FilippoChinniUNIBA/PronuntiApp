@@ -14,15 +14,16 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ProfileFragment;
 
-public class NavigatioSelectorLogopedistaNavBar extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
+public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final PazientiFragment pazientiFragment = new PazientiFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
     private final ProfileFragment profileFragment = new ProfileFragment();
     private final AppuntamentiLogopedistaFragment appuntamentiLogopedistaFragment = new AppuntamentiLogopedistaFragment();
 
-    public NavigatioSelectorLogopedistaNavBar(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
+    public NavigationNavBarSelectorLogopedista(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
         super(fragmentManager, fragmentContainerId, bottomNavigationView);
 
+        /*
             fragmentManager.addOnBackStackChangedListener(() -> {
                     Fragment currentFragment = fragmentManager.findFragmentById(fragmentContainerId);
                     if (currentFragment instanceof PazientiFragment) {
@@ -36,6 +37,8 @@ public class NavigatioSelectorLogopedistaNavBar extends AbstractNavigationSelect
                         bottomNavigationView.setSelectedItemId(R.id.profiloLogopedista);
                     }
             });
+
+         */
         }
 
     public boolean selectItem(@IdRes int itemId) {

@@ -12,7 +12,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigatioSelectorLogopedistaNavBar;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarSelectorLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarItemSelector;
 
 public class LogopedistaActivity extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class LogopedistaActivity extends AppCompatActivity {
 
         //LOGOPEDISTA
         bottomNavigationView.inflateMenu(R.menu.bottom_navbar_logopedista);
-        navigationNavBarItemSelector = new NavigatioSelectorLogopedistaNavBar(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView);
+        navigationNavBarItemSelector = new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView);
 
 
         //first fragment selected
