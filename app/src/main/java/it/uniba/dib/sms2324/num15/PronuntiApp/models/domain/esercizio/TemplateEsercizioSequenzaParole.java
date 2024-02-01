@@ -70,7 +70,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
     public Map<String, Object> toMap() {
         Map<String, Object> entityMap = super.toMap();
         //entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
-        entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO, this.audioEsercizio);
+        entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO, this.audioEsercizio.getPath());
         entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1, this.parola1);
         entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_2, this.parola2);
         entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_3, this.parola3);

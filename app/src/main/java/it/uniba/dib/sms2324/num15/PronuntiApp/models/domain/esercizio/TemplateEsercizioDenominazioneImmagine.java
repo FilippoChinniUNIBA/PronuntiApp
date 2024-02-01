@@ -32,7 +32,7 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
     public Map<String, Object> toMap() {
         Map<String, Object> entityMap = super.toMap();
         //entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
-        entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO, this.immagineEsercizio);
+        entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO, this.immagineEsercizio.getPath());
         return entityMap;
     }
 
