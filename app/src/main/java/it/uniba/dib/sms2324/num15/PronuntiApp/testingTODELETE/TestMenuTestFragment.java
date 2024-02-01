@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.LoginFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
 

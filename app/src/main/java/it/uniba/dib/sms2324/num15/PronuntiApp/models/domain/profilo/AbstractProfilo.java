@@ -17,6 +17,14 @@ public abstract class AbstractProfilo {
 		this.password = password;
 	}
 
+	public AbstractProfilo(String nome, String cognome, String username, String email, String password) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
 	public String getIdProfilo() {
 		return idProfilo;
 	}
@@ -39,5 +47,17 @@ public abstract class AbstractProfilo {
 
 	public String getPassword() {
 		return password;
+	}
+
+	@Override
+	public String toString() {
+		return "AbstractProfilo{" +
+				"idProfilo='" + idProfilo + '\'' +
+				", nome='" + nome + '\'' +
+				", cognome='" + cognome + '\'' +
+				", username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

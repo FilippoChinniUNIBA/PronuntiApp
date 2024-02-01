@@ -15,6 +15,9 @@ public class Classifica implements Persistente<Classifica> {
 		return classificaPazienti;
 	}
 
+	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
+		this.classificaPazienti = classificaPazienti;
+	}
 
 	@Override
 	public Map<String, Object> toMap() {
@@ -24,5 +27,12 @@ public class Classifica implements Persistente<Classifica> {
 	@Override
 	public Classifica fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "Classifica{" +
+				"classificaPazienti=" + classificaPazienti +
+				'}';
 	}
 }

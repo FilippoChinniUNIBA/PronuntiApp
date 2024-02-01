@@ -20,16 +20,5 @@ public class PazienteActivity extends AbstractAppActivity {
         super.onCreate(savedInstanceState);
         setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
         setFirstFragment(R.id.appFrameLayout, new ScenarioFragment());
-
-        //BUTTONS FOR TEST
-        View buttonToTest = findViewById(R.id.buttonTest);
-        buttonToTest.setOnClickListener(v -> {
-                    TestMenuTestFragment testMenuTestFragment = new TestMenuTestFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.appFrameLayout, testMenuTestFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
-        );
     }
 }

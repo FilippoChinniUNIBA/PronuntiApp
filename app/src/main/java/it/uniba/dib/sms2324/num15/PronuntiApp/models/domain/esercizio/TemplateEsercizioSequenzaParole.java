@@ -65,4 +65,17 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
     public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "TemplateEsercizioSequenzaParole{" +
+                "audioEsercizio=" + audioEsercizio +
+                ", parola1='" + parola1 + '\'' +
+                ", parola2='" + parola2 + '\'' +
+                ", parola3='" + parola3 + '\'' +
+                ", idEsercizio='" + idEsercizio + '\'' +
+                ", ricompensaCorretto=" + ricompensaCorretto +
+                ", ricompensaErrato=" + ricompensaErrato +
+                '}';
+    }
 }

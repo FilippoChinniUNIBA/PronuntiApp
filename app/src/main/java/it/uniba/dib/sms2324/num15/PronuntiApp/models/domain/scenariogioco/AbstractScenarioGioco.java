@@ -12,4 +12,11 @@ public abstract class AbstractScenarioGioco {
 	public File getImmagineSfondo() {
 		return immagineSfondo;
 	}
+
+	@Override
+	public String toString() {
+		return "AbstractScenarioGioco{" +
+				"immagineSfondo=" + immagineSfondo +
+				'}';
+	}
 }

@@ -11,13 +11,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitor
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenarioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PersonaggiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ProfileFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileFragmentLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileFragmentPaziente;
 
 public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final ScenarioFragment scenarioFragment = new ScenarioFragment();
     private final PersonaggiFragment personaggiFragment = new PersonaggiFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
-    private final ProfileFragment profileFragment = new ProfileFragment();
+    private final ProfileFragmentPaziente profileFragmentPaziente = new ProfileFragmentPaziente();
     private final AppuntamentiGenitoreFragment appuntamentiGenitoreFragment = new AppuntamentiGenitoreFragment();
 
     public NavigationNavBarSelectorPaziente(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
@@ -32,7 +33,7 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
             } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(3).setChecked(true);
-            } else if (currentFragment instanceof ProfileFragment) {
+            } else if (currentFragment instanceof ProfileFragmentLogopedista) {
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
             }
         });
@@ -48,8 +49,8 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
             fragment = classificaFragment;
         else if (itemId == R.id.calendarPaziente)
             fragment = appuntamentiGenitoreFragment;
-        else if (itemId == R.id.profiloLogopedista)
-            fragment = profileFragment;
+        else if (itemId == R.id.profiloPaziente)
+            fragment = profileFragmentPaziente;
 
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);

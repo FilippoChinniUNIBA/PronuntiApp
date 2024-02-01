@@ -24,6 +24,38 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.luogo = luogo;
 	}
 
+	public Appuntamento(int refIdGenitore, int refIdLogopedista, LocalDate data, LocalTime time, String luogo) {
+		this.refIdGenitore = refIdGenitore;
+		this.refIdLogopedista = refIdLogopedista;
+		this.data = data;
+		this.time = time;
+		this.luogo = luogo;
+	}
+
+	public void setIdAppuntamento(String idAppuntamento) {
+		this.idAppuntamento = idAppuntamento;
+	}
+
+	public void setRefIdGenitore(int refIdGenitore) {
+		this.refIdGenitore = refIdGenitore;
+	}
+
+	public void setRefIdLogopedista(int refIdLogopedista) {
+		this.refIdLogopedista = refIdLogopedista;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
+
 	public String getIdAppuntamento() {
 		return idAppuntamento;
 	}
@@ -57,5 +89,17 @@ public class Appuntamento implements Persistente<Appuntamento> {
 	@Override
 	public Appuntamento fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "Appuntamento{" +
+				"idAppuntamento='" + idAppuntamento + '\'' +
+				", refIdGenitore=" + refIdGenitore +
+				", refIdLogopedista=" + refIdLogopedista +
+				", data=" + data +
+				", time=" + time +
+				", luogo='" + luogo + '\'' +
+				'}';
 	}
 }

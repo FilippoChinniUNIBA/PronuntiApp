@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutImageProfilo"
+            android:id="@+id/constraintLayoutImageProfiloPaziente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -39,13 +39,13 @@
                 android:layout_height="24dp"
                 android:src="@drawable/ic_edit_image"
                 app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutImageProfilo"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutImageProfiloPaziente"
                 android:visibility="gone"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
-            android:id="@+id/textViewUsernameProfilo"
+            android:id="@+id/textViewUsernameProfiloPaziente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -61,7 +61,7 @@
             app:cardElevation="4dp">
 
             <LinearLayout
-                android:id="@+id/linearLayoutProfilo"
+                android:id="@+id/linearLayoutProfiloPaziente"
                 android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextNomeProfilo"
+                        android:id="@+id/textInputEditTextNomeProfiloPaziente"
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextCognomeProfilo"
+                        android:id="@+id/textInputEditTextCognomeProfiloPaziente"
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -94,53 +94,56 @@
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- TextInputLayout e TextInputEditText per Email -->
+                <!-- TextInputLayout e TextInputEditText per Data Nascita -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextEmailProfilo"
+                        android:id="@+id/textInputEditTextDataNascitaProfiloPaziente"
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/email_hint"
-                        android:inputType="textEmailAddress" />
+                        android:hint="@string/birth_date_hint"
+                        android:inputType="date" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- TextInputLayout e TextInputEditText per Telefono -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutStyle"
+                <!-- TextInputLayout e Spinner per Sesso -->
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextTelefonoProfilo"
-                        style="@style/TextInputEditTextStyle"
-                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="-2dp"
+                    >
+                    <Spinner
+                        android:id="@+id/spinnerSessoProfiloPaziente"
+                        style="@style/SpinnerStyle"
+                        android:prompt="@string/gender_hint"
+                        android:entries="@array/sesso_array"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:spinnerMode="dropdown"
+                        />
+                    <EditText
+                        android:id="@+id/editTextSessoProfiloPaziente"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/phone_hint"
-                        android:inputType="phone" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- TextInputLayout e TextInputEditText per Indirizzo -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextIndirizzoProfilo"
-                        style="@style/TextInputEditTextStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/address_hint"
-                        android:inputType="textPostalAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                        android:text="@string/gender_hint"
+                        android:layout_marginStart="17dp"
+                        android:paddingHorizontal="2dp"
+                        android:textColor="@color/hintTextColor"
+                        android:background="@color/white"
+                        />
+                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/buttonModificaProfilo"
+            android:id="@+id/buttonModificaProfiloPaziente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

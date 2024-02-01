@@ -19,16 +19,5 @@ public class GenitoreActivity extends AbstractAppActivity{
         setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
         setFirstFragment(R.id.appFrameLayout, new ScenariGenitoriFragment());
 
-        //BUTTONS FOR TEST
-        View buttonToTest = findViewById(R.id.buttonTest);
-        buttonToTest.setOnClickListener(v -> {
-                    TestMenuTestFragment testMenuTestFragment = new TestMenuTestFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.appFrameLayout, testMenuTestFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
-        );
-
     }
 }

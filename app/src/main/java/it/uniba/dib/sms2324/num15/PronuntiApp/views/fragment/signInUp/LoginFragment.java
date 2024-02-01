@@ -1,22 +1,18 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.GenitoreActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
 
 public class LoginFragment extends AbstractFragmentSignInUp {
 
@@ -54,9 +50,9 @@ public class LoginFragment extends AbstractFragmentSignInUp {
         //se è un logopedista
         //startActivity(new Intent(getActivity(), LogopedistaActivity.class));
         //se è un genitore
-        startActivity(new Intent(getActivity(), GenitoreActivity.class));
+        //startActivity(new Intent(getActivity(), GenitoreActivity.class));
         //se è un paziente
-        //startActivity(new Intent(getActivity(), PazienteActivity.class));
+        startActivity(new Intent(getActivity(), PazienteActivity.class));
 
         if (getActivity() != null) {
             getActivity().finish(); // Chiude l'Activity corrente

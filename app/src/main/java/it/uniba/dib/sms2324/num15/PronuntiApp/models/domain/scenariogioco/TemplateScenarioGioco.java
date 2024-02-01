@@ -31,4 +31,15 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 	public TemplateScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
+
+	public void setIdTemplateScenarioGioco(String idTemplateScenarioGioco) {
+		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
+	}
+
+	@Override
+	public String toString() {
+		return "TemplateScenarioGioco{" +
+				"idTemplateScenarioGioco='" + idTemplateScenarioGioco + '\'' +
+				'}';
+	}
 }
