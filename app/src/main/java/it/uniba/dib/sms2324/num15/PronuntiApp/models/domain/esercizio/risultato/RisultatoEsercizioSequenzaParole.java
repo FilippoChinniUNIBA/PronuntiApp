@@ -3,23 +3,22 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato
 import java.io.File;
 import java.util.Map;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
-
 public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizioConAudio {
-	public RisultatoEsercizioSequenzaParole(boolean esercizioCorretto, File audioRegistrati) {
-		super(esercizioCorretto, audioRegistrati);
+	public RisultatoEsercizioSequenzaParole(boolean esercizioCorretto, File audioRegistrato) {
+		super(esercizioCorretto, audioRegistrato);
 	}
 
-	@Override
-	public Map<String, Object> toMap() {
-		return null;
+	public RisultatoEsercizioSequenzaParole(String idEsercizio, boolean esercizioCorretto, File audioRegistrato) {
+		super(idEsercizio, esercizioCorretto, audioRegistrato);
 	}
 
 	@Override
 	public String toString() {
 		return "RisultatoEsercizioSequenzaParole{" +
-				"audioRegistrati=" + audioRegistrati +
+				"idEsercizio='" + idEsercizio + '\'' +
 				", esercizioCorretto=" + esercizioCorretto +
+				", audioRegistrato=" + audioRegistrato +
 				'}';
 	}
+
 }

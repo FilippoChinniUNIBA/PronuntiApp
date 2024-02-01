@@ -83,12 +83,12 @@ public class Personaggio implements Persistente<Personaggio> {
 
 	@Override
 	public Map<String, Object> toMap() {
-		Map<String, Object> result = new HashMap<>();
-		//result.put(CostantiDBPersonaggio.ID_PERSONAGGIO, idPersonaggio);
-		result.put(CostantiDBPersonaggio.NOME_PERSONAGGIO, nomePersonaggio);
-		result.put(CostantiDBPersonaggio.COSTO_SBLOCCO, costoSblocco);
-		result.put(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO, texturePersonaggio.getPath());
-		return result;
+		Map<String, Object> entityMap = new HashMap<>();
+		//entityMap.put(CostantiDBPersonaggio.ID_PERSONAGGIO, idPersonaggio);
+		entityMap.put(CostantiDBPersonaggio.NOME_PERSONAGGIO, this.nomePersonaggio);
+		entityMap.put(CostantiDBPersonaggio.COSTO_SBLOCCO, this.costoSblocco);
+		entityMap.put(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO, this.texturePersonaggio.getPath());
+		return entityMap;
 	}
 
 	@Override

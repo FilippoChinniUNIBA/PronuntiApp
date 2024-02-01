@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 import java.io.File;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio implements Esercizio {
@@ -11,6 +12,11 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 
     public TemplateEsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio) {
         super(ricompensaCorretto, ricompensaErrato);
+        this.immagineEsercizio = immagineEsercizio;
+    }
+
+    public TemplateEsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio) {
+        super(idEsercizio, ricompensaCorretto, ricompensaErrato);
         this.immagineEsercizio = immagineEsercizio;
     }
 
@@ -24,7 +30,10 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 
     @Override
     public Map<String, Object> toMap() {
-        return null;
+        Map<String, Object> entityMap = super.toMap();
+        //entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
+        entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO, this.immagineEsercizio);
+        return entityMap;
     }
 
     @Override
@@ -35,10 +44,11 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
     @Override
     public String toString() {
         return "TemplateEsercizioDenominazioneImmagine{" +
-                "immagineEsercizio=" + immagineEsercizio +
-                ", idEsercizio='" + idEsercizio + '\'' +
+                "idEsercizio='" + idEsercizio + '\'' +
                 ", ricompensaCorretto=" + ricompensaCorretto +
                 ", ricompensaErrato=" + ricompensaErrato +
+                ", immagineEsercizio=" + immagineEsercizio +
                 '}';
     }
+
 }

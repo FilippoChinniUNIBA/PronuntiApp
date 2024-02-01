@@ -1,5 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioAbstract;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioAbstract;
+
 public abstract class AbstractEsercizio implements Esercizio {
 	protected String idEsercizio;
 	protected int ricompensaCorretto;
@@ -37,11 +43,16 @@ public abstract class AbstractEsercizio implements Esercizio {
 	}
 
 	@Override
-	public String toString() {
-		return "AbstractEsercizio{" +
-				"idEsercizio='" + idEsercizio + '\'' +
-				", ricompensaCorretto=" + ricompensaCorretto +
-				", ricompensaErrato=" + ricompensaErrato +
-				'}';
+	public Map<String, Object> toMap() {
+		Map<String, Object> entityMap = new HashMap<>();
+		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_CORRETTO, this.ricompensaCorretto);
+		entityMap.put(CostantiDBTemplateEsercizioAbstract.RICOMPENSA_ERRATO, this.ricompensaErrato);
+		return entityMap;
 	}
+
+	@Override
+	public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
+		return null;
+	}
+
 }

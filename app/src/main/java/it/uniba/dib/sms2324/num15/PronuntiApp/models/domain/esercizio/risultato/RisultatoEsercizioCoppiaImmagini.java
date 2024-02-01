@@ -9,10 +9,15 @@ public class RisultatoEsercizioCoppiaImmagini extends AbstractRisultatoEsercizio
 		super(esercizioCorretto);
 	}
 
+	public RisultatoEsercizioCoppiaImmagini(String idEsercizio, boolean esercizioCorretto) {
+		super(idEsercizio, esercizioCorretto);
+	}
+
 	@Override
 	public String toString() {
 		return "RisultatoEsercizioCoppiaImmagini{" +
-				"esercizioCorretto=" + esercizioCorretto +
+				"idEsercizio='" + idEsercizio + '\'' +
+				", esercizioCorretto=" + esercizioCorretto +
 				'}';
 	}
 }
