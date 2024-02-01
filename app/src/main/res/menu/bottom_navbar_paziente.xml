@@ -9,9 +9,10 @@
         android:title="Personaggi"
         android:icon="@drawable/ic_personaggi"/>
     <item
-        android:id="@+id/classificaGenitore"
+        android:id="@+id/classificaPaziente"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
+    <!--
     <item
         android:id="@+id/calendarPaziente"
         android:title="Visite"
@@ -20,4 +21,5 @@
         android:id="@+id/profiloPaziente"
         android:title="Profilo"
         android:icon="@drawable/ic_profile"/>
+     -->
 </menu>

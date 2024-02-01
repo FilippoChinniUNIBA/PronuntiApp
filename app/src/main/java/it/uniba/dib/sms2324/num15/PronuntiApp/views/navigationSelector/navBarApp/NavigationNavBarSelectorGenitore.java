@@ -33,9 +33,9 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
             } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(3).setChecked(true);
-            } else if (currentFragment instanceof ProfileLogopedistaFragment) {
+            } /*else if (currentFragment instanceof ProfileLogopedistaFragment) {
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
-            }
+            }*/
         });
     }
 
@@ -45,8 +45,10 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
             fragment = monitoraggioFragment;
         else if (itemId == R.id.scenari_genitori)
             fragment = scenariGenitoriFragment;
+        /*
         else if (itemId == R.id.classificaGenitore)
             fragment = classificaFragment;
+         */
         else if (itemId == R.id.calendarPaziente)
             fragment = appuntamentiGenitoreFragment;
         else if (itemId == R.id.profiloGenitore)

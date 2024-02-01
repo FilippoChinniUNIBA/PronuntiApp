@@ -8,10 +8,12 @@
         android:id="@+id/scenari_genitori"
         android:title="Giochi"
         android:icon="@drawable/ic_game"/>
+    <!--
     <item
         android:id="@+id/classificaGenitore"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
+        -->
     <item
         android:id="@+id/calendarPaziente"
         android:title="Visite"

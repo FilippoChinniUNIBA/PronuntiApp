@@ -31,11 +31,13 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
                 bottomNavigationView.getMenu().getItem(1).setChecked(true);
             } else if (currentFragment instanceof ClassificaFragment) {
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
-            } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
+            }
+            /* else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(3).setChecked(true);
             } else if (currentFragment instanceof ProfileLogopedistaFragment) {
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
             }
+            */
         });
     }
 
@@ -45,13 +47,14 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
             fragment = scenarioFragment;
         else if (itemId == R.id.personaggi)
             fragment = personaggiFragment;
-        else if (itemId == R.id.classificaGenitore)
+        else if (itemId == R.id.classificaPaziente)
             fragment = classificaFragment;
+        /*
         else if (itemId == R.id.calendarPaziente)
             fragment = appuntamentiGenitoreFragment;
         else if (itemId == R.id.profiloPaziente)
             fragment = profilePazienteFragment;
-
+        */
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);
             return true;
