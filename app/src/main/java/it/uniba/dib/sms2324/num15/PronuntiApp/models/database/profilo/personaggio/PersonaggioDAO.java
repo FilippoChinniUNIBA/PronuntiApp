@@ -31,16 +31,8 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 	@Override
 	public void save(Personaggio obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.PERSONAGGI);
-
 		String dbKey = ref.push().getKey();
-
-		if (dbKey != null) {
-			ref.child(dbKey).setValue(obj.toMap());
-		}
-		else {
-			Log.e("Personaggio DAO", MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
-			throw new NullPointerException(MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
-		}
+		ref.child(dbKey).setValue(obj.toMap());
 	}
 
 	@Override
