@@ -20,4 +20,5 @@ public class RisultatoEsercizioCoppiaImmagini extends AbstractRisultatoEsercizio
 				", esercizioCorretto=" + esercizioCorretto +
 				'}';
 	}
+
 }

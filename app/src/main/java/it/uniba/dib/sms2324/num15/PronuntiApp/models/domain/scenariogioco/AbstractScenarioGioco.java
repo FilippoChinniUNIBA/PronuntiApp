@@ -3,7 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco;
 import java.io.File;
 
 public abstract class AbstractScenarioGioco {
-	private File immagineSfondo;
+	protected File immagineSfondo;
 
 	public AbstractScenarioGioco(File immagineSfondo) {
 		this.immagineSfondo = immagineSfondo;
@@ -13,10 +13,8 @@ public abstract class AbstractScenarioGioco {
 		return immagineSfondo;
 	}
 
-	@Override
-	public String toString() {
-		return "AbstractScenarioGioco{" +
-				"immagineSfondo=" + immagineSfondo +
-				'}';
+	public void setImmagineSfondo(File immagineSfondo) {
+		this.immagineSfondo = immagineSfondo;
 	}
+
 }

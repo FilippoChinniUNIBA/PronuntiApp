@@ -13,13 +13,15 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 	private LocalDate dataInizio;
 	private int ricompensaFinale;
 	private List<Esercizio> esercizi;
+	private String refIdTerapia;
 
-	public ScenarioGioco(File immagineSfondo, String idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
+	public ScenarioGioco(File immagineSfondo, String idScenarioGioco, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi, String refIdTerapia) {
 		super(immagineSfondo);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
 		this.esercizi = esercizi;
+		this.refIdTerapia = refIdTerapia;
 	}
 
 	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
@@ -45,6 +47,10 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		return esercizi;
 	}
 
+	public String getRefIdTerapia() {
+		return refIdTerapia;
+	}
+
 	public void setIdScenarioGioco(String idScenarioGioco) {
 		this.idScenarioGioco = idScenarioGioco;
 	}
@@ -59,6 +65,10 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 
 	public void setEsercizi(List<Esercizio> esercizi) {
 		this.esercizi = esercizi;
+	}
+
+	public void setRefIdTerapia(String refIdTerapia) {
+		this.refIdTerapia = refIdTerapia;
 	}
 
 	@Override
@@ -78,6 +88,8 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 				", dataInizio=" + dataInizio +
 				", ricompensaFinale=" + ricompensaFinale +
 				", esercizi=" + esercizi +
+				", refIdTerapia='" + refIdTerapia + '\'' +
 				'}';
 	}
+
 }

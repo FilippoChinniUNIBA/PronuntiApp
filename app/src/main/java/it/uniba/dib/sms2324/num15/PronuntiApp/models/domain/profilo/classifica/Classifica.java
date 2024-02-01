@@ -6,6 +6,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class Classifica implements Persistente<Classifica> {
 	private Map<String, Integer> classificaPazienti;
+	private String refIdLogopedista;
+
+	public Classifica(Map<String, Integer> classificaPazienti, String refIdLogopedista) {
+		this.classificaPazienti = classificaPazienti;
+		this.refIdLogopedista = refIdLogopedista;
+	}
 
 	public Classifica(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
@@ -15,8 +21,16 @@ public class Classifica implements Persistente<Classifica> {
 		return classificaPazienti;
 	}
 
+	public String getRefIdLogopedista() {
+		return refIdLogopedista;
+	}
+
 	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
+	}
+
+	public void setRefIdLogopedista(String refIdLogopedista) {
+		this.refIdLogopedista = refIdLogopedista;
 	}
 
 	@Override
@@ -33,6 +47,8 @@ public class Classifica implements Persistente<Classifica> {
 	public String toString() {
 		return "Classifica{" +
 				"classificaPazienti=" + classificaPazienti +
+				", refIdLogopedista='" + refIdLogopedista + '\'' +
 				'}';
 	}
+
 }

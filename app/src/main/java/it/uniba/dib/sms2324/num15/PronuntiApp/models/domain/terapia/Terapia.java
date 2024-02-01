@@ -12,12 +12,14 @@ public class Terapia implements Persistente<Terapia> {
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
 	private List<ScenarioGioco> scenariGioco;
+	private String redIdPaziente;
 
-	public Terapia(String idTerapia, LocalDate dataInizio, LocalDate dataFine, List<ScenarioGioco> scenariGioco) {
+	public Terapia(String idTerapia, LocalDate dataInizio, LocalDate dataFine, List<ScenarioGioco> scenariGioco, String redIdPaziente) {
 		this.idTerapia = idTerapia;
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
 		this.scenariGioco = scenariGioco;
+		this.redIdPaziente = redIdPaziente;
 	}
 
 	public Terapia(LocalDate dataInizio, LocalDate dataFine, List<ScenarioGioco> scenariGioco) {
@@ -42,6 +44,10 @@ public class Terapia implements Persistente<Terapia> {
 		return scenariGioco;
 	}
 
+	public String getRedIdPaziente() {
+		return redIdPaziente;
+	}
+
 	public void setIdTerapia(String idTerapia) {
 		this.idTerapia = idTerapia;
 	}
@@ -56,6 +62,10 @@ public class Terapia implements Persistente<Terapia> {
 
 	public void setScenariGioco(List<ScenarioGioco> scenariGioco) {
 		this.scenariGioco = scenariGioco;
+	}
+
+	public void setRedIdPaziente(String redIdPaziente) {
+		this.redIdPaziente = redIdPaziente;
 	}
 
 	@Override
@@ -75,6 +85,8 @@ public class Terapia implements Persistente<Terapia> {
 				", dataInizio=" + dataInizio +
 				", dataFine=" + dataFine +
 				", scenariGioco=" + scenariGioco +
+				", redIdPaziente='" + redIdPaziente + '\'' +
 				'}';
 	}
+
 }

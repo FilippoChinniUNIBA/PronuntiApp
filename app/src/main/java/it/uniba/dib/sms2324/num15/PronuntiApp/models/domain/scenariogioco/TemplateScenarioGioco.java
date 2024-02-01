@@ -21,6 +21,9 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 		return idTemplateScenarioGioco;
 	}
 
+	public void setIdTemplateScenarioGioco(String idTemplateScenarioGioco) {
+		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
+	}
 
 	@Override
 	public Map<String, Object> toMap() {
@@ -32,14 +35,12 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 		return null;
 	}
 
-	public void setIdTemplateScenarioGioco(String idTemplateScenarioGioco) {
-		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
-	}
-
 	@Override
 	public String toString() {
 		return "TemplateScenarioGioco{" +
 				"idTemplateScenarioGioco='" + idTemplateScenarioGioco + '\'' +
+				", immagineSfondo=" + immagineSfondo +
 				'}';
 	}
+
 }

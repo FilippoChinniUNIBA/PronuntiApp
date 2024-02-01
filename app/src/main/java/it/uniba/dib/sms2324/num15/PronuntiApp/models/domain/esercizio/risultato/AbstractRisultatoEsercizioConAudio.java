@@ -9,9 +9,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisultatoEsercizio {
 	protected File audioRegistrato;
 
-	public AbstractRisultatoEsercizioConAudio() {
-	}
-
 	public AbstractRisultatoEsercizioConAudio(boolean esercizioCorretto, File audioRegistrato) {
 		super(esercizioCorretto);
 		this.audioRegistrato = audioRegistrato;
@@ -43,4 +40,5 @@ public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisulta
 	public RisultatoEsercizio fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
+
 }

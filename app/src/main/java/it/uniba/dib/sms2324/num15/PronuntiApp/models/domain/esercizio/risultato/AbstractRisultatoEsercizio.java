@@ -9,9 +9,6 @@ public abstract class AbstractRisultatoEsercizio implements RisultatoEsercizio {
 	protected String idEsercizio;
 	protected boolean esercizioCorretto;
 
-	public AbstractRisultatoEsercizio() {
-	}
-
 	public AbstractRisultatoEsercizio(boolean esercizioCorretto) {
 		this.esercizioCorretto = esercizioCorretto;
 	}
@@ -21,20 +18,20 @@ public abstract class AbstractRisultatoEsercizio implements RisultatoEsercizio {
 		this.esercizioCorretto = esercizioCorretto;
 	}
 
-	public boolean isEsercizioCorretto() {
-		return esercizioCorretto;
-	}
-
-	public void setEsercizioCorretto(boolean esercizioCorretto) {
-		this.esercizioCorretto = esercizioCorretto;
-	}
-
 	public String getIdEsercizio() {
 		return idEsercizio;
 	}
 
+	public boolean isEsercizioCorretto() {
+		return esercizioCorretto;
+	}
+
 	public void setIdEsercizio(String idEsercizio) {
 		this.idEsercizio = idEsercizio;
+	}
+
+	public void setEsercizioCorretto(boolean esercizioCorretto) {
+		this.esercizioCorretto = esercizioCorretto;
 	}
 
 	@Override
@@ -49,4 +46,5 @@ public abstract class AbstractRisultatoEsercizio implements RisultatoEsercizio {
 	public RisultatoEsercizio fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
 	}
+
 }

@@ -49,6 +49,30 @@ public abstract class AbstractProfilo {
 		return password;
 	}
 
+	public void setIdProfilo(String idProfilo) {
+		this.idProfilo = idProfilo;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "AbstractProfilo{" +
@@ -60,4 +84,5 @@ public abstract class AbstractProfilo {
 				", password='" + password + '\'' +
 				'}';
 	}
+
 }

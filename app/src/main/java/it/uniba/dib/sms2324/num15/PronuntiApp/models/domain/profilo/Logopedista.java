@@ -26,22 +26,6 @@ public class Logopedista extends AbstractProfilo implements Persistente<Logopedi
 		this.pazienti = pazienti;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
-	}
-
-	public void setClassificaPazienti(Classifica classificaPazienti) {
-		this.classificaPazienti = classificaPazienti;
-	}
-
-	public void setPazienti(List<Paziente> pazienti) {
-		this.pazienti = pazienti;
-	}
-
 	public String getTelefono() {
 		return telefono;
 	}
@@ -58,6 +42,22 @@ public class Logopedista extends AbstractProfilo implements Persistente<Logopedi
 		return pazienti;
 	}
 
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public void setIndirizzo(String indirizzo) {
+		this.indirizzo = indirizzo;
+	}
+
+	public void setClassificaPazienti(Classifica classificaPazienti) {
+		this.classificaPazienti = classificaPazienti;
+	}
+
+	public void setPazienti(List<Paziente> pazienti) {
+		this.pazienti = pazienti;
+	}
+
 	@Override
 	public Map<String, Object> toMap() {
 		return null;
@@ -71,16 +71,17 @@ public class Logopedista extends AbstractProfilo implements Persistente<Logopedi
 	@Override
 	public String toString() {
 		return "Logopedista{" +
-				"telefono='" + telefono + '\'' +
-				", indirizzo='" + indirizzo + '\'' +
-				", classificaPazienti=" + classificaPazienti +
-				", pazienti=" + pazienti +
-				", idProfilo='" + idProfilo + '\'' +
+				"idProfilo='" + idProfilo + '\'' +
 				", nome='" + nome + '\'' +
 				", cognome='" + cognome + '\'' +
 				", username='" + username + '\'' +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
+				", telefono='" + telefono + '\'' +
+				", indirizzo='" + indirizzo + '\'' +
+				", classificaPazienti=" + classificaPazienti +
+				", pazienti=" + pazienti +
 				'}';
 	}
+
 }

@@ -32,30 +32,6 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.luogo = luogo;
 	}
 
-	public void setIdAppuntamento(String idAppuntamento) {
-		this.idAppuntamento = idAppuntamento;
-	}
-
-	public void setRefIdGenitore(int refIdGenitore) {
-		this.refIdGenitore = refIdGenitore;
-	}
-
-	public void setRefIdLogopedista(int refIdLogopedista) {
-		this.refIdLogopedista = refIdLogopedista;
-	}
-
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-
-	public void setTime(LocalTime time) {
-		this.time = time;
-	}
-
-	public void setLuogo(String luogo) {
-		this.luogo = luogo;
-	}
-
 	public String getIdAppuntamento() {
 		return idAppuntamento;
 	}
@@ -80,6 +56,29 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		return luogo;
 	}
 
+	public void setIdAppuntamento(String idAppuntamento) {
+		this.idAppuntamento = idAppuntamento;
+	}
+
+	public void setRefIdGenitore(int refIdGenitore) {
+		this.refIdGenitore = refIdGenitore;
+	}
+
+	public void setRefIdLogopedista(int refIdLogopedista) {
+		this.refIdLogopedista = refIdLogopedista;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
 
 	@Override
 	public Map<String, Object> toMap() {
@@ -102,4 +101,5 @@ public class Appuntamento implements Persistente<Appuntamento> {
 				", luogo='" + luogo + '\'' +
 				'}';
 	}
+
 }
