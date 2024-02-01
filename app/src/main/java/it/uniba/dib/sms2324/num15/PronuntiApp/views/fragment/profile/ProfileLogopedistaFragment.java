@@ -12,12 +12,12 @@ import com.google.android.material.textfield.TextInputEditText;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 
-public class ProfileFragmentLogopedista extends AsbtractProfileFragment {
+public class ProfileLogopedistaFragment extends AsbtractProfileFragment {
 
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
-    public ProfileFragmentLogopedista(){
+    public ProfileLogopedistaFragment(){
         // require a empty public constructor
     }
 

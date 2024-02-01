@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
-public class ProfileFragmentPaziente extends AsbtractProfileFragment{
+public class ProfilePazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
     private Spinner spinnerSesso;
     @Nullable

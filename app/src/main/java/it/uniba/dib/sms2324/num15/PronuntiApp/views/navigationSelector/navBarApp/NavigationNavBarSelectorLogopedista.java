@@ -10,12 +10,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiLogopedistaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileFragmentLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileLogopedistaFragment;
 
 public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final PazientiFragment pazientiFragment = new PazientiFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
-    private final ProfileFragmentLogopedista profileFragmentLogopedista = new ProfileFragmentLogopedista();
+    private final ProfileLogopedistaFragment profileLogopedistaFragment = new ProfileLogopedistaFragment();
     private final AppuntamentiLogopedistaFragment appuntamentiLogopedistaFragment = new AppuntamentiLogopedistaFragment();
 
     public NavigationNavBarSelectorLogopedista(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
@@ -28,7 +28,7 @@ public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelec
                         bottomNavigationView.getMenu().getItem(1).setChecked(true);
                     } else if (currentFragment instanceof AppuntamentiLogopedistaFragment) {
                         bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                    } else if (currentFragment instanceof ProfileFragmentLogopedista) {
+                    } else if (currentFragment instanceof ProfileLogopedistaFragment) {
                         bottomNavigationView.getMenu().getItem(3).setChecked(true);
                     }
             });
@@ -43,7 +43,7 @@ public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelec
         else if (itemId == R.id.calendarLogopedista)
             fragment = appuntamentiLogopedistaFragment;
         else if (itemId == R.id.profiloLogopedista)
-            fragment = profileFragmentLogopedista;
+            fragment = profileLogopedistaFragment;
 
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);

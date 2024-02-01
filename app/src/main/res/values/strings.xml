@@ -26,6 +26,9 @@
         <item>@string/other</item>
     </string-array>
     <string name="gender_hint">Sex</string>
+    <string name="patient">Patient</string>
+    <string name="parent">Parent</string>
+    <string name="logopedist">Speech terapist</string>
 
 
 </resources>
