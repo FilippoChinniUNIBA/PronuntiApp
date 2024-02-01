@@ -17,7 +17,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenariGenitoriFrag
 public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final MonitoraggioFragment monitoraggioFragment = new MonitoraggioFragment();
     private final ScenariGenitoriFragment scenariGenitoriFragment = new ScenariGenitoriFragment();
-    private final ClassificaFragment classificaFragment = new ClassificaFragment();
+    //private final ClassificaFragment classificaFragment = new ClassificaFragment();
     private final ProfileGenitoreFragment profileGenitoreFragment = new ProfileGenitoreFragment();
     private final AppuntamentiGenitoreFragment appuntamentiGenitoreFragment = new AppuntamentiGenitoreFragment();
 
