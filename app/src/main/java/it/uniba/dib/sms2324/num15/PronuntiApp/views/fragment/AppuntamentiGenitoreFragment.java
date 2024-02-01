@@ -18,7 +18,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 public class AppuntamentiGenitoreFragment extends Fragment {
 
     public AppuntamentiGenitoreFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
