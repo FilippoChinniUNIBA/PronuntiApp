@@ -16,6 +16,14 @@
     <string name="subtitle_registration">Benvenuto, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>
     <string name="modify_profile"> Modifica profilo </string>
     <string name="confirm_modify_profile"> Conferma modifiche</string>
-
-
+    <string name="birth_date_hint">Data di nascita</string>
+    <string name="male">Maschio</string>
+    <string name="female">Femmina</string>
+    <string name="other">Altro</string>
+    <string-array name="sesso_array">
+        <item>@string/male</item>
+        <item>@string/female</item>
+        <item>@string/other</item>
+    </string-array>
+    <string name="gender_hint">Sesso</string>
 </resources>

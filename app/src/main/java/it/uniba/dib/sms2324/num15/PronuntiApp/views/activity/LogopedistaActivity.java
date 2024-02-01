@@ -22,20 +22,8 @@ public class LogopedistaActivity extends AbstractAppActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
+        setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
         setFirstFragment(R.id.appFrameLayout, new PazientiFragment());
-
-
-        //BUTTONS FOR TEST
-        View buttonToTest = findViewById(R.id.buttonTest);
-        buttonToTest.setOnClickListener(v -> {
-            TestMenuTestFragment testMenuTestFragment = new TestMenuTestFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.appFrameLayout, testMenuTestFragment)
-                    .addToBackStack(null)
-                    .commit();
-            }
-        );
 
     }
 
