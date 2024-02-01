@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DatabaseReference;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class TestDBFragment extends Fragment {
 
 	private void testDAOPersonaggioSave() {
 		String idPersonaggio = "1234567890";
-		String nomePersonaggio = "nome prova 1";
+		String nomePersonaggio = "nome prova 2";
 		int costoSblocco = 600;
 		File texturePersonaggio = new File("folder/texture/texture.png");
 
@@ -107,7 +108,7 @@ public class TestDBFragment extends Fragment {
 		List<Personaggio> lista = new ArrayList<>();
 		lista = daoP.get(CostantiDBPersonaggio.NOME_PERSONAGGIO, "erger");
 
-		Log.d("Test DAO - Get", (lista == null) ? "lista null" : lista.toString());
+		Log.d("Test DAO Get Personaggio", (lista == null) ? "lista null" : lista.toString());
 		textViewTestDB_2.setText(lista.toString());
 	}
 

@@ -61,6 +61,7 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 		Query query = Persistente.createQuery(ref, field, value);
 
 		List<Personaggio> result = new LinkedList<>();
+
 		query.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
