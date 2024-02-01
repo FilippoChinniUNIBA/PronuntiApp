@@ -20,6 +20,12 @@ public class Terapia implements Persistente<Terapia> {
 		this.scenariGioco = scenariGioco;
 	}
 
+	public Terapia(LocalDate dataInizio, LocalDate dataFine, List<ScenarioGioco> scenariGioco) {
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.scenariGioco = scenariGioco;
+	}
+
 	public String getIdTerapia() {
 		return idTerapia;
 	}
@@ -36,6 +42,21 @@ public class Terapia implements Persistente<Terapia> {
 		return scenariGioco;
 	}
 
+	public void setIdTerapia(String idTerapia) {
+		this.idTerapia = idTerapia;
+	}
+
+	public void setDataInizio(LocalDate dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+
+	public void setDataFine(LocalDate dataFine) {
+		this.dataFine = dataFine;
+	}
+
+	public void setScenariGioco(List<ScenarioGioco> scenariGioco) {
+		this.scenariGioco = scenariGioco;
+	}
 
 	@Override
 	public Map<String, Object> toMap() {
@@ -45,5 +66,15 @@ public class Terapia implements Persistente<Terapia> {
 	@Override
 	public Terapia fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "Terapia{" +
+				"idTerapia='" + idTerapia + '\'' +
+				", dataInizio=" + dataInizio +
+				", dataFine=" + dataFine +
+				", scenariGioco=" + scenariGioco +
+				'}';
 	}
 }

@@ -19,4 +19,13 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
     public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "EsercizioSequenzaParole{" +
+                "idEsercizio='" + idEsercizio + '\'' +
+                ", ricompensaCorretto=" + ricompensaCorretto +
+                ", ricompensaErrato=" + ricompensaErrato +
+                '}';
+    }
 }

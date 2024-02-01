@@ -14,4 +14,12 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 	public Map<String, Object> toMap() {
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "RisultatoEsercizioDenominazioneImmagine{" +
+				"audioRegistrati=" + audioRegistrati +
+				", esercizioCorretto=" + esercizioCorretto +
+				'}';
+	}
 }

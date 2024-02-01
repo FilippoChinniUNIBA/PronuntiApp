@@ -19,4 +19,13 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
     public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "EsercizioCoppiaImmagini{" +
+                "idEsercizio='" + idEsercizio + '\'' +
+                ", ricompensaCorretto=" + ricompensaCorretto +
+                ", ricompensaErrato=" + ricompensaErrato +
+                '}';
+    }
 }

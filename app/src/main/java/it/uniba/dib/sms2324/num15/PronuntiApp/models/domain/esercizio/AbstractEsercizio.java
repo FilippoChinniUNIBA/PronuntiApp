@@ -35,4 +35,13 @@ public abstract class AbstractEsercizio implements Esercizio {
 	public void setRicompensaErrato(int ricompensaErrato) {
 		this.ricompensaErrato = ricompensaErrato;
 	}
+
+	@Override
+	public String toString() {
+		return "AbstractEsercizio{" +
+				"idEsercizio='" + idEsercizio + '\'' +
+				", ricompensaCorretto=" + ricompensaCorretto +
+				", ricompensaErrato=" + ricompensaErrato +
+				'}';
+	}
 }

@@ -14,4 +14,12 @@ public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizio
 	public Map<String, Object> toMap() {
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "RisultatoEsercizioSequenzaParole{" +
+				"audioRegistrati=" + audioRegistrati +
+				", esercizioCorretto=" + esercizioCorretto +
+				'}';
+	}
 }

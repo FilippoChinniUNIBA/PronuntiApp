@@ -22,6 +22,13 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.esercizi = esercizi;
 	}
 
+	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
+		super(immagineSfondo);
+		this.dataInizio = dataInizio;
+		this.ricompensaFinale = ricompensaFinale;
+		this.esercizi = esercizi;
+	}
+
 	public String getIdScenarioGioco() {
 		return idScenarioGioco;
 	}
@@ -38,6 +45,21 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		return esercizi;
 	}
 
+	public void setIdScenarioGioco(String idScenarioGioco) {
+		this.idScenarioGioco = idScenarioGioco;
+	}
+
+	public void setDataInizio(LocalDate dataInizio) {
+		this.dataInizio = dataInizio;
+	}
+
+	public void setRicompensaFinale(int ricompensaFinale) {
+		this.ricompensaFinale = ricompensaFinale;
+	}
+
+	public void setEsercizi(List<Esercizio> esercizi) {
+		this.esercizi = esercizi;
+	}
 
 	@Override
 	public Map<String, Object> toMap() {
@@ -47,5 +69,15 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 	@Override
 	public ScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "ScenarioGioco{" +
+				"idScenarioGioco='" + idScenarioGioco + '\'' +
+				", dataInizio=" + dataInizio +
+				", ricompensaFinale=" + ricompensaFinale +
+				", esercizi=" + esercizi +
+				'}';
 	}
 }

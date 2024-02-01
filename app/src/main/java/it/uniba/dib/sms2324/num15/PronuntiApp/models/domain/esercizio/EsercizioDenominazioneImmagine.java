@@ -30,4 +30,14 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
     public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "EsercizioDenominazioneImmagine{" +
+                "countAiuti=" + countAiuti +
+                ", idEsercizio='" + idEsercizio + '\'' +
+                ", ricompensaCorretto=" + ricompensaCorretto +
+                ", ricompensaErrato=" + ricompensaErrato +
+                '}';
+    }
 }
