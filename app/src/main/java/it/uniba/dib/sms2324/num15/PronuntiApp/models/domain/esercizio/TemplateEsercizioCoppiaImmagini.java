@@ -30,20 +30,20 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         return immagineEsercizioCorretta;
     }
 
-    public void setImmagineEsercizioCorretta(File immagineEsercizioCorretta) {
-        this.immagineEsercizioCorretta = immagineEsercizioCorretta;
-    }
-
     public File getImmagineEsercizioErrata() {
         return immagineEsercizioErrata;
     }
 
-    public void setImmagineEsercizioErrata(File immagineEsercizioErrata) {
-        this.immagineEsercizioErrata = immagineEsercizioErrata;
-    }
-
     public File getAudio() {
         return audio;
+    }
+
+    public void setImmagineEsercizioCorretta(File immagineEsercizioCorretta) {
+        this.immagineEsercizioCorretta = immagineEsercizioCorretta;
+    }
+
+    public void setImmagineEsercizioErrata(File immagineEsercizioErrata) {
+        this.immagineEsercizioErrata = immagineEsercizioErrata;
     }
 
     public void setAudio(File audio) {

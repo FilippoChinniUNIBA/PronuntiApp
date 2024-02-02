@@ -8,7 +8,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio {
-
     private File audioEsercizio;
     private String parola1;
     private String parola2;
@@ -30,36 +29,32 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
         this.parola3 = parola3;
     }
 
-    public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato) {
-        super(ricompensaCorretto, ricompensaErrato);
-    }
-
     public File getAudioEsercizio() {
         return audioEsercizio;
-    }
-
-    public void setAudioEsercizio(File audioEsercizio) {
-        this.audioEsercizio = audioEsercizio;
     }
 
     public String getParola1() {
         return parola1;
     }
 
-    public void setParola1(String parola1) {
-        this.parola1 = parola1;
-    }
-
     public String getParola2() {
         return parola2;
     }
 
-    public void setParola2(String parola2) {
-        this.parola2 = parola2;
-    }
-
     public String getParola3() {
         return parola3;
+    }
+
+    public void setAudioEsercizio(File audioEsercizio) {
+        this.audioEsercizio = audioEsercizio;
+    }
+
+    public void setParola1(String parola1) {
+        this.parola1 = parola1;
+    }
+
+    public void setParola2(String parola2) {
+        this.parola2 = parola2;
     }
 
     public void setParola3(String parola3) {
@@ -85,13 +80,13 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
     @Override
     public String toString() {
         return "TemplateEsercizioSequenzaParole{" +
-                "audioEsercizio=" + audioEsercizio +
+                "idEsercizio='" + idEsercizio + '\'' +
+                ", ricompensaCorretto=" + ricompensaCorretto +
+                ", ricompensaErrato=" + ricompensaErrato +
+                ", audioEsercizio=" + audioEsercizio +
                 ", parola1='" + parola1 + '\'' +
                 ", parola2='" + parola2 + '\'' +
                 ", parola3='" + parola3 + '\'' +
-                ", idEsercizio='" + idEsercizio + '\'' +
-                ", ricompensaCorretto=" + ricompensaCorretto +
-                ", ricompensaErrato=" + ricompensaErrato +
                 '}';
     }
 

@@ -7,7 +7,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio implements Esercizio {
-
    private File immagineEsercizio;
 
     public TemplateEsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio) {
