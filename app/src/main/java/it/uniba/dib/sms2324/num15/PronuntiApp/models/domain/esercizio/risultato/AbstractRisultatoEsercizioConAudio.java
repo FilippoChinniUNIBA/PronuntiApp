@@ -9,13 +9,15 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisultatoEsercizio {
 	protected File audioRegistrato;
 
-	public AbstractRisultatoEsercizioConAudio(boolean esercizioCorretto, File audioRegistrato) {
-		super(esercizioCorretto);
+	public AbstractRisultatoEsercizioConAudio() {}
+
+	public AbstractRisultatoEsercizioConAudio(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
+		super(idEsercizio, esitoCorretto);
 		this.audioRegistrato = audioRegistrato;
 	}
 
-	public AbstractRisultatoEsercizioConAudio(String idEsercizio, boolean esercizioCorretto, File audioRegistrato) {
-		super(idEsercizio, esercizioCorretto);
+	public AbstractRisultatoEsercizioConAudio(boolean esitoCorretto, File audioRegistrato) {
+		super(esitoCorretto);
 		this.audioRegistrato = audioRegistrato;
 	}
 
@@ -29,16 +31,10 @@ public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisulta
 
 	@Override
 	public Map<String, Object> toMap() {
-		Map<String, Object> entityMap = new HashMap<>();
-		//entityMap.put(CostantiDBRisultato.ID_ESERCIZIO, this.idEsercizio);
-		entityMap.put(CostantiDBRisultato.CORRETTO, this.esercizioCorretto);
+		Map<String, Object> entityMap = super.toMap();
+
 		entityMap.put(CostantiDBRisultato.AUDIO_REGISTRATO, this.audioRegistrato.getPath());
 		return entityMap;
-	}
-
-	@Override
-	public RisultatoEsercizio fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
 	}
 
 }

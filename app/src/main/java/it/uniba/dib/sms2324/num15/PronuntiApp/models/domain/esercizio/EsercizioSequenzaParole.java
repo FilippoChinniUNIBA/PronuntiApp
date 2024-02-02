@@ -1,5 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
+import android.util.Log;
+
 import java.io.File;
 import java.util.Map;
 
@@ -8,78 +10,79 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole implements EsercizioEseguibile {
-    private String refIdTemplateEsercizio;
-    private String refIdScenarioGioco;
+	private String refIdTemplateEsercizio;
 
-    public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, String refIdScenarioGioco) {
-        super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
-        this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-        this.refIdScenarioGioco = refIdScenarioGioco;
-    }
+	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
 
-    public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, String refIdScenarioGioco) {
-        super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
-        this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-        this.refIdScenarioGioco = refIdScenarioGioco;
-    }
+	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
+		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
 
-    public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
-        super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
-        this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-    }
+	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
+		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
+	}
 
-    public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
-        super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
-    }
+	public EsercizioSequenzaParole(Map<String,Object> fromDatabaseMap) {
+		EsercizioSequenzaParole e = fromMap(fromDatabaseMap);
 
-    public EsercizioSequenzaParole(Map<String,Object> fromDatabaseMap){
-        super(fromDatabaseMap);
-        EsercizioSequenzaParole E = (EsercizioSequenzaParole) fromMap(fromDatabaseMap);
-        this.refIdTemplateEsercizio = E.refIdTemplateEsercizio;
-        this.refIdScenarioGioco = E.refIdScenarioGioco;
-        this.idEsercizio = E.idEsercizio;
-        this.ricompensaCorretto = E.ricompensaCorretto;
-        this.ricompensaErrato = E.ricompensaErrato;
-    }
+		this.idEsercizio = e.getIdEsercizio();
+		this.ricompensaCorretto = e.getRicompensaCorretto();
+		this.ricompensaErrato = e.getRicompensaErrato();
+		this.audioEsercizio = e.getAudioEsercizio();
+		this.parola1 = e.getParola1();
+		this.parola2 = e.getParola2();
+		this.parola3 = e.getParola3();
+		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
+	}
 
-    public String getRefIdTemplateEsercizio() {
-        return refIdTemplateEsercizio;
-    }
+	public String getRefIdTemplateEsercizio() {
+		return refIdTemplateEsercizio;
+	}
 
-    public String getRefIdScenarioGioco() {
-        return refIdScenarioGioco;
-    }
+	public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
 
-    public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
-        this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-    }
+	@Override
+	public Map<String,Object> toMap() {
+		Map<String,Object> entityMap = super.toMap();
 
-    public void setRefIdScenarioGioco(String refIdScenarioGioco) {
-        this.refIdScenarioGioco = refIdScenarioGioco;
-    }
+		//entityMap.put(CostantiDBEsercizioSequenzaParole.ID_ESERCIZIO, this.idEsercizio);
+		entityMap.put(CostantiDBEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+		return entityMap;
+	}
 
-    @Override
-    public Map<String, Object> toMap() {
-        Map<String, Object> entityMap = super.toMap();
-        entityMap.put(CostantiDBEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
-        entityMap.put(CostantiDBEsercizioSequenzaParole.ID_SCENARIOGIOCO, this.refIdScenarioGioco);
-        return entityMap;
-    }
+	@Override
+	public EsercizioSequenzaParole fromMap(Map<String,Object> fromDatabaseMap) {
+		Log.d("EsercizioSequenzaParole.fromMap()", fromDatabaseMap.toString());
+		return new EsercizioSequenzaParole(
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.ID_ESERCIZIO),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.RICOMPENSA_CORRETTO)),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.RICOMPENSA_ERRATO)),
+				new File((String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.AUDIO_ESERCIZIO)),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_1),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_2),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_3),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO)
+		);
+	}
 
-    @Override
-    public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        return "EsercizioSequenzaParole{" +
-                "idEsercizio='" + idEsercizio + '\'' +
-                ", ricompensaCorretto=" + ricompensaCorretto +
-                ", ricompensaErrato=" + ricompensaErrato +
-                ", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
-                ", refIdScenarioGioco='" + refIdScenarioGioco + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "EsercizioSequenzaParole{" +
+				"idEsercizio='" + idEsercizio + '\'' +
+				", ricompensaCorretto=" + ricompensaCorretto +
+				", ricompensaErrato=" + ricompensaErrato +
+				", audioEsercizio=" + audioEsercizio +
+				", parola1='" + parola1 + '\'' +
+				", parola2='" + parola2 + '\'' +
+				", parola3='" + parola3 + '\'' +
+				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
+				'}';
+	}
 
 }

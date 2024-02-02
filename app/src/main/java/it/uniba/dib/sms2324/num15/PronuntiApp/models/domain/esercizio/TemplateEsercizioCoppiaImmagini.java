@@ -1,21 +1,20 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
+import android.util.Log;
+
 import java.io.File;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
 public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implements Esercizio {
-    private File audioEsercizio;
-    private File immagineEsercizioCorretta;
-    private File immagineEsercizioErrata;
+    protected File audioEsercizio;
+    protected File immagineEsercizioCorretta;
+    protected File immagineEsercizioErrata;
 
-    public TemplateEsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata) {
-        super(ricompensaCorretto, ricompensaErrato);
-        this.audioEsercizio = audioEsercizio;
-        this.immagineEsercizioCorretta = immagineEsercizioCorretta;
-        this.immagineEsercizioErrata = immagineEsercizioErrata;
-    }
+    public TemplateEsercizioCoppiaImmagini() {}
 
     public TemplateEsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata) {
         super(idEsercizio, ricompensaCorretto, ricompensaErrato);
@@ -24,12 +23,26 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         this.immagineEsercizioErrata = immagineEsercizioErrata;
     }
 
-    public TemplateEsercizioCoppiaImmagini(Map<String,Object> fromDatabaseMap){
-        super(fromDatabaseMap);
-        TemplateEsercizioCoppiaImmagini T = (TemplateEsercizioCoppiaImmagini) fromMap(fromDatabaseMap);
-        this.audioEsercizio = T.audioEsercizio;
-        this.immagineEsercizioCorretta = T.immagineEsercizioCorretta;
-        this.immagineEsercizioErrata = T.immagineEsercizioErrata;
+    public TemplateEsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata) {
+        super(ricompensaCorretto, ricompensaErrato);
+        this.audioEsercizio = audioEsercizio;
+        this.immagineEsercizioCorretta = immagineEsercizioCorretta;
+        this.immagineEsercizioErrata = immagineEsercizioErrata;
+    }
+
+    public TemplateEsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap) {
+        TemplateEsercizioCoppiaImmagini t = this.fromMap(fromDatabaseMap);
+
+        this.idEsercizio = t.getIdEsercizio();
+        this.ricompensaCorretto = t.getRicompensaCorretto();
+        this.ricompensaErrato = t.getRicompensaErrato();
+        this.audioEsercizio = t.getAudioEsercizio();
+        this.immagineEsercizioCorretta = t.getImmagineEsercizioCorretta();
+        this.immagineEsercizioErrata = t.getImmagineEsercizioErrata();
+    }
+
+    public File getAudioEsercizio() {
+        return audioEsercizio;
     }
 
     public File getImmagineEsercizioCorretta() {
@@ -40,8 +53,8 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         return immagineEsercizioErrata;
     }
 
-    public File getAudioEsercizio() {
-        return audioEsercizio;
+    public void setAudioEsercizio(File audioEsercizio) {
+        this.audioEsercizio = audioEsercizio;
     }
 
     public void setImmagineEsercizioCorretta(File immagineEsercizioCorretta) {
@@ -52,34 +65,38 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         this.immagineEsercizioErrata = immagineEsercizioErrata;
     }
 
-    public void setAudioEsercizio(File audioEsercizio) {
-        this.audioEsercizio = audioEsercizio;
-    }
-
     @Override
     public Map<String, Object> toMap() {
         Map<String, Object> entityMap = super.toMap();
+
         //entityMap.put(CostantiDBTemplateEsercizioCoppiaImmagini.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
+        entityMap.put(CostantiDBTemplateEsercizioCoppiaImmagini.AUDIO_ESERCIZIO, this.audioEsercizio.getPath());
         entityMap.put(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA, this.immagineEsercizioCorretta.getPath());
         entityMap.put(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_ERRATA, this.immagineEsercizioErrata.getPath());
-        entityMap.put(CostantiDBTemplateEsercizioCoppiaImmagini.AUDIO_ESERCIZIO, this.audioEsercizio.getPath());
         return entityMap;
     }
 
     @Override
-    public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
-        return null;
+    public TemplateEsercizioCoppiaImmagini fromMap(Map<String, Object> fromDatabaseMap) {
+        Log.d("TemplateEsercizioCoppiaImmagini.fromMap()", fromDatabaseMap.toString());
+        return new TemplateEsercizioCoppiaImmagini(
+                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioCoppiaImmagini.RICOMPENSA_CORRETTO)),
+                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioCoppiaImmagini.RICOMPENSA_ERRATO)),
+                new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioCoppiaImmagini.AUDIO_ESERCIZIO)),
+                new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)),
+                new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_ERRATA))
+        );
     }
 
     @Override
     public String toString() {
         return "TemplateEsercizioCoppiaImmagini{" +
-                "idEsercizio='" + idEsercizio + '\'' +
+                "idTemplateEsercizio='" + idEsercizio + '\'' +
                 ", ricompensaCorretto=" + ricompensaCorretto +
                 ", ricompensaErrato=" + ricompensaErrato +
+                ", audioEsercizio=" + audioEsercizio +
                 ", immagineEsercizioCorretta=" + immagineEsercizioCorretta +
                 ", immagineEsercizioErrata=" + immagineEsercizioErrata +
-                ", audioEsercizio=" + audioEsercizio +
                 '}';
     }
 

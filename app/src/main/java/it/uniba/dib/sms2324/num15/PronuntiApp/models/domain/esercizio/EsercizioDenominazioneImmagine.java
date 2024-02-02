@@ -1,29 +1,24 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 
+import android.util.Log;
+
 import java.io.File;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazioneImmagine implements EsercizioEseguibile {
     private int countAiuti;
     private String refIdTemplateEsercizio;
-    private String refIdScenarioGioco;
 
-    public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio, String refIdScenarioGioco) {
+    public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio) {
         super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio);
         this.countAiuti = countAiuti;
         this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-        this.refIdScenarioGioco = refIdScenarioGioco;
-    }
-
-    public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio, String refIdScenarioGioco) {
-        super(ricompensaCorretto, ricompensaErrato, immagineEsercizio);
-        this.countAiuti = countAiuti;
-        this.refIdTemplateEsercizio = refIdTemplateEsercizio;
-        this.refIdScenarioGioco = refIdScenarioGioco;
     }
 
     public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio) {
@@ -38,14 +33,14 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
     }
 
     public EsercizioDenominazioneImmagine(Map<String,Object> fromDatabaseMap){
-        super(fromDatabaseMap);
-        EsercizioDenominazioneImmagine E = (EsercizioDenominazioneImmagine) fromMap(fromDatabaseMap);
-        this.refIdTemplateEsercizio = E.refIdTemplateEsercizio;
-        this.refIdScenarioGioco = E.refIdScenarioGioco;
-        this.idEsercizio = E.idEsercizio;
-        this.ricompensaCorretto = E.ricompensaCorretto;
-        this.ricompensaErrato = E.ricompensaErrato;
-        this.countAiuti = E.countAiuti;
+        EsercizioDenominazioneImmagine e = fromMap(fromDatabaseMap);
+
+        this.idEsercizio = e.getIdEsercizio();
+        this.ricompensaCorretto = e.getRicompensaCorretto();
+        this.ricompensaErrato = e.getRicompensaErrato();
+        this.immagineEsercizio = e.getImmagineEsercizio();
+        this.countAiuti = e.getCountAiuti();
+        this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
     }
 
     public int getCountAiuti() {
@@ -56,10 +51,6 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
         return refIdTemplateEsercizio;
     }
 
-    public String getRefIdScenarioGioco() {
-        return refIdScenarioGioco;
-    }
-
     public void setCountAiuti(int countAiuti) {
         this.countAiuti = countAiuti;
     }
@@ -68,22 +59,26 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
         this.refIdTemplateEsercizio = refIdTemplateEsercizio;
     }
 
-    public void setRefIdScenarioGioco(String refIdScenarioGioco) {
-        this.refIdScenarioGioco = refIdScenarioGioco;
-    }
-
     @Override
     public Map<String, Object> toMap() {
         Map<String, Object> entityMap = super.toMap();
+
+        //entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_ESERCIZIO, this.idEsercizio);
         entityMap.put(CostantiDBEsercizioDenominazioneImmagine.COUNT_AIUTI, this.countAiuti);
         entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
-        entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_SCENARIOGIOCO, this.refIdScenarioGioco);
         return entityMap;
     }
 
     @Override
-    public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
-        return null;
+    public EsercizioDenominazioneImmagine fromMap(Map<String, Object> fromDatabaseMap) {
+        Log.d("EsercizioDenominazioneImmagine.fromMap()", fromDatabaseMap.toString());
+        return new EsercizioDenominazioneImmagine(
+                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.RICOMPENSA_CORRETTO)),
+                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.RICOMPENSA_ERRATO)),
+                new File((String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)),
+                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.COUNT_AIUTI)),
+                (String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO)
+        );
     }
 
     @Override
@@ -92,9 +87,9 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
                 "idEsercizio='" + idEsercizio + '\'' +
                 ", ricompensaCorretto=" + ricompensaCorretto +
                 ", ricompensaErrato=" + ricompensaErrato +
+                ", immagineEsercizio=" + immagineEsercizio +
                 ", countAiuti=" + countAiuti +
                 ", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
-                ", refIdScenarioGioco='" + refIdScenarioGioco + '\'' +
                 '}';
     }
 

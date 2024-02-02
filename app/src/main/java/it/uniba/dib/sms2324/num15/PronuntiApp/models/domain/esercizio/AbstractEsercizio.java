@@ -11,6 +11,9 @@ public abstract class AbstractEsercizio implements Esercizio {
 	protected int ricompensaCorretto;
 	protected int ricompensaErrato;
 
+	public AbstractEsercizio() {
+	}
+
 	public AbstractEsercizio(String idEsercizio, int ricompensaCorretto, int ricompensaErrato) {
 		this.idEsercizio = idEsercizio;
 		this.ricompensaCorretto = ricompensaCorretto;
@@ -21,8 +24,6 @@ public abstract class AbstractEsercizio implements Esercizio {
 		this.ricompensaCorretto = ricompensaCorretto;
 		this.ricompensaErrato = ricompensaErrato;
 	}
-
-	public AbstractEsercizio(Map<String,Object> fromDatabaseMap){}
 
 	public String getIdEsercizio() {
 		return idEsercizio;
@@ -36,6 +37,10 @@ public abstract class AbstractEsercizio implements Esercizio {
 		return ricompensaErrato;
 	}
 
+	public void setIdEsercizio(String idEsercizio) {
+		this.idEsercizio = idEsercizio;
+	}
+
 	public void setRicompensaCorretto(int ricompensaCorretto) {
 		this.ricompensaCorretto = ricompensaCorretto;
 	}
@@ -45,16 +50,13 @@ public abstract class AbstractEsercizio implements Esercizio {
 	}
 
 	@Override
-	public Map<String, Object> toMap() {
-		Map<String, Object> entityMap = new HashMap<>();
+	public Map<String,Object> toMap() {
+		Map<String,Object> entityMap = new HashMap<>();
+
+		//entityMap.put(CostantiDBEsercizioAbstract.ID_ESERCIZIO, this.idEsercizio);
 		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_CORRETTO, this.ricompensaCorretto);
 		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_ERRATO, this.ricompensaErrato);
 		return entityMap;
-	}
-
-	@Override
-	public Esercizio fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
 	}
 
 }
