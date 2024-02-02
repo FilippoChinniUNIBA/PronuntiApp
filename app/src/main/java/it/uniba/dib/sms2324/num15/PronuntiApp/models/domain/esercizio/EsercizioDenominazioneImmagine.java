@@ -3,6 +3,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio;
 import java.io.File;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazioneImmagine implements EsercizioEseguibile {
@@ -61,7 +63,11 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 
     @Override
     public Map<String, Object> toMap() {
-        return null;
+        Map<String, Object> entityMap = super.toMap();
+        entityMap.put(CostantiDBEsercizioDenominazioneImmagine.COUNT_AIUTI, this.countAiuti);
+        entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+        entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_SCENARIOGIOCO, this.refIdScenarioGioco);
+        return entityMap;
     }
 
     @Override

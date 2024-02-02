@@ -1,7 +1,9 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBClassifica;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class Classifica implements Persistente<Classifica> {
@@ -35,7 +37,10 @@ public class Classifica implements Persistente<Classifica> {
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = new HashMap<>();
+		entityMap.put(CostantiDBClassifica.CLASSIFICA_PAZIENTI, this.classificaPazienti);
+		entityMap.put(CostantiDBClassifica.ID_LOGOPEDISTA, this.refIdLogopedista);
+		return entityMap;
 	}
 
 	@Override

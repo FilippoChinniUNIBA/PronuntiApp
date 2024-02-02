@@ -2,9 +2,10 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBGenitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
-public class Genitore extends AbstractProfilo implements Persistente<Genitore> {
+public class Genitore extends AbstractProfilo {
 	private String telefono;
 	private String refIdPaziente;
 
@@ -42,7 +43,10 @@ public class Genitore extends AbstractProfilo implements Persistente<Genitore> {
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = super.toMap();
+		entityMap.put(CostantiDBGenitore.TELEFONO, this.telefono);
+		entityMap.put(CostantiDBGenitore.ID_PAZIENTE, this.refIdPaziente);
+		return entityMap;
 	}
 
 	@Override

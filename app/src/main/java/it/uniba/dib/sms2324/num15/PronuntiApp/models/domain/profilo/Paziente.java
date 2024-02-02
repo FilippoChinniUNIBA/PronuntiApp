@@ -7,7 +7,7 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
-public class Paziente extends AbstractProfilo implements Persistente<Paziente> {
+public class Paziente extends AbstractProfilo {
 	private int eta;
 	private LocalDate dataNascita;
 	private char sesso;

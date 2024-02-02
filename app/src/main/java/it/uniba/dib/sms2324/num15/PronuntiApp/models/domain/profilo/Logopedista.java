@@ -3,10 +3,10 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 import java.util.List;
 import java.util.Map;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica.Classifica;
 
-public class Logopedista extends AbstractProfilo implements Persistente<Logopedista> {
+public class Logopedista extends AbstractProfilo {
 	private String telefono;
 	private String indirizzo;
 	private Classifica classificaPazienti;
@@ -60,7 +60,10 @@ public class Logopedista extends AbstractProfilo implements Persistente<Logopedi
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = super.toMap();
+		entityMap.put(CostantiDBLogopedista.TELEFONO, this.telefono);
+		entityMap.put(CostantiDBLogopedista.INDIRIZZO, this.indirizzo);
+		return entityMap;
 	}
 
 	@Override

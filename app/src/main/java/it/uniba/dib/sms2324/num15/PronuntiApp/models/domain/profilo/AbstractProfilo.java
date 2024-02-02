@@ -1,6 +1,13 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
-public abstract class AbstractProfilo {
+import java.util.HashMap;
+import java.util.Map;
+
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBProfiloAbstract;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+
+public abstract class AbstractProfilo implements Profilo {
 	protected String idProfilo;
 	protected String nome;
 	protected String cognome;
@@ -71,6 +78,23 @@ public abstract class AbstractProfilo {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public Map<String, Object> toMap() {
+		Map<String, Object> entityMap = new HashMap<>();
+		//entityMap.put(CostantiDBProfiloAbstract.ID_PROFILO, this.idProfilo);
+		entityMap.put(CostantiDBProfiloAbstract.NOME, this.nome);
+		entityMap.put(CostantiDBProfiloAbstract.COGNOME, this.cognome);
+		entityMap.put(CostantiDBProfiloAbstract.USERNAME, this.username);
+		entityMap.put(CostantiDBProfiloAbstract.EMAIL, this.email);
+		entityMap.put(CostantiDBProfiloAbstract.PASSWORD, this.password);
+		return entityMap;
+	}
+
+	@Override
+	public Profilo fromMap(Map<String, Object> fromDatabaseMap) {
+		return null;
 	}
 
 	@Override

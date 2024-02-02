@@ -51,6 +51,8 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
     @Override
     public Map<String, Object> toMap() {
         Map<String, Object> entityMap = super.toMap();
+        entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+        entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_SCENARIOGIOCO, this.refIdScenarioGioco);
         return entityMap;
     }
 

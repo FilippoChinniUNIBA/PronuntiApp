@@ -9,26 +9,26 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class Appuntamento implements Persistente<Appuntamento> {
 	private String idAppuntamento;
-	private int refIdGenitore;
-	private int refIdLogopedista;
+	private String refIdGenitore;
+	private String refIdLogopedista;
 	private LocalDate data;
-	private LocalTime time;
+	private LocalTime ora;
 	private String luogo;
 
-	public Appuntamento(String idAppuntamento, int refIdGenitore, int refIdLogopedista, LocalDate data, LocalTime time, String luogo) {
+	public Appuntamento(String idAppuntamento, String refIdGenitore, String refIdLogopedista, LocalDate data, LocalTime ora, String luogo) {
 		this.idAppuntamento = idAppuntamento;
 		this.refIdGenitore = refIdGenitore;
 		this.refIdLogopedista = refIdLogopedista;
 		this.data = data;
-		this.time = time;
+		this.ora = ora;
 		this.luogo = luogo;
 	}
 
-	public Appuntamento(int refIdGenitore, int refIdLogopedista, LocalDate data, LocalTime time, String luogo) {
+	public Appuntamento(String refIdGenitore, String refIdLogopedista, LocalDate data, LocalTime ora, String luogo) {
 		this.refIdGenitore = refIdGenitore;
 		this.refIdLogopedista = refIdLogopedista;
 		this.data = data;
-		this.time = time;
+		this.ora = ora;
 		this.luogo = luogo;
 	}
 
@@ -36,11 +36,11 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		return idAppuntamento;
 	}
 
-	public int getRefIdGenitore() {
+	public String getRefIdGenitore() {
 		return refIdGenitore;
 	}
 
-	public int getRefIdLogopedista() {
+	public String getRefIdLogopedista() {
 		return refIdLogopedista;
 	}
 
@@ -48,8 +48,8 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		return data;
 	}
 
-	public LocalTime getTime() {
-		return time;
+	public LocalTime getOra() {
+		return ora;
 	}
 
 	public String getLuogo() {
@@ -60,11 +60,11 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.idAppuntamento = idAppuntamento;
 	}
 
-	public void setRefIdGenitore(int refIdGenitore) {
+	public void setRefIdGenitore(String refIdGenitore) {
 		this.refIdGenitore = refIdGenitore;
 	}
 
-	public void setRefIdLogopedista(int refIdLogopedista) {
+	public void setRefIdLogopedista(String refIdLogopedista) {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
@@ -72,8 +72,8 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.data = data;
 	}
 
-	public void setTime(LocalTime time) {
-		this.time = time;
+	public void setOra(LocalTime ora) {
+		this.ora = ora;
 	}
 
 	public void setLuogo(String luogo) {
@@ -97,7 +97,7 @@ public class Appuntamento implements Persistente<Appuntamento> {
 				", refIdGenitore=" + refIdGenitore +
 				", refIdLogopedista=" + refIdLogopedista +
 				", data=" + data +
-				", time=" + time +
+				", ora=" + ora +
 				", luogo='" + luogo + '\'' +
 				'}';
 	}
