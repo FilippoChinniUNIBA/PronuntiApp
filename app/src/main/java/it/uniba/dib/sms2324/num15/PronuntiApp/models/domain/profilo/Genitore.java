@@ -25,6 +25,19 @@ public class Genitore extends AbstractProfilo implements Persistente<Genitore> {
 		this.telefono = telefono;
 	}
 
+	public Genitore(Map<String,Object> fromDatabaseMap){
+		super(fromDatabaseMap);
+		Genitore G = fromMap(fromDatabaseMap);
+		this.refIdPaziente = G.refIdPaziente;
+		this.telefono = G.telefono;
+		this.cognome = G.cognome;
+		this.email = G.email;
+		this.idProfilo = G.idProfilo;
+		this.nome = G.nome;
+		this.username = G.username;
+		this.password = G.password;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}

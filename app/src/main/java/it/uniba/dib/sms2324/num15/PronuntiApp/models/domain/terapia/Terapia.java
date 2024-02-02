@@ -28,6 +28,15 @@ public class Terapia implements Persistente<Terapia> {
 		this.scenariGioco = scenariGioco;
 	}
 
+	public Terapia(Map<String,Object> fromDatabaseMap){
+		Terapia T = fromMap(fromDatabaseMap);
+		this.idTerapia = T.idTerapia;
+		this.dataInizio = T.dataInizio;
+		this.dataFine = T.dataFine;
+		this.scenariGioco = T.scenariGioco;
+		this.redIdPaziente = T.redIdPaziente;
+	}
+
 	public String getIdTerapia() {
 		return idTerapia;
 	}

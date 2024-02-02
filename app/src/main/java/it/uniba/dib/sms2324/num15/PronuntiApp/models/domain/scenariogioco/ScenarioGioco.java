@@ -31,6 +31,17 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.esercizi = esercizi;
 	}
 
+	public ScenarioGioco(Map<String,Object> fromDatabaseMap){
+		super(fromDatabaseMap);
+		ScenarioGioco S = fromMap(fromDatabaseMap);
+		this.idScenarioGioco = S.idScenarioGioco;
+		this.dataInizio = S.dataInizio;
+		this.esercizi = S.esercizi;
+		this.immagineSfondo = S.immagineSfondo;
+		this.ricompensaFinale = S.ricompensaFinale;
+		this.refIdTerapia = S.refIdTerapia;
+	}
+
 	public String getIdScenarioGioco() {
 		return idScenarioGioco;
 	}

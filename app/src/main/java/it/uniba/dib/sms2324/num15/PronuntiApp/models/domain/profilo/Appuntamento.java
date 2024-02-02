@@ -32,6 +32,16 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.luogo = luogo;
 	}
 
+	public Appuntamento(Map<String,Object> fromDatabaseMap){
+		Appuntamento A = fromMap(fromDatabaseMap);
+		this.idAppuntamento = A.idAppuntamento;
+		this.refIdGenitore = A.refIdGenitore;
+		this.refIdLogopedista = A.refIdLogopedista;
+		this.data = A.data;
+		this.time = A.time;
+		this.luogo = A.luogo;
+	}
+
 	public String getIdAppuntamento() {
 		return idAppuntamento;
 	}

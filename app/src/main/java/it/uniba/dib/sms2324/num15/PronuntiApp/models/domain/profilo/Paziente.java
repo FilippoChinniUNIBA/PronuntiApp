@@ -52,6 +52,24 @@ public class Paziente extends AbstractProfilo implements Persistente<Paziente> {
 		this.terapie = terapie;
 	}
 
+	public Paziente(Map<String,Object> fromDatabaseMap){
+		super(fromDatabaseMap);
+		Paziente P = fromMap(fromDatabaseMap);
+		this.eta = P.eta;
+		this.dataNascita = P.dataNascita;
+		this.personaggiSbloccati = P.personaggiSbloccati;
+		this.sesso = P.sesso;
+		this.email = P.email;
+		this.punteggioTot = P.punteggioTot;
+		this.terapie = P.terapie;
+		this.refIdLogopedista = P.refIdLogopedista;
+		this.cognome = P.cognome;
+		this.idProfilo = P.idProfilo;
+		this.nome = P.nome;
+		this.password = P.password;
+		this.username = P.username;
+	}
+
 	public int getEta() {
 		return eta;
 	}

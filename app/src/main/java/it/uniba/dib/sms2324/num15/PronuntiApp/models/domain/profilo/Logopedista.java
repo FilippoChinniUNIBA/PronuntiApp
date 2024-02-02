@@ -26,6 +26,21 @@ public class Logopedista extends AbstractProfilo implements Persistente<Logopedi
 		this.pazienti = pazienti;
 	}
 
+	public Logopedista(Map<String,Object> fromDatabaseMap){
+		super(fromDatabaseMap);
+		Logopedista L = fromMap(fromDatabaseMap);
+		this.pazienti = L.pazienti;
+		this.classificaPazienti = L.classificaPazienti;
+		this.telefono = L.telefono;
+		this.cognome = L.cognome;
+		this.email = L.email;
+		this.idProfilo = L.idProfilo;
+		this.nome = L.nome;
+		this.username = L.username;
+		this.password = L.password;
+		this.indirizzo = L.indirizzo;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}

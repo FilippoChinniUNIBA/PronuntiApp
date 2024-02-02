@@ -35,6 +35,17 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
         this.countAiuti = countAiuti;
     }
 
+    public EsercizioDenominazioneImmagine(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        EsercizioDenominazioneImmagine E = (EsercizioDenominazioneImmagine) fromMap(fromDatabaseMap);
+        this.refIdTemplateEsercizio = E.refIdTemplateEsercizio;
+        this.refIdScenarioGioco = E.refIdScenarioGioco;
+        this.idEsercizio = E.idEsercizio;
+        this.ricompensaCorretto = E.ricompensaCorretto;
+        this.ricompensaErrato = E.ricompensaErrato;
+        this.countAiuti = E.countAiuti;
+    }
+
     public int getCountAiuti() {
         return countAiuti;
     }

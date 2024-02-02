@@ -1,5 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
+import java.util.Map;
+
 public abstract class AbstractProfilo {
 	protected String idProfilo;
 	protected String nome;
@@ -25,7 +27,9 @@ public abstract class AbstractProfilo {
 		this.password = password;
 	}
 
-	public String getIdProfilo() {
+    public AbstractProfilo(Map<String,Object> fromDatabaseMap) {}
+
+    public String getIdProfilo() {
 		return idProfilo;
 	}
 
