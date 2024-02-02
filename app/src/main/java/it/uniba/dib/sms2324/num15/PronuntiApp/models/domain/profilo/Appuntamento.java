@@ -38,7 +38,7 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.refIdGenitore = A.refIdGenitore;
 		this.refIdLogopedista = A.refIdLogopedista;
 		this.data = A.data;
-		this.time = A.time;
+		this.ora = A.ora;
 		this.luogo = A.luogo;
 	}
 
