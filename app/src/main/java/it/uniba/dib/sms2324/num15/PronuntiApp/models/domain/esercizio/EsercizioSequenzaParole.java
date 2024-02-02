@@ -32,6 +32,16 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
         super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
     }
 
+    public EsercizioSequenzaParole(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        EsercizioSequenzaParole E = (EsercizioSequenzaParole) fromMap(fromDatabaseMap);
+        this.refIdTemplateEsercizio = E.refIdTemplateEsercizio;
+        this.refIdScenarioGioco = E.refIdScenarioGioco;
+        this.idEsercizio = E.idEsercizio;
+        this.ricompensaCorretto = E.ricompensaCorretto;
+        this.ricompensaErrato = E.ricompensaErrato;
+    }
+
     public String getRefIdTemplateEsercizio() {
         return refIdTemplateEsercizio;
     }

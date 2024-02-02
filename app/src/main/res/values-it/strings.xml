@@ -29,4 +29,5 @@
     <string name="patient">Paziente</string>
     <string name="parent">Genitore</string>
     <string name="logopedist">Logopedista</string>
+    <string name="child_data">Dati del bambino</string>
 </resources>

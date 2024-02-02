@@ -17,6 +17,10 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 		super(immagineSfondo);
 	}
 
+	public TemplateScenarioGioco(Map<String,Object> fromDatabaseMap){
+		super(fromDatabaseMap);
+	}
+
 	public String getIdTemplateScenarioGioco() {
 		return idTemplateScenarioGioco;
 	}

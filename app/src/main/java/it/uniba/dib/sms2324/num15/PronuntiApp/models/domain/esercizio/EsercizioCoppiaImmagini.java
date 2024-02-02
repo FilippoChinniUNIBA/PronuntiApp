@@ -32,6 +32,16 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
         super(ricompensaCorretto, ricompensaErrato, immagineEsercizioCorretta, immagineEsercizioErrata, audio);
     }
 
+    public EsercizioCoppiaImmagini(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        EsercizioCoppiaImmagini E = (EsercizioCoppiaImmagini) fromMap(fromDatabaseMap);
+        this.refIdTemplateEsercizio = E.refIdTemplateEsercizio;
+        this.refIdScenarioGioco = E.refIdScenarioGioco;
+        this.idEsercizio = E.idEsercizio;
+        this.ricompensaCorretto = E.ricompensaCorretto;
+        this.ricompensaErrato = E.ricompensaErrato;
+    }
+
     public String getRefIdTemplateEsercizio() {
         return refIdTemplateEsercizio;
     }

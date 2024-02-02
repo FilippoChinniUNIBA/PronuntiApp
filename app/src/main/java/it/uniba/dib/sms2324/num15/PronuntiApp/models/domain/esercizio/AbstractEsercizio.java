@@ -22,6 +22,8 @@ public abstract class AbstractEsercizio implements Esercizio {
 		this.ricompensaErrato = ricompensaErrato;
 	}
 
+	public AbstractEsercizio(Map<String,Object> fromDatabaseMap){}
+
 	public String getIdEsercizio() {
 		return idEsercizio;
 	}

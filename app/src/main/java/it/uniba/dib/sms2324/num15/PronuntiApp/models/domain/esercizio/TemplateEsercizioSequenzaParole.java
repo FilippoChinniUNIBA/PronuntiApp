@@ -29,6 +29,15 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
         this.parola3 = parola3;
     }
 
+    public TemplateEsercizioSequenzaParole(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        TemplateEsercizioSequenzaParole T = (TemplateEsercizioSequenzaParole) fromMap(fromDatabaseMap);
+        this.audioEsercizio = T.audioEsercizio;
+        this.parola1 = T.parola1;
+        this.parola2 = T.parola2;
+        this.parola3 = T.parola3;
+    }
+
     public File getAudioEsercizio() {
         return audioEsercizio;
     }

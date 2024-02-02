@@ -32,7 +32,9 @@ public abstract class AbstractProfilo implements Profilo {
 		this.password = password;
 	}
 
-	public String getIdProfilo() {
+    public AbstractProfilo(Map<String,Object> fromDatabaseMap) {}
+
+    public String getIdProfilo() {
 		return idProfilo;
 	}
 
