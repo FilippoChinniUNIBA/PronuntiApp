@@ -16,6 +16,13 @@ public class Classifica implements Persistente<Classifica> {
 	public Classifica(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
 	}
+	/*
+	public Classifica(Map<String,Object> fromDatabaseMap){
+		Classifica C = fromMap(fromDatabaseMap);
+		this.classificaPazienti = C.classificaPazienti;
+		this.refIdLogopedista = C.refIdLogopedista;
+	}
+	*/
 
 	public Map<String, Integer> getClassificaPazienti() {
 		return classificaPazienti;

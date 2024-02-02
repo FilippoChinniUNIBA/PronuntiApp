@@ -19,6 +19,12 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
         this.immagineEsercizio = immagineEsercizio;
     }
 
+    public TemplateEsercizioDenominazioneImmagine(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        TemplateEsercizioDenominazioneImmagine T = (TemplateEsercizioDenominazioneImmagine) fromMap(fromDatabaseMap);
+        this.immagineEsercizio = T.immagineEsercizio;
+    }
+
     public File getImmagineEsercizio() {
         return immagineEsercizio;
     }

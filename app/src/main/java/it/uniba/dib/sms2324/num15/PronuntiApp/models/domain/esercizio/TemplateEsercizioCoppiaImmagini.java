@@ -26,6 +26,14 @@ public class TemplateEsercizioCoppiaImmagini extends AbstractEsercizio implement
         this.audio = audio;
     }
 
+    public TemplateEsercizioCoppiaImmagini(Map<String,Object> fromDatabaseMap){
+        super(fromDatabaseMap);
+        TemplateEsercizioCoppiaImmagini T = (TemplateEsercizioCoppiaImmagini) fromMap(fromDatabaseMap);
+        this.audio = T.audio;
+        this.immagineEsercizioCorretta = T.immagineEsercizioCorretta;
+        this.immagineEsercizioErrata = T.immagineEsercizioErrata;
+    }
+
     public File getImmagineEsercizioCorretta() {
         return immagineEsercizioCorretta;
     }
