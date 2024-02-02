@@ -139,24 +139,6 @@
       </aapt:attr>
     </path>
     <path
-        android:pathData="M21.237,3L21.237,3A6.432,6.432 0,0 1,27.67 9.433L27.67,14.946A6.432,6.432 0,0 1,21.237 21.378L21.237,21.378A6.432,6.432 0,0 1,14.805 14.946L14.805,9.433A6.432,6.432 0,0 1,21.237 3z"
-        android:fillColor="#B5D2FD"/>
-    <path
-        android:pathData="M21.237,3L21.237,3A6.432,6.432 0,0 1,27.67 9.433L27.67,14.946A6.432,6.432 0,0 1,21.237 21.378L21.237,21.378A6.432,6.432 0,0 1,14.805 14.946L14.805,9.433A6.432,6.432 0,0 1,21.237 3z"
-        android:fillAlpha="0.4">
-      <aapt:attr name="android:fillColor">
-        <gradient 
-            android:startX="6.834"
-            android:startY="-3.302"
-            android:endX="44.265"
-            android:endY="27.292"
-            android:type="linear">
-          <item android:offset="0" android:color="#FF000000"/>
-          <item android:offset="1" android:color="#00000000"/>
-        </gradient>
-      </aapt:attr>
-    </path>
-    <path
         android:pathData="M30.867,25.784m-5.513,0a5.513,5.513 0,1 1,11.027 0a5.513,5.513 0,1 1,-11.027 0"
         android:fillColor="#EDF1F0"/>
     <path
