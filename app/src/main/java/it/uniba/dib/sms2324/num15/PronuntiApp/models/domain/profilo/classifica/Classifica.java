@@ -7,17 +7,18 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class Classifica implements Persistente<Classifica> {
-	private Map<String, Integer> classificaPazienti;
 	private String refIdLogopedista;
+	private Map<String, Integer> classificaPazienti;
 
-	public Classifica(Map<String, Integer> classificaPazienti, String refIdLogopedista) {
-		this.classificaPazienti = classificaPazienti;
+	public Classifica(String refIdLogopedista, Map<String, Integer> classificaPazienti) {
 		this.refIdLogopedista = refIdLogopedista;
+		this.classificaPazienti = classificaPazienti;
 	}
 
 	public Classifica(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
 	}
+
 	/*
 	public Classifica(Map<String,Object> fromDatabaseMap){
 		Classifica C = fromMap(fromDatabaseMap);
@@ -26,27 +27,27 @@ public class Classifica implements Persistente<Classifica> {
 	}
 	*/
 
-	public Map<String, Integer> getClassificaPazienti() {
-		return classificaPazienti;
-	}
-
 	public String getRefIdLogopedista() {
 		return refIdLogopedista;
 	}
 
-	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
-		this.classificaPazienti = classificaPazienti;
+	public Map<String, Integer> getClassificaPazienti() {
+		return classificaPazienti;
 	}
 
 	public void setRefIdLogopedista(String refIdLogopedista) {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
+	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
+		this.classificaPazienti = classificaPazienti;
+	}
+
 	@Override
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
-		entityMap.put(CostantiDBClassifica.CLASSIFICA_PAZIENTI, this.classificaPazienti);
 		entityMap.put(CostantiDBClassifica.ID_LOGOPEDISTA, this.refIdLogopedista);
+		entityMap.put(CostantiDBClassifica.CLASSIFICA_PAZIENTI, this.classificaPazienti);
 		return entityMap;
 	}
 
@@ -58,8 +59,8 @@ public class Classifica implements Persistente<Classifica> {
 	@Override
 	public String toString() {
 		return "Classifica{" +
-				"classificaPazienti=" + classificaPazienti +
-				", refIdLogopedista='" + refIdLogopedista + '\'' +
+				"refIdLogopedista='" + refIdLogopedista + '\'' +
+				", classificaPazienti=" + classificaPazienti +
 				'}';
 	}
 
