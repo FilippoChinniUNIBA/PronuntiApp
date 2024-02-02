@@ -23,17 +23,18 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
 
     public NavigationNavBarSelectorGenitore(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
         super( fragmentManager, fragmentContainerId, bottomNavigationView);
+
         fragmentManager.addOnBackStackChangedListener(() -> {
             Fragment currentFragment = fragmentManager.findFragmentById(fragmentContainerId);
             if (currentFragment instanceof MonitoraggioFragment) {
                 bottomNavigationView.getMenu().getItem(0).setChecked(true);
             } else if (currentFragment instanceof ScenariGenitoriFragment) {
                 bottomNavigationView.getMenu().getItem(1).setChecked(true);
-            } else if (currentFragment instanceof ClassificaFragment) {
-                bottomNavigationView.getMenu().getItem(2).setChecked(true);
             } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
+                bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            } else if (currentFragment instanceof ProfileGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(3).setChecked(true);
-            } /*else if (currentFragment instanceof ProfileLogopedistaFragment) {
+            } /*else if (currentFragment instanceof ClassificaFragment) {
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
             }*/
         });
@@ -53,7 +54,6 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
             fragment = appuntamentiGenitoreFragment;
         else if (itemId == R.id.profiloGenitore)
             fragment = profileGenitoreFragment;
-
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);
             return true;

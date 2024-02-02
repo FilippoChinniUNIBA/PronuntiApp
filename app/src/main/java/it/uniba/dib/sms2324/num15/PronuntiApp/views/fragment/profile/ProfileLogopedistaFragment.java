@@ -12,9 +12,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 
-public class ProfileLogopedistaFragment extends AsbtractProfileFragment {
+public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment {
 
-    private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
     public ProfileLogopedistaFragment(){
@@ -28,12 +27,12 @@ public class ProfileLogopedistaFragment extends AsbtractProfileFragment {
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloLogopedista);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloLogopedista);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloLogopedista);
+        textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailProfiloLogopedista);
         imageViewProfile = view.findViewById(R.id.imageViewProfile);
         imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
 
-        textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailProfiloLogopedista);
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
 

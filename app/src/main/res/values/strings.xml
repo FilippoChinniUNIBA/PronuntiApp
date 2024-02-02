@@ -29,6 +29,7 @@
     <string name="patient">Patient</string>
     <string name="parent">Parent</string>
     <string name="logopedist">Speech terapist</string>
+    <string name="child_data">Child data</string>
 
 
 </resources>
