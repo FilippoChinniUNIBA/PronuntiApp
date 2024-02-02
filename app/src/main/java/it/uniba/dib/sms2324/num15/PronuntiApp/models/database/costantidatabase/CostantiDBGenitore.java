@@ -8,6 +8,7 @@ public final class CostantiDBGenitore {
 	public static final String EMAIL = "email";
 	public static final String PASSWORD = "password";
 	public static final String TELEFONO = "telefono";
+	public static final String LISTA_APPUNTAMENTI = "listaAppuntamenti";
 	public static final String ID_PAZIENTE = "idPaziente";
 
 	private CostantiDBGenitore() {}

@@ -48,7 +48,7 @@ public abstract class AbstractEsercizio implements Esercizio {
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
 		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_CORRETTO, this.ricompensaCorretto);
-		entityMap.put(CostantiDBTemplateEsercizioAbstract.RICOMPENSA_ERRATO, this.ricompensaErrato);
+		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_ERRATO, this.ricompensaErrato);
 		return entityMap;
 	}
 
