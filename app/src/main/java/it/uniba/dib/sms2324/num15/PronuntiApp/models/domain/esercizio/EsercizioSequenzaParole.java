@@ -26,10 +26,10 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 	}
 
-	public EsercizioSequenzaParole(Map<String,Object> fromDatabaseMap) {
+	public EsercizioSequenzaParole(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		EsercizioSequenzaParole e = fromMap(fromDatabaseMap);
 
-		this.idEsercizio = e.getIdEsercizio();
+		this.idEsercizio = fromDatabaseKey;
 		this.ricompensaCorretto = e.getRicompensaCorretto();
 		this.ricompensaErrato = e.getRicompensaErrato();
 		this.audioEsercizio = e.getAudioEsercizio();
@@ -48,8 +48,8 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 	}
 
 	@Override
-	public Map<String,Object> toMap() {
-		Map<String,Object> entityMap = super.toMap();
+	public Map<String, Object> toMap() {
+		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBEsercizioSequenzaParole.ID_ESERCIZIO, this.idEsercizio);
 		entityMap.put(CostantiDBEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
@@ -57,7 +57,7 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 	}
 
 	@Override
-	public EsercizioSequenzaParole fromMap(Map<String,Object> fromDatabaseMap) {
+	public EsercizioSequenzaParole fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("EsercizioSequenzaParole.fromMap()", fromDatabaseMap.toString());
 		return new EsercizioSequenzaParole(
 				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.ID_ESERCIZIO),

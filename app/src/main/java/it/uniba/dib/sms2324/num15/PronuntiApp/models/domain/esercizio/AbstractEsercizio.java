@@ -11,8 +11,7 @@ public abstract class AbstractEsercizio implements Esercizio {
 	protected int ricompensaCorretto;
 	protected int ricompensaErrato;
 
-	public AbstractEsercizio() {
-	}
+	public AbstractEsercizio() {}
 
 	public AbstractEsercizio(String idEsercizio, int ricompensaCorretto, int ricompensaErrato) {
 		this.idEsercizio = idEsercizio;
@@ -50,8 +49,8 @@ public abstract class AbstractEsercizio implements Esercizio {
 	}
 
 	@Override
-	public Map<String,Object> toMap() {
-		Map<String,Object> entityMap = new HashMap<>();
+	public Map<String, Object> toMap() {
+		Map<String, Object> entityMap = new HashMap<>();
 
 		//entityMap.put(CostantiDBEsercizioAbstract.ID_ESERCIZIO, this.idEsercizio);
 		entityMap.put(CostantiDBEsercizioAbstract.RICOMPENSA_CORRETTO, this.ricompensaCorretto);

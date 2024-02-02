@@ -33,10 +33,10 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		this.parola3 = parola3;
 	}
 
-	public TemplateEsercizioSequenzaParole(Map<String, Object> fromDatabaseMap) {
-        TemplateEsercizioSequenzaParole t = this.fromMap(fromDatabaseMap);
+	public TemplateEsercizioSequenzaParole(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+		TemplateEsercizioSequenzaParole t = this.fromMap(fromDatabaseMap);
 
-		this.idEsercizio = t.getIdEsercizio();
+		this.idEsercizio = fromDatabaseKey;
 		this.ricompensaCorretto = t.getRicompensaCorretto();
 		this.ricompensaErrato = t.getRicompensaErrato();
 		this.audioEsercizio = t.getAudioEsercizio();
@@ -91,15 +91,15 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 
 	@Override
 	public TemplateEsercizioSequenzaParole fromMap(Map<String, Object> fromDatabaseMap) {
-        Log.d("TemplateEsercizioSequenzaParole.fromMap()", fromDatabaseMap.toString());
+		Log.d("TemplateEsercizioSequenzaParole.fromMap()", fromDatabaseMap.toString());
 		return new TemplateEsercizioSequenzaParole(
-                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_CORRETTO)),
-                Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_ERRATO)),
-                new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO)),
-                (String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1),
-                (String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_2),
-                (String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_3)
-        );
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_CORRETTO)),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_ERRATO)),
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO)),
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1),
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_2),
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_3)
+		);
 	}
 
 	@Override

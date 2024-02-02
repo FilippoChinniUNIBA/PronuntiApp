@@ -24,13 +24,13 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		this.immagineEsercizio = immagineEsercizio;
 	}
 
-	public TemplateEsercizioDenominazioneImmagine(Map<String, Object> fromDatabaseMap) {
-        TemplateEsercizioDenominazioneImmagine t = this.fromMap(fromDatabaseMap);
+	public TemplateEsercizioDenominazioneImmagine(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+		TemplateEsercizioDenominazioneImmagine t = this.fromMap(fromDatabaseMap);
 
-        this.idEsercizio = t.getIdEsercizio();
-        this.ricompensaCorretto = t.getRicompensaCorretto();
-        this.ricompensaErrato = t.getRicompensaErrato();
-        this.immagineEsercizio = t.getImmagineEsercizio();
+		this.idEsercizio = fromDatabaseKey;
+		this.ricompensaCorretto = t.getRicompensaCorretto();
+		this.ricompensaErrato = t.getRicompensaErrato();
+		this.immagineEsercizio = t.getImmagineEsercizio();
 	}
 
 	public File getImmagineEsercizio() {

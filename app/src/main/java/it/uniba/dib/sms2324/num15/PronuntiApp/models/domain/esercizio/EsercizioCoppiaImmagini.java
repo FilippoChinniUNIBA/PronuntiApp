@@ -27,10 +27,10 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 	}
 
-	public EsercizioCoppiaImmagini(Map<String,Object> fromDatabaseMap) {
+	public EsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		EsercizioCoppiaImmagini e = fromMap(fromDatabaseMap);
 
-		this.idEsercizio = e.getIdEsercizio();
+		this.idEsercizio = fromDatabaseKey;
 		this.ricompensaCorretto = e.getRicompensaCorretto();
 		this.ricompensaErrato = e.getRicompensaErrato();
 		this.audioEsercizio = e.getAudioEsercizio();
@@ -48,8 +48,8 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 	}
 
 	@Override
-	public Map<String,Object> toMap() {
-		Map<String,Object> entityMap = super.toMap();
+	public Map<String, Object> toMap() {
+		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_ESERCIZIO, this.idEsercizio);
 		entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
@@ -57,7 +57,7 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 	}
 
 	@Override
-	public EsercizioCoppiaImmagini fromMap(Map<String,Object> fromDatabaseMap) {
+	public EsercizioCoppiaImmagini fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("EsercizioCoppiaImmagini.fromMap()", fromDatabaseMap.toString());
 		return new EsercizioCoppiaImmagini(
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.RICOMPENSA_CORRETTO)),

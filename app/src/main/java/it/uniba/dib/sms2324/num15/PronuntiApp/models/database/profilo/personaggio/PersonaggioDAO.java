@@ -60,8 +60,7 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 				for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
 					Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
-					Personaggio personaggio = new Personaggio(fromDatabaseMap);
-					personaggio.setIdPersonaggio(snapshot.getKey());
+					Personaggio personaggio = new Personaggio(fromDatabaseMap, snapshot.getKey());
 
 					Log.d("PROVA PERSONAGGIO", personaggio.toString());
 					result.add(personaggio);

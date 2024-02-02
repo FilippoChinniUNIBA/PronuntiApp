@@ -30,10 +30,10 @@ public class Personaggio implements Persistente<Personaggio> {
 		this.texturePersonaggio = texturePersonaggio;
 	}
 
-	public Personaggio(Map<String, Object> fromDatabaseMap) {
+	public Personaggio(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		Personaggio p = this.fromMap(fromDatabaseMap);
 
-		this.idPersonaggio = p.getIdPersonaggio();
+		this.idPersonaggio = fromDatabaseKey;
 		this.nomePersonaggio = p.getNomePersonaggio();
 		this.costoSblocco = p.getCostoSblocco();
 		this.texturePersonaggio = p.getTexturePersonaggio();
@@ -72,18 +72,9 @@ public class Personaggio implements Persistente<Personaggio> {
 	}
 
 	@Override
-	public String toString() {
-		return "Personaggio{" +
-				"idPersonaggio='" + idPersonaggio + '\'' +
-				", nomePersonaggio='" + nomePersonaggio + '\'' +
-				", costoSblocco=" + costoSblocco +
-				", texturePersonaggio=" + texturePersonaggio +
-				'}';
-	}
-
-	@Override
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
+
 		//entityMap.put(CostantiDBPersonaggio.ID_PERSONAGGIO, idPersonaggio);
 		entityMap.put(CostantiDBPersonaggio.NOME_PERSONAGGIO, this.nomePersonaggio);
 		entityMap.put(CostantiDBPersonaggio.COSTO_SBLOCCO, this.costoSblocco);
@@ -100,4 +91,15 @@ public class Personaggio implements Persistente<Personaggio> {
 				new File((String) fromDatabaseMap.get(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO))
 		);
 	}
+
+	@Override
+	public String toString() {
+		return "Personaggio{" +
+				"idPersonaggio='" + idPersonaggio + '\'' +
+				", nomePersonaggio='" + nomePersonaggio + '\'' +
+				", costoSblocco=" + costoSblocco +
+				", texturePersonaggio=" + texturePersonaggio +
+				'}';
+	}
+
 }

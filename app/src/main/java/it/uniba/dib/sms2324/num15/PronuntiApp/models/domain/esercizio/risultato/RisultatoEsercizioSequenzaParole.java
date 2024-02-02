@@ -5,9 +5,7 @@ import android.util.Log;
 import java.io.File;
 import java.util.Map;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 
 public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizioConAudio {
 	public RisultatoEsercizioSequenzaParole(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
@@ -18,10 +16,10 @@ public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizio
 		super(esitoCorretto, audioRegistrato);
 	}
 
-	public RisultatoEsercizioSequenzaParole(Map<String, Object> fromDatabaseMap) {
+	public RisultatoEsercizioSequenzaParole(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		RisultatoEsercizioSequenzaParole r = this.fromMap(fromDatabaseMap);
 
-		this.idEsercizio = r.getIdEsercizio();
+		this.idEsercizio = fromDatabaseKey;
 		this.esitoCorretto = r.isEsitoCorretto();
 		this.audioRegistrato = r.getAudioRegistrato();
 	}

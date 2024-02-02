@@ -10,14 +10,15 @@ public class RisultatoEsercizioCoppiaImmagini extends AbstractRisultatoEsercizio
 	public RisultatoEsercizioCoppiaImmagini(String idEsercizio, boolean esitoCorretto) {
 		super(idEsercizio, esitoCorretto);
 	}
+
 	public RisultatoEsercizioCoppiaImmagini(boolean esitoCorretto) {
 		super(esitoCorretto);
 	}
 
-	public RisultatoEsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap) {
+	public RisultatoEsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		RisultatoEsercizioCoppiaImmagini r = this.fromMap(fromDatabaseMap);
 
-		this.idEsercizio = r.getIdEsercizio();
+		this.idEsercizio = fromDatabaseKey;
 		this.esitoCorretto = r.isEsitoCorretto();
 	}
 
