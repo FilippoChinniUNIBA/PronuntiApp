@@ -1,9 +1,15 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.terapia;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
@@ -42,6 +48,18 @@ public class TerapiaDAO implements DAO<Terapia> {
 
 	@Override
 	public Terapia getById(String idObj) {
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.TERAPIE);
+		ref.child(idObj).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+			@Override
+			public void onComplete(@NonNull Task<DataSnapshot> task) {
+				if (task.isSuccessful()) {
+					DataSnapshot snapshot = task.getResult();
+
+					Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+					Terapia terapia = new Terapia(fromDatabaseMap, idObj);
+				}
+			}
+		});
 		return null;
 	}
 
