@@ -30,6 +30,8 @@
     <string name="parent">Genitore</string>
     <string name="logopedist">Logopedista</string>
     <string name="child_data">Dati del bambino</string>
+    <string name="actualSelectedCharacter"><b>ATTUALE</b></string>
+    <string name="notSelectedCharacter">SELEZIONA</string>
     <string-array name="character_names">
         <item>Bambina</item>
         <item>Bambino</item>
