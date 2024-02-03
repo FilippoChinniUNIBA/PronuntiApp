@@ -1,23 +1,30 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
+import android.util.Log;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
 public class Paziente extends AbstractProfilo {
 	private int eta;
 	private LocalDate dataNascita;
 	private char sesso;
-	private int valuta = 0;
-	private int punteggioTot = 0;
-	private Map<String, Boolean> personaggiSbloccati;
+	private int valuta;
+	private int punteggioTot;
+	private List<Personaggio> personaggiSbloccati;
 	private List<Terapia> terapie;
 	private String refIdLogopedista;
 
-	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Boolean> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
+	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -29,7 +36,7 @@ public class Paziente extends AbstractProfilo {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
-	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Boolean> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
+	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
 		super(nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -41,7 +48,7 @@ public class Paziente extends AbstractProfilo {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
-	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Boolean> personaggiSbloccati, List<Terapia> terapie) {
+	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie) {
 		super(nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -52,22 +59,24 @@ public class Paziente extends AbstractProfilo {
 		this.terapie = terapie;
 	}
 
-	public Paziente(Map<String,Object> fromDatabaseMap){
-		super(fromDatabaseMap);
-		Paziente P = fromMap(fromDatabaseMap);
-		this.eta = P.eta;
-		this.dataNascita = P.dataNascita;
-		this.personaggiSbloccati = P.personaggiSbloccati;
-		this.sesso = P.sesso;
-		this.email = P.email;
-		this.punteggioTot = P.punteggioTot;
-		this.terapie = P.terapie;
-		this.refIdLogopedista = P.refIdLogopedista;
-		this.cognome = P.cognome;
-		this.idProfilo = P.idProfilo;
-		this.nome = P.nome;
-		this.password = P.password;
-		this.username = P.username;
+	public Paziente(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
+		Paziente p = this.fromMap(fromDatabaseMap);
+
+		this.idProfilo = fromDatabaseKey;
+		this.nome = p.getNome();
+		this.cognome = p.getCognome();
+		this.username = p.getUsername();
+		this.email = p.getEmail();
+		this.password = p.getPassword();
+		this.eta = p.getEta();
+		this.dataNascita = p.getDataNascita();
+		this.sesso = p.getSesso();
+		this.valuta = p.getValuta();
+		this.punteggioTot = p.getPunteggioTot();
+		this.personaggiSbloccati = p.getPersonaggiSbloccati();
+		this.terapie = p.getTerapie();
+		this.refIdLogopedista = p.getRefIdLogopedista();
+
 	}
 
 	public int getEta() {
@@ -90,7 +99,7 @@ public class Paziente extends AbstractProfilo {
 		return punteggioTot;
 	}
 
-	public Map<String, Boolean> getPersonaggiSbloccati() {
+	public List<Personaggio> getPersonaggiSbloccati() {
 		return personaggiSbloccati;
 	}
 
@@ -122,7 +131,7 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 	}
 
-	public void setPersonaggiSbloccati(Map<String, Boolean> personaggiSbloccati) {
+	public void setPersonaggiSbloccati(List<Personaggio> personaggiSbloccati) {
 		this.personaggiSbloccati = personaggiSbloccati;
 	}
 
@@ -136,12 +145,38 @@ public class Paziente extends AbstractProfilo {
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = super.toMap();
+
+		entityMap.put(CostantiDBPaziente.ETA, this.eta);
+		entityMap.put(CostantiDBPaziente.DATA_NASCITA, this.dataNascita.toString());
+		entityMap.put(CostantiDBPaziente.SESSO, Character.toString(this.sesso));
+		entityMap.put(CostantiDBPaziente.VALUTA, this.valuta);
+		entityMap.put(CostantiDBPaziente.PUNTEGGIO_TOT, this.punteggioTot);
+		entityMap.put(CostantiDBPaziente.LISTA_PERSONAGGI_SBLOCCATI, this.personaggiSbloccati.stream().map(Personaggio::getIdPersonaggio).collect(Collectors.toList()));
+		entityMap.put(CostantiDBPaziente.LISTA_TERAPIE, this.terapie.stream().map(Terapia::getIdTerapia).collect(Collectors.toList()));
+		entityMap.put(CostantiDBPaziente.ID_LOGOPEDISTA, this.refIdLogopedista);
+		return entityMap;
 	}
 
 	@Override
 	public Paziente fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
+		Log.d("Paziente.fromMap()", fromDatabaseMap.toString());
+		return new Paziente(
+				(String) fromDatabaseMap.get(CostantiDBPaziente.NOME),
+				(String) fromDatabaseMap.get(CostantiDBPaziente.COGNOME),
+				(String) fromDatabaseMap.get(CostantiDBPaziente.USERNAME),
+				(String) fromDatabaseMap.get(CostantiDBPaziente.EMAIL),
+				(String) fromDatabaseMap.get(CostantiDBPaziente.PASSWORD),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.ETA)),
+				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBPaziente.DATA_NASCITA)),
+				((String) fromDatabaseMap.get(CostantiDBPaziente.SESSO)).charAt(0),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.VALUTA)),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.PUNTEGGIO_TOT)),
+				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni terapia e pesonaggio
+				(List<Personaggio>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_PERSONAGGI_SBLOCCATI),
+				(List<Terapia>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE),
+				(String) fromDatabaseMap.get(CostantiDBPaziente.ID_LOGOPEDISTA)
+		);
 	}
 
 	@Override

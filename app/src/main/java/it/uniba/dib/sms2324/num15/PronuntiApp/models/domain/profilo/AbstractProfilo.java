@@ -15,6 +15,8 @@ public abstract class AbstractProfilo implements Profilo {
 	protected String email;
 	protected String password;
 
+	public AbstractProfilo() {}
+
 	public AbstractProfilo(String idProfilo, String nome, String cognome, String username, String email, String password) {
 		this.idProfilo = idProfilo;
 		this.nome = nome;
@@ -31,8 +33,6 @@ public abstract class AbstractProfilo implements Profilo {
 		this.email = email;
 		this.password = password;
 	}
-
-    public AbstractProfilo(Map<String,Object> fromDatabaseMap) {}
 
     public String getIdProfilo() {
 		return idProfilo;
@@ -85,6 +85,7 @@ public abstract class AbstractProfilo implements Profilo {
 	@Override
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
+
 		//entityMap.put(CostantiDBProfiloAbstract.ID_PROFILO, this.idProfilo);
 		entityMap.put(CostantiDBProfiloAbstract.NOME, this.nome);
 		entityMap.put(CostantiDBProfiloAbstract.COGNOME, this.cognome);
@@ -92,23 +93,6 @@ public abstract class AbstractProfilo implements Profilo {
 		entityMap.put(CostantiDBProfiloAbstract.EMAIL, this.email);
 		entityMap.put(CostantiDBProfiloAbstract.PASSWORD, this.password);
 		return entityMap;
-	}
-
-	@Override
-	public Profilo fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
-	}
-
-	@Override
-	public String toString() {
-		return "AbstractProfilo{" +
-				"idProfilo='" + idProfilo + '\'' +
-				", nome='" + nome + '\'' +
-				", cognome='" + cognome + '\'' +
-				", username='" + username + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				'}';
 	}
 
 }

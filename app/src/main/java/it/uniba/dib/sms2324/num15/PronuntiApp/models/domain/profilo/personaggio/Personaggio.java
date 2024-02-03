@@ -5,7 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
@@ -75,7 +77,7 @@ public class Personaggio implements Persistente<Personaggio> {
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
 
-		//entityMap.put(CostantiDBPersonaggio.ID_PERSONAGGIO, idPersonaggio);
+		//entityMap.put(CostantiDBPersonaggio.ID_PERSONAGGIO, this.idPersonaggio);
 		entityMap.put(CostantiDBPersonaggio.NOME_PERSONAGGIO, this.nomePersonaggio);
 		entityMap.put(CostantiDBPersonaggio.COSTO_SBLOCCO, this.costoSblocco);
 		entityMap.put(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO, this.texturePersonaggio.getPath());

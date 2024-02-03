@@ -1,8 +1,12 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBGenitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica.Classifica;
 
@@ -10,35 +14,49 @@ public class Logopedista extends AbstractProfilo {
 	private String telefono;
 	private String indirizzo;
 	private Classifica classificaPazienti;
+	private List<Appuntamento> appuntamenti;
 	private List<Paziente> pazienti;
 
-	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo) {
+	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.telefono = telefono;
 		this.indirizzo = indirizzo;
+		this.classificaPazienti = classificaPazienti;
+		this.appuntamenti = appuntamenti;
+		this.pazienti = pazienti;
 	}
 
-	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Paziente> pazienti) {
+	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
 		super(nome, cognome, username, email, password);
 		this.telefono = telefono;
 		this.indirizzo = indirizzo;
 		this.classificaPazienti = classificaPazienti;
+		this.appuntamenti = appuntamenti;
 		this.pazienti = pazienti;
 	}
 
-	public Logopedista(Map<String,Object> fromDatabaseMap){
-		super(fromDatabaseMap);
-		Logopedista L = fromMap(fromDatabaseMap);
-		this.pazienti = L.pazienti;
-		this.classificaPazienti = L.classificaPazienti;
-		this.telefono = L.telefono;
-		this.cognome = L.cognome;
-		this.email = L.email;
-		this.idProfilo = L.idProfilo;
-		this.nome = L.nome;
-		this.username = L.username;
-		this.password = L.password;
-		this.indirizzo = L.indirizzo;
+	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
+		super(nome, cognome, username, email, password);
+		this.telefono = telefono;
+		this.indirizzo = indirizzo;
+		this.appuntamenti = appuntamenti;
+		this.pazienti = pazienti;
+	}
+
+	public Logopedista(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+		Logopedista l = this.fromMap(fromDatabaseMap);
+
+		this.idProfilo = fromDatabaseKey;
+		this.nome = l.getNome();
+		this.cognome = l.getCognome();
+		this.username = l.getUsername();
+		this.email = l.getEmail();
+		this.password = l.getPassword();
+		this.telefono = l.getTelefono();
+		this.indirizzo = l.getIndirizzo();
+		this.classificaPazienti = l.getClassificaPazienti();
+		this.appuntamenti = l.getAppuntamenti();
+		this.pazienti = l.getPazienti();
 	}
 
 	public String getTelefono() {
@@ -51,6 +69,10 @@ public class Logopedista extends AbstractProfilo {
 
 	public Classifica getClassificaPazienti() {
 		return classificaPazienti;
+	}
+
+	public List<Appuntamento> getAppuntamenti() {
+		return appuntamenti;
 	}
 
 	public List<Paziente> getPazienti() {
@@ -69,6 +91,10 @@ public class Logopedista extends AbstractProfilo {
 		this.classificaPazienti = classificaPazienti;
 	}
 
+	public void setAppuntamenti(List<Appuntamento> appuntamenti) {
+		this.appuntamenti = appuntamenti;
+	}
+
 	public void setPazienti(List<Paziente> pazienti) {
 		this.pazienti = pazienti;
 	}
@@ -76,14 +102,29 @@ public class Logopedista extends AbstractProfilo {
 	@Override
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = super.toMap();
+
 		entityMap.put(CostantiDBLogopedista.TELEFONO, this.telefono);
 		entityMap.put(CostantiDBLogopedista.INDIRIZZO, this.indirizzo);
+		entityMap.put(CostantiDBLogopedista.LISTA_APPUNTAMENTI, this.appuntamenti.stream().map(Appuntamento::getIdAppuntamento).collect(Collectors.toList()));
+		entityMap.put(CostantiDBLogopedista.LISTA_PAZIENTI, this.pazienti.stream().map(Paziente::getIdProfilo).collect(Collectors.toList()));
 		return entityMap;
 	}
 
 	@Override
 	public Logopedista fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
+		Log.d("Logopedista.fromMap()", fromDatabaseMap.toString());
+		return new Logopedista(
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.NOME),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.COGNOME),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.USERNAME),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.EMAIL),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.PASSWORD),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.TELEFONO),
+				(String) fromDatabaseMap.get(CostantiDBLogopedista.INDIRIZZO),
+				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni appuntamento e paziente
+				(List<Appuntamento>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_APPUNTAMENTI),
+				(List<Paziente>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)
+		);
 	}
 
 	@Override
@@ -98,6 +139,7 @@ public class Logopedista extends AbstractProfilo {
 				", telefono='" + telefono + '\'' +
 				", indirizzo='" + indirizzo + '\'' +
 				", classificaPazienti=" + classificaPazienti +
+				", appuntamenti=" + appuntamenti +
 				", pazienti=" + pazienti +
 				'}';
 	}

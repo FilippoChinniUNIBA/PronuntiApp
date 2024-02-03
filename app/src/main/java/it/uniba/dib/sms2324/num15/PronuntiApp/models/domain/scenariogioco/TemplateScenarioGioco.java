@@ -1,14 +1,24 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco;
 
+import android.util.Log;
+
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Map;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 
-public class TemplateScenarioGioco extends AbstractScenarioGioco implements Persistente<TemplateScenarioGioco> {
+public class TemplateScenarioGioco extends AbstractScenarioGioco {
 	private String idTemplateScenarioGioco;
 
-	public TemplateScenarioGioco(File immagineSfondo, String idTemplateScenarioGioco) {
+	public TemplateScenarioGioco() {}
+
+	public TemplateScenarioGioco(String idTemplateScenarioGioco, File immagineSfondo) {
 		super(immagineSfondo);
 		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
 	}
@@ -17,8 +27,11 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 		super(immagineSfondo);
 	}
 
-	public TemplateScenarioGioco(Map<String,Object> fromDatabaseMap){
-		super(fromDatabaseMap);
+	public TemplateScenarioGioco(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
+		TemplateScenarioGioco t = this.fromMap(fromDatabaseMap);
+
+		this.idTemplateScenarioGioco = fromDatabaseKey;
+		this.immagineSfondo = t.getImmagineSfondo();
 	}
 
 	public String getIdTemplateScenarioGioco() {
@@ -31,12 +44,18 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco implements Pers
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = super.toMap();
+
+		//entityMap.put(CostantiDBTemplateScenarioGioco.ID_TEMPLATE_SCENARIOGIOCO, this.idTemplateScenarioGioco);
+		return entityMap;
 	}
 
 	@Override
 	public TemplateScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
+		Log.d("TemplateScenarioGioco.fromMap()", fromDatabaseMap.toString());
+		return new TemplateScenarioGioco(
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO))
+		);
 	}
 
 	@Override

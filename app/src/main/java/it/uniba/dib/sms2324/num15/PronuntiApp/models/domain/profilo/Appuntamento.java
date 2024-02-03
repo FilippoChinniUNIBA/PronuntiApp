@@ -1,57 +1,51 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
+import android.util.Log;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class Appuntamento implements Persistente<Appuntamento> {
 	private String idAppuntamento;
-	private String refIdGenitore;
-	private String refIdLogopedista;
 	private LocalDate data;
 	private LocalTime ora;
 	private String luogo;
 
-	public Appuntamento(String idAppuntamento, String refIdGenitore, String refIdLogopedista, LocalDate data, LocalTime ora, String luogo) {
+	public Appuntamento(String idAppuntamento, LocalDate data, LocalTime ora, String luogo) {
 		this.idAppuntamento = idAppuntamento;
-		this.refIdGenitore = refIdGenitore;
-		this.refIdLogopedista = refIdLogopedista;
 		this.data = data;
 		this.ora = ora;
 		this.luogo = luogo;
 	}
 
-	public Appuntamento(String refIdGenitore, String refIdLogopedista, LocalDate data, LocalTime ora, String luogo) {
-		this.refIdGenitore = refIdGenitore;
-		this.refIdLogopedista = refIdLogopedista;
+	public Appuntamento(LocalDate data, LocalTime ora, String luogo) {
 		this.data = data;
 		this.ora = ora;
 		this.luogo = luogo;
 	}
 
-	public Appuntamento(Map<String,Object> fromDatabaseMap){
-		Appuntamento A = fromMap(fromDatabaseMap);
-		this.idAppuntamento = A.idAppuntamento;
-		this.refIdGenitore = A.refIdGenitore;
-		this.refIdLogopedista = A.refIdLogopedista;
-		this.data = A.data;
-		this.ora = A.ora;
-		this.luogo = A.luogo;
+	public Appuntamento(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+		Appuntamento a = this.fromMap(fromDatabaseMap);
+
+		this.idAppuntamento = fromDatabaseKey;
+		this.data = a.getData();
+		this.ora = a.getOra();
+		this.luogo = a.getLuogo();
 	}
 
 	public String getIdAppuntamento() {
 		return idAppuntamento;
-	}
-
-	public String getRefIdGenitore() {
-		return refIdGenitore;
-	}
-
-	public String getRefIdLogopedista() {
-		return refIdLogopedista;
 	}
 
 	public LocalDate getData() {
@@ -70,14 +64,6 @@ public class Appuntamento implements Persistente<Appuntamento> {
 		this.idAppuntamento = idAppuntamento;
 	}
 
-	public void setRefIdGenitore(String refIdGenitore) {
-		this.refIdGenitore = refIdGenitore;
-	}
-
-	public void setRefIdLogopedista(String refIdLogopedista) {
-		this.refIdLogopedista = refIdLogopedista;
-	}
-
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
@@ -92,24 +78,43 @@ public class Appuntamento implements Persistente<Appuntamento> {
 
 	@Override
 	public Map<String, Object> toMap() {
-		return null;
+		Map<String, Object> entityMap = new HashMap<>();
+
+		//entityMap.put(CostantiDBAppuntamento.ID_APPUNTAMENTO, this.idAppuntamento);
+		entityMap.put(CostantiDBAppuntamento.DATA, this.data.toString());
+		entityMap.put(CostantiDBAppuntamento.ORA, this.ora.toString());
+		entityMap.put(CostantiDBAppuntamento.LUOGO, this.luogo);
+		return entityMap;
 	}
 
 	@Override
 	public Appuntamento fromMap(Map<String, Object> fromDatabaseMap) {
-		return null;
+		Log.d("Appuntamento.fromMap()", fromDatabaseMap.toString());
+		return new Appuntamento(
+				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBAppuntamento.DATA)),
+				LocalTime.parse((String) fromDatabaseMap.get(CostantiDBAppuntamento.ORA)),
+				(String) fromDatabaseMap.get(CostantiDBAppuntamento.LUOGO)
+		);
 	}
 
 	@Override
 	public String toString() {
 		return "Appuntamento{" +
 				"idAppuntamento='" + idAppuntamento + '\'' +
-				", refIdGenitore=" + refIdGenitore +
-				", refIdLogopedista=" + refIdLogopedista +
 				", data=" + data +
 				", ora=" + ora +
 				", luogo='" + luogo + '\'' +
 				'}';
 	}
+
+/*	public static List<String> fromAppuntamentoListToAppuntamentoIdList(List<Appuntamento> appuntamenti) {
+		List<String> listaIdAppuntamenti = new ArrayList<>();
+
+		for (Appuntamento a : appuntamenti) {
+			listaIdAppuntamenti.add(a.getIdAppuntamento());
+		}
+
+		return listaIdAppuntamenti;
+	}*/
 
 }
