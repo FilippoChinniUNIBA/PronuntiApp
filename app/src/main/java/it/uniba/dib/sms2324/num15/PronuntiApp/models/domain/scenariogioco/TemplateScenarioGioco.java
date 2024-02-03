@@ -34,7 +34,7 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 		this.immagineSfondo = t.getImmagineSfondo();
 	}
 
-	public String getIdTemplateScenarioGioco() {
+	public final String getIdTemplateScenarioGioco() {
 		return idTemplateScenarioGioco;
 	}
 
