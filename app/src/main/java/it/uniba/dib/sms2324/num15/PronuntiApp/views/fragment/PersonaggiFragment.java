@@ -10,15 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggioImageAdapter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiAcquistabiliAdapter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiSbloccatiAdapter;
 
 public class PersonaggiFragment extends Fragment {
+    private RecyclerView recyclerViewPersonaggiSbloccati;
+    private RecyclerView recyclerViewPersonaggiAcquistabili;
+    private TextView textViewPersonaggiSbloccati;
+    private TextView textViewPersonaggiAcquistabili;
     public PersonaggiFragment() {
         // Required empty public constructor
     }
@@ -28,10 +33,11 @@ public class PersonaggiFragment extends Fragment {
         super.onCreate(savedInstanceState);
         View view= inflater.inflate(R.layout.fragment_personaggi, container, false);
 
+        /*
         TypedArray typedArray = getResources().obtainTypedArray(R.array.personaggi_images);
 
         // Converti l'array in una lista di Integer
-        List<Integer> imageList = new ArrayList<>();
+        ArrayList<Integer> imageList = new ArrayList<>();
         for (int i = 0; i < typedArray.length(); i++) {
             imageList.add(typedArray.getResourceId(i, 0));
         }
@@ -40,24 +46,36 @@ public class PersonaggiFragment extends Fragment {
 
         // Ottieni la lista di nomi dei personaggi
         String[] characterNamesArray = getResources().getStringArray(R.array.character_names);
-        List<String> characterNames = Arrays.asList(characterNamesArray);
+        ArrayList<String> characterNames = new ArrayList<>(Arrays.asList(characterNamesArray));
 
         // Ottieni la lista dei costi dei personaggi
         String[] characterCostsArray = getResources().getStringArray(R.array.character_costs);
-        List<String> characterCosts = Arrays.asList(characterCostsArray);
+        ArrayList<String> characterCosts = new ArrayList<>(Arrays.asList(characterCostsArray));
 
-        // Trova la RecyclerView nel tuo layout del fragment
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewPersonaggi);
+        */
 
-        // Crea un'istanza del tuo adattatore personalizzato
-        PersonaggioImageAdapter adapter = new PersonaggioImageAdapter(requireContext(), imageList, characterNames, characterCosts );
+        // Inizializza le viste
+        textViewPersonaggiSbloccati = view.findViewById(R.id.textViewPersonaggiSbloccati);
+        textViewPersonaggiAcquistabili = view.findViewById(R.id.textViewPersonaggiAcquistabili);
 
-        // Imposta il layout manager e l'adattatore per la RecyclerView
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3)); // 3 colonne, modifica in base alle tue esigenze
-        recyclerView.setAdapter(adapter);
+        recyclerViewPersonaggiSbloccati = view.findViewById(R.id.recyclerViewPersonaggiSbloccati);
+        recyclerViewPersonaggiAcquistabili = view.findViewById(R.id.recyclerViewPersonaggiAcquistabili);
 
+        // Configura il layout manager per le RecyclerView
+        GridLayoutManager layoutManagerSbloccati = new GridLayoutManager(getContext(), 3);
+        GridLayoutManager layoutManagerAcquistabili = new GridLayoutManager(getContext(), 3);
+        recyclerViewPersonaggiSbloccati.setLayoutManager(layoutManagerSbloccati);
+        recyclerViewPersonaggiAcquistabili.setLayoutManager(layoutManagerAcquistabili);
+
+        // Configura l'adapter per le RecyclerView
+        //recyclerViewPersonaggiSbloccati.setAdapter(new PersonaggiSbloccatiAdapter());
+        //recyclerViewPersonaggiAcquistabili.setAdapter(new PersonaggiAcquistabiliAdapter());
+
+        // Altre inizializzazioni e configurazioni possono essere fatte qui
         return view;
     }
+
+
 
     @Override
     public void onResume() {

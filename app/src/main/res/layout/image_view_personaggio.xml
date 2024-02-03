@@ -21,17 +21,37 @@
         android:gravity="center"
         android:layout_margin="5dp"
         android:layout_gravity="center"
+        android:background="@drawable/rectangle_rounded_border_bkg"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:visibility="gone"
         >
-        <ImageView
-            android:id="@+id/imageViewCoins"
-            android:src="@drawable/ic_coins"
-            style="@style/CoinsIconStyle"
-            android:layout_marginRight="3dp"/>
+        <include layout="@layout/image_view_coins"/>
         <TextView
             android:id="@+id/textViewCostoPersonaggio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100"
+            android:gravity="center" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llPossiediPersonaggio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_rounded_border_bkg"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/textViewSelezionePersonaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
             android:gravity="center" />
     </LinearLayout>
     <TextView

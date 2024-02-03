@@ -30,6 +30,8 @@
     <string name="parent">Parent</string>
     <string name="logopedist">Speech terapist</string>
     <string name="child_data">Child data</string>
+    <string name="actualSelectedCharacter"><b>SELECTED</b></string>
+    <string name="notSelectedCharacter">SELECT</string>
     <integer-array name="personaggi_images">
         <item>@drawable/personaggio_bambina_rossa</item> <!-- Nome: Bambina -->
         <item>@drawable/personaggio_bambino_no_zaino</item> <!-- Nome: Bambino -->
