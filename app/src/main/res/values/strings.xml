@@ -30,6 +30,78 @@
     <string name="parent">Parent</string>
     <string name="logopedist">Speech terapist</string>
     <string name="child_data">Child data</string>
+    <integer-array name="personaggi_images">
+        <item>@drawable/personaggio_bambina_rossa</item> <!-- Nome: Bambina -->
+        <item>@drawable/personaggio_bambino_no_zaino</item> <!-- Nome: Bambino -->
+        <item>@drawable/personaggio_bambina_disegna</item> <!-- Nome: Bambina che disegna -->
+        <item>@drawable/personaggio_bambino_pensieroso</item> <!-- Nome: Bambino pensieroso -->
+        <item>@drawable/personaggio_bambino_soldato</item> <!-- Nome: Bambino soldato -->
+        <item>@drawable/personaggio_bambino_zaino</item> <!-- Nome: Bambino con zaino -->
+        <item>@drawable/personaggio_batman</item> <!-- Nome: Batman -->
+        <item>@drawable/personaggio_boy_knight</item> <!-- Nome: Ragazzo cavaliere -->
+        <item>@drawable/personaggio_cane</item> <!-- Nome: Cane -->
+        <item>@drawable/personaggio_drago_blu</item> <!-- Nome: Drago blu -->
+        <item>@drawable/personaggio_drago_femmina</item> <!-- Nome: Drago femmina -->
+        <item>@drawable/personaggio_elefante</item> <!-- Nome: Elefante -->
+        <item>@drawable/personaggio_gatta</item> <!-- Nome: Gatta -->
+        <item>@drawable/personaggio_gatto</item> <!-- Nome: Gatto -->
+        <item>@drawable/personaggio_girl_knight</item> <!-- Nome: Ragazza cavaliere -->
+        <item>@drawable/personaggio_leone</item> <!-- Nome: Leone -->
+        <item>@drawable/personaggio_mini_captain_america</item> <!-- Nome: Mini Captain America -->
+        <item>@drawable/personaggio_mucca</item> <!-- Nome: Mucca -->
+        <item>@drawable/personaggio_pecora</item> <!-- Nome: Pecora -->
+        <item>@drawable/personaggio_spiderman</item> <!-- Nome: Spiderman -->
+        <item>@drawable/personaggio_wonderwoman</item> <!-- Nome: Wonder Woman -->
+    </integer-array>
+
+    <string-array name="character_names">
+        <item>Girl</item>
+        <item>Boy</item>
+        <item>Girl Drawing</item>
+        <item>Thoughtful Boy</item>
+        <item>Soldier Boy</item>
+        <item>Boy with Backpack</item>
+        <item>Batman</item>
+        <item>Boy Knight</item>
+        <item>Dog</item>
+        <item>Blue Dragon</item>
+        <item>Female Dragon</item>
+        <item>Elephant</item>
+        <item>Cat</item>
+        <item>Kitten</item>
+        <item>Girl Knight</item>
+        <item>Lion</item>
+        <item>Mini Captain America</item>
+        <item>Cow</item>
+        <item>Sheep</item>
+        <item>Spiderman</item>
+        <item>Wonder Woman</item>
+    </string-array>
+
+    <string-array name="character_costs">
+        <item>50</item>   <!-- Girl -->
+        <item>60</item>   <!-- Boy -->
+        <item>75</item>   <!-- Girl Drawing -->
+        <item>70</item>   <!-- Thoughtful Boy -->
+        <item>80</item>   <!-- Soldier Boy -->
+        <item>90</item>   <!-- Boy with Backpack -->
+        <item>120</item>  <!-- Batman -->
+        <item>100</item>  <!-- Boy Knight -->
+        <item>40</item>   <!-- Dog -->
+        <item>110</item>  <!-- Blue Dragon -->
+        <item>130</item>  <!-- Female Dragon -->
+        <item>85</item>   <!-- Elephant -->
+        <item>45</item>   <!-- Cat -->
+        <item>30</item>   <!-- Kitten -->
+        <item>105</item>  <!-- Girl Knight -->
+        <item>95</item>   <!-- Lion -->
+        <item>150</item>  <!-- Mini Captain America -->
+        <item>55</item>   <!-- Cow -->
+        <item>65</item>   <!-- Sheep -->
+        <item>140</item>  <!-- Spiderman -->
+        <item>145</item>  <!-- Wonder Woman -->
+    </string-array>
+
 
 
 </resources>
