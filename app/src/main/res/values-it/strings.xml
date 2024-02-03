@@ -30,4 +30,28 @@
     <string name="parent">Genitore</string>
     <string name="logopedist">Logopedista</string>
     <string name="child_data">Dati del bambino</string>
+    <string-array name="character_names">
+        <item>Bambina</item>
+        <item>Bambino</item>
+        <item>Bambina che disegna</item>
+        <item>Bambino pensieroso</item>
+        <item>Bambino soldato</item>
+        <item>Bambino con zaino</item>
+        <item>Batman</item>
+        <item>Ragazzo cavaliere</item>
+        <item>Cane</item>
+        <item>Drago blu</item>
+        <item>Drago femmina</item>
+        <item>Elefante</item>
+        <item>Gatta</item>
+        <item>Gatto</item>
+        <item>Ragazza cavaliere</item>
+        <item>Leone</item>
+        <item>Mini Captain America</item>
+        <item>Mucca</item>
+        <item>Pecora</item>
+        <item>Spiderman</item>
+        <item>Wonder Woman</item>
+    </string-array>
+
 </resources>

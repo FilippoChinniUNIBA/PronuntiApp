@@ -61,5 +61,24 @@
     </style>
 
 
+    <style name="PersonaggiStyle">
+        <item name="android:layout_width">@dimen/personaggioWidthDim</item>
+        <item name="android:layout_height">@dimen/personaggioWidthDim</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!--<item name="android:layout_marginRight">10dp</item>
+        -->
+    </style>
+
+    <style name="CoinsIconStyle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="NomePersonaggioStyle">
+        <item name="android:layout_width">@dimen/personaggioWidthDim</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">20dp</item>
+    </style>
 
 </resources>
