@@ -9,9 +9,17 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 
 public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini implements EsercizioEseguibile {
 	private String refIdTemplateEsercizio;
+	private RisultatoEsercizioCoppiaImmagini risultatoEsercizio;
+
+	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+		this.risultatoEsercizio = risultatoEsercizio;
+	}
 
 	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
@@ -37,14 +45,23 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		this.immagineEsercizioCorretta = e.getImmagineEsercizioCorretta();
 		this.immagineEsercizioErrata = e.getImmagineEsercizioErrata();
 		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
+		//this.risultatoEsercizio = e.getRisultatoEsercizio();
 	}
 
 	public String getRefIdTemplateEsercizio() {
 		return refIdTemplateEsercizio;
 	}
 
+	public RisultatoEsercizioCoppiaImmagini getRisultatoEsercizio() {
+		return risultatoEsercizio;
+	}
+
 	public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
+
+	public void setRisultatoEsercizio(RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
+		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
 	@Override
@@ -79,6 +96,7 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 				", immagineEsercizioCorretta=" + immagineEsercizioCorretta +
 				", immagineEsercizioErrata=" + immagineEsercizioErrata +
 				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
+				", risultatoEsercizio=" + risultatoEsercizio +
 				'}';
 	}
 

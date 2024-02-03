@@ -54,7 +54,7 @@ public class Logopedista extends AbstractProfilo {
 		this.password = l.getPassword();
 		this.telefono = l.getTelefono();
 		this.indirizzo = l.getIndirizzo();
-		this.classificaPazienti = l.getClassificaPazienti();
+		//this.classificaPazienti = l.getClassificaPazienti();
 		this.appuntamenti = l.getAppuntamenti();
 		this.pazienti = l.getPazienti();
 	}

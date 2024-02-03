@@ -9,11 +9,20 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazioneImmagine implements EsercizioEseguibile {
 	private int countAiuti;
 	private String refIdTemplateEsercizio;
+	private RisultatoEsercizioDenominazioneImmagine risultatoEsercizio;
+
+	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio, RisultatoEsercizioDenominazioneImmagine risultatoEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio);
+		this.countAiuti = countAiuti;
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+		this.risultatoEsercizio = risultatoEsercizio;
+	}
 
 	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio);
@@ -41,6 +50,7 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 		this.immagineEsercizio = e.getImmagineEsercizio();
 		this.countAiuti = e.getCountAiuti();
 		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
+		//this.risultatoEsercizio = e.getRisultatoEsercizio();
 	}
 
 	public int getCountAiuti() {
@@ -51,12 +61,20 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 		return refIdTemplateEsercizio;
 	}
 
+	public RisultatoEsercizioDenominazioneImmagine getRisultatoEsercizio() {
+		return risultatoEsercizio;
+	}
+
 	public void setCountAiuti(int countAiuti) {
 		this.countAiuti = countAiuti;
 	}
 
 	public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
+
+	public void setRisultatoEsercizio(RisultatoEsercizioDenominazioneImmagine risultatoEsercizio) {
+		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
 	@Override
@@ -90,6 +108,7 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 				", immagineEsercizio=" + immagineEsercizio +
 				", countAiuti=" + countAiuti +
 				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
+				", risultatoEsercizio=" + risultatoEsercizio +
 				'}';
 	}
 

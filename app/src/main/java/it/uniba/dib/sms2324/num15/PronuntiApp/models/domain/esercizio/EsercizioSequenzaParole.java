@@ -8,9 +8,17 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
 public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole implements EsercizioEseguibile {
 	private String refIdTemplateEsercizio;
+	private RisultatoEsercizioSequenzaParole risultatoEsercizio;
+
+	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, RisultatoEsercizioSequenzaParole risultatoEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+		this.risultatoEsercizio = risultatoEsercizio;
+	}
 
 	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
@@ -37,14 +45,23 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 		this.parola2 = e.getParola2();
 		this.parola3 = e.getParola3();
 		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
+		//this.risultatoEsercizio = e.getRisultatoEsercizio();
 	}
 
 	public String getRefIdTemplateEsercizio() {
 		return refIdTemplateEsercizio;
 	}
 
+	public RisultatoEsercizioSequenzaParole getRisultatoEsercizio() {
+		return risultatoEsercizio;
+	}
+
 	public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+	}
+
+	public void setRisultatoEsercizio(RisultatoEsercizioSequenzaParole risultatoEsercizio) {
+		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
 	@Override
@@ -82,6 +99,7 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 				", parola2='" + parola2 + '\'' +
 				", parola3='" + parola3 + '\'' +
 				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
+				", risultatoEsercizio=" + risultatoEsercizio +
 				'}';
 	}
 
