@@ -10,16 +10,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
@@ -106,9 +102,17 @@ public class TestDBFragment extends Fragment {
 		PersonaggioDAO daoP = new PersonaggioDAO();
 
 		List<Personaggio> lista = new ArrayList<>();
-		lista = daoP.get(CostantiDBPersonaggio.NOME_PERSONAGGIO, "erger");
+//		lista = daoP.get(CostantiDBPersonaggio.NOME_PERSONAGGIO, "nome prova 1");
+
 
 		Log.d("Test DAO Get Personaggio", (lista == null) ? "lista null" : lista.toString());
+
+		CompletableFuture<List<Personaggio>> future = daoP.getAllProva();
+		future.thenAccept(list -> {
+			Log.d("PROVA PERSONAGGIO", "thenAccept" + list.toString());
+			textViewTestDB_2.setText("PROVA PERS" + list.toString());
+		});
+
 		textViewTestDB_2.setText(lista.toString());
 	}
 

@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.esercizio.risultato;
+package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.esercizio;
 
 import androidx.annotation.NonNull;
 
@@ -17,49 +17,44 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
-public class RisultatoEsercizioDAO implements DAO<RisultatoEsercizio> {
-	protected final FirebaseDatabase db;
+public class EsercizioDAO implements DAO<Esercizio> {
+	private final FirebaseDatabase db;
 
-	public RisultatoEsercizioDAO() {
+	public EsercizioDAO() {
 		db = FirebaseDatabase.getInstance();
 	}
 
 	@Override
-	public void save(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI);
-		String dbKey = obj.getIdEsercizio();
+	public void save(Esercizio obj) {
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.ESERCIZI);
+		String dbKey = ref.push().getKey();
 		ref.child(dbKey).setValue(obj.toMap());
 	}
 
 	@Override
-	public void update(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI).child(obj.getIdEsercizio());
+	public void update(Esercizio obj) {
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.ESERCIZI).child(obj.getIdEsercizio());
 		ref.setValue(obj.toMap());
 	}
 
 	@Override
-	public void delete(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI).child(obj.getIdEsercizio());
+	public void delete(Esercizio obj) {
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.ESERCIZI).child(obj.getIdEsercizio());
 		ref.removeValue();
 	}
 
 	@Override
-	public List<RisultatoEsercizio> get(String field, Object value) {
+	public List<Esercizio> get(String field, Object value) {
 		DatabaseReference ref = db.getReference(CostantiNodiDB.ESERCIZI);
 		Query query = DAO.createQuery(ref, field, value);
 
-		List<RisultatoEsercizio> result = new LinkedList<>();
+		List<Esercizio> result = new LinkedList<>();
 
 		query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 			@Override
@@ -68,13 +63,17 @@ public class RisultatoEsercizioDAO implements DAO<RisultatoEsercizio> {
 					for (DataSnapshot snapshot : task.getResult().getChildren()) {
 						Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
 
-						if (fromDatabaseMap.containsKey(CostantiDBRisultato.AUDIO_REGISTRATO)) {
-							RisultatoEsercizioDenominazioneImmagine risultatoEsercizio = new RisultatoEsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
-							result.add(risultatoEsercizio);
+						if (fromDatabaseMap.containsKey(CostantiDBEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
+							EsercizioDenominazioneImmagine esercizio = new EsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
+							result.add(esercizio);
 						}
-						else {
-							RisultatoEsercizioCoppiaImmagini risultatoEsercizio = new RisultatoEsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
-							result.add(risultatoEsercizio);
+						else if (fromDatabaseMap.containsKey(CostantiDBEsercizioSequenzaParole.PAROLA_1)) {
+							EsercizioSequenzaParole esercizio = new EsercizioSequenzaParole(fromDatabaseMap, snapshot.getKey());
+							result.add(esercizio);
+						}
+						else if (fromDatabaseMap.containsKey(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
+							EsercizioCoppiaImmagini esercizio = new EsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
+							result.add(esercizio);
 						}
 					}
 				}
@@ -84,13 +83,12 @@ public class RisultatoEsercizioDAO implements DAO<RisultatoEsercizio> {
 	}
 
 	@Override
-	public RisultatoEsercizio getById(String idObj) {
+	public Esercizio getById(String idObj) {
 		return null;
 	}
 
 	@Override
-	public List<RisultatoEsercizio> getAll() {
+	public List<Esercizio> getAll() {
 		return null;
 	}
-
 }

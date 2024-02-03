@@ -18,6 +18,9 @@ public final class CostantiNodiDB {
 	public static final String RISULTATI_ESERCIZI = "risultatiEsercizi";
 	public static final String PERSONAGGI = "personaggi";
 
+	public static final String TEMPLATE_ESERCIZI = "templateEsercizi";
+	public static final String ESERCIZI = "esercizi";
+
 	private CostantiNodiDB() {}
 
 }
