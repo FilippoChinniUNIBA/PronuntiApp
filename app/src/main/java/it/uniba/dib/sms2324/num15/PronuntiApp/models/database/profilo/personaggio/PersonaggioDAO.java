@@ -49,7 +49,7 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 
 	@Override
 	public List<Personaggio> get(String field, Object value) {
-		DatabaseReference ref = db.getReference("personaggi");
+		DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI);
 		Query query = DAO.createQuery(ref, field, value);
 
 		List<Personaggio> result = new LinkedList<>();

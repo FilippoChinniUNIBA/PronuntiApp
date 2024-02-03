@@ -21,29 +21,11 @@ public class PazienteDAO implements DAO<Paziente> {
 		db = FirebaseDatabase.getInstance();
 	}
 
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-	//TODO: rivedere i metodi derivati da DAO
-
 	@Override
 	public void save(Paziente obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.PAZIENTI);
-
 		String dbKey = ref.push().getKey();
-
-		if (dbKey != null) {
-			ref.child(dbKey).setValue(obj.toMap());
-		}
-		else {
-			Log.e("Paziente DAO", MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
-			throw new NullPointerException(MessaggioErrore.CHIAVE_NULL_DATABASE_ERR.toString());
-		}
+		ref.child(dbKey).setValue(obj.toMap());
 	}
 
 	@Override
