@@ -6,7 +6,7 @@
     >
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="344dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
@@ -32,5 +32,15 @@
             android:id="@+id/button_logopedista"
             >
         </Button>
-</LinearLayout>
+
+        <Button
+            android:id="@+id/testPortaleTestButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="TEST"
+            >
+        </Button>
+
+    </LinearLayout>
 </FrameLayout>

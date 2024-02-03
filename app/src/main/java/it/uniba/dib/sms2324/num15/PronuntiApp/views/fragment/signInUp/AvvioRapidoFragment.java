@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TEST_Activity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.GenitoreActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
@@ -24,6 +26,7 @@ public class AvvioRapidoFragment extends AbstractFragmentSignInUp {
         view.findViewById(R.id.button_paziente).setOnClickListener(v ->startActivity(new Intent(getActivity(), PazienteActivity.class)));
         view.findViewById(R.id.button_logopedista).setOnClickListener(v ->startActivity(new Intent(getActivity(), LogopedistaActivity.class)));
 
+        view.findViewById(R.id.testPortaleTestButton).setOnClickListener(v -> startActivity(new Intent(getActivity(), TEST_Activity.class)));
 
         return view;
     }

@@ -37,6 +37,9 @@
         <activity android:name=".views.activity.PazienteActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             />
+        <activity android:name=".testingTODELETE.TEST_Activity"
+            android:theme="@style/Theme.PronuntiAppActionBar"
+            />
     </application>
 
 </manifest>
