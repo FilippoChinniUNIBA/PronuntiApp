@@ -1,16 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 import android.os.Bundle;
-import android.view.View;
-
-import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenariGenitoriFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarSelectorGenitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarSelectorPaziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.navbar.NavigationNavBarSelectorGenitore;
 
 public class GenitoreActivity extends AbstractAppActivity{
 
