@@ -21,7 +21,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
 public class ScenarioFragment extends Fragment {
     private float xDelta, yDelta;
     private int bottomHeight;
-    private TextView scenarioTextView;
     private ImageView personaggioImageView;
     @Nullable
     @Override
@@ -30,11 +29,8 @@ public class ScenarioFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 
         // Trova le view nel layout
-        scenarioTextView = view.findViewById(R.id.scenarioFragment);
         personaggioImageView = view.findViewById(R.id.imageViewPersonaggio);
 
-        // Imposta il testo del TextView
-        scenarioTextView.setText("Scenario");
         // Imposta l'immagine della ImageView (assicurati che l'immagine "batman" sia presente nella cartella drawable)
         personaggioImageView.setImageResource(R.drawable.batman);
 
