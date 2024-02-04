@@ -25,10 +25,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.test_database.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.test_database.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
@@ -76,21 +80,38 @@ public class TestApiFragment extends Fragment {
 		DownloadAction downloadAction = new DownloadAction();
 		MediaPlayer mediaPlayer = new MediaPlayer();
 
+		List<Personaggio> personaggioList = new ArrayList<Personaggio>();
+
+		Personaggio pers1 = new Personaggio("1","nome1",5,R.drawable.personaggio_bambina_rossa);
+		Personaggio pers2 = new Personaggio("2","nome2",5,R.drawable.personaggio_bambina_disegna);
+		Personaggio pers3 = new Personaggio("3","nome3",5,R.drawable.personaggio_bambino_no_zaino);
+		Personaggio pers4 = new Personaggio("4","nome4",5,R.drawable.personaggio_batman);
+		Personaggio pers5 = new Personaggio("5","nome5",5,R.drawable.personaggio_pecora);
+		Personaggio pers6 = new Personaggio("6","nome6",5,R.drawable.personaggio_mucca);
+
+		PersonaggioDAO dao = new PersonaggioDAO ();
+		dao.save(pers1);
+		dao.save(pers2);
+		dao.save(pers3);
+		dao.save(pers4);
+		dao.save(pers5);
+		dao.save(pers6);
+
 		AudioRecognizer audioRecognizer = new AudioRecognizer(fileRegistrazione,curretactivity);
 		CloudTask cloudTaskUpload = new CloudTask(fileConvertito,curretactivity,nomeFileUploadDownload,uploadAction);
 		CloudTask cloudTaskDownload = new CloudTask(downloadFileConvertito,curretactivity,nomeFileUploadDownload, downloadAction);
 		AudioTest audioTest = new AudioTest(mediaPlayer,fileConvertito,curretactivity);
 
 		if (checkPermissions(curretactivity)) {
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest);
+			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest,dao);
 		} else {
 			requestPermissions(curretactivity);
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest);
+			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest,dao);
 		}
 		return view;
 	}
 
-	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, CloudTask cloudTaskUpload ,CloudTask cloudTaskDownload,AudioTest audioTest) {
+	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, CloudTask cloudTaskUpload ,CloudTask cloudTaskDownload,AudioTest audioTest,PersonaggioDAO dao) {
 
 		buttonAvviaRegistrazione.setOnClickListener(v -> {
 			startRecording(audioRecognizer,currentactivity);
@@ -105,7 +126,7 @@ public class TestApiFragment extends Fragment {
 		});
 
 		buttonDownloadFile.setOnClickListener(v -> {
-			downloadFile(cloudTaskDownload, currentactivity);
+			downloadFile(dao);
 		});
 
 		buttonUploadFileFirebase.setOnClickListener(v -> {
@@ -146,17 +167,15 @@ public class TestApiFragment extends Fragment {
 
 	private void uploadFile(CloudTask uploadTask,Activity currentactivity){
 		try {
-			uploadTask.execute();
-			textViewSpeechToTextView.setText("Upload completato");
+			//do nothing
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
 
-	private void downloadFile(CloudTask downloadTask,Activity currentactivity){
+	private void downloadFile(PersonaggioDAO dao){
 		try {
-			downloadTask.execute();
-			textViewSpeechToTextView.setText("Download Riuscito");
+			printcharacters(dao);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -197,6 +216,22 @@ public class TestApiFragment extends Fragment {
 		}catch (Exception e){
 			throw new RuntimeException(e);
 		}
+	}
+
+	private void printcharacters(PersonaggioDAO dao){
+		CompletableFuture<List<Personaggio>> futurePersonaggi = dao.getPersonaggi();
+
+		futurePersonaggi.thenApplyAsync(personaggi -> {
+			// Elabora la lista di personaggi ottenuta
+			for (Personaggio personaggio : personaggi) {
+				System.out.println(personaggio); // Esempio: Stampa i dettagli del personaggio
+			}
+			return null; // Puoi restituire qualcosa se necessario
+		}).exceptionally(exception -> {
+			// Gestisci eventuali eccezioni
+			System.err.println("Errore durante il recupero dei personaggi: " + exception.getMessage());
+			return null;
+		});
 	}
 
 
