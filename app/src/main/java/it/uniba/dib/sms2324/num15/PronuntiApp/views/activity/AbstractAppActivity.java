@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp.NavigationNavBarItemSelector;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.navbar.NavigationNavBarItemSelector;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
 
