@@ -23,6 +23,13 @@ public interface DAO<T> {
 	List<T> getAll();
 
 
+	/**
+	 * Metodo per creare una query per il database
+	 * @param ref Riferimento al database
+	 * @param field Campo su cui fare la query
+	 * @param value Valore da cercare
+	 * @return Query
+	 */
 	static Query createQuery(DatabaseReference ref, String field, Object value) {
 		if (value instanceof String) {
 			return ref.orderByChild(field).equalTo(value.toString());
