@@ -20,6 +20,7 @@ public class TestMenuTestFragment extends Fragment {
 	private Button buttonToTestDB;
 
 	private Button buttonFragmentFilePicker;
+	private Button buttonFragmentInserimentoDatiDB;
 
 	public TestMenuTestFragment() {
 
@@ -33,6 +34,7 @@ public class TestMenuTestFragment extends Fragment {
 		buttonToTestLogin = view.findViewById(R.id.buttonTestLoginRegistrazione);
 		buttonToTestDB = view.findViewById(R.id.buttonToTestDB);
 		buttonFragmentFilePicker = view.findViewById(R.id.idfilepickerfragment);
+		buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
 
 		this.buttonToTestApi.setOnClickListener(v -> {
 			TestApiFragment testApiFragment = new TestApiFragment();
@@ -70,6 +72,16 @@ public class TestMenuTestFragment extends Fragment {
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction()
 							.replace(R.id.appFrameLayout, testFilePickerFragment)
+							.addToBackStack(null)
+							.commit();
+					}
+		);
+
+		this.buttonFragmentInserimentoDatiDB.setOnClickListener(v -> {
+					TestInserimentoDatiDBFragment testInserimentoDatiDBFragment = new TestInserimentoDatiDBFragment();
+					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+					fragmentManager.beginTransaction()
+							.replace(R.id.appFrameLayout, testInserimentoDatiDBFragment)
 							.addToBackStack(null)
 							.commit();
 					}
