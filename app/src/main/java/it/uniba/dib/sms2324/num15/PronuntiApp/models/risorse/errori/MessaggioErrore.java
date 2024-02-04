@@ -15,7 +15,7 @@ public enum MessaggioErrore {
 	FATAL_ERROR_DATABASE(1, "FATAL ERROR: Connessione con il Database Fallita, l'applicazione non puo' funzionare!"),
 	ERRORE_IMPREVISTO_DATABASE(2, "Errore a livello Database inaspettato!"),
 	CHIAVE_NULL_DATABASE_ERR(3, "Errore di scrittura codice, la reference del database sta puntando a root."),
-	TIPO_DATO_SCONOSCIUTO_DATABASE_ERR(4, "Il database ha restituito un tipo di dato non gestito."),
+	TIPO_DATO_SCONOSCIUTO_DATABASE_ERR(4, "Tipo di dato passato non gestito dal Database."),
 	FORMATO_ERR(16, "Formato dell'Input inserito errato! Riprovare.");
 
 	private final int codiceErrore;

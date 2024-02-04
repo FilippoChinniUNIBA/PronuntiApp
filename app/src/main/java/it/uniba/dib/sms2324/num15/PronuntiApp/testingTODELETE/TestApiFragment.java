@@ -31,8 +31,8 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.test_database.Personaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.test_database.PersonaggioDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.test_database.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.test_database.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
@@ -221,12 +221,11 @@ public class TestApiFragment extends Fragment {
 	private void printcharacters(PersonaggioDAO dao){
 		CompletableFuture<List<Personaggio>> futurePersonaggi = dao.getPersonaggi();
 
-		futurePersonaggi.thenApplyAsync(personaggi -> {
+		futurePersonaggi.thenAccept(personaggi -> {
 			// Elabora la lista di personaggi ottenuta
 			for (Personaggio personaggio : personaggi) {
 				System.out.println(personaggio); // Esempio: Stampa i dettagli del personaggio
 			}
-			return null; // Puoi restituire qualcosa se necessario
 		}).exceptionally(exception -> {
 			// Gestisci eventuali eccezioni
 			System.err.println("Errore durante il recupero dei personaggi: " + exception.getMessage());

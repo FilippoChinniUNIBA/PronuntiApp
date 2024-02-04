@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.test_database;
+package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.test_database;
 
 import android.util.Log;
 import java.util.HashMap;
