@@ -3,15 +3,11 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 import android.util.Log;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPaziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
 public class Paziente extends AbstractProfilo {
@@ -20,11 +16,11 @@ public class Paziente extends AbstractProfilo {
 	private char sesso;
 	private int valuta;
 	private int punteggioTot;
-	private List<Personaggio> personaggiSbloccati;
+	private Map<String, Integer> personaggiSbloccati;
 	private List<Terapia> terapie;
 	private String refIdLogopedista;
 
-	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
+	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -36,7 +32,7 @@ public class Paziente extends AbstractProfilo {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
-	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
+	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
 		super(nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -48,7 +44,7 @@ public class Paziente extends AbstractProfilo {
 		this.refIdLogopedista = refIdLogopedista;
 	}
 
-	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, List<Personaggio> personaggiSbloccati, List<Terapia> terapie) {
+	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie) {
 		super(nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -99,7 +95,7 @@ public class Paziente extends AbstractProfilo {
 		return punteggioTot;
 	}
 
-	public List<Personaggio> getPersonaggiSbloccati() {
+	public Map<String, Integer> getPersonaggiSbloccati() {
 		return personaggiSbloccati;
 	}
 
@@ -131,7 +127,7 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 	}
 
-	public void setPersonaggiSbloccati(List<Personaggio> personaggiSbloccati) {
+	public void setPersonaggiSbloccati(Map<String, Integer> personaggiSbloccati) {
 		this.personaggiSbloccati = personaggiSbloccati;
 	}
 
@@ -152,7 +148,7 @@ public class Paziente extends AbstractProfilo {
 		entityMap.put(CostantiDBPaziente.SESSO, Character.toString(this.sesso));
 		entityMap.put(CostantiDBPaziente.VALUTA, this.valuta);
 		entityMap.put(CostantiDBPaziente.PUNTEGGIO_TOT, this.punteggioTot);
-		entityMap.put(CostantiDBPaziente.LISTA_PERSONAGGI_SBLOCCATI, this.personaggiSbloccati.stream().map(Personaggio::getIdPersonaggio).collect(Collectors.toList()));
+		entityMap.put(CostantiDBPaziente.MAPPA_PERSONAGGI_SBLOCCATI, this.personaggiSbloccati);
 		entityMap.put(CostantiDBPaziente.LISTA_TERAPIE, this.terapie.stream().map(Terapia::getIdTerapia).collect(Collectors.toList()));
 		entityMap.put(CostantiDBPaziente.ID_LOGOPEDISTA, this.refIdLogopedista);
 		return entityMap;
@@ -173,7 +169,7 @@ public class Paziente extends AbstractProfilo {
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.VALUTA)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.PUNTEGGIO_TOT)),
 				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni terapia e pesonaggio
-				(List<Personaggio>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_PERSONAGGI_SBLOCCATI),
+				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBPaziente.MAPPA_PERSONAGGI_SBLOCCATI),
 				(List<Terapia>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE),
 				(String) fromDatabaseMap.get(CostantiDBPaziente.ID_LOGOPEDISTA)
 		);

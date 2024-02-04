@@ -12,7 +12,7 @@ public final class CostantiDBPaziente {
 	public static final String SESSO = "sesso";
 	public static final String VALUTA = "valuta";
 	public static final String PUNTEGGIO_TOT = "punteggioTot";
-	public static final String LISTA_PERSONAGGI_SBLOCCATI = "listaPersonaggiSbloccati";
+	public static final String MAPPA_PERSONAGGI_SBLOCCATI = "mappaPersonaggiSbloccati";
 	public static final String LISTA_TERAPIE = "listaTerapie";
 	public static final String ID_LOGOPEDISTA = "idLogopedista";
 

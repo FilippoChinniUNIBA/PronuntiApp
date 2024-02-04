@@ -12,11 +12,17 @@ import androidx.fragment.app.Fragment;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.esercizio.EsercizioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class TestDBFragment extends Fragment {
@@ -44,10 +50,14 @@ public class TestDBFragment extends Fragment {
 		textViewTestDB_3 = view.findViewById(R.id.test_DB_Action_TextView_3);
 		textViewTestDB_4 = view.findViewById(R.id.test_DB_Action_TextView_4);
 
-		buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
-		buttonTestDB_2.setOnClickListener(v -> testDAOPersonaggioGet());
+//		buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
+		buttonTestDB_1.setOnClickListener(v -> testDAOSave2());
+
 		buttonTestDB_3.setOnClickListener(v -> testDAOPersonaggioUpdate());
 		buttonTestDB_4.setOnClickListener(v -> testDAOPersonaggioDelete());
+
+//		buttonTestDB_2.setOnClickListener(v -> testDAOPersonaggioGet());
+		buttonTestDB_2.setOnClickListener(v -> testDAOGet2());
 
 		return view;
 	}
@@ -116,5 +126,39 @@ public class TestDBFragment extends Fragment {
 		textViewTestDB_2.setText(lista.toString());
 	}
 
+	private void testDAOGet2() {
+		EsercizioDAO esercizioDAO = new EsercizioDAO();
+
+		List<String> ids = Arrays.asList("-NpnZuP3OT2oDpSSOhKW", "-NpnZuP7UXJZi1p4vLjT", "-NpnZuP7UXJZi1p4vLjU");
+		esercizioDAO.getListEserciziFromListId(ids).thenAccept(esercizi -> {
+			for (Esercizio esercizio : esercizi) {
+				Log.d("PROVA ESERCIZIO", esercizio.toString());
+				textViewTestDB_2.setText(esercizio.getIdEsercizio());
+			}
+		});
+	}
+
+	private void testDAOSave2() {
+		List<Esercizio> esercizi = new ArrayList<>();
+
+		final String pathFasullo = "pathFasullo/document/immagine.png";
+		final File fileFasullo = new File(pathFasullo);
+
+		EsercizioCoppiaImmagini esercizio1 = new EsercizioCoppiaImmagini(10, 10, fileFasullo, fileFasullo, fileFasullo);
+		EsercizioDenominazioneImmagine esercizio2 = new EsercizioDenominazioneImmagine(10, 10, fileFasullo, 10);
+		EsercizioSequenzaParole esercizio3 = new EsercizioSequenzaParole(10, 10, fileFasullo,"parola1", "parola2", "parola3");
+
+		esercizi.add(esercizio1);
+		esercizi.add(esercizio2);
+		esercizi.add(esercizio3);
+
+		EsercizioDAO daoP = new EsercizioDAO();
+		daoP.save(esercizio1);
+		daoP.save(esercizio2);
+		daoP.save(esercizio3);
+
+		Log.d("PROVA ESERCIZI - Save", esercizi.toString());
+		textViewTestDB_1.setText(esercizi.toString());
+	}
 
 }
