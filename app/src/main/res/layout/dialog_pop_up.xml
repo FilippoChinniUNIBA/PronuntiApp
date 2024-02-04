@@ -73,6 +73,7 @@
             android:text="conferma"
             android:textColor="@color/white"
             android:background="@color/colorPrimary"
+            android:visibility="gone"
             />
         <android.widget.Button
             android:id="@+id/buttonAnnullaPopUp"
@@ -81,6 +82,7 @@
             android:text="annulla"
             android:textColor="@color/primaryTextColor"
             android:background="@color/hintTextColor"
+            android:visibility="gone"
             />
     </LinearLayout>
 </LinearLayout>

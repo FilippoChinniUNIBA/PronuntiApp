@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenarioFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.navbar.NavigationNavBarSelectorPaziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.NavigationNavBarSelectorPaziente;
 
 public class PazienteActivity extends AbstractAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
