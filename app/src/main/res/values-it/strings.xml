@@ -32,6 +32,11 @@
     <string name="child_data">Dati del bambino</string>
     <string name="actualSelectedCharacter"><b>ATTUALE</b></string>
     <string name="notSelectedCharacter">SELEZIONA</string>
+    <string name="startDate">Data inizio</string>
+    <string name="endDate">Data fine</string>
+    <string name="id">Id</string>
+    <string name="next">Avanti</string>
+
     <string-array name="character_names">
         <item>Bambina</item>
         <item>Bambino</item>

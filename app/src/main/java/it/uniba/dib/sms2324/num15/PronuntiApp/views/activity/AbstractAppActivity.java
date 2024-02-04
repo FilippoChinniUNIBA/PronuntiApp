@@ -2,9 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TestMenuTestFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.navbar.NavigationNavBarItemSelector;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.NavigationNavBarItemSelector;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
 
@@ -28,25 +25,13 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        //BUTTONS FOR TEST
-        View buttonToTest = findViewById(R.id.buttonTest);
-        buttonToTest.setOnClickListener(v -> {
-                    TestMenuTestFragment testMenuTestFragment = new TestMenuTestFragment();
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.appFrameLayout, testMenuTestFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
-        );
     }
 
     protected void setBottomNavBar(int menuId, NavigationNavBarItemSelector navigationNavBarItemSelector) {
-        Log.d("Id BottomNavBar--------------------->", menuId + " " );
         bottomNavigationView.inflateMenu(menuId);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setOnItemSelectedListener(item -> navigationNavBarItemSelector.selectItem(item.getItemId()));
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Controlla se il tasto up è stato premuto
@@ -57,7 +42,6 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     protected void setFirstFragment(int fragmentContainerId, androidx.fragment.app.Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(fragmentContainerId, fragment)

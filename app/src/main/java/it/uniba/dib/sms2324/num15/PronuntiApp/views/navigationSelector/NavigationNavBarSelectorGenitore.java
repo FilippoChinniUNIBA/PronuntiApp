@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
@@ -8,10 +8,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitoreFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileGenitoreFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileLogopedistaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenariGenitoriFragment;
 
 public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector implements NavigationNavBarItemSelector {

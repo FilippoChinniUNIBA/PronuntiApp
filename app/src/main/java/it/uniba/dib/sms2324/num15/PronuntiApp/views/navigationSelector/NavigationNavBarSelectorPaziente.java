@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationSelector.navBarApp;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
@@ -11,7 +11,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitor
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenarioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PersonaggiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileLogopedistaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfilePazienteFragment;
 
 public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
