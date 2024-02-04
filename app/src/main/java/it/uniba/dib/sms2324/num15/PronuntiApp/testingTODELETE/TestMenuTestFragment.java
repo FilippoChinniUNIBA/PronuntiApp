@@ -40,7 +40,7 @@ public class TestMenuTestFragment extends Fragment {
 			TestApiFragment testApiFragment = new TestApiFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testApiFragment)
+					.replace(R.id.frameLayoutLogopedista, testApiFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -50,7 +50,7 @@ public class TestMenuTestFragment extends Fragment {
 			LoginFragment testLoginFragment = new LoginFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testLoginFragment)
+					.replace(R.id.frameLayoutLogopedista, testLoginFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -61,7 +61,7 @@ public class TestMenuTestFragment extends Fragment {
 			TestDBFragment testDBFragment = new TestDBFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testDBFragment)
+					.replace(R.id.frameLayoutLogopedista, testDBFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -71,7 +71,7 @@ public class TestMenuTestFragment extends Fragment {
 					TestFilePickerFragment testFilePickerFragment = new TestFilePickerFragment();
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.appFrameLayout, testFilePickerFragment)
+							.replace(R.id.frameLayoutLogopedista, testFilePickerFragment)
 							.addToBackStack(null)
 							.commit();
 					}
@@ -81,7 +81,7 @@ public class TestMenuTestFragment extends Fragment {
 					TestInserimentoDatiDBFragment testInserimentoDatiDBFragment = new TestInserimentoDatiDBFragment();
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.appFrameLayout, testInserimentoDatiDBFragment)
+							.replace(R.id.frameLayoutLogopedista, testInserimentoDatiDBFragment)
 							.addToBackStack(null)
 							.commit();
 					}

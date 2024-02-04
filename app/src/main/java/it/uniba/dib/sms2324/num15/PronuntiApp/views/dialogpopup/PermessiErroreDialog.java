@@ -2,14 +2,16 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.dialogpopup;
 
 import android.content.Context;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+
 public class PermessiErroreDialog extends AbstractPopUpDialog{
 
     public PermessiErroreDialog(Context context, String descrizione) {
         super(context);
-        setTitolo("Permessi necessari");
+        setTitolo(context.getString(R.string.errorPermissionTitle));
         setDescrizione(descrizione);
-        setConfermaButtonText("Richiedimeli");
-        setAnnullaButtonText("Non voglio fornirli");
+        setConfermaButtonText(context.getString(R.string.errorPermissionOption1));
+        setAnnullaButtonText(context.getString(R.string.errorPermissionOption2));
     }
 
     @Override

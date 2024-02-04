@@ -17,20 +17,16 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
     protected NavigationNavBarItemSelector navigationNavBarItemSelector;
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        // Abilita il tasto Up nella ActionBar
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
+
 
     protected void setBottomNavBar(int menuId, NavigationNavBarItemSelector navigationNavBarItemSelector) {
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.inflateMenu(menuId);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setOnItemSelectedListener(item -> navigationNavBarItemSelector.selectItem(item.getItemId()));
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

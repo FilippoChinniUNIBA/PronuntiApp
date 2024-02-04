@@ -36,6 +36,14 @@
     <string name="endDate">End date</string>
     <string name="id">Id</string>
     <string name="next">Avanti</string>
+    <string name="errorConnectionDescription">Internet connection is not available. Check your connection, the app will be restarted automatically.</string>
+    <string name="errorConnectionTitle">Connection error</string>
+    <string name="restartApp" >Restart the app</string>
+    <string name="errorPermissionTitle">Necessary permissions</string>
+    <string name="errorPermissionOption1">Request them again</string>
+    <string name="errorPermissionOption2">I don\'t want to give them</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 
     <integer-array name="personaggi_images">
         <item>@drawable/personaggio_bambina_rossa</item> <!-- Nome: Bambina -->

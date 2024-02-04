@@ -10,8 +10,9 @@ public class GenitoreActivity extends AbstractAppActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
-        setFirstFragment(R.id.appFrameLayout, new ScenariGenitoriFragment());
+        setContentView(R.layout.activity_genitore);
+        setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.frameLayoutGenitore, bottomNavigationView));
+        setFirstFragment(R.id.frameLayoutGenitore, new ScenariGenitoriFragment());
 
     }
 }
