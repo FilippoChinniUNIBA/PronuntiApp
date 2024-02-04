@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector;
 
 public interface NavigationNavBarItemSelector {
 

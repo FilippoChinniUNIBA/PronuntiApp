@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigationselector.NavigationNavBarSelectorLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorLogopedista;
 
 public class LogopedistaActivity extends AbstractAppActivity {
 
