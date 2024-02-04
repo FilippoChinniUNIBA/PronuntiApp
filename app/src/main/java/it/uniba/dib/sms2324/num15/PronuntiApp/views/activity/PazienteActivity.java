@@ -2,6 +2,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenarioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorPaziente;
@@ -12,5 +14,7 @@ public class PazienteActivity extends AbstractAppActivity {
         setContentView(R.layout.activity_paziente);
         setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.frameLayoutPaziente, bottomNavigationView));
         setFirstFragment(R.id.frameLayoutPaziente, new ScenarioFragment());
+        // Aggiungi un listener per ascoltare quando la vista è stata completamente inizializzata
+
     }
 }

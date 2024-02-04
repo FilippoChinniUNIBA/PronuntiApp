@@ -1,7 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,5 +43,8 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public BottomNavigationView getBottomNavBar() {
+        return bottomNavigationView;
+    }
 
 }

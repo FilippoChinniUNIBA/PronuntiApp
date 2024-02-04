@@ -82,12 +82,12 @@ public class TestApiFragment extends Fragment {
 
 		List<Personaggio> personaggioList = new ArrayList<Personaggio>();
 
-		Personaggio pers1 = new Personaggio("1","nome1",5,R.drawable.personaggio_bambina_rossa);
-		Personaggio pers2 = new Personaggio("2","nome2",5,R.drawable.personaggio_bambina_disegna);
-		Personaggio pers3 = new Personaggio("3","nome3",5,R.drawable.personaggio_bambino_no_zaino);
-		Personaggio pers4 = new Personaggio("4","nome4",5,R.drawable.personaggio_batman);
-		Personaggio pers5 = new Personaggio("5","nome5",5,R.drawable.personaggio_pecora);
-		Personaggio pers6 = new Personaggio("6","nome6",5,R.drawable.personaggio_mucca);
+		Personaggio pers1 = new Personaggio("1","nome1",5,R.drawable.bambina);
+		Personaggio pers2 = new Personaggio("2","nome2",5,R.drawable.bambina_disegna);
+		Personaggio pers3 = new Personaggio("3","nome3",5,R.drawable.bambino);
+		Personaggio pers4 = new Personaggio("4","nome4",5,R.drawable.batman);
+		Personaggio pers5 = new Personaggio("5","nome5",5,R.drawable.pecora);
+		Personaggio pers6 = new Personaggio("6","nome6",5,R.drawable.mucca);
 
 		PersonaggioDAO dao = new PersonaggioDAO ();
 		dao.save(pers1);
