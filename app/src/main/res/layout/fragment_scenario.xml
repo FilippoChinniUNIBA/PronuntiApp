@@ -32,8 +32,8 @@
     <ImageView
         android:id="@+id/posizione_primo_esercizio"
         style="@style/stylePosizioniScenario"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="156dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="132dp"
         android:src="@drawable/candy_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -149,10 +149,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                         // Salva le coordinate iniziali del tocco
                         xDelta = x - v.getX();
                         yDelta = y - v.getY();
-                        if(isPersonaggioInAreaPrimoEsercizio()) {
-                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
-                        }
-
                         break;
 
                     case MotionEvent.ACTION_MOVE:
@@ -191,6 +187,19 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                         }
 
                         break;
+
+                    case MotionEvent.ACTION_UP:
+                        //controlla dove sta il personaggio e naviga al gioco corrispondente
+                        if(isPersonaggioInAreaPrimoEsercizio()) {
+                            Log.d("Personaggio", "in area primo esercizio in esecuzione");
+                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                        }
+                        else if(isPersonaggioInAreaSecondaEsercizio()) {
+                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                        }
+                        else if(isPersonaggioInAreaTerzoEsercizio()) {
+                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                        }
                 }
                 return true;
             }

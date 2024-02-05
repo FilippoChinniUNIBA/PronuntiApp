@@ -50,4 +50,12 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
     private void showTooltip(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Denominazione immagine");
+        }
+    }
 }

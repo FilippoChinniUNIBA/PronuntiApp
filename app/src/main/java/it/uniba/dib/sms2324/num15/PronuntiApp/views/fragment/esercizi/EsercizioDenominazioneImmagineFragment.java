@@ -55,7 +55,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
         buttonFermaRegistrazione = view.findViewById(R.id.buttonFermaRegistrazione);
         buttonAiuti = view.findViewById(R.id.buttonAiuti);
         buttonCompletaEsercizio = view.findViewById(R.id.buttonCompletaEsercizio);
-        imageViewImmagineEsercizioDenominazione = view.findViewById(R.id.imageViewImmagineEsercizioDenominazione);
+        imageViewImmagineEsercizioDenominazione = view.findViewById(R.id.cardViewImmagineEsercizioDenominazione);
 
         return view;
     }
