@@ -17,6 +17,7 @@ public final class CostantiNodiDB {
 	public static final String ESERCIZI_COPPIA_IMMAGINI = "eserciziCoppiaImmagini";
 	public static final String RISULTATO_ESERCIZIO = "risultatoEsercizio";
 	public static final String PERSONAGGI = "personaggi";
+	public static final String MAPPA_TIPO_UTENTI = "mappaTipoUtenti";
 
 	public static final String TEMPLATE_ESERCIZI = "templateEsercizi";
 	public static final String ESERCIZI = "esercizi";

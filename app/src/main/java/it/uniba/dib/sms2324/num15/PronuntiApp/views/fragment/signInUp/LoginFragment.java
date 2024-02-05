@@ -42,7 +42,10 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
         buttonLogin = view.findViewById(R.id.buttonLogin);
         buttonToRegister = view.findViewById(R.id.buttonToRegister);
 
-        loginViewModel.login(textInputEditTextPassword.getText().toString(),textInputEditTextUsername.getText().toString());
+        /*per prima cosa non si fanno le operazioni in onCreateView,
+        secondo sta roba fa il login immediatamente all apertura dell'app, senza alcun input da parte dell'utente,
+        causando il crash dell'app*/
+        //loginViewModel.login(textInputEditTextPassword.getText().toString(),textInputEditTextUsername.getText().toString());
 
         buttonLogin.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new AvvioRapidoFragment()));
         buttonToRegister.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new RegistrazioneFragment()));

@@ -8,7 +8,7 @@ import com.google.firebase.database.Query;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.errori.MessaggioErrore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.MessaggioErrore;
 
 public interface DAO<T> {
 	void save(T obj);

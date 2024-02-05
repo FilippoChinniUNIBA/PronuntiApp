@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.errori;
+package it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse;
 
 import android.util.Log;
 

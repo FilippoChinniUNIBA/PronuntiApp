@@ -13,16 +13,20 @@ public class Autenticazione {
 		mAuth = FirebaseAuth.getInstance();
 	}
 
-	public CompletableFuture<Void> registrazione(String email, String password) {
-		CompletableFuture<Void> future = new CompletableFuture<>();
+	public FirebaseAuth getAuth() {
+		return mAuth;
+	}
+
+	public CompletableFuture<String> registrazione(String email, String password) {
+		CompletableFuture<String> future = new CompletableFuture<>();
 
 		mAuth.createUserWithEmailAndPassword(email, password)
 				.addOnCompleteListener(task -> {
 					if (task.isSuccessful()) {
-						Log.d("Autenticazione.registrazione()", "Registrazione avvenuta con successo");
-						future.complete(null);
+						Log.d("Autenticazione.registrazione()", "Registrazione avvenuta con successo" + mAuth.getCurrentUser().getUid());
+						future.complete(mAuth.getCurrentUser().getUid());
 					} else {
-						Log.e("Autenticazione.registrazione()", "Registrazione fallita: " + task.getException());
+						Log.e("Autenticazione.registrazione()", "Registrazione fallita: " + task.getException()); //TODO aggiungere agli errori
 						future.completeExceptionally(task.getException());
 					}
 				});
@@ -30,16 +34,16 @@ public class Autenticazione {
 		return future;
 	}
 
-	public CompletableFuture<Void> login(String email, String password) {
-		CompletableFuture<Void> future = new CompletableFuture<>();
+	public CompletableFuture<String> login(String email, String password) {
+		CompletableFuture<String> future = new CompletableFuture<>();
 
 		mAuth.signInWithEmailAndPassword(email, password)
 				.addOnCompleteListener(task -> {
 					if (task.isSuccessful()) {
-						Log.d("Autenticazione.login()", "Login avvenuto con successo");
-						future.complete(null);
+						Log.d("Autenticazione.login()", "Login avvenuto con successo: " + mAuth.getCurrentUser().getUid());
+						future.complete(mAuth.getCurrentUser().getUid());
 					} else {
-						Log.e("Autenticazione.login()", "Login fallito: " + task.getException());
+						Log.e("Autenticazione.login()", "Login fallito: " + task.getException()); //TODO aggiungere agli errori
 						future.completeExceptionally(task.getException());
 					}
 				});
