@@ -60,7 +60,7 @@ public class ScenarioFragment extends Fragment {
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
                 */
                 // Abilita il drag dell'immagine
-                bottomHeight= personaggioImageView.getY()-personaggioImageView.getHeight();
+                bottomHeight= personaggioImageView.getHeight()+ personaggioImageView.getHeight()*0.2f;
                 Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
                 enableImageDrag(personaggioImageView);
             }
