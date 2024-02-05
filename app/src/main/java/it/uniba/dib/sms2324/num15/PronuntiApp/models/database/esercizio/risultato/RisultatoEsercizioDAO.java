@@ -14,43 +14,35 @@ import java.util.List;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
-public class RisultatoEsercizioDAO implements DAO<RisultatoEsercizio> {
+public class RisultatoEsercizioDAO /*implements DAO<RisultatoEsercizio>*/ {
 	protected final FirebaseDatabase db;
 
 	public RisultatoEsercizioDAO() {
 		db = FirebaseDatabase.getInstance();
 	}
 
-	@Override
+	/*@Override
 	public void save(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI);
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATO_ESERCIZIO);
 		String dbKey = obj.getIdEsercizio();
 		ref.child(dbKey).setValue(obj.toMap());
 	}
 
 	@Override
 	public void update(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI).child(obj.getIdEsercizio());
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATO_ESERCIZIO).child(obj.getIdEsercizio());
 		ref.setValue(obj.toMap());
 	}
 
 	@Override
 	public void delete(RisultatoEsercizio obj) {
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATI_ESERCIZI).child(obj.getIdEsercizio());
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.RISULTATO_ESERCIZIO).child(obj.getIdEsercizio());
 		ref.removeValue();
 	}
 
@@ -91,6 +83,6 @@ public class RisultatoEsercizioDAO implements DAO<RisultatoEsercizio> {
 	@Override
 	public List<RisultatoEsercizio> getAll() {
 		return null;
-	}
+	}*/
 
 }

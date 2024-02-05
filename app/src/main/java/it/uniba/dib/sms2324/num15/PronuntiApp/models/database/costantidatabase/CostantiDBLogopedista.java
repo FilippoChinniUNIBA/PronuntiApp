@@ -9,8 +9,10 @@ public final class CostantiDBLogopedista {
 	public static final String PASSWORD = "password";
 	public static final String TELEFONO = "telefono";
 	public static final String INDIRIZZO = "indirizzo";
-	public static final String LISTA_APPUNTAMENTI = "listaAppuntamenti";
-	public static final String LISTA_PAZIENTI = "listaPazienti";
+
+	//public static final String LISTA_APPUNTAMENTI = "listaAppuntamenti";
+	public static final String CLASSIFICA_PAZIENTI = CostantiNodiDB.CLASSIFICA_PAZIENTI;
+	public static final String LISTA_PAZIENTI = CostantiNodiDB.PAZIENTI;
 
 	private CostantiDBLogopedista() {}
 

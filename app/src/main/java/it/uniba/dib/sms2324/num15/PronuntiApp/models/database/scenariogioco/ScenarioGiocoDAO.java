@@ -9,14 +9,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 
-public class ScenarioGiocoDAO implements DAO<ScenarioGioco> {
+public class ScenarioGiocoDAO /*implements DAO<ScenarioGioco>*/ {
 	private final FirebaseDatabase db;
 
 	public ScenarioGiocoDAO() {
 		db = FirebaseDatabase.getInstance();
 	}
 
-	@Override
+	/*@Override
 	public void save(ScenarioGioco obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.SCENARIGIOCO);
 		String dbKey = ref.push().getKey();
@@ -48,6 +48,6 @@ public class ScenarioGiocoDAO implements DAO<ScenarioGioco> {
 	@Override
 	public List<ScenarioGioco> getAll() {
 		return null;
-	}
+	}*/
 
 }

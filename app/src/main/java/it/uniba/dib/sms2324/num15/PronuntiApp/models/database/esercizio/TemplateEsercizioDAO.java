@@ -1,17 +1,21 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.esercizio;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioCoppiaImmagini;
@@ -50,46 +54,106 @@ public class TemplateEsercizioDAO implements DAO<Esercizio> {
 	}
 
 	@Override
-	public List<Esercizio> get(String field, Object value) {
+	public CompletableFuture<List<Esercizio>> get(String field, Object value) {
+		CompletableFuture<List<Esercizio>> future = new CompletableFuture<>();
+
 		DatabaseReference ref = db.getReference(CostantiNodiDB.TEMPLATE_ESERCIZI);
 		Query query = DAO.createQuery(ref, field, value);
 
-		List<Esercizio> result = new LinkedList<>();
-
-		query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+		query.addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
-			public void onComplete(@NonNull Task<DataSnapshot> task) {
-				if (task.isSuccessful()) {
-					for (DataSnapshot snapshot : task.getResult().getChildren()) {
-						Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				List<Esercizio> result = new ArrayList<>();
 
-						if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
-							TemplateEsercizioDenominazioneImmagine templateEsercizio = new TemplateEsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
-							result.add(templateEsercizio);
-						}
-						else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1)) {
-							TemplateEsercizioSequenzaParole templateEsercizio = new TemplateEsercizioSequenzaParole(fromDatabaseMap, snapshot.getKey());
-							result.add(templateEsercizio);
-						}
-						else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
-							TemplateEsercizioCoppiaImmagini templateEsercizio = new TemplateEsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
-							result.add(templateEsercizio);
-						}
+				for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+					Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+
+					if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
+						TemplateEsercizioDenominazioneImmagine templateEsercizio = new TemplateEsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
+						result.add(templateEsercizio);
+					}
+					else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1)) {
+						TemplateEsercizioSequenzaParole templateEsercizio = new TemplateEsercizioSequenzaParole(fromDatabaseMap, snapshot.getKey());
+						result.add(templateEsercizio);
+					}
+					else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
+						TemplateEsercizioCoppiaImmagini templateEsercizio = new TemplateEsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
+						result.add(templateEsercizio);
 					}
 				}
+
+				Log.d("TemplateEsercizioDAO.get()", result.toString());
+				future.complete(result);
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+				Log.e("TemplateEsercizioDAO.get()", databaseError.toString());
+				future.completeExceptionally(databaseError.toException());
 			}
 		});
-		return result;
+
+		return future;
 	}
 
 	@Override
-	public Esercizio getById(String idObj) {
-		return null;
+	public CompletableFuture<Esercizio> getById(String idObj) {
+		return CompletableFuture.supplyAsync(() -> {
+			DatabaseReference ref = db.getReference(CostantiNodiDB.TEMPLATE_ESERCIZI).child(idObj);
+			Task<DataSnapshot> task = ref.get();
+
+			Esercizio result = null;
+
+			while (!task.isComplete()) {}
+
+			DataSnapshot snapshot = task.getResult();
+			Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+
+			if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
+				result = new TemplateEsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
+			}
+			else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1)) {
+				result = new TemplateEsercizioSequenzaParole(fromDatabaseMap, snapshot.getKey());
+			}
+			else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
+				result = new TemplateEsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
+			}
+
+			Log.d("TemplateEsercizioDAO.getById()", result.toString());
+			return result;
+		});
 	}
 
 	@Override
-	public List<Esercizio> getAll() {
-		return null;
+	public CompletableFuture<List<Esercizio>> getAll() {
+		return CompletableFuture.supplyAsync(() -> {
+			DatabaseReference ref = db.getReference(CostantiNodiDB.TEMPLATE_ESERCIZI);
+			Task<DataSnapshot> task = ref.get();
+
+			List<Esercizio> result = new ArrayList<>();
+
+			while (!task.isComplete()) {}
+
+			for (DataSnapshot snapshot : task.getResult().getChildren()) {
+				Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+
+				if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
+					TemplateEsercizioDenominazioneImmagine templateEsercizio = new TemplateEsercizioDenominazioneImmagine(fromDatabaseMap, snapshot.getKey());
+					result.add(templateEsercizio);
+				}
+				else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1)) {
+					TemplateEsercizioSequenzaParole templateEsercizio = new TemplateEsercizioSequenzaParole(fromDatabaseMap, snapshot.getKey());
+					result.add(templateEsercizio);
+				}
+				else if (fromDatabaseMap.containsKey(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
+					TemplateEsercizioCoppiaImmagini templateEsercizio = new TemplateEsercizioCoppiaImmagini(fromDatabaseMap, snapshot.getKey());
+					result.add(templateEsercizio);
+				}
+			}
+
+			Log.d("TemplateEsercizioDAO.getAll()", result.toString());
+			return result;
+		});
 	}
 
 }

@@ -1,13 +1,26 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class AppuntamentoDAO implements DAO<Appuntamento> {
 	private final FirebaseDatabase db;
@@ -36,18 +49,75 @@ public class AppuntamentoDAO implements DAO<Appuntamento> {
 	}
 
 	@Override
-	public List<Appuntamento> get(String field, Object value) {
-		return null;
+	public CompletableFuture<List<Appuntamento>> get(String field, Object value) {
+		CompletableFuture<List<Appuntamento>> future = new CompletableFuture<>();
+
+		DatabaseReference ref = db.getReference(CostantiNodiDB.APPUNTAMENTI);
+		Query query = DAO.createQuery(ref, field, value);
+
+		query.addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+				List<Appuntamento> result = new ArrayList<>();
+
+				for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+					Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+					Appuntamento appuntamento = new Appuntamento(fromDatabaseMap, snapshot.getKey());
+					result.add(appuntamento);
+				}
+
+				Log.d("AppuntamentoDAO.get()", result.toString());
+				future.complete(result);
+			}
+
+			@Override
+			public void onCancelled(@NonNull DatabaseError databaseError) {
+				Log.e("AppuntamentoDAO.get()", databaseError.toString());
+				future.completeExceptionally(databaseError.toException());
+			}
+		});
+
+		return future;
 	}
 
 	@Override
-	public Appuntamento getById(String idObj) {
-		return null;
+	public CompletableFuture<Appuntamento> getById(String idObj) {
+		return CompletableFuture.supplyAsync(() -> {
+			DatabaseReference ref = db.getReference(CostantiNodiDB.APPUNTAMENTI).child(idObj);
+			Task<DataSnapshot> task = ref.get();
+
+			Appuntamento result = null;
+
+			while (!task.isComplete()) {}
+
+			DataSnapshot snapshot = task.getResult();
+			Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+			result = new Appuntamento(fromDatabaseMap, idObj);
+
+			Log.d("AppuntamentoDAO.getById()", result.toString());
+			return result;
+		});
 	}
 
 	@Override
-	public List<Appuntamento> getAll() {
-		return null;
+	public CompletableFuture<List<Appuntamento>> getAll() {
+		return CompletableFuture.supplyAsync(() -> {
+			DatabaseReference ref = db.getReference(CostantiNodiDB.APPUNTAMENTI);
+			Task<DataSnapshot> task = ref.get();
+
+			List<Appuntamento> result = new ArrayList<>();
+
+			while (!task.isComplete()) {}
+
+			for (DataSnapshot snapshot : task.getResult().getChildren()) {
+				Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+				Appuntamento appuntamento = new Appuntamento(fromDatabaseMap, snapshot.getKey());
+				result.add(appuntamento);
+			}
+
+			Log.d("AppuntamentoDAO.getAll()", result.toString());
+			return result;
+		});
 	}
 
 }

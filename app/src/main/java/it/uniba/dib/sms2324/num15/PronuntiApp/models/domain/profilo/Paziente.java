@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
@@ -18,9 +19,8 @@ public class Paziente extends AbstractProfilo {
 	private int punteggioTot;
 	private Map<String, Integer> personaggiSbloccati;
 	private List<Terapia> terapie;
-	private String refIdLogopedista;
 
-	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
+	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
@@ -29,19 +29,16 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 		this.personaggiSbloccati = personaggiSbloccati;
 		this.terapie = terapie;
-		this.refIdLogopedista = refIdLogopedista;
 	}
 
-	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie, String refIdLogopedista) {
-		super(nome, cognome, username, email, password);
+	public Paziente(String idProfilo, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati) {
+		super(idProfilo, nome, cognome, username, email, password);
 		this.eta = eta;
 		this.dataNascita = dataNascita;
 		this.sesso = sesso;
 		this.valuta = valuta;
 		this.punteggioTot = punteggioTot;
 		this.personaggiSbloccati = personaggiSbloccati;
-		this.terapie = terapie;
-		this.refIdLogopedista = refIdLogopedista;
 	}
 
 	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati, List<Terapia> terapie) {
@@ -53,6 +50,16 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 		this.personaggiSbloccati = personaggiSbloccati;
 		this.terapie = terapie;
+	}
+
+	public Paziente(String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot, Map<String, Integer> personaggiSbloccati) {
+		super(nome, cognome, username, email, password);
+		this.eta = eta;
+		this.dataNascita = dataNascita;
+		this.sesso = sesso;
+		this.valuta = valuta;
+		this.punteggioTot = punteggioTot;
+		this.personaggiSbloccati = personaggiSbloccati;
 	}
 
 	public Paziente(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
@@ -71,8 +78,6 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = p.getPunteggioTot();
 		this.personaggiSbloccati = p.getPersonaggiSbloccati();
 		this.terapie = p.getTerapie();
-		this.refIdLogopedista = p.getRefIdLogopedista();
-
 	}
 
 	public int getEta() {
@@ -103,10 +108,6 @@ public class Paziente extends AbstractProfilo {
 		return terapie;
 	}
 
-	public String getRefIdLogopedista() {
-		return refIdLogopedista;
-	}
-
 	public void setEta(int eta) {
 		this.eta = eta;
 	}
@@ -135,10 +136,6 @@ public class Paziente extends AbstractProfilo {
 		this.terapie = terapie;
 	}
 
-	public void setRefIdLogopedista(String refIdLogopedista) {
-		this.refIdLogopedista = refIdLogopedista;
-	}
-
 	@Override
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = super.toMap();
@@ -148,9 +145,11 @@ public class Paziente extends AbstractProfilo {
 		entityMap.put(CostantiDBPaziente.SESSO, Character.toString(this.sesso));
 		entityMap.put(CostantiDBPaziente.VALUTA, this.valuta);
 		entityMap.put(CostantiDBPaziente.PUNTEGGIO_TOT, this.punteggioTot);
-		entityMap.put(CostantiDBPaziente.MAPPA_PERSONAGGI_SBLOCCATI, this.personaggiSbloccati);
-		entityMap.put(CostantiDBPaziente.LISTA_TERAPIE, this.terapie.stream().map(Terapia::getIdTerapia).collect(Collectors.toList()));
-		entityMap.put(CostantiDBPaziente.ID_LOGOPEDISTA, this.refIdLogopedista);
+		entityMap.put(CostantiDBPaziente.PERSONAGGI_SBLOCCATI, this.personaggiSbloccati);
+
+		if (this.terapie != null) {
+			entityMap.put(CostantiDBPaziente.LISTA_TERAPIE, this.terapie.stream().map(Terapia::toMap).collect(Collectors.toList()));
+		}
 		return entityMap;
 	}
 
@@ -168,10 +167,8 @@ public class Paziente extends AbstractProfilo {
 				((String) fromDatabaseMap.get(CostantiDBPaziente.SESSO)).charAt(0),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.VALUTA)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.PUNTEGGIO_TOT)),
-				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni terapia e pesonaggio
-				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBPaziente.MAPPA_PERSONAGGI_SBLOCCATI),
-				(List<Terapia>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE),
-				(String) fromDatabaseMap.get(CostantiDBPaziente.ID_LOGOPEDISTA)
+				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBPaziente.PERSONAGGI_SBLOCCATI),
+				(fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE)).stream().map(obj -> new Terapia(obj, null)).collect(Collectors.toList()) : null
 		);
 	}
 
@@ -191,7 +188,6 @@ public class Paziente extends AbstractProfilo {
 				", punteggioTot=" + punteggioTot +
 				", personaggiSbloccati=" + personaggiSbloccati +
 				", terapie=" + terapie +
-				", refIdLogopedista='" + refIdLogopedista + '\'' +
 				'}';
 	}
 

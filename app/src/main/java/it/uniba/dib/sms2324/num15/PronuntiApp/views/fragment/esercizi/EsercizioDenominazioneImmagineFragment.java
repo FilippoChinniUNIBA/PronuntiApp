@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
@@ -68,11 +70,10 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
         }
 
         File immagineEsercizio = new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"pinguino.jpg");
+        AtomicInteger countAiuti = new AtomicInteger(3);
 
         //QUANDO VIENE ISTANZIATO UN ESERCIZIO L'IMMAGINE DEVE ESSERE ALLOCATA IN MEMORIA E IL PATH DELLA MEMORIA INTERNA DEVE ESSERE MEMORIZZATO NELL'ESERCIZIO
-        EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio,3);
-
-        String parolaCorretta = "Pinguino";
+        EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio, "pinguino", new File("help.mp3"));
 
         File directoryMusic = curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File fileRegistrazione = new File(directoryMusic,"test");
@@ -82,6 +83,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         StorageReference pinguino = storage.getReference().child("pinguino.jpg");
+        Log.d("PROVA PINGUINO", esercizioDenominazioneImmagine.getAudioAiuto().getName());
         StorageReference aiuto = storage.getReference().child("help.mp3");
 
         CompletableFuture<String> urlFuture = getUrlFromStorageReference(pinguino);
@@ -102,7 +104,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
                 Toast.makeText(curretactivity, "Registrazione interrotta", Toast.LENGTH_SHORT).show();
             });
             buttonAiuti.setOnClickListener(v -> {
-                if(esercizioDenominazioneImmagine.getCountAiuti()>0) {
+                if (countAiuti.get() > 0) {
                     getUrlFromStorageReference(aiuto).thenAccept(audioUrl -> {
                         try {
                             aiutiplayer.reset();
@@ -113,7 +115,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
                     });
-                    esercizioDenominazioneImmagine.setCountAiuti(esercizioDenominazioneImmagine.getCountAiuti()-1);
+                    countAiuti.getAndDecrement();
                 }else{
                     Toast.makeText(curretactivity, "Aiuti disponibili esauriti", Toast.LENGTH_SHORT).show();
                 }
@@ -122,8 +124,9 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
                 try {
                     AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
                     List<String> words = audioRecognizer.getText();
+                    Log.d("Words",words.get(0));
                     uploadFileAsync(fileConvertito,storage.getReference(),curretactivity);
-                    if(words.get(0).equals(parolaCorretta)){
+                    if(words.get(0).equals(esercizioDenominazioneImmagine.getParolaEsercizio())){
                         correctplayer.start();
                     }else {
                         errorplayer.start();

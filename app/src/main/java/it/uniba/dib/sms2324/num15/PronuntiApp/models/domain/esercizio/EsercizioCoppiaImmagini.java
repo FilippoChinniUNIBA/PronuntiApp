@@ -7,8 +7,7 @@ import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioAbstract;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 
 public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini implements EsercizioEseguibile {
@@ -35,6 +34,12 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 	}
 
+	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
+		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+		this.risultatoEsercizio = risultatoEsercizio;
+	}
+
 	public EsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		EsercizioCoppiaImmagini e = fromMap(fromDatabaseMap);
 
@@ -45,7 +50,7 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		this.immagineEsercizioCorretta = e.getImmagineEsercizioCorretta();
 		this.immagineEsercizioErrata = e.getImmagineEsercizioErrata();
 		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
-		//this.risultatoEsercizio = e.getRisultatoEsercizio();
+		this.risultatoEsercizio = e.getRisultatoEsercizio();
 	}
 
 	public String getRefIdTemplateEsercizio() {
@@ -69,7 +74,11 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_ESERCIZIO, this.idEsercizio);
-		entityMap.put(CostantiDBEsercizioCoppiaImmagini.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+		entityMap.put(CostantiDBEsercizioCoppiaImmagini.REF_ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+
+		if (this.risultatoEsercizio != null) {
+			entityMap.put(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO, this.risultatoEsercizio.toMap());
+		}
 		return entityMap;
 	}
 
@@ -82,7 +91,8 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.AUDIO_ESERCIZIO)),
 				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)),
 				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_ERRATA)),
-				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.ID_TEMPLATE_ESERCIZIO)
+				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.REF_ID_TEMPLATE_ESERCIZIO),
+				(fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) != null ? new RisultatoEsercizioCoppiaImmagini((Map<String, Object>) fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) : null
 		);
 	}
 

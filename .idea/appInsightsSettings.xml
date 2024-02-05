@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AppInsightsSettings">
+    <option name="selectedTabId" value="Android Vitals" />
+    <option name="tabSettings">
+      <map>
+        <entry key="Firebase Crashlytics">
+          <value>
+            <InsightsFilterSettings>
+              <option name="connection">
+                <ConnectionSetting>
+                  <option name="appId" value="it.uniba.dib.sms2324.num15.PronuntiApp" />
+                  <option name="mobileSdkAppId" value="1:910097971832:android:4d834ec6af3f5437f20b8d" />
+                  <option name="projectId" value="pronuntiapp-32bf6" />
+                  <option name="projectNumber" value="910097971832" />
+                </ConnectionSetting>
+              </option>
+              <option name="signal" value="SIGNAL_UNSPECIFIED" />
+              <option name="timeIntervalDays" value="THIRTY_DAYS" />
+              <option name="visibilityType" value="ALL" />
+            </InsightsFilterSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

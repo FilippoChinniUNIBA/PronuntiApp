@@ -5,40 +5,39 @@ import android.util.Log;
 import java.io.File;
 import java.util.Map;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioAbstract;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazioneImmagine implements EsercizioEseguibile {
-	private int countAiuti;
 	private String refIdTemplateEsercizio;
 	private RisultatoEsercizioDenominazioneImmagine risultatoEsercizio;
 
-	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio, RisultatoEsercizioDenominazioneImmagine risultatoEsercizio) {
-		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio);
-		this.countAiuti = countAiuti;
+	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto, String refIdTemplateEsercizio, RisultatoEsercizioDenominazioneImmagine risultatoEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio, parolaEsercizio, audioAiuto);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
-	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio) {
-		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio);
-		this.countAiuti = countAiuti;
+	public EsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto, String refIdTemplateEsercizio) {
+		super(idEsercizio, ricompensaCorretto, ricompensaErrato, immagineEsercizio, parolaEsercizio, audioAiuto);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti, String refIdTemplateEsercizio) {
-		super(ricompensaCorretto, ricompensaErrato, immagineEsercizio);
-		this.countAiuti = countAiuti;
+	public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto, String refIdTemplateEsercizio) {
+		super(ricompensaCorretto, ricompensaErrato, immagineEsercizio, parolaEsercizio, audioAiuto);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, int countAiuti) {
-		super(ricompensaCorretto, ricompensaErrato, immagineEsercizio);
-		this.countAiuti = countAiuti;
+	public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto) {
+		super(ricompensaCorretto, ricompensaErrato, immagineEsercizio, parolaEsercizio, audioAiuto);
+	}
+
+	public EsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto, String refIdTemplateEsercizio, RisultatoEsercizioDenominazioneImmagine risultatoEsercizio) {
+		super(ricompensaCorretto, ricompensaErrato, immagineEsercizio, parolaEsercizio, audioAiuto);
+		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
+		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
 	public EsercizioDenominazioneImmagine(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
@@ -48,13 +47,10 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 		this.ricompensaCorretto = e.getRicompensaCorretto();
 		this.ricompensaErrato = e.getRicompensaErrato();
 		this.immagineEsercizio = e.getImmagineEsercizio();
-		this.countAiuti = e.getCountAiuti();
+		this.parolaEsercizio = e.getParolaEsercizio();
+		this.audioAiuto = e.getAudioAiuto();
 		this.refIdTemplateEsercizio = e.getRefIdTemplateEsercizio();
-		//this.risultatoEsercizio = e.getRisultatoEsercizio();
-	}
-
-	public int getCountAiuti() {
-		return countAiuti;
+		this.risultatoEsercizio = e.getRisultatoEsercizio();
 	}
 
 	public String getRefIdTemplateEsercizio() {
@@ -63,10 +59,6 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 
 	public RisultatoEsercizioDenominazioneImmagine getRisultatoEsercizio() {
 		return risultatoEsercizio;
-	}
-
-	public void setCountAiuti(int countAiuti) {
-		this.countAiuti = countAiuti;
 	}
 
 	public void setRefIdTemplateEsercizio(String refIdTemplateEsercizio) {
@@ -82,8 +74,11 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_ESERCIZIO, this.idEsercizio);
-		entityMap.put(CostantiDBEsercizioDenominazioneImmagine.COUNT_AIUTI, this.countAiuti);
-		entityMap.put(CostantiDBEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+		entityMap.put(CostantiDBEsercizioDenominazioneImmagine.REF_ID_TEMPLATE_ESERCIZIO, this.refIdTemplateEsercizio);
+
+		if (this.risultatoEsercizio != null) {
+			entityMap.put(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO, this.risultatoEsercizio.toMap());
+		}
 		return entityMap;
 	}
 
@@ -94,8 +89,10 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.RICOMPENSA_CORRETTO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.RICOMPENSA_ERRATO)),
 				new File((String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)),
-				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.COUNT_AIUTI)),
-				(String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO)
+				(String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.PAROLA_ESERCIZIO),
+				new File((String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.AUDIO_AIUTO)),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioDenominazioneImmagine.REF_ID_TEMPLATE_ESERCIZIO),
+				(fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) != null ? new RisultatoEsercizioDenominazioneImmagine((Map<String, Object>) fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) : null
 		);
 	}
 
@@ -106,7 +103,8 @@ public class EsercizioDenominazioneImmagine extends TemplateEsercizioDenominazio
 				", ricompensaCorretto=" + ricompensaCorretto +
 				", ricompensaErrato=" + ricompensaErrato +
 				", immagineEsercizio=" + immagineEsercizio +
-				", countAiuti=" + countAiuti +
+				", parolaEsercizio='" + parolaEsercizio + '\'' +
+				", audioAiuto=" + audioAiuto +
 				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
 				", risultatoEsercizio=" + risultatoEsercizio +
 				'}';
