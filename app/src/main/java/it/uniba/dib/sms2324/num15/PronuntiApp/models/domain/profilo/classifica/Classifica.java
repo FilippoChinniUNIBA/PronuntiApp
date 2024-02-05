@@ -60,7 +60,6 @@ public class Classifica implements Persistente<Classifica> {
 	public Classifica fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("Classifica.fromMap()", fromDatabaseMap.toString());
 		return new Classifica(
-				//TODO  probabilmente lanciera CastException (non riesce a trasformare long in Integer)
 				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBClassifica.CLASSIFICA_PAZIENTI)
 		);
 	}

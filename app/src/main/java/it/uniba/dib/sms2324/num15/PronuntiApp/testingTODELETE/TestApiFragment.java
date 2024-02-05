@@ -31,14 +31,14 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.test_database.Personaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.test_database.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.CloudTask;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.DownloadAction;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.UploadAction;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 
 public class TestApiFragment extends Fragment {
 	private Button buttonAvviaRegistrazione;
@@ -82,12 +82,12 @@ public class TestApiFragment extends Fragment {
 
 		List<Personaggio> personaggioList = new ArrayList<Personaggio>();
 
-		Personaggio pers1 = new Personaggio("1","nome1",5,R.drawable.bambina);
-		Personaggio pers2 = new Personaggio("2","nome2",5,R.drawable.bambina_disegna);
-		Personaggio pers3 = new Personaggio("3","nome3",5,R.drawable.bambino);
-		Personaggio pers4 = new Personaggio("4","nome4",5,R.drawable.batman);
-		Personaggio pers5 = new Personaggio("5","nome5",5,R.drawable.pecora);
-		Personaggio pers6 = new Personaggio("6","nome6",5,R.drawable.mucca);
+		Personaggio pers1 = new Personaggio("1","nome1",5,/*R.drawable.bambina*/ new File("path"));
+		Personaggio pers2 = new Personaggio("2","nome2",5,/*R.drawable.bambina_disegna*/ new File("path"));
+		Personaggio pers3 = new Personaggio("3","nome3",5,/*R.drawable.bambino*/ new File("path"));
+		Personaggio pers4 = new Personaggio("4","nome4",5,/*R.drawable.batman*/ new File("path"));
+		Personaggio pers5 = new Personaggio("5","nome5",5,/*R.drawable.pecora*/ new File("path"));
+		Personaggio pers6 = new Personaggio("6","nome6",5,/*R.drawable.mucca*/ new File("path"));
 
 		PersonaggioDAO dao = new PersonaggioDAO ();
 		dao.save(pers1);
@@ -219,7 +219,7 @@ public class TestApiFragment extends Fragment {
 	}
 
 	private void printcharacters(PersonaggioDAO dao){
-		CompletableFuture<List<Personaggio>> futurePersonaggi = dao.getPersonaggi();
+		CompletableFuture<List<Personaggio>> futurePersonaggi = dao.getAll();
 
 		futurePersonaggi.thenAccept(personaggi -> {
 			// Elabora la lista di personaggi ottenuta

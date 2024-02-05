@@ -15,27 +15,30 @@ import android.widget.CheckBox;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTerapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica.Classifica;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
@@ -143,11 +146,43 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		bottoneInserisciDati.setOnClickListener(v -> savaInDB());
+		bottoneInserisciDati.setOnClickListener(v -> tempWrapper());
 	}
 
-	private void savaInDB() {
-/*		LocalDate dataInizioT = LocalDate.parse(dataInizioTerapia.getText().toString());
+	private void tempWrapper() {
+//		registrazioneFirebaseAuth();
+		loginFirebaseAuth();
+//		salvaInDB();
+	}
+
+	private void registrazioneFirebaseAuth() {
+		FirebaseAuth mAuth = FirebaseAuth.getInstance();
+		mAuth.createUserWithEmailAndPassword("email123@prova.it", "password")
+				.addOnCompleteListener(task -> {
+					if (task.isSuccessful()) {
+						Log.d("TEST AUTH", "Registrazione avvenuta con successo");
+						loginFirebaseAuth();
+					} else {
+						Log.e("TEST AUTH", "Registrazione fallita: " + task.getException());
+					}
+				});
+	}
+
+	private void loginFirebaseAuth() {
+		FirebaseAuth mAuth = FirebaseAuth.getInstance();
+		mAuth.signInWithEmailAndPassword("email123@prova.it", "password")
+				.addOnCompleteListener(task -> {
+					if (task.isSuccessful()) {
+						Log.d("TEST AUTH", "Login avvenuto con successo");
+						salvaInDB();
+					} else {
+						Log.e("TEST AUTH", "Login fallito: " + task.getException());
+					}
+				});
+	}
+
+	private void salvaInDB() {
+		/*LocalDate dataInizioT = LocalDate.parse(dataInizioTerapia.getText().toString());
 		LocalDate dataFineT = LocalDate.parse(dataFineTerapia.getText().toString());
 
 
@@ -192,28 +227,33 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 
 		Terapia terapia = new Terapia(dataInizioT, dataFineT, Arrays.asList(scenarioGioco));
 
-		FirebaseDatabase db = FirebaseDatabase.getInstance();
-		DatabaseReference ref = db.getReference(CostantiNodiDB.TERAPIE);
-		String key = ref.push().getKey();
-		ref.child(key).setValue(terapia.toMap());
-		Log.d("PROVA MATTA", "Terapia salvata: " + terapia.toString());*/
+		Map<String, Integer> personaggiSbloccati = new HashMap<String, Integer>() {{
+			put("personaggio1", 1);
+			put("personaggio2", 0);
+		}};
+		Paziente paziente = new Paziente("prova123456", "nome", "cognome", "username", "email", "password", 5, LocalDate.parse("2021-01-01"), 'M', 120, 180, personaggiSbloccati, Arrays.asList(terapia));
 
-		FirebaseDatabase db = FirebaseDatabase.getInstance();
-		DatabaseReference getRef = db.getReference(CostantiNodiDB.TERAPIE + "/" + "-Npp6VjtlttByPUDbq3E");
-		getRef.get().addOnCompleteListener(task -> {
-			if (task.isSuccessful()) {
-				Map<String, Object> terapiaMap = (Map<String, Object>) task.getResult().getValue();
-				Terapia terapiaLetta = new Terapia(terapiaMap, task.getResult().getKey());
-				Log.d("PROVA MATTA new", "Terapia letta: " + terapiaLetta);
-				Log.d("PROVA MATTA", "prova1: " + terapiaLetta.getScenariGioco().getClass().getSimpleName());
-				Log.d("PROVA MATTA", "prova2: " + terapiaLetta.getScenariGioco().get(0).getClass().getSimpleName());
-				Log.d("PROVA MATTA", "prova3: " + terapiaLetta.getScenariGioco().get(0).getImmagineSfondo());
-				Log.d("PROVA MATTA", "prova4: " + terapiaLetta.getScenariGioco().get(0).getImmagineSfondo().getClass().getSimpleName());
-				Log.d("PROVA MATTA", "prova5: " + terapiaLetta.getScenariGioco().get(0).getEsercizi().get(0).getRisultatoEsercizio());
-				Log.d("PROVA MATTA", "prova6: " + terapiaLetta.getScenariGioco().get(0).getImmagineSfondo());
-			} else {
-				Log.d("PROVA MATTA", "Errore: " + task.getException());
-			}
+		Classifica classifica = new Classifica(new HashMap<String, Integer>() {{
+			put("ssss", 180);
+			put("fsrdhs", 150);
+			put("svss", 200);
+		}});
+		Logopedista logopedista = new Logopedista(FirebaseAuth.getInstance().getCurrentUser().getUid(),"nome", "cognome", "username", "email", "password", "333333333", "via", classifica, Arrays.asList(paziente));
+
+		//Test save
+		LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
+		logopedistaDAO.save(logopedista);
+		Log.d("TEST PROVA MATTA", "Logopedista salvato: " + logopedista.toString());*/
+
+		//Test get
+		LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
+		logopedistaDAO.getAll().thenAccept(logopedisti -> {
+			Log.d("TEST PROVA MATTA", "Logopedisti: " + logopedisti);
+			Log.d("TEST PROVA MATTA", "Pazienti: " + logopedisti.get(0).getPazienti());
+			Log.d("TEST PROVA MATTA", "Terapie: " + logopedisti.get(0).getPazienti().get(0).getTerapie());
+			Log.d("TEST PROVA MATTA", "ScenariGioco: " + logopedisti.get(0).getPazienti().get(0).getTerapie().get(0).getScenariGioco());
+			Log.d("TEST PROVA MATTA", "Esercizi: " + logopedisti.get(0).getPazienti().get(0).getTerapie().get(0).getScenariGioco().get(0).getEsercizi());
+			Log.d("TEST PROVA MATTA", "Risultato Esercizio: " + logopedisti.get(0).getPazienti().get(0).getTerapie().get(0).getScenariGioco().get(0).getEsercizi().get(0).getRisultatoEsercizio());
 		});
 	}
 
@@ -257,7 +297,7 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 					audioRegistrato.setText(uri.getPath());
 					break;
 				default:
-					// Handle the result for unknown request codes
+
 					break;
 			}
 		}

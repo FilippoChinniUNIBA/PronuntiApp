@@ -167,9 +167,8 @@ public class Paziente extends AbstractProfilo {
 				((String) fromDatabaseMap.get(CostantiDBPaziente.SESSO)).charAt(0),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.VALUTA)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPaziente.PUNTEGGIO_TOT)),
-				//TODO probabilmente lanciera CastException (non riesce a trasformare long in Integer) (come in classifica)
 				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBPaziente.PERSONAGGI_SBLOCCATI),
-				(fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)).stream().map(obj -> new Terapia(obj, null)).collect(Collectors.toList()) : null
+				(fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBPaziente.LISTA_TERAPIE)).stream().map(obj -> new Terapia(obj, null)).collect(Collectors.toList()) : null
 		);
 	}
 
