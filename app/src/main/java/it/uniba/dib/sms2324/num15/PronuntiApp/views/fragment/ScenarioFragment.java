@@ -22,11 +22,12 @@ import androidx.fragment.app.Fragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragmentCopy;
 
-public class ScenarioFragment extends Fragment {
+public class ScenarioFragment extends AbstractFragmentWithNavigation {
     private float xDelta, yDelta;
-    private float bottomHeight, heightPosizioneGioco1ImageView, heightPosizioneGioco2ImageView, heightPosizioneGioco3ImageView;
-    private float widthPosizioneGioco1ImageView, widthPosizioneGioco2ImageView, widthPosizioneGioco3ImageView;
+    private float bottomHeight;
     private ImageView personaggioImageView;
     private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
     private CurvedLineView curvedLineView1to2, curvedLineView2to3;
@@ -40,12 +41,16 @@ public class ScenarioFragment extends Fragment {
         // Trova le view nel layout
         personaggioImageView = view.findViewById(R.id.imageViewPersonaggio);
 
-        // Imposta l'immagine della ImageView (assicurati che l'immagine "batman" sia presente nella cartella drawable)
-        personaggioImageView.setImageResource(R.drawable.batman);
-
         posizioneGioco1ImageView= view.findViewById(R.id.posizione_primo_esercizio);
         posizioneGioco2ImageView= view.findViewById(R.id.posizione_secondo_esercizio);
         posizioneGioco3ImageView= view.findViewById(R.id.posizione_terzo_esercizio);
+
+        // Imposta l'immagine delle ImageView dal ViewModel
+        personaggioImageView.setImageResource(R.drawable.batman);
+        posizioneGioco1ImageView.setImageResource(R.drawable.candy_yellow);
+        posizioneGioco2ImageView.setImageResource(R.drawable.candy_red);
+        posizioneGioco3ImageView.setImageResource(R.drawable.candy_pink);
+
 
         curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
         curvedLineView2to3 = view.findViewById(R.id.curvedLineView2to3);
@@ -144,6 +149,10 @@ public class ScenarioFragment extends Fragment {
                         // Salva le coordinate iniziali del tocco
                         xDelta = x - v.getX();
                         yDelta = y - v.getY();
+                        if(isPersonaggioInAreaPrimoEsercizio()) {
+                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                        }
+
                         break;
 
                     case MotionEvent.ACTION_MOVE:
