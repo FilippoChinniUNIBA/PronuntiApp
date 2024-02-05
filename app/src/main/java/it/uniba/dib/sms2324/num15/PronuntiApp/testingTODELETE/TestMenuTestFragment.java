@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
@@ -37,7 +38,7 @@ public class TestMenuTestFragment extends Fragment {
 		buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
 
 		this.buttonToTestApi.setOnClickListener(v -> {
-			TestApiFragment testApiFragment = new TestApiFragment();
+			EsercizioDenominazioneImmagineFragment testApiFragment = new EsercizioDenominazioneImmagineFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
 					.replace(R.id.frameLayoutLogopedista, testApiFragment)
