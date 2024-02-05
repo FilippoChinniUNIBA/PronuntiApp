@@ -14,12 +14,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.Navigati
 public abstract class AbstractAppActivity extends AppCompatActivity {
 
     protected BottomNavigationView bottomNavigationView;
-    protected NavigationNavBarItemSelector navigationNavBarItemSelector;
-
 
 
     protected void setBottomNavBar(int menuId, NavigationNavBarItemSelector navigationNavBarItemSelector) {
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.inflateMenu(menuId);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
         bottomNavigationView.setOnItemSelectedListener(item -> navigationNavBarItemSelector.selectItem(item.getItemId()));

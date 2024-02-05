@@ -24,14 +24,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
 
     private TextInputEditText textInputEditTextTelefono;
-    private List<ProfilePazienteFragment> listaBambini;
+    private ProfilePazienteFragment profilePazienteFragment;
 
-    private LinearLayout linearLayoutContainer;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
-        linearLayoutContainer=  view.findViewById(R.id.linearLayoutProfiloGenitore);
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloGenitore);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloGenitore);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloGenitore);
@@ -42,37 +40,18 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         setPickMedia();
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
+
         setData();
-        setChildFragments();
-        return view;
-    }
 
-    private void setChildFragments() {
-        // Supponiamo che listaBambini sia la tua lista di bambini
-        listaBambini = new ArrayList<>();
-        listaBambini.add(new ProfilePazienteFragment());
-        listaBambini.add(new ProfilePazienteFragment());
-
-        // Aggiungi i tuoi bambini alla lista
-
-        // Itera attraverso la lista e aggiungi i fragment dinamicamente
+        profilePazienteFragment = new ProfilePazienteFragment();
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        for (int i = 0; i < listaBambini.size(); i++) {
-            FrameLayout frameLayout = new FrameLayout(getContext());
-            frameLayout.setId(View.generateViewId());
-            linearLayoutContainer.addView(frameLayout);
-
-            ProfilePazienteFragment pazienteFragment = listaBambini.get(i);
-            // Usa un ID univoco per ciascun fragment
-            fragmentTransaction.add(frameLayout.getId(), pazienteFragment, "bambino_" + i);
-            Log.d("ProfileGenitoreFragment", "Aggiunto il fragment " + pazienteFragment + " con ID " + i);
-        }
-
+        fragmentTransaction.replace(R.id.containerBambino, profilePazienteFragment);
         fragmentTransaction.commit();
-    }
 
+
+        return view;
+    }
 
     @Override
     void setData() {
@@ -85,15 +64,12 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         textViewUsernameProfilo.setText("@username");
         textInputEditTextTelefono.setText("Telefono");
         textInputEditTextTelefono.setEnabled(false);
-
     }
 
     @Override
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        for (ProfilePazienteFragment bambinoFragment : listaBambini) {
-            bambinoFragment.confermaModificaProfilo();
-        }
+        profilePazienteFragment.confermaModificaProfilo();
     }
 
     @Override
@@ -112,9 +88,7 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
         //rendi modificabile anche i bambini
-        for (ProfilePazienteFragment bambinoFragment : listaBambini) {
-            bambinoFragment.modificaProfilo();
-        }
+        profilePazienteFragment.modificaProfilo();
 
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();

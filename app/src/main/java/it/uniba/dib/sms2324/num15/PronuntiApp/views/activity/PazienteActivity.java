@@ -12,9 +12,9 @@ public class PazienteActivity extends AbstractAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paziente);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.frameLayoutPaziente, bottomNavigationView));
         setFirstFragment(R.id.frameLayoutPaziente, new ScenarioFragment());
-        // Aggiungi un listener per ascoltare quando la vista è stata completamente inizializzata
 
     }
 }

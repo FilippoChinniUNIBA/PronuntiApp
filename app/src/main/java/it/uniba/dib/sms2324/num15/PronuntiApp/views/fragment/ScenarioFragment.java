@@ -1,6 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +20,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
 
 public class ScenarioFragment extends Fragment {
     private float xDelta, yDelta;
-    private int bottomHeight;
+    private int bottomHeight, heightPosizioneGioco1ImageView, heightPosizioneGioco2ImageView, heightPosizioneGioco3ImageView;
+    private int widthPosizioneGioco1ImageView, widthPosizioneGioco2ImageView, widthPosizioneGioco3ImageView;
     private ImageView personaggioImageView;
+    private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
+    private CurvedLineView curvedLineView1to2, curvedLineView2to3;
+    private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,7 +43,12 @@ public class ScenarioFragment extends Fragment {
         // Imposta l'immagine della ImageView (assicurati che l'immagine "batman" sia presente nella cartella drawable)
         personaggioImageView.setImageResource(R.drawable.batman);
 
+        posizioneGioco1ImageView= view.findViewById(R.id.posizione_primo_esercizio);
+        posizioneGioco2ImageView= view.findViewById(R.id.posizione_secondo_esercizio);
+        posizioneGioco3ImageView= view.findViewById(R.id.posizione_terzo_esercizio);
 
+        curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
+        curvedLineView2to3 = view.findViewById(R.id.curvedLineView2to3);
         personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -42,14 +56,78 @@ public class ScenarioFragment extends Fragment {
                 personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                 // Ora puoi ottenere l'altezza della BottomNavigationView in modo sicuro
-                int bottomNavHeight = ((PazienteActivity) getActivity()).getBottomNavBar().getHeight();
+                /*int bottomNavHeight = ((PazienteActivity) getActivity()).getBottomNavBar().getHeight();
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
+                */
                 // Abilita il drag dell'immagine
-                bottomHeight= personaggioImageView.getHeight() + bottomNavHeight;
+                bottomHeight= personaggioImageView.getHeight();
                 enableImageDrag(personaggioImageView);
             }
         });
+
+        posizioneGioco3ImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Rimuovi il listener una volta che la vista è stata completamente inizializzata
+                posizioneGioco3ImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                curvedLineView1to2.setStartPoint(posizioneGioco1ImageView.getX() + posizioneGioco1ImageView.getWidth() / 2, posizioneGioco1ImageView.getY() + posizioneGioco1ImageView.getHeight() / 2);
+                curvedLineView1to2.setEndPoint(posizioneGioco2ImageView.getX() + posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + posizioneGioco2ImageView.getHeight() / 2);
+                curvedLineView2to3.setStartPoint(posizioneGioco2ImageView.getX() + posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + posizioneGioco2ImageView.getHeight() / 2);
+                curvedLineView2to3.setEndPoint(posizioneGioco3ImageView.getX() + posizioneGioco3ImageView.getWidth() / 2, posizioneGioco3ImageView.getY() + posizioneGioco3ImageView.getHeight() / 2);
+            }
+        });
         return view;
+    }
+
+    private void setPersonaggioPosition() {
+        personaggioX = personaggioImageView.getX();
+        personaggioY = personaggioImageView.getY();
+        personaggioWidth = personaggioImageView.getWidth();
+        personaggioHeight = personaggioImageView.getHeight();
+    }
+
+    private void highlightArea(ImageView imageView) {
+        imageView.setBackground(getContext().getDrawable(R.drawable.esercizio_highlight_background));
+    }
+
+    private boolean isPersonaggioInAreaPrimoEsercizio() {
+        setPersonaggioPosition();
+        float areaPrimoEsercizioX = posizioneGioco1ImageView.getX();
+        float areaPrimoEsercizioY = posizioneGioco1ImageView.getY();
+        float areaPrimoEsercizioWidth = posizioneGioco1ImageView.getWidth();
+        float areaPrimoEsercizioHeight = posizioneGioco1ImageView.getHeight();
+
+        return personaggioX < (areaPrimoEsercizioX + areaPrimoEsercizioWidth) &&
+                (personaggioX + personaggioWidth) > areaPrimoEsercizioX &&
+                personaggioY < (areaPrimoEsercizioY + areaPrimoEsercizioHeight) &&
+                (personaggioY + personaggioHeight) > areaPrimoEsercizioY;
+    }
+
+    private boolean isPersonaggioInAreaSecondaEsercizio() {
+        setPersonaggioPosition();
+        float areaSecondoEsercizioX = posizioneGioco2ImageView.getX();
+        float areaSecondoEsercizioY = posizioneGioco2ImageView.getY();
+        float areaSecondoEsercizioWidth = posizioneGioco2ImageView.getWidth();
+        float areaSecondoEsercizioHeight = posizioneGioco2ImageView.getHeight();
+
+        return personaggioX < (areaSecondoEsercizioX + areaSecondoEsercizioWidth) &&
+                (personaggioX + personaggioWidth) > areaSecondoEsercizioX &&
+                personaggioY < (areaSecondoEsercizioY + areaSecondoEsercizioHeight) &&
+                (personaggioY + personaggioHeight) > areaSecondoEsercizioY;
+    }
+
+    private boolean isPersonaggioInAreaTerzoEsercizio() {
+        setPersonaggioPosition();
+        float areaTerzoEsercizioX = posizioneGioco3ImageView.getX();
+        float areaTerzoEsercizioY = posizioneGioco3ImageView.getY();
+        float areaTerzoEsercizioWidth = posizioneGioco3ImageView.getWidth();
+        float areaTerzoEsercizioHeight = posizioneGioco3ImageView.getHeight();
+
+        return personaggioX < (areaTerzoEsercizioX + areaTerzoEsercizioWidth) &&
+                (personaggioX + personaggioWidth) > areaTerzoEsercizioX &&
+                personaggioY < (areaTerzoEsercizioY + areaTerzoEsercizioHeight) &&
+                (personaggioY + personaggioHeight) > areaTerzoEsercizioY;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -71,6 +149,27 @@ public class ScenarioFragment extends Fragment {
                         // Calcola la nuova posizione della ImageView
                         float newX = x - xDelta;
                         float newY = y - yDelta;
+
+                        if(isPersonaggioInAreaPrimoEsercizio()) {
+                            highlightArea(posizioneGioco1ImageView);
+                            posizioneGioco2ImageView.setBackground(null);
+                            posizioneGioco3ImageView.setBackground(null);
+                        }
+                        else if(isPersonaggioInAreaSecondaEsercizio()){
+                            highlightArea(posizioneGioco2ImageView);
+                            posizioneGioco1ImageView.setBackground(null);
+                            posizioneGioco3ImageView.setBackground(null);
+                        }
+                        else if(isPersonaggioInAreaTerzoEsercizio()) {
+                            highlightArea(posizioneGioco3ImageView);
+                            posizioneGioco1ImageView.setBackground(null);
+                            posizioneGioco2ImageView.setBackground(null);
+                        }
+                        else{
+                            posizioneGioco1ImageView.setBackground(null);
+                            posizioneGioco2ImageView.setBackground(null);
+                            posizioneGioco3ImageView.setBackground(null);
+                        }
 
                         // Verifica che la ImageView non esca dalla schermata
                         if (newX > 0 && newX < (getScreenWidth() - v.getWidth())) {

@@ -30,56 +30,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_down"/>
     </LinearLayout>
-    <!--
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutImageProfiloPaziente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imageViewProfile"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:clipToOutline="true"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_shape"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="2dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
-
-        <ImageView
-            android:id="@+id/imageViewEditProfile"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_edit_image"
-            app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutImageProfiloPaziente"
-            android:visibility="gone"
-            />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
-            android:id="@+id/textViewUsernameProfiloPaziente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_marginBottom="20dp">
-        </TextView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/cardview_light_background"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp">
--->
             <LinearLayout
                 android:id="@+id/linearLayoutProfiloPaziente"
                 android:padding="16dp"

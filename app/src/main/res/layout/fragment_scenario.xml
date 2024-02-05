@@ -2,9 +2,62 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_candy">
+
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView
+        android:id="@+id/curvedLineView2to3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView
+        android:id="@+id/curvedLineView1to2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/posizione_primo_esercizio"
+        style="@style/stylePosizioniScenario"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="100dp"
+        android:src="@drawable/candy_yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/posizione_secondo_esercizio"
+        style="@style/stylePosizioniScenario"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="268dp"
+        android:src="@drawable/candy_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <ImageView
+        android:id="@+id/posizione_terzo_esercizio"
+        style="@style/stylePosizioniScenario"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="480dp"
+        android:src="@drawable/candy_pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <ImageView
         android:id="@+id/imageViewPersonaggio"

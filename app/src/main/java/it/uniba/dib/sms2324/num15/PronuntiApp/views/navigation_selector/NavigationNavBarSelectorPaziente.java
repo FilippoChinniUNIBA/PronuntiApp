@@ -1,5 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector;
 
+import android.util.Log;
+
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,8 +19,6 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
     private final ScenarioFragment scenarioFragment = new ScenarioFragment();
     private final PersonaggiFragment personaggiFragment = new PersonaggiFragment();
     private final ClassificaFragment classificaFragment = new ClassificaFragment();
-    private final ProfilePazienteFragment profilePazienteFragment = new ProfilePazienteFragment();
-    private final AppuntamentiGenitoreFragment appuntamentiGenitoreFragment = new AppuntamentiGenitoreFragment();
 
     public NavigationNavBarSelectorPaziente(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
         super( fragmentManager, fragmentContainerId, bottomNavigationView);
@@ -31,12 +31,6 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
             } else if (currentFragment instanceof ClassificaFragment) {
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
             }
-            /* else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
-                bottomNavigationView.getMenu().getItem(3).setChecked(true);
-            } else if (currentFragment instanceof ProfileLogopedistaFragment) {
-                bottomNavigationView.getMenu().getItem(4).setChecked(true);
-            }
-            */
         });
     }
 
@@ -48,12 +42,6 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
             fragment = personaggiFragment;
         else if (itemId == R.id.classificaPaziente)
             fragment = classificaFragment;
-        /*
-        else if (itemId == R.id.calendarPaziente)
-            fragment = appuntamentiGenitoreFragment;
-        else if (itemId == R.id.profiloPaziente)
-            fragment = profilePazienteFragment;
-        */
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);
             return true;
