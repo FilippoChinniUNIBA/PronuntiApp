@@ -10,10 +10,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profileviewmodel.ProfilePazienteViewModel;
 
 public class ProfilePazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
@@ -21,6 +24,9 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
 
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
+
+    private ProfilePazienteViewModel profilePazienteViewModel;
+
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
     @Nullable
@@ -37,6 +43,8 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
         //setPickMedia();
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
+
+        this.profilePazienteViewModel = new ViewModelProvider(this).get(ProfilePazienteViewModel.class);
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -59,17 +67,21 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
     }
 
     public void setData(){
-        textInputEditTextNome.setText("Nome");
+
+        Paziente paziente = profilePazienteViewModel.getPaziente();
+
+        textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);
-        textInputEditTextCognome.setText("Cognome");
+        textInputEditTextCognome.setText(paziente.getCognome());
         textInputEditTextCognome.setEnabled(false);
-        textViewUsernameProfilo.setText("@username");
-        textInputEditTextDataNascita.setText("12/03/1999");
+        textViewUsernameProfilo.setText(paziente.getUsername());
+        textInputEditTextDataNascita.setText(paziente.getDataNascita().toString());
         textInputEditTextDataNascita.setEnabled(false);
-        textInputEditTextEmail.setText("ginoPasticcino@gmail.com");
+        textInputEditTextEmail.setText(paziente.getEmail());
         textInputEditTextEmail.setEnabled(false);
-        spinnerSesso.setSelection(0);
+        spinnerSesso.setSelection(paziente.getSesso());
         spinnerSesso.setEnabled(false);
+
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -20,11 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profileviewmodel.ProfileGenitoreViewModel;
 
 public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
 
     private TextInputEditText textInputEditTextTelefono;
     private ProfilePazienteFragment profilePazienteFragment;
+    private ProfileGenitoreViewModel profileGenitoreViewModel;
 
     @Nullable
     @Override
@@ -38,6 +42,8 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloGenitore);
         setPickMedia();
+
+        this.profileGenitoreViewModel = new ViewModelProvider(this).get(ProfileGenitoreViewModel.class);
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
@@ -55,15 +61,19 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
-        textInputEditTextNome.setText("Nome");
+
+        Genitore genitore = profileGenitoreViewModel.getGenitore();
+
+        textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);
-        textInputEditTextCognome.setText("Cognome");
+        textInputEditTextCognome.setText(genitore.getCognome());
         textInputEditTextCognome.setEnabled(false);
-        textInputEditTextEmail.setText("Email");
+        textInputEditTextEmail.setText(genitore.getEmail());
         textInputEditTextEmail.setEnabled(false);
-        textViewUsernameProfilo.setText("@username");
-        textInputEditTextTelefono.setText("Telefono");
+        textViewUsernameProfilo.setText(genitore.getUsername());
+        textInputEditTextTelefono.setText(genitore.getTelefono());
         textInputEditTextTelefono.setEnabled(false);
+
     }
 
     @Override

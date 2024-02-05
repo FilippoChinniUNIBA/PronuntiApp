@@ -6,16 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profileviewmodel.ProfileLogopedistaViewModel;
 
 
 public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment {
 
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
+    private ProfileLogopedistaViewModel profileLogopedistaViewModel;
+
     public ProfileLogopedistaFragment(){
         // require a empty public constructor
     }
@@ -33,6 +38,8 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
 
+        this.profileLogopedistaViewModel = new ViewModelProvider(this).get(ProfileLogopedistaViewModel.class);
+
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
 
@@ -42,17 +49,21 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
     }
 
     public void setData(){
-        textInputEditTextNome.setText("Nome");
+
+        Logopedista logopedista = profileLogopedistaViewModel.getLogopedista();
+
+        textInputEditTextNome.setText(logopedista.getNome());
         textInputEditTextNome.setEnabled(false);
-        textInputEditTextCognome.setText("Cognome");
+        textInputEditTextCognome.setText(logopedista.getCognome());
         textInputEditTextCognome.setEnabled(false);
-        textInputEditTextEmail.setText("Email");
+        textInputEditTextEmail.setText(logopedista.getEmail());
         textInputEditTextEmail.setEnabled(false);
-        textViewUsernameProfilo.setText("@username");
-        textInputEditTextTelefono.setText("Telefono");
+        textViewUsernameProfilo.setText(logopedista.getUsername());
+        textInputEditTextTelefono.setText(logopedista.getTelefono());
         textInputEditTextTelefono.setEnabled(false);
-        textInputEditTextIndirizzo.setText("Indirizzo");
+        textInputEditTextIndirizzo.setText(logopedista.getIndirizzo());
         textInputEditTextIndirizzo.setEnabled(false);
+
     }
 
     @Override
