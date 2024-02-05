@@ -25,8 +25,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
 
 public class ScenarioFragment extends Fragment {
     private float xDelta, yDelta;
-    private int bottomHeight, heightPosizioneGioco1ImageView, heightPosizioneGioco2ImageView, heightPosizioneGioco3ImageView;
-    private int widthPosizioneGioco1ImageView, widthPosizioneGioco2ImageView, widthPosizioneGioco3ImageView;
+    private float bottomHeight, heightPosizioneGioco1ImageView, heightPosizioneGioco2ImageView, heightPosizioneGioco3ImageView;
+    private float widthPosizioneGioco1ImageView, widthPosizioneGioco2ImageView, widthPosizioneGioco3ImageView;
     private ImageView personaggioImageView;
     private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
     private CurvedLineView curvedLineView1to2, curvedLineView2to3;
@@ -60,7 +60,8 @@ public class ScenarioFragment extends Fragment {
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
                 */
                 // Abilita il drag dell'immagine
-                bottomHeight= personaggioImageView.getHeight();
+                bottomHeight= personaggioImageView.getY()-personaggioImageView.getHeight();
+                Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
                 enableImageDrag(personaggioImageView);
             }
         });
