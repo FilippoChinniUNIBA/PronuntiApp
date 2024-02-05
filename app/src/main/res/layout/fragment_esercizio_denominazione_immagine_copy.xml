@@ -27,14 +27,19 @@
         android:layout_gravity="center"
         android:layout_marginTop="52dp"
         app:cardCornerRadius="20dp"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:backgroundTint="@color/corniceDenominazioneImmagine"
+        android:padding="6dp"
+        >
+
         <ImageView
             android:id="@+id/imageViewImmagineEsercizioDenominazione"
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:src="@drawable/test_imageview"
-            android:background="@drawable/rectangle_rounded_border_bkg"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:src="@drawable/cane"
+            android:layout_gravity="center"
             />
+
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -83,7 +88,8 @@
         app:layout_constraintStart_toEndOf="@+id/buttonAiuti"
         app:layout_constraintTop_toBottomOf="@+id/textViewEsercizioMicSuggestion"
         app:layout_constraintVertical_bias="0.243"
-        android:elevation="10dp"/>
+        android:elevation="10dp"
+        />
 
     <ImageView
             android:id="@+id/buttonCompletaEsercizio"

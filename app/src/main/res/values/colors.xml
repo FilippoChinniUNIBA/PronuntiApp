@@ -15,4 +15,5 @@
     <color name="hintTextColorEnabled">#000000</color> <!-- Colore quando abilitato -->
     <color name="hintTextColorDisabled">#A9A9A9</color> <!-- Colore quando disabilitato -->
     <color name="coinsBackground">#22000000</color>
+    <color name="corniceDenominazioneImmagine">#272727</color>
 </resources>
