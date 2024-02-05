@@ -1,6 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,6 +62,11 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Activity curretactivity = requireActivity();
+
+        if (!checkPermissions(curretactivity)) {
+            requestPermissions(curretactivity);
+        }
+
         File immagineEsercizio = new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"pinguino.jpg");
 
         //QUANDO VIENE ISTANZIATO UN ESERCIZIO L'IMMAGINE DEVE ESSERE ALLOCATA IN MEMORIA E IL PATH DELLA MEMORIA INTERNA DEVE ESSERE MEMORIZZATO NELL'ESERCIZIO
@@ -79,7 +88,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
 
         MediaPlayer aiutiplayer = new MediaPlayer();
         MediaPlayer correctplayer = MediaPlayer.create(curretactivity,R.raw.correct_sound);
-        MediaPlayer errorplayer = MediaPlayer.create(curretactivity,R.raw.correct_sound);
+        MediaPlayer errorplayer = MediaPlayer.create(curretactivity,R.raw.error_sound);
 
 
         urlFuture.thenAccept(imageUrl -> {
@@ -111,8 +120,8 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
             });
             buttonCompletaEsercizio.setOnClickListener(v -> {
                 try {
-                    List<String> words = audioRecognizer.getText();
                     AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
+                    List<String> words = audioRecognizer.getText();
                     uploadFileAsync(fileConvertito,storage.getReference(),curretactivity);
                     if(words.get(0).equals(parolaCorretta)){
                         correctplayer.start();
@@ -159,14 +168,6 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
 
     private void uploadFileAsync(File fileToUpload,StorageReference storageReference,Activity currentactivity) {
         CompletableFuture<Void> uploadFuture = uploadFileToStorage(fileToUpload,storageReference,currentactivity);
-
-        uploadFuture.whenComplete((result, throwable) -> {
-            if (throwable == null) {
-                showToast("Upload completato con successo",currentactivity);
-            } else {
-                showToast("Errore durante l'upload: " + throwable.getMessage(),currentactivity);
-            }
-        });
     }
 
     private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
@@ -190,6 +191,24 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
 
     private void showToast(String message,Activity currentactivity) {
         Toast.makeText(currentactivity, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean checkPermissions(Activity currentactivity) {
+        int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int recordAudioPermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.RECORD_AUDIO);
+
+        return readStoragePermission == PackageManager.PERMISSION_GRANTED &&
+                writeStoragePermission == PackageManager.PERMISSION_GRANTED &&
+                recordAudioPermission == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions(Activity currentactivity) {
+        ActivityCompat.requestPermissions(currentactivity, new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECORD_AUDIO
+        }, 1000);
     }
 }
 
