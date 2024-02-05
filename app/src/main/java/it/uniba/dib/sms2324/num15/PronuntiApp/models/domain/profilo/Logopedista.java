@@ -125,6 +125,16 @@ public class Logopedista extends AbstractProfilo {
 	@Override
 	public Logopedista fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("Logopedista.fromMap()", fromDatabaseMap.toString());
+
+		List<Paziente> listaPazienti = (fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)) != null ?
+				((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)).stream().map(obj -> new Paziente(obj, null)).collect(Collectors.toList())
+				: null;
+
+		/*List<Paziente> listaPazienti = (fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)) != null ?
+				((Map<String, Map<String, Object>>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI))
+						.entrySet().stream().map(entry -> new Paziente(entry.getValue(), entry.getKey())).collect(Collectors.toList())
+				: null;*/
+
 		return new Logopedista(
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.NOME),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.COGNOME),
@@ -135,7 +145,7 @@ public class Logopedista extends AbstractProfilo {
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.INDIRIZZO),
 				(fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI)) != null ? new Classifica((Map<String, Object>) fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI), null) : null,
 				//TODO partendo da una lista di Entry<String, Object>, devi trasformare ogni Entry in un oggetto Paziente, dove la chiave è l'id del paziente e il valore è un oggetto Map<String, Object> che rappresenta il paziente
-				(fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)).stream().map(obj -> new Paziente(obj, null)).collect(Collectors.toList()) : null
+				listaPazienti
 		);
 	}
 

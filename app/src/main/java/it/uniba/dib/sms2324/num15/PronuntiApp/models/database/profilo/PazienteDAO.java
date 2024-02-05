@@ -43,7 +43,7 @@ public class PazienteDAO implements DAO<Paziente> {
 
 	@Override
 	public void update(Paziente obj) {
-		String idLogopedista = firebaseAuth.getCurrentUser().getUid(); //TODO probabilmente da cambiare, anche il Paziente può fare update su se stesso
+		String idLogopedista = firebaseAuth.getCurrentUser().getUid(); //TODO: probabilmente da cambiare, anche il Paziente può fare update su se stesso
 
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
 		ref.setValue(obj.toMap());
