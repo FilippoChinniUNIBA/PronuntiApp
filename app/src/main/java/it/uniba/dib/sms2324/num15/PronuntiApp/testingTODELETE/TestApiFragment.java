@@ -57,12 +57,12 @@ public class TestApiFragment extends Fragment {
 
 		buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
 		buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
-		buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
-		buttonDownloadFile = view.findViewById(R.id.buttonDownloadFile);
-		buttonUploadFileFirebase = view.findViewById(R.id.buttonUpdloadinfirebase);
+		//buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
+		//buttonDownloadFile = view.findViewById(R.id.buttonDownloadFile);
+		//buttonUploadFileFirebase = view.findViewById(R.id.buttonUpdloadinfirebase);
 		buttonAvviaVocale = view.findViewById(R.id.buttonAvviaVocale);
 		buttonStoppaVocale= view.findViewById(R.id.buttonStoppaVocale);
-		textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
+		//textViewSpeechToTextView = view.findViewById(R.id.textViewSpeechToText);
 
 
 		Activity curretactivity = requireActivity();

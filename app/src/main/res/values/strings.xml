@@ -44,6 +44,13 @@
     <string name="errorPermissionOption2">I don\'t want to give them</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="startRecording">Start Recording</string>
+    <string name="stopRecording">Stop Recording</string>
+    <string name="CheckAnswer">Check</string>
+    <string name="StartAnswer">Start Answer</string>
+    <string name="StopAnswer">Stop Answer</string>
+    <string name="getHelp">Help</string>
+
 
     <string-array name="character_names">
         <item>Girl</item>

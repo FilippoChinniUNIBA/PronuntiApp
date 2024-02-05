@@ -44,6 +44,12 @@
     <string name="errorPermissionOption2">Non voglio concederli</string>
     <string name="confirm">Conferma</string>
     <string name="cancel">Annulla</string>
+    <string name="startRecording">Avvia Registrazione</string>
+    <string name="stopRecording">Ferma Registrazione</string>
+    <string name="CheckAnswer">Verifica</string>
+    <string name="StartAnswer"> Riproduci Registrazione</string>
+    <string name="StopAnswer">Ferma Registrazione</string>
+    <string name="getHelp">Aiuto</string>
 
     <string-array name="character_names">
         <item>Bambina</item>
