@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profileviewmodel.ProfileLogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfileLogopedistaViewModel;
 
 
 public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment {

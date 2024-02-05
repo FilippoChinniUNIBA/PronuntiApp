@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profileviewmodel.ProfilePazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfilePazienteViewModel;
 
 public class ProfilePazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.Autenticazione;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
@@ -150,35 +151,17 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 	}
 
 	private void tempWrapper() {
-//		registrazioneFirebaseAuth();
-		loginFirebaseAuth();
+		Autenticazione mAutenticazione = new Autenticazione();
+
+		mAutenticazione.registrazione("email@provaREGISTRAZIONE.it", "password").thenAccept(aVoid -> {
+			Log.d("TEST AUTH", "Registrazione avvenuta con successo");
+			mAutenticazione.login("email@provaREGISTRAZIONE.it", "password").thenAccept(aVoid1 -> {
+				Log.d("TEST AUTH", "Login avvenuto con successo");
+				salvaInDB();
+			});
+		});
+//		loginFirebaseAuth();
 //		salvaInDB();
-	}
-
-	private void registrazioneFirebaseAuth() {
-		FirebaseAuth mAuth = FirebaseAuth.getInstance();
-		mAuth.createUserWithEmailAndPassword("email123@prova.it", "password")
-				.addOnCompleteListener(task -> {
-					if (task.isSuccessful()) {
-						Log.d("TEST AUTH", "Registrazione avvenuta con successo");
-						loginFirebaseAuth();
-					} else {
-						Log.e("TEST AUTH", "Registrazione fallita: " + task.getException());
-					}
-				});
-	}
-
-	private void loginFirebaseAuth() {
-		FirebaseAuth mAuth = FirebaseAuth.getInstance();
-		mAuth.signInWithEmailAndPassword("email123@prova.it", "password")
-				.addOnCompleteListener(task -> {
-					if (task.isSuccessful()) {
-						Log.d("TEST AUTH", "Login avvenuto con successo");
-						salvaInDB();
-					} else {
-						Log.e("TEST AUTH", "Login fallito: " + task.getException());
-					}
-				});
 	}
 
 	private void salvaInDB() {
@@ -297,7 +280,6 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 					audioRegistrato.setText(uri.getPath());
 					break;
 				default:
-
 					break;
 			}
 		}
