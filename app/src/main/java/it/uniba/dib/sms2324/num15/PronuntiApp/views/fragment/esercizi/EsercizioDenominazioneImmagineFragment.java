@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
         //QUANDO VIENE ISTANZIATO UN ESERCIZIO L'IMMAGINE DEVE ESSERE ALLOCATA IN MEMORIA E IL PATH DELLA MEMORIA INTERNA DEVE ESSERE MEMORIZZATO NELL'ESERCIZIO
         EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio,3);
 
-        String parolaCorretta = "Pinguino";
+        String parolaCorretta = "pinguino";
 
         File directoryMusic = curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         File fileRegistrazione = new File(directoryMusic,"test");
@@ -122,6 +123,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
                 try {
                     AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
                     List<String> words = audioRecognizer.getText();
+                    Log.d("Words",words.get(0));
                     uploadFileAsync(fileConvertito,storage.getReference(),curretactivity);
                     if(words.get(0).equals(parolaCorretta)){
                         correctplayer.start();
