@@ -36,30 +36,21 @@
     <string name="endDate">End date</string>
     <string name="id">Id</string>
     <string name="next">Avanti</string>
+    <string name="errorConnectionDescription">Internet connection is not available. Check your connection, the app will be restarted automatically.</string>
+    <string name="errorConnectionTitle">Connection error</string>
+    <string name="restartApp" >Restart the app</string>
+    <string name="errorPermissionTitle">Necessary permissions</string>
+    <string name="errorPermissionOption1">Request them again</string>
+    <string name="errorPermissionOption2">I don\'t want to give them</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="startRecording">Start Recording</string>
+    <string name="stopRecording">Stop Recording</string>
+    <string name="CheckAnswer">Check</string>
+    <string name="StartAnswer">Start Answer</string>
+    <string name="StopAnswer">Stop Answer</string>
+    <string name="getHelp">Help</string>
 
-    <integer-array name="personaggi_images">
-        <item>@drawable/personaggio_bambina_rossa</item> <!-- Nome: Bambina -->
-        <item>@drawable/personaggio_bambino_no_zaino</item> <!-- Nome: Bambino -->
-        <item>@drawable/personaggio_bambina_disegna</item> <!-- Nome: Bambina che disegna -->
-        <item>@drawable/personaggio_bambino_pensieroso</item> <!-- Nome: Bambino pensieroso -->
-        <item>@drawable/personaggio_bambino_soldato</item> <!-- Nome: Bambino soldato -->
-        <item>@drawable/personaggio_bambino_zaino</item> <!-- Nome: Bambino con zaino -->
-        <item>@drawable/personaggio_batman</item> <!-- Nome: Batman -->
-        <item>@drawable/personaggio_boy_knight</item> <!-- Nome: Ragazzo cavaliere -->
-        <item>@drawable/personaggio_cane</item> <!-- Nome: Cane -->
-        <item>@drawable/personaggio_drago_blu</item> <!-- Nome: Drago blu -->
-        <item>@drawable/personaggio_drago_femmina</item> <!-- Nome: Drago femmina -->
-        <item>@drawable/personaggio_elefante</item> <!-- Nome: Elefante -->
-        <item>@drawable/personaggio_gatta</item> <!-- Nome: Gatta -->
-        <item>@drawable/personaggio_gatto</item> <!-- Nome: Gatto -->
-        <item>@drawable/personaggio_girl_knight</item> <!-- Nome: Ragazza cavaliere -->
-        <item>@drawable/personaggio_leone</item> <!-- Nome: Leone -->
-        <item>@drawable/personaggio_mini_captain_america</item> <!-- Nome: Mini Captain America -->
-        <item>@drawable/personaggio_mucca</item> <!-- Nome: Mucca -->
-        <item>@drawable/personaggio_pecora</item> <!-- Nome: Pecora -->
-        <item>@drawable/personaggio_spiderman</item> <!-- Nome: Spiderman -->
-        <item>@drawable/personaggio_wonderwoman</item> <!-- Nome: Wonder Woman -->
-    </integer-array>
 
     <string-array name="character_names">
         <item>Girl</item>

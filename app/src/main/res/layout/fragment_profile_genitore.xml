@@ -130,7 +130,7 @@
 
                 <!--ContainerBambini-->
                 <FrameLayout
-                    android:id="@+id/containerBambini"
+                    android:id="@+id/containerBambino"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -138,6 +138,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
                 </FrameLayout>
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

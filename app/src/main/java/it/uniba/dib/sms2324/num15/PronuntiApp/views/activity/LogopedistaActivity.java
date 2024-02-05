@@ -10,8 +10,10 @@ public class LogopedistaActivity extends AbstractAppActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.appFrameLayout, bottomNavigationView));
-        setFirstFragment(R.id.appFrameLayout, new PazientiFragment());
+        setContentView(R.layout.activity_logopedista);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));
+        setFirstFragment(R.id.frameLayoutLogopedista, new PazientiFragment());
 
     }
 

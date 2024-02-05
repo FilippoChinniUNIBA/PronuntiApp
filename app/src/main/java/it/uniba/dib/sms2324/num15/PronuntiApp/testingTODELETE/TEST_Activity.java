@@ -9,7 +9,8 @@ public class TEST_Activity extends AbstractAppActivity {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setFirstFragment(R.id.appFrameLayout, new TestMenuTestFragment());
+		setContentView(R.layout.activity_logopedista);
+		setFirstFragment(R.id.frameLayoutLogopedista, new TestMenuTestFragment());
 
 	}
 }

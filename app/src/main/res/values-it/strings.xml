@@ -35,7 +35,21 @@
     <string name="startDate">Data inizio</string>
     <string name="endDate">Data fine</string>
     <string name="id">Id</string>
+    <string name="errorConnectionDescription">La connessione Internet non è disponibile. Verifica la tua connessione, l\'app verrà riavviata automaticamente.</string>
     <string name="next">Avanti</string>
+    <string name="errorConnectionTitle">Errore di connessione</string>
+    <string name="restartApp">Riavvia l\'app</string>
+    <string name="errorPermissionTitle">Permessi necessari</string>
+    <string name="errorPermissionOption1">Richiedimeli di nuovo</string>
+    <string name="errorPermissionOption2">Non voglio concederli</string>
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Annulla</string>
+    <string name="startRecording">Avvia Registrazione</string>
+    <string name="stopRecording">Ferma Registrazione</string>
+    <string name="CheckAnswer">Verifica</string>
+    <string name="StartAnswer"> Riproduci Registrazione</string>
+    <string name="StopAnswer">Ferma Registrazione</string>
+    <string name="getHelp">Aiuto</string>
 
     <string-array name="character_names">
         <item>Bambina</item>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
@@ -37,10 +38,10 @@ public class TestMenuTestFragment extends Fragment {
 		buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
 
 		this.buttonToTestApi.setOnClickListener(v -> {
-			TestApiFragment testApiFragment = new TestApiFragment();
+			EsercizioDenominazioneImmagineFragment testApiFragment = new EsercizioDenominazioneImmagineFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testApiFragment)
+					.replace(R.id.frameLayoutLogopedista, testApiFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -50,7 +51,7 @@ public class TestMenuTestFragment extends Fragment {
 			LoginFragment testLoginFragment = new LoginFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testLoginFragment)
+					.replace(R.id.frameLayoutLogopedista, testLoginFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -61,7 +62,7 @@ public class TestMenuTestFragment extends Fragment {
 			TestDBFragment testDBFragment = new TestDBFragment();
 			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 			fragmentManager.beginTransaction()
-					.replace(R.id.appFrameLayout, testDBFragment)
+					.replace(R.id.frameLayoutLogopedista, testDBFragment)
 					.addToBackStack(null)
 					.commit();
 			}
@@ -71,7 +72,7 @@ public class TestMenuTestFragment extends Fragment {
 					TestFilePickerFragment testFilePickerFragment = new TestFilePickerFragment();
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.appFrameLayout, testFilePickerFragment)
+							.replace(R.id.frameLayoutLogopedista, testFilePickerFragment)
 							.addToBackStack(null)
 							.commit();
 					}
@@ -81,7 +82,7 @@ public class TestMenuTestFragment extends Fragment {
 					TestInserimentoDatiDBFragment testInserimentoDatiDBFragment = new TestInserimentoDatiDBFragment();
 					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					fragmentManager.beginTransaction()
-							.replace(R.id.appFrameLayout, testInserimentoDatiDBFragment)
+							.replace(R.id.frameLayoutLogopedista, testInserimentoDatiDBFragment)
 							.addToBackStack(null)
 							.commit();
 					}
