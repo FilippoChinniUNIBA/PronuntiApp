@@ -12,13 +12,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
 public class Classifica implements Persistente<Classifica> {
-	private String refIdLogopedista;
+	//private String refIdLogopedista;
 	private Map<String, Integer> classificaPazienti;
 
-	public Classifica(String refIdLogopedista, Map<String, Integer> classificaPazienti) {
+	/*public Classifica(String refIdLogopedista, Map<String, Integer> classificaPazienti) {
 		this.refIdLogopedista = refIdLogopedista;
 		this.classificaPazienti = classificaPazienti;
-	}
+	}*/
 
 	public Classifica(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
@@ -27,21 +27,21 @@ public class Classifica implements Persistente<Classifica> {
 	public Classifica(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
 		Classifica c = this.fromMap(fromDatabaseMap);
 
-		this.refIdLogopedista = fromDatabaseKey;
+		//this.refIdLogopedista = fromDatabaseKey;
 		this.classificaPazienti = c.getClassificaPazienti();
 	}
 
-	public String getRefIdLogopedista() {
+	/*public String getRefIdLogopedista() {
 		return refIdLogopedista;
-	}
+	}*/
 
 	public Map<String, Integer> getClassificaPazienti() {
 		return classificaPazienti;
 	}
 
-	public void setRefIdLogopedista(String refIdLogopedista) {
+	/*public void setRefIdLogopedista(String refIdLogopedista) {
 		this.refIdLogopedista = refIdLogopedista;
-	}
+	}*/
 
 	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
@@ -60,7 +60,7 @@ public class Classifica implements Persistente<Classifica> {
 	public Classifica fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("Classifica.fromMap()", fromDatabaseMap.toString());
 		return new Classifica(
-				//TODO probabilmente lanciera CastException (non riesce a trasformare long in Integer)
+				//TODO  probabilmente lanciera CastException (non riesce a trasformare long in Integer)
 				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBClassifica.CLASSIFICA_PAZIENTI)
 		);
 	}
@@ -68,8 +68,7 @@ public class Classifica implements Persistente<Classifica> {
 	@Override
 	public String toString() {
 		return "Classifica{" +
-				"refIdLogopedista='" + refIdLogopedista + '\'' +
-				", classificaPazienti=" + classificaPazienti +
+				"classificaPazienti=" + classificaPazienti +
 				'}';
 	}
 

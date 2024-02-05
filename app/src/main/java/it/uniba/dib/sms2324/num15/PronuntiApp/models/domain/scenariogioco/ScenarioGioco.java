@@ -8,19 +8,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBScenarioGioco;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateScenarioGioco;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTemplateEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTerapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 
 public class ScenarioGioco extends TemplateScenarioGioco {
 	private String idScenarioGioco;
 	private LocalDate dataInizio;
 	private int ricompensaFinale;
-	private List<Esercizio> esercizi;
+	private List<EsercizioEseguibile> esercizi;
 	private String refIdTemplateScenarioGioco;
 
-	public ScenarioGioco(String idScenarioGioco, File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String idScenarioGioco, File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
@@ -29,7 +34,15 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
-	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String idScenarioGioco, File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
+		super(immagineSfondo);
+		this.idScenarioGioco = idScenarioGioco;
+		this.dataInizio = dataInizio;
+		this.ricompensaFinale = ricompensaFinale;
+		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
+	}
+
+	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo);
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
@@ -37,11 +50,11 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
-	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, List<Esercizio> esercizi) {
+	public ScenarioGioco(File immagineSfondo, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo);
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
-		this.esercizi = esercizi;
+		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
 	public ScenarioGioco(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
@@ -67,7 +80,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		return ricompensaFinale;
 	}
 
-	public List<Esercizio> getEsercizi() {
+	public List<EsercizioEseguibile> getEsercizi() {
 		return esercizi;
 	}
 
@@ -87,7 +100,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.ricompensaFinale = ricompensaFinale;
 	}
 
-	public void setEsercizi(List<Esercizio> esercizi) {
+	public void setEsercizi(List<EsercizioEseguibile> esercizi) {
 		this.esercizi = esercizi;
 	}
 
@@ -102,21 +115,39 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		//entityMap.put(CostantiDBScenarioGioco.ID_SCENARIOGIOCO, this.idScenarioGioco);
 		entityMap.put(CostantiDBScenarioGioco.DATA_INIZIO, this.dataInizio.toString());
 		entityMap.put(CostantiDBScenarioGioco.RICOMPENSA_FINALE, this.ricompensaFinale);
-		entityMap.put(CostantiDBScenarioGioco.LISTA_ESERCIZI, this.esercizi.stream().map(Esercizio::getIdEsercizio).collect(Collectors.toList()));
-		entityMap.put(CostantiDBScenarioGioco.ID_TEMPLATE_SCENARIOGIOCO, this.refIdTemplateScenarioGioco);
+
+		if (this.esercizi != null) {
+			entityMap.put(CostantiDBScenarioGioco.LISTA_ESERCIZI, this.esercizi.stream().map(EsercizioEseguibile::toMap).collect(Collectors.toList()));
+		}
+
+		entityMap.put(CostantiDBScenarioGioco.REF_ID_TEMPLATE_SCENARIOGIOCO, this.refIdTemplateScenarioGioco);
 		return entityMap;
 	}
 
 	@Override
 	public ScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("ScenarioGioco.fromMap()", fromDatabaseMap.toString());
+
+		List<EsercizioEseguibile> esercizi = (fromDatabaseMap.get(CostantiDBScenarioGioco.LISTA_ESERCIZI)) != null ?
+				((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBScenarioGioco.LISTA_ESERCIZI)).stream().map(obj -> {
+					if (obj.containsKey(CostantiDBEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)) {
+						return new EsercizioDenominazioneImmagine((Map<String, Object>) obj, null);
+					}
+					else if (obj.containsKey(CostantiDBEsercizioSequenzaParole.PAROLA_3)) {
+						return new EsercizioSequenzaParole((Map<String, Object>) obj, null);
+					}
+					else if (obj.containsKey(CostantiDBTemplateEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)) {
+						return new EsercizioCoppiaImmagini((Map<String, Object>) obj, null);
+					}
+					return null;
+				}).collect(Collectors.toList()) : null;
+
 		return new ScenarioGioco(
 				new File((String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_SFONDO)),
 				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBScenarioGioco.DATA_INIZIO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBScenarioGioco.RICOMPENSA_FINALE)),
-				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni esercizio
-				(List<Esercizio>) fromDatabaseMap.get(CostantiDBScenarioGioco.LISTA_ESERCIZI),
-				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.ID_TEMPLATE_SCENARIOGIOCO)
+				esercizi,
+				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.REF_ID_TEMPLATE_SCENARIOGIOCO)
 		);
 	}
 

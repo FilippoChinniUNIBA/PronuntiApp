@@ -14,33 +14,48 @@ public class Logopedista extends AbstractProfilo {
 	private String telefono;
 	private String indirizzo;
 	private Classifica classificaPazienti;
-	private List<Appuntamento> appuntamenti;
 	private List<Paziente> pazienti;
 
-	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
+	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Paziente> pazienti) {
 		super(idProfilo, nome, cognome, username, email, password);
 		this.telefono = telefono;
 		this.indirizzo = indirizzo;
 		this.classificaPazienti = classificaPazienti;
-		this.appuntamenti = appuntamenti;
 		this.pazienti = pazienti;
 	}
 
-	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
+	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti) {
+		super(idProfilo, nome, cognome, username, email, password);
+		this.telefono = telefono;
+		this.indirizzo = indirizzo;
+		this.classificaPazienti = classificaPazienti;
+	}
+
+	public Logopedista(String idProfilo, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo) {
+		super(idProfilo, nome, cognome, username, email, password);
+		this.telefono = telefono;
+		this.indirizzo = indirizzo;
+	}
+
+	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti, List<Paziente> pazienti) {
 		super(nome, cognome, username, email, password);
 		this.telefono = telefono;
 		this.indirizzo = indirizzo;
 		this.classificaPazienti = classificaPazienti;
-		this.appuntamenti = appuntamenti;
 		this.pazienti = pazienti;
 	}
 
-	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, List<Appuntamento> appuntamenti, List<Paziente> pazienti) {
+	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo, Classifica classificaPazienti) {
 		super(nome, cognome, username, email, password);
 		this.telefono = telefono;
 		this.indirizzo = indirizzo;
-		this.appuntamenti = appuntamenti;
-		this.pazienti = pazienti;
+		this.classificaPazienti = classificaPazienti;
+	}
+
+	public Logopedista(String nome, String cognome, String username, String email, String password, String telefono, String indirizzo) {
+		super(nome, cognome, username, email, password);
+		this.telefono = telefono;
+		this.indirizzo = indirizzo;
 	}
 
 	public Logopedista(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
@@ -54,8 +69,7 @@ public class Logopedista extends AbstractProfilo {
 		this.password = l.getPassword();
 		this.telefono = l.getTelefono();
 		this.indirizzo = l.getIndirizzo();
-		//this.classificaPazienti = l.getClassificaPazienti();
-		this.appuntamenti = l.getAppuntamenti();
+		this.classificaPazienti = l.getClassificaPazienti();
 		this.pazienti = l.getPazienti();
 	}
 
@@ -69,10 +83,6 @@ public class Logopedista extends AbstractProfilo {
 
 	public Classifica getClassificaPazienti() {
 		return classificaPazienti;
-	}
-
-	public List<Appuntamento> getAppuntamenti() {
-		return appuntamenti;
 	}
 
 	public List<Paziente> getPazienti() {
@@ -91,10 +101,6 @@ public class Logopedista extends AbstractProfilo {
 		this.classificaPazienti = classificaPazienti;
 	}
 
-	public void setAppuntamenti(List<Appuntamento> appuntamenti) {
-		this.appuntamenti = appuntamenti;
-	}
-
 	public void setPazienti(List<Paziente> pazienti) {
 		this.pazienti = pazienti;
 	}
@@ -105,8 +111,10 @@ public class Logopedista extends AbstractProfilo {
 
 		entityMap.put(CostantiDBLogopedista.TELEFONO, this.telefono);
 		entityMap.put(CostantiDBLogopedista.INDIRIZZO, this.indirizzo);
-		entityMap.put(CostantiDBLogopedista.LISTA_APPUNTAMENTI, this.appuntamenti.stream().map(Appuntamento::getIdAppuntamento).collect(Collectors.toList()));
-		entityMap.put(CostantiDBLogopedista.LISTA_PAZIENTI, this.pazienti.stream().map(Paziente::getIdProfilo).collect(Collectors.toList()));
+
+		if (this.pazienti != null) {
+			entityMap.put(CostantiDBLogopedista.LISTA_PAZIENTI, this.pazienti.stream().map(Paziente::toMap).collect(Collectors.toList()));
+		}
 		return entityMap;
 	}
 
@@ -121,9 +129,9 @@ public class Logopedista extends AbstractProfilo {
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.PASSWORD),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.TELEFONO),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.INDIRIZZO),
-				//TODO: lanceranno eccezione, bisogna fare una funzione che faccia la get di ogni appuntamento e paziente
-				(List<Appuntamento>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_APPUNTAMENTI),
-				(List<Paziente>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)
+				(fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI)) != null ? new Classifica((Map<String, Object>) fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI), null) : null,
+				//TODO partendo da una lista di Entry<String, Object>, devi trasformare ogni Entry in un oggetto Paziente, dove la chiave è l'id del paziente e il valore è un oggetto Map<String, Object> che rappresenta il paziente
+				(fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBLogopedista.LISTA_PAZIENTI)).stream().map(obj -> new Paziente(obj, null)).collect(Collectors.toList()) : null
 		);
 	}
 
@@ -139,7 +147,6 @@ public class Logopedista extends AbstractProfilo {
 				", telefono='" + telefono + '\'' +
 				", indirizzo='" + indirizzo + '\'' +
 				", classificaPazienti=" + classificaPazienti +
-				", appuntamenti=" + appuntamenti +
 				", pazienti=" + pazienti +
 				'}';
 	}

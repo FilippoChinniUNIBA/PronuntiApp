@@ -15,14 +15,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
-public class TerapiaDAO implements DAO<Terapia> {
+public class TerapiaDAO /*implements DAO<Terapia>*/ {
 	private final FirebaseDatabase db;
 
 	public TerapiaDAO() {
 		db = FirebaseDatabase.getInstance();
 	}
 
-	@Override
+	/*@Override
 	public void save(Terapia obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.TERAPIE);
 		String dbKey = ref.push().getKey();
@@ -66,6 +66,6 @@ public class TerapiaDAO implements DAO<Terapia> {
 	@Override
 	public List<Terapia> getAll() {
 		return null;
-	}
+	}*/
 
 }

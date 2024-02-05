@@ -11,10 +11,10 @@ public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisulta
 
 	public AbstractRisultatoEsercizioConAudio() {}
 
-	public AbstractRisultatoEsercizioConAudio(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
+	/*public AbstractRisultatoEsercizioConAudio(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
 		super(idEsercizio, esitoCorretto);
 		this.audioRegistrato = audioRegistrato;
-	}
+	}*/
 
 	public AbstractRisultatoEsercizioConAudio(boolean esitoCorretto, File audioRegistrato) {
 		super(esitoCorretto);

@@ -50,14 +50,14 @@ public class TestDBFragment extends Fragment {
 		textViewTestDB_3 = view.findViewById(R.id.test_DB_Action_TextView_3);
 		textViewTestDB_4 = view.findViewById(R.id.test_DB_Action_TextView_4);
 
-//		buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
-		buttonTestDB_1.setOnClickListener(v -> testDAOSave2());
+		buttonTestDB_1.setOnClickListener(v -> testDAOPersonaggioSave());
+//		buttonTestDB_1.setOnClickListener(v -> testDAOSave2());
 
 		buttonTestDB_3.setOnClickListener(v -> testDAOPersonaggioUpdate());
 		buttonTestDB_4.setOnClickListener(v -> testDAOPersonaggioDelete());
 
-//		buttonTestDB_2.setOnClickListener(v -> testDAOPersonaggioGet());
-		buttonTestDB_2.setOnClickListener(v -> testDAOGet2());
+		buttonTestDB_2.setOnClickListener(v -> testDAOPersonaggioGet());
+//		buttonTestDB_2.setOnClickListener(v -> testDAOGet2());
 
 		return view;
 	}
@@ -117,25 +117,13 @@ public class TestDBFragment extends Fragment {
 
 		Log.d("Test DAO Get Personaggio", (lista == null) ? "lista null" : lista.toString());
 
-		CompletableFuture<List<Personaggio>> future = daoP.getAllProva();
+		CompletableFuture<List<Personaggio>> future = daoP.getAll();
 		future.thenAccept(list -> {
 			Log.d("PROVA PERSONAGGIO", "thenAccept" + list.toString());
 			textViewTestDB_2.setText("PROVA PERS" + list.toString());
 		});
 
 		textViewTestDB_2.setText(lista.toString());
-	}
-
-	private void testDAOGet2() {
-		EsercizioDAO esercizioDAO = new EsercizioDAO();
-
-		List<String> ids = Arrays.asList("-NpnZuP3OT2oDpSSOhKW", "-NpnZuP7UXJZi1p4vLjT", "-NpnZuP7UXJZi1p4vLjU");
-		esercizioDAO.getListEserciziFromListId(ids).thenAccept(esercizi -> {
-			for (Esercizio esercizio : esercizi) {
-				Log.d("PROVA ESERCIZIO", esercizio.toString());
-				textViewTestDB_2.setText(esercizio.getIdEsercizio());
-			}
-		});
 	}
 
 	private void testDAOSave2() {
@@ -145,7 +133,7 @@ public class TestDBFragment extends Fragment {
 		final File fileFasullo = new File(pathFasullo);
 
 		EsercizioCoppiaImmagini esercizio1 = new EsercizioCoppiaImmagini(10, 10, fileFasullo, fileFasullo, fileFasullo);
-		EsercizioDenominazioneImmagine esercizio2 = new EsercizioDenominazioneImmagine(10, 10, fileFasullo, 10);
+		EsercizioDenominazioneImmagine esercizio2 = new EsercizioDenominazioneImmagine(10, 10, fileFasullo, "parola", fileFasullo);
 		EsercizioSequenzaParole esercizio3 = new EsercizioSequenzaParole(10, 10, fileFasullo,"parola1", "parola2", "parola3");
 
 		esercizi.add(esercizio1);
@@ -153,9 +141,9 @@ public class TestDBFragment extends Fragment {
 		esercizi.add(esercizio3);
 
 		EsercizioDAO daoP = new EsercizioDAO();
-		daoP.save(esercizio1);
-		daoP.save(esercizio2);
-		daoP.save(esercizio3);
+//		daoP.save(esercizio1);
+//		daoP.save(esercizio2);
+//		daoP.save(esercizio3);
 
 		Log.d("PROVA ESERCIZI - Save", esercizi.toString());
 		textViewTestDB_1.setText(esercizi.toString());

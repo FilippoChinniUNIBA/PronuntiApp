@@ -8,25 +8,42 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 
 public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEsercizioConAudio {
-	public RisultatoEsercizioDenominazioneImmagine(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
+	private int countAiuti;
+
+	/*public RisultatoEsercizioDenominazioneImmagine(String idEsercizio, boolean esitoCorretto, File audioRegistrato, int countAiuti) {
 		super(idEsercizio, esitoCorretto, audioRegistrato);
-	}
+		this.countAiuti = countAiuti;
+	}*/
 
-	public RisultatoEsercizioDenominazioneImmagine(boolean esitoCorretto, File audioRegistrato) {
+	public RisultatoEsercizioDenominazioneImmagine(boolean esitoCorretto, File audioRegistrato, int countAiuti) {
 		super(esitoCorretto, audioRegistrato);
+		this.countAiuti = countAiuti;
 	}
 
-	public RisultatoEsercizioDenominazioneImmagine(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+	public RisultatoEsercizioDenominazioneImmagine(Map<String, Object> fromDatabaseMap) {
 		RisultatoEsercizioDenominazioneImmagine r = this.fromMap(fromDatabaseMap);
 
-		this.idEsercizio = fromDatabaseKey;
+		//this.idEsercizio = fromDatabaseKey;
 		this.esitoCorretto = r.isEsitoCorretto();
 		this.audioRegistrato = r.getAudioRegistrato();
+		this.countAiuti = r.getCountAiuti();
+	}
+
+	public int getCountAiuti() {
+		return countAiuti;
+	}
+
+	public void setCountAiuti(int countAiuti) {
+		this.countAiuti = countAiuti;
 	}
 
 	@Override
 	public Map<String, Object> toMap() {
-		return super.toMap();
+		Map<String, Object> entityMap = super.toMap();
+
+		entityMap.put(CostantiDBRisultato.COUNT_AIUTI, this.countAiuti);
+		return entityMap;
+
 	}
 
 	@Override
@@ -34,16 +51,17 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 		Log.d("RisultatoEsercizioDenominazioneImmagine.fromMap()", fromDatabaseMap.toString());
 		return new RisultatoEsercizioDenominazioneImmagine(
 				(boolean) fromDatabaseMap.get(CostantiDBRisultato.ESITO_CORRETTO),
-				new File((String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO))
+				new File((String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO)),
+				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBRisultato.COUNT_AIUTI))
 		);
 	}
 
 	@Override
 	public String toString() {
 		return "RisultatoEsercizioDenominazioneImmagine{" +
-				"idEsercizio='" + idEsercizio + '\'' +
-				", esitoCorretto=" + esitoCorretto +
+				"esitoCorretto=" + esitoCorretto +
 				", audioRegistrato=" + audioRegistrato +
+				", countAiuti=" + countAiuti +
 				'}';
 	}
 

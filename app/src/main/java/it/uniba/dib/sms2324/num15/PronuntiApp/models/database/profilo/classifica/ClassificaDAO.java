@@ -9,7 +9,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica.Classifica;
 
-public class ClassificaDAO implements DAO<Classifica> {
+public class ClassificaDAO /*implements DAO<Classifica>*/ {
 	private final FirebaseDatabase db;
 
 	public ClassificaDAO() {
@@ -17,7 +17,7 @@ public class ClassificaDAO implements DAO<Classifica> {
 	}
 
 
-	@Override
+	/*@Override
 	public void save(Classifica obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.CLASSIFICHE);
 		String dbKey = obj.getRefIdLogopedista();
@@ -49,5 +49,5 @@ public class ClassificaDAO implements DAO<Classifica> {
 	@Override
 	public List<Classifica> getAll() {
 		return null;
-	}
+	}*/
 }

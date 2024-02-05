@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.errori.MessaggioErrore;
 
@@ -16,11 +17,11 @@ public interface DAO<T> {
 
 	void delete(T obj);
 
-	List<T> get(String field, Object value);
+	CompletableFuture<List<T>> get(String field, Object value);
 
-	T getById(String idObj);
+	CompletableFuture<T> getById(String idObj);
 
-	List<T> getAll();
+	CompletableFuture<List<T>> getAll();
 
 
 	/**

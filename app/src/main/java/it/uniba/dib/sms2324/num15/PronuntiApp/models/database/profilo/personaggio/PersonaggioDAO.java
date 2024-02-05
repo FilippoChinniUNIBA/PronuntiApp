@@ -49,37 +49,7 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 	}
 
 	@Override
-	public List<Personaggio> get(String field, Object value) {
-
-		DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI);
-		Query query = DAO.createQuery(ref, field, value);
-
-		List<Personaggio> result = new LinkedList<>();
-
-		while (!query.get().isComplete()) {}
-
-		for (DataSnapshot snapshot : query.get().getResult().getChildren()) {
-			Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
-			Personaggio personaggio = new Personaggio(fromDatabaseMap, snapshot.getKey());
-
-			Log.d("PROVA PERSONAGGIO", personaggio.toString());
-			result.add(personaggio);
-		}
-		Log.d("PROVA PERSONAGGIO", result.toString());
-
-
-
-
-		return result;
-	}
-
-	@Override
-	public Personaggio getById(String idObj) {
-		return null;
-	}
-
-	//TODO: da eliminare
-	public CompletableFuture<List<Personaggio>> getSinglePROVA(String field, Object value) {
+	public CompletableFuture<List<Personaggio>> get(String field, Object value) {
 		CompletableFuture<List<Personaggio>> future = new CompletableFuture<>();
 
 		DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI);
@@ -88,17 +58,21 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-				List<Personaggio> result = new LinkedList<>();
+				List<Personaggio> result = new ArrayList<>();
+
 				for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 					Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
 					Personaggio personaggio = new Personaggio(fromDatabaseMap, snapshot.getKey());
 					result.add(personaggio);
 				}
+
+				Log.d("PersonaggioDAO.get()", result.toString());
 				future.complete(result);
 			}
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError databaseError) {
+				Log.e("PersonaggioDAO.get()", databaseError.toString());
 				future.completeExceptionally(databaseError.toException());
 			}
 		});
@@ -106,34 +80,44 @@ public class PersonaggioDAO implements DAO<Personaggio> {
 		return future;
 	}
 
-	//TODO: da eliminare
-	public CompletableFuture<List<Personaggio>> getAllProva() {
+	@Override
+	public CompletableFuture<Personaggio> getById(String idObj) {
 		return CompletableFuture.supplyAsync(() -> {
-			DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI);
-			Task<DataSnapshot> query = ref.get();
+			DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI).child(idObj);
+			Task<DataSnapshot> task = ref.get();
 
-			Log.d("PROVA PERSONAGGIO", "PRIMA WHILE");
+			Personaggio result = null;
 
-			while (!query.isComplete()) {}
+			while (!task.isComplete()) {}
 
-			Log.d("PROVA PERSONAGGIO", "DOPO WHILE");
+			DataSnapshot snapshot = task.getResult();
+			Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+			result = new Personaggio(fromDatabaseMap, idObj);
 
-			List<Personaggio> personaggi = new ArrayList<>();
-
-			for (DataSnapshot snapshot : query.getResult().getChildren()) {
-				Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
-				Personaggio personaggio = new Personaggio(fromDatabaseMap, snapshot.getKey());
-				personaggi.add(personaggio);
-				Log.d("PROVA PERSONAGGIO", "DENTRO FOR");
-			}
-			Log.d("PROVA PERSONAGGIO", "FINE FOR" + personaggi.toString());
-			return personaggi;
+			Log.d("PersonaggioDAO.getById()", result.toString());
+			return result;
 		});
 	}
 
 	@Override
-	public List<Personaggio> getAll() {
-		return null;
+	public CompletableFuture<List<Personaggio>> getAll() {
+		return CompletableFuture.supplyAsync(() -> {
+			DatabaseReference ref = db.getReference(CostantiNodiDB.PERSONAGGI);
+			Task<DataSnapshot> task = ref.get();
+
+			List<Personaggio> result = new ArrayList<>();
+
+			while (!task.isComplete()) {}
+
+			for (DataSnapshot snapshot : task.getResult().getChildren()) {
+				Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
+				Personaggio personaggio = new Personaggio(fromDatabaseMap, snapshot.getKey());
+				result.add(personaggio);
+			}
+
+			Log.d("PersonaggioDAO.getAll()", result.toString());
+			return result;
+		});
 	}
 
 }

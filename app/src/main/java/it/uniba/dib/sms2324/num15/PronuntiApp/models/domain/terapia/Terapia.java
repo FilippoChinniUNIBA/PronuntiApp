@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBTerapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 
 public class Terapia implements Persistente<Terapia> {
@@ -25,10 +28,21 @@ public class Terapia implements Persistente<Terapia> {
 		this.scenariGioco = scenariGioco;
 	}
 
+	public Terapia(String idTerapia, LocalDate dataInizio, LocalDate dataFine) {
+		this.idTerapia = idTerapia;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+	}
+
 	public Terapia(LocalDate dataInizio, LocalDate dataFine, List<ScenarioGioco> scenariGioco) {
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
 		this.scenariGioco = scenariGioco;
+	}
+
+	public Terapia(LocalDate dataInizio, LocalDate dataFine) {
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
 	}
 
 	public Terapia(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
@@ -79,7 +93,10 @@ public class Terapia implements Persistente<Terapia> {
 		//entityMap.put(CostantiDBTerapia.ID_TERAPIA, this.idTerapia);
 		entityMap.put(CostantiDBTerapia.DATA_INIZIO, this.dataInizio.toString());
 		entityMap.put(CostantiDBTerapia.DATA_FINE, this.dataFine.toString());
-		entityMap.put(CostantiDBTerapia.LISTA_SCENARIGIOCO, this.scenariGioco.stream().map(ScenarioGioco::getIdScenarioGioco).collect(Collectors.toList()));
+
+		if (this.scenariGioco != null) {
+			entityMap.put(CostantiDBTerapia.LISTA_SCENARIGIOCO, this.scenariGioco.stream().map(ScenarioGioco::toMap).collect(Collectors.toList()));
+		}
 		return entityMap;
 	}
 
@@ -89,8 +106,7 @@ public class Terapia implements Persistente<Terapia> {
 		return new Terapia(
 				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBTerapia.DATA_INIZIO)),
 				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBTerapia.DATA_FINE)),
-				//TODO: lancera eccezione, bisogna fare una funzione che faccia la get di ogni scenarioGioco
-				(List<ScenarioGioco>) fromDatabaseMap.get(CostantiDBTerapia.LISTA_SCENARIGIOCO)
+				(fromDatabaseMap.get(CostantiDBTerapia.LISTA_SCENARIGIOCO)) != null ? ((List<Map<String, Object>>) fromDatabaseMap.get(CostantiDBTerapia.LISTA_SCENARIGIOCO)).stream().map(obj -> new ScenarioGioco(obj, null)).collect(Collectors.toList()) : null
 		);
 	}
 

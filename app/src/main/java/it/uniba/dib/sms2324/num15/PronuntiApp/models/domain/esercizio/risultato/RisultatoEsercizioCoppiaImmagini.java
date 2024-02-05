@@ -7,18 +7,18 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 
 public class RisultatoEsercizioCoppiaImmagini extends AbstractRisultatoEsercizio {
-	public RisultatoEsercizioCoppiaImmagini(String idEsercizio, boolean esitoCorretto) {
+/*	public RisultatoEsercizioCoppiaImmagini(String idEsercizio, boolean esitoCorretto) {
 		super(idEsercizio, esitoCorretto);
-	}
+	}*/
 
 	public RisultatoEsercizioCoppiaImmagini(boolean esitoCorretto) {
 		super(esitoCorretto);
 	}
 
-	public RisultatoEsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap, String fromDatabaseKey) {
+	public RisultatoEsercizioCoppiaImmagini(Map<String, Object> fromDatabaseMap) {
 		RisultatoEsercizioCoppiaImmagini r = this.fromMap(fromDatabaseMap);
 
-		this.idEsercizio = fromDatabaseKey;
+		//this.idEsercizio = fromDatabaseKey;
 		this.esitoCorretto = r.isEsitoCorretto();
 	}
 
@@ -38,8 +38,7 @@ public class RisultatoEsercizioCoppiaImmagini extends AbstractRisultatoEsercizio
 	@Override
 	public String toString() {
 		return "RisultatoEsercizioCoppiaImmagini{" +
-				"idEsercizio='" + idEsercizio + '\'' +
-				", esitoCorretto=" + esitoCorretto +
+				"esitoCorretto=" + esitoCorretto +
 				'}';
 	}
 

@@ -29,14 +29,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioD
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
-public class EsercizioDAO implements DAO<Esercizio> {
+public class EsercizioDAO /*implements DAO<Esercizio>*/ {
 	private final FirebaseDatabase db;
 
 	public EsercizioDAO() {
 		db = FirebaseDatabase.getInstance();
 	}
 
-	@Override
+	/*@Override
 	public void save(Esercizio obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.ESERCIZI);
 		String dbKey = ref.push().getKey();
@@ -131,5 +131,6 @@ public class EsercizioDAO implements DAO<Esercizio> {
 	@Override
 	public List<Esercizio> getAll() {
 		return null;
-	}
+	}*/
+
 }
