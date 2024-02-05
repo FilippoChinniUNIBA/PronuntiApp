@@ -10,8 +10,9 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class LoginFragment extends AbstractFragmentSignInUp {
+public class LoginFragment extends AbstractFragmentWithNavigation {
 
     private TextInputEditText textInputEditTextUsername;
     private TextInputEditText textInputEditTextPassword;

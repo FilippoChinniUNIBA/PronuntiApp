@@ -90,7 +90,7 @@
 
     <style name="stylePosizioniScenario">
         <item name="android:layout_width">120dp</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">100dp</item>
     </style>
 
 </resources>

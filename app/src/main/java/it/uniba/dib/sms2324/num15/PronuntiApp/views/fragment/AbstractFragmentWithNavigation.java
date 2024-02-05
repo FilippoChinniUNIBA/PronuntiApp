@@ -1,11 +1,11 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
 
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public abstract class AbstractFragmentSignInUp extends Fragment {
+public abstract class AbstractFragmentWithNavigation extends Fragment {
 
     protected void navigateTo(int idFragment, Fragment fragment) {
         if (getActivity() != null) {

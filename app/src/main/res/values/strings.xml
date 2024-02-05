@@ -49,8 +49,10 @@
     <string name="CheckAnswer">Check</string>
     <string name="StartAnswer">Start Answer</string>
     <string name="StopAnswer">Stop Answer</string>
-    <string name="getHelp">Help</string>
-
+    <string name="getHelp">Click here for help!</string>
+    <string name="showHelp">Click for help!</string>
+    <string name="suggestEsercizioDenominazione">Click on the microphone and pronounce the element in the image!</string>
+    <string name="checkAnswer">Check</string>
 
     <string-array name="character_names">
         <item>Girl</item>
