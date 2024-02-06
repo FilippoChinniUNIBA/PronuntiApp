@@ -20,6 +20,9 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
+    <string name="age">Age</string>
+    <string name="informations_patient">Patient informations</string>
+    <string name="informations_parent">Parent informations</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>
@@ -53,6 +56,7 @@
     <string name="showHelp">Click for help!</string>
     <string name="suggestEsercizioDenominazione">Click on the microphone and pronounce the element in the image!</string>
     <string name="checkAnswer">Check</string>
+    <string name="micDenominazioneImmagine">Click to respond!</string>
 
     <string-array name="character_names">
         <item>Girl</item>

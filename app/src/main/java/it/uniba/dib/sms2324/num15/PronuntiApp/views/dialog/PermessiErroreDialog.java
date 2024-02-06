@@ -14,14 +14,4 @@ public class PermessiErroreDialog extends AbstractPopUpDialog {
 		setAnnullaButtonText(context.getString(R.string.errorPermissionOption2));
 	}
 
-	@Override
-	protected void onConfermaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
-
-	@Override
-	protected void onAnnullaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
-
 }

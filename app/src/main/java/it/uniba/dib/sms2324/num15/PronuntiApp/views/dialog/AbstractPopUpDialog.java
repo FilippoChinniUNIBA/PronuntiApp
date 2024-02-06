@@ -41,8 +41,6 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 	public AlertDialog show() {
 		if (alertDialog == null) {
 			alertDialog = create();
-			buttonConferma.setOnClickListener(v -> onConfermaButtonClicked());
-			buttonAnnulla.setOnClickListener(v -> onAnnullaButtonClicked());
 		}
 		alertDialog.show();
 		return alertDialog;
@@ -67,8 +65,24 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 		buttonAnnulla.setText(text);
 	}
 
-	protected abstract void onConfermaButtonClicked();
+	public void setOnConfermaButtonClickListener(OnConfermaButtonClickListener listener) {
+		buttonConferma.setOnClickListener(v -> {
+			listener.onConfermaButtonClicked();
+			alertDialog.dismiss();
+		});
+	}
 
-	protected abstract void onAnnullaButtonClicked();
+	public void setOnAnnullaButtonClickListener(OnAnnullaButtonClickListener listener) {
+		buttonAnnulla.setOnClickListener(v -> {
+			listener.onAnnullaButtonClicked();
+			alertDialog.dismiss();
+		});
+	}
+	public interface OnConfermaButtonClickListener {
+		void onConfermaButtonClicked();
+	}
 
+	public interface OnAnnullaButtonClickListener {
+		void onAnnullaButtonClicked();
+	}
 }
