@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore;
 
 import android.os.Bundle;
 
@@ -10,11 +10,6 @@ import android.view.ViewGroup;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AppuntamentiGenitoreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AppuntamentiGenitoreFragment extends Fragment {
 
     public AppuntamentiGenitoreFragment() {

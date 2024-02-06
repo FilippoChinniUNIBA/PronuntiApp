@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialogpopup.ConnessioneErroreDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
 
 public class ClassificaFragment extends Fragment {
 

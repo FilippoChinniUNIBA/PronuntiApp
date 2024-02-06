@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

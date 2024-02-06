@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.signInUp;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitoreFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.AppuntamentiGenitoreFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileGenitoreFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenariGenitoriFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfileGenitoreFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment;
 
 public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final MonitoraggioFragment monitoraggioFragment = new MonitoraggioFragment();

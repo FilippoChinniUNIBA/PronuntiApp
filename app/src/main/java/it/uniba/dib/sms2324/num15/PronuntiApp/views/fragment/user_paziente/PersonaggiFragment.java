@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;

@@ -1,10 +1,6 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.esercizi.EsercizioDenominazioneImmagineFragmentCopy;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragmentCopy;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
     private float xDelta, yDelta;

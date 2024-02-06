@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiLogopedistaFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.AppuntamentiLogopedistaFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PazientiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfileLogopedistaFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfileLogopedistaFragment;
 
 public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final PazientiFragment pazientiFragment = new PazientiFragment();

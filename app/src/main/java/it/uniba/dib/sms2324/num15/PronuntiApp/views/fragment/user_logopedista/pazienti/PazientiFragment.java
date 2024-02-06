@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
-
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.pazienti.RegistrazionePazienteGenitoreFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
     public PazientiFragment() {

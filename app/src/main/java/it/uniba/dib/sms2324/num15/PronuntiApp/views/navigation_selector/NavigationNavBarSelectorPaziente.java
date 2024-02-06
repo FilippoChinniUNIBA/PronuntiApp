@@ -1,7 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector;
 
-import android.util.Log;
-
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,11 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AppuntamentiGenitoreFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ScenarioFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.PersonaggiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profile.ProfilePazienteFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenarioFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.PersonaggiFragment;
 
 public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final ScenarioFragment scenarioFragment = new ScenarioFragment();
