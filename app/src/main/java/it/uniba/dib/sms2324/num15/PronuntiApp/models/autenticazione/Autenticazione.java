@@ -23,7 +23,7 @@ public class Autenticazione {
 		mAuth.createUserWithEmailAndPassword(email, password)
 				.addOnCompleteListener(task -> {
 					if (task.isSuccessful()) {
-						Log.d("Autenticazione.registrazione()", "Registrazione avvenuta con successo" + mAuth.getCurrentUser().getUid());
+						Log.d("Autenticazione.registrazione()", "Registrazione avvenuta con successo: " + mAuth.getCurrentUser().getUid());
 						future.complete(mAuth.getCurrentUser().getUid());
 					} else {
 						Log.e("Autenticazione.registrazione()", "Registrazione fallita: " + task.getException()); //TODO aggiungere agli errori

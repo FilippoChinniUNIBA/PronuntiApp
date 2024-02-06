@@ -22,6 +22,8 @@ public class TestMenuTestFragment extends Fragment {
 	private Button buttonToTestDB;
 	private Button buttonFragmentFilePicker;
 	private Button buttonFragmentInserimentoDatiDB;
+	private Button buttonFragmentNuovoTest1;
+	private Button buttonFragmentNuovoTest2;
 
 	public TestMenuTestFragment() {}
 
@@ -36,6 +38,8 @@ public class TestMenuTestFragment extends Fragment {
 		this.buttonToTestDB = view.findViewById(R.id.buttonToTestDB);
 		this.buttonFragmentFilePicker = view.findViewById(R.id.idfilepickerfragment);
 		this.buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
+		this.buttonFragmentNuovoTest1 = view.findViewById(R.id.buttonFragmenttestNuovotest1);
+		this.buttonFragmentNuovoTest2 = view.findViewById(R.id.buttonFragmenttestNuovotest2);
 
 		return view;
 
@@ -63,6 +67,14 @@ public class TestMenuTestFragment extends Fragment {
 
 		this.buttonFragmentInserimentoDatiDB.setOnClickListener(v -> {
 			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestInserimentoDatiDBFragment());
+		});
+
+		this.buttonFragmentNuovoTest1.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestNuovoTest1Fragment());
+		});
+
+		this.buttonFragmentNuovoTest2.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestNuovoTest2Fragment());
 		});
 
 	}

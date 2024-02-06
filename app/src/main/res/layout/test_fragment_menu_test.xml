@@ -63,4 +63,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idfilepickerfragment"
         app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/buttonFragmenttestNuovotest1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuovo Test 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFragmentInserimentoDatiDB"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/buttonFragmenttestNuovotest2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuovo Test 2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonFragmenttestNuovotest1"
+        app:layout_constraintVertical_bias="0.05" />
 </androidx.constraintlayout.widget.ConstraintLayout>

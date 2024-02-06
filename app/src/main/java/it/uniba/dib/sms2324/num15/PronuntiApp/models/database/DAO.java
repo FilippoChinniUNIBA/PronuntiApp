@@ -8,7 +8,7 @@ import com.google.firebase.database.Query;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.MessaggioErrore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse.MessaggioLogErrore;
 
 public interface DAO<T> {
 	void save(T obj);
@@ -41,7 +41,7 @@ public interface DAO<T> {
 		} else if (value instanceof Double) {
 			return ref.orderByChild(field).equalTo((double) value);
 		} else {
-			Log.e("Persistente.createQuery()", MessaggioErrore.TIPO_DATO_SCONOSCIUTO_DATABASE_ERR.toString());
+			Log.e("Persistente.createQuery()", MessaggioLogErrore.TIPO_DATO_SCONOSCIUTO_DATABASE_ERR.toString());
 			return null;
 		}
 	}
