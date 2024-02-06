@@ -13,14 +13,5 @@ public class ConnessioneErroreDialog extends AbstractPopUpDialog {
 		setConfermaButtonText(context.getString(R.string.restartApp));
 	}
 
-	@Override
-	protected void onConfermaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
-
-	@Override
-	protected void onAnnullaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
 }
 

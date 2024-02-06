@@ -11,13 +11,5 @@ public class InfoDialog extends AbstractPopUpDialog {
 		setConfermaButtonText("OK"); //TODO aggiungi string id
 	}
 
-	@Override
-	protected void onConfermaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
 
-	@Override
-	protected void onAnnullaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
 }
