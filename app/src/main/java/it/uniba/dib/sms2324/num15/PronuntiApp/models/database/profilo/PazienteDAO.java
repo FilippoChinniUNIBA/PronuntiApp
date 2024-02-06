@@ -20,9 +20,10 @@ import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
-public class PazienteDAO implements DAO<Paziente> {
+public class PazienteDAO {
 
 	private final FirebaseDatabase db;
 	private final FirebaseAuth firebaseAuth;
@@ -32,8 +33,8 @@ public class PazienteDAO implements DAO<Paziente> {
 		firebaseAuth = FirebaseAuth.getInstance();
 	}
 
-	@Override
 	public void save(Paziente obj) {
+		//solo il logopedista può salvare un paziente
 		String idLogopedista = firebaseAuth.getCurrentUser().getUid();
 
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
@@ -41,27 +42,52 @@ public class PazienteDAO implements DAO<Paziente> {
 		ref.child(dbKey).setValue(obj.toMap());
 	}
 
-	@Override
-	public void update(Paziente obj) {
-		String idLogopedista = firebaseAuth.getCurrentUser().getUid(); //TODO: probabilmente da cambiare, anche il Paziente può fare update su se stesso
+	public CompletableFuture<Void> update(Paziente obj) {
+		CompletableFuture<Void> future = new CompletableFuture<>();
 
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
-		ref.setValue(obj.toMap());
+		String idPaziente = obj.getIdProfilo();
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI);
+
+		ref.get().addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				DataSnapshot dataSnapshot = task.getResult();
+				DatabaseReference refPaziente = null;
+
+				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
+					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
+						if (pazienteSnapshot.getKey().equals(idPaziente)) {
+							refPaziente = pazienteSnapshot.getRef();
+							refPaziente.setValue(obj.toMap());
+
+							Log.d("PazienteDAO.update()", "Paziente aggiornato con successo");
+							future.complete(null);
+							break;
+						}
+					}
+					if (refPaziente != null) break;
+				}
+			} else {
+				future.completeExceptionally(task.getException());
+				Log.e("PazienteDAO.update()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+			}
+		});
+
+		return future;
 	}
 
-	@Override
 	public void delete(Paziente obj) {
+		//solo il logopedista può cancellare un paziente
 		String idLogopedista = firebaseAuth.getCurrentUser().getUid();
 
-		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI).child(obj.getIdProfilo());
 		ref.removeValue();
 	}
 
-	@Override
-	public CompletableFuture<List<Paziente>> get(String field, Object value) {
+	//Probabilmente non serve
+	/*public CompletableFuture<List<Paziente>> get(String idPaziente, String field, Object value) {
 		CompletableFuture<List<Paziente>> future = new CompletableFuture<>();
 
-		DatabaseReference ref = db.getReference(CostantiNodiDB.PAZIENTI); //TODO funzione che capisce il tipo di utente
+		DatabaseReference ref = db.getReference(CostantiNodiDB.PAZIENTI);
 		Query query = DAO.createQuery(ref, field, value);
 
 		query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -87,31 +113,36 @@ public class PazienteDAO implements DAO<Paziente> {
 		});
 
 		return future;
-	}
+	}*/
 
-	@Override
 	public CompletableFuture<Paziente> getById(String idObj) {
 		return CompletableFuture.supplyAsync(() -> {
-			DatabaseReference ref = db.getReference(CostantiNodiDB.PAZIENTI).child(idObj); //TODO funzione che capisce il tipo di utente
+			DatabaseReference ref = db.getReference(CostantiNodiDB.LOGOPEDISTI);
 			Task<DataSnapshot> task = ref.get();
 
 			Paziente result = null;
 
 			while (!task.isComplete()) {}
 
-			DataSnapshot snapshot = task.getResult();
-			Map<String, Object> fromDatabaseMap = (Map<String, Object>) snapshot.getValue();
-			result = new Paziente(fromDatabaseMap, idObj);
+			for (DataSnapshot logopedistaSnapshot : task.getResult().getChildren()) {
+				for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
+					if (pazienteSnapshot.getKey().equals(idObj)) {
+						Map<String, Object> fromDatabaseMap = (Map<String, Object>) pazienteSnapshot.getValue();
+						result = new Paziente(fromDatabaseMap, idObj);
+						break;
+					}
+				}
+				if (result != null) break;
+			}
 
-			Log.d("PazienteDAO.getById()", result.toString());
+			Log.d("PazienteDAO.getById()", (result == null) ? result.toString() : "null");
 			return result;
 		});
 	}
 
-	@Override
-	public CompletableFuture<List<Paziente>> getAll() {
+	public CompletableFuture<List<Paziente>> getAllFromLogopedista(String idLogopedista) {
 		return CompletableFuture.supplyAsync(() -> {
-			DatabaseReference ref = db.getReference(CostantiNodiDB.PAZIENTI); //TODO funzione che capisce il tipo di utente
+			DatabaseReference ref = db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
 			Task<DataSnapshot> task = ref.get();
 
 			List<Paziente> result = new ArrayList<>();
@@ -127,6 +158,40 @@ public class PazienteDAO implements DAO<Paziente> {
 			Log.d("PazienteDAO.getAll()", result.toString());
 			return result;
 		});
+	}
+
+	public CompletableFuture<Logopedista> getDatiLogopedistaByIdPaziente(String idPaziente) {
+		CompletableFuture<Logopedista> future = new CompletableFuture<>();
+
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI);
+
+		ref.get().addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				DataSnapshot dataSnapshot = task.getResult();
+				DatabaseReference refLogopedista = null;
+
+				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
+					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
+						if (pazienteSnapshot.getKey().equals(idPaziente)) {
+							refLogopedista = logopedistaSnapshot.getRef();
+							Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
+							Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
+							logopedista.setPazienti(null);
+
+							Log.d("PazienteDAO.getDatiLogopedistaByIdPaziente()", logopedista.toString());
+							future.complete(logopedista);
+							break;
+						}
+					}
+					if (refLogopedista != null) break;
+				}
+			} else {
+				future.completeExceptionally(task.getException());
+				Log.e("PazienteDAO.getDatiLogopedistaByIdPaziente()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+			}
+		});
+
+		return future;
 	}
 
 }

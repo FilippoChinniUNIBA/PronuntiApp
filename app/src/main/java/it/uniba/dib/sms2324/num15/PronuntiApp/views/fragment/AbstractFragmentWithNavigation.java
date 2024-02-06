@@ -13,7 +13,7 @@ public abstract class AbstractFragmentWithNavigation extends Fragment {
             fragmentTransaction.replace(idFragment, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            }
+        }
         Log.d("navigateTo", "navigateTo: " + idFragment);
 
     }

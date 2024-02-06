@@ -52,6 +52,8 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
             fragment = appuntamentiGenitoreFragment;
         else if (itemId == R.id.profiloGenitore)
             fragment = profileGenitoreFragment;
+
+
         if (fragment != null) {
             replaceFragment(fragmentManager,fragmentContainerId,fragment);
             return true;

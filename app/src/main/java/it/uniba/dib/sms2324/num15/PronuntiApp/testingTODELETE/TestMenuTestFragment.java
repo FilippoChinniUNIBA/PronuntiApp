@@ -23,9 +23,7 @@ public class TestMenuTestFragment extends Fragment {
 	private Button buttonFragmentFilePicker;
 	private Button buttonFragmentInserimentoDatiDB;
 
-	public TestMenuTestFragment() {
-
-	}
+	public TestMenuTestFragment() {}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
