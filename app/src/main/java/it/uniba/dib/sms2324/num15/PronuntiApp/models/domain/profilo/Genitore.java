@@ -20,8 +20,9 @@ public class Genitore extends AbstractProfilo {
 		this.telefono = telefono;
 	}
 
-	public Genitore(String idProfilo, String nome, String cognome, String username, String email, String password) {
-		super(idProfilo, nome, cognome, username, email, password);
+	public Genitore(String nome, String cognome, String username, String email, String password, String telefono) {
+		super(nome, cognome, username, email, password);
+		this.telefono = telefono;
 	}
 
 	public Genitore(Map<String,Object> fromDatabaseMap, String fromDatabaseKey) {
