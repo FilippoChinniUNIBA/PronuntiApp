@@ -125,7 +125,7 @@ public class EsercizioDenominazioneImmagineFragment extends Fragment {
                     AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
                     List<String> words = audioRecognizer.getText();
                     Log.d("Words",words.get(0));
-                    uploadFileAsync(fileConvertito,storage.getReference(),curretactivity);
+                    uploadFileAsync(fileConvertito, storage.getReference(), curretactivity);
                     if(words.get(0).equals(esercizioDenominazioneImmagine.getParolaEsercizio())){
                         correctplayer.start();
                     }else {

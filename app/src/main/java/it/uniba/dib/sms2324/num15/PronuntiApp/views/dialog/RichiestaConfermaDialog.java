@@ -14,15 +14,5 @@ public class RichiestaConfermaDialog extends AbstractPopUpDialog {
 		setAnnullaButtonText(context.getString(R.string.cancel));
 	}
 
-	@Override
-	protected void onConfermaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
-
-	@Override
-	protected void onAnnullaButtonClicked() {
-		this.alertDialog.dismiss(); // Usa il riferimento corretto
-	}
-
 }
 
