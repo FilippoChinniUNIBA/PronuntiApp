@@ -8,18 +8,18 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
+	private FragmentManager mFragmentManager;
 
 	private Button buttonToTestApi;
 	private Button buttonToTestLogin;
-
 	private Button buttonToTestDB;
-
 	private Button buttonFragmentFilePicker;
 	private Button buttonFragmentInserimentoDatiDB;
 
@@ -29,67 +29,50 @@ public class TestMenuTestFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.test_fragment_menu_test, container, false);
 
-		buttonToTestApi = view.findViewById(R.id.buttonTestApi);
-		buttonToTestLogin = view.findViewById(R.id.buttonTestLoginRegistrazione);
-		buttonToTestDB = view.findViewById(R.id.buttonToTestDB);
-		buttonFragmentFilePicker = view.findViewById(R.id.idfilepickerfragment);
-		buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
+		this.mFragmentManager = getActivity().getSupportFragmentManager();
 
-		this.buttonToTestApi.setOnClickListener(v -> {
-			EsercizioDenominazioneImmagineFragment testApiFragment = new EsercizioDenominazioneImmagineFragment();
-			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frameLayoutLogopedista, testApiFragment)
-					.addToBackStack(null)
-					.commit();
-			}
-		);
-
-		this.buttonToTestLogin.setOnClickListener(v -> {
-			LoginFragment testLoginFragment = new LoginFragment();
-			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frameLayoutLogopedista, testLoginFragment)
-					.addToBackStack(null)
-					.commit();
-			}
-		);
-
-
-		this.buttonToTestDB.setOnClickListener(v -> {
-			TestDBFragment testDBFragment = new TestDBFragment();
-			FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-			fragmentManager.beginTransaction()
-					.replace(R.id.frameLayoutLogopedista, testDBFragment)
-					.addToBackStack(null)
-					.commit();
-			}
-		);
-
-		this.buttonFragmentFilePicker.setOnClickListener(v -> {
-					TestFilePickerFragment testFilePickerFragment = new TestFilePickerFragment();
-					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-					fragmentManager.beginTransaction()
-							.replace(R.id.frameLayoutLogopedista, testFilePickerFragment)
-							.addToBackStack(null)
-							.commit();
-					}
-		);
-
-		this.buttonFragmentInserimentoDatiDB.setOnClickListener(v -> {
-					TestInserimentoDatiDBFragment testInserimentoDatiDBFragment = new TestInserimentoDatiDBFragment();
-					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-					fragmentManager.beginTransaction()
-							.replace(R.id.frameLayoutLogopedista, testInserimentoDatiDBFragment)
-							.addToBackStack(null)
-							.commit();
-					}
-		);
+		this.buttonToTestApi = view.findViewById(R.id.buttonTestApi);
+		this.buttonToTestLogin = view.findViewById(R.id.buttonTestLoginRegistrazione);
+		this.buttonToTestDB = view.findViewById(R.id.buttonToTestDB);
+		this.buttonFragmentFilePicker = view.findViewById(R.id.idfilepickerfragment);
+		this.buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
 
 		return view;
 
 	}
 
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		this.buttonToTestApi.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new EsercizioDenominazioneImmagineFragment());
+		});
+
+		this.buttonToTestLogin.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new LoginFragment());
+		});
+
+		this.buttonToTestDB.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestDBFragment());
+		});
+
+		this.buttonFragmentFilePicker.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestFilePickerFragment());
+		});
+
+		this.buttonFragmentInserimentoDatiDB.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestInserimentoDatiDBFragment());
+		});
+
+	}
+
+	private static void replaceFragment(FragmentManager fragmentManager, int containerId, Fragment fragment) {
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(containerId, fragment);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
+	}
 
 }
 
