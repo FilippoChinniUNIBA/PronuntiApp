@@ -12,7 +12,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDate;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.registrazione_viewmodel.RegistrazionePazienteEGenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -60,12 +64,9 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         editTextConfermaPasswordGenitore = view.findViewById(R.id.textInputEditTextConfermaPasswordGenitore);
         editTextTelefonoGenitore = view.findViewById(R.id.textInputEditTextTelefonoGenitore);
         editTextIndirizzoGenitore = view.findViewById(R.id.textInputEditTextIndirizzoGenitore);
-
         buttonRegistraPazienteEGenitore = view.findViewById(R.id.buttonRegistraPazienteEGenitore);
 
         registrazionePazienteEGenitoreViewModel = new ViewModelProvider(this).get(RegistrazionePazienteEGenitoreViewModel.class);
-
-
 
         return view;
     }
@@ -73,7 +74,10 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        buttonRegistraPazienteEGenitore.setOnClickListener(v -> registraPazienteEGenitore());
+        buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
+            registraPazienteEGenitore(); //todo dovrebbe dare un future
+            navigateTo(R.id.frameLayoutLogopedista, new PazientiFragment());
+        });
     }
 
     private void registraPazienteEGenitore(){
@@ -84,9 +88,9 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         String usernamepaziente = editTextUsernamePaziente.getText().toString();
         String passwordpaziente = editTextPasswordPaziente.getText().toString();
         String confermapasswordpaziente = editTextConfermaPasswordPaziente.getText().toString();
-        String sessopaziente = editTextSessoPaziente.getText().toString();
-        String datanascitapaziente = editTextDataNascitaPaziente.getText().toString();
-        String etapaziente = editTextEtaPaziente.getText().toString();
+        char sessopaziente = editTextSessoPaziente.getText().toString().charAt(0);
+        LocalDate datanascitapaziente = LocalDate.parse(editTextDataNascitaPaziente.getText().toString());
+        int etapaziente = Integer.parseInt(editTextEtaPaziente.getText().toString());
 
         String nomegenitore = editTextNomeGenitore.getText().toString();
         String cognomegenitore = editTextCognomeGenitore.getText().toString();
@@ -96,6 +100,9 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         String confermapasswordgenitore = editTextConfermaPasswordGenitore.getText().toString();
         String telefonogenitore = editTextTelefonoGenitore.getText().toString();
         String indirizzogenitore = editTextIndirizzoGenitore.getText().toString();
+
+        registrazionePazienteEGenitoreViewModel.registrazionePaziente(nomepaziente,cognomepaziente,emailpaziente,usernamepaziente,passwordpaziente,etapaziente,datanascitapaziente,sessopaziente);
+        registrazionePazienteEGenitoreViewModel.registrazioneGenitore(nomegenitore,cognomegenitore,usernamegenitore,emailgenitore,passwordgenitore,telefonogenitore,indirizzogenitore);
 
     }
 

@@ -20,6 +20,9 @@
     <string name="male">Maschio</string>
     <string name="female">Femmina</string>
     <string name="other">Altro</string>
+    <string name="age">Età</string>
+    <string name="informations_patient">Informazioni paziente</string>
+    <string name="informations_parent">Informazioni genitore</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>

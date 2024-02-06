@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -54,6 +57,21 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textViewSubInformazioniPaziente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="@string/informations_patient"
+                android:textColor="@color/black"
+                android:textSize="@dimen/subHeaderTextSize"
+                app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomePaziente"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
 
             <!-- TextInputLayout e TextInputEditText per Nome -->
             <com.google.android.material.textfield.TextInputLayout
@@ -125,9 +143,9 @@
                     android:id="@+id/textInputEditTextEtaPaziente"
                     style="@style/TextInputEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                    <!--android:hint="@string/phone_hint"
-                    android:inputType="phone" />-->
+                    android:layout_height="wrap_content"
+                    android:hint="@string/age"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,9 +159,9 @@
                     android:id="@+id/textInputEditTextSessoPaziente"
                     style="@style/TextInputEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                    <!-- android:hint="@string/address_hint"
-                   android:inputType="textPostalAddress" />-->
+                    android:layout_height="wrap_content"
+                    android:hint="@string/gender_hint"
+                    android:inputType="text" />
    </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -155,9 +173,9 @@
                     android:id="@+id/textInputEditTextDataNascitaPaziente"
                     style="@style/TextInputEditTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <!-- android:hint="@string/address_hint"
-               android:inputType="textPostalAddress" />-->
+                    android:layout_height="wrap_content"
+                    android:hint="@string/birth_date_hint"
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
    <!-- TextInputLayout e TextInputEditText per Password -->
@@ -215,6 +233,21 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textViewSubTitoloGenitore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="@string/informations_parent"
+                android:textColor="@color/black"
+                android:textSize="@dimen/subHeaderTextSize"
+                app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomeGenitore"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore" />
 
             <!-- TextInputLayout e TextInputEditText per Nome -->
             <com.google.android.material.textfield.TextInputLayout
@@ -359,3 +392,4 @@
             android:text="@string/register" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
