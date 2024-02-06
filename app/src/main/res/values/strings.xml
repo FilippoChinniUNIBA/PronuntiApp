@@ -57,6 +57,8 @@
     <string name="suggestEsercizioDenominazione">Click on the microphone and pronounce the element in the image!</string>
     <string name="checkAnswer">Check</string>
     <string name="micDenominazioneImmagine">Click to respond!</string>
+    <string name="corretto">Correct!</string>
+    <string name="sbagliato">Wrong!</string>
 
     <string-array name="character_names">
         <item>Girl</item>

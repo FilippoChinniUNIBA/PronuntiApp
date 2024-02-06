@@ -7,17 +7,19 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -38,9 +40,10 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 
-public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
+public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment{
     private ImageButton buttonAiutiImageView;
     private ImageButton buttonCompletaEsercizioImageView;
     private ImageButton buttonAvviaRegistrazione;
@@ -51,10 +54,17 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
     private View viewAnimationMic, viewConfirmMic, viewStopMic;
     private ImageView imageViewConfermaRegistrazione;
     private AudioRecognizer audioRecognizer;
+    private ConstraintLayout constraintLayoutEsercizioDenominazione;
+    private FineEsercizioView fineEsercizioView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Infla il layout per questo fragment
         View view = inflater.inflate(R.layout.fragment_esercizio_denominazione_immagine_copy, container, false);
+
+        constraintLayoutEsercizioDenominazione = view.findViewById(R.id.constraintLayoutEsercizioDenominazioneImmagine);
+        constraintLayoutEsercizioDenominazione.setVisibility(View.VISIBLE);
+
+        fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
+        fineEsercizioView.setVisibility(View.VISIBLE);
 
         buttonAiutiImageView = view.findViewById(R.id.buttonAiuti);
         buttonCompletaEsercizioImageView = view.findViewById(R.id.buttonCompletaEsercizio);
@@ -67,7 +77,6 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
         viewStopMic = view.findViewById(R.id.viewStopRegMic);
         imageViewConfermaRegistrazione = view.findViewById(R.id.confermaRegistrazioneImageView);
         imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
-
 
         setAnimazioneRegistrazione();
         buttonAvviaRegistrazione.setOnClickListener(v -> {
@@ -139,85 +148,87 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        Activity curretactivity = requireActivity();
 
-        if (!checkPermissions(curretactivity)) {
-            requestPermissions(curretactivity);
+        //set dei dei coins da guadagnare
+
+        if (!checkPermissions(requireActivity())) {
+            requestPermissions(requireActivity());
         }
 
-        //------------------>FILE DA OTTENERE DAL db
-        File immagineEsercizio = new File(curretactivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"pinguino.jpg");
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+
         AtomicInteger countAiuti = new AtomicInteger(3);
-
-        //QUANDO VIENE ISTANZIATO UN ESERCIZIO L'IMMAGINE DEVE ESSERE ALLOCATA IN MEMORIA E IL PATH DELLA MEMORIA INTERNA DEVE ESSERE MEMORIZZATO NELL'ESERCIZIO
-        EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio, "pinguino", new File("help.mp3"));
-
-        File directoryMusic = curretactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File fileRegistrazione = new File(directoryMusic,"test");
-        File fileConvertito = new File(directoryMusic,"test.mp3");
-
-        audioRecognizer = new AudioRecognizer(fileRegistrazione,curretactivity);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
         StorageReference pinguino = storage.getReference().child("pinguino.jpg");
-        Log.d("PROVA PINGUINO", esercizioDenominazioneImmagine.getAudioAiuto().getName());
-        StorageReference aiuto = storage.getReference().child("help.mp3");
-
         CompletableFuture<String> urlFuture = getUrlFromStorageReference(pinguino);
-        //->FINE FILE DA OTTENERE DAL db
+        File directoryMusic = getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File fileRegistrazione = new File(directoryMusic,"test");
+        audioRecognizer = new AudioRecognizer(fileRegistrazione,getContext());
 
-        MediaPlayer aiutiplayer = new MediaPlayer();
-        MediaPlayer correctplayer = MediaPlayer.create(curretactivity,R.raw.correct_sound);
-        MediaPlayer errorplayer = MediaPlayer.create(curretactivity,R.raw.error_sound);
 
         urlFuture.thenAccept(imageUrl -> {
             // Set the image view with the downloaded image
             Picasso.get().load(imageUrl).into(immagineEsercizioDenominazioneImageView);
             buttonAvviaRegistrazione.setOnClickListener(v -> {
                 setButtonAvviaRegistrazione();
-                Toast.makeText(curretactivity, "Registrazione avviata", Toast.LENGTH_SHORT).show();
             });
             viewStopMic.setOnClickListener(v -> {
                 stopRecording();
-                Toast.makeText(curretactivity, "Registrazione interrotta", Toast.LENGTH_SHORT).show();
             });
             buttonAiutiImageView.setOnClickListener(v -> {
-                if (countAiuti.get() > 0) {
-                    Toast.makeText(curretactivity, "Aiuto utilizzato, solo "+ (countAiuti.get() - 1) +" aiuti rimasti!", Toast.LENGTH_SHORT).show();
-                    getUrlFromStorageReference(aiuto).thenAccept(audioUrl -> {
-                        try {
-                            aiutiplayer.reset();
-                            aiutiplayer.setDataSource(audioUrl);
-                            aiutiplayer.prepare();
-                            aiutiplayer.start();
-                            countAiuti.decrementAndGet();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                if (countAiuti.get() > 1) {
+                    Toast.makeText(getContext(), (countAiuti.get() - 1)+" aiuti rimasti!", Toast.LENGTH_SHORT).show();
+                    riproduciAiuti(countAiuti);
+                } else if(countAiuti.get() ==1){
+                    riproduciAiuti(countAiuti);
                 } else {
-                    Toast.makeText(curretactivity, "Non hai più aiuti!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Non hai più aiuti!", Toast.LENGTH_SHORT).show();
                 }
             });
             buttonCompletaEsercizioImageView.setOnClickListener(v -> {
-                try{
-                    AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
-                    List<String> words = audioRecognizer.getText();
-                    uploadFileToStorage(fileConvertito, storage.getReference(), curretactivity);
-                    if(words.get(0).toLowerCase().equals(esercizioDenominazioneImmagine.getParolaEsercizio())){
-                        correctplayer.start();
-                    }else {
-                        errorplayer.start();
-                    }
-                } catch (IndexOutOfBoundsException e) {
-                    Toast.makeText(curretactivity, "Parola non riconosciuta, riprova!", Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                Toast.makeText(getContext(), "Registra prima la risposta!", Toast.LENGTH_SHORT).show();
             });
         });
     }
 
+    private void riproduciAiuti(AtomicInteger countAiuti){
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+        StorageReference aiuto = storage.getReference().child("help.mp3");
+        getUrlFromStorageReference(aiuto).thenAccept(audioUrl -> {
+            try {
+                MediaPlayer aiutiplayer = new MediaPlayer();
+                aiutiplayer.reset();
+                aiutiplayer.setDataSource(audioUrl);
+                aiutiplayer.prepare();
+                aiutiplayer.start();
+                countAiuti.decrementAndGet();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private boolean verificaAudio(){
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+        File directoryMusic = getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File fileConvertito = new File(directoryMusic,"test.mp3");
+        File immagineEsercizio = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),"pinguino.jpg");
+        EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio, "pinguino", new File("help.mp3"));
+        try{
+            AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
+            List<String> words = audioRecognizer.getText();
+            uploadFileToStorage(fileConvertito, storage.getReference(), requireActivity());
+            if(words.get(0).toLowerCase().equals(esercizioDenominazioneImmagine.getParolaEsercizio())){
+                return true;
+            }else {
+                return false;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            Toast.makeText(getContext(), "Parola non riconosciuta, riprova!", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     private CompletableFuture<String> getUrlFromStorageReference(StorageReference reference) {
         CompletableFuture<String> future = new CompletableFuture<>();
 
@@ -245,6 +256,22 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
         viewStopMic.setVisibility(View.GONE);
         viewConfirmMic.setVisibility(View.VISIBLE);
         audioRecognizer.stopRecording();
+        Toast.makeText(getContext(), "Registrazione interrotta", Toast.LENGTH_SHORT).show();
+
+        buttonCompletaEsercizioImageView.setOnClickListener(v -> {
+            MediaPlayer correctplayer = MediaPlayer.create(getContext(),R.raw.correct_sound);
+            MediaPlayer errorplayer = MediaPlayer.create(getContext(),R.raw.error_sound);
+            if(verificaAudio()) {
+                correctplayer.start();
+                constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+                fineEsercizioView.setEsercizioCorretto();
+            }
+            else{
+                errorplayer.start();
+                constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+                fineEsercizioView.setEsercizioSbagliato();
+            }
+        });
     }
 
     private void automateStartRecording(){
@@ -254,6 +281,9 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
         viewStopMic.setVisibility(View.VISIBLE);
         viewConfirmMic.setVisibility(View.GONE);
         audioRecognizer.startRecording();
+        buttonCompletaEsercizioImageView.setOnClickListener(v->{
+            Toast.makeText(getContext(), "Registra prima la risposta!", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void setButtonAvviaRegistrazione(){
@@ -261,6 +291,7 @@ public class EsercizioDenominazioneImmagineFragmentCopy extends Fragment {
         imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
         viewStopMic.setVisibility(View.VISIBLE);
         viewConfirmMic.setVisibility(View.GONE);
+        Toast.makeText(getContext(), "Registrazione avviata", Toast.LENGTH_SHORT).show();
     }
 
     private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {

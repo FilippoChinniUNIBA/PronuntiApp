@@ -16,4 +16,6 @@
     <color name="hintTextColorDisabled">#A9A9A9</color> <!-- Colore quando disabilitato -->
     <color name="coinsBackground">#22000000</color>
     <color name="animationMic">#8FDF1919</color>
+    <color name="corretto">#27E12A</color>
+    <color name="sbagliato">#FF1313</color>
 </resources>

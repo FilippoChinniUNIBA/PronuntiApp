@@ -57,6 +57,8 @@
     <string name="suggestEsercizioDenominazione">Clicca sul microfono e pronuncia l\'elemento nell\'immagine!</string>
     <string name="checkAnswer">Verifica</string>
     <string name="micDenominazioneImmagine">Clicca per rispondere!</string>
+    <string name="corretto">Corretto!</string>
+    <string name="sbagliato">Sbagliato</string>
 
     <string-array name="character_names">
         <item>Bambina</item>
