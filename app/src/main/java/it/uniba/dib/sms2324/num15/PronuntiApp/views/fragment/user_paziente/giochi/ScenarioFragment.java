@@ -19,6 +19,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParole;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
     private float xDelta, yDelta;
@@ -193,7 +194,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                             replaceFragment(R.id.frameLayoutPaziente, new EsercizioCoppiaImmagini(), "scenarioPaziente");
                         }
                         else if(isPersonaggioInAreaTerzoEsercizio()) {
-                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragment(), "scenarioPaziente");
+                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioSequenzaParole(), "scenarioPaziente");
                         }
                 }
                 return true;

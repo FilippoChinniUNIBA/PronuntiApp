@@ -6,5 +6,5 @@
     <dimen name="personaggioWidthDim">100dp</dimen>
     <dimen name="personaggioHeighthDim">100dp</dimen>
     <dimen name="size_text_esercizio">50sp</dimen>
-    <dimen name="size_text_esercizio_coppia_immagine">35sp</dimen>
+    <dimen name="size_text_title_esercizio">30sp</dimen>
 </resources>

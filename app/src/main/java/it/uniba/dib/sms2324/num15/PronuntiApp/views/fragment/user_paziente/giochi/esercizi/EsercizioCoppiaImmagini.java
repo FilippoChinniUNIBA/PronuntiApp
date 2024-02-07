@@ -3,7 +3,6 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioc
 import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,15 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -51,7 +42,7 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflating del layout del fragment
-        View view = inflater.inflate(R.layout.fragment_esercizio_coppia_immaini, container, false);
+        View view = inflater.inflate(R.layout.fragment_esercizio_coppia_immagini, container, false);
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
 
         constraintLayoutEsercizioCoppiaImmagini = view.findViewById(R.id.constraintLayoutEsercizioCoppiaImmagini);

@@ -67,6 +67,7 @@
     <string name="overwriteAudioDescription">Sei sicuro di voler sovrascrivere l\'audio?</string>
     <string name="startedRecording">Registrazione avviata</string>
     <string name="stopedRecording">Registrazione terminata</string>
+    <string name="suggestionSequenzaParole">Riproduci l\'audio con il pulsante in basso a sinistra e registra la stessa frase!</string>
 
     <string-array name="character_names">
         <item>Bambina</item>
@@ -94,5 +95,8 @@
     <string name="accesso_rapido">Accesso Rapido</string>
     <string name="infoTitle">Info</string>
     <string name="suggestEsercizioCoppiaImmagini">Ascolta l\'audio prima di rispondere!</string>
+    <string name="titleEsercizioCoppiaImmagini">Qual è l\'immagine che hai ascoltato?</string>
+    <string name="titleEsercizioSequenzaParole">Cosa sta dicendo l\'audio?\n Prova a ripeterlo!</string>
+    <string name="titleEsercizioDenominazioneImmagine">Cosa c\'è nell\'immagine?</string>
 
 </resources>

@@ -11,6 +11,16 @@
         android:scaleType="centerCrop"
         android:src="@drawable/background_space"
         />
+    <View
+        android:id="@+id/viewOverlaySfondoEsercizioCoppiaImmagini"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView
         android:layout_width="match_parent"
@@ -29,25 +39,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
-        <View
-            android:id="@+id/viewOverlaySfondoEsercizioCoppiaImmagini"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#80000000"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:elevation="1dp"
-            />
 
         <TextView
             android:id="@+id/textViewEsercizioCoppiaImmagini"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Qual è l'immagine che hai ascoltato?"
+            android:text="@string/titleEsercizioCoppiaImmagini"
             android:padding="10dp"
-            android:textSize="@dimen/size_text_esercizio_coppia_immagine"
+            android:textSize="@dimen/size_text_title_esercizio"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="center"
