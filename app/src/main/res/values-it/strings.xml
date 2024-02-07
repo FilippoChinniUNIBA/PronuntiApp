@@ -98,5 +98,19 @@
     <string name="titleEsercizioCoppiaImmagini">Qual è l\'immagine che hai ascoltato?</string>
     <string name="titleEsercizioSequenzaParole">Cosa sta dicendo l\'audio?\n Prova a ripeterlo!</string>
     <string name="titleEsercizioDenominazioneImmagine">Cosa c\'è nell\'immagine?</string>
+    <string name="erroreLoginCredenziali">Credenziali mancanti o incorrette</string>
+    <string name="tastoRiprova">Riprova</string>
+    <string name="erroreRegistrazioneLogopedistaCampiIncompleti">Campi mancanti o incompleti</string>
+    <string name="erroreRegistrazioneLogopedistaPasswordDifformi">Password e Conferma Password non coincidono</string>
+    <string name="erroreRegistrazioneLogopedistaAutenticazione">Errore Database: probabilmente email già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
+    <string name="erroreRegistrazionePazienteCampiMancanti">Campi mancanti o incompleti (Bambino)</string>
+    <string name="erroreRegistrazionePazientePasswordDifformi">Password e Conferma Password non coincidono (Bambino)</string>
+    <string name="erroreRegistrazionePazienteEtaNonValida">Età non valida</string>
+    <string name="erroreRegistrazionePazienteDataNonValida">Data non valida</string>
+    <string name="erroreRegistrazionePazienteSessoNonValido">Valore di Sesso non valido</string>
+    <string name="erroreRegistrazioneGenitoreCampiMancanti">Campi mancanti o incompleti (Child)</string>
+    <string name="erroreRegistrazioneGenitorePasswordDifformi">Password e Conferma Password non coincidono (Genitore)</string>
+    <string name="erroreRegistrazionePazienteAutenticazione">Errore Database: probabilmente email del bambino (paziente) già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
+    <string name="erroreRegistrazioneGenitoreAutenticazione">Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
 
 </resources>

@@ -171,34 +171,34 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         String messaggioErrore = "";
         switch (tipoErrore) {
             case 1:
-                messaggioErrore = "Campi incompleti (Bambino)";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazienteCampiMancanti);
                 break;
             case 2:
-                messaggioErrore = "Password e conferma password non coincidono (Bambino)";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazientePasswordDifformi);
                 break;
             case 3:
-                messaggioErrore = "Età non valida";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazienteEtaNonValida);
                 break;
             case 4:
-                messaggioErrore = "Data di nascita non valida";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazienteDataNonValida);
                 break;
             case 5:
-                messaggioErrore = "Sesso non valido";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazienteSessoNonValido);
                 break;
             case 6:
-                messaggioErrore = "Campi incompleti (Genitore)";
+                messaggioErrore = getString(R.string.erroreRegistrazioneGenitoreCampiMancanti);
                 break;
             case 7:
-                messaggioErrore = "Password e conferma password non coincidono (Genitore)";
+                messaggioErrore = getString(R.string.erroreRegistrazioneGenitorePasswordDifformi);
                 break;
             case 8:
-                messaggioErrore = "Errore Database: probabilmente email del bambino già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                messaggioErrore = getString(R.string.erroreRegistrazionePazienteAutenticazione);
                 break;
             case 9:
-                messaggioErrore = "Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                messaggioErrore = getString(R.string.erroreRegistrazioneGenitoreAutenticazione);
                 break;
         }
-        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, "Riprova");
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
         infoDialog.show();
         infoDialog.setOnConfermaButtonClickListener(null);
     }
