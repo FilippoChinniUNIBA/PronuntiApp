@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
     public PazientiFragment() {
@@ -21,7 +20,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
         addPazientiButton = view.findViewById(R.id.addPaziente);
-        addPazientiButton.setOnClickListener(v -> navigateTo(R.id.frameLayoutLogopedista, new RegistrazionePazienteGenitoreFragment()));
+        addPazientiButton.setOnClickListener(v -> replaceFragment(R.id.frameLayoutLogopedista, new RegistrazionePazienteGenitoreFragment(),null));
 
         return view;
     }

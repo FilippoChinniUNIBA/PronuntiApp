@@ -62,8 +62,8 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
         super.onViewCreated(view, savedInstanceState);
 
         buttonLogin.setOnClickListener(v -> eseguiLogin());
-        buttonAccessoRapido.setOnClickListener(v -> navigateTo(R.id.autenticazioneFrameLayout, new AvvioRapidoFragment()));
-        buttonToRegister.setOnClickListener(v -> navigateTo(R.id.autenticazioneFrameLayout, new RegistrazioneFragment()));
+        buttonAccessoRapido.setOnClickListener(v -> replaceFragment(R.id.autenticazioneFrameLayout, new AvvioRapidoFragment(), null));
+        buttonToRegister.setOnClickListener(v -> replaceFragment(R.id.autenticazioneFrameLayout, new RegistrazioneFragment(), null));
     }
 
     private void eseguiLogin() {

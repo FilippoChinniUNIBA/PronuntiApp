@@ -15,8 +15,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDate;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.registrazione_viewmodel.RegistrazionePazienteEGenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -76,7 +74,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         super.onViewCreated(view, savedInstanceState);
         buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
             registraPazienteEGenitore(); //todo dovrebbe dare un future
-            navigateTo(R.id.frameLayoutLogopedista, new PazientiFragment());
+            replaceFragment(R.id.frameLayoutLogopedista, new PazientiFragment(),null);
         });
     }
 
