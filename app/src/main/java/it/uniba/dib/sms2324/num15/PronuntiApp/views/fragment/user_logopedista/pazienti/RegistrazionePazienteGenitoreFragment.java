@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDate;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.registrazione_viewmodel.RegistrazionePazienteEGenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.RegistrazionePazienteEGenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithNavigation {

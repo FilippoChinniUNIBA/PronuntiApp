@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels;
+package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels;
 
 import androidx.lifecycle.ViewModel;
 

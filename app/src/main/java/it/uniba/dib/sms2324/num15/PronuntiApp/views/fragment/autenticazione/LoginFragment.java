@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,12 +15,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.AbstractProfilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.signinup_viewmodel.LoginViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.GenitoreActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
@@ -30,7 +27,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class LoginFragment extends AbstractFragmentWithNavigation {
-
     private TextInputEditText textInputEditTextEmail;
     private TextInputEditText textInputEditTextPassword;
     private Button buttonLogin;

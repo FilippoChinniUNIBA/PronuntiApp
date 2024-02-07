@@ -6,10 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.GenitoreViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorLogopedista;
 

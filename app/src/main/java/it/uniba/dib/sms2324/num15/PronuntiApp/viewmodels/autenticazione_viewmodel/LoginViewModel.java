@@ -1,15 +1,10 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.signinup_viewmodel;
+package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel;
 
 import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicReference;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.Autenticazione;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAOGenerica;
@@ -21,10 +16,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfileGenitoreViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfileLogopedistaViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfilePazienteViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 
 public class LoginViewModel extends ViewModel {
 
@@ -36,12 +27,15 @@ public class LoginViewModel extends ViewModel {
 		}
 		else {
 			Autenticazione auth = new Autenticazione();
-			auth.login(email, password).thenAccept(userId -> {
-				if (userId != null) {
-					future.complete(true);
-				} else {
+			auth.login(email, password).handle((userId, exception) -> {
+				if (exception != null) {
+					Log.d("LoginViewModel.verificaLogin()", "Errore durante il login: " + exception.getMessage()); //TODO aggiungere agli errori
 					future.complete(false);
 				}
+				else {
+					future.complete(true);
+				}
+				return null;
 			});
 		}
 

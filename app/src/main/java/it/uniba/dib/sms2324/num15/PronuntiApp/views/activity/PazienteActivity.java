@@ -5,10 +5,8 @@ import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.GenitoreViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenarioFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorPaziente;
 
