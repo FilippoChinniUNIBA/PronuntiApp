@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -28,11 +29,15 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
     private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
     private CurvedLineView curvedLineView1to2, curvedLineView2to3;
     private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
+    private ConstraintLayout constraintLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Infla il layout del fragment
         View view = inflater.inflate(R.layout.fragment_scenario, container, false);
+
+        //set background e caselle giochi
+        constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
         // Trova le view nel layout
         personaggioImageView = view.findViewById(R.id.imageViewPersonaggio);
@@ -41,11 +46,13 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
         posizioneGioco2ImageView= view.findViewById(R.id.posizione_secondo_esercizio);
         posizioneGioco3ImageView= view.findViewById(R.id.posizione_terzo_esercizio);
 
+
         // Imposta l'immagine delle ImageView dal ViewModel
+        constraintLayout.setBackground(getContext().getDrawable(R.drawable.background_space_scenario));
         personaggioImageView.setImageResource(R.drawable.batman);
-        posizioneGioco1ImageView.setImageResource(R.drawable.candy_yellow);
-        posizioneGioco2ImageView.setImageResource(R.drawable.candy_red);
-        posizioneGioco3ImageView.setImageResource(R.drawable.candy_pink);
+        posizioneGioco1ImageView.setImageResource(R.drawable.uranio);
+        posizioneGioco2ImageView.setImageResource(R.drawable.giove);
+        posizioneGioco3ImageView.setImageResource(R.drawable.earth);
 
 
         curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);

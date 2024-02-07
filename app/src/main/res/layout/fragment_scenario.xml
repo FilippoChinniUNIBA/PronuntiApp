@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayoutScenario"
      android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_candy">
+    android:background="@drawable/background_candy_scenario">
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView
         android:id="@+id/curvedLineView2to3"
@@ -37,7 +38,6 @@
         android:src="@drawable/candy_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         />
 
     <ImageView
