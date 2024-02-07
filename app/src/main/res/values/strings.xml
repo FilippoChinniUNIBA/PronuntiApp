@@ -69,6 +69,11 @@
     <string name="overwriteAudioDescription">Are you sure that you would overwrite the audio?</string>
     <string name="startedRecording">Recording started</string>
     <string name="stopedRecording">Recording stopped</string>
+    <string name="suggestEsercizioCoppiaImmagini">Play the audio before answering!</string>
+    <string name="titleEsercizioCoppiaImmagini">What image are you ear?</string>
+    <string name="titleEsercizioSequenzaParole">What is audio say?\nTry to repeat!</string>
+    <string name="suggestionSequenzaParole">Reproduce the audio with bottom left button, then record the same phrase! </string>
+    <string name="titleEsercizioDenominazioneImmagine">What is in the image?</string>
 
 
     <string-array name="character_names">

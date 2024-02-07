@@ -16,12 +16,13 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -43,42 +44,44 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWithNavigation {
-    private ImageButton buttonAiutiImageView;
-    private ImageButton buttonCompletaEsercizioImageView;
-    private ImageButton buttonAvviaRegistrazione;
-    private View viewOverlayBackground;
-    private ImageView immagineEsercizioDenominazioneImageView;
-    private View viewSuggestionMic;
-    private ScaleAnimation animazioneButtonMic;
-    private View viewAnimationMic, viewConfirmMic, viewStopMic;
-    private ImageView imageViewConfermaRegistrazione;
-    private AudioRecognizer audioRecognizer;
-    private ConstraintLayout constraintLayoutEsercizioDenominazione;
+public class EsercizioSequenzaParole extends AbstractFragmentWithNavigation {
+
     private FineEsercizioView fineEsercizioView;
+    private ConstraintLayout constraintLayoutEsercizioSequenzaParole;
+    private SeekBar seekBarEsercizioSequenzaParole;
+    private ImageButton imageButtonPlay, imageButtonPause;
+    private View viewAnimazioneMic, viewConfirmMic, viewStopMic;
+    private ImageButton imageButtonAvviaRegistrazione, buttonCompletaEsercizio;
+    private ImageView imageViewConfermaRegistrazione;
+    private ScaleAnimation animazioneButtonMic;
+    private MediaPlayer mediaPlayer;
+    private boolean firstClickReproduced = false;
+    private TextView textViewEsercizioMicSuggestion;
+    private View viewClickForSuggestion;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_esercizio_denominazione_immagine, container, false);
-
-        constraintLayoutEsercizioDenominazione = view.findViewById(R.id.constraintLayoutEsercizioDenominazioneImmagine);
-        constraintLayoutEsercizioDenominazione.setVisibility(View.VISIBLE);
+        View view = inflater.inflate(R.layout.fragment_esercizio_sequenza_parole, container, false);
 
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
-
-        buttonAiutiImageView = view.findViewById(R.id.buttonAiuti);
-        buttonCompletaEsercizioImageView = view.findViewById(R.id.buttonCompletaEsercizio);
-        buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
-        immagineEsercizioDenominazioneImageView = view.findViewById(R.id.imageViewImmagineEsercizioDenominazione);
-        viewOverlayBackground = view.findViewById(R.id.viewOverlaySfondoEsercizioDenominazione);
-        viewSuggestionMic = view.findViewById(R.id.textViewEsercizioMicSuggestion);
-        viewAnimationMic = view.findViewById(R.id.viewAnimationMic);
+        textViewEsercizioMicSuggestion = view.findViewById(R.id.textViewEsercizioMicSuggestion);
+        viewClickForSuggestion = view.findViewById(R.id.viewClickForSuggestion);
+        constraintLayoutEsercizioSequenzaParole = view.findViewById(R.id.constraintLayoutEsercizioSequenzaParole);
+        seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
+        imageButtonPlay = view.findViewById(R.id.playButton);
+        imageButtonPause = view.findViewById(R.id.pauseButton);
+        viewAnimazioneMic = view.findViewById(R.id.viewAnimationMic);
         viewConfirmMic = view.findViewById(R.id.viewConfirmMic);
         viewStopMic = view.findViewById(R.id.viewStopRegMic);
+        imageButtonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
+        buttonCompletaEsercizio = view.findViewById(R.id.buttonCompletaEsercizio);
         imageViewConfermaRegistrazione = view.findViewById(R.id.confermaRegistrazioneImageView);
-        imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
+
+        viewClickForSuggestion.setOnClickListener(v -> {
+            showSuggestionMic();
+        });
 
         setAnimazioneRegistrazione();
-        buttonAvviaRegistrazione.setOnClickListener(v -> {
+        imageButtonAvviaRegistrazione.setOnClickListener(v -> {
             setButtonAvviaRegistrazione();
         });
 
@@ -90,11 +93,24 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
             sovrascriviAudio();
         });
 
-        viewOverlayBackground.setOnClickListener(v -> {
-            showSuggestionMic();
+        // Imposta un listener per il pulsante di riproduzione
+        imageButtonPlay.setOnClickListener(v -> {
+            onPlayButtonClick();
+        });
+        // Imposta un listener per il pulsante di pausa
+        imageButtonPause.setOnClickListener(v ->{
+            onPauseButtonClick();
         });
 
-
+        imageButtonAvviaRegistrazione.setOnClickListener(v -> {
+            setButtonAvviaRegistrazione();
+        });
+        viewStopMic.setOnClickListener(v -> {
+            stopRecording();
+        });
+        buttonCompletaEsercizio.setOnClickListener(v -> {
+            invalidConferma();
+        });
 
         return view;
     }
@@ -103,67 +119,10 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        //set dei dei coins da guadagnare
-
         if (!checkPermissions(requireActivity())) {
             requestPermissions(requireActivity());
         }
 
-        FirebaseStorage storage= FirebaseStorage.getInstance();
-
-        AtomicInteger countAiuti = new AtomicInteger(3);
-        StorageReference pinguino = storage.getReference().child("pinguino.jpg");
-        CompletableFuture<String> urlFuture = getUrlFromStorageReference(pinguino);
-        File directoryMusic = getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File fileRegistrazione = new File(directoryMusic,"test");
-        audioRecognizer = new AudioRecognizer(fileRegistrazione,getContext());
-
-
-        urlFuture.thenAccept(imageUrl -> {
-            // Set the image view with the downloaded image
-            Picasso.get().load(imageUrl).into(immagineEsercizioDenominazioneImageView);
-            buttonAvviaRegistrazione.setOnClickListener(v -> {
-                setButtonAvviaRegistrazione();
-            });
-            viewStopMic.setOnClickListener(v -> {
-                stopRecording();
-            });
-            buttonAiutiImageView.setOnClickListener(v -> {
-                if (countAiuti.get() > 1) {
-                    Toast.makeText(getContext(), (countAiuti.get() - 1)+ " "+getContext().getString(R.string.aidRemaining), Toast.LENGTH_SHORT).show();
-                    riproduciAiuti(countAiuti);
-                } else if(countAiuti.get() ==1){
-                    riproduciAiuti(countAiuti);
-                    Toast.makeText(getContext(), getContext().getString(R.string.noAidRemaining), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), getContext().getString(R.string.noAidRemaining), Toast.LENGTH_SHORT).show();
-                }
-            });
-            buttonCompletaEsercizioImageView.setOnClickListener(v -> {
-                invalidConferma();
-            });
-        });
-    }
-
-    private void riproduciAiuti(AtomicInteger countAiuti){
-        FirebaseStorage storage= FirebaseStorage.getInstance();
-        StorageReference aiuto = storage.getReference().child("help.mp3");
-        getUrlFromStorageReference(aiuto).thenAccept(audioUrl -> {
-            try {
-                MediaPlayer aiutiplayer = new MediaPlayer();
-                aiutiplayer.reset();
-                aiutiplayer.setDataSource(audioUrl);
-                aiutiplayer.prepare();
-                aiutiplayer.start();
-                countAiuti.decrementAndGet();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    private void invalidConferma(){
-        Toast.makeText(getContext(), getContext().getString(R.string.recordBeforeCheck), Toast.LENGTH_SHORT).show();
     }
 
     private void showSuggestionMic(){
@@ -178,14 +137,14 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                viewSuggestionMic.setVisibility(View.VISIBLE);
+                textViewEsercizioMicSuggestion.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
             }
         });
-        viewSuggestionMic.startAnimation(fadeIn);
+        textViewEsercizioMicSuggestion.startAnimation(fadeIn);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -199,7 +158,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        viewSuggestionMic.setVisibility(View.INVISIBLE);
+                        textViewEsercizioMicSuggestion.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -207,76 +166,116 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
                     }
                 });
                 // Start the animation set
-                viewSuggestionMic.startAnimation(fadeOut);
+                textViewEsercizioMicSuggestion.startAnimation(fadeOut);
             }
         }, 10000);
     }
-
-    private boolean verificaAudio(){
-        FirebaseStorage storage= FirebaseStorage.getInstance();
-        File directoryMusic = getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File fileConvertito = new File(directoryMusic,"test.mp3");
-        File immagineEsercizio = new File(getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),"pinguino.jpg");
-        EsercizioDenominazioneImmagine esercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500,200,immagineEsercizio, "pinguino", new File("help.mp3"));
-        try{
-            AudioConverter.convertFile(audioRecognizer.getAudioFile(),fileConvertito);
-            List<String> words = audioRecognizer.getText();
-            uploadFileToStorage(fileConvertito, storage.getReference(), requireActivity());
-            if(words.get(0).toLowerCase().equals(esercizioDenominazioneImmagine.getParolaEsercizio())){
-                return true;
-            }else {
-                return false;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            Toast.makeText(getContext(), getContext().getString(R.string.noWordsReconized), Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void onPauseButtonClick() {
+        imageButtonPlay.setVisibility(View.VISIBLE);
+        imageButtonPause.setVisibility(View.GONE);
+        mediaPlayer.pause();
     }
-    private CompletableFuture<String> getUrlFromStorageReference(StorageReference reference) {
-        CompletableFuture<String> future = new CompletableFuture<>();
 
-        reference.getDownloadUrl().addOnSuccessListener(uri -> {
-            String imageUrl = uri.toString();
-            future.complete(imageUrl);
-        }).addOnFailureListener(e -> {
-            future.completeExceptionally(e);
+    private void enableAnswer() {
+        firstClickReproduced = true;
+        buttonCompletaEsercizio.setOnClickListener(v -> {
+            setButtonCompletaEsercizioImageView();
+        });
+    }
+
+    private void onPlayButtonClick() {
+        if (!firstClickReproduced) {
+            enableAnswer();
+        }
+        imageButtonPlay.setVisibility(View.GONE);
+        imageButtonPause.setVisibility(View.VISIBLE);
+        initializeMediaPlayer();
+        mediaPlayer.start();
+    }
+
+    private void initializeMediaPlayer() {
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct_sound);
+
+        mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+            Log.d("EsercizioCoppiaImmagini", "Audio completato");
+            imageButtonPlay.setVisibility(View.VISIBLE);
+            imageButtonPause.setVisibility(View.GONE);
         });
 
-        return future;
-    }
+        seekBarEsercizioSequenzaParole.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mediaPlayer.seekTo(progress * mediaPlayer.getDuration() / 100);
+                }
+            }
 
-    private void setAnimazioneRegistrazione(){
-        animazioneButtonMic = new ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animazioneButtonMic.setDuration(500); // Durata dell'animazione in millisecondi
-        animazioneButtonMic.setRepeatMode(Animation.REVERSE); // Ripetizione dell'animazione in modalità reverse
-        animazioneButtonMic.setRepeatCount(Animation.INFINITE); // Ripetizione dell'animazione infinite volte
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress() * mediaPlayer.getDuration() / 100);
+            }
+        });
+
+        mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+            @Override
+            public void onSeekComplete(MediaPlayer mediaPlayer) {
+                seekBarEsercizioSequenzaParole.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration()));
+            }
+        });
+
+        final int delay = 5; // Milliseconds
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null && mediaPlayer.isPlaying() && seekBarEsercizioSequenzaParole != null) {
+                    seekBarEsercizioSequenzaParole.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration()));
+                }
+                handler.postDelayed(this, delay);
+            }
+        };
+
+        mediaPlayer.setOnPreparedListener(mp -> handler.postDelayed(runnable, delay));
     }
 
     private void stopRecording(){
-        viewAnimationMic.clearAnimation();
-        buttonAvviaRegistrazione.setBackground(getContext().getDrawable(R.drawable.circle_button_mic_background));
+        viewAnimazioneMic.clearAnimation();
+        imageButtonAvviaRegistrazione.setBackground(getContext().getDrawable(R.drawable.circle_button_mic_background));
         imageViewConfermaRegistrazione.setVisibility(View.VISIBLE);
         viewStopMic.setVisibility(View.GONE);
         viewConfirmMic.setVisibility(View.VISIBLE);
-        audioRecognizer.stopRecording();
         Toast.makeText(getContext(), getContext().getString(R.string.stopedRecording), Toast.LENGTH_SHORT).show();
 
-        buttonCompletaEsercizioImageView.setOnClickListener(v -> {
+        buttonCompletaEsercizio.setOnClickListener(v -> {
             setButtonCompletaEsercizioImageView();
         });
     }
 
     private void setButtonCompletaEsercizioImageView(){
         if(verificaAudio()) {
-            constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+            constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioCorretto(50);
         }
         else{
-            constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+            constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioSbagliato(20);
         }
+    }
+
+    private void setAnimazioneRegistrazione() {
+        animazioneButtonMic = new ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        animazioneButtonMic.setDuration(500); // Durata dell'animazione in millisecondi
+        animazioneButtonMic.setRepeatMode(Animation.REVERSE); // Ripetizione dell'animazione in modalità reverse
+        animazioneButtonMic.setRepeatCount(Animation.INFINITE); // Ripetizione dell'animazione infinite volte
+    }
+
+    private void invalidConferma() {
+        Toast.makeText(getContext(), getContext().getString(R.string.recordBeforeCheck), Toast.LENGTH_SHORT).show();
     }
 
     private void sovrascriviAudio(){
@@ -287,14 +286,13 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     }
 
     private void automateStartRecording(){
-        buttonAvviaRegistrazione.setBackground(null);
-        viewAnimationMic.startAnimation(animazioneButtonMic);
+        imageButtonAvviaRegistrazione.setBackground(null);
+        viewAnimazioneMic.startAnimation(animazioneButtonMic);
         imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
         viewStopMic.setVisibility(View.VISIBLE);
         viewConfirmMic.setVisibility(View.GONE);
-        audioRecognizer.startRecording();
 
-        buttonCompletaEsercizioImageView.setOnClickListener(v->{
+        buttonCompletaEsercizio.setOnClickListener(v->{
             invalidConferma();
         });
     }
@@ -307,6 +305,11 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
     }
 
+    private boolean verificaAudio() {
+        //if vero
+        return true;
+        //else return false;
+    }
 
     private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
         CompletableFuture<Void> future = new CompletableFuture<>();
@@ -326,6 +329,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         }
         return future;
     }
+
+
     private boolean checkPermissions(Activity currentactivity) {
         int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
         int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -342,13 +347,5 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO
         }, 1000);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Denominazione immagine");
-        }
     }
 }
