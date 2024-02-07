@@ -123,7 +123,20 @@
         <item>140</item>  <!-- Spiderman -->
         <item>145</item>  <!-- Wonder Woman -->
     </string-array>
-
+    <string name="erroreLoginCredenziali">Missing or incorrect credentials</string>
+    <string name="tastoRiprova">Try Again</string>
+    <string name="erroreRegistrazioneLogopedistaCampiIncompleti">Missing or incomplete fields</string>
+    <string name="erroreRegistrazioneLogopedistaPasswordDifformi">Password and Confirm Password do not match</string>
+    <string name="erroreRegistrazioneLogopedistaAutenticazione">Error in Database; probably the email is already in use. Also check if the email is in the correct format</string>
+    <string name="erroreRegistrazionePazienteCampiMancanti">Missing or incomplete fields (Child)</string>
+    <string name="erroreRegistrazionePazientePasswordDifformi">Password and Confirm Password do not match (Child)</string>
+    <string name="erroreRegistrazionePazienteEtaNonValida">Invalid Age</string>
+    <string name="erroreRegistrazionePazienteDataNonValida">Invalid Date</string>
+    <string name="erroreRegistrazionePazienteSessoNonValido">Invalid Sex value</string>
+    <string name="erroreRegistrazioneGenitoreCampiMancanti">Missing or incomplete fields (Parent)</string>
+    <string name="erroreRegistrazioneGenitorePasswordDifformi">Password and Confirm Password do not match (Parent)</string>
+    <string name="erroreRegistrazionePazienteAutenticazione">Error in Database; probably the child (patient) email is already in use. Also check if the email is in the correct format</string>
+    <string name="erroreRegistrazioneGenitoreAutenticazione">Error in Database; probably the parent email is already in use. Also check if the email is in the correct format</string>
 
 
 </resources>

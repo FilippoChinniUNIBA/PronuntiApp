@@ -51,4 +51,8 @@ public class Autenticazione {
 		return mAuth.getCurrentUser().getUid();
 	}
 
+	public void logout() {
+		mAuth.signOut();
+	}
+
 }

@@ -43,7 +43,7 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
 
         this.mRegistrazioneViewModel = new ViewModelProvider(this).get(RegistrazioneViewModel.class);
 
-        this.editTextNome = (TextInputEditText) view.findViewById(R.id.textInputEditTextNome);
+        this.editTextNome = view.findViewById(R.id.textInputEditTextNome);
         this.editTextCognome = view.findViewById(R.id.textInputEditTextCognome);
         this.editTextEmail = view.findViewById(R.id.textInputEditTextEmail);
         this.editTextUsername = view.findViewById(R.id.textInputEditTextUsername);
@@ -105,16 +105,16 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
         String messaggioErrore = "";
         switch (tipoErrore) {
             case 1:
-                messaggioErrore = "Campi incompleti";
+                messaggioErrore = getString(R.string.erroreRegistrazioneLogopedistaCampiIncompleti);
                 break;
             case 2:
-                messaggioErrore = "Password e conferma password non coincidono";
+                messaggioErrore = getString(R.string.erroreRegistrazioneLogopedistaPasswordDifformi);
                 break;
             case 3:
-                messaggioErrore = "Errore Database: probabilmente email già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                messaggioErrore = getString(R.string.erroreRegistrazioneLogopedistaAutenticazione);
                 break;
         }
-        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, "Riprova");
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
         infoDialog.show();
         infoDialog.setOnConfermaButtonClickListener(null);
     }

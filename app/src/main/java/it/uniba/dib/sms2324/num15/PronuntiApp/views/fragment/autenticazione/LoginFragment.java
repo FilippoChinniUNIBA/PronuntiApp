@@ -69,7 +69,7 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
         CompletableFuture<Boolean> futureIsLoginCorrect = mLoginViewModel.verificaLogin(email, password);
         futureIsLoginCorrect.thenAccept(isLoginCorrect -> {
             if (!isLoginCorrect) {
-                InfoDialog infoDialog = new InfoDialog(getContext(), "Credenziali incorrette o mancanti", "Riprova");
+                InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.erroreLoginCredenziali), getString(R.string.tastoRiprova));
                 infoDialog.show();
                 infoDialog.setOnConfermaButtonClickListener(null);
             }
