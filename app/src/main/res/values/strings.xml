@@ -59,6 +59,15 @@
     <string name="micDenominazioneImmagine">Click to respond!</string>
     <string name="corretto">Correct!</string>
     <string name="sbagliato">Wrong!</string>
+    <string name="aidRemaining"> aid remaning </string>
+    <string name="noAidRemaining">No aid remaning!</string>
+    <string name="recordBeforeCheck">Record before the answer!</string>
+    <string name="noWordsReconized">No word reconized!</string>
+    <string name="overwriteAudio"> Overwrite audio?</string>
+    <string name="overwriteAudioDescription">Are you sure that you would overwrite the audio?</string>
+    <string name="startedRecording">Recording started</string>
+    <string name="stopedRecording">Recording stopped</string>
+
 
     <string-array name="character_names">
         <item>Girl</item>

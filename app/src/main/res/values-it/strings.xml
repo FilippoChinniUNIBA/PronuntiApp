@@ -59,6 +59,14 @@
     <string name="micDenominazioneImmagine">Clicca per rispondere!</string>
     <string name="corretto">Corretto!</string>
     <string name="sbagliato">Sbagliato</string>
+    <string name="aidRemaining"> aiuti rimasti</string>
+    <string name="noAidRemaining">Nessun aiuto rimasto!</string>
+    <string name="recordBeforeCheck">Registra prima la risposta!</string>
+    <string name="noWordsReconized">Nessuna parola riconosciuta!</string>
+    <string name="overwriteAudio"> Sovrascrivi audio?</string>
+    <string name="overwriteAudioDescription">Sei sicuro di voler sovrascrivere l\'audio?</string>
+    <string name="startedRecording">Registrazione avviata</string>
+    <string name="stopedRecording">Registrazione terminata</string>
 
     <string-array name="character_names">
         <item>Bambina</item>

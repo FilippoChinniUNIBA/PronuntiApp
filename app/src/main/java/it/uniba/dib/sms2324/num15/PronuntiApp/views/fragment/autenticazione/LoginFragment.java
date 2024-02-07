@@ -47,8 +47,8 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
         causando il crash dell'app*/
         //loginViewModel.login(textInputEditTextPassword.getText().toString(),textInputEditTextUsername.getText().toString());
 
-        buttonLogin.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new AvvioRapidoFragment()));
-        buttonToRegister.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new RegistrazioneFragment()));
+        buttonLogin.setOnClickListener(v -> replaceFragment(R.id.loginRegistrazioneFrameLayout, new AvvioRapidoFragment(), null));
+        buttonToRegister.setOnClickListener(v -> replaceFragment(R.id.loginRegistrazioneFrameLayout, new RegistrazioneFragment(), null));
 
         return view;
     }

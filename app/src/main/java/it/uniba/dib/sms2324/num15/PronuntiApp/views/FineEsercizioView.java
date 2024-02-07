@@ -1,6 +1,9 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,15 +43,34 @@ public class FineEsercizioView extends FrameLayout {
         textViewEsercizioSbagliato = view.findViewById(R.id.textViewEsercizioSbagliato);
     }
 
-    public void setEsercizioCorretto() {
+    public void setEsercizioCorretto(int coins) {
         frameLayoutFineEsercizio.setVisibility(View.VISIBLE);
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioCorretto.setVisibility(View.VISIBLE);
+        simulateCoinIncrease(coins);
     }
 
-    public void setEsercizioSbagliato() {
+    public void setEsercizioSbagliato(int coins) {
         frameLayoutFineEsercizio.setVisibility(View.VISIBLE);
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioSbagliato.setVisibility(View.VISIBLE);
+        simulateCoinIncrease(coins);
+    }
+
+    private void simulateCoinIncrease(int targetCoins) {
+        //valore da raggiungere
+        // ValueAnimator per animare il valore dei coin
+        ValueAnimator animator = ValueAnimator.ofInt(0, targetCoins);
+        animator.setDuration(1500); // Durata dell'animazione in millisecondi
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                // Aggiorna il testo con il valore corrente dell'animazione
+                int animatedValue = (int) valueAnimator.getAnimatedValue();
+                textViewCoins.setText(String.valueOf(animatedValue));
+            }
+
+        });
+        animator.start();
     }
 }

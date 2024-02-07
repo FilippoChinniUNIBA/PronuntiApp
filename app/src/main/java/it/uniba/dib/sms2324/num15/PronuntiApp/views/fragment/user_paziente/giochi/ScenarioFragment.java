@@ -12,11 +12,13 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragmentCopy;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
     private float xDelta, yDelta;
@@ -185,13 +187,13 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                         //controlla dove sta il personaggio e naviga al gioco corrispondente
                         if(isPersonaggioInAreaPrimoEsercizio()) {
                             Log.d("Personaggio", "in area primo esercizio in esecuzione");
-                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragment(), "scenarioPaziente");
                         }
                         else if(isPersonaggioInAreaSecondaEsercizio()) {
-                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioCoppiaImmagini(), "scenarioPaziente");
                         }
                         else if(isPersonaggioInAreaTerzoEsercizio()) {
-                            navigateTo(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragmentCopy());
+                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragment(), "scenarioPaziente");
                         }
                 }
                 return true;

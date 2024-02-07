@@ -46,7 +46,7 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
 
         buttonRegistrati.setOnClickListener(v -> registration());
 
-        buttonVaiAlLogin.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new LoginFragment()));
+        buttonVaiAlLogin.setOnClickListener(v -> replaceFragment(R.id.loginRegistrazioneFrameLayout, new LoginFragment() ,null));
 
         return view;
     }

@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
@@ -50,7 +49,6 @@ public class TestMenuTestFragment extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		this.buttonToTestApi.setOnClickListener(v -> {
-			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new EsercizioDenominazioneImmagineFragment());
 		});
 
 		this.buttonToTestLogin.setOnClickListener(v -> {
