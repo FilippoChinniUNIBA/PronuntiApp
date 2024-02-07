@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
     private ImageView imageViewImmagine1, imageViewImmagine2;
     private MediaPlayer mediaPlayer;
     private FineEsercizioView fineEsercizioView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,18 +72,16 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
     public void onPauseButtonClick() {
         playButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.GONE);
-        initializeMediaPlayer();
         mediaPlayer.pause();
     }
 
     private void initializeMediaPlayer() {
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct_sound);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                seekBarScorrimentoAudioEsercizioCoppiaImmagini.setProgress(0);
-                mediaPlayer.seekTo(0);
-            }
+
+        mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+            Log.d("EsercizioCoppiaImmagini", "Audio completato");
+            playButton.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.GONE);
         });
 
         seekBarScorrimentoAudioEsercizioCoppiaImmagini.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -110,7 +110,7 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
             }
         });
 
-        final int delay = 1; // Milliseconds
+        final int delay = 5; // Milliseconds
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
@@ -122,19 +122,7 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
             }
         };
 
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                handler.postDelayed(runnable, delay);
-            }
-        });
-
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                handler.removeCallbacks(runnable);
-            }
-        });
+        mediaPlayer.setOnPreparedListener(mp -> handler.postDelayed(runnable, delay));
     }
 }
 
