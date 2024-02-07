@@ -24,9 +24,7 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
     private Button buttonRegistrati;
     private Button buttonVaiAlLogin;
 
-    public RegistrazioneFragment() {
-        // Required empty public constructor
-    }
+    public RegistrazioneFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,14 +42,11 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
         buttonRegistrati = view.findViewById(R.id.buttonRegistrati);
         buttonVaiAlLogin = view.findViewById(R.id.buttonVaiAlLogin);
 
-        buttonRegistrati.setOnClickListener(v -> registration());
+        //buttonRegistrati.setOnClickListener(v -> registration());
 
-        buttonVaiAlLogin.setOnClickListener(v -> navigateTo(R.id.loginRegistrazioneFrameLayout, new LoginFragment()));
+        buttonVaiAlLogin.setOnClickListener(v -> navigateTo(R.id.autenticazioneFrameLayout, new LoginFragment()));
 
         return view;
     }
 
-    private void registration(){
-
-    }
 }

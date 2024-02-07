@@ -10,10 +10,10 @@
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Conferma Password</string>
     <string name="register">Registrati</string>
-    <string name="not_register">Non hai un account? <b>Registrati</b></string>
-    <string name="already_registered">Hai già un account? Accedi</string>
+    <string name="not_register">Sei un Logopedista e non hai un account? <b>Registrati</b></string>
+    <string name="already_registered">Hai già un account? <b>Accedi</b></string>
     <string name="login">Accedi</string>
-    <string name="subtitle_registration">Benvenuto, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>
+    <string name="subtitle_registration">Benvenuto Dottore, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>
     <string name="modify_profile"> Modifica profilo </string>
     <string name="confirm_modify_profile"> Conferma modifiche</string>
     <string name="birth_date_hint">Data di nascita</string>
@@ -81,5 +81,7 @@
         <item>Spiderman</item>
         <item>Wonder Woman</item>
     </string-array>
+    <string name="accesso_rapido">Accesso Rapido</string>
+    <string name="infoTitle">Info</string>
 
 </resources>

@@ -12,7 +12,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.Logi
 public class FirstActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_registrazione);
+        setContentView(R.layout.activity_first_activity);
 
         if (savedInstanceState == null) {
             // Crea un'istanza del Fragment
@@ -23,7 +23,7 @@ public class FirstActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // Aggiungi il Fragment al FrameLayout
-            fragmentTransaction.add(R.id.loginRegistrazioneFrameLayout, loginFragment);
+            fragmentTransaction.add(R.id.autenticazioneFrameLayout, loginFragment);
             fragmentTransaction.commit();
         }
     }

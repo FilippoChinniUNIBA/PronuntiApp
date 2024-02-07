@@ -2,13 +2,15 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog;
 
 import android.content.Context;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+
 public class InfoDialog extends AbstractPopUpDialog {
 
-	public InfoDialog(Context context, String descrizione) {
+	public InfoDialog(Context context, String descrizione, String testoBottoneConferma) {
 		super(context);
-		setTitolo(""); //TODO aggiungi un titolo come string id
+		setTitolo(context.getString(R.string.infoTitle));
 		setDescrizione(descrizione);
-		setConfermaButtonText("OK"); //TODO aggiungi string id
+		setConfermaButtonText(testoBottoneConferma);
 	}
 
 

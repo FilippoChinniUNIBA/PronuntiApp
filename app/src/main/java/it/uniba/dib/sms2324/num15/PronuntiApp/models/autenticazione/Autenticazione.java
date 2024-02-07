@@ -13,10 +13,6 @@ public class Autenticazione {
 		mAuth = FirebaseAuth.getInstance();
 	}
 
-	public FirebaseAuth getAuth() {
-		return mAuth;
-	}
-
 	public CompletableFuture<String> registrazione(String email, String password) {
 		CompletableFuture<String> future = new CompletableFuture<>();
 
@@ -49,6 +45,10 @@ public class Autenticazione {
 				});
 
 		return future;
+	}
+
+	public String getCurrentUserId() {
+		return mAuth.getCurrentUser().getUid();
 	}
 
 }

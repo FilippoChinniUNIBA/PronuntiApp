@@ -50,12 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextUsernameLogin"
+                android:id="@+id/textInputEditTextEmailLogin"
                 style="@style/TextInputEditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username_hint"
-                android:inputType="textPersonName" />
+                android:hint="@string/email_hint"
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- TextInputLayout e TextInputEditText per Password -->
@@ -95,11 +95,18 @@
             android:text="@string/login" />
 
         <Button
+            android:id="@+id/buttonAccessoRapido"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/accesso_rapido" />
+
+        <Button
             android:id="@+id/buttonToRegister"
             style="@style/TrasparentButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="40dp"
             android:text="@string/not_register"
             android:textAllCaps="false" />
     </LinearLayout>

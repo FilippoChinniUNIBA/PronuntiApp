@@ -10,10 +10,11 @@
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="register">Sign Up</string>
-    <string name="not_register">Don\'t have an account? <b>Register</b></string>
-    <string name="already_registered">Already have an account? Login</string>
+    <string name="not_register">Are you a Speech Therapist and don\'t have an account? <b>Register</b></string>
+    <string name="already_registered">Already have an account? <b>Login</b></string>
     <string name="login">Sign in</string>
-    <string name="subtitle_registration">Welcome, enter your data to start using the application!</string>
+    <string name="accesso_rapido">Quick Access</string>
+    <string name="subtitle_registration">Welcome Doctor, enter your data to start using the application!</string>
     <string name="modify_profile"> Edit profile </string>
     <string name="confirm_modify_profile"> Confirm edit profile</string>
     <string name="birth_date_hint">Birth date</string>
@@ -47,6 +48,7 @@
     <string name="errorPermissionOption2">I don\'t want to give them</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="infoTitle">Info</string>
     <string name="startRecording">Start Recording</string>
     <string name="stopRecording">Stop Recording</string>
     <string name="CheckAnswer">Check</string>
