@@ -45,7 +45,8 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
     @Override
     void setData() {
 
-        Genitore genitore = null; /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
+        Genitore genitore = new Genitore( "nome", "cognome", "username", "email", "password", "telefono");
+        /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
 
         textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);

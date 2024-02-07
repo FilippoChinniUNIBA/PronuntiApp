@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.DatePickerCustom;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.LoginFragment;
 
 public class TestMenuTestFragment extends Fragment {
@@ -23,7 +24,7 @@ public class TestMenuTestFragment extends Fragment {
 	private Button buttonFragmentInserimentoDatiDB;
 	private Button buttonFragmentNuovoTest1;
 	private Button buttonFragmentNuovoTest2;
-
+	private Button buttonFragmentTestDatePicker;
 	public TestMenuTestFragment() {}
 
 	@Override
@@ -39,6 +40,7 @@ public class TestMenuTestFragment extends Fragment {
 		this.buttonFragmentInserimentoDatiDB = view.findViewById(R.id.buttonFragmentInserimentoDatiDB);
 		this.buttonFragmentNuovoTest1 = view.findViewById(R.id.buttonFragmenttestNuovotest1);
 		this.buttonFragmentNuovoTest2 = view.findViewById(R.id.buttonFragmenttestNuovotest2);
+		buttonFragmentTestDatePicker = view.findViewById(R.id.buttonFragmenttestDatePicker);
 
 		return view;
 
@@ -73,6 +75,10 @@ public class TestMenuTestFragment extends Fragment {
 
 		this.buttonFragmentNuovoTest2.setOnClickListener(v -> {
 			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new TestNuovoTest2Fragment());
+		});
+
+		buttonFragmentTestDatePicker.setOnClickListener(v -> {
+			replaceFragment(mFragmentManager, R.id.TEST_frameLayoutActivityTest, new DatePickerCustom());
 		});
 
 	}

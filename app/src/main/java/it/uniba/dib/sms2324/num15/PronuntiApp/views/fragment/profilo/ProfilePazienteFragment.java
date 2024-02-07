@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDate;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
@@ -60,7 +62,8 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
 
     public void setData(){
 
-        Paziente paziente = null; /*profilePazienteViewModel.getPaziente();*/  //TODO deve prendere il paziente dal viewmodel
+        Paziente paziente = new Paziente("nome", "cognome", "username", "email", "password",20, java.time.LocalDate.of(2002,12,2),'M',100,100,null);
+        /*profilePazienteViewModel.getPaziente();*/  //TODO deve prendere il paziente dal viewmodel
 
         textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);
