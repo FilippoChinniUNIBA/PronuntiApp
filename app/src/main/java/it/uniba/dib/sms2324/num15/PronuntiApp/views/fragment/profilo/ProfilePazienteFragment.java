@@ -9,14 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfilePazienteViewModel;
 
 public class ProfilePazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
@@ -25,11 +21,9 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
 
-    private ProfilePazienteViewModel profilePazienteViewModel;
-
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_paziente, container, false);
@@ -43,8 +37,6 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
         //setPickMedia();
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
-
-        this.profilePazienteViewModel = new ViewModelProvider(this).get(ProfilePazienteViewModel.class);
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -68,7 +60,7 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
 
     public void setData(){
 
-        Paziente paziente = profilePazienteViewModel.getPaziente();
+        Paziente paziente = null; /*profilePazienteViewModel.getPaziente();*/  //TODO deve prendere il paziente dal viewmodel
 
         textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -99,8 +91,8 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
         //save();
 
         setData();
-
    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -108,9 +100,5 @@ public class ProfilePazienteFragment extends AsbtractProfileFragment{
             getActivity().setTitle("Profilo");
         }
     }
-
-    //richiamre dao per salvare in db
-    //@Ovvveride
-    //public void save(){}
 
 }

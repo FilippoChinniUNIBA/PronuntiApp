@@ -5,27 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfileLogopedistaViewModel;
 
 
 public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment {
-
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
-    private ProfileLogopedistaViewModel profileLogopedistaViewModel;
 
-    public ProfileLogopedistaFragment(){
-        // require a empty public constructor
-    }
+    public ProfileLogopedistaFragment() {}
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
@@ -38,8 +29,6 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
 
-        this.profileLogopedistaViewModel = new ViewModelProvider(this).get(ProfileLogopedistaViewModel.class);
-
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
 
@@ -50,7 +39,7 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
 
     public void setData(){
 
-        Logopedista logopedista = profileLogopedistaViewModel.getLogopedista();
+        Logopedista logopedista = null; /*profileLogopedistaViewModel.getLogopedista();*/ //TODO deve prendere il logopedista dal viewmodel
 
         textInputEditTextNome.setText(logopedista.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -85,6 +74,7 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -93,9 +83,6 @@ public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment
         }
     }
 
-    //richiamre dao per salvare in db
-    //@Ovvveride
-    //public void save(){}
 
 
 }

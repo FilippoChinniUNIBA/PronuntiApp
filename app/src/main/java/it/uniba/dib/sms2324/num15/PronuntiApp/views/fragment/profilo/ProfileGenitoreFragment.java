@@ -5,24 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.profile_viewmodel.ProfileGenitoreViewModel;
 
 public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
-
     private TextInputEditText textInputEditTextTelefono;
     private ProfilePazienteFragment profilePazienteFragment;
-    private ProfileGenitoreViewModel profileGenitoreViewModel;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
@@ -35,8 +29,6 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloGenitore);
         setPickMedia();
 
-        this.profileGenitoreViewModel = new ViewModelProvider(this).get(ProfileGenitoreViewModel.class);
-
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
         setData();
@@ -47,14 +39,13 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         fragmentTransaction.replace(R.id.containerBambino, profilePazienteFragment);
         fragmentTransaction.commit();
 
-
         return view;
     }
 
     @Override
     void setData() {
 
-        Genitore genitore = profileGenitoreViewModel.getGenitore();
+        Genitore genitore = null; /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
 
         textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -95,4 +86,13 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            getActivity().setTitle("Profilo");
+        }
+    }
+
 }

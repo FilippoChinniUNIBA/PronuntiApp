@@ -20,29 +20,20 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
 
 public class RegistrazioneViewModel extends ViewModel {
-	public static CompletableFuture<String> verificaRegistrazione(String email, String password, String confermaPassword) {
+
+	public static CompletableFuture<String> verificaRegistrazione(String email, String password) {
 		CompletableFuture<String> future = new CompletableFuture<>();
 
-		if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
-			future.complete(null);
-		}
-		else if (!password.equals(confermaPassword)) {
-			future.complete(null);
-		}
-		else {
-			Autenticazione auth = new Autenticazione();
-			auth.registrazione(email, password).handle((userId, exception) -> {
-				if (exception != null) {
-					Log.d("RegistrazioneViewModel.verificaRegistrazione()", "Errore durante la registrazione: " + exception.getMessage()); //TODO aggiungere agli errori
-					future.complete(null);
-				}
-				else {
-					future.complete(userId);
-				}
-				return null;
-			});
-		}
-
+		Autenticazione auth = new Autenticazione();
+		auth.registrazione(email, password).handle((userId, exception) -> {
+			if (exception != null) {
+				Log.e("RegistrazioneViewModel.verificaRegistrazione()", "Errore durante la registrazione: " + exception.getMessage()); //TODO aggiungere agli errori
+				future.complete(null);
+			} else {
+				future.complete(userId);
+			}
+			return null;
+		});
 		return future;
 	}
 
@@ -61,6 +52,16 @@ public class RegistrazioneViewModel extends ViewModel {
 		helperRegistrazione(userId, tipoUtente);
 
 		return logopedista;
+	}
+
+	public int verificaCorrettezzaCampiLogopedista(String nomeLogopedista, String cognomeLogopedista, String usernameLogopedista, String emailLogopedista, String passwordLogopedista, String confermaPasswordLogopedista, String telefono, String indirizzo) {
+		if (nomeLogopedista.isEmpty() || cognomeLogopedista.isEmpty() || usernameLogopedista.isEmpty() || emailLogopedista.isEmpty() || passwordLogopedista.isEmpty() || confermaPasswordLogopedista.isEmpty() || telefono.isEmpty() || indirizzo.isEmpty() || nomeLogopedista == null || cognomeLogopedista == null || usernameLogopedista == null || emailLogopedista == null || passwordLogopedista == null || confermaPasswordLogopedista == null || telefono == null || indirizzo == null) {
+			return 1;	//Campi incompleti
+		}
+		if (!passwordLogopedista.equals(confermaPasswordLogopedista)) {
+			return 2;	//Password Difformi
+		}
+		return 0;
 	}
 
 }

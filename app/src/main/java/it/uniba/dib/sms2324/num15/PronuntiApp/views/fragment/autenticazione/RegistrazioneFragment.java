@@ -77,24 +77,46 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
         String telefono = editTextTelefono.getText().toString();
         String indirizzo = editTextIndirizzo.getText().toString();
 
-        CompletableFuture<String> futureIsRegistrationCorrect = RegistrazioneViewModel.verificaRegistrazione(email, password, confermaPassword);
-        futureIsRegistrationCorrect.thenAccept(userId -> {
-            if (userId == null) {
-                InfoDialog infoDialog = new InfoDialog(getContext(), "Campi incompleti o incorretti. Oppure password difformi.", "Riprova");
-                infoDialog.show();
-                infoDialog.setOnConfermaButtonClickListener(null);
-            }
-            else {
-                Logopedista logopedista = mRegistrazioneViewModel.registrazioneLogopedista(userId, nome, cognome, username, email, password, telefono, indirizzo);
-                Log.d("RegistrazioneFragment.eseguiRegistrazione()", "Logopedista: " + logopedista.toString());
+        int statusCampiValidi = mRegistrazioneViewModel.verificaCorrettezzaCampiLogopedista(nome, cognome, username, email, password, confermaPassword, telefono, indirizzo);
+        if (statusCampiValidi != 0) {
+            creaDialogErroreCampi(statusCampiValidi);
+        }
+        else {
+            CompletableFuture<String> futureIsRegistrationCorrect = RegistrazioneViewModel.verificaRegistrazione(email, password);
+            futureIsRegistrationCorrect.thenAccept(userId -> {
+                if (userId == null) {
+                    creaDialogErroreCampi(3);   //Errore Database probabilmente email già in uso
+                }
+                else {
+                    Logopedista logopedista = mRegistrazioneViewModel.registrazioneLogopedista(userId, nome, cognome, username, email, password, telefono, indirizzo);
+                    Log.d("RegistrazioneFragment.eseguiRegistrazione()", "Logopedista: " + logopedista.toString());
 
-                getActivity().runOnUiThread(() -> {
-                    Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
-                    intent.putExtra("profilo", logopedista);
-                    startActivity(intent);
-                });
-            }
-        });
+                    getActivity().runOnUiThread(() -> {
+                        Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
+                        intent.putExtra("profilo", logopedista);
+                        startActivity(intent);
+                    });
+                }
+            });
+        }
+    }
+
+    public void creaDialogErroreCampi(int tipoErrore) {
+        String messaggioErrore = "";
+        switch (tipoErrore) {
+            case 1:
+                messaggioErrore = "Campi incompleti";
+                break;
+            case 2:
+                messaggioErrore = "Password e conferma password non coincidono";
+                break;
+            case 3:
+                messaggioErrore = "Errore Database: probabilmente email già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                break;
+        }
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, "Riprova");
+        infoDialog.show();
+        infoDialog.setOnConfermaButtonClickListener(null);
     }
 
 }

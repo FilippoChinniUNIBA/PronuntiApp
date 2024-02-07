@@ -29,7 +29,7 @@ public class LoginViewModel extends ViewModel {
 			Autenticazione auth = new Autenticazione();
 			auth.login(email, password).handle((userId, exception) -> {
 				if (exception != null) {
-					Log.d("LoginViewModel.verificaLogin()", "Errore durante il login: " + exception.getMessage()); //TODO aggiungere agli errori
+					Log.e("LoginViewModel.verificaLogin()", "Errore durante il login: " + exception.getMessage()); //TODO aggiungere agli errori
 					future.complete(false);
 				}
 				else {
@@ -72,6 +72,7 @@ public class LoginViewModel extends ViewModel {
 					Log.e("LoginViewModel.login()", "TipoUtente non riconosciuto: " + tipoUtente);  //TODO aggiungere agli errori
 			}
 		});
+
 		return future;
 	}
 

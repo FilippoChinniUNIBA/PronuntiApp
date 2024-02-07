@@ -31,7 +31,7 @@ public class LogopedistaActivity extends AbstractAppActivity {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("LogopedistaActivity", mLogopedistaViewModel.getLogopedista().toString());
+        //Log.d("LogopedistaActivity", mLogopedistaViewModel.getLogopedista().toString());
     }
 
 

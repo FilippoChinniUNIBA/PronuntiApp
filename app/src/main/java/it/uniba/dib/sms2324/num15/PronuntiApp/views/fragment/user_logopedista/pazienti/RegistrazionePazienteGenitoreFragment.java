@@ -17,10 +17,11 @@ import java.time.LocalDate;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.Autenticazione;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.RegistrazionePazienteGenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.RegistrazionePazienteGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -45,14 +46,16 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
 
     private Button buttonRegistraPazienteEGenitore;
 
-    private RegistrazionePazienteGenitoreViewModel mRegistrazionePazienteGenitoreViewModel;
+    private LogopedistaViewModel mLogopedistaViewModel;
+    private RegistrazionePazienteGenitoreController mController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_registrazione_paziente_genitore, container, false);
 
-        this.mRegistrazionePazienteGenitoreViewModel = new ViewModelProvider(this).get(RegistrazionePazienteGenitoreViewModel.class);
+        this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        this.mController = mLogopedistaViewModel.getRegistrazionePazienteGenitoreController();
 
 
         this.editTextNomePaziente = view.findViewById(R.id.textInputEditTextNomePaziente);
@@ -83,14 +86,15 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         super.onViewCreated(view, savedInstanceState);
 
         buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
-            Autenticazione auth = new Autenticazione();
-            String idLogopedista = auth.getCurrentUserId(); //TODO dovrebbe prenderlo dal logopedista del main viewModel dell'activity
+            Logopedista mLogopedista = mLogopedistaViewModel.getLogopedista();
+            String idLogopedista = mLogopedista.getIdProfilo();
 
             eseguiRegistrazionePaziente(idLogopedista).thenAccept(paziente -> {
                 eseguiRegistrazioneGenitore(idLogopedista, paziente.getIdProfilo()).thenAccept(genitore -> {
-                    //TODO qui logopedista deve riloggarsi, e solo DOPO si deve eseguire il resto
-                    //TODO qui l'oggetto logopedista del main viewModel dell'activity deve essere aggiornato
-                    replaceFragment(R.id.frameLayoutLogopedista, new PazientiFragment(), null);
+                    mController.reLogLogopedista(mLogopedista.getEmail(), mLogopedista.getPassword()).thenAccept(userId -> {
+                        mLogopedista.addPaziente(paziente);
+                        getActivity().runOnUiThread(() -> replaceFragment(R.id.frameLayoutLogopedista, new PazientiFragment(), null));
+                    });
                 });
             });
         });
@@ -103,25 +107,30 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         String usernamePaziente = editTextUsernamePaziente.getText().toString();
         String passwordPaziente = editTextPasswordPaziente.getText().toString();
         String confermaPasswordPaziente = editTextConfermaPasswordPaziente.getText().toString();
-        char sessoPaziente = editTextSessoPaziente.getText().toString().charAt(0);
-        LocalDate dataNascitaPaziente = LocalDate.parse(editTextDataNascitaPaziente.getText().toString());
-        int etaPaziente = Integer.parseInt(editTextEtaPaziente.getText().toString());
 
         CompletableFuture<Paziente> futurePaziente = new CompletableFuture<>();
 
-        CompletableFuture<String> futureIsRegistrationCorrect = verificaRegistrazione(emailPaziente, passwordPaziente, confermaPasswordPaziente);
-        futureIsRegistrationCorrect.thenAccept(userId -> {
-            if (userId == null) {
-                InfoDialog infoDialog = new InfoDialog(getContext(), "Campi del Genitore incompleti o incorretti. Oppure password difformi.", "Riprova");
-                infoDialog.show();
-                infoDialog.setOnConfermaButtonClickListener(null);
-            } else {
-                Paziente paziente = mRegistrazionePazienteGenitoreViewModel.registrazionePaziente(userId, nomePaziente, cognomePaziente, usernamePaziente, emailPaziente, passwordPaziente, etaPaziente, dataNascitaPaziente, sessoPaziente, idLogopedista);
-                Log.d("RegistrazionePazienteGenitoreFragment.eseguiRegistrazionePaziente()", paziente.toString());
+        int statusCampiValidi = mController.verificaCorrettezzaCampiPaziente(nomePaziente, cognomePaziente, emailPaziente, usernamePaziente, passwordPaziente, confermaPasswordPaziente, editTextEtaPaziente.getText().toString(), editTextDataNascitaPaziente.getText().toString(), editTextSessoPaziente.getText().toString());
+        if (statusCampiValidi != 0) {
+            creaDialogErroreCampi(statusCampiValidi);
+        }
+        else {
+            char sessoPaziente = editTextSessoPaziente.getText().toString().charAt(0);
+            LocalDate dataNascitaPaziente = LocalDate.parse(editTextDataNascitaPaziente.getText().toString());
+            int etaPaziente = Integer.parseInt(editTextEtaPaziente.getText().toString());
 
-                futurePaziente.complete(paziente);
-            }
-        });
+            CompletableFuture<String> futureIsRegistrationCorrect = verificaRegistrazione(emailPaziente, passwordPaziente);
+            futureIsRegistrationCorrect.thenAccept(userId -> {
+                if (userId == null) {
+                    creaDialogErroreCampi(8);   //Errore del Database; probabilmente email del bambino già in uso
+                } else {
+                    Paziente paziente = mController.registrazionePaziente(userId, nomePaziente, cognomePaziente, usernamePaziente, emailPaziente, passwordPaziente, etaPaziente, dataNascitaPaziente, sessoPaziente, idLogopedista);
+                    Log.d("RegistrazionePazienteGenitoreFragment.eseguiRegistrazionePaziente()", paziente.toString());
+
+                    futurePaziente.complete(paziente);
+                }
+            });
+        }
 
         return futurePaziente;
     }
@@ -137,21 +146,61 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
 
         CompletableFuture<Genitore> futureGenitore = new CompletableFuture<>();
 
-        CompletableFuture<String> futureIsRegistrationCorrect = verificaRegistrazione(emailGenitore, passwordGenitore, confermaPasswordGenitore);
-        futureIsRegistrationCorrect.thenAccept(userId -> {
-            if (userId == null) {
-                InfoDialog infoDialog = new InfoDialog(getContext(), "Campi del Bambino incompleti o incorretti. Oppure password difformi.", "Riprova");
-                infoDialog.show();
-                infoDialog.setOnConfermaButtonClickListener(null);
-            } else {
-                Genitore genitore = mRegistrazionePazienteGenitoreViewModel.registrazioneGenitore(userId, nomeGenitore, cognomeGenitore, usernameGenitore, emailGenitore, passwordGenitore, telefonoGenitore, idLogopedista, idPaziente);
-                Log.d("RegistrazionePazienteGenitoreFragment.eseguiRegistrazioneGenitore()", genitore.toString());
+        int statusCampiValidi = mController.verificaCorrettezzaCampiGenitore(nomeGenitore, cognomeGenitore, emailGenitore, usernameGenitore, passwordGenitore, confermaPasswordGenitore, telefonoGenitore);
+        if (statusCampiValidi != 0) {
+            creaDialogErroreCampi(statusCampiValidi);
+        }
+        else {
+            CompletableFuture<String> futureIsRegistrationCorrect = verificaRegistrazione(emailGenitore, passwordGenitore);
+            futureIsRegistrationCorrect.thenAccept(userId -> {
+                if (userId == null) {
+                    creaDialogErroreCampi(9);   //Errore del Database; probabilmente email del genitore già in uso
+                } else {
+                    Genitore genitore = mController.registrazioneGenitore(userId, nomeGenitore, cognomeGenitore, usernameGenitore, emailGenitore, passwordGenitore, telefonoGenitore, idLogopedista, idPaziente);
+                    Log.d("RegistrazionePazienteGenitoreFragment.eseguiRegistrazioneGenitore()", genitore.toString());
 
-                futureGenitore.complete(genitore);
-            }
-        });
+                    futureGenitore.complete(genitore);
+                }
+            });
+        }
 
         return futureGenitore;
+    }
+
+    public void creaDialogErroreCampi(int tipoErrore) {
+        String messaggioErrore = "";
+        switch (tipoErrore) {
+            case 1:
+                messaggioErrore = "Campi incompleti (Bambino)";
+                break;
+            case 2:
+                messaggioErrore = "Password e conferma password non coincidono (Bambino)";
+                break;
+            case 3:
+                messaggioErrore = "Età non valida";
+                break;
+            case 4:
+                messaggioErrore = "Data di nascita non valida";
+                break;
+            case 5:
+                messaggioErrore = "Sesso non valido";
+                break;
+            case 6:
+                messaggioErrore = "Campi incompleti (Genitore)";
+                break;
+            case 7:
+                messaggioErrore = "Password e conferma password non coincidono (Genitore)";
+                break;
+            case 8:
+                messaggioErrore = "Errore Database: probabilmente email del bambino già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                break;
+            case 9:
+                messaggioErrore = "Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l'email sia nel formato corretto";
+                break;
+        }
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, "Riprova");
+        infoDialog.show();
+        infoDialog.setOnConfermaButtonClickListener(null);
     }
 
 }
