@@ -20,7 +20,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
 
 public class RegistrazioneViewModel extends ViewModel {
-	public CompletableFuture<String> verificaRegistrazione(String email, String password, String confermaPassword) {
+	public static CompletableFuture<String> verificaRegistrazione(String email, String password, String confermaPassword) {
 		CompletableFuture<String> future = new CompletableFuture<>();
 
 		if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
@@ -46,6 +46,11 @@ public class RegistrazioneViewModel extends ViewModel {
 		return future;
 	}
 
+	public static void helperRegistrazione(String userId, TipoUtente tipoUtente) {
+		DAOGenerica daoGenerica = new DAOGenerica();
+		daoGenerica.saveTipoUtente(userId, tipoUtente);
+	}
+
 	public Logopedista registrazioneLogopedista(String userId, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo) {
 		TipoUtente tipoUtente = TipoUtente.LOGOPEDISTA;
 
@@ -57,47 +62,5 @@ public class RegistrazioneViewModel extends ViewModel {
 
 		return logopedista;
 	}
-
-	public Genitore registrazioneGenitore(String userId, String nome, String cognome, String username, String email, String password, String telefono, String idPaziente) {
-		TipoUtente tipoUtente = TipoUtente.GENITORE;
-
-		Genitore genitore = new Genitore(userId, nome, cognome, username, email, password, telefono);
-		GenitoreDAO genitoreDAO = new GenitoreDAO();
-		genitoreDAO.save(genitore, idPaziente); //TODO qui serve che il Logopedista si rilogghi prima di fare questa operazione
-
-		helperRegistrazione(userId, tipoUtente);
-
-		return genitore;
-	}
-
-	public Paziente registrazionePaziente(String userId, String nome, String cognome, String username, String email, String password, int eta, LocalDate dataNascita, char sesso, int valuta, int punteggioTot) {
-		TipoUtente tipoUtente = TipoUtente.PAZIENTE;
-
-		Paziente paziente = new Paziente(userId, nome, cognome, username, email, password, eta, dataNascita, sesso, valuta, punteggioTot, PERSONAGGI_INIZIALI);
-		PazienteDAO pazienteDAO = new PazienteDAO();
-		pazienteDAO.save(paziente); //TODO qui serve che il Logopedista si rilogghi prima di fare questa operazione
-
-		helperRegistrazione(userId, tipoUtente);
-
-		return paziente;
-	}
-
-	public void helperRegistrazione(String userId, TipoUtente tipoUtente) {
-		DAOGenerica daoGenerica = new DAOGenerica();
-		daoGenerica.saveTipoUtente(userId, tipoUtente);
-	}
-
-	private static final Map<String, Integer> PERSONAGGI_INIZIALI = new HashMap<String, Integer>() {{
-		put("personaggio1", 0);
-		put("personaggio2", 0);
-		put("personaggio3", 0);
-		put("personaggio4", 0);
-		put("personaggio5", 0);
-		put("personaggio6", 0);
-		put("personaggio7", 0);
-		put("personaggio8", 0);
-		put("personaggio9", 0);
-		put("personaggio10", 0);
-	}};
 
 }

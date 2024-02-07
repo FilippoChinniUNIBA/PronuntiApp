@@ -34,10 +34,7 @@ public class GenitoreDAO {
 		firebaseAuth = FirebaseAuth.getInstance();
 	}
 
-	public void save(Genitore obj, String idPaziente) {
-		//solo il logopedista può salvare un genitore
-		String idLogopedista = firebaseAuth.getCurrentUser().getUid();
-
+	public void save(Genitore obj, String idLogopedista, String idPaziente) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI).child(idPaziente).child(CostantiNodiDB.GENITORE);
 		String dbKey = obj.getIdProfilo();
 		ref.child(dbKey).setValue(obj.toMap());

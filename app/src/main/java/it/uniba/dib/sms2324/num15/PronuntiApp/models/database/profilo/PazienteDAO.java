@@ -33,10 +33,7 @@ public class PazienteDAO {
 		firebaseAuth = FirebaseAuth.getInstance();
 	}
 
-	public void save(Paziente obj) {
-		//solo il logopedista può salvare un paziente
-		String idLogopedista = firebaseAuth.getCurrentUser().getUid();
-
+	public void save(Paziente obj, String idLogopedista) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI).child(idLogopedista).child(CostantiNodiDB.PAZIENTI);
 		String dbKey = obj.getIdProfilo();
 		ref.child(dbKey).setValue(obj.toMap());

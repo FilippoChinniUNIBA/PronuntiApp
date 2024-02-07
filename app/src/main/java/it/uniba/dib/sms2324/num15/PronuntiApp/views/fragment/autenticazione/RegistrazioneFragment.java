@@ -77,7 +77,7 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
         String telefono = editTextTelefono.getText().toString();
         String indirizzo = editTextIndirizzo.getText().toString();
 
-        CompletableFuture<String> futureIsRegistrationCorrect = mRegistrazioneViewModel.verificaRegistrazione(email, password, confermaPassword);
+        CompletableFuture<String> futureIsRegistrationCorrect = RegistrazioneViewModel.verificaRegistrazione(email, password, confermaPassword);
         futureIsRegistrationCorrect.thenAccept(userId -> {
             if (userId == null) {
                 InfoDialog infoDialog = new InfoDialog(getContext(), "Campi incompleti o incorretti. Oppure password difformi.", "Riprova");
