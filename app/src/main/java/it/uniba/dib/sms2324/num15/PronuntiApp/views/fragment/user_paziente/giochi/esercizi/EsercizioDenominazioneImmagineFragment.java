@@ -269,19 +269,13 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     }
 
     private void setButtonCompletaEsercizioImageView(){
-        MediaPlayer correctplayer = MediaPlayer.create(getContext(),R.raw.correct_sound);
-        MediaPlayer errorplayer = MediaPlayer.create(getContext(),R.raw.error_sound);
         if(verificaAudio()) {
-            correctplayer.start();
             constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioCorretto(50);
-            tornaAScenario();
         }
         else{
-            errorplayer.start();
             constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioSbagliato(20);
-            tornaAScenario();
         }
     }
 
@@ -313,9 +307,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
     }
 
-    private void tornaAScenario(){
-        takeBackFragmentFromBackStack(R.id.frameLayoutPaziente, "scenarioPaziente");
-    }
 
     private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
         CompletableFuture<Void> future = new CompletableFuture<>();

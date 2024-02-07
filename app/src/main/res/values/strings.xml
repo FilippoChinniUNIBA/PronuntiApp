@@ -69,7 +69,7 @@
     <string name="overwriteAudioDescription">Are you sure that you would overwrite the audio?</string>
     <string name="startedRecording">Recording started</string>
     <string name="stopedRecording">Recording stopped</string>
-
+    <string name="suggestEsercizioCoppiaImmagini">Play the audio before answering!</string>
 
     <string-array name="character_names">
         <item>Girl</item>

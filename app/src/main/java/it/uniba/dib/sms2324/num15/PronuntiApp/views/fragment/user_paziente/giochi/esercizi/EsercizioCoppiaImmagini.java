@@ -1,13 +1,18 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi;
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -30,14 +36,17 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWit
 
 public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
 
-    private TextView textViewEsercizioCoppiaImmagini;
+    private TextView textViewEsercizioCoppiaImmagini, textViewEsercizioPlaySuggestion;
     private SeekBar seekBarScorrimentoAudioEsercizioCoppiaImmagini;
     private ImageButton playButton;
     private ImageButton pauseButton;
-    private ImageView imageViewImmagine1, imageViewImmagine2;
+    private ImageView imageButtonImmagine1, imageButtonImmagine2;
     private MediaPlayer mediaPlayer;
     private FineEsercizioView fineEsercizioView;
-
+    private ConstraintLayout constraintLayoutEsercizioCoppiaImmagini;
+    private FrameLayout fl1ImmagineEsercizioCoppiaImmagini, fl2ImmagineEsercizioCoppiaImmagini;
+    private boolean isLongClick = false, firstClickReproduced = false;
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,24 +54,123 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
         View view = inflater.inflate(R.layout.fragment_esercizio_coppia_immaini, container, false);
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
 
+        constraintLayoutEsercizioCoppiaImmagini = view.findViewById(R.id.constraintLayoutEsercizioCoppiaImmagini);
+        fl1ImmagineEsercizioCoppiaImmagini = view.findViewById(R.id.fl1ImmagineEsercizioCoppiaImmagini);
+        fl2ImmagineEsercizioCoppiaImmagini = view.findViewById(R.id.fl2ImmagineEsercizioCoppiaImmagini);
+
         // Trova le viste all'interno del layout del fragment
         textViewEsercizioCoppiaImmagini = view.findViewById(R.id.textViewEsercizioCoppiaImmagini);
+        textViewEsercizioPlaySuggestion = view.findViewById(R.id.textViewEsercizioPlaySuggestion);
         seekBarScorrimentoAudioEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
         playButton = view.findViewById(R.id.playButton);
         pauseButton = view.findViewById(R.id.pauseButton);
-        imageViewImmagine1=view.findViewById(R.id.imageView1ImmagineEsercizioCoppiaImmagini);
-        imageViewImmagine2=view.findViewById(R.id.imageView2ImmagineEsercizioCoppiaImmagini);
+        imageButtonImmagine1=view.findViewById(R.id.imageView1ImmagineEsercizioCoppiaImmagini);
+        imageButtonImmagine2=view.findViewById(R.id.imageView2ImmagineEsercizioCoppiaImmagini);
+
+        imageButtonImmagine1.setOnClickListener(v -> showSuggestionPlay());
+        imageButtonImmagine2.setOnClickListener(v -> showSuggestionPlay());
 
         // Imposta un listener per il pulsante di riproduzione
-        playButton.setOnClickListener(v -> onPlayButtonClick());
-
+        playButton.setOnClickListener(v -> {
+            onPlayButtonClick();
+        });
         // Imposta un listener per il pulsante di pausa
-        pauseButton.setOnClickListener(v -> onPauseButtonClick());
+        pauseButton.setOnClickListener(v ->{
+            onPauseButtonClick();
+        });
 
         return view;
     }
 
-    public void onPlayButtonClick() {
+    @SuppressLint("ClickableViewAccessibility")
+    private void enableAnswer(){
+        firstClickReproduced = true;
+        textViewEsercizioPlaySuggestion.setVisibility(View.GONE);
+        imageButtonImmagine1.setOnClickListener(v -> {
+            borderImageSelector(fl1ImmagineEsercizioCoppiaImmagini);
+            new Handler().postDelayed(this::verifyImageClick, 1000);
+        });
+        imageButtonImmagine2.setOnClickListener(v -> {
+            borderImageSelector(fl2ImmagineEsercizioCoppiaImmagini);
+            new Handler().postDelayed(this::verifyImageClick, 1000);
+        });
+
+        imageButtonImmagine1.setOnLongClickListener(v -> {
+            borderImageSelector(fl1ImmagineEsercizioCoppiaImmagini);
+            return true;
+        });
+        imageButtonImmagine1.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (!isLongClick) {
+                    fl1ImmagineEsercizioCoppiaImmagini.setBackground(null);
+                }
+                isLongClick = false;
+            }
+            return false;
+        });
+
+        imageButtonImmagine2.setOnLongClickListener(v -> {
+            borderImageSelector(fl2ImmagineEsercizioCoppiaImmagini);
+            return true;
+        });
+        imageButtonImmagine2.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (!isLongClick) {
+                    fl2ImmagineEsercizioCoppiaImmagini.setBackground(null);
+                }
+                isLongClick = false;
+            }
+            return false;
+        });
+    }
+
+    private void showSuggestionPlay(){
+        // Create a fade-in animation with a duration of 500 milliseconds
+        AlphaAnimation fadeIn = new AlphaAnimation(0.0f, 1.0f);
+        fadeIn.setDuration(500);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // Optional: You can add code to be executed when the animation starts here
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                textViewEsercizioPlaySuggestion.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+        textViewEsercizioPlaySuggestion.startAnimation(fadeIn);
+        new Handler().postDelayed(() -> {
+            AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+            fadeOut.setDuration(500);
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    // Optional: You can add code to be executed when the animation starts here
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    textViewEsercizioPlaySuggestion.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+            // Start the animation set
+            textViewEsercizioPlaySuggestion.startAnimation(fadeOut);
+        }, 10000);
+    }
+
+    private void onPlayButtonClick() {
+        if (!firstClickReproduced) {
+            enableAnswer();
+        }
         playButton.setVisibility(View.GONE);
         pauseButton.setVisibility(View.VISIBLE);
         initializeMediaPlayer();
@@ -73,6 +181,19 @@ public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
         playButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.GONE);
         mediaPlayer.pause();
+    }
+
+    private void borderImageSelector(FrameLayout immagine){
+        immagine.setBackgroundResource(R.drawable.selector_image_background);
+    }
+
+    public void verifyImageClick(){
+        constraintLayoutEsercizioCoppiaImmagini.setVisibility(View.GONE);
+        //if()
+        //    fineEsercizioView.setEsercizioCorretto(100);
+        //else fineEsercizioView.setEsercizioSbagliato(50);
+
+        fineEsercizioView.setEsercizioCorretto(50);
     }
 
     private void initializeMediaPlayer() {

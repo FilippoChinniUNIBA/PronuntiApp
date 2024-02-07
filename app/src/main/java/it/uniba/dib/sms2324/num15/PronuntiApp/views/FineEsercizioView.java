@@ -20,7 +20,7 @@ public class FineEsercizioView extends FrameLayout {
     private FrameLayout frameLayoutFineEsercizio;
     private ImageView imageViewUpCoin;
     private TextView textViewCoins, textViewEsercizioCorretto, textViewEsercizioSbagliato;
-
+    private MediaPlayer mediaPlayer;
     public FineEsercizioView(Context context) {
         super(context);
         initView(context);
@@ -34,7 +34,7 @@ public class FineEsercizioView extends FrameLayout {
     private void initView(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_fine_esercizio, this, true);
-
+        mediaPlayer = new MediaPlayer();
         frameLayoutFineEsercizio = view.findViewById(R.id.frameLayoutFineEsercizioDenominazioneImmagineFine);
         frameLayoutFineEsercizio.setVisibility(View.GONE);
         imageViewUpCoin = view.findViewById(R.id.imageViewUpCoinFineEsercizio);
@@ -44,6 +44,8 @@ public class FineEsercizioView extends FrameLayout {
     }
 
     public void setEsercizioCorretto(int coins) {
+        mediaPlayer = MediaPlayer.create(getContext(),R.raw.correct_sound);
+        mediaPlayer.start();
         frameLayoutFineEsercizio.setVisibility(View.VISIBLE);
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioCorretto.setVisibility(View.VISIBLE);
@@ -51,6 +53,8 @@ public class FineEsercizioView extends FrameLayout {
     }
 
     public void setEsercizioSbagliato(int coins) {
+        mediaPlayer = MediaPlayer.create(getContext(),R.raw.error_sound);
+        mediaPlayer.start();
         frameLayoutFineEsercizio.setVisibility(View.VISIBLE);
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioSbagliato.setVisibility(View.VISIBLE);

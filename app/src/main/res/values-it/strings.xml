@@ -93,5 +93,6 @@
     </string-array>
     <string name="accesso_rapido">Accesso Rapido</string>
     <string name="infoTitle">Info</string>
+    <string name="suggestEsercizioCoppiaImmagini">Ascolta l\'audio prima di rispondere!</string>
 
 </resources>
