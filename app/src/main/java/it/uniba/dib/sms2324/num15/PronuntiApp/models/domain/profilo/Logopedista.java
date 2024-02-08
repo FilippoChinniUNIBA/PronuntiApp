@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBGenitore;
@@ -170,18 +171,13 @@ public class Logopedista extends AbstractProfilo {
 	}
 
 	public void aggiornaClassificaPazienti() {
-		Map<String, Integer> classifica = new LinkedHashMap<>();
+		TreeMap<String, Integer> classifica = new TreeMap<>();
+
 		for (Paziente paziente : this.pazienti) {
 			classifica.put(paziente.getUsername(), paziente.getPunteggioTot());
 		}
 
-		Map<String, Integer> sortedClassifica = classifica.entrySet()
-				.stream()
-				.sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
-
-		this.classificaPazienti.setClassificaPazienti(sortedClassifica);
+		this.classificaPazienti.setClassificaPazienti(classifica);
 	}
 
 }
