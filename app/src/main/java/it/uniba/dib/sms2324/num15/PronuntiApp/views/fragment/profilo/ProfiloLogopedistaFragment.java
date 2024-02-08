@@ -18,9 +18,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
     private LogopedistaViewModel logopedistaViewModel;
-
-    public ProfiloLogopedistaFragment() {}
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
@@ -68,17 +65,13 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         textInputEditTextTelefono.setEnabled(true);
         textInputEditTextIndirizzo.setEnabled(true);
 
-
-
         imageViewProfile.setOnClickListener(v->pickImage());
 
         //Uri uri = (Uri)imageViewProfile.getTag();
 
 
-
         buttonModificaProfilo.setText(getString(R.string.confirm_modify_profile));
-        buttonModificaProfilo.setOnClickListener(v->confermaModificaProfilo(textInputEditTextIndirizzo.getText().toString(),textInputEditTextTelefono.getText().toString()));
-
+        buttonModificaProfilo.setOnClickListener(v->confermaModificaProfilo());
 
         imageViewEditProfile.setOnClickListener(v->pickImage());
         imageViewEditProfile.setVisibility(View.VISIBLE);
@@ -88,16 +81,12 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     }
 
     @Override
-    void confermaModificaProfilo(String indirizzo, String telefono) {
+    void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        /*logopedistaViewModel.getLogopedista().setIndirizzo(indirizzo);
-        logopedistaViewModel.getLogopedista().setTelefono(telefono);
-        logopedistaViewModel.aggiornaLogopedistaRemoto();*/
-    }
-
-    @Override
-    void confermaModificaProfilo(String telefono) {
-
+        //fai le cose che devi fare per salvare i dati aggiornati del logopedista
+        //save(textInputEditTextIndirizzo.getText().toString(), textInputEditTextTelefono.getText().toString());
+        textInputEditTextIndirizzo.getText().toString();
+        textInputEditTextTelefono.getText().toString();
     }
 
     @Override

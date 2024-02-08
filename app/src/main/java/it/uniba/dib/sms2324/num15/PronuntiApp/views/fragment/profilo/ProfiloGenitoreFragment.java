@@ -13,7 +13,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 
-public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
+public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
     private ProfiloPazienteFragment profiloPazienteFragment;
 
@@ -33,10 +33,10 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
 
         setData();
 
-        profilePazienteFragment = new ProfilePazienteFragment();
+        profiloPazienteFragment = new ProfiloPazienteFragment();
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.containerBambino, profilePazienteFragment);
+        fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
         fragmentTransaction.commit();
 
         return view;
@@ -63,7 +63,7 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
     @Override
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        profilePazienteFragment.confermaModificaProfilo();
+        profiloPazienteFragment.confermaModificaProfilo();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
         //rendi modificabile anche i bambini
-        profilePazienteFragment.modificaProfilo();
+        profiloPazienteFragment.modificaProfilo();
 
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
