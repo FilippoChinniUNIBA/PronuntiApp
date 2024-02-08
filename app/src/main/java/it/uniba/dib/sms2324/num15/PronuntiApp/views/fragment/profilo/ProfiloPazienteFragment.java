@@ -22,7 +22,6 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private Spinner spinnerSesso;
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
-
     private PazienteViewModel pazienteViewModel;
 
     LinearLayout linearLayoutDatiBambinoClick;
@@ -37,7 +36,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailProfiloPaziente);
         //imageViewProfile = view.findViewById(R.id.imageViewProfile);
         //imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
-        //uttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloPaziente);
+        //buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloPaziente);
         //setPickMedia();
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
