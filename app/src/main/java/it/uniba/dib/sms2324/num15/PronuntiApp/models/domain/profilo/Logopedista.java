@@ -177,7 +177,9 @@ public class Logopedista extends AbstractProfilo {
 			classifica.put(paziente.getUsername(), paziente.getPunteggioTot());
 		}
 
-		this.classificaPazienti.setClassificaPazienti(classifica);
+		Classifica c = new Classifica(classifica);
+		this.setClassificaPazienti(c);
+		//this.classificaPazienti.setClassificaPazienti(classifica);
 	}
 
 }

@@ -19,16 +19,14 @@
     <string name="modify_profile"> Edit profile </string>
     <string name="confirm_modify_profile"> Confirm edit profile</string>
     <string name="birth_date_hint">Birth date</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="other">Other</string>
+    <string name="male">M</string>
+    <string name="female">F</string>
     <string name="age">Age</string>
     <string name="informations_patient">Patient informations</string>
     <string name="informations_parent">Parent informations</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>
-        <item>@string/other</item>
     </string-array>
     <string name="gender_hint">Sex</string>
     <string name="patient">Patient</string>
@@ -76,6 +74,9 @@
     <string name="suggestionSequenzaParole">Reproduce the audio with bottom left button, then record the same phrase! </string>
     <string name="titleEsercizioDenominazioneImmagine">What is in the image?</string>
     <string name="subTitleLogin">Welcome back!\nEnter your credentials to access the application</string>
+    <string name="date">Date</string>
+    <string name="place">Place</string>
+    <string name="insertPaziente" >Insert patient</string>
 
     <string-array name="character_names">
         <item>Girl</item>

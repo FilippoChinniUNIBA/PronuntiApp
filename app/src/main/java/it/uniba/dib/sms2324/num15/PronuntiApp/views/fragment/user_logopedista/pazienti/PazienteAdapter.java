@@ -20,7 +20,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazienti;
     private List<Paziente> pazientiFull;
-    private int selectedPosition = RecyclerView.NO_POSITION;
     public PazienteAdapter(List<Paziente> pazienti) {
         this.pazienti = pazienti;
         pazientiFull = new ArrayList<>(pazienti);
@@ -45,6 +44,10 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
     @Override
     public int getItemCount() {
         return pazienti.size();
+    }
+
+    public Paziente getItem(int position) {
+        return pazienti.get(position);
     }
 
     public static class PazienteViewHolder extends RecyclerView.ViewHolder {
