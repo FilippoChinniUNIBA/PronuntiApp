@@ -7,4 +7,6 @@
     <dimen name="personaggioHeighthDim">100dp</dimen>
     <dimen name="size_text_esercizio">50sp</dimen>
     <dimen name="size_text_title_esercizio">30sp</dimen>
+    <dimen name="size_text_sub_subtitle_reg">16sp</dimen>
+    <dimen name="size_text_info_paziente">14sp</dimen>
 </resources>

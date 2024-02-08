@@ -88,6 +88,7 @@ public class DatePickerCustom extends AbstractFragmentWithNavigation {
         datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
             String date = formatDate(year, month, dayOfMonth);
             textInputEditTextDataNascitaProfiloPaziente.setText(date);
+            this.date = date;
         }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
         datePickerDialog.show();
     }

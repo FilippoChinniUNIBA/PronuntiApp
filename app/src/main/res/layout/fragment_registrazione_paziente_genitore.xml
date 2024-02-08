@@ -8,6 +8,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!--
     <TextView
         android:id="@+id/textViewTitoloRegistrazionePazienteEGenitore"
         android:layout_width="wrap_content"
@@ -16,38 +18,45 @@
         android:text="@string/app_name"
         android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/headerTextSize"
-        app:layout_constraintBottom_toTopOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore"
+        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginVertical="20dp"
+        />
+    -->
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginVertical="10dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:text="@string/subtitle_registration"
+        android:text="@string/subtitle_registration_patient_parent"
         android:textColor="@color/black"
         android:textSize="@dimen/subHeaderTextSize"
         app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitoloRegistrazionePazienteEGenitore" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="10dp"
+        />
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewDataRegistrazionePaziente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
+        android:layout_marginHorizontal="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore">
+        app:layout_constraintTop_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
+        >
 
 
         <LinearLayout
@@ -60,14 +69,14 @@
 
             <TextView
                 android:id="@+id/textViewSubInformazioniPaziente"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="sans-serif-black"
-                android:gravity="center"
                 android:text="@string/informations_patient"
                 android:textColor="@color/black"
-                android:textSize="@dimen/subHeaderTextSize"
+                android:textSize="@dimen/size_text_sub_subtitle_reg"
                 app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomePaziente"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +208,9 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="10dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditTextConfermaPasswordPaziente"
@@ -216,11 +227,12 @@
         android:id="@+id/cardViewDataRegistrazioneGenitore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtonsRegistrazionePazienteEGenitore"
+        app:layout_constraintBottom_toTopOf="@id/buttonRegistraPazienteEGenitore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente">
@@ -236,14 +248,14 @@
 
             <TextView
                 android:id="@+id/textViewSubTitoloGenitore"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-black"
-                android:gravity="center"
                 android:text="@string/informations_parent"
                 android:textColor="@color/black"
-                android:textSize="@dimen/subHeaderTextSize"
+                android:textSize="@dimen/size_text_sub_subtitle_reg"
                 app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomeGenitore"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -360,7 +372,9 @@
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="10dp"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditTextConfermaPasswordGenitore"
@@ -372,24 +386,15 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayoutButtonsRegistrazionePazienteEGenitore"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonRegistraPazienteEGenitore"
+        android:layout_width="296dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore">
-
-        <Button
-            android:id="@+id/buttonRegistraPazienteEGenitore"
-            android:layout_width="296dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/register" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

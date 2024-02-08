@@ -14,7 +14,8 @@
     <string name="already_registered">Already have an account? <b>Login</b></string>
     <string name="login">Sign in</string>
     <string name="accesso_rapido">Quick Access</string>
-    <string name="subtitle_registration">Welcome Doctor, enter your data to start using the application!</string>
+    <string name="subtitle_registration">Welcome Doctor!\nEnter your data to start using the application</string>
+    <string name="subtitle_registration_patient_parent">Welcome Doctor!\nEnter date of your patient</string>
     <string name="modify_profile"> Edit profile </string>
     <string name="confirm_modify_profile"> Confirm edit profile</string>
     <string name="birth_date_hint">Birth date</string>
@@ -74,7 +75,7 @@
     <string name="titleEsercizioSequenzaParole">What is audio say?\nTry to repeat!</string>
     <string name="suggestionSequenzaParole">Reproduce the audio with bottom left button, then record the same phrase! </string>
     <string name="titleEsercizioDenominazioneImmagine">What is in the image?</string>
-
+    <string name="subTitleLogin">Welcome back!\nEnter your credentials to access the application</string>
 
     <string-array name="character_names">
         <item>Girl</item>
@@ -137,6 +138,10 @@
     <string name="erroreRegistrazioneGenitorePasswordDifformi">Password and Confirm Password do not match (Parent)</string>
     <string name="erroreRegistrazionePazienteAutenticazione">Error in Database; probably the child (patient) email is already in use. Also check if the email is in the correct format</string>
     <string name="erroreRegistrazioneGenitoreAutenticazione">Error in Database; probably the parent email is already in use. Also check if the email is in the correct format</string>
+    <string name="addPatient">Patient +</string>
+    <string name="sex">Sex</string>
+    <string name="surname">Surname</string>
+    <string name="name">Name</string>
 
 
 </resources>
