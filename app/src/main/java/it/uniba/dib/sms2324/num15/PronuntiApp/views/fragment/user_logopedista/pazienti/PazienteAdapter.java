@@ -1,9 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazienti;
     private List<Paziente> pazientiFull;
+    private int selectedPosition = RecyclerView.NO_POSITION;
     public PazienteAdapter(List<Paziente> pazienti) {
         this.pazienti = pazienti;
         pazientiFull = new ArrayList<>(pazienti);
@@ -37,11 +40,6 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         holder.textViewCognomePaziente.setText(paziente.getCognome());
         holder.textViewEtaPaziente.setText(String.valueOf(paziente.getEta()));
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
-
-        holder.itemView.setOnClickListener(v -> {
-            Paziente pazienteSelezionato = pazienti.get(position);
-            //TODO implementare la navigazione verso i risultati del paziente
-        });
     }
 
     @Override
@@ -54,9 +52,11 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         TextView textViewCognomePaziente;
         TextView textViewEtaPaziente;
         TextView textViewSessoPaziente;
+        LinearLayout linearLayoutPaziente;
 
         public PazienteViewHolder(@NonNull View itemView) {
             super(itemView);
+            linearLayoutPaziente = itemView.findViewById(R.id.llPazienteInListaLogopedista);
             textViewNomePaziente = itemView.findViewById(R.id.textViewNomePaziente);
             textViewCognomePaziente = itemView.findViewById(R.id.textViewCognomePaziente);
             textViewEtaPaziente = itemView.findViewById(R.id.textViewEtaPaziente);

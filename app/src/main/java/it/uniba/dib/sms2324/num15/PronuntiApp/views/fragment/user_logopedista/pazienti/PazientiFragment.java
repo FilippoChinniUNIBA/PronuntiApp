@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -53,6 +54,23 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
         Log.d("PazientiFragment", "pazienti: " + pazienti);
         adapterPazienti = new PazienteAdapter(pazienti);
         recyclerViewListaPazienti.setAdapter(adapterPazienti);
+
+        recyclerViewListaPazienti.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener() {
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                Log.d("PazientiFragment", "onInterceptTouchEvent: " + motionEvent);
+                View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                Log.d("PazientiFragment", "childView: " + childView);
+                if (childView != null && motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Log.d("PazientiFragment", "childView nell'if : " + childView);
+                    childView.setBackgroundResource(R.drawable.rectangle_rounded_border_selector_bkg);
+
+                    //TODO implementare la navigazione verso i risultati del paziente
+                    Paziente pazienteSelezionato = pazienti.get(recyclerViewListaPazienti.getChildAdapterPosition(childView));
+                }
+                return false;
+            }
+        });
+
 
         searchViewListaPazienti.setOnCloseListener(() -> {
             addPazientiButton.setText("Paziente +");
