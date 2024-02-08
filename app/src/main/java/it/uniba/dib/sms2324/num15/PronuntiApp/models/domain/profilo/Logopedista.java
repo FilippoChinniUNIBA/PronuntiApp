@@ -117,8 +117,12 @@ public class Logopedista extends AbstractProfilo {
 			entityMap.put(CostantiDBLogopedista.CLASSIFICA_PAZIENTI, this.classificaPazienti.toMap());
 		}
 
-		if (this.pazienti != null) {
+		/*if (this.pazienti != null) {
 			entityMap.put(CostantiDBLogopedista.LISTA_PAZIENTI, this.pazienti.stream().map(Paziente::toMap).collect(Collectors.toList()));
+		}*/
+
+		if (this.pazienti != null) {
+			entityMap.put(CostantiDBLogopedista.LISTA_PAZIENTI, this.pazienti.stream().collect(Collectors.toMap(Paziente::getIdProfilo, Paziente::toMap)));
 		}
 		return entityMap;
 	}
