@@ -34,23 +34,4 @@ public class NavigationNavBarSelectorLogopedista extends AbstractNavigationSelec
             });
         }
 
-    public boolean selectItem(@IdRes int itemId) {
-        Fragment fragment = null;
-        if (itemId == R.id.pazienti)
-            fragment = pazientiFragment;
-        else if (itemId == R.id.classificaGenitore)
-            fragment = classificaFragment;
-        else if (itemId == R.id.calendarLogopedista)
-            fragment = appuntamentiLogopedistaFragment;
-        else if (itemId == R.id.profiloLogopedista)
-            fragment = profiloLogopedistaFragment;
-
-        if (fragment != null) {
-            replaceFragment(fragmentManager,fragmentContainerId,fragment);
-            return true;
-        }
-        return false;
-    }
-
-
 }

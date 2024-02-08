@@ -61,10 +61,8 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         buttonRegistrati.setOnClickListener(v -> eseguiRegistrazione());
-        buttonVaiAlLogin.setOnClickListener(v -> replaceFragment(R.id.autenticazioneFrameLayout, new LoginFragment(), null));
-
+        buttonVaiAlLogin.setOnClickListener(v -> navigateTo(R.id.action_registrazioneFragment_to_loginFragment));
     }
 
     private void eseguiRegistrazione() {

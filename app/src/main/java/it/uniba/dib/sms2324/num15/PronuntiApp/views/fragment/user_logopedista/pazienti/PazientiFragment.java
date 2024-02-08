@@ -1,21 +1,17 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -34,7 +30,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
         addPazientiButton = view.findViewById(R.id.addPaziente);
-        addPazientiButton.setOnClickListener(v -> replaceFragment(R.id.frameLayoutLogopedista, new RegistrazionePazienteGenitoreFragment(),null));
+        addPazientiButton.setOnClickListener(v -> navigateTo(R.id.action_pazientiFragment_to_registrazionePazienteGenitoreFragment));
         searchViewListaPazienti = view.findViewById(R.id.searchViewListaPazienti);
 
         recyclerViewListaPazienti = view.findViewById(R.id.pazientiRecyclerView);
@@ -66,6 +62,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
                     //TODO implementare la navigazione verso i risultati del paziente
                     Paziente pazienteSelezionato = pazienti.get(recyclerViewListaPazienti.getChildAdapterPosition(childView));
+
                 }
                 return false;
             }

@@ -37,27 +37,4 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
             }*/
         });
     }
-
-    public boolean selectItem(@IdRes int itemId) {
-        Fragment fragment = null;
-        if (itemId == R.id.monitoraggio_bambino)
-            fragment = monitoraggioFragment;
-        else if (itemId == R.id.scenari_genitori)
-            fragment = scenariGenitoriFragment;
-        /*
-        else if (itemId == R.id.classificaGenitore)
-            fragment = classificaFragment;
-         */
-        else if (itemId == R.id.calendarPaziente)
-            fragment = appuntamentiGenitoreFragment;
-        else if (itemId == R.id.profiloGenitore)
-            fragment = profiloGenitoreFragment;
-
-
-        if (fragment != null) {
-            replaceFragment(fragmentManager,fragmentContainerId,fragment);
-            return true;
-        }
-        return false;
-    }
 }

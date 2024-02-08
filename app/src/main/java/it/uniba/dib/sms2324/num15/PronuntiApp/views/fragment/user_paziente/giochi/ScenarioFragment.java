@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.CurvedLineView;
@@ -195,13 +194,13 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                         //controlla dove sta il personaggio e naviga al gioco corrispondente
                         if(isPersonaggioInAreaPrimoEsercizio()) {
                             Log.d("Personaggio", "in area primo esercizio in esecuzione");
-                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioDenominazioneImmagineFragment(), "scenarioPaziente");
+                            navigateTo(R.id.action_scenarioFragment_to_esercizioDenominazioneImmagineFragment2);
                         }
                         else if(isPersonaggioInAreaSecondaEsercizio()) {
-                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioCoppiaImmagini(), "scenarioPaziente");
+                            navigateTo(R.id.action_scenarioFragment_to_esercizioCoppiaImmagini2);
                         }
                         else if(isPersonaggioInAreaTerzoEsercizio()) {
-                            replaceFragment(R.id.frameLayoutPaziente, new EsercizioSequenzaParole(), "scenarioPaziente");
+                            navigateTo(R.id.action_scenarioFragment_to_esercizioSequenzaParole);
                         }
                 }
                 return true;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_logopedista"
+    app:startDestination="@id/pazientiFragment">
+
+    <fragment
+        android:id="@+id/pazientiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment"
+        android:label="fragment_pazienti"
+        tools:layout="@layout/fragment_pazienti" >
+        <action
+            android:id="@+id/action_pazientiFragment_to_registrazionePazienteGenitoreFragment"
+            app:destination="@id/registrazionePazienteGenitoreFragment"
+            app:popUpTo="@id/pazientiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/classificaFragment2"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment"
+        android:label="fragment_classifica"
+        tools:layout="@layout/fragment_classifica" />
+    <fragment
+        android:id="@+id/appuntamentiLogopedistaFragment2"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.AppuntamentiLogopedistaFragment"
+        android:label="fragment_appuntamenti_logopedista"
+        tools:layout="@layout/fragment_appuntamenti_logopedista" />
+    <fragment
+        android:id="@+id/profiloLogopedistaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloLogopedistaFragment"
+        android:label="fragment_profile_logopedista"
+        tools:layout="@layout/fragment_profile_logopedista" />
+    <fragment
+        android:id="@+id/registrazionePazienteGenitoreFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment"
+        android:label="fragment_registrazione_paziente_genitore"
+        tools:layout="@layout/fragment_registrazione_paziente_genitore" >
+        <action
+            android:id="@+id/action_registrazionePazienteGenitoreFragment_to_pazientiFragment"
+            app:destination="@id/pazientiFragment" />
+    </fragment>
+</navigation>
