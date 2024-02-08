@@ -46,20 +46,28 @@ public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFr
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
 
+
+
     }
+
+
 
     @Override
     void confermaModificaProfilo(){
         //salvare in db
         //save();
 
-        setData();
+        //setData();
 
-        imageViewEditProfile.setVisibility(View.GONE);
+        //imageViewEditProfile.setVisibility(View.GONE);
 
-        buttonModificaProfilo.setText(getString(R.string.modify_profile));
-        buttonModificaProfilo.setOnClickListener(v->modificaProfilo());
+        //buttonModificaProfilo.setText(getString(R.string.modify_profile));
+        //buttonModificaProfilo.setOnClickListener(v->modificaProfilo());
 
-        imageViewProfile.setOnClickListener(v->{});
+        //imageViewProfile.setOnClickListener(v->{});
     }
+
+    abstract void confermaModificaProfilo(String indirizzo, String telefono);
+
+    abstract void confermaModificaProfilo(String telefono);
 }
