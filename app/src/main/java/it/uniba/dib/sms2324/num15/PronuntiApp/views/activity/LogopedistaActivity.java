@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,7 +16,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorLogopedista;
 
 public class LogopedistaActivity extends AbstractAppActivity {
     private LogopedistaViewModel mLogopedistaViewModel;
@@ -39,6 +39,16 @@ public class LogopedistaActivity extends AbstractAppActivity {
         mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (navcontroller.getCurrentDestination().getId() == R.id.pazientiFragment) {
+                    finish();
+                } else {
+                    navcontroller.navigate(R.id.pazientiFragment);
+                }
+            }
+        });
 
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));
         //setFirstFragment(R.id.frameLayoutLogopedista, new PazientiFragment());

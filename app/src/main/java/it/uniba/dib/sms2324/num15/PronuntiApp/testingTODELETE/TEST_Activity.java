@@ -7,7 +7,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity
 
 public class TEST_Activity extends AbstractAppActivity {
 
-	protected void onCreate(Bundle savedInstanceState) {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_activity_test);
 		setFirstFragment(R.id.TEST_frameLayoutActivityTest, new TestMenuTestFragment());
