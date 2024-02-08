@@ -5,32 +5,117 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.activity.LogopedistaActivity">
+    >
 
-    <TextView
-        android:id="@+id/pazientiFragment"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@id/layoutPazientiTopBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lista Pazienti"
-        android:textColor="#43a047"
-        android:textSize="40sp"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addPaziente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Paziente +"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        android:layout_marginVertical="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/titleRecyclerViewPazienti"
+        android:gravity="end"
+        android:weightSum="8"
+        android:layout_marginTop="10dp"
+        >
+        <Button
+            android:id="@+id/addPaziente"
+            android:layout_height="match_parent"
+            android:text="@string/addPatient"
+            app:layout_constraintEnd_toStartOf="@+id/searchViewListaPazienti"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/nestedScrollViewPazienti"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:layout_marginHorizontal="5dp"
+             android:layout_width="match_parent"
+            />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchViewListaPazienti"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/nestedScrollViewPazienti"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="5dp"
+            android:iconifiedByDefault="false"
+            android:focusable="true"
+            app:defaultQueryHint="Search Pazienti"
+            android:background="@drawable/rectangle_rounded_border_bkg"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/titleRecyclerViewPazienti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPazientiTopBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/nestedScrollViewPazienti"
+        android:layout_marginHorizontal="5dp"
+        >
+        <TextView
+            android:id="@+id/textViewNomePaziente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="@dimen/size_text_info_paziente"
+            android:text="@string/name"
+            android:fontFamily="sans-serif-black"
+            android:layout_weight="3"
+            />
+        <TextView
+            android:id="@+id/textViewCognomePaziente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="@dimen/size_text_info_paziente"
+            android:text="@string/surname"
+            android:fontFamily="sans-serif-black"
+            android:layout_weight="3"
+            />
+        <TextView
+            android:id="@+id/textViewEtaPaziente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="@dimen/size_text_info_paziente"
+            android:text="@string/age"
+            android:gravity="end"
+            android:fontFamily="sans-serif-black"
+            android:layout_weight="2"
+            />
+        <TextView
+            android:id="@+id/textViewSessoPaziente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="@dimen/size_text_info_paziente"
+            android:text="@string/sex"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewPazienti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/titleRecyclerViewPazienti"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pazientiRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

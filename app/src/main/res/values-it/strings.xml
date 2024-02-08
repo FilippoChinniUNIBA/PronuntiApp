@@ -13,7 +13,7 @@
     <string name="not_register">Sei un Logopedista e non hai un account? <b>Registrati</b></string>
     <string name="already_registered">Hai già un account? <b>Accedi</b></string>
     <string name="login">Accedi</string>
-    <string name="subtitle_registration">Benvenuto Dottore, inserici i tuoi dati per inizare ad usare l\'applicazione!</string>
+    <string name="subtitle_registration">Benvenuto Dottore!\nInserici i tuoi dati per inizare ad usare l\'applicazione</string>
     <string name="modify_profile"> Modifica profilo </string>
     <string name="confirm_modify_profile"> Conferma modifiche</string>
     <string name="birth_date_hint">Data di nascita</string>
@@ -112,5 +112,11 @@
     <string name="erroreRegistrazioneGenitorePasswordDifformi">Password e Conferma Password non coincidono (Genitore)</string>
     <string name="erroreRegistrazionePazienteAutenticazione">Errore Database: probabilmente email del bambino (paziente) già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
     <string name="erroreRegistrazioneGenitoreAutenticazione">Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
+    <string name="subTitleLogin">Bentornato!\nEffettua il login per continuare</string>
+    <string name="subtitle_registration_patient_parent">Benvenuto dottore!\nInserisci i dati dei tuoi pazienti</string>
+    <string name="addPatient">Paziente +</string>
+    <string name="sex">Sesso</string>
+    <string name="surname">Cognome</string>
+    <string name="name">Nome</string>
 
 </resources>
