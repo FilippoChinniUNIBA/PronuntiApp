@@ -41,8 +41,9 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
 
-        this.pazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
-        pazienteViewModel.setPaziente((Paziente) getActivity().getIntent().getExtras().get("profilo"));
+        //TODO prendere il paziente dal genitore dal viewmodelGenitore
+        //this.pazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
+        //pazienteViewModel.setPaziente((Paziente) getActivity().getIntent().getExtras().get("profilo"));
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -96,7 +97,6 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     public void confermaModificaProfilo(){
         //salvare in db
         //save();
-
         setData();
    }
 

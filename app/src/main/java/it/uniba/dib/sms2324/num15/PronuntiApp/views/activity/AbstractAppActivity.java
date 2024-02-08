@@ -1,8 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 
+import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -40,6 +42,11 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }*/
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     protected void setFirstFragment(int fragmentContainerId, Fragment fragment) {
         //TODO nicola non so perché qui non setti il fragment in backstack come negli altri,
         // comunque oltre questo, non so se ha senso usare il getSupportFragmentManager() qui
@@ -59,12 +66,4 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             return super.onSupportNavigateUp();
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        // Il tuo codice qui
-        super.onBackPressed();
-        onSupportNavigateUp();
-    }
-
 }

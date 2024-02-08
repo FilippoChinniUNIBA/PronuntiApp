@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.appcompat.app.AppCompatActivity; // For activities
 import androidx.navigation.NavController;
@@ -15,7 +16,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.navigation_selector.NavigationNavBarSelectorGenitore;
 
 public class GenitoreActivity extends AbstractAppActivity {
     private GenitoreViewModel mGenitoreViewModel;
@@ -37,6 +37,17 @@ public class GenitoreActivity extends AbstractAppActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (navcontroller.getCurrentDestination().getId() == R.id.monitoraggioFragment2) {
+                    finish();
+                } else {
+                    navcontroller.navigate(R.id.monitoraggioFragment2);
+                }
+            }
+        });
 
         //setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.fragmentContainerGenitore, bottomNavigationView));
         //setFirstFragment(R.id.fragmentContainerGenitore, new ScenariGenitoriFragment());
