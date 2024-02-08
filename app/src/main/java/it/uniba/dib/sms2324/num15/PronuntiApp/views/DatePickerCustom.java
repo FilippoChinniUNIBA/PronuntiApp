@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -29,7 +31,6 @@ public class DatePickerCustom extends AbstractFragmentWithNavigation {
 
     private TextInputEditText textInputEditTextDataNascitaProfiloPaziente;
     private TextInputLayout textInputLayoutDataNascitaProfiloPaziente;
-    private Calendar calendar;
     private DatePickerDialog datePickerDialog;
     private ImageButton imageButtonDataNascitaProfiloPaziente;
     private GridLayout gridLayout;
@@ -46,30 +47,19 @@ public class DatePickerCustom extends AbstractFragmentWithNavigation {
         imageButtonDataNascitaProfiloPaziente = view.findViewById(R.id.imageButtonDataNascitaProfiloPaziente);
         textInputLayoutDataNascitaProfiloPaziente = view.findViewById(R.id.textInputLayoutDataNascitaProfiloPaziente);
 
-        calendar = Calendar.getInstance();
-
         textInputEditTextDataNascitaProfiloPaziente.setOnClickListener(v -> showDatePickerDialog());
         textInputLayoutDataNascitaProfiloPaziente.setEndIconOnClickListener(v -> showDatePickerDialog());
         imageButtonDataNascitaProfiloPaziente.setOnClickListener(v -> showDatePickerDialog());
 
         //parte del time picker
         gridLayout = view.findViewById(R.id.gridLayout);
-        // Loop through each child view in the GridLayout
+
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
             View child = gridLayout.getChildAt(i);
 
-            // Check if the child view is a TextView
             if (child instanceof TextView) {
                 final TextView textView = (TextView) child;
-
-                // Set OnClickListener for the TextView
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Handle the selection of the TextView here
-                        handleTextViewSelection(textView);
-                    }
-                });
+                textView.setOnClickListener(v -> handleTextViewSelection(textView));
             }
         }
         return view;
@@ -93,21 +83,18 @@ public class DatePickerCustom extends AbstractFragmentWithNavigation {
     }
 
     //metodi del date picker
-    private void updateDateInView() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = simpleDateFormat.format(calendar.getTime());
-        textInputEditTextDataNascitaProfiloPaziente.setText(formattedDate);
-        date = formattedDate;
-    }
-
     private void showDatePickerDialog() {
-        datePickerDialog = new DatePickerDialog(getActivity(), (view, year, month, dayOfMonth) -> {
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateDateInView();
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
+        LocalDate now = LocalDate.now();
+        datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
+            String date = formatDate(year, month, dayOfMonth);
+            textInputEditTextDataNascitaProfiloPaziente.setText(date);
+        }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
         datePickerDialog.show();
     }
+
+    private String formatDate(int year, int month, int dayOfMonth) {
+        LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
+        return selectedDate.toString();
+    }
+
 }
