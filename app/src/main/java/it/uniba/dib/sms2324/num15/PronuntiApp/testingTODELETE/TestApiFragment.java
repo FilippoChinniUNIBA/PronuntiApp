@@ -28,15 +28,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioConverter;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.AudioRecognizer;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.CloudTask;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.Test.AudioTest;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.DownloadAction;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.restapi.cloudspeechtotextapi.cloud_actions.UploadAction;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.ffmpegkit.AudioConverter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.google_cloud_speech_to_text_api.SpeechToTextAPI;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AbstractAudioPlayer;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 
@@ -50,12 +46,12 @@ public class TestApiFragment extends Fragment {
 	private Button buttonStoppaVocale;
 	private TextView textViewSpeechToTextView;
 
-	@Override
+	/*@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.test_fragment_test_api, container, false);
 
-		buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
+		//buttonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
 		buttonStopRegistrazione = view.findViewById(R.id.buttonStopRegistrazione);
 		//buttonUploadFile = view.findViewById(R.id.buttonUploadFile);
 		//buttonDownloadFile = view.findViewById(R.id.buttonDownloadFile);
@@ -76,18 +72,16 @@ public class TestApiFragment extends Fragment {
 
 		String nomeFileUploadDownload = "test.mp3";
 
-		UploadAction uploadAction = new UploadAction();
-		DownloadAction downloadAction = new DownloadAction();
 		MediaPlayer mediaPlayer = new MediaPlayer();
 
 		List<Personaggio> personaggioList = new ArrayList<Personaggio>();
 
-		Personaggio pers1 = new Personaggio("1","nome1",5,/*R.drawable.bambina*/ new File("path"));
-		Personaggio pers2 = new Personaggio("2","nome2",5,/*R.drawable.bambina_disegna*/ new File("path"));
-		Personaggio pers3 = new Personaggio("3","nome3",5,/*R.drawable.bambino*/ new File("path"));
-		Personaggio pers4 = new Personaggio("4","nome4",5,/*R.drawable.batman*/ new File("path"));
-		Personaggio pers5 = new Personaggio("5","nome5",5,/*R.drawable.pecora*/ new File("path"));
-		Personaggio pers6 = new Personaggio("6","nome6",5,/*R.drawable.mucca*/ new File("path"));
+		Personaggio pers1 = new Personaggio("1","nome1",5,*//*R.drawable.bambina*//* new File("path"));
+		Personaggio pers2 = new Personaggio("2","nome2",5,*//*R.drawable.bambina_disegna*//* new File("path"));
+		Personaggio pers3 = new Personaggio("3","nome3",5,*//*R.drawable.bambino*//* new File("path"));
+		Personaggio pers4 = new Personaggio("4","nome4",5,*//*R.drawable.batman*//* new File("path"));
+		Personaggio pers5 = new Personaggio("5","nome5",5,*//*R.drawable.pecora*//* new File("path"));
+		Personaggio pers6 = new Personaggio("6","nome6",5,*//*R.drawable.mucca*//* new File("path"));
 
 		PersonaggioDAO dao = new PersonaggioDAO ();
 		dao.save(pers1);
@@ -97,97 +91,72 @@ public class TestApiFragment extends Fragment {
 		dao.save(pers5);
 		dao.save(pers6);
 
-		AudioRecognizer audioRecognizer = new AudioRecognizer(fileRegistrazione,curretactivity);
-		CloudTask cloudTaskUpload = new CloudTask(fileConvertito,curretactivity,nomeFileUploadDownload,uploadAction);
-		CloudTask cloudTaskDownload = new CloudTask(downloadFileConvertito,curretactivity,nomeFileUploadDownload, downloadAction);
-		AudioTest audioTest = new AudioTest(mediaPlayer,fileConvertito,curretactivity);
+		SpeechToTextAPI speechToTextAPI = new SpeechToTextAPI(fileRegistrazione,curretactivity);
+		AbstractAudioPlayer abstractAudioPlayer = new AbstractAudioPlayer(mediaPlayer,fileConvertito,curretactivity);
 
 		if (checkPermissions(curretactivity)) {
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest,dao);
+			setupButtons(speechToTextAPI,curretactivity, abstractAudioPlayer,dao);
 		} else {
 			requestPermissions(curretactivity);
-			setupButtons(audioRecognizer,curretactivity,cloudTaskUpload,cloudTaskDownload,audioTest,dao);
+			setupButtons(speechToTextAPI,curretactivity, abstractAudioPlayer,dao);
 		}
 		return view;
 	}
 
-	private void setupButtons(AudioRecognizer audioRecognizer, Activity currentactivity, CloudTask cloudTaskUpload ,CloudTask cloudTaskDownload,AudioTest audioTest,PersonaggioDAO dao) {
+	private void setupButtons(SpeechToTextAPI speechToTextAPI, Activity currentactivity, AbstractAudioPlayer abstractAudioPlayer, PersonaggioDAO dao) {
 
 		buttonAvviaRegistrazione.setOnClickListener(v -> {
-			startRecording(audioRecognizer,currentactivity);
+			startRecording(speechToTextAPI,currentactivity);
         });
 
 		buttonStopRegistrazione.setOnClickListener(v -> {
-			stopRecording(audioRecognizer,currentactivity);
-		});
-
-		buttonUploadFile.setOnClickListener(v -> {
-			uploadFile(cloudTaskUpload,currentactivity);
-		});
-
-		buttonDownloadFile.setOnClickListener(v -> {
-			downloadFile(dao);
+			stopRecording(speechToTextAPI,currentactivity);
 		});
 
 		buttonUploadFileFirebase.setOnClickListener(v -> {
-			uploadInFirebase(audioRecognizer);
+			uploadInFirebase(speechToTextAPI);
 		});
 
 		buttonAvviaVocale.setOnClickListener(v -> {
-			startVocal(audioTest);
+			startVocal(abstractAudioPlayer);
 		});
 
 		buttonStoppaVocale.setOnClickListener(v -> {
-			stopVocal(audioTest);
+			stopVocal(abstractAudioPlayer);
 		});
 
 	}
 
 
-	private void startRecording(AudioRecognizer audioRecognizer, Activity currentactivity){
+	private void startRecording(SpeechToTextAPI speechToTextAPI, Activity currentactivity){
 		try{
-		audioRecognizer.startRecording();
+		speechToTextAPI.startRecording();
 			textViewSpeechToTextView.setText("Registrazione in corso . . .");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void stopRecording(AudioRecognizer audioRecognizer, Activity currentactivity){
+	private void stopRecording(SpeechToTextAPI speechToTextAPI, Activity currentactivity){
 		try {
 			textViewSpeechToTextView.setText("Salvataggio in corso . . .");
-			audioRecognizer.stopRecording();
-			List<String> words = audioRecognizer.getText();
+			speechToTextAPI.stopRecording();
+			List<String> words = speechToTextAPI.callAPI();
 			textViewSpeechToTextView.setText("parole dette: " + words.toString());
-			AudioConverter.convertFile(audioRecognizer.getAudioFile(),new File(currentactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.mp3"));
+			AudioConverter.convertiAudio(speechToTextAPI.getAudioFile(),new File(currentactivity.getExternalFilesDir(Environment.DIRECTORY_MUSIC),"test.mp3"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void uploadFile(CloudTask uploadTask,Activity currentactivity){
-		try {
-			//do nothing
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
 
-	private void downloadFile(PersonaggioDAO dao){
-		try {
-			printcharacters(dao);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-
-	private void uploadInFirebase(AudioRecognizer audioRecognizer){
+	private void uploadInFirebase(SpeechToTextAPI speechToTextAPI){
 		FirebaseStorage storage = FirebaseStorage.getInstance();
 		StorageReference mountainImagesRef = storage.getReference("test");
 		InputStream stream = null;
 		UploadTask uploadTask =null;
 		try {
-			stream = new FileInputStream(audioRecognizer.getAudioFile());
+			stream = new FileInputStream(speechToTextAPI.getAudioFile());
 			uploadTask = mountainImagesRef.putStream(stream);
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
@@ -202,35 +171,20 @@ public class TestApiFragment extends Fragment {
 		});
 	}
 
-	private void startVocal(AudioTest audioTest){
+	private void startVocal(AbstractAudioPlayer abstractAudioPlayer){
 		try {
-			audioTest.playAudio();
+			abstractAudioPlayer.playAudio();
 		}catch (Exception e){
 			throw new RuntimeException(e);
 		}
 	}
 
-	private void stopVocal(AudioTest audioTest){
+	private void stopVocal(AbstractAudioPlayer abstractAudioPlayer){
 		try {
-			audioTest.stopAudio();
+			abstractAudioPlayer.stopAudio();
 		}catch (Exception e){
 			throw new RuntimeException(e);
 		}
-	}
-
-	private void printcharacters(PersonaggioDAO dao){
-		CompletableFuture<List<Personaggio>> futurePersonaggi = dao.getAll();
-
-		futurePersonaggi.thenAccept(personaggi -> {
-			// Elabora la lista di personaggi ottenuta
-			for (Personaggio personaggio : personaggi) {
-				System.out.println(personaggio); // Esempio: Stampa i dettagli del personaggio
-			}
-		}).exceptionally(exception -> {
-			// Gestisci eventuali eccezioni
-			System.err.println("Errore durante il recupero dei personaggi: " + exception.getMessage());
-			return null;
-		});
 	}
 
 
@@ -250,6 +204,6 @@ public class TestApiFragment extends Fragment {
 				Manifest.permission.WRITE_EXTERNAL_STORAGE,
 				Manifest.permission.RECORD_AUDIO
 		}, 1000);
-	}
+	}*/
 
 }
