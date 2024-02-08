@@ -68,7 +68,7 @@ public class DatePickerCustom extends AbstractFragmentWithNavigation {
 
     //metodi del time picker
     private void handleTextViewSelection(TextView selectedTextView) {
-        selectedTextView.setBackground(getContext().getDrawable(R.drawable.rectangle_rounded_border_bkg_colored));
+        selectedTextView.setBackground(getContext().getDrawable(R.drawable.rectangle_rounded_border_selector_bkg));
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
             View child = gridLayout.getChildAt(i);
             if (child instanceof TextView) {
