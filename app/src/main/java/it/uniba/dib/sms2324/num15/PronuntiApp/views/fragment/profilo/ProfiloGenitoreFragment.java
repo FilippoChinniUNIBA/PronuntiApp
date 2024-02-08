@@ -7,18 +7,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 
 public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
-    private ProfilePazienteFragment profilePazienteFragment;
-    private GenitoreViewModel genitoreViewModel;
+    private ProfiloPazienteFragment profiloPazienteFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,9 +28,6 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloGenitore);
         setPickMedia();
-
-        genitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
-        genitoreViewModel.setGenitore((Genitore) getActivity().getIntent().getExtras().get("profilo"));
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
@@ -50,8 +44,10 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
-        Genitore genitore = genitoreViewModel.getGenitore();
-        // Genitore genitore = new Genitore( "nome", "cognome", "username", "email", "password", "telefono");
+
+        Genitore genitore = new Genitore( "nome", "cognome", "username", "email", "password", "telefono");
+        /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
+
         textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);
         textInputEditTextCognome.setText(genitore.getCognome());
@@ -71,13 +67,10 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
     }
 
     @Override
-    void confermaModificaProfilo(String indirizzo, String telefono) {
-
-    }
-
-
-    @Override
     void modificaProfilo() {
+        textInputEditTextNome.setEnabled(true);
+        textInputEditTextCognome.setEnabled(true);
+        textInputEditTextEmail.setEnabled(true);
         textInputEditTextTelefono.setEnabled(true);
 
         buttonModificaProfilo.setText(getString(R.string.confirm_modify_profile));
@@ -88,19 +81,11 @@ public class ProfileGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile.setOnClickListener(v->pickImage());
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
-
         //rendi modificabile anche i bambini
         profilePazienteFragment.modificaProfilo();
 
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
-    }
-
-    @Override
-    void confermaModificaProfilo(String telefono) {
-        /*super.confermaModificaProfilo();
-        genitoreViewModel.getGenitore().setTelefono(telefono);
-        genitoreViewModel.aggiornaGenitoreRemoto();*/
     }
 
     @Override

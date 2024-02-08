@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/monitoraggio_bambino"
+        android:id="@+id/monitoraggioFragment2"
         android:title="Monitoraggio"
         android:icon="@drawable/ic_bambino"/>
     <item
-        android:id="@+id/scenari_genitori"
+        android:id="@+id/scenariGenitoriFragment"
         android:title="Giochi"
         android:icon="@drawable/ic_game"/>
     <!--
@@ -15,11 +15,11 @@
         android:icon="@drawable/ic_classifica"/>
         -->
     <item
-        android:id="@+id/calendarPaziente"
+        android:id="@+id/appuntamentiGenitoreFragment2"
         android:title="Visite"
         android:icon="@drawable/ic_calendar"/>
     <item
-        android:id="@+id/profiloGenitore"
+        android:id="@+id/profiloGenitoreFragment"
         android:title="Profilo"
         android:icon="@drawable/ic_profile"/>
 </menu>

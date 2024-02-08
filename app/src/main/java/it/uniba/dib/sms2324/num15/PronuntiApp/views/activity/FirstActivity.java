@@ -15,6 +15,7 @@ public class FirstActivity extends AppCompatActivity {
         setContentView(R.layout.activity_first_activity);
 
         if (savedInstanceState == null) {
+            /*
             // Crea un'istanza del Fragment
             LoginFragment loginFragment = new LoginFragment();
 
@@ -23,8 +24,9 @@ public class FirstActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // Aggiungi il Fragment al FrameLayout
-            fragmentTransaction.add(R.id.autenticazioneFrameLayout, loginFragment);
+            fragmentTransaction.replace(R.id.fragmentContainerAutenticazione, loginFragment);
             fragmentTransaction.commit();
+             */
         }
     }
 }

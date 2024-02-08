@@ -14,12 +14,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 
 
-public class ProfileLogopedistaFragment extends AbstractProfileWithImageFragment {
+public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment {
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
     private LogopedistaViewModel logopedistaViewModel;
 
-    public ProfileLogopedistaFragment() {}
+    public ProfiloLogopedistaFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

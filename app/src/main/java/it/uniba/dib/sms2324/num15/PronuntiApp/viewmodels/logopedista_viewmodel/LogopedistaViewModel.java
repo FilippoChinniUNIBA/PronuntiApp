@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.classifica.ClassificaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 
 public class LogopedistaViewModel extends ViewModel {

@@ -16,7 +16,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
 
-public class RegistrazionePazienteGenitoreController extends ViewModel {
+public class RegistrazionePazienteGenitoreController {
 
     private static final Map<String, Integer> PERSONAGGI_INIZIALI = new HashMap<String, Integer>() {{
         put("personaggio1", 0);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_genitore"
+    app:startDestination="@id/monitoraggioFragment2">
+
+    <fragment
+        android:id="@+id/monitoraggioFragment2"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment"
+        android:label="fragment_monitoraggio"
+        tools:layout="@layout/fragment_monitoraggio" />
+    <fragment
+        android:id="@+id/scenariGenitoriFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment"
+        android:label="fragment_scenari_genitore"
+        tools:layout="@layout/fragment_scenari_genitore" />
+    <fragment
+        android:id="@+id/appuntamentiGenitoreFragment2"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.AppuntamentiGenitoreFragment"
+        android:label="fragment_appuntamenti_genitore"
+        tools:layout="@layout/fragment_appuntamenti_genitore" />
+    <fragment
+        android:id="@+id/profiloGenitoreFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloGenitoreFragment"
+        android:label="fragment_profile_genitore"
+        tools:layout="@layout/fragment_profile_genitore" />
+</navigation>

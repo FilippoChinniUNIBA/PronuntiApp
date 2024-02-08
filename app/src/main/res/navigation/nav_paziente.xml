@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/scenarioFragment">
+    <fragment
+        android:id="@+id/scenarioFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenarioFragment"
+        android:label="fragment_scenario"
+        tools:layout="@layout/fragment_scenario" >
+        <action
+            android:id="@+id/action_scenarioFragment_to_esercizioSequenzaParole"
+            app:destination="@id/esercizioSequenzaParole"
+            app:popUpTo="@id/scenarioFragment" />
+        <action
+            android:id="@+id/action_scenarioFragment_to_esercizioCoppiaImmagini2"
+            app:destination="@id/esercizioCoppiaImmagini"
+            app:popUpTo="@id/scenarioFragment" />
+        <action
+            android:id="@+id/action_scenarioFragment_to_esercizioDenominazioneImmagineFragment2"
+            app:destination="@id/esercizioDenominazioneImmagineFragment"
+            app:popUpTo="@id/scenarioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/esercizioCoppiaImmagini"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmagini"
+        android:label="fragment_esercizio_coppia_immagini"
+        tools:layout="@layout/fragment_esercizio_coppia_immagini" />
+    <fragment
+        android:id="@+id/esercizioSequenzaParole"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParole"
+        android:label="fragment_esercizio_sequenza_parole"
+        tools:layout="@layout/fragment_esercizio_sequenza_parole" />
+    <fragment
+        android:id="@+id/esercizioDenominazioneImmagineFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment"
+        android:label="fragment_esercizio_denominazione_immagine"
+        tools:layout="@layout/fragment_esercizio_denominazione_immagine" />
+    <fragment
+        android:id="@+id/personaggiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.PersonaggiFragment"
+        android:label="fragment_personaggi"
+        tools:layout="@layout/fragment_personaggi" />
+    <fragment
+        android:id="@+id/classificaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment"
+        android:label="fragment_classifica"
+        tools:layout="@layout/fragment_classifica" />
+</navigation>

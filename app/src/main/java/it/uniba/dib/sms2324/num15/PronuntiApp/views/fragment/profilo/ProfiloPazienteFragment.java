@@ -13,13 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.time.LocalDate;
-
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
-public class ProfilePazienteFragment extends AsbtractProfileFragment{
+public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
     private Spinner spinnerSesso;
     private TextView textViewDatiBambino;

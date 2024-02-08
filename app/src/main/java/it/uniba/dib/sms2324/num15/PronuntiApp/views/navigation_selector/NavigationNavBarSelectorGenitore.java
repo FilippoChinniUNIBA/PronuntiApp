@@ -9,14 +9,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.AppuntamentiGenitoreFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfileGenitoreFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloGenitoreFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment;
 
 public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
     private final MonitoraggioFragment monitoraggioFragment = new MonitoraggioFragment();
     private final ScenariGenitoriFragment scenariGenitoriFragment = new ScenariGenitoriFragment();
     //private final ClassificaFragment classificaFragment = new ClassificaFragment();
-    private final ProfileGenitoreFragment profileGenitoreFragment = new ProfileGenitoreFragment();
+    private final ProfiloGenitoreFragment profiloGenitoreFragment = new ProfiloGenitoreFragment();
     private final AppuntamentiGenitoreFragment appuntamentiGenitoreFragment = new AppuntamentiGenitoreFragment();
 
     public NavigationNavBarSelectorGenitore(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
@@ -30,34 +30,11 @@ public class NavigationNavBarSelectorGenitore extends AbstractNavigationSelector
                 bottomNavigationView.getMenu().getItem(1).setChecked(true);
             } else if (currentFragment instanceof AppuntamentiGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
-            } else if (currentFragment instanceof ProfileGenitoreFragment) {
+            } else if (currentFragment instanceof ProfiloGenitoreFragment) {
                 bottomNavigationView.getMenu().getItem(3).setChecked(true);
             } /*else if (currentFragment instanceof ClassificaFragment) {
                 bottomNavigationView.getMenu().getItem(4).setChecked(true);
             }*/
         });
-    }
-
-    public boolean selectItem(@IdRes int itemId) {
-        Fragment fragment = null;
-        if (itemId == R.id.monitoraggio_bambino)
-            fragment = monitoraggioFragment;
-        else if (itemId == R.id.scenari_genitori)
-            fragment = scenariGenitoriFragment;
-        /*
-        else if (itemId == R.id.classificaGenitore)
-            fragment = classificaFragment;
-         */
-        else if (itemId == R.id.calendarPaziente)
-            fragment = appuntamentiGenitoreFragment;
-        else if (itemId == R.id.profiloGenitore)
-            fragment = profileGenitoreFragment;
-
-
-        if (fragment != null) {
-            replaceFragment(fragmentManager,fragmentContainerId,fragment);
-            return true;
-        }
-        return false;
     }
 }
