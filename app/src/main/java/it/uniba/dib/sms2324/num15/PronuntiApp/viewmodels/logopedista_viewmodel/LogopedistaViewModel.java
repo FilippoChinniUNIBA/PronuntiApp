@@ -12,7 +12,6 @@ public class LogopedistaViewModel extends ViewModel {
 	private Logopedista mLogopedista;
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 
-
 	public Logopedista getLogopedista() {
 		return mLogopedista;
 	}
@@ -20,14 +19,11 @@ public class LogopedistaViewModel extends ViewModel {
 		mLogopedista = logopedista;
 	}
 
-
 	public void aggiornaLogopedistaRemoto() {
 		LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
 		logopedistaDAO.update(mLogopedista);
-
 		Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + mLogopedista.toString());
 	}
-
 
 	public RegistrazionePazienteGenitoreController getRegistrazionePazienteGenitoreController() {
 		if (this.mRegistrazionePazienteGenitoreController == null) {

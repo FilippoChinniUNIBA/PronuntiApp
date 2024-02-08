@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/giochiPaziente"
+        android:id="@+id/scenarioFragment"
         android:title="Giochi"
         android:icon="@drawable/ic_game" />
     <item
-        android:id="@+id/personaggi"
+        android:id="@+id/personaggiFragment"
         android:title="Personaggi"
         android:icon="@drawable/ic_personaggi"/>
     <item
-        android:id="@+id/classificaPaziente"
+        android:id="@+id/classificaFragment"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
     <!--

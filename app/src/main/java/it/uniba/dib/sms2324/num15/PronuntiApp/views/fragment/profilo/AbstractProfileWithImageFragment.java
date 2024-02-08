@@ -46,6 +46,8 @@ public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFr
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
 
+
+
     }
 
     @Override
@@ -60,6 +62,7 @@ public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFr
         buttonModificaProfilo.setText(getString(R.string.modify_profile));
         buttonModificaProfilo.setOnClickListener(v->modificaProfilo());
 
-        imageViewProfile.setOnClickListener(v->{});
+        //imageViewProfile.setOnClickListener(v->{});
     }
+
 }

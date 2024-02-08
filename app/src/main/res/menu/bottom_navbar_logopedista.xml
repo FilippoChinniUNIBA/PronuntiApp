@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/pazienti"
+        android:id="@+id/pazientiFragment"
         android:title="Pazienti"
         android:icon="@drawable/ic_pazienti"/>
     <item
-        android:id="@+id/classificaGenitore"
+        android:id="@+id/classificaFragment2"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
     <item
-        android:id="@+id/calendarLogopedista"
+        android:id="@+id/appuntamentiLogopedistaFragment2"
         android:title="Appuntamenti"
         android:icon="@drawable/ic_calendar"/>
     <item
-        android:id="@+id/profiloLogopedista"
+        android:id="@+id/profiloLogopedistaFragment"
         android:title="Profilo"
         android:icon="@drawable/ic_profile"/>
 </menu>

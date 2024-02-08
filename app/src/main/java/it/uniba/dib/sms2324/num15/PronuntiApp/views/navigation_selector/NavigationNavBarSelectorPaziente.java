@@ -12,10 +12,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioch
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.PersonaggiFragment;
 
 public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector implements NavigationNavBarItemSelector {
-    private final ScenarioFragment scenarioFragment = new ScenarioFragment();
-    private final PersonaggiFragment personaggiFragment = new PersonaggiFragment();
-    private final ClassificaFragment classificaFragment = new ClassificaFragment();
-
     public NavigationNavBarSelectorPaziente(FragmentManager fragmentManager, @IdRes int fragmentContainerId, BottomNavigationView bottomNavigationView) {
         super( fragmentManager, fragmentContainerId, bottomNavigationView);
         fragmentManager.addOnBackStackChangedListener(() -> {
@@ -28,21 +24,6 @@ public class NavigationNavBarSelectorPaziente extends AbstractNavigationSelector
                 bottomNavigationView.getMenu().getItem(2).setChecked(true);
             }
         });
-    }
-
-    public boolean selectItem(@IdRes int itemId) {
-        Fragment fragment = null;
-        if (itemId == R.id.giochiPaziente)
-            fragment = scenarioFragment;
-        else if (itemId == R.id.personaggi)
-            fragment = personaggiFragment;
-        else if (itemId == R.id.classificaPaziente)
-            fragment = classificaFragment;
-        if (fragment != null) {
-            replaceFragment(fragmentManager,fragmentContainerId,fragment);
-            return true;
-        }
-        return false;
     }
 }
 

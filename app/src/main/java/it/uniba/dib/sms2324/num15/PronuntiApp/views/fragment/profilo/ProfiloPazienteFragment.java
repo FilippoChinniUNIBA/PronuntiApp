@@ -9,17 +9,20 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
     private Spinner spinnerSesso;
-
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
+    private PazienteViewModel pazienteViewModel;
 
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
@@ -33,10 +36,13 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailProfiloPaziente);
         //imageViewProfile = view.findViewById(R.id.imageViewProfile);
         //imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
-        //uttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloPaziente);
+        //buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloPaziente);
         //setPickMedia();
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
+
+        this.pazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
+        pazienteViewModel.setPaziente((Paziente) getActivity().getIntent().getExtras().get("profilo"));
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -60,8 +66,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
 
     public void setData(){
 
-        Paziente paziente = new Paziente("nome", "cognome", "username", "email", "password",20, java.time.LocalDate.of(2002,12,2),'M',100,100,null);
-        /*profilePazienteViewModel.getPaziente();*/  //TODO deve prendere il paziente dal viewmodel
+        Paziente paziente = pazienteViewModel.getPaziente();
 
         textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -84,6 +89,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextDataNascita.setEnabled(true);
         spinnerSesso.setEnabled(true);
         textInputEditTextEmail.setEnabled(true);
+
     }
 
     @Override

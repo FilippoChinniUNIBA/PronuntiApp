@@ -34,7 +34,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
         addPazientiButton = view.findViewById(R.id.addPaziente);
-        addPazientiButton.setOnClickListener(v -> replaceFragment(R.id.frameLayoutLogopedista, new RegistrazionePazienteGenitoreFragment(),null));
+        addPazientiButton.setOnClickListener(v -> navigateTo(R.id.action_pazientiFragment_to_registrazionePazienteGenitoreFragment));
         searchViewListaPazienti = view.findViewById(R.id.searchViewListaPazienti);
 
         recyclerViewListaPazienti = view.findViewById(R.id.pazientiRecyclerView);

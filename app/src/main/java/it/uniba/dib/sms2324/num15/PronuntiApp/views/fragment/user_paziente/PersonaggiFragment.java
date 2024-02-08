@@ -18,8 +18,9 @@ import java.util.Arrays;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiAcquistabiliAdapter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiSbloccatiAdapter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class PersonaggiFragment extends Fragment {
+public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewPersonaggiSbloccati;
     private RecyclerView recyclerViewPersonaggiAcquistabili;
     private TextView textViewPersonaggiSbloccati;
