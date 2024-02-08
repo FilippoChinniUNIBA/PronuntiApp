@@ -18,13 +18,13 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 
 	public TemplateScenarioGioco() {}
 
-	public TemplateScenarioGioco(String idTemplateScenarioGioco, File immagineSfondo) {
-		super(immagineSfondo);
+	public TemplateScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, String idTemplateScenarioGioco) {
+		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
 	}
 
-	public TemplateScenarioGioco(File immagineSfondo) {
-		super(immagineSfondo);
+	public TemplateScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3) {
+		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 	}
 
 	public TemplateScenarioGioco(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
@@ -32,6 +32,9 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 
 		this.idTemplateScenarioGioco = fromDatabaseKey;
 		this.immagineSfondo = t.getImmagineSfondo();
+		this.immagineTappa1 = t.getImmagineTappa1();
+		this.immagineTappa2 = t.getImmagineTappa2();
+		this.immagineTappa3 = t.getImmagineTappa3();
 	}
 
 	public final String getIdTemplateScenarioGioco() {
@@ -54,7 +57,10 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 	public TemplateScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("TemplateScenarioGioco.fromMap()", fromDatabaseMap.toString());
 		return new TemplateScenarioGioco(
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO))
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO)),
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_1)),
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_2)),
+				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_3))
 		);
 	}
 
@@ -63,6 +69,9 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 		return "TemplateScenarioGioco{" +
 				"idTemplateScenarioGioco='" + idTemplateScenarioGioco + '\'' +
 				", immagineSfondo=" + immagineSfondo +
+				", immagineTappa1=" + immagineTappa1 +
+				", immagineTappa2=" + immagineTappa2 +
+				", immagineTappa3=" + immagineTappa3 +
 				'}';
 	}
 
