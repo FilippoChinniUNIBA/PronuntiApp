@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.time.LocalDate;
-
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
-public class ProfilePazienteFragment extends AsbtractProfileFragment{
+public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
     private Spinner spinnerSesso;
 
