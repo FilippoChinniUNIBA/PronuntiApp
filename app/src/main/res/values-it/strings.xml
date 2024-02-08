@@ -17,16 +17,14 @@
     <string name="modify_profile"> Modifica profilo </string>
     <string name="confirm_modify_profile"> Conferma modifiche</string>
     <string name="birth_date_hint">Data di nascita</string>
-    <string name="male">Maschio</string>
-    <string name="female">Femmina</string>
-    <string name="other">Altro</string>
+    <string name="male">M</string>
+    <string name="female">F</string>
     <string name="age">Età</string>
     <string name="informations_patient">Informazioni paziente</string>
     <string name="informations_parent">Informazioni genitore</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>
-        <item>@string/other</item>
     </string-array>
     <string name="gender_hint">Sesso</string>
     <string name="patient">Paziente</string>
@@ -68,6 +66,9 @@
     <string name="startedRecording">Registrazione avviata</string>
     <string name="stopedRecording">Registrazione terminata</string>
     <string name="suggestionSequenzaParole">Riproduci l\'audio con il pulsante in basso a sinistra e registra la stessa frase!</string>
+    <string name="date">Data</string>
+    <string name="place">Luogo</string>
+    <string name="insertPaziente" >Inserisci il paziente</string>
 
     <string-array name="character_names">
         <item>Bambina</item>

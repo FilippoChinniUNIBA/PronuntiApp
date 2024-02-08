@@ -56,34 +56,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
         adapterPazienti = new PazienteAdapter(pazienti);
         recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
-        recyclerViewListaPazienti.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
-                Log.d("PazientiFragment", "onInterceptTouchEvent: " + childView);
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
-                View childView = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
-                Log.d("PazientiFragment", "onTouchEvent: " + childView);
-                if (childView != null && motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    childView.setBackgroundResource(R.drawable.rectangle_rounded_border_selector_bkg);
-
-                    // You can also trigger navigation or other actions here.
-                    Paziente pazienteSelezionato = pazienti.get(recyclerViewListaPazienti.getChildAdapterPosition(childView));
-                    // TODO: Implementare la navigazione verso i risultati del paziente
-                }
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-                // This method is not relevant for this implementation.
-            }
-        });
-
-
+        recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
         searchViewListaPazienti.setOnCloseListener(() -> {
             addPazientiButton.setText("Paziente +");
