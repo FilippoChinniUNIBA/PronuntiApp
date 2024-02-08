@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
+import android.media.tv.TvContract;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     public void setData(){
 
         Logopedista logopedista = logopedistaViewModel.getLogopedista();
-        //Logopedista logopedista = null; /*profileLogopedistaViewModel.getLogopedista();*/ //TODO deve prendere il logopedista dal viewmodel
 
         textInputEditTextNome.setText(logopedista.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -85,8 +85,11 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         super.confermaModificaProfilo();
         //fai le cose che devi fare per salvare i dati aggiornati del logopedista
         //save(textInputEditTextIndirizzo.getText().toString(), textInputEditTextTelefono.getText().toString());
-        textInputEditTextIndirizzo.getText().toString();
-        textInputEditTextTelefono.getText().toString();
+        String indirizzo = textInputEditTextIndirizzo.getText().toString();
+        String telefono = textInputEditTextTelefono.getText().toString();
+        logopedistaViewModel.getLogopedista().setIndirizzo(indirizzo);
+        logopedistaViewModel.getLogopedista().setTelefono(telefono);
+        logopedistaViewModel.aggiornaLogopedistaRemoto();
     }
 
     @Override

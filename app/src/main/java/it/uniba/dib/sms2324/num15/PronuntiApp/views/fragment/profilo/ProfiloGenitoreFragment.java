@@ -7,15 +7,18 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
     private ProfiloPazienteFragment profiloPazienteFragment;
+    private GenitoreViewModel genitoreViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         setPickMedia();
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
+
+        genitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
+        //genitoreViewModel.setGenitore((Genitore) getActivity().getIntent().getExtras().get("profilo"));
 
         setData();
 
@@ -47,6 +53,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         Genitore genitore = new Genitore( "nome", "cognome", "username", "email", "password", "telefono");
         /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
+        //Genitore genitore = genitoreViewModel.getGenitore();
 
         textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -64,13 +71,12 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
         profiloPazienteFragment.confermaModificaProfilo();
+        genitoreViewModel.getGenitore().setTelefono(textInputEditTextTelefono.getText().toString());
+        genitoreViewModel.aggiornaGenitoreRemoto();
     }
 
     @Override
     void modificaProfilo() {
-        textInputEditTextNome.setEnabled(true);
-        textInputEditTextCognome.setEnabled(true);
-        textInputEditTextEmail.setEnabled(true);
         textInputEditTextTelefono.setEnabled(true);
 
         buttonModificaProfilo.setText(getString(R.string.confirm_modify_profile));
