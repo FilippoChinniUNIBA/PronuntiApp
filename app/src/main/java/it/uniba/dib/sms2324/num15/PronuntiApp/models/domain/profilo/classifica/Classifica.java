@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBClassifica;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
@@ -12,9 +13,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
 public class Classifica implements Persistente<Classifica> {
-	private Map<String, Integer> classificaPazienti;
+	private TreeMap<String, Integer> classificaPazienti;
 
-	public Classifica(Map<String, Integer> classificaPazienti) {
+	public Classifica(TreeMap<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
 	}
 
@@ -24,11 +25,11 @@ public class Classifica implements Persistente<Classifica> {
 		this.classificaPazienti = c.getClassificaPazienti();
 	}
 
-	public Map<String, Integer> getClassificaPazienti() {
+	public TreeMap<String, Integer> getClassificaPazienti() {
 		return classificaPazienti;
 	}
 
-	public void setClassificaPazienti(Map<String, Integer> classificaPazienti) {
+	public void setClassificaPazienti(TreeMap<String, Integer> classificaPazienti) {
 		this.classificaPazienti = classificaPazienti;
 	}
 
@@ -44,7 +45,7 @@ public class Classifica implements Persistente<Classifica> {
 	public Classifica fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("Classifica.fromMap()", fromDatabaseMap.toString());
 		return new Classifica(
-				(Map<String, Integer>) fromDatabaseMap.get(CostantiDBClassifica.CLASSIFICA_PAZIENTI)
+				(TreeMap<String, Integer>) fromDatabaseMap.get(CostantiDBClassifica.CLASSIFICA_PAZIENTI)
 		);
 	}
 
