@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
 import android.util.Log;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -162,6 +163,21 @@ public class Logopedista extends AbstractProfilo {
 
 	public void addPaziente(Paziente paziente) {
 		this.pazienti.add(paziente);
+	}
+
+	public void aggiornaClassificaPazienti() {
+		Map<String, Integer> classifica = new LinkedHashMap<>();
+		for (Paziente paziente : this.pazienti) {
+			classifica.put(paziente.getUsername(), paziente.getPunteggioTot());
+		}
+
+		Map<String, Integer> sortedClassifica = classifica.entrySet()
+				.stream()
+				.sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+		this.classificaPazienti.setClassificaPazienti(sortedClassifica);
 	}
 
 }
