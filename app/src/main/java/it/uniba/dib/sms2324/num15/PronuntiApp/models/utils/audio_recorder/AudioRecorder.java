@@ -21,12 +21,10 @@ public class AudioRecorder {
 	private boolean isRecording = false;
 
 	private File audioFile;
-	private Context context;
 
 	@SuppressLint("MissingPermission")
-	public AudioRecorder(Context context, File audioFile) {
+	public AudioRecorder( File audioFile) {
 		this.audioFile = audioFile;
-		this.context = context;
 		audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, BUFFER_SIZE);
 	}
 
