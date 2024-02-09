@@ -51,7 +51,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
     private AudioRecorder audioRecorder;
     private int countAiuti = 3;
-
     private PazienteViewModel mPazienteViewModel;
     private EsercizioDenominazioneImmagineController mController;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;
@@ -97,7 +96,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
         File audioConvertito = new File(cartellaApp, "audioConvertito.mp3");
 
-        this.audioRecorder = new AudioRecorder(getContext(), audioRegistrazione);
+        this.audioRecorder = new AudioRecorder(audioRegistrazione);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
 
