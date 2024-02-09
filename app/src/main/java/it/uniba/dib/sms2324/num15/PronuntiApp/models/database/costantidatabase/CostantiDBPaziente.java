@@ -13,6 +13,7 @@ public final class CostantiDBPaziente {
 	public static final String VALUTA = "valuta";
 	public static final String PUNTEGGIO_TOT = "punteggioTot";
 	public static final String PERSONAGGI_SBLOCCATI = "personaggiSbloccati";
+	public static final String GENITORE = CostantiNodiDB.GENITORE;
 	public static final String LISTA_TERAPIE = CostantiNodiDB.TERAPIE;
 
 	//public static final String ID_LOGOPEDISTA = "idLogopedista";
