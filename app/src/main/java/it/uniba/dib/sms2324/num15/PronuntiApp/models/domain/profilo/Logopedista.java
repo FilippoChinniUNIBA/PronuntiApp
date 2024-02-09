@@ -137,6 +137,10 @@ public class Logopedista extends AbstractProfilo {
 						.entrySet().stream().map(entry -> new Paziente(entry.getValue(), entry.getKey())).collect(Collectors.toList())
 				: null;
 
+		Classifica classifica = (fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI)) != null ?
+				new Classifica((Map<String, Object>) fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI), null)
+				: null;
+
 		return new Logopedista(
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.NOME),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.COGNOME),
@@ -145,7 +149,7 @@ public class Logopedista extends AbstractProfilo {
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.PASSWORD),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.TELEFONO),
 				(String) fromDatabaseMap.get(CostantiDBLogopedista.INDIRIZZO),
-				(fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI)) != null ? new Classifica((Map<String, Object>) fromDatabaseMap.get(CostantiDBLogopedista.CLASSIFICA_PAZIENTI), null) : null,
+				classifica,
 				listaPazienti
 		);
 	}
