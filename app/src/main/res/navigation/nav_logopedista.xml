@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_classifica" />
     <fragment
         android:id="@+id/appuntamentiLogopedistaFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.AppuntamentiLogopedistaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti.AppuntamentiLogopedistaFragment"
         android:label="fragment_appuntamenti_logopedista"
         tools:layout="@layout/fragment_appuntamenti_logopedista" />
     <fragment

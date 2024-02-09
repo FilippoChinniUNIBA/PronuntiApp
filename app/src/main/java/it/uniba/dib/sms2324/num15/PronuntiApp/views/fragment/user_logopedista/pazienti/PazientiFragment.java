@@ -57,11 +57,9 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
             recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
-
-
-        searchViewListaPazienti.setOnCloseListener(() -> {
-            addPazientiButton.setText("Paziente +");
-            return false;
+            searchViewListaPazienti.setOnCloseListener(() -> {
+                addPazientiButton.setText("Paziente +");
+                return false;
         });
         searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
 

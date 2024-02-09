@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +36,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         Paziente paziente = pazienti.get(position);
         holder.textViewNomePaziente.setText(paziente.getNome());
         holder.textViewCognomePaziente.setText(paziente.getCognome());
-        holder.textViewEtaPaziente.setText(String.valueOf(paziente.getEta()));
+        holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
     }
 
@@ -53,7 +52,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
     public static class PazienteViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNomePaziente;
         TextView textViewCognomePaziente;
-        TextView textViewEtaPaziente;
+        TextView textViewDataNascitaPaziente;
         TextView textViewSessoPaziente;
         LinearLayout linearLayoutPaziente;
 
@@ -62,7 +61,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
             linearLayoutPaziente = itemView.findViewById(R.id.llPazienteInListaLogopedista);
             textViewNomePaziente = itemView.findViewById(R.id.textViewNomePaziente);
             textViewCognomePaziente = itemView.findViewById(R.id.textViewCognomePaziente);
-            textViewEtaPaziente = itemView.findViewById(R.id.textViewEtaPaziente);
+            textViewDataNascitaPaziente = itemView.findViewById(R.id.textViewDataNascitaPaziente);
             textViewSessoPaziente = itemView.findViewById(R.id.textViewSessoPaziente);
         }
     }
