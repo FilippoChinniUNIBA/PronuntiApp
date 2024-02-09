@@ -9,49 +9,49 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public abstract class AbstractScenarioGioco implements Persistente<AbstractScenarioGioco> {
-	protected File immagineSfondo;
-	protected File immagineTappa1;
-	protected File immagineTappa2;
-	protected File immagineTappa3;
+	protected String immagineSfondo;
+	protected String immagineTappa1;
+	protected String immagineTappa2;
+	protected String immagineTappa3;
 
 	public AbstractScenarioGioco() {}
 
-	public AbstractScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3) {
+	public AbstractScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3) {
 		this.immagineSfondo = immagineSfondo;
 		this.immagineTappa1 = immagineTappa1;
 		this.immagineTappa2 = immagineTappa2;
 		this.immagineTappa3 = immagineTappa3;
 	}
 
-	public File getImmagineSfondo() {
+	public String getImmagineSfondo() {
 		return immagineSfondo;
 	}
 
-	public File getImmagineTappa1() {
+	public String getImmagineTappa1() {
 		return immagineTappa1;
 	}
 
-	public File getImmagineTappa2() {
+	public String getImmagineTappa2() {
 		return immagineTappa2;
 	}
 
-	public File getImmagineTappa3() {
+	public String getImmagineTappa3() {
 		return immagineTappa3;
 	}
 
-	public void setImmagineSfondo(File immagineSfondo) {
+	public void setImmagineSfondo(String immagineSfondo) {
 		this.immagineSfondo = immagineSfondo;
 	}
 
-	public void setImmagineTappa1(File immagineTappa1) {
+	public void setImmagineTappa1(String immagineTappa1) {
 		this.immagineTappa1 = immagineTappa1;
 	}
 
-	public void setImmagineTappa2(File immagineTappa2) {
+	public void setImmagineTappa2(String immagineTappa2) {
 		this.immagineTappa2 = immagineTappa2;
 	}
 
-	public void setImmagineTappa3(File immagineTappa3) {
+	public void setImmagineTappa3(String immagineTappa3) {
 		this.immagineTappa3 = immagineTappa3;
 	}
 
@@ -59,10 +59,10 @@ public abstract class AbstractScenarioGioco implements Persistente<AbstractScena
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = new HashMap<>();
 
-		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO, this.immagineSfondo.getPath());
-		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_1, this.immagineTappa1.getPath());
-		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_2, this.immagineTappa2.getPath());
-		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_3, this.immagineTappa3.getPath());
+		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO, this.immagineSfondo);
+		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_1, this.immagineTappa1);
+		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_2, this.immagineTappa2);
+		entityMap.put(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_3, this.immagineTappa3);
 		return entityMap;
 	}
 

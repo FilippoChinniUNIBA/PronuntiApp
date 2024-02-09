@@ -12,7 +12,7 @@ public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizio
 		super(idEsercizio, esitoCorretto, audioRegistrato);
 	}*/
 
-	public RisultatoEsercizioSequenzaParole(boolean esitoCorretto, File audioRegistrato) {
+	public RisultatoEsercizioSequenzaParole(boolean esitoCorretto, String audioRegistrato) {
 		super(esitoCorretto, audioRegistrato);
 	}
 
@@ -34,7 +34,7 @@ public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizio
 		Log.d("RisultatoEsercizioSequenzaParole.fromMap()", fromDatabaseMap.toString());
 		return new RisultatoEsercizioSequenzaParole(
 				(boolean) fromDatabaseMap.get(CostantiDBRisultato.ESITO_CORRETTO),
-				new File((String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO))
+				(String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO)
 		);
 	}
 

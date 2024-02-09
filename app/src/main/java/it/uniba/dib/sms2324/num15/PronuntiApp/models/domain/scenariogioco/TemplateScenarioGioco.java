@@ -18,12 +18,12 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 
 	public TemplateScenarioGioco() {}
 
-	public TemplateScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, String idTemplateScenarioGioco) {
+	public TemplateScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, String idTemplateScenarioGioco) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
 	}
 
-	public TemplateScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3) {
+	public TemplateScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 	}
 
@@ -57,10 +57,10 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 	public TemplateScenarioGioco fromMap(Map<String, Object> fromDatabaseMap) {
 		Log.d("TemplateScenarioGioco.fromMap()", fromDatabaseMap.toString());
 		return new TemplateScenarioGioco(
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO)),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_1)),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_2)),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_3))
+				(String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_SFONDO),
+				(String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_1),
+				(String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_2),
+				(String) fromDatabaseMap.get(CostantiDBTemplateScenarioGioco.IMMAGINE_TAPPA_3)
 		);
 	}
 

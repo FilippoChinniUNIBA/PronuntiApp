@@ -25,7 +25,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 	private List<EsercizioEseguibile> esercizi;
 	private String refIdTemplateScenarioGioco;
 
-	public ScenarioGioco(String idScenarioGioco, File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String idScenarioGioco, String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
@@ -34,7 +34,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
-	public ScenarioGioco(String idScenarioGioco, File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String idScenarioGioco, String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.idScenarioGioco = idScenarioGioco;
 		this.dataInizio = dataInizio;
@@ -42,7 +42,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
-	public ScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, LocalDate dataInizio, int ricompensaFinale, List<EsercizioEseguibile> esercizi, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
@@ -50,7 +50,7 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 		this.refIdTemplateScenarioGioco = refIdTemplateScenarioGioco;
 	}
 
-	public ScenarioGioco(File immagineSfondo, File immagineTappa1, File immagineTappa2, File immagineTappa3, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
+	public ScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, LocalDate dataInizio, int ricompensaFinale, String refIdTemplateScenarioGioco) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.dataInizio = dataInizio;
 		this.ricompensaFinale = ricompensaFinale;
@@ -146,10 +146,10 @@ public class ScenarioGioco extends TemplateScenarioGioco {
 				}).collect(Collectors.toList()) : null;
 
 		return new ScenarioGioco(
-				new File((String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_SFONDO)),
-				new File((String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_1)),
-				new File((String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_2)),
-				new File((String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_3)),
+				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_SFONDO),
+				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_1),
+				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_2),
+				(String) fromDatabaseMap.get(CostantiDBScenarioGioco.IMMAGINE_TAPPA_3),
 				LocalDate.parse((String) fromDatabaseMap.get(CostantiDBScenarioGioco.DATA_INIZIO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBScenarioGioco.RICOMPENSA_FINALE)),
 				esercizi,

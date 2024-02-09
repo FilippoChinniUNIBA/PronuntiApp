@@ -7,7 +7,7 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 
 public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisultatoEsercizio {
-	protected File audioRegistrato;
+	protected String audioRegistrato;
 
 	public AbstractRisultatoEsercizioConAudio() {}
 
@@ -16,16 +16,16 @@ public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisulta
 		this.audioRegistrato = audioRegistrato;
 	}*/
 
-	public AbstractRisultatoEsercizioConAudio(boolean esitoCorretto, File audioRegistrato) {
+	public AbstractRisultatoEsercizioConAudio(boolean esitoCorretto, String audioRegistrato) {
 		super(esitoCorretto);
 		this.audioRegistrato = audioRegistrato;
 	}
 
-	public File getAudioRegistrato() {
+	public String getAudioRegistrato() {
 		return audioRegistrato;
 	}
 
-	public void setAudioRegistrato(File audioRegistrato) {
+	public void setAudioRegistrato(String audioRegistrato) {
 		this.audioRegistrato = audioRegistrato;
 	}
 
@@ -33,7 +33,7 @@ public abstract class AbstractRisultatoEsercizioConAudio extends AbstractRisulta
 	public Map<String, Object> toMap() {
 		Map<String, Object> entityMap = super.toMap();
 
-		entityMap.put(CostantiDBRisultato.AUDIO_REGISTRATO, this.audioRegistrato.getPath());
+		entityMap.put(CostantiDBRisultato.AUDIO_REGISTRATO, this.audioRegistrato);
 		return entityMap;
 	}
 

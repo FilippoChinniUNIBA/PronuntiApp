@@ -15,7 +15,7 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 		this.countAiuti = countAiuti;
 	}*/
 
-	public RisultatoEsercizioDenominazioneImmagine(boolean esitoCorretto, File audioRegistrato, int countAiuti) {
+	public RisultatoEsercizioDenominazioneImmagine(boolean esitoCorretto, String audioRegistrato, int countAiuti) {
 		super(esitoCorretto, audioRegistrato);
 		this.countAiuti = countAiuti;
 	}
@@ -51,7 +51,7 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 		Log.d("RisultatoEsercizioDenominazioneImmagine.fromMap()", fromDatabaseMap.toString());
 		return new RisultatoEsercizioDenominazioneImmagine(
 				(boolean) fromDatabaseMap.get(CostantiDBRisultato.ESITO_CORRETTO),
-				new File((String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO)),
+				(String) fromDatabaseMap.get(CostantiDBRisultato.AUDIO_REGISTRATO),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBRisultato.COUNT_AIUTI))
 		);
 	}
