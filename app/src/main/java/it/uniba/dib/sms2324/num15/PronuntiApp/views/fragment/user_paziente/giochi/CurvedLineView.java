@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi;
 
 import android.content.Context;
 import android.graphics.Canvas;

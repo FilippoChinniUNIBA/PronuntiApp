@@ -24,7 +24,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
@@ -33,7 +32,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPla
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioDenominazioneImmagineController;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 

@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,12 +13,12 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
-public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiSbloccatiAdapter.ViewHolder> {
+public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
 
     private Context context;
-    private List<Personaggio> listaPersonaggi;
+    private List<Personaggio> listaPersonaggi; // Sostituisci "YourDataModel" con la classe del tuo modello dati
 
-    public PersonaggiSbloccatiAdapter(Context context, List<Personaggio> listaPersonaggi) {
+    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> listaPersonaggi) {
         this.context = context;
         this.listaPersonaggi = listaPersonaggi;
     }

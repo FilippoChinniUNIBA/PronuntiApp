@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/esercizioCoppiaImmagini"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmagini"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmaginiFragment"
         android:label="fragment_esercizio_coppia_immagini"
         tools:layout="@layout/fragment_esercizio_coppia_immagini" />
     <fragment
         android:id="@+id/esercizioSequenzaParole"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParole"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment"
         android:label="fragment_esercizio_sequenza_parole"
         tools:layout="@layout/fragment_esercizio_sequenza_parole" />
     <fragment

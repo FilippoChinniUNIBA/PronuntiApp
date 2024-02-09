@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineEsercizioView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fineEsercizioView"
