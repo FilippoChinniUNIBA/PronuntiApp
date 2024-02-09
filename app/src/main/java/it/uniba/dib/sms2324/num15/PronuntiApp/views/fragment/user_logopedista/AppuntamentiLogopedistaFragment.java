@@ -48,9 +48,9 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
 
-        editTextGenitore = view.findViewById(R.id.textInputLayoutPazienteAppuntamentoLogopedista);
-        editTextDataAppuntemento = view.findViewById(R.id.textInputLayoutDataAppuntamentoLogopedista);
-        editTextLuogo = view.findViewById(R.id.textInputLayoutLuogoAppuntamentoLogopedista);
+        editTextGenitore = view.findViewById(R.id.textInputEditTextPazienteAppuntamentoLogopedista);
+        editTextDataAppuntemento = view.findViewById(R.id.textInputEditTextDataAppuntamentoLogopedista);
+        editTextLuogo = view.findViewById(R.id.textInputEditTextLuogoAppuntamentoLogopedista);
 
         //addAppuntamentoButton=view.findViewById();
 
@@ -60,7 +60,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         return view;
     }
 
-    @Override
+   /* @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -70,7 +70,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
             eseguiAggiuntaPrenotazione(idLogopedista);
 
         });
-    }
+    }*/
 
     private CompletableFuture<Appuntamento> eseguiAggiuntaPrenotazione(String idLogopedista) {
 
