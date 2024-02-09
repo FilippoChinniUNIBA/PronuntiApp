@@ -20,15 +20,21 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.api.services.storage.Storage;
+import com.google.firebase.Firebase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
 
 public class TestFilePickerFragment extends Fragment {
     private Button buttonfilePicker;
+    private Button buttonfileUploader;
+    private Button buttonfileDownloader;
     private TextView filepath;
     private ActivityResultLauncher<String> filePickerLauncher;
 
@@ -40,10 +46,18 @@ public class TestFilePickerFragment extends Fragment {
 
         this.buttonfilePicker = view.findViewById(R.id.idfilepickerbutton);
         this.filepath = view.findViewById(R.id.filepathsceltoid);
+        this.buttonfileUploader = view.findViewById(R.id.testButtonUploadFilePicker);
+        this.buttonfileDownloader = view.findViewById(R.id.testButtonDownloadFilePicker);
 
-        this.buttonfilePicker.setOnClickListener(v -> openFile());
+        buttonfilePicker.setOnClickListener(v -> funzioneMaster());
+        buttonfileUploader.setOnClickListener(v -> uploadFileToStorage(FirebaseStorage.getInstance(), Uri.parse(filepath.getText().toString())));
+        buttonfileDownloader.setOnClickListener(v -> getUrlFromStorageReference(FirebaseStorage.getInstance()));
 
         return view;
+    }
+
+    private void funzioneMaster() {
+        openFile();
     }
 
     private void openFile() {
@@ -70,37 +84,39 @@ public class TestFilePickerFragment extends Fragment {
     }
 
 
-    private CompletableFuture<String> getUrlFromStorageReference(StorageReference reference) {
+    private CompletableFuture<String> getUrlFromStorageReference(FirebaseStorage storage) {
         CompletableFuture<String> future = new CompletableFuture<>();
 
-        reference.getDownloadUrl().addOnSuccessListener(uri -> {
-            String imageUrl = uri.toString();
-            future.complete(imageUrl);
+        StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
+        ref.child("texture.png");
+
+        ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            future.complete(uri.toString());
+            Log.d("TestFilePickerFragment", "File downloaded" + uri.toString());
         }).addOnFailureListener(e -> {
             future.completeExceptionally(e);
+            Log.e("TestFilePickerFragment", "Error downloading file", e);
         });
 
         return future;
     }
 
-    /*private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        StorageReference fileReference = storageReference.child(file.getName());
+    private CompletableFuture<String> uploadFileToStorage(FirebaseStorage storage, Uri file) {
+        CompletableFuture<String> future = new CompletableFuture<>();
 
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            UploadTask uploadTask = fileReference.putStream(stream);
+        StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
+        ref.child("texture.png");
 
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                future.complete(null);
-            }).addOnFailureListener(exception -> {
-                future.completeExceptionally(exception);
-            });
-        } catch (IOException e) {
+        ref.putFile(file).addOnSuccessListener(taskSnapshot -> {
+            future.complete(taskSnapshot.getMetadata().getPath().toString());
+            Log.d("TestFilePickerFragment", "File uploaded" + taskSnapshot.getMetadata().getPath().toString());
+        }).addOnFailureListener(e -> {
             future.completeExceptionally(e);
-        }
+            Log.e("TestFilePickerFragment", "Error uploading file", e);
+        });
+
         return future;
-    }*/
+    }
 
 
 
