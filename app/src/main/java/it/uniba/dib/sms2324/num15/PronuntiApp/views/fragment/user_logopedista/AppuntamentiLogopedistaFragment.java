@@ -1,7 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista;
 
-import static it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.RegistrazioneViewModel.verificaRegistrazione;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,29 +19,23 @@ import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.CreazioneAppuntementoController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.CreazioneAppuntamentoController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 
 public class AppuntamentiLogopedistaFragment extends Fragment {
-
     private TextInputEditText editTextGenitore;
     private TextInputEditText editTextLuogo;
     private TextInputEditText editTextDataAppuntemento;
     private LogopedistaViewModel logopedistaViewModel;
-    private CreazioneAppuntementoController mController;
+    private CreazioneAppuntamentoController mController;
     private Button addAppuntamentoButton;
-    private TextView orarioTextView9;
+    private TextView orarioTextView;
 
 
-    public AppuntamentiLogopedistaFragment() {
-    }
+    public AppuntamentiLogopedistaFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
 
         editTextGenitore = view.findViewById(R.id.textInputEditTextPazienteAppuntamentoLogopedista);
@@ -80,7 +70,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         LocalTime orarioAppuntamento = null;
 
         CompletableFuture<Appuntamento> futureAppuntamento = new CompletableFuture<>();
-        Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista,idGenitore,luogoAppuntamento,dataAppuntamento,orarioAppuntamento);
+        Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista,idGenitore,dataAppuntamento,orarioAppuntamento,luogoAppuntamento);
         Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamento.toString());
         futureAppuntamento.complete(appuntamento);
         return futureAppuntamento;

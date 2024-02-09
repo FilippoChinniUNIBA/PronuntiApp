@@ -5,13 +5,12 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.classifica.ClassificaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 
 public class LogopedistaViewModel extends ViewModel {
 	private Logopedista mLogopedista;
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
-	private CreazioneAppuntementoController mCreazioneAppuntamentoController;
+	private CreazioneAppuntamentoController mCreazioneAppuntamentoController;
 
 	public Logopedista getLogopedista() {
 		return this.mLogopedista;
@@ -34,9 +33,9 @@ public class LogopedistaViewModel extends ViewModel {
 		return this.mRegistrazionePazienteGenitoreController;
 	}
 
-	public CreazioneAppuntementoController getCreazioneAppuntamentoController(){
+	public CreazioneAppuntamentoController getCreazioneAppuntamentoController(){
 		if (this.mCreazioneAppuntamentoController == null) {
-			this.mCreazioneAppuntamentoController = new CreazioneAppuntementoController();
+			this.mCreazioneAppuntamentoController = new CreazioneAppuntamentoController();
 		}
 		return this.mCreazioneAppuntamentoController;
 	}

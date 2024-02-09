@@ -11,12 +11,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class ScenariGenitoriFragment extends Fragment{
 
-    public ScenariGenitoriFragment() {
-    }
+    public ScenariGenitoriFragment() {}
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scenari_genitore, container, false);
+        View view = inflater.inflate(R.layout.fragment_scenari_genitore, container, false);
+        return view;
     }
 
     @Override
@@ -26,4 +26,5 @@ public class ScenariGenitoriFragment extends Fragment{
             getActivity().setTitle("Giochi del giorno");
         }
     }
+
 }

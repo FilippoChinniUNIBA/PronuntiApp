@@ -28,7 +28,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
-
     private RecyclerView recyclerViewListaPazienti;
     private PazienteAdapter adapterPazienti;
     private Button addPazientiButton;

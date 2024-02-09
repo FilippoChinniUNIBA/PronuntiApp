@@ -64,6 +64,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         }
     }
 
+    @Override
     public void setData(){
 
         Paziente paziente = pazienteViewModel.getPaziente();

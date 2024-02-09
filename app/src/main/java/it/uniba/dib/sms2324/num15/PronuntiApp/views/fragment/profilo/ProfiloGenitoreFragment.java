@@ -18,7 +18,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.Geni
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
     private ProfiloPazienteFragment profiloPazienteFragment;
-    private GenitoreViewModel genitoreViewModel;
+    private GenitoreViewModel mGenitoreViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +34,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
-        genitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
-
+        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         setData();
 
@@ -43,7 +42,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?
 
         return view;
     }
@@ -71,8 +70,8 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
         profiloPazienteFragment.confermaModificaProfilo();
-        genitoreViewModel.getGenitore().setTelefono(textInputEditTextTelefono.getText().toString());
-        genitoreViewModel.aggiornaGenitoreRemoto();
+        mGenitoreViewModel.getGenitore().setTelefono(textInputEditTextTelefono.getText().toString());
+        mGenitoreViewModel.aggiornaGenitoreRemoto();
     }
 
     @Override

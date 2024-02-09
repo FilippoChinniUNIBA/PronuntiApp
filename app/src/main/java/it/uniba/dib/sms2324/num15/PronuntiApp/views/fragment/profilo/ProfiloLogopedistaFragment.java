@@ -19,9 +19,11 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
     private LogopedistaViewModel logopedistaViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
+
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloLogopedista);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloLogopedista);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloLogopedista);
@@ -41,6 +43,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         return view;
     }
 
+    @Override
     public void setData(){
 
         Logopedista logopedista = logopedistaViewModel.getLogopedista();
@@ -60,22 +63,18 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     }
 
     @Override
-    public void modificaProfilo(){
+    public void modificaProfilo() {
         textInputEditTextTelefono.setEnabled(true);
         textInputEditTextIndirizzo.setEnabled(true);
 
-        imageViewProfile.setOnClickListener(v->pickImage());
-
-        //Uri uri = (Uri)imageViewProfile.getTag();
-
+        imageViewProfile.setOnClickListener(v -> pickImage());
 
         buttonModificaProfilo.setText(getString(R.string.confirm_modify_profile));
-        buttonModificaProfilo.setOnClickListener(v->confermaModificaProfilo());
+        buttonModificaProfilo.setOnClickListener(v -> confermaModificaProfilo());
 
-        imageViewEditProfile.setOnClickListener(v->pickImage());
+        imageViewEditProfile.setOnClickListener(v -> pickImage());
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
-        //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
     }
 

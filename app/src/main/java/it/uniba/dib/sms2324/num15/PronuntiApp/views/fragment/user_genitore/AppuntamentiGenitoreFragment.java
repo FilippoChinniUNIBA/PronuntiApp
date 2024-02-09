@@ -12,15 +12,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class AppuntamentiGenitoreFragment extends Fragment {
 
-    public AppuntamentiGenitoreFragment() {
-
-    }
+    public AppuntamentiGenitoreFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appuntamenti_genitore, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_appuntamenti_genitore, container, false);
+        return view;
     }
 
     @Override
@@ -30,4 +27,5 @@ public class AppuntamentiGenitoreFragment extends Fragment {
             getActivity().setTitle("Apppuntamenti");
         }
     }
+
 }
