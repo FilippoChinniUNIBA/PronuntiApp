@@ -28,10 +28,10 @@ public class ComandiDatabaseGenerici {
 		DatabaseReference ref = db.getReference(CostantiNodiDB.MAPPA_TIPO_UTENTI);
 		ref.child(userId).get().addOnCompleteListener(task -> {
 			if (task.isSuccessful()) {
-				Log.d("DAOGenerica.getTipoUtente()", "Tipo utente: " + task.getResult().getValue().toString());
+				Log.d("ComandiDatabaseGenerici.getTipoUtente()", "Tipo utente: " + task.getResult().getValue().toString());
 				future.complete(TipoUtente.fromString(task.getResult().getValue().toString()));
 			} else {
-				Log.e("DAOGenerica.getTipoUtente()", "Errore nel recupero del tipo utente: " + task.getException()); //TODO aggiungere agli errori
+				Log.e("ComandiDatabaseGenerici.getTipoUtente()", "Errore nel recupero del tipo utente: " + task.getException());
 				future.completeExceptionally(task.getException());
 			}
 		});

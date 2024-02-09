@@ -25,13 +25,13 @@ public class ComandiFirebaseStorage {
 
 		fRef.putFile(file).addOnSuccessListener(taskSnapshot -> fRef.getDownloadUrl().addOnSuccessListener(uri -> {
 			future.complete(uri.toString());
-			Log.d("DAOStorage.uploadFileAndGetLink()", "File uploaded: " + uri.toString());
+			Log.d("ComandiFirebaseStorage.uploadFileAndGetLink()", "File uploaded: " + uri.toString());
 		}).addOnFailureListener(e -> {
 			future.completeExceptionally(e);
-			Log.e("DAOStorage.uploadFileAndGetLink()", "Errore nel getting del Download URL", e);
+			Log.e("ComandiFirebaseStorage.uploadFileAndGetLink()", "Errore nel getting del Download URL", e);
 		})).addOnFailureListener(e -> {
 			future.completeExceptionally(e);
-			Log.e("DAOStorage.uploadFileAndGetLink()", "Errore Upload File", e);
+			Log.e("ComandiFirebaseStorage.uploadFileAndGetLink()", "Errore Upload File", e);
 		});
 
 		return future;

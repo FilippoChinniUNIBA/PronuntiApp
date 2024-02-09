@@ -22,7 +22,7 @@ public class Autenticazione {
 						Log.d("Autenticazione.registrazione()", "Registrazione avvenuta con successo: " + mAuth.getCurrentUser().getUid());
 						future.complete(mAuth.getCurrentUser().getUid());
 					} else {
-						Log.e("Autenticazione.registrazione()", "Registrazione fallita: " + task.getException()); //TODO aggiungere agli errori
+						Log.e("Autenticazione.registrazione()", "Registrazione fallita: " + task.getException());
 						future.completeExceptionally(task.getException());
 					}
 				});
@@ -39,7 +39,7 @@ public class Autenticazione {
 						Log.d("Autenticazione.login()", "Login avvenuto con successo: " + mAuth.getCurrentUser().getUid());
 						future.complete(mAuth.getCurrentUser().getUid());
 					} else {
-						Log.e("Autenticazione.login()", "Login fallito: " + task.getException()); //TODO aggiungere agli errori
+						Log.e("Autenticazione.login()", "Login fallito: " + task.getException());
 						future.completeExceptionally(task.getException());
 					}
 				});

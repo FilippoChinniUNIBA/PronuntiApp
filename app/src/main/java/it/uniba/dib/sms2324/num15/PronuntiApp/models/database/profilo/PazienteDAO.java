@@ -65,7 +65,7 @@ public class PazienteDAO {
 				}
 			} else {
 				future.completeExceptionally(task.getException());
-				Log.e("PazienteDAO.update()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+				Log.e("PazienteDAO.update()", "Errore nel recupero dei dati: " + task.getException());
 			}
 		});
 
@@ -184,7 +184,7 @@ public class PazienteDAO {
 				}
 			} else {
 				future.completeExceptionally(task.getException());
-				Log.e("PazienteDAO.getDatiLogopedistaByIdPaziente()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+				Log.e("PazienteDAO.getDatiLogopedistaByIdPaziente()", "Errore nel recupero dei dati: " + task.getException());
 			}
 		});
 

@@ -67,7 +67,7 @@ public class GenitoreDAO {
 				}
 			} else {
 				future.completeExceptionally(task.getException());
-				Log.e("GenitoreDAO.update()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+				Log.e("GenitoreDAO.update()", "Errore nel recupero dei dati: " + task.getException());
 			}
 		});
 
@@ -191,7 +191,7 @@ public class GenitoreDAO {
 				}
 			} else {
 				future.completeExceptionally(task.getException());
-				Log.e("GenitoreDAO.getDatiLogopedistaByIdGenitore()", "Errore nel recupero dei dati: " + task.getException()); //TODO aggiungere agli errori
+				Log.e("GenitoreDAO.getDatiLogopedistaByIdGenitore()", "Errore nel recupero dei dati: " + task.getException());
 			}
 		});
 

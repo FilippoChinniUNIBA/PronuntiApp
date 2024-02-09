@@ -20,7 +20,7 @@ public class RegistrazioneViewModel extends ViewModel {
 		Autenticazione auth = new Autenticazione();
 		auth.registrazione(email, password).handle((userId, exception) -> {
 			if (exception != null) {
-				Log.e("RegistrazioneViewModel.verificaRegistrazione()", "Errore durante la registrazione: " + exception.getMessage()); //TODO aggiungere agli errori
+				Log.e("RegistrazioneViewModel.verificaRegistrazione()", "Errore durante la registrazione: " + exception.getMessage());
 				future.complete(null);
 			} else {
 				future.complete(userId);

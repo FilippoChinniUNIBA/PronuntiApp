@@ -40,7 +40,7 @@ public enum TipoUtente {
 			case "Paziente":
 				return PAZIENTE;
 			default:
-				Log.e("TipoUtente.fromString()", "TipoUtente non riconosciuto: " + tipoUtente); //TODO aggiungere agli errori
+				Log.e("TipoUtente.fromString()", "TipoUtente non riconosciuto: " + tipoUtente);
 				return null;
 		}
 	}
