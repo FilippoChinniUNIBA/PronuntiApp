@@ -36,6 +36,7 @@ public class TestFilePickerFragment extends Fragment {
     private Button buttonfileUploader;
     private Button buttonfileDownloader;
     private TextView filepath;
+    private TextView risultatoTest;
     private ActivityResultLauncher<String> filePickerLauncher;
 
 
@@ -48,9 +49,10 @@ public class TestFilePickerFragment extends Fragment {
         this.filepath = view.findViewById(R.id.filepathsceltoid);
         this.buttonfileUploader = view.findViewById(R.id.testButtonUploadFilePicker);
         this.buttonfileDownloader = view.findViewById(R.id.testButtonDownloadFilePicker);
+        this.risultatoTest = view.findViewById(R.id.testFilePickerTextView);
 
         buttonfilePicker.setOnClickListener(v -> funzioneMaster());
-        buttonfileUploader.setOnClickListener(v -> uploadFileToStorage(FirebaseStorage.getInstance(), Uri.parse(filepath.getText().toString())));
+        buttonfileUploader.setOnClickListener(v -> uploadFileToStorage(Uri.parse(filepath.getText().toString()), FirebaseStorage.getInstance()));
         buttonfileDownloader.setOnClickListener(v -> getUrlFromStorageReference(FirebaseStorage.getInstance()));
 
         return view;
@@ -73,17 +75,38 @@ public class TestFilePickerFragment extends Fragment {
         return registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 uri -> {
-                    // This is called when a file is picked
                     if (uri != null) {
                         filepath.setText(uri.toString());
                     } else {
-                        filepath.setText("No file selected");
+                        filepath.setText("Nessun file selezionato!");
                     }
                 }
         );
     }
 
+    private CompletableFuture<String> uploadFileToStorage(Uri file, FirebaseStorage storage) {
+        CompletableFuture<String> future = new CompletableFuture<>();
 
+        StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
+        ref.child("texture.png");
+
+        ref.putFile(file).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+            future.complete(uri.toString());
+            Log.d("TestFilePickerFragment", "File uploaded: " + uri.toString());
+            this.risultatoTest.setText(uri.toString());
+        }).addOnFailureListener(e -> {
+            future.completeExceptionally(e);
+            Log.e("TestFilePickerFragment", "Error getting download URL", e);
+        })).addOnFailureListener(e -> {
+            future.completeExceptionally(e);
+            Log.e("TestFilePickerFragment", "Error uploading file", e);
+        });
+
+        return future;
+    }
+
+
+    //QUESTA NON SERVE
     private CompletableFuture<String> getUrlFromStorageReference(FirebaseStorage storage) {
         CompletableFuture<String> future = new CompletableFuture<>();
 
@@ -92,27 +115,11 @@ public class TestFilePickerFragment extends Fragment {
 
         ref.getDownloadUrl().addOnSuccessListener(uri -> {
             future.complete(uri.toString());
-            Log.d("TestFilePickerFragment", "File downloaded" + uri.toString());
+            Log.d("TestFilePickerFragment", "File downloaded: " + uri.toString());
+            this.risultatoTest.setText(uri.toString());
         }).addOnFailureListener(e -> {
             future.completeExceptionally(e);
             Log.e("TestFilePickerFragment", "Error downloading file", e);
-        });
-
-        return future;
-    }
-
-    private CompletableFuture<String> uploadFileToStorage(FirebaseStorage storage, Uri file) {
-        CompletableFuture<String> future = new CompletableFuture<>();
-
-        StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
-        ref.child("texture.png");
-
-        ref.putFile(file).addOnSuccessListener(taskSnapshot -> {
-            future.complete(taskSnapshot.getMetadata().getPath().toString());
-            Log.d("TestFilePickerFragment", "File uploaded" + taskSnapshot.getMetadata().getPath().toString());
-        }).addOnFailureListener(e -> {
-            future.completeExceptionally(e);
-            Log.e("TestFilePickerFragment", "Error uploading file", e);
         });
 
         return future;
