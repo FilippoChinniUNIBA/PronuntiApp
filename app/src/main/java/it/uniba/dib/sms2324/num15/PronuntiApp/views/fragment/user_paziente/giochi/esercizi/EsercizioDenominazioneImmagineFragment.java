@@ -185,38 +185,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         Toast.makeText(getContext(), getContext().getString(R.string.recordBeforeCheck), Toast.LENGTH_SHORT).show();
     }
 
-    /*private CompletableFuture<String> getUrlFromStorageReference(StorageReference reference) {
-        CompletableFuture<String> future = new CompletableFuture<>();
-
-        reference.getDownloadUrl().addOnSuccessListener(uri -> {
-            String imageUrl = uri.toString();
-            future.complete(imageUrl);
-        }).addOnFailureListener(e -> {
-            future.completeExceptionally(e);
-        });
-
-        return future;
-    }*/
-
-    /*private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        StorageReference fileReference = storageReference.child(file.getName());
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            UploadTask uploadTask = fileReference.putStream(stream);
-
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                future.complete(null);
-            }).addOnFailureListener(exception -> {
-                future.completeExceptionally(exception);
-            });
-        } catch (IOException e) {
-            future.completeExceptionally(e);
-        }
-        return future;
-    }*/
-
     private void completaEsercizio() {
         boolean esito;
 

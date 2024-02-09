@@ -302,26 +302,6 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         //else return false;
     }
 
-    private CompletableFuture<Void> uploadFileToStorage(File file, StorageReference storageReference, Activity activity) {
-        CompletableFuture<Void> future = new CompletableFuture<>();
-        StorageReference fileReference = storageReference.child(file.getName());
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            UploadTask uploadTask = fileReference.putStream(stream);
-
-            uploadTask.addOnSuccessListener(taskSnapshot -> {
-                future.complete(null);
-            }).addOnFailureListener(exception -> {
-                future.completeExceptionally(exception);
-            });
-        } catch (IOException e) {
-            future.completeExceptionally(e);
-        }
-        return future;
-    }
-
-
     private boolean checkPermissions(Activity currentactivity) {
         int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
         int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
