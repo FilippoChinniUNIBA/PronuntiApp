@@ -8,9 +8,6 @@ import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBRisultato;
 
 public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizioConAudio {
-	/*public RisultatoEsercizioSequenzaParole(String idEsercizio, boolean esitoCorretto, File audioRegistrato) {
-		super(idEsercizio, esitoCorretto, audioRegistrato);
-	}*/
 
 	public RisultatoEsercizioSequenzaParole(boolean esitoCorretto, String audioRegistrato) {
 		super(esitoCorretto, audioRegistrato);
@@ -42,7 +39,7 @@ public class RisultatoEsercizioSequenzaParole extends AbstractRisultatoEsercizio
 	public String toString() {
 		return "RisultatoEsercizioSequenzaParole{" +
 				"esitoCorretto=" + esitoCorretto +
-				", audioRegistrato=" + audioRegistrato +
+				", audioRegistrato='" + audioRegistrato + '\'' +
 				'}';
 	}
 

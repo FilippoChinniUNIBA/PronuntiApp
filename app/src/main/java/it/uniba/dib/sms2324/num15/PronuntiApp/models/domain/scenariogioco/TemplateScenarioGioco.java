@@ -68,10 +68,10 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 	public String toString() {
 		return "TemplateScenarioGioco{" +
 				"idTemplateScenarioGioco='" + idTemplateScenarioGioco + '\'' +
-				", immagineSfondo=" + immagineSfondo +
-				", immagineTappa1=" + immagineTappa1 +
-				", immagineTappa2=" + immagineTappa2 +
-				", immagineTappa3=" + immagineTappa3 +
+				", immagineSfondo='" + immagineSfondo + '\'' +
+				", immagineTappa1='" + immagineTappa1 + '\'' +
+				", immagineTappa2='" + immagineTappa2 + '\'' +
+				", immagineTappa3='" + immagineTappa3 + '\'' +
 				'}';
 	}
 

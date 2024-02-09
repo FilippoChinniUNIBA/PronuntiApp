@@ -10,11 +10,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEsercizioConAudio {
 	private int countAiuti;
 
-	/*public RisultatoEsercizioDenominazioneImmagine(String idEsercizio, boolean esitoCorretto, File audioRegistrato, int countAiuti) {
-		super(idEsercizio, esitoCorretto, audioRegistrato);
-		this.countAiuti = countAiuti;
-	}*/
-
 	public RisultatoEsercizioDenominazioneImmagine(boolean esitoCorretto, String audioRegistrato, int countAiuti) {
 		super(esitoCorretto, audioRegistrato);
 		this.countAiuti = countAiuti;
@@ -43,7 +38,6 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 
 		entityMap.put(CostantiDBRisultato.COUNT_AIUTI, this.countAiuti);
 		return entityMap;
-
 	}
 
 	@Override
@@ -60,7 +54,7 @@ public class RisultatoEsercizioDenominazioneImmagine extends AbstractRisultatoEs
 	public String toString() {
 		return "RisultatoEsercizioDenominazioneImmagine{" +
 				"esitoCorretto=" + esitoCorretto +
-				", audioRegistrato=" + audioRegistrato +
+				", audioRegistrato='" + audioRegistrato + '\'' +
 				", countAiuti=" + countAiuti +
 				'}';
 	}

@@ -275,7 +275,8 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
             constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto());
             //TODO Firebase Storage implementation
-            mEsercizioSequenzaParole.setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(risultatoEsercizio,new File("test")));
+            String audioRegistrato = "";
+            mEsercizioSequenzaParole.setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(risultatoEsercizio, audioRegistrato));
         }
         else{
             constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
