@@ -22,10 +22,9 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class EsercizioCoppiaImmagini extends AbstractFragmentWithNavigation {
+public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigation {
 
     private TextView textViewEsercizioCoppiaImmagini, textViewEsercizioPlaySuggestion;
     private SeekBar seekBarScorrimentoAudioEsercizioCoppiaImmagini;

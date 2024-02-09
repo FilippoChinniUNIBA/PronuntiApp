@@ -32,11 +32,10 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class EsercizioSequenzaParole extends AbstractFragmentWithNavigation {
+public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
 
     private FineEsercizioView fineEsercizioView;
     private ConstraintLayout constraintLayoutEsercizioSequenzaParole;

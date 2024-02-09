@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParole">
+    tools:context=".views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment">
     <ImageView
         android:id="@+id/backgroundImageView"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.FineEsercizioView
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineEsercizioView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fineEsercizioView"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
+
     private RecyclerView recyclerViewListaPazienti;
     private PazienteAdapter adapterPazienti;
     private Button addPazientiButton;
@@ -55,48 +57,35 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
 
             recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
-            searchViewListaPazienti.setOnCloseListener(() -> {
-                addPazientiButton.setText("Paziente +");
-                return false;
-            });
-
-        /*
-        //TODO: Recupera i pazienti dal controller
-        for (int i = 0; i < 100; i++) {
-            Paziente paziente = new Paziente("nome"+i, "cognome"+i, "username"+i, "email"+i, "password", i, java.time.LocalDate.now(), 'M', 0, 0, null);
-            paziente.setNome("Nome" + i);
-            paziente.setCognome("Cognome" + i);
-            paziente.setEta(10 + i);
-            paziente.setSesso('M');
-            pazienti.add(paziente);
-        }
-         */
 
 
-            searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
+        searchViewListaPazienti.setOnCloseListener(() -> {
+            addPazientiButton.setText("Paziente +");
+            return false;
+        });
+        searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
 
-            searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
-                    adapterPazienti.getFilter().filter(query);
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    adapterPazienti.getFilter().filter(newText);
-                    return true;
-                }
-            });
-        }
-        catch(NullPointerException exception){
-                Log.d("PazientiFragment","lista pazienti vuota"+exception);
+        searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
+                adapterPazienti.getFilter().filter(query);
+                return true;
             }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterPazienti.getFilter().filter(newText);
+                return true;
+            }
+        });
+        }catch(NullPointerException exception){
+            Log.d("PazientiFragment","lista pazienti vuota"+exception);
+        }
 
         return view;
     }
+
 
     @Override
     public void onResume() {

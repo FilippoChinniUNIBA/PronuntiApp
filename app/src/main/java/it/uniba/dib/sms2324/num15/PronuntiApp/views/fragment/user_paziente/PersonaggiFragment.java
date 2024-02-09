@@ -1,9 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente;
 
-import android.content.res.TypedArray;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,12 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiAcquistabiliAdapter;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.PersonaggiSbloccatiAdapter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class PersonaggiFragment extends AbstractFragmentWithNavigation {
