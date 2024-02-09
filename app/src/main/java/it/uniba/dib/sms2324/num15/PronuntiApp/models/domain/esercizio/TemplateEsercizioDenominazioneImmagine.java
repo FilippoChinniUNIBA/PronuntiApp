@@ -10,20 +10,20 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio implements Esercizio {
-	protected File immagineEsercizio;
+	protected String immagineEsercizio;
 	protected String parolaEsercizio;
-	protected File audioAiuto;
+	protected String audioAiuto;
 
 	public TemplateEsercizioDenominazioneImmagine() {}
 
-	public TemplateEsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto) {
+	public TemplateEsercizioDenominazioneImmagine(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String immagineEsercizio, String parolaEsercizio, String audioAiuto) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato);
 		this.immagineEsercizio = immagineEsercizio;
 		this.parolaEsercizio = parolaEsercizio;
 		this.audioAiuto = audioAiuto;
 	}
 
-	public TemplateEsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, File immagineEsercizio, String parolaEsercizio, File audioAiuto) {
+	public TemplateEsercizioDenominazioneImmagine(int ricompensaCorretto, int ricompensaErrato, String immagineEsercizio, String parolaEsercizio, String audioAiuto) {
 		super(ricompensaCorretto, ricompensaErrato);
 		this.immagineEsercizio = immagineEsercizio;
 		this.parolaEsercizio = parolaEsercizio;
@@ -41,7 +41,7 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		this.audioAiuto = t.getAudioAiuto();
 	}
 
-	public File getImmagineEsercizio() {
+	public String getImmagineEsercizio() {
 		return immagineEsercizio;
 	}
 
@@ -49,11 +49,11 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		return parolaEsercizio;
 	}
 
-	public File getAudioAiuto() {
+	public String getAudioAiuto() {
 		return audioAiuto;
 	}
 
-	public void setImmagineEsercizio(File immagineEsercizio) {
+	public void setImmagineEsercizio(String immagineEsercizio) {
 		this.immagineEsercizio = immagineEsercizio;
 	}
 
@@ -61,7 +61,7 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		this.parolaEsercizio = parolaEsercizio;
 	}
 
-	public void setAudioAiuto(File audioAiuto) {
+	public void setAudioAiuto(String audioAiuto) {
 		this.audioAiuto = audioAiuto;
 	}
 
@@ -70,9 +70,9 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
-		entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO, this.immagineEsercizio.getPath());
+		entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO, this.immagineEsercizio);
 		entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.PAROLA_ESERCIZIO, this.parolaEsercizio);
-		entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.AUDIO_AIUTO, this.audioAiuto.getPath());
+		entityMap.put(CostantiDBTemplateEsercizioDenominazioneImmagine.AUDIO_AIUTO, this.audioAiuto);
 		return entityMap;
 	}
 
@@ -82,9 +82,9 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 		return new TemplateEsercizioDenominazioneImmagine(
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.RICOMPENSA_CORRETTO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.RICOMPENSA_ERRATO)),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO)),
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.IMMAGINE_ESERCIZIO),
 				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.PAROLA_ESERCIZIO),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.AUDIO_AIUTO))
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioDenominazioneImmagine.AUDIO_AIUTO)
 		);
 	}
 
@@ -94,9 +94,9 @@ public class TemplateEsercizioDenominazioneImmagine extends AbstractEsercizio im
 				"idEsercizio='" + idEsercizio + '\'' +
 				", ricompensaCorretto=" + ricompensaCorretto +
 				", ricompensaErrato=" + ricompensaErrato +
-				", immagineEsercizio=" + immagineEsercizio +
+				", immagineEsercizio='" + immagineEsercizio + '\'' +
 				", parolaEsercizio='" + parolaEsercizio + '\'' +
-				", audioAiuto=" + audioAiuto +
+				", audioAiuto='" + audioAiuto + '\'' +
 				'}';
 	}
 

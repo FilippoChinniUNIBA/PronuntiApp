@@ -103,9 +103,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         String immagineEsercizio = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be";
         String parolaEsercizio = "pinguino";
         String audioAiuto = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd";
-        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, new File("fake"), parolaEsercizio, new File("fake"));
+        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, immagineEsercizio, parolaEsercizio, audioAiuto);
         this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
-
 
         Picasso.get().load(immagineEsercizio).into(immagineEsercizioDenominazioneImageView);
 
@@ -198,9 +197,12 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
             fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato());
         }
 
-        mController.convertiAudio(audioRecorder.getAudioFile());
+        File temp = mController.convertiAudio(audioRecorder.getAudioFile());
+        //TODO salvare il file temp su Storage e ottenere link
+        String audioRegistrato = "";
+
         Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPaziente());
-        mEsercizioDenominazioneImmagine.setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(esito, audioRecorder.getAudioFile(), countAiuti));
+        mEsercizioDenominazioneImmagine.setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(esito, audioRegistrato, countAiuti));
         Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioDenominazioneImmagine);
         Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPaziente());
     }

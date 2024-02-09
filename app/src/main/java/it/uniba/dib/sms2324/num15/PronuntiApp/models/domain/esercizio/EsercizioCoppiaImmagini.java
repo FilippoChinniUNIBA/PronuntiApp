@@ -14,27 +14,27 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 	private String refIdTemplateEsercizio;
 	private RisultatoEsercizioCoppiaImmagini risultatoEsercizio;
 
-	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
+	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String immagineEsercizioCorretta, String immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
-	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio) {
+	public EsercizioCoppiaImmagini(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String immagineEsercizioCorretta, String immagineEsercizioErrata, String refIdTemplateEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio) {
+	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String immagineEsercizioCorretta, String immagineEsercizioErrata, String refIdTemplateEsercizio) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata) {
+	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String immagineEsercizioCorretta, String immagineEsercizioErrata) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 	}
 
-	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, File immagineEsercizioCorretta, File immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
+	public EsercizioCoppiaImmagini(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String immagineEsercizioCorretta, String immagineEsercizioErrata, String refIdTemplateEsercizio, RisultatoEsercizioCoppiaImmagini risultatoEsercizio) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, immagineEsercizioCorretta, immagineEsercizioErrata);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 		this.risultatoEsercizio = risultatoEsercizio;
@@ -88,9 +88,9 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 		return new EsercizioCoppiaImmagini(
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.RICOMPENSA_CORRETTO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.RICOMPENSA_ERRATO)),
-				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.AUDIO_ESERCIZIO)),
-				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA)),
-				new File((String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_ERRATA)),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.AUDIO_ESERCIZIO),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_CORRETTA),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.IMMAGINE_ESERCIZIO_ERRATA),
 				(String) fromDatabaseMap.get(CostantiDBEsercizioCoppiaImmagini.REF_ID_TEMPLATE_ESERCIZIO),
 				(fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) != null ? new RisultatoEsercizioCoppiaImmagini((Map<String, Object>) fromDatabaseMap.get(CostantiDBEsercizioAbstract.RISULTATO_ESERCIZIO)) : null
 		);
@@ -102,9 +102,9 @@ public class EsercizioCoppiaImmagini extends TemplateEsercizioCoppiaImmagini imp
 				"idEsercizio='" + idEsercizio + '\'' +
 				", ricompensaCorretto=" + ricompensaCorretto +
 				", ricompensaErrato=" + ricompensaErrato +
-				", audioEsercizio=" + audioEsercizio +
-				", immagineEsercizioCorretta=" + immagineEsercizioCorretta +
-				", immagineEsercizioErrata=" + immagineEsercizioErrata +
+				", audioEsercizio='" + audioEsercizio + '\'' +
+				", immagineEsercizioCorretta='" + immagineEsercizioCorretta + '\'' +
+				", immagineEsercizioErrata='" + immagineEsercizioErrata + '\'' +
 				", refIdTemplateEsercizio='" + refIdTemplateEsercizio + '\'' +
 				", risultatoEsercizio=" + risultatoEsercizio +
 				'}';

@@ -27,7 +27,7 @@ public class AudioConverter {
         FFmpegKit.cancel();
     }*/
 
-    public static void convertiAudio(File inputFile) {
+    public static File convertiAudio(File inputFile) {
         String filePath = inputFile.getAbsolutePath();
 
         String command = OVERWRITE + " -f " + CODEC_INPUT +
@@ -39,6 +39,8 @@ public class AudioConverter {
 
         FFmpegKit.execute(command);
         FFmpegKit.cancel();
+
+        return inputFile;
     }
 
 }

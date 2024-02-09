@@ -17,16 +17,16 @@ public class Personaggio implements Persistente<Personaggio> {
 	private String idPersonaggio;
 	private String nomePersonaggio;
 	private int costoSblocco;
-	private File texturePersonaggio;
+	private String texturePersonaggio;
 
-	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, File texturePersonaggio) {
+	public Personaggio(String idPersonaggio, String nomePersonaggio, int costoSblocco, String texturePersonaggio) {
 		this.idPersonaggio = idPersonaggio;
 		this.nomePersonaggio = nomePersonaggio;
 		this.costoSblocco = costoSblocco;
 		this.texturePersonaggio = texturePersonaggio;
 	}
 
-	public Personaggio(String nomePersonaggio, int costoSblocco, File texturePersonaggio) {
+	public Personaggio(String nomePersonaggio, int costoSblocco, String texturePersonaggio) {
 		this.nomePersonaggio = nomePersonaggio;
 		this.costoSblocco = costoSblocco;
 		this.texturePersonaggio = texturePersonaggio;
@@ -53,7 +53,7 @@ public class Personaggio implements Persistente<Personaggio> {
 		return costoSblocco;
 	}
 
-	public File getTexturePersonaggio() {
+	public String getTexturePersonaggio() {
 		return texturePersonaggio;
 	}
 
@@ -69,7 +69,7 @@ public class Personaggio implements Persistente<Personaggio> {
 		this.costoSblocco = costoSblocco;
 	}
 
-	public void setTexturePersonaggio(File texturePersonaggio) {
+	public void setTexturePersonaggio(String texturePersonaggio) {
 		this.texturePersonaggio = texturePersonaggio;
 	}
 
@@ -80,7 +80,7 @@ public class Personaggio implements Persistente<Personaggio> {
 		//entityMap.put(CostantiDBPersonaggio.ID_PERSONAGGIO, this.idPersonaggio);
 		entityMap.put(CostantiDBPersonaggio.NOME_PERSONAGGIO, this.nomePersonaggio);
 		entityMap.put(CostantiDBPersonaggio.COSTO_SBLOCCO, this.costoSblocco);
-		entityMap.put(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO, this.texturePersonaggio.getPath());
+		entityMap.put(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO, this.texturePersonaggio);
 		return entityMap;
 	}
 
@@ -90,7 +90,7 @@ public class Personaggio implements Persistente<Personaggio> {
 		return new Personaggio(
 				(String) fromDatabaseMap.get(CostantiDBPersonaggio.NOME_PERSONAGGIO),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBPersonaggio.COSTO_SBLOCCO)),
-				new File((String) fromDatabaseMap.get(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO))
+				(String) fromDatabaseMap.get(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO)
 		);
 	}
 
@@ -100,7 +100,7 @@ public class Personaggio implements Persistente<Personaggio> {
 				"idPersonaggio='" + idPersonaggio + '\'' +
 				", nomePersonaggio='" + nomePersonaggio + '\'' +
 				", costoSblocco=" + costoSblocco +
-				", texturePersonaggio=" + texturePersonaggio +
+				", texturePersonaggio='" + texturePersonaggio + '\'' +
 				'}';
 	}
 

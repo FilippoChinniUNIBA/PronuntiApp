@@ -10,14 +10,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.C
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.Persistente;
 
 public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implements Esercizio {
-	protected File audioEsercizio;
+	protected String audioEsercizio;
 	protected String parola1;
 	protected String parola2;
 	protected String parola3;
 
 	public TemplateEsercizioSequenzaParole() {}
 
-	public TemplateEsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
+	public TemplateEsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato);
 		this.audioEsercizio = audioEsercizio;
 		this.parola1 = parola1;
@@ -25,7 +25,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		this.parola3 = parola3;
 	}
 
-	public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
+	public TemplateEsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3) {
 		super(ricompensaCorretto, ricompensaErrato);
 		this.audioEsercizio = audioEsercizio;
 		this.parola1 = parola1;
@@ -45,7 +45,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		this.parola3 = t.getParola3();
 	}
 
-	public File getAudioEsercizio() {
+	public String getAudioEsercizio() {
 		return audioEsercizio;
 	}
 
@@ -61,7 +61,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		return parola3;
 	}
 
-	public void setAudioEsercizio(File audioEsercizio) {
+	public void setAudioEsercizio(String audioEsercizio) {
 		this.audioEsercizio = audioEsercizio;
 	}
 
@@ -82,7 +82,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		Map<String, Object> entityMap = super.toMap();
 
 		//entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.ID_TEMPLATE_ESERCIZIO, this.idEsercizio);
-		entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO, this.audioEsercizio.getPath());
+		entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO, this.audioEsercizio);
 		entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1, this.parola1);
 		entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_2, this.parola2);
 		entityMap.put(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_3, this.parola3);
@@ -95,7 +95,7 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 		return new TemplateEsercizioSequenzaParole(
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_CORRETTO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.RICOMPENSA_ERRATO)),
-				new File((String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO)),
+				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.AUDIO_ESERCIZIO),
 				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_1),
 				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_2),
 				(String) fromDatabaseMap.get(CostantiDBTemplateEsercizioSequenzaParole.PAROLA_3)
@@ -105,10 +105,10 @@ public class TemplateEsercizioSequenzaParole extends AbstractEsercizio implement
 	@Override
 	public String toString() {
 		return "TemplateEsercizioSequenzaParole{" +
-				"idTemplateEsercizio='" + idEsercizio + '\'' +
+				"idEsercizio='" + idEsercizio + '\'' +
 				", ricompensaCorretto=" + ricompensaCorretto +
 				", ricompensaErrato=" + ricompensaErrato +
-				", audioEsercizio=" + audioEsercizio +
+				", audioEsercizio='" + audioEsercizio + '\'' +
 				", parola1='" + parola1 + '\'' +
 				", parola2='" + parola2 + '\'' +
 				", parola3='" + parola3 + '\'' +

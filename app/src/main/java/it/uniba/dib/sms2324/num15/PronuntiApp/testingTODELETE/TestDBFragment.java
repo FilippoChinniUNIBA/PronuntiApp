@@ -66,7 +66,7 @@ public class TestDBFragment extends Fragment {
 		String idPersonaggio = "1234567890";
 		String nomePersonaggio = "nome prova 2";
 		int costoSblocco = 600;
-		File texturePersonaggio = new File("folder/texture/texture.png");
+		String texturePersonaggio = "folder/texture/texture.png";
 
 		Personaggio p = new Personaggio(nomePersonaggio, costoSblocco, texturePersonaggio);
 
@@ -82,7 +82,7 @@ public class TestDBFragment extends Fragment {
 		String idPersonaggio = "-NpTuTGI9QUg0y5XoeJO";
 		String nomePersonaggio = "abcde";
 		int costoSblocco = 500;
-		File texturePersonaggio = new File("folder/cambioProva/texture.png");
+		String texturePersonaggio = "folder/cambioProva/texture.png";
 
 		Personaggio p = new Personaggio(idPersonaggio, nomePersonaggio, costoSblocco, texturePersonaggio);
 
@@ -97,7 +97,7 @@ public class TestDBFragment extends Fragment {
 		String idPersonaggio = "-NpWKFqa3yzinrW3acKT";
 		String nomePersonaggio = "weggrrgrg";
 		int costoSblocco = 1000;
-		File texturePersonaggio = new File("folder/cambioSbaglio/texture.png");
+		String texturePersonaggio = "folder/cambioSbaglio/texture.png";
 
 		Personaggio p = new Personaggio(idPersonaggio, nomePersonaggio, costoSblocco, texturePersonaggio);
 
@@ -130,11 +130,10 @@ public class TestDBFragment extends Fragment {
 		List<Esercizio> esercizi = new ArrayList<>();
 
 		final String pathFasullo = "pathFasullo/document/immagine.png";
-		final File fileFasullo = new File(pathFasullo);
 
-		EsercizioCoppiaImmagini esercizio1 = new EsercizioCoppiaImmagini(10, 10, fileFasullo, fileFasullo, fileFasullo);
-		EsercizioDenominazioneImmagine esercizio2 = new EsercizioDenominazioneImmagine(10, 10, fileFasullo, "parola", fileFasullo);
-		EsercizioSequenzaParole esercizio3 = new EsercizioSequenzaParole(10, 10, fileFasullo,"parola1", "parola2", "parola3");
+		EsercizioCoppiaImmagini esercizio1 = new EsercizioCoppiaImmagini(10, 10, pathFasullo, pathFasullo, pathFasullo);
+		EsercizioDenominazioneImmagine esercizio2 = new EsercizioDenominazioneImmagine(10, 10, pathFasullo, "parola", pathFasullo);
+		EsercizioSequenzaParole esercizio3 = new EsercizioSequenzaParole(10, 10, pathFasullo,"parola1", "parola2", "parola3");
 
 		esercizi.add(esercizio1);
 		esercizi.add(esercizio2);

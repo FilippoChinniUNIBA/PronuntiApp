@@ -14,27 +14,27 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 	private String refIdTemplateEsercizio;
 	private RisultatoEsercizioSequenzaParole risultatoEsercizio;
 
-	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, RisultatoEsercizioSequenzaParole risultatoEsercizio) {
+	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, RisultatoEsercizioSequenzaParole risultatoEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 		this.risultatoEsercizio = risultatoEsercizio;
 	}
 
-	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
+	public EsercizioSequenzaParole(String idEsercizio, int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
 		super(idEsercizio, ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
+	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 	}
 
-	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3) {
+	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 	}
 
-	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, File audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, RisultatoEsercizioSequenzaParole risultatoEsercizio) {
+	public EsercizioSequenzaParole(int ricompensaCorretto, int ricompensaErrato, String audioEsercizio, String parola1, String parola2, String parola3, String refIdTemplateEsercizio, RisultatoEsercizioSequenzaParole risultatoEsercizio) {
 		super(ricompensaCorretto, ricompensaErrato, audioEsercizio, parola1, parola2, parola3);
 		this.refIdTemplateEsercizio = refIdTemplateEsercizio;
 		this.risultatoEsercizio = risultatoEsercizio;
@@ -90,7 +90,7 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.ID_ESERCIZIO),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.RICOMPENSA_CORRETTO)),
 				Math.toIntExact((long) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.RICOMPENSA_ERRATO)),
-				new File((String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.AUDIO_ESERCIZIO)),
+				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.AUDIO_ESERCIZIO),
 				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_1),
 				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_2),
 				(String) fromDatabaseMap.get(CostantiDBEsercizioSequenzaParole.PAROLA_3),
@@ -105,7 +105,7 @@ public class EsercizioSequenzaParole extends TemplateEsercizioSequenzaParole imp
 				"idEsercizio='" + idEsercizio + '\'' +
 				", ricompensaCorretto=" + ricompensaCorretto +
 				", ricompensaErrato=" + ricompensaErrato +
-				", audioEsercizio=" + audioEsercizio +
+				", audioEsercizio='" + audioEsercizio + '\'' +
 				", parola1='" + parola1 + '\'' +
 				", parola2='" + parola2 + '\'' +
 				", parola3='" + parola3 + '\'' +
