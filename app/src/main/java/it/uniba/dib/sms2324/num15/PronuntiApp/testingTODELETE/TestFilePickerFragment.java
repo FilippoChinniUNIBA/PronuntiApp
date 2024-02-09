@@ -52,7 +52,7 @@ public class TestFilePickerFragment extends Fragment {
         this.risultatoTest = view.findViewById(R.id.testFilePickerTextView);
 
         buttonfilePicker.setOnClickListener(v -> funzioneMaster());
-        buttonfileUploader.setOnClickListener(v -> uploadFileToStorage(Uri.parse(filepath.getText().toString()), FirebaseStorage.getInstance()));
+        buttonfileUploader.setOnClickListener(v -> uploadFileToStorage(Uri.parse(filepath.getText().toString())));
         buttonfileDownloader.setOnClickListener(v -> getUrlFromStorageReference(FirebaseStorage.getInstance()));
 
         return view;
@@ -84,8 +84,10 @@ public class TestFilePickerFragment extends Fragment {
         );
     }
 
-    private CompletableFuture<String> uploadFileToStorage(Uri file, FirebaseStorage storage) {
+    private CompletableFuture<String> uploadFileToStorage(Uri file) {
         CompletableFuture<String> future = new CompletableFuture<>();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
         StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
         ref.child("texture.png");
