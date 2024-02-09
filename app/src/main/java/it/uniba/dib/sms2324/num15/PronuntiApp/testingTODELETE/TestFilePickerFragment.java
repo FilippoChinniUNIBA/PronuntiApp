@@ -1,8 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.LOCALE_SERVICE;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -26,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -90,18 +95,18 @@ public class TestFilePickerFragment extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         StorageReference ref = storage.getReference().child(CostantiDBPersonaggio.TEXTURE_PERSONAGGIO);
-        ref.child("texture.png");
+        StorageReference fRef = ref.child(LocalDate.now().toString() + LocalTime.now().toString());
 
-        ref.putFile(file).addOnSuccessListener(taskSnapshot -> ref.getDownloadUrl().addOnSuccessListener(uri -> {
+        fRef.putFile(file).addOnSuccessListener(taskSnapshot -> fRef.getDownloadUrl().addOnSuccessListener(uri -> {
             future.complete(uri.toString());
             Log.d("TestFilePickerFragment", "File uploaded: " + uri.toString());
             this.risultatoTest.setText(uri.toString());
         }).addOnFailureListener(e -> {
             future.completeExceptionally(e);
-            Log.e("TestFilePickerFragment", "Error getting download URL", e);
+            Log.e("TestFilePickerFragment", "Errore nel getting del Download URL", e);
         })).addOnFailureListener(e -> {
             future.completeExceptionally(e);
-            Log.e("TestFilePickerFragment", "Error uploading file", e);
+            Log.e("TestFilePickerFragment", "Errore Upload File", e);
         });
 
         return future;

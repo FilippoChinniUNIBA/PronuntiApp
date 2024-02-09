@@ -4,19 +4,12 @@ import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.Autenticazione;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAOGenerica;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.ComandiDatabaseGenerici;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
 
 public class RegistrazioneViewModel extends ViewModel {
@@ -38,8 +31,8 @@ public class RegistrazioneViewModel extends ViewModel {
 	}
 
 	public static void helperRegistrazione(String userId, TipoUtente tipoUtente) {
-		DAOGenerica daoGenerica = new DAOGenerica();
-		daoGenerica.saveTipoUtente(userId, tipoUtente);
+		ComandiDatabaseGenerici comandiDatabaseGenerici = new ComandiDatabaseGenerici();
+		comandiDatabaseGenerici.saveTipoUtente(userId, tipoUtente);
 	}
 
 	public Logopedista registrazioneLogopedista(String userId, String nome, String cognome, String username, String email, String password, String telefono, String indirizzo) {

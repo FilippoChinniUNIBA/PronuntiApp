@@ -1,6 +1,5 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.models.database;
+package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
@@ -11,10 +10,10 @@ import java.util.concurrent.CompletableFuture;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
 
-public class DAOGenerica {
-	private FirebaseDatabase db;
+public class ComandiDatabaseGenerici {
+	private final FirebaseDatabase db;
 
-	public DAOGenerica() {
+	public ComandiDatabaseGenerici() {
 		db = FirebaseDatabase.getInstance();
 	}
 

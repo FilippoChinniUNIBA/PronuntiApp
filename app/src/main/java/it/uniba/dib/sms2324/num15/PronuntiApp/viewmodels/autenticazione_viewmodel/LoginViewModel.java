@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.Autenticazione;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAOGenerica;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.ComandiDatabaseGenerici;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
@@ -48,8 +48,8 @@ public class LoginViewModel extends ViewModel {
 		Autenticazione auth = new Autenticazione();
 		String userId = auth.getCurrentUserId();
 
-		DAOGenerica daoGenerica = new DAOGenerica();
-		CompletableFuture<TipoUtente> tipoUtenteFuture = daoGenerica.getTipoUtente(userId);
+		ComandiDatabaseGenerici comandiDatabaseGenerici = new ComandiDatabaseGenerici();
+		CompletableFuture<TipoUtente> tipoUtenteFuture = comandiDatabaseGenerici.getTipoUtente(userId);
 
 		tipoUtenteFuture.thenAccept(tipoUtente -> {
 			switch (tipoUtente) {
