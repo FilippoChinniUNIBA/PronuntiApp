@@ -97,7 +97,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
         File audioConvertito = new File(cartellaApp, "audioConvertito.mp3");
 
-        this.audioRecorder = new AudioRecorder(getContext(), audioRegistrazione);
+        this.audioRecorder = new AudioRecorder(audioRegistrazione);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
 
