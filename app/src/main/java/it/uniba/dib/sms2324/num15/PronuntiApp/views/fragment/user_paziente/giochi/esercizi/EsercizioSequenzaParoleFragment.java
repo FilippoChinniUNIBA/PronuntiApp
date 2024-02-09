@@ -29,9 +29,16 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.google_cloud_speech_to_text_api.SpeechToTextAPI;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -45,10 +52,17 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     private ImageButton imageButtonAvviaRegistrazione, buttonCompletaEsercizio;
     private ImageView imageViewConfermaRegistrazione;
     private ScaleAnimation animazioneButtonMic;
-    private MediaPlayer mediaPlayer;
     private boolean firstClickReproduced = false;
     private TextView textViewEsercizioMicSuggestion;
     private View viewClickForSuggestion;
+
+    private EsercizioSequenzaParole mEsercizioSequenzaParole;
+    private AudioRecorder audioRecorder;
+    private String audioRiproducibile;
+    private AudioPlayerLink audioPlayerLink;
+    private MediaPlayer mediaPlayer;
+    File audioRegistrato;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_esercizio_sequenza_parole, container, false);
@@ -66,6 +80,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         imageButtonAvviaRegistrazione = view.findViewById(R.id.buttonAvviaRegistrazione);
         buttonCompletaEsercizio = view.findViewById(R.id.buttonCompletaEsercizio);
         imageViewConfermaRegistrazione = view.findViewById(R.id.confermaRegistrazioneImageView);
+
 
         viewClickForSuggestion.setOnClickListener(v -> {
             showSuggestionMic();
@@ -114,6 +129,13 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
             requestPermissions(requireActivity());
         }
 
+        File cartellaApp = requireActivity().getFilesDir();
+        mEsercizioSequenzaParole = new EsercizioSequenzaParole(50,20,null,"cane","carota","gatto");
+        audioRegistrato = new File(cartellaApp,"tempAudioRegistratoSequenza");
+        audioRecorder = new AudioRecorder(audioRegistrato);
+        audioRiproducibile = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc";
+        audioPlayerLink = new AudioPlayerLink(audioRiproducibile);
+        mediaPlayer=audioPlayerLink.getMediaPlayer();
     }
 
     private void showSuggestionMic(){
@@ -164,7 +186,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     public void onPauseButtonClick() {
         imageButtonPlay.setVisibility(View.VISIBLE);
         imageButtonPause.setVisibility(View.GONE);
-        mediaPlayer.pause();
+        audioPlayerLink.stopAudio();
     }
 
     private void enableAnswer() {
@@ -180,12 +202,11 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         }
         imageButtonPlay.setVisibility(View.GONE);
         imageButtonPause.setVisibility(View.VISIBLE);
-        initializeMediaPlayer();
-        mediaPlayer.start();
+        initializeSeekBar();
+        audioPlayerLink.playAudio();
     }
 
-    private void initializeMediaPlayer() {
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.correct_sound);
+    private void initializeSeekBar() {
 
         mediaPlayer.setOnCompletionListener(mediaPlayer -> {
             Log.d("EsercizioCoppiaImmagini", "Audio completato");
@@ -235,26 +256,30 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     }
 
     private void stopRecording(){
+        audioRecorder.stopRecording();
         viewAnimazioneMic.clearAnimation();
         imageButtonAvviaRegistrazione.setBackground(getContext().getDrawable(R.drawable.circle_button_mic_background));
         imageViewConfermaRegistrazione.setVisibility(View.VISIBLE);
         viewStopMic.setVisibility(View.GONE);
         viewConfirmMic.setVisibility(View.VISIBLE);
         Toast.makeText(getContext(), getContext().getString(R.string.stopedRecording), Toast.LENGTH_SHORT).show();
-
         buttonCompletaEsercizio.setOnClickListener(v -> {
             setButtonCompletaEsercizioImageView();
         });
     }
 
     private void setButtonCompletaEsercizioImageView(){
-        if(verificaAudio()) {
+        boolean risultatoEsercizio = verificaAudio();
+        if(risultatoEsercizio) {
+            //TODO Firebase uploadFileRegistrato e convertito
             constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
-            fineEsercizioView.setEsercizioCorretto(50);
+            fineEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto());
+            //TODO Firebase Storage implementation
+            mEsercizioSequenzaParole.setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(risultatoEsercizio,new File("test")));
         }
         else{
             constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
-            fineEsercizioView.setEsercizioSbagliato(20);
+            fineEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato());
         }
     }
 
@@ -277,12 +302,12 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     }
 
     private void automateStartRecording(){
+        audioRecorder.startRecording();
         imageButtonAvviaRegistrazione.setBackground(null);
         viewAnimazioneMic.startAnimation(animazioneButtonMic);
         imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
         viewStopMic.setVisibility(View.VISIBLE);
         viewConfirmMic.setVisibility(View.GONE);
-
         buttonCompletaEsercizio.setOnClickListener(v->{
             invalidConferma();
         });
@@ -297,9 +322,14 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     }
 
     private boolean verificaAudio() {
-        //if vero
+        List<String> correctWords = Arrays.asList(mEsercizioSequenzaParole.getParola1(),mEsercizioSequenzaParole.getParola2(),mEsercizioSequenzaParole.getParola3());
+        List<String> pronunciationWords = SpeechToTextAPI.callAPI(requireActivity(),audioRegistrato);
+        for(String pronunciationWord : pronunciationWords){
+            if(!correctWords.contains(pronunciationWord.toLowerCase())){
+                return false;
+            }
+        }
         return true;
-        //else return false;
     }
 
     private boolean checkPermissions(Activity currentactivity) {

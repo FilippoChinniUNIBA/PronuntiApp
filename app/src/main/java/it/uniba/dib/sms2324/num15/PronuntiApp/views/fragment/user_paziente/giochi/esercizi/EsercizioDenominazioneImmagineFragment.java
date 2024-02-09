@@ -51,7 +51,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
     private AudioRecorder audioRecorder;
     private int countAiuti = 3;
-
     private PazienteViewModel mPazienteViewModel;
     private EsercizioDenominazioneImmagineController mController;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;

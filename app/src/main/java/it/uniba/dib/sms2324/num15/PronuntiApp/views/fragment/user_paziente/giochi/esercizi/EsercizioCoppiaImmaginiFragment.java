@@ -43,7 +43,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
     private int correctImageView;
 
 
-    private EsercizioCoppiaImmagini mEsercizioDenominazioneImmagine;
+    private EsercizioCoppiaImmagini mEsercizioCoppiaImmagini;
     private String immagineCorretta;
     private String immagineErrata;
     private String audioImmagine;
@@ -74,7 +74,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         imageButtonImmagine2.setOnClickListener(v -> showSuggestionPlay());
 
         //ATTIVITA PER IL RECUPERO DELL'ESERCIZIO
-        mEsercizioDenominazioneImmagine = new EsercizioCoppiaImmagini(50,20,null,null,null);
+        mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,null,null,null);
 
         //UTILIZZO DI STRINGHE IN RELAZIONE ALL'IMPLEMENTAZIONE DI TEMPLATESERCIZIOCOPPIAIMMAGINI
         immagineCorretta = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d";
@@ -215,10 +215,10 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         boolean risultatoEsecuzione = selectedImageViewiew == correctImageView;
         constraintLayoutEsercizioCoppiaImmagini.setVisibility(View.GONE);
 
-        if(risultatoEsecuzione) fineEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
-        else fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato());
+        if(risultatoEsecuzione) fineEsercizioView.setEsercizioCorretto(mEsercizioCoppiaImmagini.getRicompensaCorretto());
+        else fineEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato());
 
-        mEsercizioDenominazioneImmagine.setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(risultatoEsecuzione));
+        mEsercizioCoppiaImmagini.setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(risultatoEsecuzione));
     }
 
     private void initializeSeekBar() {
