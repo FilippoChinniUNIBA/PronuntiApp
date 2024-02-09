@@ -31,8 +31,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
 
-        logopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
-        logopedistaViewModel.setLogopedista((Logopedista) getActivity().getIntent().getExtras().get("profilo"));
+        logopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);

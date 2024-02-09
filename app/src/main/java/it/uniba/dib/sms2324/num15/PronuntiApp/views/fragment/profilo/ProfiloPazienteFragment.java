@@ -42,8 +42,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
 
         //TODO prendere il paziente dal genitore dal viewmodelGenitore
-        //this.pazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
-        //pazienteViewModel.setPaziente((Paziente) getActivity().getIntent().getExtras().get("profilo"));
+        this.pazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);

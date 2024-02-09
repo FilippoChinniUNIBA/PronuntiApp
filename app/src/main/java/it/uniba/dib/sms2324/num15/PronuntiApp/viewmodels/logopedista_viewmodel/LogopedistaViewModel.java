@@ -11,12 +11,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 public class LogopedistaViewModel extends ViewModel {
 	private Logopedista mLogopedista;
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
+	private CreazioneAppuntementoController mCreazioneAppuntamentoController;
 
 	public Logopedista getLogopedista() {
-		return mLogopedista;
+		return this.mLogopedista;
 	}
+
 	public void setLogopedista(Logopedista logopedista) {
-		mLogopedista = logopedista;
+		this.mLogopedista=logopedista;
 	}
 
 	public void aggiornaLogopedistaRemoto() {
@@ -32,6 +34,11 @@ public class LogopedistaViewModel extends ViewModel {
 		return this.mRegistrazionePazienteGenitoreController;
 	}
 
-
+	public CreazioneAppuntementoController getCreazioneAppuntamentoController(){
+		if (this.mCreazioneAppuntamentoController == null) {
+			this.mCreazioneAppuntamentoController = new CreazioneAppuntementoController();
+		}
+		return this.mCreazioneAppuntamentoController;
+	}
 
 }

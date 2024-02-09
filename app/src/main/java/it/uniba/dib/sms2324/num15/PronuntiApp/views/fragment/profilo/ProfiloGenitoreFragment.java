@@ -34,8 +34,8 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
-        genitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
-        //genitoreViewModel.setGenitore((Genitore) getActivity().getIntent().getExtras().get("profilo"));
+        genitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+
 
         setData();
 
