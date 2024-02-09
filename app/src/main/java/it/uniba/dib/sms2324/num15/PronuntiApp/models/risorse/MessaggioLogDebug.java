@@ -1,9 +1,12 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.models.risorse;
 
-import android.util.Log;
-
+/**
+ * Classe abbandonata per ragioni di tempo, doveva essere una
+ * astrazione per i messaggi di log di debug.
+ * La si lascia per eventuali sviluppi futuri.
+ */
 public enum MessaggioLogDebug {
-	MESSAGGIOBHO(0, "Bho");
+	MESSAGGIO_DEBUG_GENERICO(0, "Bho");
 
 	private final int codiceMessaggio;
 	private final String descrizioneMessaggio;

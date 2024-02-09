@@ -22,15 +22,15 @@ public class EsercizioDenominazioneImmagineController {
 
 
 	public boolean verificaAudio(File audioRegistrato, Context context) {
-		List<String> words = SpeechToTextAPI.callAPI(context, audioRegistrato);
+		List<String> paroleRegistrate = SpeechToTextAPI.callAPI(context, audioRegistrato);
 
-		if (words == null || words.isEmpty()) {
+		if (paroleRegistrate == null || paroleRegistrate.isEmpty()) {
 			return false;
 		}
 		else {
 			boolean check = true;
-			for (String word : words) {
-				if (!(word.toLowerCase().equals(mEsercizioDenominazioneImmagine.getParolaEsercizio().toLowerCase()))) {
+			for (String parola : paroleRegistrate) {
+				if (!(parola.toLowerCase().equals(mEsercizioDenominazioneImmagine.getParolaEsercizio().toLowerCase()))) {
 					check = false;
 				}
 

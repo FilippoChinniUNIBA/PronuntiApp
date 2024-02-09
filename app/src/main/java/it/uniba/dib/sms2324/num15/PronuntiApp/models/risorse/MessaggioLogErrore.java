@@ -4,13 +4,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Classe abbandonata per ragioni di tempo, doveva essere una
+ * astrazione per i messaggi di log di errore.
+ * La si lascia per eventuali sviluppi futuri.
+ */
 public enum MessaggioLogErrore {
-	ERRORE_SCONOSCIUTO(0, "Errore Sconosciuto."),
-	FATAL_ERROR_DATABASE(1, "FATAL ERROR: Connessione con il Database Fallita, l'applicazione non puo' funzionare!"),
-	ERRORE_IMPREVISTO_DATABASE(2, "Errore a livello Database inaspettato!"),
-	CHIAVE_NULL_DATABASE_ERR(3, "Errore di scrittura codice, la reference del database sta puntando a root."),
-	TIPO_DATO_SCONOSCIUTO_DATABASE_ERR(4, "Tipo di dato passato non gestito dal Database."),
-	FORMATO_ERR(16, "Formato dell'Input inserito errato! Riprovare.");
+	ERRORE_SCONOSCIUTO(0, "Errore Sconosciuto.");
 
 	private final int codiceErrore;
 	private final String descrizioneErrore;

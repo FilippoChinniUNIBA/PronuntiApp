@@ -41,7 +41,7 @@ public interface DAO<T> {
 		} else if (value instanceof Double) {
 			return ref.orderByChild(field).equalTo((double) value);
 		} else {
-			Log.e("Persistente.createQuery()", MessaggioLogErrore.TIPO_DATO_SCONOSCIUTO_DATABASE_ERR.toString());
+			Log.e("Persistente.createQuery()", "Tipo del parametro value non supportato dal db: " + value.getClass().getName());
 			return null;
 		}
 	}
