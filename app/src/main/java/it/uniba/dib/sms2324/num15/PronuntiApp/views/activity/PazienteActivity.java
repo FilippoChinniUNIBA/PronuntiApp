@@ -36,16 +36,8 @@ public class PazienteActivity extends AbstractAppActivity {
         this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
         mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("profilo"));
 
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (navcontroller.getCurrentDestination().getId() == R.id.scenarioFragment) {
-                    finish();
-                } else {
-                    navcontroller.navigate(R.id.scenarioFragment);
-                }
-            }
-        });
+        setOnBackPressedCallback(R.id.scenarioFragment);
+
 
         //setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.fragmentContainerPaziente, bottomNavigationView));
 

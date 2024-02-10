@@ -11,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
-import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClassificaAdapter.PazienteViewHolder> {
 
-    private List<Paziente> pazienti;
+    private List<PazienteClassifica> pazienti;
 
-    public PazienteClassificaAdapter(List<Paziente> pazienti) {
+    public PazienteClassificaAdapter(List<PazienteClassifica> pazienti) {
         this.pazienti = pazienti;
     }
 
@@ -32,13 +30,12 @@ public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClas
 
     @Override
     public void onBindViewHolder(PazienteViewHolder holder, int position) {
-        Paziente paziente = pazienti.get(position);
+        PazienteClassifica paziente = pazienti.get(position);
 
         holder.textViewPosizione.setText(String.valueOf(position + 1));
         holder.textViewUsernamePaziente.setText(paziente.getUsername());
-        holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
-        Glide.with(holder.imageView.getContext()).load(paziente.getPersonaggiSbloccati().
-                entrySet().stream().filter(e -> e.getValue()==2).findFirst().map(Map.Entry::getKey).orElse(null)).into(holder.imageView);
+        holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggio()));
+        Glide.with(holder.imageView.getContext()).load(paziente.getUrl_img()).into(holder.imageView);
     }
 
     @Override
@@ -57,7 +54,7 @@ public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClas
             super(itemView);
             textViewPosizione = itemView.findViewById(R.id.textViewPosizione);
             imageView = itemView.findViewById(R.id.imageViewPaziente);
-            textViewUsernamePaziente = itemView.findViewById(R.id.textViewNomePaziente);
+            textViewUsernamePaziente = itemView.findViewById(R.id.textViewUsernamePaziente);
             textViewPunteggio = itemView.findViewById(R.id.textViewPunteggio);
         }
     }
