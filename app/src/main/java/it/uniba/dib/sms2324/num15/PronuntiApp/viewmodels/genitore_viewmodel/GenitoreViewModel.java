@@ -6,9 +6,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.concurrent.CompletableFuture;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitoreLiveData = new MutableLiveData<>();
@@ -28,6 +31,16 @@ public class GenitoreViewModel extends ViewModel {
 		genitoreDAO.update(genitore);
 
 		Log.d("GenitoreViewModel.aggiornaGenitoreRemoto()", "Genitore aggiornato: " + genitore.toString());
+	}
+
+	public CompletableFuture<Paziente> getPazienteGenitore(String idGenitore){
+		GenitoreDAO genitoreDAO = new GenitoreDAO();
+
+		CompletableFuture<Paziente> future = new CompletableFuture<>();
+		genitoreDAO.getPazienteByIdGenitore(idGenitore).thenAccept(paziente -> {
+			future.complete(paziente);
+		});
+		return future;
 	}
 
 }
