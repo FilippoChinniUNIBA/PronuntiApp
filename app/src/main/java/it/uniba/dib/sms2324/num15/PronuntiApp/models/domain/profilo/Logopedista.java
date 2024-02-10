@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,6 +172,9 @@ public class Logopedista extends AbstractProfilo {
 	}
 
 	public void addPaziente(Paziente paziente) {
+		if (this.pazienti == null) {
+			this.pazienti = new ArrayList<>();
+		}
 		this.pazienti.add(paziente);
 	}
 
@@ -183,7 +187,6 @@ public class Logopedista extends AbstractProfilo {
 
 		Classifica c = new Classifica(classifica);
 		this.setClassificaPazienti(c);
-		//this.classificaPazienti.setClassificaPazienti(classifica);
 	}
 
 }

@@ -69,7 +69,7 @@ public class FineEsercizioView extends FrameLayout {
 
     private void animazioneIncrementoValuta(int targetCoins, int idNagiation, AbstractFragmentWithNavigation fragment) {
         ValueAnimator animator = ValueAnimator.ofInt(0, targetCoins);
-        animator.setDuration(1500);
+        animator.setDuration(4000);
         animator.addUpdateListener(valueAnimator -> {
             int animatedValue = (int) valueAnimator.getAnimatedValue();
             textViewCoins.setText(String.valueOf(animatedValue));
