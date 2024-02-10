@@ -34,8 +34,7 @@ public class TestNuovoTest1Fragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		this.bottoneInserisci.setOnClickListener(v -> funzioneMaster());
-	}
+		this.bottoneInserisci.setOnClickListener(v -> funzioneMaster(LISTA_PERSONAGGI_PRONUNTIAPP)); }
 
 	public void funzioneMaster(List<Personaggio> listaPersonaggi) {
 		PersonaggioDAO personaggioDAO = new PersonaggioDAO();
