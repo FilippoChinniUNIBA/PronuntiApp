@@ -30,6 +30,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     private LogopedistaViewModel mLogopedistaViewModel;
 
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
         initViews(view);
@@ -54,39 +55,35 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     private void loadData() {
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(), logopedista -> {
-            if (logopedista != null) {
-                try {
-                    List<Paziente> pazienti = logopedista.getPazienti();
-                    Log.d("PazientiFragment", "pazienti: " + pazienti);
-                    adapterPazienti = new PazienteAdapter(pazienti);
-                    recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
-                    recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
+            List<Paziente> pazienti = logopedista.getPazienti();
+            Log.d("PazientiFragment.loadData()", "pazienti: " + ((pazienti == null) ? "null" : pazienti.toString()));
 
-                    searchViewListaPazienti.setOnCloseListener(() -> {
-                        addPazientiButton.setText("Paziente +");
-                        return false;
-                    });
-                    searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
+            adapterPazienti = new PazienteAdapter(pazienti);
+            recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
-                    searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
-                            adapterPazienti.getFilter().filter(query);
-                            return true;
-                        }
+            recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
-                        @Override
-                        public boolean onQueryTextChange(String newText) {
-                            adapterPazienti.getFilter().filter(newText);
-                            return true;
-                        }
-                    });
-                } catch (NullPointerException exception) {
-                    Log.d("PazientiFragment", "lista pazienti vuota" + exception);
+            searchViewListaPazienti.setOnCloseListener(() -> {
+                addPazientiButton.setText("Paziente +");
+                return false;
+            });
+            searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
+
+            searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
+                    adapterPazienti.getFilter().filter(query);
+                    return true;
                 }
-            }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    adapterPazienti.getFilter().filter(newText);
+                    return true;
+                }
+            });
         });
     }
 

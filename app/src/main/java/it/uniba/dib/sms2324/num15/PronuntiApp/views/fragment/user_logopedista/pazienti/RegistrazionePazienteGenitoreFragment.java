@@ -95,7 +95,6 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
                     mController.reLogLogopedista(mLogopedista.getEmail(), mLogopedista.getPassword()).thenAccept(userId -> {
                         mLogopedista.addPaziente(paziente);
                         mLogopedista.aggiornaClassificaPazienti();
-                        Log.d("ARRIVARO2","ARRIVATO2");
                         mLogopedistaViewModel.aggiornaLogopedistaRemoto();
                         getActivity().runOnUiThread(() -> navigateTo(R.id.action_registrazionePazienteGenitoreFragment_to_pazientiFragment));
                     });

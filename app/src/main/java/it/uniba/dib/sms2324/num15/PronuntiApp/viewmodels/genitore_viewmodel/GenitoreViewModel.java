@@ -2,6 +2,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
@@ -9,21 +11,23 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.Logopedist
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 
 public class GenitoreViewModel extends ViewModel {
-	private Genitore mGenitore;
+	private MutableLiveData<Genitore> mGenitoreLiveData = new MutableLiveData<>();
 
-	public Genitore getGenitore() {
-		return mGenitore;
+	public LiveData<Genitore> getGenitoreLiveData() {
+		return mGenitoreLiveData;
 	}
 
 	public void setGenitore(Genitore genitore) {
-		mGenitore = genitore;
+		mGenitoreLiveData.setValue(genitore);
 	}
 
 	public void aggiornaGenitoreRemoto() {
-		GenitoreDAO genitoreDao = new GenitoreDAO();
-		genitoreDao.update(mGenitore);
+		Genitore genitore = mGenitoreLiveData.getValue();
 
-		Log.d("GenitoreViewModel.aggiornaGenitoreRemoto()", "Genitore aggiornato: " + mGenitore.toString());
+		GenitoreDAO genitoreDAO = new GenitoreDAO();
+		genitoreDAO.update(genitore);
+
+		Log.d("GenitoreViewModel.aggiornaGenitoreRemoto()", "Genitore aggiornato: " + genitore.toString());
 	}
 
 }

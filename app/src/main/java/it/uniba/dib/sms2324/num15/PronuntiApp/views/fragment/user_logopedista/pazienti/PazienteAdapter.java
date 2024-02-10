@@ -19,9 +19,10 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazienti;
     private List<Paziente> pazientiFull;
+
     public PazienteAdapter(List<Paziente> pazienti) {
         this.pazienti = pazienti;
-        pazientiFull = new ArrayList<>(pazienti);
+        pazientiFull = new ArrayList<>(pazienti); //TODO per Nicola: non controlla se pazienti è null
     }
 
     @NonNull

@@ -17,18 +17,18 @@ public class LogopedistaViewModel extends ViewModel {
 	public LiveData<Logopedista> getLogopedistaLiveData() {
 		return mLogopedistaLiveData;
 	}
-
 	public void setLogopedista(Logopedista logopedista) {
 		mLogopedistaLiveData.setValue(logopedista);
 	}
 
+
 	public void aggiornaLogopedistaRemoto() {
 		Logopedista logopedista = mLogopedistaLiveData.getValue();
-		if (logopedista != null) {
-			LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
-			logopedistaDAO.update(logopedista);
-			Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + logopedista.toString());
-		}
+
+		LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
+		logopedistaDAO.update(logopedista);
+
+		Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + logopedista.toString());
 	}
 
 	public RegistrazionePazienteGenitoreController getRegistrazionePazienteGenitoreController() {
