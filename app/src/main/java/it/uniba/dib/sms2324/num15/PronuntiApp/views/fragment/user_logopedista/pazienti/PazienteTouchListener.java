@@ -12,10 +12,10 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class PazienteTouchListener implements RecyclerView.OnItemTouchListener {
-
     private Context context;
     private RecyclerView recyclerView;
     private int lastClickedPosition = -1;
+
 
     public PazienteTouchListener(Context context, RecyclerView recyclerView) {
         this.context = context;
@@ -49,11 +49,11 @@ public class PazienteTouchListener implements RecyclerView.OnItemTouchListener {
     }
 
     @Override
-    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-    }
+    public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
 
     private boolean isClick(MotionEvent e) {
         return e.getAction() == MotionEvent.ACTION_DOWN;
     }
+
 }
 

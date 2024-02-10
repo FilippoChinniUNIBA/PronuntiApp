@@ -21,4 +21,5 @@ public abstract class AbstractAudioPlayer {
 	public MediaPlayer getMediaPlayer() {
 		return mediaPlayer;
 	}
+
 }

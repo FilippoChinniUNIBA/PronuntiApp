@@ -1,40 +1,32 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
-
     private RecyclerView recyclerViewListaPazienti;
     private PazienteAdapter adapterPazienti;
     private Button addPazientiButton;
     private SearchView searchViewListaPazienti;
-    private LogopedistaViewModel logopedistaViewModel;
+
+    private LogopedistaViewModel mLogopedistaViewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,10 +39,10 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
         recyclerViewListaPazienti = view.findViewById(R.id.pazientiRecyclerView);
         recyclerViewListaPazienti.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        logopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         try {
-            List<Paziente> pazienti = logopedistaViewModel.getLogopedista().getPazienti();
+            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedista().getPazienti();
             Log.d("PazientiFragment", "pazienti: " + pazienti);
             adapterPazienti = new PazienteAdapter(pazienti);
             recyclerViewListaPazienti.setAdapter(adapterPazienti);

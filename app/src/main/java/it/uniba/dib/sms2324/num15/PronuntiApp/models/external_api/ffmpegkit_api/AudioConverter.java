@@ -12,7 +12,7 @@ public class AudioConverter {
     private static final String SAMPLE_RATE_OUTPUT = "32k";
     private static final String OVERWRITE = "-y";
 
-    /*public static void convertiAudio(File inputFile, File outputFile) {
+    public static File convertiAudio(File inputFile, File outputFile) {
         String inputFilePath = inputFile.getAbsolutePath();
         String outputFilePath = outputFile.getAbsolutePath();
 
@@ -25,22 +25,8 @@ public class AudioConverter {
 
         FFmpegKit.execute(command);
         FFmpegKit.cancel();
-    }*/
 
-    public static File convertiAudio(File inputFile) {
-        String filePath = inputFile.getAbsolutePath();
-
-        String command = OVERWRITE + " -f " + CODEC_INPUT +
-                " -ar " + SAMPLE_RATE_INPUT +
-                " -ac " + CHANNEL_CONFIG_INPUT +
-                " -i " + filePath +
-                " -acodec " + CODEC_OUTPUT +
-                " -ab " + SAMPLE_RATE_OUTPUT + " " + filePath;
-
-        FFmpegKit.execute(command);
-        FFmpegKit.cancel();
-
-        return inputFile;
+        return outputFile;
     }
 
 }

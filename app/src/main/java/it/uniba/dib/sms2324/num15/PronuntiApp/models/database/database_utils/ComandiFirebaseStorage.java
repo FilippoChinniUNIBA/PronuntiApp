@@ -11,6 +11,19 @@ import java.time.LocalTime;
 import java.util.concurrent.CompletableFuture;
 
 public class ComandiFirebaseStorage {
+	private static final String TEXTURE_PERSONAGGI = "texture_personaggi";
+	private static final String TEMPLATE_SCENARIGIOCO = "template_scenarigioco";
+	private static final String SCENARIGIOCO = "scenarigioco";
+	private static final String TEMPLATE_ESERCIZI_DENOMINAZIONE_IMMAGINE = "template_esercizi_denominazione_immagine";
+	private static final String TEMPLATE_ESERCIZI_SEQUENZA_PAROLE = "template_esercizi_sequenza_parole";
+	private static final String TEMPLATE_ESERCIZI_COPPIA_IMMAGINI = "template_esercizi_coppia_immagini";
+	private static final String ESERCIZI_DENOMINAZIONE_IMMAGINE = "esercizi_denominazione_immagine";
+	private static final String ESERCIZI_SEQUENZA_PAROLE = "esercizi_sequenza_parole";
+	private static final String ESERCIZI_COPPIA_IMMAGINI = "esercizi_coppia_immagini";
+	private static final String AUDIO_REGISTRATI_DENOMINAZIONE_IMMAGINE = ESERCIZI_DENOMINAZIONE_IMMAGINE + "/audio_registrati";
+	private static final String AUDIO_REGISTRATI_SEQUENZA_PAROLE = ESERCIZI_SEQUENZA_PAROLE + "/audio_registrati";
+
+
 	private final FirebaseStorage storage;
 
 	public ComandiFirebaseStorage() {

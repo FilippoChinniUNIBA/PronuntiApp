@@ -18,9 +18,8 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewPersonaggiAcquistabili;
     private TextView textViewPersonaggiSbloccati;
     private TextView textViewPersonaggiAcquistabili;
-    public PersonaggiFragment() {
-        // Required empty public constructor
-    }
+
+    public PersonaggiFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,13 +68,4 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         return view;
     }
 
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Personaggi");
-        }
-    }
 }

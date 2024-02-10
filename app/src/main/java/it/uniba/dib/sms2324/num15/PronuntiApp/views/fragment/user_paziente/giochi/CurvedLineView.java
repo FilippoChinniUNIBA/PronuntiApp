@@ -52,7 +52,7 @@ public class CurvedLineView extends View {
 
     private void checkAndInvalidate() {
         if (startSet && endSet) {
-            invalidate(); // Redraw the view only when both start and end points are set
+            invalidate();
         }
     }
 
@@ -68,7 +68,8 @@ public class CurvedLineView extends View {
         Log.d("endY", String.valueOf(endY));
 
         path.moveTo(startX, startY);
-        path.quadTo((startX + endX) / 2, startY + 200, endX, endY); // Change the quadTo parameters to adjust the curve
+        path.quadTo((startX + endX) / 2, startY + 200, endX, endY);
         canvas.drawPath(path, paint);
     }
+
 }

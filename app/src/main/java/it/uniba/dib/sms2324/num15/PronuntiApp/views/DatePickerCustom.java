@@ -28,7 +28,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class DatePickerCustom extends AbstractFragmentWithNavigation {
-
     private TextInputEditText textInputEditTextDataNascitaProfiloPaziente;
     private TextInputLayout textInputLayoutDataNascitaProfiloPaziente;
     private DatePickerDialog datePickerDialog;

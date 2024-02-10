@@ -72,7 +72,6 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
     }
 
     private class PazienteFilter extends Filter {
-
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<Paziente> filteredPazienti = new ArrayList<>();

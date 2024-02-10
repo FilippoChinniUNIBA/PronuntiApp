@@ -20,6 +20,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private ProfiloPazienteFragment profiloPazienteFragment;
     private GenitoreViewModel mGenitoreViewModel;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
@@ -91,14 +92,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Profilo");
-        }
     }
 
 }

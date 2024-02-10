@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -88,37 +90,32 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (!checkPermissions(requireActivity())) {
-            requestPermissions(requireActivity());
-        }
-
-        File cartellaApp = getContext().getFilesDir();
-        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
-        File audioConvertito = new File(cartellaApp, "audioConvertito.mp3");
-
-        this.audioRecorder = new AudioRecorder(audioRegistrazione);
-
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
+        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be", "pinguino", "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
 
-        String immagineEsercizio = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be";
-        String parolaEsercizio = "pinguino";
-        String audioAiuto = "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd";
-        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, immagineEsercizio, parolaEsercizio, audioAiuto);
         this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
 
-        Picasso.get().load(immagineEsercizio).into(immagineEsercizioDenominazioneImageView);
+
+        this.audioRecorder = initAudioRecorder();
+        Picasso.get().load(mEsercizioDenominazioneImmagine.getImmagineEsercizio()).into(immagineEsercizioDenominazioneImageView);
+
 
         buttonAvviaRegistrazione.setOnClickListener(v -> avviaPrimaRegistrazione());
         viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
         viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
 
-        buttonAiutiImageView.setOnClickListener(v -> riproduciAiuti(audioAiuto));
+        buttonAiutiImageView.setOnClickListener(v -> riproduciAiuti(mEsercizioDenominazioneImmagine.getAudioAiuto()));
         viewOverlayBackground.setOnClickListener(v -> mostraSuggerimento());
 
         buttonCompletaEsercizioImageView.setOnClickListener(v -> invalidConferma());
     }
 
     private void avviaPrimaRegistrazione() {
+        if (!checkPermissions(requireActivity())) {
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+            return;
+        }
+
         avviaRegistrazione();
 
         imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
@@ -188,16 +185,16 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
         if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
             esito = true;
-            constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
         }
         else {
             esito = false;
-            constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
             fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato());
         }
 
-        File temp = mController.convertiAudio(audioRecorder.getAudioFile());
+        constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+
+        File temp = mController.convertiAudio(audioRecorder.getAudioFile(), new File(getContext().getFilesDir(), "tempAudioConvertito.mp3"));
         //TODO salvare il file temp su Storage e ottenere link
         String audioRegistrato = "";
 
@@ -205,6 +202,20 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         mEsercizioDenominazioneImmagine.setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(esito, audioRegistrato, countAiuti));
         Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioDenominazioneImmagine);
         Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPaziente());
+
+        //TODO aggiornamento del paziente con l'esito dell'esercizio
+
+        //TODO per Nicola: hai 2 opzioni: o devi settare un listener su fineEsercizioView a fine animazione
+        //e fare il navigateTo() in quel listener,
+        //oppure devi mettere un onClick sulla schemata finale a fine animazione e fare il navigateTo() in quel onClick
+        navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment);
+    }
+
+    private void sovrascriviAudio(){
+        RichiestaConfermaDialog richiestaConfermaDialog = new RichiestaConfermaDialog(getContext(), getContext().getString(R.string.overwriteAudio), getContext().getString(R.string.overwriteAudioDescription));
+        richiestaConfermaDialog.setOnConfermaButtonClickListener(this::avviaRegistrazione);
+        richiestaConfermaDialog.setOnAnnullaButtonClickListener(() -> {});
+        richiestaConfermaDialog.show();
     }
 
     private void setAnimazioneRegistrazione() {
@@ -254,36 +265,27 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         }, 10000);
     }
 
-    private void sovrascriviAudio(){
-        RichiestaConfermaDialog richiestaConfermaDialog = new RichiestaConfermaDialog(getContext(), getContext().getString(R.string.overwriteAudio), getContext().getString(R.string.overwriteAudioDescription));
-        richiestaConfermaDialog.setOnConfermaButtonClickListener(this::avviaRegistrazione);
-        richiestaConfermaDialog.setOnAnnullaButtonClickListener(() -> {});
-        richiestaConfermaDialog.show();
-    }
 
     private boolean checkPermissions(Activity currentactivity) {
-        int readStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int writeStoragePermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int recordAudioPermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.RECORD_AUDIO);
-
-        return readStoragePermission == PackageManager.PERMISSION_GRANTED &&
-                writeStoragePermission == PackageManager.PERMISSION_GRANTED &&
-                recordAudioPermission == PackageManager.PERMISSION_GRANTED;
+        return recordAudioPermission == PackageManager.PERMISSION_GRANTED;
     }
 
-    private void requestPermissions(Activity currentactivity) {
-        ActivityCompat.requestPermissions(currentactivity, new String[]{
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.RECORD_AUDIO
-        }, 1000);
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    this.audioRecorder = initAudioRecorder();
+                    avviaPrimaRegistrazione();
+                } else {
+                    navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment);
+                }
+            });
+
+    private AudioRecorder initAudioRecorder() {
+        File cartellaApp = getContext().getFilesDir();
+        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
+
+        return new AudioRecorder(audioRegistrazione);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Denominazione immagine");
-        }
-    }
 }

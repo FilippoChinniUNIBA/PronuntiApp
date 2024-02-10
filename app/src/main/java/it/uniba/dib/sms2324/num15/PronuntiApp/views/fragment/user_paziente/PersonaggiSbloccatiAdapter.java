@@ -14,7 +14,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiSbloccatiAdapter.ViewHolder> {
-
     private Context context;
     private List<Personaggio> listaPersonaggi;
 
@@ -58,4 +57,5 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
             // Puoi impostare clic e altre interazioni qui se necessario
         }
     }
+
 }

@@ -22,10 +22,11 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private Spinner spinnerSesso;
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
-    private PazienteViewModel pazienteViewModel;
-
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
+
+    private PazienteViewModel mPazienteViewModel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
 
         //TODO prendere il paziente dal genitore dal viewmodelGenitore
-        this.pazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
+        this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -67,7 +68,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     @Override
     public void setData(){
 
-        Paziente paziente = pazienteViewModel.getPaziente();
+        Paziente paziente = mPazienteViewModel.getPaziente();
 
         textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -99,13 +100,5 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         //save();
         setData();
    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Profilo");
-        }
-    }
 
 }

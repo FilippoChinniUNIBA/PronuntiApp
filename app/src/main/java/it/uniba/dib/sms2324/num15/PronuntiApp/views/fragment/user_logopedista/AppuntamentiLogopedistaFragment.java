@@ -26,10 +26,11 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     private TextInputEditText editTextGenitore;
     private TextInputEditText editTextLuogo;
     private TextInputEditText editTextDataAppuntemento;
-    private LogopedistaViewModel logopedistaViewModel;
     private CreazioneAppuntamentoController mController;
     private Button addAppuntamentoButton;
     private TextView orarioTextView;
+
+    private LogopedistaViewModel mLogopedistaViewModel;
 
 
     public AppuntamentiLogopedistaFragment() {}
@@ -38,14 +39,14 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
 
+        this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        this.mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
+
         editTextGenitore = view.findViewById(R.id.textInputEditTextPazienteAppuntamentoLogopedista);
         editTextDataAppuntemento = view.findViewById(R.id.textInputEditTextDataAppuntamentoLogopedista);
         editTextLuogo = view.findViewById(R.id.textInputEditTextLuogoAppuntamentoLogopedista);
 
         //addAppuntamentoButton=view.findViewById();
-
-        logopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
-        mController = logopedistaViewModel.getCreazioneAppuntamentoController();
 
         return view;
     }

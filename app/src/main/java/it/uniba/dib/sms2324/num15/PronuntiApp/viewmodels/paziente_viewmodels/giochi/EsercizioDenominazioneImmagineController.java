@@ -39,8 +39,8 @@ public class EsercizioDenominazioneImmagineController {
 		}
 	}
 
-	public File convertiAudio(File audioRegistrato) {
-		return AudioConverter.convertiAudio(audioRegistrato);
+	public File convertiAudio(File audioRegistrato, File outputFile) {
+		return AudioConverter.convertiAudio(audioRegistrato, outputFile);
 	}
 
 }

@@ -20,6 +20,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     private TextInputEditText textInputEditTextIndirizzo;
     private LogopedistaViewModel logopedistaViewModel;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
@@ -89,15 +90,5 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         logopedistaViewModel.getLogopedista().setTelefono(telefono);
         logopedistaViewModel.aggiornaLogopedistaRemoto();
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Profilo");
-        }
-    }
-
-
 
 }

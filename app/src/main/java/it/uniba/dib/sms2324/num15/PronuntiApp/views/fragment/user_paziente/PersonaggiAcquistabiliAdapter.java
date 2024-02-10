@@ -14,9 +14,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
-
     private Context context;
-    private List<Personaggio> listaPersonaggi; // Sostituisci "YourDataModel" con la classe del tuo modello dati
+    private List<Personaggio> listaPersonaggi;
 
     public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> listaPersonaggi) {
         this.context = context;
@@ -33,11 +32,7 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Personaggio currentItem = listaPersonaggi.get(position);
-
-        // Configura la vista del ViewHolder con i dati appropriati
         //holder.textViewNomePersonaggio.setText(currentItem.getNome());
-
-        // Puoi gestire clic o altre interazioni qui se necessario
     }
 
     @Override
@@ -58,4 +53,5 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
             // Puoi impostare clic e altre interazioni qui se necessario
         }
     }
+
 }

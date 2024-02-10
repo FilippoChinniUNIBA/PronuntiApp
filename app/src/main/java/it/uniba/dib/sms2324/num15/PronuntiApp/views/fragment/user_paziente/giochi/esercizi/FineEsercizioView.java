@@ -48,7 +48,7 @@ public class FineEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioCorretto.setVisibility(View.VISIBLE);
 
-        simulateCoinIncrease(coins);
+        animazioneIncrementoValuta(coins);
     }
 
     public void setEsercizioSbagliato(int coins) {
@@ -59,10 +59,10 @@ public class FineEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioSbagliato.setVisibility(View.VISIBLE);
 
-        simulateCoinIncrease(coins);
+        animazioneIncrementoValuta(coins);
     }
 
-    private void simulateCoinIncrease(int targetCoins) {
+    private void animazioneIncrementoValuta(int targetCoins) {
         ValueAnimator animator = ValueAnimator.ofInt(0, targetCoins);
         animator.setDuration(1500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

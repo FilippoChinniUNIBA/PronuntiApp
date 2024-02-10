@@ -18,7 +18,7 @@ public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFr
 	protected Button buttonModificaProfilo;
 	protected ImageView imageViewProfile;
 	protected ImageView imageViewEditProfile;
-	//abstract void save();
+
 
     protected void setPickMedia() {
         pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {

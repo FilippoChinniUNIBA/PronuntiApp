@@ -49,6 +49,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     private LogopedistaViewModel mLogopedistaViewModel;
     private RegistrazionePazienteGenitoreController mController;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
