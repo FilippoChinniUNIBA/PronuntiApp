@@ -51,7 +51,6 @@
 
         <TextView
             android:id="@+id/textViewSubTitoloLogin"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
@@ -63,6 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
+            android:textColor="@color/black"
             />
 
         <!-- TextInputLayout e TextInputEditText per Username -->
