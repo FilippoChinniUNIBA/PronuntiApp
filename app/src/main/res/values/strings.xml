@@ -143,6 +143,11 @@
     <string name="sex">Sex</string>
     <string name="surname">Surname</string>
     <string name="name">Name</string>
+    <string name="i_tuoi_appuntamenti">Your appointments</string>
+    <string name="ricerca_appuntamento">Research appointments...</string>
+    <string name="nuovo_appuntamento">New appointments +</string>
+    <string name="nuovo_appuntamento_titolo">New appointments</string>
+    <string name="rimuovi_appuntamento">Remove</string>
 
 
 </resources>

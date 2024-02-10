@@ -119,5 +119,10 @@
     <string name="sex">Sesso</string>
     <string name="surname">Cognome</string>
     <string name="name">Nome</string>
+    <string name="i_tuoi_appuntamenti">I tuoi appuntamenti</string>
+    <string name="ricerca_appuntamento">Ricerca appuntamento...</string>
+    <string name="nuovo_appuntamento">Nuovo appuntamento +</string>
+    <string name="nuovo_appuntamento_titolo">Nuovo appuntamento</string>
+    <string name="rimuovi_appuntamento">Rimuovi</string>
 
 </resources>
