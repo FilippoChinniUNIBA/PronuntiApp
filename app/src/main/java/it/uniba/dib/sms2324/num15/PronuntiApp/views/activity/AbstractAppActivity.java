@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
