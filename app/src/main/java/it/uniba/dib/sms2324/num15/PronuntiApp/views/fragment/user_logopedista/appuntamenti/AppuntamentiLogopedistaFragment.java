@@ -58,8 +58,8 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     private PazienteAdapter adapterPazientiAppuntamentoLogopedista;
     private LinearLayout linearLayoutPazienteAppuntamentoLogopedista;
     private View viewOverlay;
-    private LogopedistaViewModel mLogopedistaViewModel;
-    private CreazioneAppuntamentoController mController;
+
+
     private String orarioAppuntamento;
     private String idPazienteSelezionato;
 
@@ -68,11 +68,18 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     private List<AppuntamentoCustom> appuntamenti;
 
 
+    private LogopedistaViewModel mLogopedistaViewModel;
+    private CreazioneAppuntamentoController mController;
+
+
     public AppuntamentiLogopedistaFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
+
+        this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        this.mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
 
         viewOverlay = view.findViewById(R.id.viewOverlayAppuntamentiLogopedista);
         viewOverlay.setVisibility(View.GONE);
@@ -85,8 +92,6 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         recyclerViewAppuntamenti = view.findViewById(R.id.recyclerViewAppuntamentiLogopedista);
         recyclerViewAppuntamenti.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
-        mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
 
         //nuovo appuntamento
         editTextAppuntamentoPaziente = view.findViewById(R.id.textInputEditTextPazienteAppuntamentoLogopedista);
