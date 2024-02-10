@@ -15,20 +15,26 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDA
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.TipoUtente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class RegistrazionePazienteGenitoreController {
 
     private static final Map<String, Integer> PERSONAGGI_INIZIALI = new HashMap<String, Integer>() {{
-        put("personaggio1", 0);
-        put("personaggio2", 0);
-        put("personaggio3", 0);
-        put("personaggio4", 0);
-        put("personaggio5", 0);
-        put("personaggio6", 0);
-        put("personaggio7", 0);
-        put("personaggio8", 0);
-        put("personaggio9", 0);
-        put("personaggio10", 0);
+        put("Batman", 0);               //Batman
+        put("Cane", 2);                 //Cane
+        put("Capitan America", 0);      //Capitan America
+        put("Cavaliere", 0);            //Cavaliere
+        put("Cavaliera", 0);            //Cavaliera
+        put("Coniglio", 1);             //Coniglio
+        put("Draghetta", 0);            //Draghetta
+        put("Drago", 0);                //Drago
+        put("Elefante", 0);             //Elefante
+        put("Gattina", 0);              //Gattina
+        put("Gatto", 0);                //Gatto
+        put("Mucca", 0);                //Mucca
+        put("Pecora", 0);               //Pecora
+        put("Spiderman", 0);            //Spiderman
+        put("Wonderwoman", 0);          //Wonderwoman
     }};
     private static final int VALUTA_INIZIALE_PAZIENTE = 50;
 

@@ -18,7 +18,7 @@ public class TemplateScenarioGioco extends AbstractScenarioGioco {
 
 	public TemplateScenarioGioco() {}
 
-	public TemplateScenarioGioco(String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3, String idTemplateScenarioGioco) {
+	public TemplateScenarioGioco(String idTemplateScenarioGioco, String immagineSfondo, String immagineTappa1, String immagineTappa2, String immagineTappa3) {
 		super(immagineSfondo, immagineTappa1, immagineTappa2, immagineTappa3);
 		this.idTemplateScenarioGioco = idTemplateScenarioGioco;
 	}
