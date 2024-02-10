@@ -14,8 +14,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_avvio_rapido, container, false);
 
         view.findViewById(R.id.button_genitore).setOnClickListener(v ->startActivity(new Intent(getActivity(), GenitoreActivity.class)));

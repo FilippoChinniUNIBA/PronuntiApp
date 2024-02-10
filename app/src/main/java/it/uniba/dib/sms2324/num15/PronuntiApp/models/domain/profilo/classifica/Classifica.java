@@ -49,7 +49,7 @@ public class Classifica implements Persistente<Classifica> {
 	@Override
 	public String toString() {
 		return "Classifica{" +
-				"classificaPazienti=" + classifica +
+				"classifica=" + classifica +
 				'}';
 	}
 

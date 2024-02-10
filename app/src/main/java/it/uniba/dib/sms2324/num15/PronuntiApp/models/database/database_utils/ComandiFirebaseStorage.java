@@ -14,9 +14,10 @@ public class ComandiFirebaseStorage {
 	public static final String TEXTURE_PERSONAGGI = "texture_personaggi";
 	public static final String TEMPLATE_SCENARIGIOCO = "template_scenarigioco";
 	public static final String SCENARIGIOCO = "scenarigioco";
-	public static final String TEMPLATE_ESERCIZI_DENOMINAZIONE_IMMAGINE = "template_esercizi_denominazione_immagine";
-	public static final String TEMPLATE_ESERCIZI_SEQUENZA_PAROLE = "template_esercizi_sequenza_parole";
-	public static final String TEMPLATE_ESERCIZI_COPPIA_IMMAGINI = "template_esercizi_coppia_immagini";
+	public static final String TEMPLATE_ESERCIZI = "template_esercizi";
+	public static final String TEMPLATE_ESERCIZI_DENOMINAZIONE_IMMAGINE = TEMPLATE_ESERCIZI + "/template_esercizi_denominazione_immagine";
+	public static final String TEMPLATE_ESERCIZI_SEQUENZA_PAROLE = TEMPLATE_ESERCIZI + "/template_esercizi_sequenza_parole";
+	public static final String TEMPLATE_ESERCIZI_COPPIA_IMMAGINI = TEMPLATE_ESERCIZI + "/template_esercizi_coppia_immagini";
 	public static final String ESERCIZI_DENOMINAZIONE_IMMAGINE = "esercizi_denominazione_immagine";
 	public static final String ESERCIZI_SEQUENZA_PAROLE = "esercizi_sequenza_parole";
 	public static final String ESERCIZI_COPPIA_IMMAGINI = "esercizi_coppia_immagini";
