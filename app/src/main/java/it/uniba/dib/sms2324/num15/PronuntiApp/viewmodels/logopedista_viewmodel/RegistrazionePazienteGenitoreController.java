@@ -20,21 +20,21 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.
 public class RegistrazionePazienteGenitoreController {
 
     private static final Map<String, Integer> PERSONAGGI_INIZIALI = new HashMap<String, Integer>() {{
-        put("Batman", 0);               //Batman
-        put("Cane", 2);                 //Cane
-        put("Capitan America", 0);      //Capitan America
-        put("Cavaliere", 0);            //Cavaliere
-        put("Cavaliera", 0);            //Cavaliera
-        put("Coniglio", 1);             //Coniglio
-        put("Draghetta", 0);            //Draghetta
-        put("Drago", 0);                //Drago
-        put("Elefante", 0);             //Elefante
-        put("Gattina", 0);              //Gattina
-        put("Gatto", 0);                //Gatto
-        put("Mucca", 0);                //Mucca
-        put("Pecora", 0);               //Pecora
-        put("Spiderman", 0);            //Spiderman
-        put("Wonderwoman", 0);          //Wonderwoman
+        put("-NqIFkOcaDJKFU_BhuH2", 0);     //Batman
+        put("-NqIFkOqJ7eznb2BIubm", 2);     //Cane
+        put("-NqIFkOuix-wiNRaxtlo", 0);     //Capitan America
+        put("-NqIFkP0yNyXQFp5VveX", 0);     //Cavaliere
+        put("-NqIFkP7u9RENb6CfQlG", 0);     //Cavaliera
+        put("-NqIFkPCmPM-2sOY6O0e", 1);     //Coniglio
+        put("-NqIFkPIJoJlQZ1iwgfj", 0);     //Draghetta
+        put("-NqIFkPTTupPgYkYc74E", 0);     //Drago
+        put("-NqIFkPYD_JMBxlV-dIx", 0);     //Elefante
+        put("-NqIFkPchAFVCOm0Uffi", 0);     //Gattina
+        put("-NqIFkPgCrXO8lqN56jo", 0);     //Gatto
+        put("-NqIFkPlPjvZDY2TskvO", 0);     //Mucca
+        put("-NqIFkPpkXllw9SXtFY2", 0);     //Pecora
+        put("-NqIFkPtcD7NHKpKOL0X", 0);     //Spiderman
+        put("-NqIFkPxWAuHV9o40Idc", 0);     //Wonderwoman
     }};
     private static final int VALUTA_INIZIALE_PAZIENTE = 50;
 
