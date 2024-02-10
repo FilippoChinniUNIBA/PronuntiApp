@@ -71,7 +71,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
         profiloPazienteFragment.confermaModificaProfilo();
-        mGenitoreViewModel.getGenitore().setTelefono(textInputEditTextTelefono.getText().toString());
+        mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(textInputEditTextTelefono.getText().toString());
         mGenitoreViewModel.aggiornaGenitoreRemoto();
     }
 

@@ -22,7 +22,13 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
     public PazienteAdapter(List<Paziente> pazienti) {
         this.pazienti = pazienti;
-        pazientiFull = new ArrayList<>(pazienti); //TODO per Nicola: non controlla se pazienti è null
+
+        if (pazienti == null) {
+            this.pazienti = new ArrayList<>();
+            this.pazientiFull = new ArrayList<>();
+        } else {
+            this.pazientiFull = new ArrayList<>(pazienti);
+        }//TODO per Nicola: qusto è il check che ti avevo detot se pazienti è null
     }
 
     @NonNull

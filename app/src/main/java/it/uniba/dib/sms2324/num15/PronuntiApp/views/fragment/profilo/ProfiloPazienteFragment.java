@@ -68,7 +68,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     @Override
     public void setData(){
 
-        Paziente paziente = mPazienteViewModel.getPaziente();
+        Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
 
         textInputEditTextNome.setText(paziente.getNome());
         textInputEditTextNome.setEnabled(false);

@@ -33,7 +33,9 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
+
         initViews(view);
+
         return view;
     }
 
