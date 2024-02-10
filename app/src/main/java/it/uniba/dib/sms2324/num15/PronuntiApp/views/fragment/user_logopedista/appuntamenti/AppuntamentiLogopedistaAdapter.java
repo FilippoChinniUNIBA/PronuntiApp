@@ -28,7 +28,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public AppuntamentiLogopedistaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_paziente_in_appuntamenti_logopedista, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_appuntamento_in_logopedista, parent, false);
         return new AppuntamentiLogopedistaViewHolder(view);
     }
 

@@ -185,11 +185,11 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
         if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
             esito = true;
-            fineEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
+            fineEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
         }
         else {
             esito = false;
-            fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato());
+            fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
         }
 
         constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
@@ -205,10 +205,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
         //TODO aggiornamento del paziente con l'esito dell'esercizio
 
-        //TODO per Nicola: hai 2 opzioni: o devi settare un listener su fineEsercizioView a fine animazione
-        //e fare il navigateTo() in quel listener,
-        //oppure devi mettere un onClick sulla schemata finale a fine animazione e fare il navigateTo() in quel onClick
-        navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment);
     }
 
     private void sovrascriviAudio(){

@@ -172,10 +172,10 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
 
         if (mController.verificaSceltaImmagine(immagineScelta, correctImageView)) {
             esito = true;
-            fineEsercizioView.setEsercizioCorretto(mEsercizioCoppiaImmagini.getRicompensaCorretto());
+            fineEsercizioView.setEsercizioCorretto(mEsercizioCoppiaImmagini.getRicompensaCorretto(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this);
         } else {
             esito = false;
-            fineEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato());
+            fineEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this);
         }
 
         constraintLayoutEsercizioCoppiaImmagini.setVisibility(View.GONE);
@@ -187,10 +187,6 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
 
         //TODO aggiornamento del paziente con l'esito dell'esercizio
 
-        //TODO per Nicola: hai 2 opzioni: o devi settare un listener su fineEsercizioView a fine animazione
-        //e fare il navigateTo() in quel listener,
-        //oppure devi mettere un onClick sulla schemata finale a fine animazione e fare il navigateTo() in quel onClick
-        navigateTo(R.id.action_esercizioCoppiaImmagini_to_scenarioFragment);
     }
 
     private void borderImageSelector(FrameLayout immagine){

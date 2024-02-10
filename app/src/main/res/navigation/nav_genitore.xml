@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_scenari_genitore" />
     <fragment
         android:id="@+id/appuntamentiGenitoreFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.AppuntamentiGenitoreFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.appuntamenti.AppuntamentiGenitoreFragment"
         android:label="fragment_appuntamenti_genitore"
         tools:layout="@layout/fragment_appuntamenti_genitore" />
     <fragment
