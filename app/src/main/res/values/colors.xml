@@ -16,6 +16,8 @@
     <color name="hintTextColorEnabled">#000000</color> <!-- Colore quando abilitato -->
     <color name="hintTextColorDisabled">#A9A9A9</color> <!-- Colore quando disabilitato -->
     <color name="meseAnnoAppuntamento">#DFDFDF</color>
+    <color name="backgroundSceltaPaziente">#F1F1F1</color>
+    <color name="nuovoAppuntamento">#5C5D90EA</color>
     <color name="coinsBackground">#22000000</color>
     <color name="animationMic">#8FDF1919</color>
     <color name="corretto">#27E12A</color>

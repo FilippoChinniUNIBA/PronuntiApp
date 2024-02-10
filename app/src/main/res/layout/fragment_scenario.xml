@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayoutScenario"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_candy_scenario"
+    android:background="@drawable/background_scenario_neve"
     tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment">
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.CurvedLineView
@@ -36,7 +36,7 @@
         style="@style/stylePosizioniScenario"
         android:layout_marginStart="72dp"
         android:layout_marginBottom="132dp"
-        android:src="@drawable/candy_yellow"
+        android:src="@drawable/igloo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -46,7 +46,7 @@
         style="@style/stylePosizioniScenario"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="312dp"
-        android:src="@drawable/candy_red"
+        android:src="@drawable/lago_inverno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,7 +55,7 @@
         style="@style/stylePosizioniScenario"
         android:layout_marginStart="100dp"
         android:layout_marginBottom="508dp"
-        android:src="@drawable/candy_pink"
+        android:src="@drawable/casa_natale"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
