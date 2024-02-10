@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name=".views.activity.FirstActivity"
+            android:name=".views.activity.AutenticazioneActivity"
             android:exported="true"
             android:theme="@style/Theme.PronuntiAppNoActionBar"
             >
