@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/textViewAppuntamentiLogopedista"
+                app:layout_constraintBottom_toTopOf="@+id/searchBarAppuntamentiLogopedista"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
@@ -243,32 +243,18 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/textViewAppuntamentiLogopedista"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/i_tuoi_appuntamenti"
-                android:textSize="@dimen/subHeaderTextSize"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewNuovoAppuntamentoLogopedista"
-                app:layout_constraintBottom_toTopOf="@+id/searchBarAppuntamentiLogopedista"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginVertical="20dp"
-                android:paddingTop="20dp"
-                />
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/searchBarAppuntamentiLogopedista"
                     style="@style/SearchBarStyle"
                     android:layout_marginHorizontal="10dp"
                     android:hint="@string/ricerca_appuntamento"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewAppuntamentiLogopedista"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewNuovoAppuntamentoLogopedista"
                     app:layout_constraintBottom_toTopOf="@+id/recyclerViewAppuntamentiLogopedista"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:background="@drawable/rectangle_rounded_border_bkg"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     />
                 <ImageView
                     android:id="@+id/icLogoSearchAppuntamentiLogopedista"
