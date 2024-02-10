@@ -36,7 +36,7 @@
     <string name="startDate">Data inizio</string>
     <string name="endDate">Data fine</string>
     <string name="id">Id</string>
-    <string name="errorConnectionDescription">La connessione Internet non è disponibile. Verifica la tua connessione, l\'app verrà riavviata automaticamente.</string>
+    <string name="errorConnectionDescription">La connessione Internet non è disponibile. Verifica la tua connessione, non puoi utilizzare l\'App senza connessione Internet.</string>
     <string name="next">Avanti</string>
     <string name="errorConnectionTitle">Errore di connessione</string>
     <string name="restartApp">Riavvia l\'app</string>

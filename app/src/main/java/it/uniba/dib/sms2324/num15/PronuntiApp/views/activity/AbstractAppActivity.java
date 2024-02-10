@@ -1,34 +1,40 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
     protected NavController navcontroller;
 
 
+    private Context getThisContext() {
+        return this;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        registerNetworkCallback();
+
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeReceiver, filter);
     }
 
     protected void setOnBackPressedCallback(int id) {
@@ -48,22 +54,36 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             }
         });
     }
-    private void registerNetworkCallback() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(Network network) {
-                super.onAvailable(network);
-                Log.d("Connection","Connection setted");
-            }
 
-            @Override
-            public void onLost(Network network) {
-                super.onLost(network);
-                Log.d("Connection","Connection Lost");
+
+    private boolean isConnessioneInternet() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
+    }
+
+    private BroadcastReceiver networkChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!isConnessioneInternet()) {
+                Log.d("AbstractAppActivity.BroadcastReceiver()", "Connessione assente");
+
+                ConnessioneErroreDialog dialog = new ConnessioneErroreDialog(getThisContext());
+                dialog.setOnConfermaButtonClickListener(() -> riavviaApplicazione());
+                runOnUiThread(dialog::show);
             }
-        };
-        connectivityManager.registerDefaultNetworkCallback(networkCallback);
+        }
+
+    };
+
+    private void riavviaApplicazione() {
+        runOnUiThread(() -> {
+            Intent restartIntent = new Intent(getThisContext(), FirstActivity.class);
+            startActivity(restartIntent);
+        });
     }
 
     @Override

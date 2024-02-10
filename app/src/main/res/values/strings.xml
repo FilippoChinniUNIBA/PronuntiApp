@@ -39,7 +39,7 @@
     <string name="endDate">End date</string>
     <string name="id">Id</string>
     <string name="next">Avanti</string>
-    <string name="errorConnectionDescription">Internet connection is not available. Check your connection, the app will be restarted automatically.</string>
+    <string name="errorConnectionDescription">Internet connection is not available. Check your connection, you can\'t use the App without Internet connection</string>
     <string name="errorConnectionTitle">Connection error</string>
     <string name="restartApp" >Restart the app</string>
     <string name="errorPermissionTitle">Necessary permissions</string>
