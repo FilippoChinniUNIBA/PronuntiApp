@@ -9,10 +9,10 @@
     android:layout_marginHorizontal="2dp"
     >
     <LinearLayout
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="match_parent"
         android:background="@drawable/rectangle_no_right_cornes_bkg"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="5dp"
         android:paddingVertical="5dp"
         >
         <TextView
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="199"
+            android:text="99"
             android:textSize="@dimen/size_text_orario_appuntamento"
             android:textColor="@color/white"
             android:textStyle="bold"

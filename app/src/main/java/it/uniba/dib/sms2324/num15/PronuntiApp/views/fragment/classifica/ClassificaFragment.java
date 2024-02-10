@@ -44,6 +44,9 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //TODO: costruire la classifica creando una lista di PazienteClassifica (username, punteggio, url_img)
+        // url_img si ottiene da personaggioDao ottenendo prima l'id del personaggio selezionato da Paziente paziente.getPersonaggiSbloccati() e
+        // poi cercare la chiave con il valore 2 (che significa selezionato)
         pazienti= new ArrayList<>();
         for(int i=100; i>0; i--){
             pazienti.add(new PazienteClassifica("username_paziente"+i, i, url_img));

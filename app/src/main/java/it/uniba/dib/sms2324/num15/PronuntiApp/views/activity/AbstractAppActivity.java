@@ -1,7 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -17,9 +21,15 @@ import com.google.android.material.navigation.NavigationBarView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
-
     protected BottomNavigationView bottomNavigationView;
     protected NavController navcontroller;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        registerNetworkCallback();
+    }
 
     protected void setOnBackPressedCallback(int id) {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -38,43 +48,22 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             }
         });
     }
+    private void registerNetworkCallback() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                super.onAvailable(network);
+                Log.d("Connection","Connection setted");
+            }
 
-    /*protected void setBottomNavBar(int menuId, NavigationNavBarItemSelector navigationNavBarItemSelector) {
-        bottomNavigationView.inflateMenu(menuId);
-        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
-        bottomNavigationView.setOnItemSelectedListener(item -> navigationNavBarItemSelector.selectItem(item.getItemId()));
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }*/
-
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Controlla se il tasto up è stato premuto
-        if (item.getItemId() == android.R.id.home) {
-            // Sostituisci il fragment corrente con il fragment precedente
-            getSupportFragmentManager().popBackStack();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    protected void setFirstFragment(int fragmentContainerId, Fragment fragment) {
-        //TODO nicola non so perché qui non setti il fragment in backstack come negli altri,
-        // comunque oltre questo, non so se ha senso usare il getSupportFragmentManager() qui
-        // forse sarebbe meglio passare il fragmentManager come attributo di classe.
-        // poi in ogni caso serve anche qui una funzione tipo replaceFragment o navigateToFragment
-        // per astrarre la transazione del fragment
-        getSupportFragmentManager().beginTransaction()
-                .replace(fragmentContainerId, fragment)
-                .commit();
+            @Override
+            public void onLost(Network network) {
+                super.onLost(network);
+                Log.d("Connection","Connection Lost");
+            }
+        };
+        connectivityManager.registerDefaultNetworkCallback(networkCallback);
     }
 
     @Override
@@ -85,4 +74,5 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             return super.onSupportNavigateUp();
         }
     }
+
 }
