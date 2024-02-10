@@ -41,7 +41,7 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        this.mLoginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
         this.textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailLogin);
         this.textInputEditTextPassword = view.findViewById(R.id.textInputEditTextPasswordLogin);
@@ -66,6 +66,10 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
         String email = textInputEditTextEmail.getText().toString();
         String password = textInputEditTextPassword.getText().toString();
 
+        loginActivityProfilo(email, password);
+    }
+
+    private void loginActivityProfilo(String email, String password) {
         CompletableFuture<Boolean> futureIsLoginCorrect = mLoginViewModel.verificaLogin(email, password);
         futureIsLoginCorrect.thenAccept(isLoginCorrect -> {
             if (!isLoginCorrect) {
@@ -74,9 +78,9 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
                 infoDialog.setOnConfermaButtonClickListener(null);
             }
             else {
-                CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login(email, password);
+                CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login();
                 futureProfilo.thenAccept(profilo -> {
-                    Log.d("LoginFragment.eseguiLogin()", "Profilo: " + profilo.toString());
+                    Log.d("LoginFragment.loginActivityProfilo()", "Profilo: " + profilo.toString());
 
                     getActivity().runOnUiThread(() -> {
                         if (profilo instanceof Logopedista) {

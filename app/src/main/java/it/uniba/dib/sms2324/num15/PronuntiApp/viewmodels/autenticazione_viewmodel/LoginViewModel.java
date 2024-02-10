@@ -42,7 +42,7 @@ public class LoginViewModel extends ViewModel {
 		return future;
 	}
 
-	public CompletableFuture<Profilo> login(String email, String password) {
+	public CompletableFuture<Profilo> login() {
 		CompletableFuture<Profilo> future = new CompletableFuture<>();
 
 		Autenticazione auth = new Autenticazione();
