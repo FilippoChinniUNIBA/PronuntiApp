@@ -88,20 +88,6 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
 
-        Log.d("AppuntamentoLogopedistaFragment","NullPointerException"+mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti());
-
-        try {
-            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
-            adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
-        }catch (NullPointerException exception){
-            Log.d("AppuntamentoLogopedistaFragment","NullPointerException");
-        }
-
-        recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
-        adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamenti);
-        recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
-
-
         //nuovo appuntamento
         editTextAppuntamentoPaziente = view.findViewById(R.id.textInputEditTextPazienteAppuntamentoLogopedista);
         editTextLuogo = view.findViewById(R.id.textInputEditTextLuogoAppuntamentoLogopedista);
@@ -112,6 +98,19 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         linearLayoutPazienteAppuntamentoLogopedista = view.findViewById(R.id.llPazienteAppuntamentoLogopedista);
 
         linearLayoutPazienteAppuntamentoLogopedista.setVisibility(View.GONE);
+
+        try {
+            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
+            adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
+            recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
+            //prendere gli appuntamenti da controller appuntamenti
+            //adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamenti);
+            //recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
+        }catch (NullPointerException exception){
+            Log.e("AppuntamentoLogopedistaFragment","NullPointerException",exception);
+        }
+
+
 
         return view;
     }
