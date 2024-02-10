@@ -39,16 +39,8 @@ public class LogopedistaActivity extends AbstractAppActivity {
         mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
 
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (navcontroller.getCurrentDestination().getId() == R.id.pazientiFragment) {
-                    finish();
-                } else {
-                    navcontroller.navigate(R.id.pazientiFragment);
-                }
-            }
-        });
+        setOnBackPressedCallback(R.id.pazientiFragment);
+
 
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));
         //setFirstFragment(R.id.frameLayoutLogopedista, new PazientiFragment());
