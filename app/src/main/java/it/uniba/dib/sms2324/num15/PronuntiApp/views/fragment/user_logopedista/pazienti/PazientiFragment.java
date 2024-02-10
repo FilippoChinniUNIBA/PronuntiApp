@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,52 +30,64 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     private LogopedistaViewModel mLogopedistaViewModel;
 
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
+        initViews(view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loadData();
+    }
+
+    private void initViews(View view) {
         addPazientiButton = view.findViewById(R.id.addPaziente);
         addPazientiButton.setOnClickListener(v -> navigateTo(R.id.action_pazientiFragment_to_registrazionePazienteGenitoreFragment));
-        searchViewListaPazienti = view.findViewById(R.id.searchViewListaPazienti);
 
+        searchViewListaPazienti = view.findViewById(R.id.searchViewListaPazienti);
         recyclerViewListaPazienti = view.findViewById(R.id.pazientiRecyclerView);
         recyclerViewListaPazienti.setLayoutManager(new LinearLayoutManager(requireContext()));
+    }
 
+    private void loadData() {
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(), logopedista -> {
+            if (logopedista != null) {
+                try {
+                    List<Paziente> pazienti = logopedista.getPazienti();
+                    Log.d("PazientiFragment", "pazienti: " + pazienti);
+                    adapterPazienti = new PazienteAdapter(pazienti);
+                    recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
-        try {
-            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedista().getPazienti();
-            Log.d("PazientiFragment", "pazienti: " + pazienti);
-            adapterPazienti = new PazienteAdapter(pazienti);
-            recyclerViewListaPazienti.setAdapter(adapterPazienti);
+                    recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
-            recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
+                    searchViewListaPazienti.setOnCloseListener(() -> {
+                        addPazientiButton.setText("Paziente +");
+                        return false;
+                    });
+                    searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
 
-            searchViewListaPazienti.setOnCloseListener(() -> {
-                addPazientiButton.setText("Paziente +");
-                return false;
-        });
-        searchViewListaPazienti.setOnSearchClickListener(v -> addPazientiButton.setText("+"));
+                    searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                        @Override
+                        public boolean onQueryTextSubmit(String query) {
+                            Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
+                            adapterPazienti.getFilter().filter(query);
+                            return true;
+                        }
 
-        searchViewListaPazienti.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d("PazientiFragment", "onQueryTextSubmit: " + query);
-                adapterPazienti.getFilter().filter(query);
-                return true;
+                        @Override
+                        public boolean onQueryTextChange(String newText) {
+                            adapterPazienti.getFilter().filter(newText);
+                            return true;
+                        }
+                    });
+                } catch (NullPointerException exception) {
+                    Log.d("PazientiFragment", "lista pazienti vuota" + exception);
+                }
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapterPazienti.getFilter().filter(newText);
-                return true;
-            }
         });
-        }catch(NullPointerException exception){
-            Log.d("PazientiFragment","lista pazienti vuota"+exception);
-        }
-
-        return view;
     }
 
 

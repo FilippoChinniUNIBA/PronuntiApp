@@ -2,28 +2,33 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 
 public class LogopedistaViewModel extends ViewModel {
-	private Logopedista mLogopedista;
+	private MutableLiveData<Logopedista> mLogopedistaLiveData = new MutableLiveData<>();
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 	private CreazioneAppuntamentoController mCreazioneAppuntamentoController;
 
-	public Logopedista getLogopedista() {
-		return this.mLogopedista;
+	public LiveData<Logopedista> getLogopedistaLiveData() {
+		return mLogopedistaLiveData;
 	}
 
 	public void setLogopedista(Logopedista logopedista) {
-		this.mLogopedista=logopedista;
+		mLogopedistaLiveData.setValue(logopedista);
 	}
 
 	public void aggiornaLogopedistaRemoto() {
-		LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
-		logopedistaDAO.update(mLogopedista);
-		Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + mLogopedista.toString());
+		Logopedista logopedista = mLogopedistaLiveData.getValue();
+		if (logopedista != null) {
+			LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
+			logopedistaDAO.update(logopedista);
+			Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + logopedista.toString());
+		}
 	}
 
 	public RegistrazionePazienteGenitoreController getRegistrazionePazienteGenitoreController() {

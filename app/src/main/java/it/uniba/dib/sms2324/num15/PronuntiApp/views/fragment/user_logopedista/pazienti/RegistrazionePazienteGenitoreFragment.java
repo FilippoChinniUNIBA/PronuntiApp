@@ -87,7 +87,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         super.onViewCreated(view, savedInstanceState);
 
         buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
-            Logopedista mLogopedista = mLogopedistaViewModel.getLogopedista();
+            Logopedista mLogopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
             String idLogopedista = mLogopedista.getIdProfilo();
 
             eseguiRegistrazionePaziente(idLogopedista).thenAccept(paziente -> {
