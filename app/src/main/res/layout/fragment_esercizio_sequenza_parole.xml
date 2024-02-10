@@ -64,14 +64,14 @@
             android:elevation="1dp"
             />
 
-        <SeekBar
+        <android.widget.SeekBar
             android:id="@+id/seekBarScorrimentoAudioEsercizioSequenzaParole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="100"
             android:progressBackgroundTint="@color/buttonMicBackground"
-            android:progressTint="@color/colorAccent"
-            android:thumbTint="@color/colorAccent"
+            android:progressTint="@color/yellowTheme"
+            android:thumbTint="@color/yellowTheme"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp"
             app:layout_constraintTop_toTopOf="parent"

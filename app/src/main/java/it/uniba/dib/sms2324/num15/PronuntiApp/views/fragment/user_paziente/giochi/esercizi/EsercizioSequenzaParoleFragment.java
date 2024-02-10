@@ -190,11 +190,11 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
 
         if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
             esito = true;
-            fineEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto());
+            fineEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this);
         }
         else{
             esito = false;
-            fineEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato());
+            fineEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this);
         }
 
         constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
@@ -210,10 +210,6 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
 
         //TODO aggiornamento del paziente con l'esito dell'esercizio
 
-        //TODO per Nicola: hai 2 opzioni: o devi settare un listener su fineEsercizioView a fine animazione
-        //e fare il navigateTo() in quel listener,
-        //oppure devi mettere un onClick sulla schemata finale a fine animazione e fare il navigateTo() in quel onClick
-        navigateTo(R.id.action_esercizioSequenzaParole_to_scenarioFragment);
     }
 
     private void sovrascriviAudio() {
@@ -246,26 +242,23 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
             public void onAnimationRepeat(Animation animation) {}
         });
         textViewEsercizioMicSuggestion.startAnimation(fadeIn);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
-                fadeOut.setDuration(500);
-                fadeOut.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {}
+        new Handler().postDelayed(() -> {
+            AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+            fadeOut.setDuration(500);
+            fadeOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {}
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        textViewEsercizioMicSuggestion.setVisibility(View.INVISIBLE);
-                    }
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    textViewEsercizioMicSuggestion.setVisibility(View.INVISIBLE);
+                }
 
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {}
-                });
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+            });
 
-                textViewEsercizioMicSuggestion.startAnimation(fadeOut);
-            }
+            textViewEsercizioMicSuggestion.startAnimation(fadeOut);
         }, 10000);
     }
 
@@ -295,12 +288,8 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
             }
         });
 
-        mMediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
-            @Override
-            public void onSeekComplete(MediaPlayer mediaPlayer) {
-                seekBarEsercizioSequenzaParole.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration()));
-            }
-        });
+        mMediaPlayer.setOnSeekCompleteListener(mediaPlayer ->
+                seekBarEsercizioSequenzaParole.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration())));
 
         final int delay = 5;
         Handler handler = new Handler();

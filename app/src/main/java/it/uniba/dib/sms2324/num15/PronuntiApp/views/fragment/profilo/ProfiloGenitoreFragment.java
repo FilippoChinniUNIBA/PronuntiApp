@@ -89,7 +89,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         //rendi modificabile anche i bambini
         profiloPazienteFragment.modificaProfilo();
-
+        setData();
         //focus automatico per far capire che si può modificare
         textInputEditTextNome.requestFocus();
     }

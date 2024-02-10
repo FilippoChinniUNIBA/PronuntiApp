@@ -89,6 +89,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         logopedistaViewModel.getLogopedistaLiveData().getValue().setIndirizzo(indirizzo);
         logopedistaViewModel.getLogopedistaLiveData().getValue().setTelefono(telefono);
         logopedistaViewModel.aggiornaLogopedistaRemoto();
+        setData();
     }
 
 }

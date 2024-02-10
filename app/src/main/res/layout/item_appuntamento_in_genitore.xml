@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardViewAppuntamentoGenitore"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorPrimary"
+    android:padding="16dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="8dp"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        >
+        <TextView
+            android:id="@+id/textViewGiornoAppuntamentoGenitore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/headerTextSize"
+            android:text="28"
+            android:layout_marginEnd="10dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            >
+            <TextView
+                android:id="@+id/textViewMeseAppuntamentoGenitore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textColor="@color/meseAnnoAppuntamento"
+                android:textSize="@dimen/subHeaderTextSize"
+                android:text="Marzo 2023"
+                android:textAllCaps="true"
+                />
+            <TextView
+                android:id="@+id/textViewLuogoAppuntamentoGenitore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Via dei mille 10, 20123 Milano"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewOraAppuntamentoGenitore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="13:09"
+            android:textSize="@dimen/size_text_orario_appuntamento"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_gravity="top"
+            android:gravity="end"
+            />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
