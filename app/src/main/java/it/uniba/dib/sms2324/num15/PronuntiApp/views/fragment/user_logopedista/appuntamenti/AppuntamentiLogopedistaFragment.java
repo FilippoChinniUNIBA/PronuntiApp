@@ -35,6 +35,7 @@ import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.CreazioneAppuntamentoController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
@@ -59,11 +60,10 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     private LinearLayout linearLayoutPazienteAppuntamentoLogopedista;
     private View viewOverlay;
 
-
     private String orarioAppuntamento;
     private String idPazienteSelezionato;
 
-
+    private String idLogopedista;
     private List<Paziente> pazienti;
     private List<AppuntamentoCustom> appuntamenti;
 
@@ -104,19 +104,6 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 
         linearLayoutPazienteAppuntamentoLogopedista.setVisibility(View.GONE);
 
-        try {
-            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
-            adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
-            recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
-            //prendere gli appuntamenti da controller appuntamenti
-            //adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamenti);
-            //recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
-        }catch (NullPointerException exception){
-            Log.e("AppuntamentoLogopedistaFragment","NullPointerException",exception);
-        }
-
-
-
         return view;
     }
 
@@ -129,16 +116,40 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
             nestedScrollView.smoothScrollTo(0, 0);
         });
 
+
+       Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
+       this.idLogopedista = logopedista.getIdProfilo();
+
+       List<AppuntamentoCustom> appuntamentiCustoms = new ArrayList<>();
+
+           CompletableFuture<List<Appuntamento>> future = mController.retrieveAppuntamenti(idLogopedista);
+           future.thenAccept(appuntamenti -> {
+               for (Appuntamento appuntamento : appuntamenti) {
+                   for (Paziente paziente : logopedista.getPazienti()) {
+                       if (appuntamento.getRefIdPaziente().equals(paziente.getIdProfilo())) {
+                           Log.d("identidficativi","id"+appuntamento.getRefIdPaziente());
+                           AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
+                           appuntamentiCustoms.add(appuntamentoCustom);
+                       }
+                   }
+               }
+               try {
+                   List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
+                   adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
+                   recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
+
+                   adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiCustoms);
+                   recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
+               }catch (NullPointerException exception){
+                   Log.e("AppuntamentoLogopedistaFragment","NullPointerException",exception);
+               }
+           });
+
        confermaAppuntamentoButton.setOnClickListener(v -> {
            cardViewAppuntamento.setVisibility(View.GONE);
            addAppuntamentoButton.setVisibility(View.VISIBLE);
-           recyclerViewAppuntamenti.getAdapter().notifyDataSetChanged();
-           //TODO aggiungere funzionalità per aggiungere un appuntamento
-           //l'orario selezionano sta nella variabile orarioAppuntamento
-             //la data selezionata sta nella variabile editTextDataAppuntemento
-                //il paziente selezionato sta nella variabile editTextAppuntamentoPaziente ecc
+           eseguiAggiuntaPrenotazione(idLogopedista);
 
-           String idLogopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getIdProfilo();
        });
 
        editTextAppuntamentoPaziente.addTextChangedListener(new TextWatcher() {
@@ -226,6 +237,9 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
             eseguiAggiuntaPrenotazione(idLogopedista);
 
         });*/
+
+
+
     }
 
     private void handleTextViewSelection(TextView selectedTextView) {
@@ -259,31 +273,19 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 
     private CompletableFuture<Appuntamento> eseguiAggiuntaPrenotazione(String idLogopedista) {
 
-        //l'orario selezionano sta nella variabile orarioAppuntamento
-        //la data selezionata sta nella variabile editTextDataAppuntemento
-        //il paziente selezionato sta nella variabile editTextAppuntamentoPaziente ecc
-
         String luogoAppuntamento = editTextLuogo.getText().toString();
         LocalDate dataAppuntamento = LocalDate.parse(editTextDataAppuntemento.getText().toString());
         LocalTime orarioAppuntamentoEffettivo = LocalTime.parse((CharSequence)orarioAppuntamento);
         String idPaziente = this.idPazienteSelezionato;
 
-        List<Paziente> paziente = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
-
-        String idGenitore = null;
-
-        for (Paziente p:paziente) {
-            if(p.getIdProfilo() == idPaziente){
-            idGenitore = p.getGenitore().getIdProfilo();
-            }
-        }
-
         CompletableFuture<Appuntamento> futureAppuntamento = new CompletableFuture<>();
-        Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista,idGenitore,dataAppuntamento,orarioAppuntamentoEffettivo,luogoAppuntamento);
+        Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista,idPaziente,dataAppuntamento,orarioAppuntamentoEffettivo,luogoAppuntamento);
         Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamento.toString());
         futureAppuntamento.complete(appuntamento);
         return futureAppuntamento;
     }
+
+
 
    /* private AppuntamentoCustom getAppuntamentoFromAppuntamentoCustom(Appuntamento appuntamento){
 
