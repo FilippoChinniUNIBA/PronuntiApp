@@ -127,7 +127,7 @@ public class GenitoreDAO {
 				for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 					DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
 
-					if (genitoreSnapshot.getKey().equals(idObj)) {
+					if (genitoreSnapshot.hasChild(idObj)) {
 						Map<String, Object> fromDatabaseMap = (Map<String, Object>) genitoreSnapshot.getValue();
 						result = new Genitore(fromDatabaseMap, idObj);
 						break;

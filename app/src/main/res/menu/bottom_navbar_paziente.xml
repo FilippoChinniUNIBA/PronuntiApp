@@ -5,13 +5,14 @@
         android:title="Giochi"
         android:icon="@drawable/ic_game" />
     <item
-        android:id="@+id/personaggiFragment"
-        android:title="Personaggi"
-        android:icon="@drawable/ic_personaggi"/>
-    <item
         android:id="@+id/classificaFragment"
         android:title="Classifica"
         android:icon="@drawable/ic_classifica"/>
+    <item
+        android:id="@+id/personaggiFragment"
+        android:title="Personaggi"
+        android:icon="@drawable/ic_personaggi"/>
+
     <!--
     <item
         android:id="@+id/calendarPaziente"

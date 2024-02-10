@@ -19,7 +19,7 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 	private Button buttonConferma;
 	private Button buttonAnnulla;
 
-	// Layout IDs
+
 	private static final int LAYOUT_ID = R.layout.dialog_pop_up;
 
 	public AbstractPopUpDialog(@NonNull Context context) {
@@ -46,7 +46,7 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 		return alertDialog;
 	}
 
-	// Metodi per impostare i valori dinamicamente
+
 	protected void setTitolo(String titolo) {
 		textViewTitoloPopUp.setText(titolo);
 	}
@@ -82,6 +82,7 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 			alertDialog.dismiss();
 		});
 	}
+
 	public interface OnConfermaButtonClickListener {
 		void onConfermaButtonClicked();
 	}
@@ -89,4 +90,5 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 	public interface OnAnnullaButtonClickListener {
 		void onAnnullaButtonClicked();
 	}
+
 }

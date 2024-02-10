@@ -18,6 +18,10 @@ public class AppuntamentoCustom {
         this.oraAppuntamento = oraAppuntamento;
     }
 
+    public AppuntamentoCustom() {
+
+    }
+
     public String getNomePaziente() {
         return nomePaziente;
     }
@@ -36,6 +40,26 @@ public class AppuntamentoCustom {
 
     public LocalTime getOraAppuntamento() {
         return oraAppuntamento;
+    }
+
+    public void setNomePaziente(String nomePaziente) {
+        this.nomePaziente = nomePaziente;
+    }
+
+    public void setCognomePaziente(String cognomePaziente) {
+        this.cognomePaziente = cognomePaziente;
+    }
+
+    public void setLuogoAppuntamento(String luogoAppuntamento) {
+        this.luogoAppuntamento = luogoAppuntamento;
+    }
+
+    public void setDataAppuntamento(LocalDate dataAppuntamento) {
+        this.dataAppuntamento = dataAppuntamento;
+    }
+
+    public void setOraAppuntamento(LocalTime oraAppuntamento) {
+        this.oraAppuntamento = oraAppuntamento;
     }
 
     @Override

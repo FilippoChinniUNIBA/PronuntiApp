@@ -11,7 +11,10 @@ public class TEST_Activity extends AbstractAppActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.test_activity_test);
-		setFirstFragment(R.id.TEST_frameLayoutActivityTest, new TestMenuTestFragment());
 
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.TEST_frameLayoutActivityTest, new TestMenuTestFragment())
+				.commit();
 	}
 }

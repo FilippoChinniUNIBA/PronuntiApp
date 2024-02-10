@@ -19,7 +19,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pa
 
 public class LogopedistaActivity extends AbstractAppActivity {
     private LogopedistaViewModel mLogopedistaViewModel;
-    private NavController navcontroller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
