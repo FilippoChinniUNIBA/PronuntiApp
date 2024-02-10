@@ -32,7 +32,6 @@ public class AppuntamentiGenitoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_genitore, container, false);
         recyclerViewAppuntamentiGenitore = view.findViewById(R.id.recyclerViewAppuntamentiGenitore);
-
         recyclerViewAppuntamentiGenitore.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
