@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ClassificaFragment extends AbstractFragmentWithNavigation {
 
@@ -21,7 +22,6 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
         View view = inflater.inflate(R.layout.fragment_classifica, container, false);
 
         ConnessioneErroreDialog connessioneErroreDialog = new ConnessioneErroreDialog(getContext()); //TODO perché sta sta cosa qua??
-        view.findViewById(R.id.buttonClassifica).setOnClickListener(v-> connessioneErroreDialog.show());
 
         return view;
     }
