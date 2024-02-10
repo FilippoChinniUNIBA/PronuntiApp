@@ -36,7 +36,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazienteAdapter;
 
 public class AppuntamentiLogopedistaFragment extends Fragment {
-
     private RecyclerView recyclerViewAppuntamenti;
     private Button addAppuntamentoButton;
     private CardView cardViewAppuntamento;
@@ -48,19 +47,24 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
     private TextInputEditText editTextLuogo;
     private TextInputEditText editTextDataAppuntemento;
     private GridLayout gridLayoutOrarioAppuntamento;
-    private String orarioAppuntamento;
     private DatePickerDialog datePickerDialog;
     private TextInputEditText searchViewAppuntamentiLogopedista;
     private PazienteAdapter adapterPazientiAppuntamentoLogopedista;
-    private List<Paziente> pazienti;
-    private List<AppuntamentoCustom> appuntamenti;
     private LinearLayout linearLayoutPazienteAppuntamentoLogopedista;
     private View viewOverlay;
+
+    private String orarioAppuntamento;
+
+    private List<Paziente> pazienti;
+    private List<AppuntamentoCustom> appuntamenti;
+
+
     public AppuntamentiLogopedistaFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
+
         viewOverlay = view.findViewById(R.id.viewOverlayAppuntamentiLogopedista);
         viewOverlay.setVisibility(View.GONE);
         nestedScrollView = view.findViewById(R.id.nestedScrollViewAppuntamentiLogopedista);
@@ -126,9 +130,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 
        editTextAppuntamentoPaziente.addTextChangedListener(new TextWatcher() {
            @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-           }
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
            @Override
            public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -254,13 +256,5 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         futureAppuntamento.complete(appuntamento);
         return futureAppuntamento;
     }*/
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getActivity() != null) {
-            getActivity().setTitle("Apppuntamenti");
-        }
-    }
 
 }

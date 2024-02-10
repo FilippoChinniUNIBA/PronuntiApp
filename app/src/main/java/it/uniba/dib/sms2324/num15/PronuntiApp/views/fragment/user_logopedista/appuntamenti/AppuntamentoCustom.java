@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class AppuntamentoCustom {
-
     private String nomePaziente;
     private String cognomePaziente;
     private String luogoAppuntamento;
@@ -39,11 +38,6 @@ public class AppuntamentoCustom {
         return oraAppuntamento;
     }
 
-
-
-
-    // Getters e setters per tutti gli attributi
-
     @Override
     public String toString() {
         return "Appuntamento{" +
@@ -54,4 +48,5 @@ public class AppuntamentoCustom {
                 ", oraAppuntamento=" + oraAppuntamento +
                 '}';
     }
+
 }
