@@ -1,6 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -23,6 +28,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerNetworkCallback();
     }
 
     protected void setOnBackPressedCallback(int id) {
@@ -41,6 +47,23 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void registerNetworkCallback() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                super.onAvailable(network);
+                Log.d("Connection","Connection setted");
+            }
+
+            @Override
+            public void onLost(Network network) {
+                super.onLost(network);
+                Log.d("Connection","Connection Lost");
+            }
+        };
+        connectivityManager.registerDefaultNetworkCallback(networkCallback);
     }
 
     @Override
