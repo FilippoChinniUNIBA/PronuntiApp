@@ -30,7 +30,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                     finishAffinity();
                 } else if (navcontroller.getCurrentDestination().getId() == id) {
                     doubleBackToExit = true;
-                    Toast.makeText(getApplicationContext(), "Premi ancora indietro per uscire", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.closeApp) , Toast.LENGTH_SHORT).show();
                 }
                 else {
                     navcontroller.navigate(id);

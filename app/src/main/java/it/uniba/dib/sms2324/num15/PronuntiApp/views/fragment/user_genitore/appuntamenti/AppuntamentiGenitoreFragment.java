@@ -2,6 +2,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.appu
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,8 +35,13 @@ public class AppuntamentiGenitoreFragment extends Fragment {
 
         recyclerViewAppuntamentiGenitore.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //TODO: prendere gli appuntamenti dal database
+        return view;
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //TODO: prendere gli appuntamenti dal database
         appuntamenti = new ArrayList<>();
         for(int i = 0; i < 100; i++) {
             if(i<3)
@@ -44,9 +51,5 @@ public class AppuntamentiGenitoreFragment extends Fragment {
         }
         appuntamentoAdapter = new AppuntamentoGenitoreAdapter(appuntamenti);
         recyclerViewAppuntamentiGenitore.setAdapter(appuntamentoAdapter);
-
-        return view;
     }
-
-
 }
