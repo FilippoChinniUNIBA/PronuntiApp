@@ -25,7 +25,9 @@ public class TestNuovoTest1Fragment extends Fragment {
 		View view = inflater.inflate(R.layout.test_fragment_test_nuovo_test_1, container, false);
 
 		this.bottoneInserisci = view.findViewById(R.id.buttonTestInserimentoPersonaggi);
-		this.testoInserito = view.findViewById(R.id.textViewTestInserimentoPersonaggi);
+		this.testoInserito = view.findViewById(R.id.textViewTetsInserimentoPersonaggi);
+
+		return view;
 	}
 
 	@Override
