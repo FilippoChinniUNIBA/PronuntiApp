@@ -148,6 +148,6 @@
     <string name="nuovo_appuntamento">New appointments +</string>
     <string name="nuovo_appuntamento_titolo">New appointments</string>
     <string name="rimuovi_appuntamento">Remove</string>
-
+    <string name="closeApp">Press back again to exit</string>
 
 </resources>

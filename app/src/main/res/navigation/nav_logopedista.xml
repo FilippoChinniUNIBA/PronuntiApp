@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/classificaFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.ClassificaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.ClassificaFragment"
         android:label="fragment_classifica"
         tools:layout="@layout/fragment_classifica" />
     <fragment

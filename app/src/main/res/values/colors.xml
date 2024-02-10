@@ -23,4 +23,5 @@
     <color name="corretto">#27E12A</color>
     <color name="sbagliato">#FF1313</color>
     <color name="yellowTheme">#FDCA70</color>
+    <color name="primaryColorShadow">#B25D90EA</color>
 </resources>
