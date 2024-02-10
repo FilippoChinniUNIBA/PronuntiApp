@@ -35,7 +35,7 @@ public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClas
         holder.textViewPosizione.setText(String.valueOf(position + 1));
         holder.textViewUsernamePaziente.setText(paziente.getUsername());
         holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggio()));
-        Glide.with(holder.imageView.getContext()).load(paziente.getUrl_img()).into(holder.imageView);
+        Glide.with(holder.imageView.getContext()).load(paziente.getUrlImg()).into(holder.imageView);
     }
 
     @Override

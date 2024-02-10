@@ -25,12 +25,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDial
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ClassificaFragment extends AbstractFragmentWithNavigation {
-
     private RecyclerView recyclerViewClassifica;
     private PazienteClassificaAdapter pazienteClassificaAdapter;
     private List<PazienteClassifica> pazienti;
 
     private final String url_img="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.ilgiornale.it%2Fnews%2Fspettacoli%2Fjoker-grande-film-e-i-pericoli-dellempatia-1763658.html&psig=AOvVaw20KYZ33AVj0UJ1zQVFhpbS&ust=1707670729411000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCOCg1aufoYQDFQAAAAAdAAAAABAJ";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_classifica, container, false);
