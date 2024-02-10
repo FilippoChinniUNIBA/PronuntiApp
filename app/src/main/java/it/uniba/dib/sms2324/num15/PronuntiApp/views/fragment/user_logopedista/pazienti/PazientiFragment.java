@@ -34,6 +34,8 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
 
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+
         initViews(view);
 
         return view;
@@ -55,7 +57,6 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     }
 
     private void loadData() {
-        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(), logopedista -> {
 
             List<Paziente> pazienti = logopedista.getPazienti();
