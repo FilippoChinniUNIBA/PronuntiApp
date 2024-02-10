@@ -88,10 +88,10 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
 
-        Log.d("AppuntamentoLogopedistaFragment","NullPointerException"+mLogopedistaViewModel.getLogopedista().getPazienti());
+        Log.d("AppuntamentoLogopedistaFragment","NullPointerException"+mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti());
 
         try {
-            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedista().getPazienti();
+            List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
             adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
         }catch (NullPointerException exception){
             Log.d("AppuntamentoLogopedistaFragment","NullPointerException");
@@ -134,7 +134,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
              //la data selezionata sta nella variabile editTextDataAppuntemento
                 //il paziente selezionato sta nella variabile editTextAppuntamentoPaziente ecc
 
-           String idLogopedista = mLogopedistaViewModel.getLogopedista().getIdProfilo();
+           String idLogopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getIdProfilo();
        });
 
        editTextAppuntamentoPaziente.addTextChangedListener(new TextWatcher() {
@@ -264,7 +264,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
         LocalTime orarioAppuntamentoEffettivo = LocalTime.parse((CharSequence)orarioAppuntamento);
         String idPaziente = this.idPazienteSelezionato;
 
-        List<Paziente> paziente = mLogopedistaViewModel.getLogopedista().getPazienti();
+        List<Paziente> paziente = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
 
         String idGenitore = null;
 
