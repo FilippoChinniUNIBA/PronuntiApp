@@ -45,6 +45,18 @@
                 android:visibility="gone"
                 />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/logoutFragmentContainer"
+                android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.LogoutFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="150dp"
+                app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/textViewUsernameProfiloLogopedista"

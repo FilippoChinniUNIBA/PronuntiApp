@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TEST_Activity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
@@ -68,9 +69,12 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
                 infoDialog.setOnConfermaButtonClickListener(null);
             }
             else {
+                AuthSharedPreferences authSharedPreferences = new AuthSharedPreferences(requireActivity());
+                authSharedPreferences.salvaCredenziali(email, password);
+
                 CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login();
                 futureProfilo.thenAccept(profilo -> {
-                    Log.d("LoginFragment.loginActivityProfilo()", "Profilo: " + profilo.toString());
+                    Log.d("AvvioRapidoFragment.loginActivityProfilo()", "Profilo: " + profilo.toString());
 
                     getActivity().runOnUiThread(() -> ((AbstractAppActivity) getActivity()).navigaConProfilo(profilo, getActivity()));
                 });

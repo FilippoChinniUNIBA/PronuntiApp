@@ -12,6 +12,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.LoginFragment;
 
 public class EntryActivity extends AbstractAppActivity {
     private LoginViewModel mLoginViewModel;
@@ -35,15 +36,12 @@ public class EntryActivity extends AbstractAppActivity {
         String email = authSharedPreferences.getEmail();
         String password = authSharedPreferences.getPassword();
 
-        Intent intent = new Intent(this, AutenticazioneActivity.class);
-        startActivity(intent); //TODO TOGLIERE
-
-        /*if (email != null && password != null) {
+        if (email != null && password != null) {
             loginActivityProfilo(email, password);
         } else {
             Intent intent = new Intent(this, AutenticazioneActivity.class);
             startActivity(intent);
-        }*/
+        }
     }
 
     private void loginActivityProfilo(String email, String password) {

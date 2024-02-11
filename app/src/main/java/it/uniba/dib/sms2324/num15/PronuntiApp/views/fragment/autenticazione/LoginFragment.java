@@ -74,7 +74,7 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
             }
             else {
                 AuthSharedPreferences authSharedPreferences = new AuthSharedPreferences(requireActivity());
-                authSharedPreferences.salvaCredenziali(email,password);
+                authSharedPreferences.salvaCredenziali(email, password);
 
                 CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login();
                 futureProfilo.thenAccept(profilo -> {

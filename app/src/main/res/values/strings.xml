@@ -160,7 +160,8 @@
     <string name="monitoraggio">Monitor your children</string>
     <string name="gioco">Game</string>
     <string name="personaggi">Characters</string>
-
+    <string name="logoutTitle">Logout?</string>
+    <string name="logoutRichiesta">Are you sure you want to Logout PronuntiApp? If you do, then you will have to Login again</string>
 
 
 </resources>

@@ -89,8 +89,10 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
                 else {
                     Logopedista logopedista = mRegistrazioneViewModel.registrazioneLogopedista(userId, nome, cognome, username, email, password, telefono, indirizzo);
                     Log.d("RegistrazioneFragment.eseguiRegistrazione()", "Logopedista: " + logopedista.toString());
+
                     AuthSharedPreferences authSharedPreferences = new AuthSharedPreferences(requireActivity());
-                    authSharedPreferences.salvaCredenziali(email,password);
+                    authSharedPreferences.salvaCredenziali(email, password);
+
                     getActivity().runOnUiThread(() -> {
                         Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
                         intent.putExtra("profilo", logopedista);

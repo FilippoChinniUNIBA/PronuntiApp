@@ -72,9 +72,6 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 	private CreazioneAppuntamentoController mController;
 
 
-	public AppuntamentiLogopedistaFragment() {
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);

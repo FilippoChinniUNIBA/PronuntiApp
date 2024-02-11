@@ -136,4 +136,6 @@
     <string name="monitoraggio">Monitora il tuo bambino</string>
     <string name="gioco">Gioco</string>
     <string name="personaggi">Personaggi</string>
+    <string name="logoutTitle">Eseguire il logout?</string>
+    <string name="logoutRichiesta">Sei sicuro di voler effettuare il logout da PronuntiApp? Se lo fai dovrai riloggarti</string>
 </resources>
