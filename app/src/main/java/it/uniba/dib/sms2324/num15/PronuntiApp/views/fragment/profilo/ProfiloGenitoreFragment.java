@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,15 +42,19 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
-        setData();
-
-        profiloPazienteFragment = new ProfiloPazienteFragment();
+        /*profiloPazienteFragment = new ProfiloPazienteFragment();
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?*/
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setData();
     }
 
     @Override

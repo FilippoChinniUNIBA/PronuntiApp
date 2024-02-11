@@ -131,7 +131,8 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!--ContainerBambini-->
-                <FrameLayout
+                <androidx.fragment.app.FragmentContainerView
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloPazienteFragment"
                     android:id="@+id/containerBambino"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,7 +140,7 @@
                     app:layout_constraintTop_toBottomOf="@id/textInputEditTextTelefonoProfiloGenitore"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
-                </FrameLayout>
+                </androidx.fragment.app.FragmentContainerView>
 
             </LinearLayout>
 
