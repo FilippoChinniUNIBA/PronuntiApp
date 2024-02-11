@@ -11,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+
 public class CurvedLineView extends View {
 
     private Paint paint;
@@ -29,7 +31,7 @@ public class CurvedLineView extends View {
 
     private void init() {
         paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(getContext().getColor(R.color.yellowTheme));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5f);
         paint.setPathEffect(new CornerPathEffect(20));
