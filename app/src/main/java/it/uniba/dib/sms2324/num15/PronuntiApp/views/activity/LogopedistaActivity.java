@@ -20,6 +20,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pa
 public class LogopedistaActivity extends AbstractAppActivity {
     private LogopedistaViewModel mLogopedistaViewModel;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class LogopedistaActivity extends AbstractAppActivity {
 
         this.mLogopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
         mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
+
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
 
         setOnBackPressedCallback(R.id.pazientiFragment);

@@ -126,17 +126,19 @@ public class GenitoreDAO {
 			for (DataSnapshot logopedistaSnapshot : task.getResult().getChildren()) {
 				for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 					DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
-
-					if (genitoreSnapshot.hasChild(idObj)) {
-						Map<String, Object> fromDatabaseMap = (Map<String, Object>) genitoreSnapshot.getValue();
-						result = new Genitore(fromDatabaseMap, idObj);
-						break;
+					for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
+						if (datoGenitoreSnapshot.getKey().equals(idObj)) {
+							Map<String, Object> fromDatabaseMap = (Map<String, Object>) datoGenitoreSnapshot.getValue();
+							result = new Genitore(fromDatabaseMap, idObj);
+							break;
+						}
 					}
+					if (result != null) break;
 				}
 				if (result != null) break;
 			}
 
-			Log.d("GenitoreDAO.getById()", (result == null) ? result.toString() : "null");
+			Log.d("GenitoreDAO.getById()", (result != null) ? result.toString() : "null");
 			return result;
 		});
 	}
