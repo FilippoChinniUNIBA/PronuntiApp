@@ -1,11 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -15,7 +12,6 @@ import com.google.android.material.navigation.NavigationBarView;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment;
 
 public class LogopedistaActivity extends AbstractAppActivity {
     private LogopedistaViewModel mLogopedistaViewModel;
@@ -40,10 +36,6 @@ public class LogopedistaActivity extends AbstractAppActivity {
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
         setOnBackPressedCallback(R.id.pazientiFragment);
-
-        navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
-
-
 
 
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));

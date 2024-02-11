@@ -8,16 +8,23 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextClock;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloPazienteFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.TopBarFragment;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float xDelta, yDelta;
@@ -27,16 +34,23 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private CurvedLineView curvedLineView1to2, curvedLineView2to3;
 	private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
 	private ConstraintLayout constraintLayout;
-
-
+	private TopBarFragment topBarFragment;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
+
 
 		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.hide();
 		}
+
+		topBarFragment = new TopBarFragment();
+		FragmentManager fragmentManager = getChildFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.topBarLayout, topBarFragment);
+		fragmentTransaction.commit();
+
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
