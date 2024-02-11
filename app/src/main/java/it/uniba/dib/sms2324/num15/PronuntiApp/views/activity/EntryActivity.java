@@ -23,6 +23,7 @@ public class EntryActivity extends AbstractAppActivity {
 
         this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerEntry, new FragmentCaricamento()).commit();
     }
 
     @Override

@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutAvvioRapido"
-    tools:context=".views.fragment.autenticazione.AvvioRapidoFragment"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.fragment.autenticazione.AvvioRapidoFragment">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="344dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <Button
+            android:id="@+id/button_paziente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/patient"
-            android:id="@+id/button_paziente"
             >
         </Button>
+
         <Button
+            android:id="@+id/button_genitore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/parent"
-            android:id="@+id/button_genitore"
             >
         </Button>
+
         <Button
+            android:id="@+id/button_logopedista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logopedist"
-            android:id="@+id/button_logopedista"
             >
         </Button>
 
@@ -45,4 +48,5 @@
         </Button>
 
     </LinearLayout>
+
 </FrameLayout>
