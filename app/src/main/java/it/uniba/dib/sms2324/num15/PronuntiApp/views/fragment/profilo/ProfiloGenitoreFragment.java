@@ -1,6 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.Paz
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
     private GenitoreViewModel mGenitoreViewModel;
-    private ProfiloPazienteFragment profiloPazienteFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,14 +40,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         setPickMedia();
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
-
-        profiloPazienteFragment = new ProfiloPazienteFragment();
-        Log.d("ProfiloGenitoreFragment", "onCreateView: " + profiloPazienteFragment);
-        profiloPazienteFragment = new ProfiloPazienteFragment();
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.containerBambino, profiloPazienteFragment)
-                .commit();
 
         return view;
     }
