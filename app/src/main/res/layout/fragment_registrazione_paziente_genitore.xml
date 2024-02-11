@@ -30,7 +30,6 @@
         />
     -->
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,12 +39,28 @@
         android:text="@string/subtitle_registration_patient_parent"
         android:textColor="@color/black"
         android:textSize="@dimen/subHeaderTextSize"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
+        app:layout_constraintBottom_toTopOf="@id/textViewSubInformazioniPaziente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginHorizontal="10dp"
         />
+
+    <TextView
+        android:id="@+id/textViewSubInformazioniPaziente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/information_patient"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_text_sub_subtitle_reg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore"
+        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente" />
 
 
     <com.google.android.material.card.MaterialCardView
@@ -71,20 +86,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/textViewSubInformazioniPaziente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/informations_patient"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_text_sub_subtitle_reg"
-                app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomePaziente"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
 
             <!-- TextInputLayout e TextInputEditText per Nome -->
             <com.google.android.material.textfield.TextInputLayout
@@ -227,19 +228,36 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:id="@+id/textViewSubTitoloGenitore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/information_parent"
+        android:textColor="@color/black"
+        android:textSize="@dimen/size_text_sub_subtitle_reg"
+        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewDataRegistrazioneGenitore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         app:cardBackgroundColor="@color/cardview_light_background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/buttonRegistraPazienteEGenitore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente">
+        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore">
 
 
         <LinearLayout
@@ -249,21 +267,6 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp">
-
-            <TextView
-                android:id="@+id/textViewSubTitoloGenitore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/informations_parent"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_text_sub_subtitle_reg"
-                app:layout_constraintBottom_toTopOf="@id/textInputEditTextNomeGenitore"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore" />
 
             <!-- TextInputLayout e TextInputEditText per Nome -->
             <com.google.android.material.textfield.TextInputLayout
@@ -340,21 +343,6 @@
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- TextInputLayout e TextInputEditText per Indirizzo -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextIndirizzoGenitore"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/address_hint"
-                    android:inputType="textPostalAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <!-- TextInputLayout e TextInputEditText per Password -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
@@ -394,8 +382,8 @@
         android:id="@+id/buttonRegistraPazienteEGenitore"
         android:layout_width="296dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/register"
+        android:layout_marginBottom="70dp"
+        android:text="@string/registraPaziente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

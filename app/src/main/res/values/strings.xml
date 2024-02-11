@@ -15,15 +15,15 @@
     <string name="login">Sign in</string>
     <string name="accesso_rapido">Quick Access</string>
     <string name="subtitle_registration">Welcome Doctor!\nEnter your data to start using the application</string>
-    <string name="subtitle_registration_patient_parent">Welcome Doctor!\nEnter date of your patient</string>
+    <string name="subtitle_registration_patient_parent">Hello Doctor.\nEnter here data of your new patient</string>
     <string name="modify_profile"> Edit profile </string>
     <string name="confirm_modify_profile"> Confirm edit profile</string>
     <string name="birth_date_hint">Birth date</string>
     <string name="male">M</string>
     <string name="female">F</string>
     <string name="age">Age</string>
-    <string name="informations_patient">Patient informations</string>
-    <string name="informations_parent">Parent informations</string>
+    <string name="information_patient">Patient information</string>
+    <string name="information_parent">Parent information</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>
@@ -149,5 +149,6 @@
     <string name="nuovo_appuntamento_titolo">New appointments</string>
     <string name="rimuovi_appuntamento">Remove</string>
     <string name="closeApp">Press back again to exit</string>
+    <string name="registraPaziente">Register Patient</string>
 
 </resources>

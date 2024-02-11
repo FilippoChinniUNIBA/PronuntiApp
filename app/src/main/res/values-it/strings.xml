@@ -20,8 +20,8 @@
     <string name="male">M</string>
     <string name="female">F</string>
     <string name="age">Età</string>
-    <string name="informations_patient">Informazioni paziente</string>
-    <string name="informations_parent">Informazioni genitore</string>
+    <string name="information_patient">Informazioni Paziente</string>
+    <string name="information_parent">Informazioni Genitore</string>
     <string-array name="sesso_array">
         <item>@string/male</item>
         <item>@string/female</item>
@@ -114,7 +114,7 @@
     <string name="erroreRegistrazionePazienteAutenticazione">Errore Database: probabilmente email del bambino (paziente) già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
     <string name="erroreRegistrazioneGenitoreAutenticazione">Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
     <string name="subTitleLogin">Bentornato!\nEffettua il login per continuare</string>
-    <string name="subtitle_registration_patient_parent">Benvenuto dottore!\nInserisci i dati dei tuoi pazienti</string>
+    <string name="subtitle_registration_patient_parent">Ciao Dottore.\nInserisci qui i dati del nuovo Paziente</string>
     <string name="addPatient">Paziente +</string>
     <string name="sex">Sesso</string>
     <string name="surname">Cognome</string>
@@ -125,5 +125,6 @@
     <string name="nuovo_appuntamento_titolo">Nuovo appuntamento</string>
     <string name="rimuovi_appuntamento">Rimuovi</string>
     <string name="closeApp">Premi ancora indietro per uscire</string>
+    <string name="registraPaziente">Registra Paziente</string>
 
 </resources>
