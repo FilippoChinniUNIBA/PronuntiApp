@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 
-//TODO eliminare questa classe; i logopedisti non avranno un'immagine di profilo
 public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFragment {
 	protected ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
 	protected Button buttonModificaProfilo;

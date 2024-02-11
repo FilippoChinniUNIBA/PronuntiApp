@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -22,7 +23,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.Paz
 
 public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
-    private Spinner spinnerSesso;
+    private EditText spinnerSesso;
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
     LinearLayout linearLayoutDatiBambinoClick;
@@ -99,11 +100,6 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
 
     @Override
     public void modificaProfilo(){
-        textInputEditTextNome.setEnabled(true);
-        textInputEditTextCognome.setEnabled(true);
-        textInputEditTextDataNascita.setEnabled(true);
-        spinnerSesso.setEnabled(true);
-        textInputEditTextEmail.setEnabled(true);
 
     }
 

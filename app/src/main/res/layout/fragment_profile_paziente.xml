@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:text="@string/child_data"
             android:layout_weight="1"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            />
         <ImageView
             android:id="@+id/arrowImageView"
             android:layout_width="wrap_content"
@@ -55,7 +56,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/first_name_hint"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:enabled="false"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- TextInputLayout e TextInputEditText per Cognome -->
@@ -69,7 +72,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/last_name_hint"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        android:enabled="false"
+
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- TextInputLayout e TextInputEditText per Username -->
@@ -98,7 +104,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/birth_date_hint"
-                        android:inputType="date" />
+                        android:inputType="date"
+                        android:enabled="false"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- TextInputLayout e TextInputEditText per Email -->
@@ -112,7 +120,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email_hint"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- TextInputLayout e Spinner per Sesso -->
@@ -123,8 +133,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="-2dp"
+                    android:clickable="false"
+                    android:focusable="false"
                     >
-                    <Spinner
+                    <EditText
                         android:id="@+id/spinnerSessoProfiloPaziente"
                         style="@style/SpinnerStyle"
                         android:prompt="@string/gender_hint"
@@ -133,7 +145,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:spinnerMode="dropdown"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:enabled="false"
                         />
                     <EditText
                         android:id="@+id/editTextSessoProfiloPaziente"
@@ -144,6 +158,9 @@
                         android:paddingHorizontal="2dp"
                         android:textColor="@color/hintTextColor"
                         android:background="@color/white"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:enabled="false"
                         />
                 </RelativeLayout>
             </LinearLayout>
