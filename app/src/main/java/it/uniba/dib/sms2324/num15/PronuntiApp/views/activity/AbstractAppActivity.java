@@ -85,7 +85,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
 
     private void riavviaApplicazione() {
         runOnUiThread(() -> {
-            Intent restartIntent = new Intent(getThisContext(), AutenticazioneActivity.class);
+            Intent restartIntent = new Intent(getThisContext(), EntryActivity.class);
             startActivity(restartIntent);
         });
     }
