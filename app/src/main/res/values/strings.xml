@@ -150,5 +150,17 @@
     <string name="rimuovi_appuntamento">Remove</string>
     <string name="closeApp">Press back again to exit</string>
     <string name="registraPaziente">Register Patient</string>
+    <string name="avvioRapido">Quick accces</string>
+    <string name="registrazione">Registration</string>
+    <string name="registrazionePaziente">Patient and parent registration</string>
+    <string name="iTuoiPazienti">Your patients</string>
+    <string name="tuoProfilo">Your profile</string>
+    <string name="classifica">Ranking</string>
+    <string name="giochiBambini">Game of your children</string>
+    <string name="monitoraggio">Monitor your children</string>
+    <string name="gioco">Game</string>
+    <string name="personaggi">Characters</string>
+
+
 
 </resources>

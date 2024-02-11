@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/scenarioFragment">
+    app:startDestination="@id/scenarioFragment"
+    >
     <fragment
         android:id="@+id/scenarioFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenarioFragment"
-        android:label="fragment_scenario"
-        tools:layout="@layout/fragment_scenario" >
+        tools:layout="@layout/fragment_scenario">
         <action
             android:id="@+id/action_scenarioFragment_to_esercizioSequenzaParole"
             app:destination="@id/esercizioSequenzaParole"
-            app:popUpTo="@id/scenarioFragment" />
+            app:popUpTo="@id/scenarioFragment"
+            />
         <action
             android:id="@+id/action_scenarioFragment_to_esercizioCoppiaImmagini2"
             app:destination="@id/esercizioCoppiaImmagini"
@@ -25,8 +26,8 @@
     <fragment
         android:id="@+id/esercizioCoppiaImmagini"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmaginiFragment"
-        android:label="fragment_esercizio_coppia_immagini"
-        tools:layout="@layout/fragment_esercizio_coppia_immagini" >
+        android:label="@string/gioco"
+        tools:layout="@layout/fragment_esercizio_coppia_immagini">
         <action
             android:id="@+id/action_esercizioCoppiaImmagini_to_scenarioFragment"
             app:destination="@id/scenarioFragment" />
@@ -34,8 +35,8 @@
     <fragment
         android:id="@+id/esercizioSequenzaParole"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment"
-        android:label="fragment_esercizio_sequenza_parole"
-        tools:layout="@layout/fragment_esercizio_sequenza_parole" >
+        android:label="@string/gioco"
+        tools:layout="@layout/fragment_esercizio_sequenza_parole">
         <action
             android:id="@+id/action_esercizioSequenzaParole_to_scenarioFragment"
             app:destination="@id/scenarioFragment" />
@@ -43,8 +44,8 @@
     <fragment
         android:id="@+id/esercizioDenominazioneImmagineFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment"
-        android:label="fragment_esercizio_denominazione_immagine"
-        tools:layout="@layout/fragment_esercizio_denominazione_immagine" >
+        android:label="@string/gioco"
+        tools:layout="@layout/fragment_esercizio_denominazione_immagine">
         <action
             android:id="@+id/action_esercizioDenominazioneImmagineFragment_to_scenarioFragment"
             app:destination="@id/scenarioFragment" />
@@ -52,11 +53,11 @@
     <fragment
         android:id="@+id/personaggiFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.PersonaggiFragment"
-        android:label="fragment_personaggi"
+        android:label="@string/personaggi"
         tools:layout="@layout/fragment_personaggi" />
     <fragment
         android:id="@+id/classificaFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.ClassificaFragment"
-        android:label="fragment_classifica"
+        android:label="@string/classifica"
         tools:layout="@layout/fragment_classifica" />
 </navigation>

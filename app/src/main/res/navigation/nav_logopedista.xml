@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/pazientiFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment"
-        android:label="fragment_pazienti"
-        tools:layout="@layout/fragment_pazienti" >
+        android:label="@string/iTuoiPazienti"
+        tools:layout="@layout/fragment_pazienti">
         <action
             android:id="@+id/action_pazientiFragment_to_registrazionePazienteGenitoreFragment"
             app:destination="@id/registrazionePazienteGenitoreFragment"
@@ -23,18 +23,18 @@
     <fragment
         android:id="@+id/appuntamentiLogopedistaFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti.AppuntamentiLogopedistaFragment"
-        android:label="fragment_appuntamenti_logopedista"
+        android:label="@string/i_tuoi_appuntamenti"
         tools:layout="@layout/fragment_appuntamenti_logopedista" />
     <fragment
         android:id="@+id/profiloLogopedistaFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloLogopedistaFragment"
-        android:label="fragment_profile_logopedista"
+        android:label="@string/tuoProfilo"
         tools:layout="@layout/fragment_profile_logopedista" />
     <fragment
         android:id="@+id/registrazionePazienteGenitoreFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment"
-        android:label="fragment_registrazione_paziente_genitore"
-        tools:layout="@layout/fragment_registrazione_paziente_genitore" >
+        android:label="@string/registrazionePaziente"
+        tools:layout="@layout/fragment_registrazione_paziente_genitore">
         <action
             android:id="@+id/action_registrazionePazienteGenitoreFragment_to_pazientiFragment"
             app:destination="@id/pazientiFragment" />

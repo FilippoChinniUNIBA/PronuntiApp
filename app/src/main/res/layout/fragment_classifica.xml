@@ -10,26 +10,27 @@
         android:layout_height="match_parent"
         >
         <ImageView
-            android:id="@+id/imageViewClassifica"
+            android:id="@+id/imageViewCupClassifica"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:padding="5dp"
-            android:src="@drawable/golden_shield"
+            android:src="@drawable/top_ranking"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewClassifica"
+            android:layout_marginTop="10dp"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewClassifica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewClassifica"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewCupClassifica"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="8dp"
+            android:paddingHorizontal="16dp"
         />
 
 
