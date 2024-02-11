@@ -1,18 +1,22 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
@@ -55,7 +59,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
-
         Genitore genitore = mGenitoreViewModel.getGenitoreLiveData().getValue();
 
         textInputEditTextNome.setText(genitore.getNome());
@@ -67,14 +70,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         textViewUsernameProfilo.setText(genitore.getUsername());
         textInputEditTextTelefono.setText(genitore.getTelefono());
         textInputEditTextTelefono.setEnabled(false);
-    }
-
-    @Override
-    void confermaModificaProfilo() {
-        super.confermaModificaProfilo();
-        mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(textInputEditTextTelefono.getText().toString());
-        mGenitoreViewModel.aggiornaGenitoreRemoto();
-        setData();
     }
 
     @Override
@@ -91,6 +86,26 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         //focus automatico per far capire che si può modificare
         textInputEditTextTelefono.requestFocus();
+
+        textInputEditTextTelefono.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String telefono = s.toString();
+                mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(telefono);
+            }
+        });
+    }
+
+    @Override
+    void confermaModificaProfilo() {
+        super.confermaModificaProfilo();
+
+        mGenitoreViewModel.aggiornaGenitoreRemoto();
+        setData();
     }
 
 }

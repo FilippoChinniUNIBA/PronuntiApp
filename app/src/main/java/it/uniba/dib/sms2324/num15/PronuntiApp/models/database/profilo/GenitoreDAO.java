@@ -53,15 +53,19 @@ public class GenitoreDAO {
 
 				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
 					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
-						DataSnapshot temp = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
-						if (temp.getKey().equals(idGenitore)) {
-							refGenitore = temp.getRef();
-							refGenitore.setValue(obj.toMap());
+						DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
+						for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
+							DataSnapshot temp = datoGenitoreSnapshot;
+							if (temp.getKey().equals(idGenitore)) {
+								refGenitore = temp.getRef();
+								refGenitore.setValue(obj.toMap());
 
-							Log.d("GenitoreDAO.update()", "Genitore aggiornato con successo");
-							future.complete(null);
-							break;
+								Log.d("GenitoreDAO.update()", "Genitore aggiornato con successo");
+								future.complete(null);
+								break;
+							}
 						}
+						if (refGenitore != null) break;
 					}
 					if (refGenitore != null) break;
 				}
@@ -153,7 +157,7 @@ public class GenitoreDAO {
 			while (!task.isComplete()) {}
 
 			for (DataSnapshot snapshot : task.getResult().getChildren()) {
-				DataSnapshot genitoreSnapshot = snapshot.child(CostantiNodiDB.GENITORE);
+				DataSnapshot genitoreSnapshot = snapshot.child(CostantiNodiDB.GENITORE).getChildren().iterator().next();
 				Map<String, Object> fromDatabaseMap = (Map<String, Object>) genitoreSnapshot.getValue();
 				Genitore genitore = new Genitore(fromDatabaseMap, snapshot.getKey());
 				result.add(genitore);
@@ -177,17 +181,20 @@ public class GenitoreDAO {
 				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
 					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 						DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
+						for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
 
-						if (genitoreSnapshot.getKey().equals(idGenitore)) {
-							refLogopedista = logopedistaSnapshot.getRef();
-							Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
-							Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
-							logopedista.setPazienti(null);
+							if (datoGenitoreSnapshot.getKey().equals(idGenitore)) {
+								refLogopedista = logopedistaSnapshot.getRef();
+								Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
+								Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
+								logopedista.setPazienti(null);
 
-							Log.d("GenitoreDAO.getDatiLogopedistaByIdGenitore()", logopedista.toString());
-							future.complete(logopedista);
-							break;
+								Log.d("GenitoreDAO.getDatiLogopedistaByIdGenitore()", logopedista.toString());
+								future.complete(logopedista);
+								break;
+							}
 						}
+						if (refLogopedista != null) break;
 					}
 					if (refLogopedista != null) break;
 				}
@@ -212,12 +219,15 @@ public class GenitoreDAO {
 			for (DataSnapshot logopedistaSnapshot : task.getResult().getChildren()) {
 				for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 					DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
+					for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
 
-					if (genitoreSnapshot.getKey().equals(idGenitore)) {
-						Map<String, Object> fromDatabaseMap = (Map<String, Object>) pazienteSnapshot.getValue();
-						result = new Paziente(fromDatabaseMap, pazienteSnapshot.getKey());
-						break;
+						if (datoGenitoreSnapshot.getKey().equals(idGenitore)) {
+							Map<String, Object> fromDatabaseMap = (Map<String, Object>) pazienteSnapshot.getValue();
+							result = new Paziente(fromDatabaseMap, pazienteSnapshot.getKey());
+							break;
+						}
 					}
+					if (result != null) break;
 				}
 				if (result != null) break;
 			}

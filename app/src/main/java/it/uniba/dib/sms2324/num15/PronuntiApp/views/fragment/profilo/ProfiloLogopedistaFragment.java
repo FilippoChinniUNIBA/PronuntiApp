@@ -1,7 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
-import android.media.tv.TvContract;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment {
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
-    private LogopedistaViewModel logopedistaViewModel;
+    private LogopedistaViewModel mLogopedistaViewModel;
 
 
     @Override
@@ -34,7 +35,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
 
-        logopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
@@ -46,8 +47,7 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
 
     @Override
     public void setData(){
-
-        Logopedista logopedista = logopedistaViewModel.getLogopedistaLiveData().getValue();
+        Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
 
         textInputEditTextNome.setText(logopedista.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -77,18 +77,37 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
         textInputEditTextNome.requestFocus();
+
+        textInputEditTextIndirizzo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String indirizzo = s.toString();
+                mLogopedistaViewModel.getLogopedistaLiveData().getValue().setIndirizzo(indirizzo);
+            }
+        });
+
+        textInputEditTextTelefono.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String telefono = s.toString();
+                mLogopedistaViewModel.getLogopedistaLiveData().getValue().setTelefono(telefono);
+            }
+        });
     }
 
     @Override
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        //fai le cose che devi fare per salvare i dati aggiornati del logopedista
-        //save(textInputEditTextIndirizzo.getText().toString(), textInputEditTextTelefono.getText().toString());
-        String indirizzo = textInputEditTextIndirizzo.getText().toString();
-        String telefono = textInputEditTextTelefono.getText().toString();
-        logopedistaViewModel.getLogopedistaLiveData().getValue().setIndirizzo(indirizzo);
-        logopedistaViewModel.getLogopedistaLiveData().getValue().setTelefono(telefono);
-        logopedistaViewModel.aggiornaLogopedistaRemoto();
+
+        mLogopedistaViewModel.aggiornaLogopedistaRemoto();
         setData();
     }
 
