@@ -15,6 +15,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 public class LogopedistaViewModel extends ViewModel {
 	private MutableLiveData<Logopedista> mLogopedistaLiveData = new MutableLiveData<>();
 	private MutableLiveData<List<Appuntamento>> mAppuntamentiLiveData = new MutableLiveData<>();
+
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 	private CreazioneAppuntamentoController mCreazioneAppuntamentoController;
 

@@ -14,18 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.AppuntamentiControllerGenitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.AppuntamentiGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 
 public class AppuntamentiGenitoreFragment extends Fragment {
@@ -34,7 +29,7 @@ public class AppuntamentiGenitoreFragment extends Fragment {
     private List<Appuntamento> appuntamenti; // Lista degli appuntamenti (da sostituire con la tua implementazione)
     private GenitoreViewModel mGenitoreViewModel;
     private String idGenitore;
-    private AppuntamentiControllerGenitore mAppuntamentiControllerGenitore;
+    private AppuntamentiGenitoreController mAppuntamentiGenitoreController;
 
     public AppuntamentiGenitoreFragment() {}
 
@@ -47,7 +42,7 @@ public class AppuntamentiGenitoreFragment extends Fragment {
 
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
         this.idGenitore = mGenitoreViewModel.getGenitoreLiveData().getValue().getIdProfilo();
-        this.mAppuntamentiControllerGenitore = mGenitoreViewModel.getAppuntamentiControllerGenitore();
+        this.mAppuntamentiGenitoreController = mGenitoreViewModel.getAppuntamentiControllerGenitore();
 
         return view;
     }
@@ -58,7 +53,7 @@ public class AppuntamentiGenitoreFragment extends Fragment {
         GenitoreDAO genitoreDAO = new GenitoreDAO();
 
         try {
-            CompletableFuture<List<Appuntamento>> appuntamentiFuture = mAppuntamentiControllerGenitore.retrieveAppuntamentiGenitore(idGenitore);
+            CompletableFuture<List<Appuntamento>> appuntamentiFuture = mAppuntamentiGenitoreController.retrieveAppuntamentiGenitore(idGenitore);
             appuntamentiFuture.thenAccept(appuntamenti -> {
                 Log.e("AppuntamentoGenitoreFragment","appuntamenti" + appuntamenti.toString());
                 appuntamentoAdapter = new AppuntamentoGenitoreAdapter(appuntamenti);

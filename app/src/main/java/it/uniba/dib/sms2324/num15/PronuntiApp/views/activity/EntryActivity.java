@@ -12,6 +12,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.FragmentCaricamento;
 
 public class EntryActivity extends AbstractAppActivity {
     private LoginViewModel mLoginViewModel;

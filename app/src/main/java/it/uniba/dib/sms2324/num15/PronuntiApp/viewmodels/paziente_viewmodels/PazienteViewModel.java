@@ -16,6 +16,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.gio
 
 public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<Paziente> mPazienteLiveData = new MutableLiveData<>();
+
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
 	private EsercizioSequenzaParoleController mEsercizioSequenzaParoleController;
 	private EsercizioCoppiaImmaginiController mEsercizioCoppiaImmaginiController;

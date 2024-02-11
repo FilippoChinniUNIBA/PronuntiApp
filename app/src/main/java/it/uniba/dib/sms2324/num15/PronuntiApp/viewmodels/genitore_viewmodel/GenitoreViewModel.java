@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModel;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitoreLiveData = new MutableLiveData<>();
-	private AppuntamentiControllerGenitore appuntamentiControllerGenitore;
+
+	private AppuntamentiGenitoreController appuntamentiGenitoreController;
 
 	public LiveData<Genitore> getGenitoreLiveData() {
 		return mGenitoreLiveData;
@@ -44,11 +44,11 @@ public class GenitoreViewModel extends ViewModel {
 		return future;
 	}
 
-	public AppuntamentiControllerGenitore getAppuntamentiControllerGenitore(){
-		if (this.appuntamentiControllerGenitore == null){
-			this.appuntamentiControllerGenitore = new AppuntamentiControllerGenitore();
+	public AppuntamentiGenitoreController getAppuntamentiControllerGenitore(){
+		if (this.appuntamentiGenitoreController == null){
+			this.appuntamentiGenitoreController = new AppuntamentiGenitoreController();
 		}
-		return this.appuntamentiControllerGenitore;
+		return this.appuntamentiGenitoreController;
 	}
 
 }
