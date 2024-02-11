@@ -19,8 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".views.activity.VerificaActivity"
+            android:name=".views.activity.EntryActivity"
             android:exported="true"
             android:theme="@style/Theme.PronuntiAppNoActionBar"
             >
@@ -30,6 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".views.activity.AutenticazioneActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             android:windowSoftInputMode="adjustPan"
@@ -38,17 +40,21 @@
             android:theme="@style/Theme.PronuntiAppActionBar"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity android:name=".views.activity.GenitoreActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity android:name=".views.activity.PazienteActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             android:windowSoftInputMode="adjustPan"
             />
+
         <activity android:name=".testingTODELETE.TEST_Activity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             />
+
     </application>
 
 </manifest>

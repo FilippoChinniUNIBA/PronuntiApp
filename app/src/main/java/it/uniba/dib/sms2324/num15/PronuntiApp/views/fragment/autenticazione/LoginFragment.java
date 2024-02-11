@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,15 +14,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.CredentialSaver;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.GenitoreActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.PazienteActivity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -79,31 +73,19 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
                 infoDialog.setOnConfermaButtonClickListener(null);
             }
             else {
-                CredentialSaver credentialSaver = new CredentialSaver(requireActivity());
-                credentialSaver.saveCredentials(email,password);
+                AuthSharedPreferences authSharedPreferences = new AuthSharedPreferences(requireActivity());
+                authSharedPreferences.salvaCredenziali(email,password);
 
                 CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login();
                 futureProfilo.thenAccept(profilo -> {
                     Log.d("LoginFragment.loginActivityProfilo()", "Profilo: " + profilo.toString());
 
-                    getActivity().runOnUiThread(() -> {
-                        if (profilo instanceof Logopedista) {
-                            Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
-                            intent.putExtra("profilo", profilo);
-                            startActivity(intent);
-                        } else if (profilo instanceof Genitore) {
-                            Intent intent = new Intent(getActivity(), GenitoreActivity.class);
-                            intent.putExtra("profilo", profilo);
-                            startActivity(intent);
-                        } else if (profilo instanceof Paziente) {
-                            Intent intent = new Intent(getActivity(), PazienteActivity.class);
-                            intent.putExtra("profilo", profilo);
-                            startActivity(intent);
-                        }
-                    });
+                    getActivity().runOnUiThread(() -> ((AbstractAppActivity) getActivity()).navigaConProfilo(profilo, getActivity()));
                 });
             }
         });
     }
+
+
 
 }
