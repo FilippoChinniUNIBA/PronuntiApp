@@ -20,7 +20,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.Paz
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
-    private ProfiloPazienteFragment profiloPazienteFragment;
     private GenitoreViewModel mGenitoreViewModel;
 
 
@@ -41,11 +40,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
-        /*profiloPazienteFragment = new ProfiloPazienteFragment();
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
-        fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?*/
 
         return view;
     }
@@ -75,9 +69,9 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     @Override
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        profiloPazienteFragment.confermaModificaProfilo();
         mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(textInputEditTextTelefono.getText().toString());
         mGenitoreViewModel.aggiornaGenitoreRemoto();
+        setData();
     }
 
     @Override
@@ -92,11 +86,8 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         imageViewEditProfile.setOnClickListener(v->pickImage());
         imageViewEditProfile.setVisibility(View.VISIBLE);
 
-        //rendi modificabile anche i bambini
-        profiloPazienteFragment.modificaProfilo();
-        setData();
         //focus automatico per far capire che si può modificare
-        textInputEditTextNome.requestFocus();
+        textInputEditTextTelefono.requestFocus();
     }
 
 }
