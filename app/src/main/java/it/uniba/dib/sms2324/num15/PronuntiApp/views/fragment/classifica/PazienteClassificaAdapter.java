@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClas
         holder.textViewPosizione.setText(String.valueOf(position + 1));
         holder.textViewUsernamePaziente.setText(paziente.getUsername());
         holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggio()));
-        Glide.with(holder.imageView.getContext()).load(paziente.getUrlImg()).into(holder.imageView);
+        Picasso.get().load(paziente.getUrlImg()).into(holder.imageView);
     }
 
     @Override

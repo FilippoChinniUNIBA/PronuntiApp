@@ -51,7 +51,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		fragmentTransaction.replace(R.id.topBarLayout, topBarFragment);
 		fragmentTransaction.commit();
 
-
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
 		personaggioImageView = view.findViewById(R.id.imageViewPersonaggio);
@@ -80,7 +79,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
                 */
 				// Abilita il drag dell'immagine
-				bottomHeight = (float) personaggioImageView.getHeight() /2 + personaggioImageView.getHeight()*0.1f;
+				bottomHeight = personaggioImageView.getHeight()*0.2f;
 				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
 				enableImageDrag(personaggioImageView);
 			}
