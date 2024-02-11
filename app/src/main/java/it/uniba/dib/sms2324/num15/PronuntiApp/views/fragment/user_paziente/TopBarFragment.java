@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class TopBarFragment extends Fragment {
-
     private LinearLayout topBarLayout;
     private ImageView imageViewPaziente;
     private TextView textViewUsernamePaziente;
     private TextView textViewPunteggio;
     private ConstraintLayout upCoinsLayout;
     private TextView coinsTextView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,4 +47,5 @@ public class TopBarFragment extends Fragment {
         textViewUsernamePaziente.setText("Your username");
 
     }
+
 }

@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +10,6 @@ import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
 
@@ -23,7 +19,7 @@ public class EntryActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verifica);
+        setContentView(R.layout.activity_entry);
 
         this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
     }

@@ -15,7 +15,7 @@ public class AutenticazioneActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_activity);
+        setContentView(R.layout.activity_autenticazione);
 
         this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 

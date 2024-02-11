@@ -11,9 +11,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class MonitoraggioFragment extends Fragment {
 
-    public MonitoraggioFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
