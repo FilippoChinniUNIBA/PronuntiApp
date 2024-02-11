@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.AppuntamentiControllerGenitore;
@@ -42,8 +44,10 @@ public class AppuntamentiGenitoreFragment extends Fragment {
         recyclerViewAppuntamentiGenitore = view.findViewById(R.id.recyclerViewAppuntamentiGenitore);
         recyclerViewAppuntamentiGenitore.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
         this.idGenitore = mGenitoreViewModel.getGenitoreLiveData().getValue().getIdProfilo();
+        this.mAppuntamentiControllerGenitore = mGenitoreViewModel.getAppuntamentiControllerGenitore();
 
         return view;
     }
@@ -51,16 +55,21 @@ public class AppuntamentiGenitoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //TODO: prendere gli appuntamenti dal database
 
-        /*CompletableFuture<Paziente> =
+        GenitoreDAO genitoreDAO = new GenitoreDAO();
 
-        Paziente paziente
+        Log.e("AppuntamentoGenitoreFragment","appuntamenti" +genitoreDAO.getPazienteByIdGenitore(idGenitore));
 
-        CompletableFuture<List<Appuntamento>>
+        try {
+            CompletableFuture<List<Appuntamento>> appuntamentiFuture = mAppuntamentiControllerGenitore.retrieveAppuntamentiGenitore(idGenitore);
+            appuntamentiFuture.thenAccept(appuntamenti -> {
+                Log.e("AppuntamentoGenitoreFragment","appuntamenti" + appuntamenti.toString());
+                appuntamentoAdapter = new AppuntamentoGenitoreAdapter(appuntamenti);
+                recyclerViewAppuntamentiGenitore.setAdapter(appuntamentoAdapter);
+            });
+        }catch(NullPointerException exception){
+            Log.e("AppuntamentoLogopedistaFragment", "NullPointerException", exception);
+        }
 
-
-        appuntamentoAdapter = new AppuntamentoGenitoreAdapter(appuntamenti);
-        recyclerViewAppuntamentiGenitore.setAdapter(appuntamentoAdapter);*/
     }
 }

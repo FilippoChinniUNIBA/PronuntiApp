@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/monitoraggioFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment"
-        android:label="fragment_monitoraggio"
+        android:label="@string/monitoraggio"
         tools:layout="@layout/fragment_monitoraggio" />
     <fragment
         android:id="@+id/scenariGenitoriFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment"
-        android:label="fragment_scenari_genitore"
+        android:label="@string/giochiBambini"
         tools:layout="@layout/fragment_scenari_genitore" />
     <fragment
         android:id="@+id/appuntamentiGenitoreFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.appuntamenti.AppuntamentiGenitoreFragment"
-        android:label="fragment_appuntamenti_genitore"
+        android:label="@string/i_tuoi_appuntamenti"
         tools:layout="@layout/fragment_appuntamenti_genitore" />
     <fragment
         android:id="@+id/profiloGenitoreFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloGenitoreFragment"
-        android:label="fragment_profile_genitore"
+        android:label="@string/tuoProfilo"
         tools:layout="@layout/fragment_profile_genitore" />
 </navigation>

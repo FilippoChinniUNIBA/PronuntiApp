@@ -121,29 +121,32 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
        this.idLogopedista = logopedista.getIdProfilo();
 
        List<AppuntamentoCustom> appuntamentiCustoms = new ArrayList<>();
+        try {
+            CompletableFuture<List<Appuntamento>> future = mController.retrieveAppuntamenti(idLogopedista);
+            future.thenAccept(appuntamenti -> {
+                for (Appuntamento appuntamento : appuntamenti) {
+                    for (Paziente paziente : logopedista.getPazienti()) {
+                        if (appuntamento.getRefIdPaziente().equals(paziente.getIdProfilo())) {
+                            Log.d("identidficativi", "id" + appuntamento.getRefIdPaziente());
+                            AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
+                            appuntamentiCustoms.add(appuntamentoCustom);
+                        }
+                    }
+                }
+                try {
+                    List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
+                    adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
+                    recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
 
-           CompletableFuture<List<Appuntamento>> future = mController.retrieveAppuntamenti(idLogopedista);
-           future.thenAccept(appuntamenti -> {
-               for (Appuntamento appuntamento : appuntamenti) {
-                   for (Paziente paziente : logopedista.getPazienti()) {
-                       if (appuntamento.getRefIdPaziente().equals(paziente.getIdProfilo())) {
-                           Log.d("identidficativi","id"+appuntamento.getRefIdPaziente());
-                           AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
-                           appuntamentiCustoms.add(appuntamentoCustom);
-                       }
-                   }
-               }
-               try {
-                   List<Paziente> pazienti = mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti();
-                   adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(pazienti);
-                   recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
-
-                   adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiCustoms);
-                   recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
-               }catch (NullPointerException exception){
-                   Log.e("AppuntamentoLogopedistaFragment","NullPointerException",exception);
-               }
-           });
+                    adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiCustoms);
+                    recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
+                } catch (NullPointerException exception) {
+                    Log.e("AppuntamentoLogopedistaFragment", "NullPointerException", exception);
+                }
+            });
+        }catch (NullPointerException exception){
+            Log.e("AppuntamentoLogopedistaFragment", "NullPointerException", exception);
+        }
 
        confermaAppuntamentoButton.setOnClickListener(v -> {
            cardViewAppuntamento.setVisibility(View.GONE);

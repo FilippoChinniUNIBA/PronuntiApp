@@ -15,6 +15,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitoreLiveData = new MutableLiveData<>();
+	private AppuntamentiControllerGenitore appuntamentiControllerGenitore;
 
 	public LiveData<Genitore> getGenitoreLiveData() {
 		return mGenitoreLiveData;
@@ -41,6 +42,13 @@ public class GenitoreViewModel extends ViewModel {
 			future.complete(paziente);
 		});
 		return future;
+	}
+
+	public AppuntamentiControllerGenitore getAppuntamentiControllerGenitore(){
+		if (this.appuntamentiControllerGenitore == null){
+			this.appuntamentiControllerGenitore = new AppuntamentiControllerGenitore();
+		}
+		return this.appuntamentiControllerGenitore;
 	}
 
 }

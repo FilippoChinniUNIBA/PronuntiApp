@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_scenario_neve"
-    tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment">
+    tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment"
+    android:fitsSystemWindows="true"
+    >
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.CurvedLineView
         android:id="@+id/curvedLineView2to3"

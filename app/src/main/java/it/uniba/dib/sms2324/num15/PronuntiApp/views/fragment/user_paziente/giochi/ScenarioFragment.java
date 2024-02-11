@@ -12,6 +12,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -30,6 +32,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
+
+		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.hide();
+		}
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
@@ -59,7 +66,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
                 */
 				// Abilita il drag dell'immagine
-				bottomHeight = personaggioImageView.getHeight() + personaggioImageView.getHeight() * 0.2f;
+				bottomHeight = (float) personaggioImageView.getHeight() /2 + personaggioImageView.getHeight()*0.1f;
 				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
 				enableImageDrag(personaggioImageView);
 			}
@@ -203,4 +210,9 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		((AppCompatActivity) getActivity()).getSupportActionBar().show();
+	}
 }
