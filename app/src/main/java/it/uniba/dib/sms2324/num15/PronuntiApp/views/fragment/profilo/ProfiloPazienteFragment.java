@@ -82,6 +82,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     @Override
     public void setData(){
         String idGenitore = mGenitoreViewModel.getGenitoreLiveData().getValue().getIdProfilo();
+        //TODO prendere il paziente dal genitore dal viewmodelGenitore come livedate
         mGenitoreViewModel.getPazienteGenitore(idGenitore).thenAccept(paziente -> {
             textInputEditTextNome.setText(paziente.getNome());
             textInputEditTextNome.setEnabled(false);
