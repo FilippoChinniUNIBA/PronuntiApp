@@ -18,6 +18,10 @@ import androidx.navigation.NavController;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
@@ -81,7 +85,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
 
     private void riavviaApplicazione() {
         runOnUiThread(() -> {
-            Intent restartIntent = new Intent(getThisContext(), AutenticazioneActivity.class);
+            Intent restartIntent = new Intent(getThisContext(), EntryActivity.class);
             startActivity(restartIntent);
         });
     }
@@ -92,6 +96,22 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             return true;
         } else {
             return super.onSupportNavigateUp();
+        }
+    }
+
+    public void navigaConProfilo(Profilo profilo, Context context) {
+        if (profilo instanceof Logopedista) {
+            Intent intent = new Intent(context, LogopedistaActivity.class);
+            intent.putExtra("profilo", profilo);
+            startActivity(intent);
+        } else if (profilo instanceof Genitore) {
+            Intent intent = new Intent(context, GenitoreActivity.class);
+            intent.putExtra("profilo", profilo);
+            startActivity(intent);
+        } else if (profilo instanceof Paziente) {
+            Intent intent = new Intent(context, PazienteActivity.class);
+            intent.putExtra("profilo", profilo);
+            startActivity(intent);
         }
     }
 
