@@ -1,5 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -21,8 +23,9 @@ public class AppuntamentiControllerGenitore {
         List<Appuntamento> result = new ArrayList<>();
 
         genitoreDAO.getPazienteByIdGenitore(idGenitore).thenAccept(paziente -> {
+            Log.e("AppuntamentoLogopedistaFragment", "paziente"+paziente.toString());
 
-                    appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_PAZIENTE, paziente.getIdProfilo()).thenAccept(appuntamenti -> {
+            appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_PAZIENTE, paziente.getIdProfilo()).thenAccept(appuntamenti -> {
                         for (Appuntamento appuntamento : appuntamenti) {
                             result.add(appuntamento);
                         }

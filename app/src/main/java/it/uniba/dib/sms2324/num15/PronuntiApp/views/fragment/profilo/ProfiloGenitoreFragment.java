@@ -13,12 +13,15 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
     private ProfiloPazienteFragment profiloPazienteFragment;
     private GenitoreViewModel mGenitoreViewModel;
+
 
 
     @Override
@@ -45,15 +48,14 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
         fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?
 
+
         return view;
     }
 
     @Override
     void setData() {
 
-        Genitore genitore = new Genitore( "nome", "cognome", "username", "email", "password", "telefono");
-        /*profileGenitoreViewModel.getGenitore();*/ //TODO deve prendere il genitore dal viewmodel
-        //Genitore genitore = genitoreViewModel.getGenitore();
+        Genitore genitore = mGenitoreViewModel.getGenitoreLiveData().getValue();
 
         textInputEditTextNome.setText(genitore.getNome());
         textInputEditTextNome.setEnabled(false);
@@ -64,7 +66,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         textViewUsernameProfilo.setText(genitore.getUsername());
         textInputEditTextTelefono.setText(genitore.getTelefono());
         textInputEditTextTelefono.setEnabled(false);
-
     }
 
     @Override

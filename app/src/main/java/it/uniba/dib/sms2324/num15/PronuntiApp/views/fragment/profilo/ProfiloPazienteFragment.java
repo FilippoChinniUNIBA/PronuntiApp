@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class ProfiloPazienteFragment extends AsbtractProfileFragment{
@@ -24,8 +25,8 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private ImageView textViewArrowDown;
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
-
     private PazienteViewModel mPazienteViewModel;
+    private GenitoreViewModel mGenitoreViewModel;
 
 
     @Override
@@ -42,8 +43,9 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
 
+        this.mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+
         //TODO prendere il paziente dal genitore dal viewmodelGenitore
-        this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -52,6 +54,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         linearLayoutContainerBambino = view.findViewById(R.id.linearLayoutProfiloPaziente);
 
         setData();
+
         return view;
     }
 
@@ -67,20 +70,20 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
 
     @Override
     public void setData(){
-
-        Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
-
-        textInputEditTextNome.setText(paziente.getNome());
-        textInputEditTextNome.setEnabled(false);
-        textInputEditTextCognome.setText(paziente.getCognome());
-        textInputEditTextCognome.setEnabled(false);
-        textViewUsernameProfilo.setText(paziente.getUsername());
-        textInputEditTextDataNascita.setText(paziente.getDataNascita().toString());
-        textInputEditTextDataNascita.setEnabled(false);
-        textInputEditTextEmail.setText(paziente.getEmail());
-        textInputEditTextEmail.setEnabled(false);
-        spinnerSesso.setSelection(paziente.getSesso());
-        spinnerSesso.setEnabled(false);
+        String idGenitore = mGenitoreViewModel.getGenitoreLiveData().getValue().getIdProfilo();
+        mGenitoreViewModel.getPazienteGenitore(idGenitore).thenAccept(paziente -> {
+            textInputEditTextNome.setText(paziente.getNome());
+            textInputEditTextNome.setEnabled(false);
+            textInputEditTextCognome.setText(paziente.getCognome());
+            textInputEditTextCognome.setEnabled(false);
+            textViewUsernameProfilo.setText(paziente.getUsername());
+            textInputEditTextDataNascita.setText(paziente.getDataNascita().toString());
+            textInputEditTextDataNascita.setEnabled(false);
+            textInputEditTextEmail.setText(paziente.getEmail());
+            textInputEditTextEmail.setEnabled(false);
+            spinnerSesso.setSelection(paziente.getSesso());
+            spinnerSesso.setEnabled(false);
+        });
 
     }
 
