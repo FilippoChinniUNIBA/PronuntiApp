@@ -1,91 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="5dp"
-    android:layout_marginHorizontal="2dp"
     >
-    <LinearLayout
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/rectangle_no_right_cornes_bkg"
-        android:paddingHorizontal="5dp"
-        android:paddingVertical="5dp"
-        >
-        <TextView
-            android:id="@+id/textViewPosizione"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="99"
-            android:textSize="@dimen/size_text_orario_appuntamento"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:gravity="center"
-            />
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageViewCorona"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/crown_gold"
+        android:elevation="1dp"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutClassificaItem"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="5dp"
+        android:layout_marginTop="-7dp"
+        android:rotation="-35"
+        android:layout_marginStart="57dp"
+        />
 
     <LinearLayout
+        android:id="@+id/linearLayoutClassificaItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:background="@drawable/rectangle_no_left_corners_bkg"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="5dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="2dp"
+        >
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/rectangle_no_right_cornes_bkg"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="5dp"
+            >
+            <TextView
+                android:id="@+id/textViewPosizione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="99"
+                android:textSize="@dimen/size_text_orario_appuntamento"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
 
-        <ImageView
-            android:id="@+id/imageViewPaziente"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_shape"
-            android:clipToOutline="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/man" />
-
-        <TextView
-            android:id="@+id/textViewUsernamePaziente"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ellipsize="marquee"
-            android:text="shiningraro_susshiningrarus"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="end"
-            >
+            android:layout_marginStart="1dp"
+            android:background="@drawable/rectangle_no_left_corners_bkg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="5dp">
+
             <ImageView
+                android:id="@+id/imageViewPaziente"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_experience_points"
-                />
+                android:background="@drawable/circle_shape"
+                android:clipToOutline="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/man" />
+
             <TextView
-                android:id="@+id/textViewPunteggio"
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewUsernamePaziente"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:textStyle="italic"
-                android:text="25000"
+                android:layout_margin="10dp"
+                android:ellipsize="marquee"
+                android:text="shiningraro_susshiningrarus"
                 android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="end"
+                >
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_experience_points"
+                    />
+                <TextView
+                    android:id="@+id/textViewPunteggio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:textStyle="italic"
+                    android:text="25000"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    />
+            </LinearLayout>
+
+
         </LinearLayout>
 
-
     </LinearLayout>
-
-</LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
