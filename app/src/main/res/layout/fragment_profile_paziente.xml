@@ -18,7 +18,9 @@
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutProfiloPaziente">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutProfiloPaziente"
+
+        >
         <TextView
             android:id="@+id/textViewDatiBambino"
             android:layout_width="wrap_content"

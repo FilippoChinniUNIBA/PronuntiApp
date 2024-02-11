@@ -55,10 +55,7 @@ public class AppuntamentiGenitoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         GenitoreDAO genitoreDAO = new GenitoreDAO();
-
-        Log.e("AppuntamentoGenitoreFragment","appuntamenti" +genitoreDAO.getPazienteByIdGenitore(idGenitore));
 
         try {
             CompletableFuture<List<Appuntamento>> appuntamentiFuture = mAppuntamentiControllerGenitore.retrieveAppuntamentiGenitore(idGenitore);

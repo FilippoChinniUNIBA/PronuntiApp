@@ -9,6 +9,7 @@
 
     <style name="MyActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
+        <item name="background">@color/white</item>
     </style>
 
     <style name="MyTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
