@@ -179,7 +179,15 @@
                         android:hint="@string/confirm_password_hint"
                         android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
+
+                    <Button
+                        android:id="@+id/buttonRegistrati"
+                        android:layout_width="296dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/register" />
+            </LinearLayout>
+
             </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
@@ -191,12 +199,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazione">
-                <Button
-                    android:id="@+id/buttonRegistrati"
-                    android:layout_width="296dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/register" />
 
                 <Button
                     android:id="@+id/buttonVaiAlLogin"

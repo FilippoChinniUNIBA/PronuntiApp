@@ -3,6 +3,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBar;
@@ -25,7 +27,10 @@ public class PazienteActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_paziente);
+
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerPaziente);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
@@ -43,6 +48,7 @@ public class PazienteActivity extends AbstractAppActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         //setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.fragmentContainerPaziente, bottomNavigationView));
 

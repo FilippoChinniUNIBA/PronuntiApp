@@ -38,8 +38,6 @@ public class LogopedistaActivity extends AbstractAppActivity {
         this.mLogopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
         mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
 
-        navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
-
         setOnBackPressedCallback(R.id.pazientiFragment);
 
 

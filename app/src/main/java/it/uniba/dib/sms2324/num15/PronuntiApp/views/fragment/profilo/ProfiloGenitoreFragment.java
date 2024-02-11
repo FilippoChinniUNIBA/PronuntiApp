@@ -46,7 +46,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
-        fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?
+        fragmentTransaction.commit();
 
         return view;
     }

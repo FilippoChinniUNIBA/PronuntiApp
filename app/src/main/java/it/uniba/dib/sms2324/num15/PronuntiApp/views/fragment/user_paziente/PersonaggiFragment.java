@@ -19,6 +19,7 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewPersonaggiAcquistabili;
     private TextView textViewPersonaggiSbloccati;
     private TextView textViewPersonaggiAcquistabili;
+    private TextView textViewMonete;
 
     public PersonaggiFragment() {}
 
@@ -48,7 +49,8 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
 
         */
 
-        // Inizializza le viste
+        //TODO settare monete in onViewCreated
+        textViewMonete = view.findViewById(R.id.coinsTextView);
         textViewPersonaggiSbloccati = view.findViewById(R.id.textViewPersonaggiSbloccati);
         textViewPersonaggiAcquistabili = view.findViewById(R.id.textViewPersonaggiAcquistabili);
 
