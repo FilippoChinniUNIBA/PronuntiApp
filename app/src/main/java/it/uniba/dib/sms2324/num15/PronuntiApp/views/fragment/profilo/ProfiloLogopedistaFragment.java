@@ -46,7 +46,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
 
     @Override
     public void setData(){
-
         Logopedista logopedista = logopedistaViewModel.getLogopedistaLiveData().getValue();
 
         textInputEditTextNome.setText(logopedista.getNome());
@@ -82,12 +81,13 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     @Override
     void confermaModificaProfilo() {
         super.confermaModificaProfilo();
-        //fai le cose che devi fare per salvare i dati aggiornati del logopedista
-        //save(textInputEditTextIndirizzo.getText().toString(), textInputEditTextTelefono.getText().toString());
+
         String indirizzo = textInputEditTextIndirizzo.getText().toString();
         String telefono = textInputEditTextTelefono.getText().toString();
+
         logopedistaViewModel.getLogopedistaLiveData().getValue().setIndirizzo(indirizzo);
         logopedistaViewModel.getLogopedistaLiveData().getValue().setTelefono(telefono);
+
         logopedistaViewModel.aggiornaLogopedistaRemoto();
         setData();
     }
