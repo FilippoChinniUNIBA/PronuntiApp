@@ -23,10 +23,12 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private GenitoreViewModel mGenitoreViewModel;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
+
+        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloGenitore);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloGenitore);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloGenitore);
@@ -37,8 +39,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         setPickMedia();
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
-
-        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         setData();
 
