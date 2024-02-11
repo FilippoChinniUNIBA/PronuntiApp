@@ -25,7 +25,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneMancanteDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
@@ -81,7 +81,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             if (!isConnessioneInternet()) {
                 Log.d("AbstractAppActivity.BroadcastReceiver()", "Connessione assente");
 
-                ConnessioneErroreDialog dialog = new ConnessioneErroreDialog(getThisContext());
+                ConnessioneMancanteDialog dialog = new ConnessioneMancanteDialog(getThisContext());
                 dialog.setOnConfermaButtonClickListener(() -> riavviaApplicazione());
                 runOnUiThread(dialog::show);
             }
@@ -104,6 +104,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             return super.onSupportNavigateUp();
         }
     }
+
 
     public void navigaConProfilo(Profilo profilo, Context context) {
         if (profilo instanceof Logopedista) {

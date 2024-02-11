@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,20 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.ClassificaPazienteController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ClassificaFragment extends AbstractFragmentWithNavigation {
@@ -45,7 +37,7 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
         recyclerViewClassifica.setLayoutManager(new LinearLayoutManager(getContext()));
 
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
-        this.mClassificaPazienteController = mPazienteViewModel.getClassificaPazienteController();
+        //this.mClassificaPazienteController = mPazienteViewModel.getClassificaPazienteController();
 
         return view;
     }

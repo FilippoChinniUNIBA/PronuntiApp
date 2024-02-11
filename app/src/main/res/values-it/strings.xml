@@ -40,7 +40,7 @@
     <string name="next">Avanti</string>
     <string name="errorConnectionTitle">Errore di connessione</string>
     <string name="restartApp">Riavvia l\'app</string>
-    <string name="errorPermissionTitle">Permessi necessari</string>
+    <string name="errorPermissionTitle">Permessi non concessi</string>
     <string name="errorPermissionOption1">Richiedimeli di nuovo</string>
     <string name="errorPermissionOption2">Non voglio concederli</string>
     <string name="confirm">Conferma</string>
@@ -138,4 +138,7 @@
     <string name="personaggi">Personaggi</string>
     <string name="logoutTitle">Eseguire il logout?</string>
     <string name="logoutRichiesta">Sei sicuro di voler effettuare il logout da PronuntiApp? Se lo fai dovrai riloggarti</string>
+    <string name="permissionDeniedDescription">Questa funzionalità richiede di utilizzare il tuo Microfono, perfavore concedi l\'autorizzazione se vuoi eseguire l\'esercizio</string>
+    <string name="infoOk">Ok</string>
+    <string name="permissionDeniedInstructions">Questa funzionalità richiede i permessi per utilizzare il microfono. Se non ti compare il messaggio per autorizzare i permessi, dovrai concederli dalle impostazioni del dispositivo riguardanti l\'App</string>
 </resources>

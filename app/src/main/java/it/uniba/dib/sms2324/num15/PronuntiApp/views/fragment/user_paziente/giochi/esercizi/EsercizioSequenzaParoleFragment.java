@@ -39,6 +39,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPla
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioSequenzaParoleController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -120,18 +122,15 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     }
 
     private void avviaPrimaRegistrazione(){
-        if (!checkPermissions(requireActivity())) {
-            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
-            return;
+        if (richiestaPermessi()) {
+            avviaRegistrazione();
+
+            imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
+            viewStopMic.setVisibility(View.VISIBLE);
+            viewConfirmMic.setVisibility(View.GONE);
+
+            Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
         }
-
-        avviaRegistrazione();
-
-        imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
-        viewStopMic.setVisibility(View.VISIBLE);
-        viewConfirmMic.setVisibility(View.GONE);
-
-        Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
     }
 
     private void avviaRegistrazione() {
@@ -217,6 +216,13 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         richiestaConfermaDialog.setOnConfermaButtonClickListener(this::avviaRegistrazione);
         richiestaConfermaDialog.setOnAnnullaButtonClickListener(() -> {});
         richiestaConfermaDialog.show();
+    }
+
+    private AudioRecorder initAudioRecorder() {
+        File cartellaApp = getContext().getFilesDir();
+        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
+
+        return new AudioRecorder(audioRegistrazione);
     }
 
     private void setAnimazioneRegistrazione() {
@@ -307,26 +313,41 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     }
 
 
+    private boolean richiestaPermessi() {
+        if (!checkPermissions(requireActivity())) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.RECORD_AUDIO)) {
+                setPermissionDialog();
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private boolean checkPermissions(Activity currentactivity) {
         int recordAudioPermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.RECORD_AUDIO);
         return recordAudioPermission == PackageManager.PERMISSION_GRANTED;
     }
 
-    private ActivityResultLauncher<String> requestPermissionLauncher =
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     this.audioRecorder = initAudioRecorder();
                     avviaPrimaRegistrazione();
                 } else {
-                    navigateTo(R.id.action_esercizioSequenzaParole_to_scenarioFragment);
+                    InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.permissionDeniedInstructions), getString(R.string.infoOk));
+                    infoDialog.show();
+                    infoDialog.setOnConfermaButtonClickListener(() -> navigateTo(R.id.action_esercizioSequenzaParole_to_scenarioFragment));
                 }
             });
 
-    private AudioRecorder initAudioRecorder() {
-        File cartellaApp = getContext().getFilesDir();
-        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
-
-        return new AudioRecorder(audioRegistrazione);
+    private void setPermissionDialog() {
+        PermessiDialog permessiDialog = new PermessiDialog(getContext(), getString(R.string.permissionDeniedDescription));
+        permessiDialog.show();
+        permessiDialog.setOnConfermaButtonClickListener(() -> requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO));
+        permessiDialog.setOnAnnullaButtonClickListener(() -> navigateTo(R.id.action_esercizioSequenzaParole_to_scenarioFragment));
     }
 
 }

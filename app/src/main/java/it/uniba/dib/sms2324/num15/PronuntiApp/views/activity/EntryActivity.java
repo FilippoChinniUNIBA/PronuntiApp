@@ -12,7 +12,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione.LoginFragment;
 
 public class EntryActivity extends AbstractAppActivity {
     private LoginViewModel mLoginViewModel;
@@ -23,6 +22,8 @@ public class EntryActivity extends AbstractAppActivity {
         setContentView(R.layout.activity_entry);
 
         this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerEntry, new FragmentCaricamento()).commit();
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,6 +18,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TEST_Activity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.EntryActivity;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.FragmentCaricamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -28,6 +31,9 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
     private static final String EMAIL_PAZIENTE_PREDEFINITO = "predefinito@paziente.it";
     private static final String PASSWORD_PAZIENTE_PREDEFINITO = "123456";
 
+
+    private FrameLayout layoutAvvioRapido;
+
     private LoginViewModel mLoginViewModel;
 
 
@@ -36,6 +42,8 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
         View view = inflater.inflate(R.layout.fragment_avvio_rapido, container, false);
 
         this.mLoginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
+        this.layoutAvvioRapido = view.findViewById(R.id.layoutAvvioRapido);
 
         return view;
     }
@@ -61,6 +69,8 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
     }
 
     private void loginActivityProfilo(String email, String password) {
+        avviaSchermataCaricamento();
+
         CompletableFuture<Boolean> futureIsLoginCorrect = mLoginViewModel.verificaLogin(email, password);
         futureIsLoginCorrect.thenAccept(isLoginCorrect -> {
             if (!isLoginCorrect) {
@@ -80,6 +90,13 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
                 });
             }
         });
+    }
+
+    private void avviaSchermataCaricamento() {
+        layoutAvvioRapido.removeAllViews();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.layoutAvvioRapido, new FragmentCaricamento())
+                .commit();
     }
 
 }
