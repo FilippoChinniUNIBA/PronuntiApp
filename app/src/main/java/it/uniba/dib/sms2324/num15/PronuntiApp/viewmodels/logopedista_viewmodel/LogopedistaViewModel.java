@@ -25,7 +25,7 @@ public class LogopedistaViewModel extends ViewModel {
 		mLogopedistaLiveData.setValue(logopedista);
 	}
 
-	public LiveData<List<Appuntamento>> getmAppuntamentiLiveData() {
+	public LiveData<List<Appuntamento>> getAppuntamentiLiveData() {
 		return mAppuntamentiLiveData;
 	}
 
