@@ -42,10 +42,11 @@ public class GenitoreActivity extends AbstractAppActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
+        setOnBackPressedCallback(R.id.monitoraggioFragment2);
+
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-        setOnBackPressedCallback(R.id.monitoraggioFragment2);
 
         //setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.fragmentContainerGenitore, bottomNavigationView));
         //setFirstFragment(R.id.fragmentContainerGenitore, new ScenariGenitoriFragment());

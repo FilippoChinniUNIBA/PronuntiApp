@@ -26,6 +26,10 @@ public class LogopedistaActivity extends AbstractAppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logopedista);
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
+
+        this.mLogopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
+        mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
@@ -35,12 +39,11 @@ public class LogopedistaActivity extends AbstractAppActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
-        this.mLogopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
-        mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("profilo"));
+        setOnBackPressedCallback(R.id.pazientiFragment);
 
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerLogopedista);
 
-        setOnBackPressedCallback(R.id.pazientiFragment);
+
 
 
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));

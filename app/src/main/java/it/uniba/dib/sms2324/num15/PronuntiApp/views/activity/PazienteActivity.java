@@ -27,6 +27,10 @@ public class PazienteActivity extends AbstractAppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paziente);
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerPaziente);
+
+        this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
+        mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("profilo"));
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
@@ -36,16 +40,12 @@ public class PazienteActivity extends AbstractAppActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
-        this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
-        mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("profilo"));
-
         setOnBackPressedCallback(R.id.scenarioFragment);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         //setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.fragmentContainerPaziente, bottomNavigationView));
-
         //setFirstFragment(R.id.fragmentContainerPaziente, new ScenarioFragment());
     }
 
