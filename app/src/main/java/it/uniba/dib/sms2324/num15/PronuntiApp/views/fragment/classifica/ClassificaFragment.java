@@ -45,7 +45,7 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
         recyclerViewClassifica.setLayoutManager(new LinearLayoutManager(getContext()));
 
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
-        this.mClassificaPazienteController = mPazienteViewModel.getClassificaPazienteController();
+        //this.mClassificaPazienteController = mPazienteViewModel.getClassificaPazienteController();
 
         return view;
     }

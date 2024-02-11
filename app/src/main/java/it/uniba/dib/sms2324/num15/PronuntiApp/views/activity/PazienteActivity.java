@@ -53,6 +53,8 @@ public class PazienteActivity extends AbstractAppActivity {
 
         setOnBackPressedCallback(R.id.scenarioFragment);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
 
         //setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.fragmentContainerPaziente, bottomNavigationView));
