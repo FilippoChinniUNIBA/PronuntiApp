@@ -1,6 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +54,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
-
         Genitore genitore = mGenitoreViewModel.getGenitoreLiveData().getValue();
 
         textInputEditTextNome.setText(genitore.getNome());
@@ -64,14 +65,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         textViewUsernameProfilo.setText(genitore.getUsername());
         textInputEditTextTelefono.setText(genitore.getTelefono());
         textInputEditTextTelefono.setEnabled(false);
-    }
-
-    @Override
-    void confermaModificaProfilo() {
-        super.confermaModificaProfilo();
-        mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(textInputEditTextTelefono.getText().toString());
-        mGenitoreViewModel.aggiornaGenitoreRemoto();
-        setData();
     }
 
     @Override
@@ -88,6 +81,26 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         //focus automatico per far capire che si può modificare
         textInputEditTextTelefono.requestFocus();
+
+        textInputEditTextTelefono.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                String telefono = s.toString();
+                mGenitoreViewModel.getGenitoreLiveData().getValue().setTelefono(telefono);
+            }
+        });
+    }
+
+    @Override
+    void confermaModificaProfilo() {
+        super.confermaModificaProfilo();
+
+        mGenitoreViewModel.aggiornaGenitoreRemoto();
+        setData();
     }
 
 }
