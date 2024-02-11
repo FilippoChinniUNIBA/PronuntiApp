@@ -20,7 +20,7 @@ public class PazienteViewModel extends ViewModel {
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
 	private EsercizioSequenzaParoleController mEsercizioSequenzaParoleController;
 	private EsercizioCoppiaImmaginiController mEsercizioCoppiaImmaginiController;
-
+	private ClassificaPazienteController mClassificaPazienteController;
 
 	public LiveData<Paziente> getPazienteLiveData() {
 		return mPazienteLiveData;
@@ -61,4 +61,10 @@ public class PazienteViewModel extends ViewModel {
 		return this.mEsercizioCoppiaImmaginiController;
 	}
 
+	public  ClassificaPazienteController getClassificaPazienteController(){
+		if(this.mClassificaPazienteController == null){
+			this.mClassificaPazienteController = new ClassificaPazienteController();
+		}
+		return this.mClassificaPazienteController;
+	}
 }
