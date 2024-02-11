@@ -33,6 +33,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 
+		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		if (actionBar != null) {
+			actionBar.hide();
+		}
+
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
 		personaggioImageView = view.findViewById(R.id.imageViewPersonaggio);
@@ -61,7 +66,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
                 Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
                 */
 				// Abilita il drag dell'immagine
-				bottomHeight = personaggioImageView.getHeight() + personaggioImageView.getHeight() * 0.2f;
+				bottomHeight = (float) personaggioImageView.getHeight() /2 + personaggioImageView.getHeight()*0.1f;
 				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
 				enableImageDrag(personaggioImageView);
 			}
@@ -206,17 +211,8 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-		// Nascondi l'ActionBar
-		if (actionBar != null) {
-			actionBar.hide();
-		}
-	}
-	@Override
 	public void onStop() {
 		super.onStop();
-		((AppCompatActivity)getActivity()).getSupportActionBar().show();
+		((AppCompatActivity) getActivity()).getSupportActionBar().show();
 	}
 }

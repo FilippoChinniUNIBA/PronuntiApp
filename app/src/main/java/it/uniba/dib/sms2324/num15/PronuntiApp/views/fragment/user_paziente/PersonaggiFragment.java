@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,5 +68,4 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         // Altre inizializzazioni e configurazioni possono essere fatte qui
         return view;
     }
-
 }

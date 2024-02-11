@@ -57,7 +57,7 @@
                 android:id="@+id/textViewDataNascitaPaziente"
                 android:layout_width="110dp"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/size_text_orario_appuntamento"
+                android:textSize="@dimen/size_text_giorno_appuntamento"
                 android:text="9 febbraio"
                 android:gravity="center"
                 android:paddingHorizontal="5dp"
