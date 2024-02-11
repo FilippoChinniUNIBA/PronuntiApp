@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -105,7 +106,16 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
         }
     }
 
+
     public void navigaConProfilo(Profilo profilo, Context context) {
+        //TODO TOGLIERE
+        /*FragmentCaricamento fragmentCaricamento = new FragmentCaricamento();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id., fragmentCaricamento)
+                .commit();*/
+        /*Intent intent2 = new Intent(context, EntryActivity.class);
+        startActivity(intent2);*/
+
         if (profilo instanceof Logopedista) {
             Intent intent = new Intent(context, LogopedistaActivity.class);
             intent.putExtra("profilo", profilo);
@@ -119,6 +129,11 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             intent.putExtra("profilo", profilo);
             startActivity(intent);
         }
+
+        //TODO TOGLIERE
+        /*getSupportFragmentManager().beginTransaction()
+                .remove(fragmentCaricamento)
+                .commit();*/
     }
 
 }
