@@ -12,6 +12,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -203,4 +205,18 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+		// Nascondi l'ActionBar
+		if (actionBar != null) {
+			actionBar.hide();
+		}
+	}
+	@Override
+	public void onStop() {
+		super.onStop();
+		((AppCompatActivity)getActivity()).getSupportActionBar().show();
+	}
 }

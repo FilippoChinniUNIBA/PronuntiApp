@@ -44,7 +44,7 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: costruire la classifica creando una lista di PazienteClassifica (username, punteggio, url_img)
+        //TODO: costruire la classifica creando una lista di tipo PazienteClassifica (username, punteggio, url_img)
         // url_img si ottiene da personaggioDao ottenendo prima l'id del personaggio selezionato da Paziente paziente.getPersonaggiSbloccati() e
         // poi cercare la chiave con il valore 2 (che significa selezionato)
         pazienti= new ArrayList<>();
@@ -52,7 +52,9 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
             pazienti.add(new PazienteClassifica("username_paziente"+i, i, url_img));
         }
         pazienti.sort((p1, p2) -> p2.getPunteggio() - p1.getPunteggio());
-        pazienteClassificaAdapter = new PazienteClassificaAdapter(pazienti);
+
+        //TODO: creare l'adapter passandor come secondo parametro l'username del paziente attuale
+        pazienteClassificaAdapter = new PazienteClassificaAdapter(pazienti, pazienti.get(5).getUsername());
         recyclerViewClassifica.setAdapter(pazienteClassificaAdapter);
     }
 }

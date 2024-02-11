@@ -1,5 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -39,6 +41,9 @@ public class GenitoreActivity extends AbstractAppActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
         NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
 
         setOnBackPressedCallback(R.id.monitoraggioFragment2);
 

@@ -126,5 +126,14 @@
     <string name="rimuovi_appuntamento">Rimuovi</string>
     <string name="closeApp">Premi ancora indietro per uscire</string>
     <string name="registraPaziente">Registra Paziente</string>
-
+    <string name="avvioRapido">Avvio rapido</string>
+    <string name="registrazione">Registrazione</string>
+    <string name="registrazionePaziente">Registrazione paziente e genitore</string>
+    <string name="iTuoiPazienti">I tuoi pazienti</string>
+    <string name="tuoProfilo">Il tuo profilo</string>
+    <string name="classifica">Classifica</string>
+    <string name="giochiBambini">Giochi del tuo bambino</string>
+    <string name="monitoraggio">Monitora il tuo bambino</string>
+    <string name="gioco">Gioco</string>
+    <string name="personaggi">Personaggi</string>
 </resources>
