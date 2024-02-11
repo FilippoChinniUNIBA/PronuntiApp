@@ -64,9 +64,9 @@ public class CurvedLineView extends View {
         // Draw the curved line between the points
         Path path = new Path();
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        float height = (48 * metrics.density)/2;
-        startY = startY + height;
-        endY = endY + height;
+        //float height = (48 * metrics.density)/2;
+        //startY = startY + height;
+        //endY = endY + height;
         Log.d("startX", String.valueOf(startX));
         Log.d("startY", String.valueOf(startY));
         Log.d("endX", String.valueOf(endX));

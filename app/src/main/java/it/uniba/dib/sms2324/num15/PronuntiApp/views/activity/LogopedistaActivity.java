@@ -1,7 +1,10 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -37,7 +40,7 @@ public class LogopedistaActivity extends AbstractAppActivity {
 
         setOnBackPressedCallback(R.id.pazientiFragment);
 
-
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));
         //setFirstFragment(R.id.frameLayoutLogopedista, new PazientiFragment());
     }

@@ -144,16 +144,17 @@
                             android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!--ContainerBambini-->
-                    <FrameLayout
-                        android:id="@+id/containerBambino"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textInputEditTextTelefonoProfiloGenitore">
-                    </FrameLayout>
+                <!--ContainerBambini-->
+                <androidx.fragment.app.FragmentContainerView
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloPazienteFragment"
+                    android:id="@+id/containerBambino"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/textInputEditTextTelefonoProfiloGenitore"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                </androidx.fragment.app.FragmentContainerView>
 
                 </LinearLayout>
 

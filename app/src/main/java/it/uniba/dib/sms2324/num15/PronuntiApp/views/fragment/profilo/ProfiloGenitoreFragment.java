@@ -41,15 +41,19 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloGenitore);
 
-        setData();
-
-        profiloPazienteFragment = new ProfiloPazienteFragment();
+        /*profiloPazienteFragment = new ProfiloPazienteFragment();
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?*/
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setData();
     }
 
     @Override
