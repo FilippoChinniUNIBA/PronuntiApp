@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,7 +25,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneErroreDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneMancanteDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
@@ -82,7 +81,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             if (!isConnessioneInternet()) {
                 Log.d("AbstractAppActivity.BroadcastReceiver()", "Connessione assente");
 
-                ConnessioneErroreDialog dialog = new ConnessioneErroreDialog(getThisContext());
+                ConnessioneMancanteDialog dialog = new ConnessioneMancanteDialog(getThisContext());
                 dialog.setOnConfermaButtonClickListener(() -> riavviaApplicazione());
                 runOnUiThread(dialog::show);
             }

@@ -4,9 +4,9 @@ import android.content.Context;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
-public class PermessiErroreDialog extends AbstractPopUpDialog {
+public class PermessiDialog extends AbstractPopUpDialog {
 
-	public PermessiErroreDialog(Context context, String descrizione) {
+	public PermessiDialog(Context context, String descrizione) {
 		super(context);
 		setTitolo(context.getString(R.string.errorPermissionTitle));
 		setDescrizione(descrizione);

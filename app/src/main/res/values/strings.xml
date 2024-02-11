@@ -42,7 +42,7 @@
     <string name="errorConnectionDescription">Internet connection is not available. Check your connection, you can\'t use the App without Internet connection</string>
     <string name="errorConnectionTitle">Connection error</string>
     <string name="restartApp" >Restart the app</string>
-    <string name="errorPermissionTitle">Necessary permissions</string>
+    <string name="errorPermissionTitle">Permissions denied</string>
     <string name="errorPermissionOption1">Request them again</string>
     <string name="errorPermissionOption2">I don\'t want to give them</string>
     <string name="confirm">Confirm</string>
@@ -162,6 +162,9 @@
     <string name="personaggi">Characters</string>
     <string name="logoutTitle">Logout?</string>
     <string name="logoutRichiesta">Are you sure you want to Logout PronuntiApp? If you do, then you will have to Login again</string>
+    <string name="permissionDeniedDescription">This App\'s functionality requires to use your Microphone, please concede the Permission if you want to be able to play</string>
+    <string name="infoOk">Ok</string>
+    <string name="permissionDeniedInstructions">This functionality requires permissions to use the microphone. If you don\'t see the messagge to concede the permissions, you have to autorize from the system settings relative to the App</string>
 
 
 </resources>
