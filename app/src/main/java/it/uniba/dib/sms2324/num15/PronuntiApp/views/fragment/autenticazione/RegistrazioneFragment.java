@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.CredentialSaver;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.RegistrazioneViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.LogopedistaActivity;
@@ -88,7 +89,8 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
                 else {
                     Logopedista logopedista = mRegistrazioneViewModel.registrazioneLogopedista(userId, nome, cognome, username, email, password, telefono, indirizzo);
                     Log.d("RegistrazioneFragment.eseguiRegistrazione()", "Logopedista: " + logopedista.toString());
-
+                    CredentialSaver credentialSaver = new CredentialSaver(requireActivity());
+                    credentialSaver.saveCredentials(email,password);
                     getActivity().runOnUiThread(() -> {
                         Intent intent = new Intent(getActivity(), LogopedistaActivity.class);
                         intent.putExtra("profilo", logopedista);

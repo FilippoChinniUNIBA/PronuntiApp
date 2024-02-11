@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         tools:targetApi="31">
         <activity
-            android:name=".views.activity.AutenticazioneActivity"
+            android:name=".views.activity.VerificaActivity"
             android:exported="true"
             android:theme="@style/Theme.PronuntiAppNoActionBar"
             >
@@ -30,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".views.activity.AutenticazioneActivity"
+            android:theme="@style/Theme.PronuntiAppActionBar"
+            android:windowSoftInputMode="adjustPan"
+            />
         <activity android:name=".views.activity.LogopedistaActivity"
             android:theme="@style/Theme.PronuntiAppActionBar"
             android:windowSoftInputMode="adjustPan"

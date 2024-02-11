@@ -15,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.CredentialSaver;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
@@ -78,6 +79,9 @@ public class LoginFragment extends AbstractFragmentWithNavigation {
                 infoDialog.setOnConfermaButtonClickListener(null);
             }
             else {
+                CredentialSaver credentialSaver = new CredentialSaver(requireActivity());
+                credentialSaver.saveCredentials(email,password);
+
                 CompletableFuture<Profilo> futureProfilo = mLoginViewModel.login();
                 futureProfilo.thenAccept(profilo -> {
                     Log.d("LoginFragment.loginActivityProfilo()", "Profilo: " + profilo.toString());
