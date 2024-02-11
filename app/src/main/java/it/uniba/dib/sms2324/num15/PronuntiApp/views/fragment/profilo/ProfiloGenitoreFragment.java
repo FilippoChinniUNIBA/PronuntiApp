@@ -48,7 +48,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         fragmentTransaction.replace(R.id.containerBambino, profiloPazienteFragment);
         fragmentTransaction.commit(); //TODO perché qua non usi la navigazione normale?
 
-
         return view;
     }
 
