@@ -52,6 +52,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
+
         Genitore genitore = mGenitoreViewModel.getGenitoreLiveData().getValue();
 
         textInputEditTextNome.setText(genitore.getNome());
