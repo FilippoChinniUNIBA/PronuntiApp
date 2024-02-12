@@ -31,13 +31,8 @@ public class GenitoreActivity extends AbstractAppActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                navcontroller.getGraph()).setFallbackOnNavigateUpListener(() -> navcontroller.navigateUp()).build();
-
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-        NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         setOnBackPressedCallback(R.id.monitoraggioFragment2);

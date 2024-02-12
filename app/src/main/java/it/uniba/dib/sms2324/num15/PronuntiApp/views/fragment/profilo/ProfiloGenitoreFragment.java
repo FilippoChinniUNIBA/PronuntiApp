@@ -27,6 +27,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
+        setToolBar(view, getString(R.string.tuoProfilo));
 
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 

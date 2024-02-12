@@ -4,10 +4,6 @@
         android:id="@+id/monitoraggioFragment2"
         android:title="Monitoraggio"
         android:icon="@drawable/ic_bambino"/>
-    <item
-        android:id="@+id/scenariGenitoriFragment"
-        android:title="Giochi"
-        android:icon="@drawable/ic_game"/>
     <!--
     <item
         android:id="@+id/classificaGenitore"

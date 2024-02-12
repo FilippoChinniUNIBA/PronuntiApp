@@ -22,8 +22,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDA
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.AppuntamentiGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class AppuntamentiGenitoreFragment extends Fragment {
+public class AppuntamentiGenitoreFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewAppuntamentiGenitore;
     private AppuntamentoGenitoreAdapter appuntamentoAdapter;
     private List<Appuntamento> appuntamenti; // Lista degli appuntamenti (da sostituire con la tua implementazione)
@@ -36,6 +37,9 @@ public class AppuntamentiGenitoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appuntamenti_genitore, container, false);
+
+        setToolBar(view,getString(R.string.i_tuoi_appuntamenti));
+
         recyclerViewAppuntamentiGenitore = view.findViewById(R.id.recyclerViewAppuntamentiGenitore);
         recyclerViewAppuntamentiGenitore.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -28,7 +28,7 @@
                 android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.LogoutFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="end|center_vertical"
                 android:layout_marginBottom="10dp"
                 />
         </androidx.appcompat.widget.Toolbar>
