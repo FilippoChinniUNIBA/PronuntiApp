@@ -1,12 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Base application theme. -->
-    <style name="Theme.PronuntiAppActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.PronuntiAppActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionBarTheme">@style/MyActionBarStyle</item>
     </style>
 
+    <style name="styleToolBar" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="android:paddingTop">20dp</item>
+    </style>
+
+    <!--
+    <item name="actionBarTheme">@style/MyActionBarStyle</item>
     <style name="MyActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
         <item name="background">@color/white</item>
@@ -15,6 +25,7 @@
     <style name="MyTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/black</item>
     </style>
+    -->
 
     <style name="Theme.PronuntiAppNoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowNoTitle">true</item>

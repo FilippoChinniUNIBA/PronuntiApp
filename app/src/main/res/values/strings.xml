@@ -161,7 +161,7 @@
     <string name="gioco">Game</string>
     <string name="personaggi">Characters</string>
     <string name="logoutTitle">Logout?</string>
-    <string name="logoutRichiesta">Are you sure you want to Logout PronuntiApp? If you do, then you will have to Login again</string>
+    <string name="logoutRichiesta">Are you sure you want to logout PronuntiApp? If you do, then you will have to login again when you will use the app</string>
     <string name="permissionDeniedDescription">This App\'s functionality requires to use your Microphone, please concede the Permission if you want to be able to play</string>
     <string name="infoOk">Ok</string>
     <string name="permissionDeniedInstructions">This functionality requires permissions to use the microphone. If you don\'t see the messagge to concede the permissions, you have to autorize from the system settings relative to the App</string>

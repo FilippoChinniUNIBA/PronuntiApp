@@ -11,11 +11,6 @@
         android:label="@string/monitoraggio"
         tools:layout="@layout/fragment_monitoraggio" />
     <fragment
-        android:id="@+id/scenariGenitoriFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.giochi.ScenariGenitoriFragment"
-        android:label="@string/giochiBambini"
-        tools:layout="@layout/fragment_scenari_genitore" />
-    <fragment
         android:id="@+id/appuntamentiGenitoreFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.appuntamenti.AppuntamentiGenitoreFragment"
         android:label="@string/i_tuoi_appuntamenti"

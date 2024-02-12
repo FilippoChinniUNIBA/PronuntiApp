@@ -40,9 +40,10 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.CreazioneAppuntamentoController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazienteAdapter;
 
-public class AppuntamentiLogopedistaFragment extends Fragment {
+public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigation {
 	private RecyclerView recyclerViewAppuntamenti;
 	private Button addAppuntamentoButton;
 	private CardView cardViewAppuntamento;
@@ -66,8 +67,6 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 	private String idLogopedista;
 	private List<Paziente> pazienti;
 	private List<AppuntamentoCustom> appuntamenti;
-
-
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private CreazioneAppuntamentoController mController;
 
@@ -75,6 +74,7 @@ public class AppuntamentiLogopedistaFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_appuntamenti_logopedista, container, false);
+		setToolBar(view, getString(R.string.i_tuoi_appuntamenti));
 
 		this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 		this.mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();

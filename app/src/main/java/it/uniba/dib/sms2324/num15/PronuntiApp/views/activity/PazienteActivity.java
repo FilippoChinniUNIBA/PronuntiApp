@@ -45,15 +45,13 @@ public class PazienteActivity extends AbstractAppActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                navcontroller.getGraph()).setFallbackOnNavigateUpListener(() -> navcontroller.navigateUp()).build();
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-        NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
+
 
         setOnBackPressedCallback(R.id.scenarioFragment);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+       //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 

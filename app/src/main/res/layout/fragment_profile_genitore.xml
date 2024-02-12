@@ -27,6 +27,22 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_above="@id/buttonModificaProfiloGenitore"
             >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/toolBar"
+                style="@style/styleToolBar"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayoutProfiloLogopedistaTotal"
+                tools:ignore="MissingConstraints"
+                android:gravity="center"
+                >
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/logoutFragmentContainer"
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.LogoutFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginBottom="10dp"
+                    />
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayoutImageProfiloGenitore"
@@ -56,18 +72,6 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayoutImageProfiloGenitore"
                     app:layout_constraintStart_toEndOf="@+id/imageViewProfile" />
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/logoutFragmentContainer"
-                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.LogoutFragment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginBottom="150dp"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewProfile"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
