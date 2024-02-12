@@ -250,10 +250,12 @@
                         android:layout_height="wrap_content"
                         android:text="@string/confirm"
                         />
-                    <ImageView
+                    <ImageButton
+                        android:id="@+id/imageButtonArrowUpAppuntamentoLogopedista"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_up"
+                        android:background="@android:color/transparent"
                         />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

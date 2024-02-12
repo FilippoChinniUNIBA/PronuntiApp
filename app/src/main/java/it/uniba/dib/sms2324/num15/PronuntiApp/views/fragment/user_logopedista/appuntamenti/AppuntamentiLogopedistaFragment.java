@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -63,7 +64,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	private String idLogopedista;
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private CreazioneAppuntamentoController mController;
-
+	private ImageButton closeCardUpButton;
 	private View viewOverlaySelezionePaziente;
 
 	@Override
@@ -74,6 +75,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 		this.mController = mLogopedistaViewModel.getCreazioneAppuntamentoController();
 
+		closeCardUpButton = view.findViewById(R.id.imageButtonArrowUpAppuntamentoLogopedista);
 		nestedScrollView = view.findViewById(R.id.nestedScrollViewAppuntamentiLogopedista);
 		cardViewAppuntamento = view.findViewById(R.id.cardViewNuovoAppuntamentoLogopedista);
 		cardViewAppuntamento.setVisibility(View.GONE);
