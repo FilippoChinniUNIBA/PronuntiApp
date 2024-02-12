@@ -12,6 +12,8 @@ public class RichiestaConfermaDialog extends AbstractPopUpDialog {
 		setDescrizione(descrizione);
 		setConfermaButtonText(context.getString(R.string.confirm));
 		setAnnullaButtonText(context.getString(R.string.cancel));
+
+		alertDialog.setCanceledOnTouchOutside(false);
 	}
 
 }
