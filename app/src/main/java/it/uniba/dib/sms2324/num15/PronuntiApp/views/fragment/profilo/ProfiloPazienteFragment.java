@@ -81,23 +81,20 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     }
 
     @Override
-    public void setData(){
-        String idGenitore = mGenitoreViewModel.getGenitoreLiveData().getValue().getIdProfilo();
-        //TODO prendere il paziente dal genitore dal viewmodelGenitore come livedate
-        mGenitoreViewModel.getPazienteGenitore(idGenitore).thenAccept(paziente -> {
-            textInputEditTextNome.setText(paziente.getNome());
-            textInputEditTextNome.setEnabled(false);
-            textInputEditTextCognome.setText(paziente.getCognome());
-            textInputEditTextCognome.setEnabled(false);
-            textViewUsernameProfilo.setText(paziente.getUsername());
-            textInputEditTextDataNascita.setText(paziente.getDataNascita().toString());
-            textInputEditTextDataNascita.setEnabled(false);
-            textInputEditTextEmail.setText(paziente.getEmail());
-            textInputEditTextEmail.setEnabled(false);
-            spinnerSesso.setSelection(paziente.getSesso());
-            spinnerSesso.setEnabled(false);
-        });
+    public void setData() {
+        Paziente paziente = mGenitoreViewModel.getPazienteLiveData().getValue();
 
+        textInputEditTextNome.setText(paziente.getNome());
+        textInputEditTextNome.setEnabled(false);
+        textInputEditTextCognome.setText(paziente.getCognome());
+        textInputEditTextCognome.setEnabled(false);
+        textViewUsernameProfilo.setText(paziente.getUsername());
+        textInputEditTextDataNascita.setText(paziente.getDataNascita().toString());
+        textInputEditTextDataNascita.setEnabled(false);
+        textInputEditTextEmail.setText(paziente.getEmail());
+        textInputEditTextEmail.setEnabled(false);
+        spinnerSesso.setSelection(paziente.getSesso());
+        spinnerSesso.setEnabled(false);
     }
 
     @Override
