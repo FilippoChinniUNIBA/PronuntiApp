@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
@@ -18,13 +20,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.EntryCla
 
 public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
-	private MutableLiveData<List<Personaggio>> mPersonaggi = new MutableLiveData<>();
+	private MutableLiveData<List<Personaggio>> mListaPersonaggi = new MutableLiveData<>();
 	private MutableLiveData<List<EntryClassifica>> mClassifica = new MutableLiveData<>();
 
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
 	private EsercizioSequenzaParoleController mEsercizioSequenzaParoleController;
 	private EsercizioCoppiaImmaginiController mEsercizioCoppiaImmaginiController;
-	private ClassificaPazienteController mClassificaPazienteController;
+	private ClassificaController mClassificaController;
 
 	public LiveData<Paziente> getPazienteLiveData() {
 		return mPaziente;
@@ -33,11 +35,11 @@ public class PazienteViewModel extends ViewModel {
 		mPaziente.setValue(paziente);
 	}
 
-	public LiveData<List<Personaggio>> getPersonaggiLiveData() {
-		return mPersonaggi;
+	public LiveData<List<Personaggio>> getListaPersonaggiLiveData() {
+		return mListaPersonaggi;
 	}
-	public void setPersonaggi(List<Personaggio> personaggi) {
-		this.mPersonaggi.setValue(personaggi);
+	public void setPersonaggi(List<Personaggio> listaPersonaggi) {
+		this.mListaPersonaggi.setValue(listaPersonaggi);
 	}
 
 	public LiveData<List<EntryClassifica>> getClassificaLiveData() {
@@ -47,6 +49,26 @@ public class PazienteViewModel extends ViewModel {
 		this.mClassifica.setValue(classifica);
 	}
 
+
+	public CompletableFuture<Void> initMPersonaggi() {
+		CompletableFuture<Void> future = new CompletableFuture<>();
+
+		PersonaggioDAO personaggioDAO = new PersonaggioDAO();
+		personaggioDAO.getAll().thenAccept(personaggi -> {
+			mListaPersonaggi.setValue(personaggi);
+			future.complete(null);
+		});
+
+		return future;
+	}
+
+	public void initMClassifica() {
+		PazienteDAO pazienteDAO = new PazienteDAO();
+
+		pazienteDAO.getLogopedistaByIdPaziente(this.mPaziente.getValue().getIdProfilo()).thenAccept(logopedista -> {
+			mClassifica.setValue(mClassificaController.costruisciClassifica(logopedista.getPazienti(), this.mListaPersonaggi.getValue()));
+		});
+	}
 
 	public void aggiornaPazienteRemoto() {
 		Paziente paziente = mPaziente.getValue();
@@ -60,7 +82,8 @@ public class PazienteViewModel extends ViewModel {
 	public void aggiornaClassificaRemota() {
 		Paziente paziente = mPaziente.getValue();
 
-		//mClassificaPazienteController.aggiornaClassificaRemota(paziente);
+		//TODO vedere come fare
+		//mClassificaController.aggiornaClassificaRemota(paziente);
 	}
 
 
@@ -85,11 +108,11 @@ public class PazienteViewModel extends ViewModel {
 		return this.mEsercizioCoppiaImmaginiController;
 	}
 
-	public  ClassificaPazienteController getClassificaPazienteController(){
-		if(this.mClassificaPazienteController == null){
-			this.mClassificaPazienteController = new ClassificaPazienteController();
+	public ClassificaController getClassificaController() {
+		if(this.mClassificaController == null){
+			this.mClassificaController = new ClassificaController();
 		}
-		return this.mClassificaPazienteController;
+		return this.mClassificaController;
 	}
 
 }

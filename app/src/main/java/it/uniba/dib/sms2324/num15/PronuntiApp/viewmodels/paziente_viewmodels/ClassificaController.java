@@ -9,17 +9,19 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDA
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.EntryClassifica;
 
-public class ClassificaPazienteController {
-    public CompletableFuture<List<EntryClassifica>> retrieveClassificaPazienti(String idPaziente) {
+public class ClassificaController {
+
+    /*public CompletableFuture<List<EntryClassifica>> retrieveClassificaPazienti(String idPaziente) {
 
         PazienteDAO pazienteDAO = new PazienteDAO();
         PersonaggioDAO personaggioDAO = new PersonaggioDAO();
 
         List<EntryClassifica> pazientiClassifica = new ArrayList<>();
         CompletableFuture<List<EntryClassifica>> futureClassifica = new CompletableFuture<>();
-        CompletableFuture<Logopedista> futureLogopedista = pazienteDAO.getDatiLogopedistaByIdPaziente(idPaziente);
+        CompletableFuture<Logopedista> futureLogopedista = pazienteDAO.getLogopedistaByIdPaziente(idPaziente);
 
         futureLogopedista.thenAccept(logopedista -> {
             for (Paziente paziente : logopedista.getPazienti()) {
@@ -36,15 +38,35 @@ public class ClassificaPazienteController {
                     }
                 }
             }
-
-            // Ordina la lista di pazienti classificati
             pazientiClassifica.sort((p1, p2) -> p2.getPunteggio() - p1.getPunteggio());
-
-            // Completa il future con la lista di pazienti classificati
             futureClassifica.complete(pazientiClassifica);
         });
 
         return futureClassifica;
+    }*/
+
+    public List<EntryClassifica> costruisciClassifica(List<Paziente> pazienti, List<Personaggio> personaggi) {
+        List<EntryClassifica> classifica = new ArrayList<>();
+
+        for (Paziente paziente : pazienti) {
+            for (Map.Entry<String, Integer> entry : paziente.getPersonaggiSbloccati().entrySet()) {
+
+                if (entry.getValue() == 2) {
+                    String idPersonaggio = entry.getKey();
+
+                    for (Personaggio personaggio : personaggi) {
+                        if (personaggio.getIdPersonaggio().equals(idPersonaggio)) {
+                            EntryClassifica entryClassifica = new EntryClassifica(paziente.getUsername(), paziente.getPunteggioTot(), personaggio.getTexturePersonaggio());
+                            classifica.add(entryClassifica);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        classifica.sort((p1, p2) -> p2.getPunteggio() - p1.getPunteggio());
+        return classifica;
     }
 
 }

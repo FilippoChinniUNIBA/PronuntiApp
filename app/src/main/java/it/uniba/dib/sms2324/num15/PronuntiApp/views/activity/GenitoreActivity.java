@@ -23,22 +23,20 @@ public class GenitoreActivity extends AbstractAppActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genitore);
-        navcontroller = Navigation.findNavController(this, R.id.fragmentContainerGenitore);
 
-        this.mGenitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
-        mGenitoreViewModel.setGenitore((Genitore) getIntent().getSerializableExtra("profilo"));
+        //Setup Navigazione
+        navcontroller = Navigation.findNavController(this, R.id.fragmentContainerGenitore);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-
-
-
         setOnBackPressedCallback(R.id.monitoraggioFragment2);
 
-        //setBottomNavBar(R.menu.bottom_navbar_genitore, new NavigationNavBarSelectorGenitore(getSupportFragmentManager(), R.id.fragmentContainerGenitore, bottomNavigationView));
-        //setFirstFragment(R.id.fragmentContainerGenitore, new ScenariGenitoriFragment());
+        //Setup Dati
+        this.mGenitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
+        this.mGenitoreViewModel.setGenitore((Genitore) getIntent().getSerializableExtra("mGenitore"));
+        this.mGenitoreViewModel.initMPaziente().thenAccept(aVoid -> mGenitoreViewModel.initMListaAppuntamenti());
     }
 
 }
