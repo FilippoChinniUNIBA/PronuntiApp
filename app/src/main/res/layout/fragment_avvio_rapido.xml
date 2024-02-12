@@ -5,7 +5,9 @@
     android:id="@+id/layoutAvvioRapido"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragment.autenticazione.AvvioRapidoFragment">
+    tools:context=".views.fragment.autenticazione.AvvioRapidoFragment"
+    android:background="@color/backgroundWhite"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
