@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,7 +41,9 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
         String url = urls.get(position);
         String nomePersonaggio = nomiPersonaggi.get(position); // Ottieni il nome del personaggio corrispondente
         holder.textViewNomePersonaggio.setText(nomePersonaggio); // Imposta il nome del personaggio nel TextView
-        Picasso.get().load(url).into(holder.imageViewPersonaggio);
+        //Picasso.get().load(url).into(holder.imageViewPersonaggio);
+        Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(url).into(holder.imageViewPersonaggio);
+
     }
 
     @Override

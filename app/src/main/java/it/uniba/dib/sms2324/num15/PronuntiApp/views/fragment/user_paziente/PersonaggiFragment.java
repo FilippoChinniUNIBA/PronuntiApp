@@ -44,6 +44,8 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         super.onCreate(savedInstanceState);
         View view= inflater.inflate(R.layout.fragment_personaggi, container, false);
 
+        setToolBar(view, getString(R.string.personaggi));
+
         /*
         TypedArray typedArray = getResources().obtainTypedArray(R.array.personaggi_images);
 
@@ -72,6 +74,7 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
 
         recyclerViewPersonaggiSbloccati = view.findViewById(R.id.recyclerViewPersonaggiSbloccati);
         recyclerViewPersonaggiAcquistabili = view.findViewById(R.id.recyclerViewPersonaggiAcquistabili);
+        recyclerViewPersonaggiAcquistabili.setHasFixedSize(true);
 
         mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         urlsPersonaggiSbloccati = new ArrayList<>();
