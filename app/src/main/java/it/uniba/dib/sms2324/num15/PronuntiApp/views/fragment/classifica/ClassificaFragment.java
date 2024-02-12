@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
@@ -56,8 +57,10 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
 
         String idPaziente = mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo();
         Log.d("ClassificaFragment","mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo()"+mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo());
-            pazienteClassificaAdapter = new PazienteClassificaAdapter(mClassificaPazienteController.retrieveClassificaPazienti(idPaziente),idPaziente);
-            recyclerViewClassifica.setAdapter(pazienteClassificaAdapter);
+        CompletableFuture<List<PazienteClassifica>> future = mClassificaPazienteController.retrieveClassificaPazienti(idPaziente);
+        future.thenAccept(pazientiClassifica ->{
+                pazienteClassificaAdapter = new PazienteClassificaAdapter(pazientiClassifica,idPaziente);
+                recyclerViewClassifica.setAdapter(pazienteClassificaAdapter);}
+                );}
 
-    }
 }
