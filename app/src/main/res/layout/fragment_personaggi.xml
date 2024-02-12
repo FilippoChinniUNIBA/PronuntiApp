@@ -13,6 +13,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@id/toolBar"
+        style="@style/styleToolBar"
+        tools:ignore="MissingConstraints"
+        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upCoinsLayout"
         android:layout_width="match_parent"

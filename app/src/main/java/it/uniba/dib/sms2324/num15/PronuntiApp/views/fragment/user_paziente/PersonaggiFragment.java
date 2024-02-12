@@ -27,6 +27,7 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View view= inflater.inflate(R.layout.fragment_personaggi, container, false);
+        setToolBar(view, getString(R.string.personaggi));
 
         /*
         TypedArray typedArray = getResources().obtainTypedArray(R.array.personaggi_images);

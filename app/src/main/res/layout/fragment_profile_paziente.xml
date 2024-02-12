@@ -144,6 +144,7 @@
                         android:prompt="@string/gender_hint"
                         android:entries="@array/sesso_array"
                         android:layout_marginTop="10dp"
+                        android:textColor="@color/hintTextColorDisabled"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

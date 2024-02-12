@@ -41,6 +41,8 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_registrazione, container, false);
 
+        setToolBar(view, getString(R.string.registrazione));
+
         this.mRegistrazioneViewModel = new ViewModelProvider(this).get(RegistrazioneViewModel.class);
 
         this.editTextNome = view.findViewById(R.id.textInputEditTextNome);
