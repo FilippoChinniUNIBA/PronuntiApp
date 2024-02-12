@@ -12,7 +12,7 @@ public class ConnessioneMancanteDialog extends AbstractPopUpDialog {
 		setDescrizione(context.getString(R.string.errorConnectionDescription));
 		setConfermaButtonText(context.getString(R.string.restartApp));
 
-		setCancelable(false);
+		alertDialog.setCanceledOnTouchOutside(false);
 	}
 
 }

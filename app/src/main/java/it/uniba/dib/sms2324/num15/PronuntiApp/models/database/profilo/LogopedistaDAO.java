@@ -122,4 +122,5 @@ public class LogopedistaDAO implements DAO<Logopedista> {
 			return result;
 		});
 	}
+
 }
