@@ -53,11 +53,10 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cardViewImmagineEsercizioDenominazione"
-            android:layout_marginBottom="0dp"
             android:elevation="1dp"
             />
 
@@ -76,9 +75,8 @@
             >
             <ImageView
                 android:id="@+id/imageViewImmagineEsercizioDenominazione"
-                android:layout_width="270dp"
-                android:layout_height="270dp"
-                android:src="@drawable/test_imageview"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
                 />
 
@@ -145,8 +143,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonCompletaEsercizio"
             app:layout_constraintStart_toEndOf="@+id/buttonAiuti"
-            app:layout_constraintTop_toBottomOf="@+id/textViewEsercizioMicSuggestion"
             android:elevation="1dp"
+            android:layout_marginBottom="40dp"
             android:tooltipText="@string/micDenominazioneImmagine"
             />
 

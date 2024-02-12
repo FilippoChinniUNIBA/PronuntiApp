@@ -63,6 +63,7 @@
     <string name="aidRemaining"> aid remaning </string>
     <string name="noAidRemaining">No aid remaning!</string>
     <string name="recordBeforeCheck">Record before the answer!</string>
+    <string name="ascoltaPrima">Before listen the audio then try to repeat!</string>
     <string name="noWordsReconized">No word reconized!</string>
     <string name="overwriteAudio"> Overwrite audio?</string>
     <string name="overwriteAudioDescription">Are you sure that you would overwrite the audio?</string>

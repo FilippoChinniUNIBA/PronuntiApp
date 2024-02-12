@@ -60,6 +60,7 @@
     <string name="aidRemaining"> aiuti rimasti</string>
     <string name="noAidRemaining">Nessun aiuto rimasto!</string>
     <string name="recordBeforeCheck">Registra prima la risposta!</string>
+    <string name="ascoltaPrima">Ascolta prima l\'audio e dopo prova a ripetere!</string>
     <string name="noWordsReconized">Nessuna parola riconosciuta!</string>
     <string name="overwriteAudio"> Sovrascrivi audio?</string>
     <string name="overwriteAudioDescription">Sei sicuro di voler sovrascrivere l\'audio?</string>
