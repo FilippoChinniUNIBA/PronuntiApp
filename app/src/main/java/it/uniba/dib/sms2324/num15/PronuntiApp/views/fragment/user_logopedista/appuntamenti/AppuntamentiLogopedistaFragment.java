@@ -105,6 +105,12 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	@Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+		closeCardUpButton.setOnClickListener(v -> {
+			linearLayoutPazienteAppuntamentoLogopedista.setVisibility(View.GONE);
+			addAppuntamentoButton.setVisibility(View.VISIBLE);
+		});
+
         addAppuntamentoButton.setOnClickListener(v -> {
 			viewOverlaySelezionePaziente.setVisibility(View.GONE);
             cardViewAppuntamento.setVisibility(View.VISIBLE);
