@@ -8,18 +8,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
     private Context context;
-    private List<Personaggio> listaPersonaggi;
+    private List<String> urls;
+    private List<String> nomiPersonaggi; // Aggiungi una lista per memorizzare i nomi dei personaggi
 
-    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> listaPersonaggi) {
+    public PersonaggiAcquistabiliAdapter(Context context, List<String> urls, List<String> nomiPersonaggi) {
         this.context = context;
-        this.listaPersonaggi = listaPersonaggi;
+        this.urls = urls;
+        this.nomiPersonaggi = nomiPersonaggi; // Inizializza la lista dei nomi dei personaggi
     }
 
     @NonNull
@@ -31,27 +35,25 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Personaggio currentItem = listaPersonaggi.get(position);
-        //holder.textViewNomePersonaggio.setText(currentItem.getNome());
+        String url = urls.get(position);
+        String nomePersonaggio = nomiPersonaggi.get(position); // Ottieni il nome del personaggio corrispondente
+        holder.textViewNomePersonaggio.setText(nomePersonaggio); // Imposta il nome del personaggio nel TextView
+        Picasso.get().load(url).into(holder.imageViewPersonaggio);
     }
 
     @Override
     public int getItemCount() {
-        return listaPersonaggi.size();
+        return urls.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewNomePersonaggio;
         ImageView imageViewPersonaggio;
+        TextView textViewNomePersonaggio;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewNomePersonaggio = itemView.findViewById(R.id.textViewNomePersonaggio);
             imageViewPersonaggio = itemView.findViewById(R.id.imageViewPersonaggio);
-            // Altri findViewById per altre viste...
-
-            // Puoi impostare clic e altre interazioni qui se necessario
+            textViewNomePersonaggio = itemView.findViewById(R.id.textViewNomePersonaggio);
         }
     }
-
 }
