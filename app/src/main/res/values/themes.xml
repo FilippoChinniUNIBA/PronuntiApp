@@ -130,7 +130,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:paddingVertical">10dp</item>
         <item name="android:paddingHorizontal">20dp</item>
-        <item name="android:background">@drawable/rectangle_rounded_border_bkg</item>
+        <item name="android:background">@drawable/rectangle_rounded_border_white_bkg</item>
         <item name="android:gravity">center</item>
     </style>
 
