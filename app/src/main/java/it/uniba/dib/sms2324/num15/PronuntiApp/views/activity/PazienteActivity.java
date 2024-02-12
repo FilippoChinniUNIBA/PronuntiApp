@@ -50,5 +50,4 @@ public class PazienteActivity extends AbstractAppActivity {
         this.mPazienteViewModel.initMPersonaggi().thenAccept(aVoid -> mPazienteViewModel.initMClassifica());
     }
 
-
 }
