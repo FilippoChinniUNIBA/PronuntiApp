@@ -13,23 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPersonaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.ClassificaPazienteController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ClassificaFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewClassifica;
-    private PazienteClassificaAdapter pazienteClassificaAdapter;
-    private List<PazienteClassifica> pazienti;
+    private EntryClassificaAdapter entryClassificaAdapter;
+    private List<EntryClassifica> pazienti;
     private PazienteViewModel mPazienteViewModel;
     private ClassificaPazienteController mClassificaPazienteController;
 
@@ -51,16 +46,16 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: costruire la classifica creando una lista di tipo PazienteClassifica (username, punteggio, url_img)
+        //TODO: costruire la classifica creando una lista di tipo EntryClassifica (username, punteggio, url_img)
         // url_img si ottiene da personaggioDao ottenendo prima l'id del personaggio selezionato da Paziente paziente.getPersonaggiSbloccati() e
         // poi cercare la chiave con il valore 2 (che significa selezionato)
 
         String idPaziente = mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo();
         Log.d("ClassificaFragment","mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo()"+mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo());
-        CompletableFuture<List<PazienteClassifica>> future = mClassificaPazienteController.retrieveClassificaPazienti(idPaziente);
+        CompletableFuture<List<EntryClassifica>> future = mClassificaPazienteController.retrieveClassificaPazienti(idPaziente);
         future.thenAccept(pazientiClassifica ->{
-                pazienteClassificaAdapter = new PazienteClassificaAdapter(pazientiClassifica,idPaziente);
-                recyclerViewClassifica.setAdapter(pazienteClassificaAdapter);}
+                entryClassificaAdapter = new EntryClassificaAdapter(pazientiClassifica,idPaziente);
+                recyclerViewClassifica.setAdapter(entryClassificaAdapter);}
                 );}
 
 }

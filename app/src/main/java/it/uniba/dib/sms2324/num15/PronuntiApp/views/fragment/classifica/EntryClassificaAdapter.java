@@ -9,19 +9,18 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
-public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClassificaAdapter.PazienteViewHolder> {
+public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassificaAdapter.PazienteViewHolder> {
 
-    private List<PazienteClassifica> pazienti;
+    private List<EntryClassifica> pazienti;
     private String pazienteAttuale;
 
-    public PazienteClassificaAdapter(List<PazienteClassifica> pazienti, String pazienteAttuale) {
+    public EntryClassificaAdapter(List<EntryClassifica> pazienti, String pazienteAttuale) {
         this.pazienti = pazienti;
         this.pazienteAttuale = pazienteAttuale;
     }
@@ -34,7 +33,7 @@ public class PazienteClassificaAdapter extends RecyclerView.Adapter<PazienteClas
 
     @Override
     public void onBindViewHolder(PazienteViewHolder holder, int position) {
-        PazienteClassifica paziente = pazienti.get(position);
+        EntryClassifica paziente = pazienti.get(position);
 
         if(position==0) {
             holder.imageViewCorona.setVisibility(View.VISIBLE);

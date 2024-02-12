@@ -121,4 +121,15 @@ public class AppuntamentoDAO implements DAO<Appuntamento> {
 		});
 	}
 
+	public void updateListaAppuntamenti(List<Appuntamento> listaAppuntamenti) {
+		for (Appuntamento appuntamento : listaAppuntamenti) {
+			if (appuntamento.getIdAppuntamento() == null) {
+				this.save(appuntamento);
+			}
+			else {
+				this.update(appuntamento);
+			}
+		}
+	}
+
 }
