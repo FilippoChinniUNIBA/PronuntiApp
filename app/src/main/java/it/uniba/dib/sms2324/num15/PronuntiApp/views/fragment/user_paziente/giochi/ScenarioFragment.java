@@ -39,12 +39,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 
-
-		ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-		if (actionBar != null) {
-			actionBar.hide();
-		}
-
 		topBarFragment = new TopBarFragment();
 		FragmentManager fragmentManager = getChildFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -223,9 +217,4 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-		((AppCompatActivity) getActivity()).getSupportActionBar().show();
-	}
 }

@@ -107,7 +107,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
         super.onViewCreated(view, savedInstanceState);
 
 		closeCardUpButton.setOnClickListener(v -> {
-			linearLayoutPazienteAppuntamentoLogopedista.setVisibility(View.GONE);
+			cardViewAppuntamento.setVisibility(View.GONE);
 			addAppuntamentoButton.setVisibility(View.VISIBLE);
 		});
 
