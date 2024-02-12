@@ -53,8 +53,8 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
         //TODO: togliere TODO sopra
 
         mPazienteViewModel.getClassificaLiveData().observe(getViewLifecycleOwner(), classifica -> {
-                    entryClassificaAdapter = new EntryClassificaAdapter(classifica, mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo());
-                    recyclerViewClassifica.setAdapter(entryClassificaAdapter);
+            entryClassificaAdapter = new EntryClassificaAdapter(classifica, mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo());
+            recyclerViewClassifica.setAdapter(entryClassificaAdapter);
         });
     }
 
