@@ -13,7 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
+        <androidx.appcompat.widget.Toolbar
+            android:id="@id/toolBar"
+            style="@style/styleToolBar"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintBottom_toTopOf="@+id/textViewTitoloRegistrazione"
+            />
         <TextView
             android:layout_marginTop="20dp"
             android:id="@+id/textViewTitoloRegistrazione"
@@ -26,7 +31,7 @@
             app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazione"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar"
             />
 
 

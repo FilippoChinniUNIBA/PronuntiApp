@@ -112,7 +112,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
         imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
 
-        imageButtonAvviaRegistrazione.setOnClickListener(v -> avviaPrimaRegistrazione());
+        imageButtonAvviaRegistrazione.setOnClickListener(v -> invalidRegistrazione());
         viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
         viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
 
@@ -142,7 +142,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
 
         audioRecorder.startRecording();
 
-        buttonCompletaEsercizio.setOnClickListener(v -> invalidConferma());
+        buttonCompletaEsercizio.setOnClickListener(v -> completaEsercizio());
     }
 
     private void stoppaRegistrazione(){
@@ -163,6 +163,10 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         Toast.makeText(getContext(), getContext().getString(R.string.recordBeforeCheck), Toast.LENGTH_SHORT).show();
     }
 
+    private void invalidRegistrazione() {
+        Toast.makeText(getContext(), getContext().getString(R.string.ascoltaPrima), Toast.LENGTH_SHORT).show();
+    }
+
     private void avviaRiproduzioneAudio() {
         if (!firstClickReproduced) {
             abilitaCompletamento();
@@ -175,7 +179,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
 
     private void abilitaCompletamento() {
         firstClickReproduced = true;
-        buttonCompletaEsercizio.setOnClickListener(v -> completaEsercizio());
+        imageButtonAvviaRegistrazione.setOnClickListener(v -> avviaPrimaRegistrazione());
     }
 
     public void stoppaRiproduzioneAudio() {

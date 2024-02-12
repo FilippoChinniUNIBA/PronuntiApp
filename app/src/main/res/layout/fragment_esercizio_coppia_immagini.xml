@@ -87,7 +87,6 @@
                         android:id="@+id/imageView1ImmagineEsercizioCoppiaImmagini"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/test_imageview"
                         android:scaleType="centerCrop"
                         android:background="@android:color/transparent"
                         />
@@ -110,7 +109,6 @@
                         android:id="@+id/imageView2ImmagineEsercizioCoppiaImmagini"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/test_imageview"
                         android:scaleType="centerCrop"
                         android:background="@android:color/transparent"
                         />

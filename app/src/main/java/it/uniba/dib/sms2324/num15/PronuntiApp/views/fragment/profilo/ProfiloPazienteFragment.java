@@ -93,7 +93,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextDataNascita.setEnabled(false);
         textInputEditTextEmail.setText(paziente.getEmail());
         textInputEditTextEmail.setEnabled(false);
-        spinnerSesso.setSelection(paziente.getSesso());
+        spinnerSesso.setText(Character.toString(paziente.getSesso()));
         spinnerSesso.setEnabled(false);
     }
 

@@ -33,6 +33,8 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_classifica, container, false);
 
+        setToolBar(view, getString(R.string.classifica));
+
         recyclerViewClassifica = view.findViewById(R.id.recyclerViewClassifica);
         recyclerViewClassifica.setLayoutManager(new LinearLayoutManager(getContext()));
 
