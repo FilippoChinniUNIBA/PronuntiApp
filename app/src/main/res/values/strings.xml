@@ -47,7 +47,7 @@
     <string name="errorPermissionOption2">I don\'t want to give them</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
-    <string name="infoTitle">Info</string>
+    <string name="infoTitle">Attention</string>
     <string name="startRecording">Start Recording</string>
     <string name="stopRecording">Stop Recording</string>
     <string name="CheckAnswer">Check</string>
@@ -165,6 +165,6 @@
     <string name="permissionDeniedDescription">This App\'s functionality requires to use your Microphone, please concede the Permission if you want to be able to play</string>
     <string name="infoOk">Ok</string>
     <string name="permissionDeniedInstructions">This functionality requires permissions to use the microphone. If you don\'t see the messagge to concede the permissions, you have to autorize from the system settings relative to the App</string>
-
+    <string name="inputErratoAggiungiAppuntamento">Probably you have miss or input wrong data. Make sure on correct format of date in yyyy-mm-gg and select a patient in the system.</string>
 
 </resources>

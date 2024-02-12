@@ -94,7 +94,7 @@
         <item>Wonder Woman</item>
     </string-array>
     <string name="accesso_rapido">Accesso Rapido</string>
-    <string name="infoTitle">Info</string>
+    <string name="infoTitle">Attenzione</string>
     <string name="suggestEsercizioCoppiaImmagini">Ascolta l\'audio prima di rispondere!</string>
     <string name="titleEsercizioCoppiaImmagini">Qual è l\'immagine che hai ascoltato?</string>
     <string name="titleEsercizioSequenzaParole">Cosa sta dicendo l\'audio?\n Prova a ripeterlo!</string>
@@ -141,4 +141,7 @@
     <string name="permissionDeniedDescription">Questa funzionalità richiede di utilizzare il tuo Microfono, perfavore concedi l\'autorizzazione se vuoi eseguire l\'esercizio</string>
     <string name="infoOk">Ok</string>
     <string name="permissionDeniedInstructions">Questa funzionalità richiede i permessi per utilizzare il microfono. Se non ti compare il messaggio per autorizzare i permessi, dovrai concederli dalle impostazioni del dispositivo riguardanti l\'App</string>
+    <string name="inputErratoAggiungiAppuntamento">Probabilmente hai sbagliato ad inserire dei dati. Assicurati che la data sia nel formato yyyy-mm-dd e seleziona un paziente nel sistema.</string>
+
+
 </resources>

@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/nav_bar_height"
+        android:background="@color/backgroundSelector"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -305,11 +306,18 @@
         android:layout_height="wrap_content"
         android:text="@string/nuovo_appuntamento"
         android:gravity="center"
-        android:fontFamily="sans-serif-black"
         android:textSize="18sp"
         android:layout_marginHorizontal="20dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="70dp"
+        />
+
+    <View
+        android:id="@+id/viewOverlayAppuntamentiLogopedistaSelezionePaziente"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:elevation="1dp"
         />
 
     <LinearLayout
@@ -320,7 +328,7 @@
         android:elevation="2dp"
         android:visibility="visible"
         android:layout_alignTop="@+id/nestedScrollViewAppuntamentiLogopedista"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/rectangle_rounded_border_white_no_top_bkg"
         android:padding="2dp"
         >
@@ -336,12 +344,6 @@
                 />
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
-    <View
-        android:id="@+id/viewOverlayAppuntamentiLogopedista"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
 </RelativeLayout>
 
