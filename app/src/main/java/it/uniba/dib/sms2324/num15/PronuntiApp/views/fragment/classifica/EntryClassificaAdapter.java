@@ -16,7 +16,6 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassificaAdapter.PazienteViewHolder> {
-
     private List<EntryClassifica> pazienti;
     private String pazienteAttuale;
 
@@ -35,23 +34,23 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
     public void onBindViewHolder(PazienteViewHolder holder, int position) {
         EntryClassifica paziente = pazienti.get(position);
 
-        if(position==0) {
+        if (position == 0) {
             holder.imageViewCorona.setVisibility(View.VISIBLE);
             holder.imageViewCorona.setImageResource(R.drawable.crown_gold);
-        } else if(position==1) {
+        } else if (position == 1) {
             holder.imageViewCorona.setVisibility(View.VISIBLE);
             holder.imageViewCorona.setImageResource(R.drawable.crown_silver);
-        } else if(position==2) {
+        } else if (position == 2) {
             holder.imageViewCorona.setVisibility(View.VISIBLE);
             holder.imageViewCorona.setImageResource(R.drawable.crown_bronze);
         } else {
             holder.imageViewCorona.setVisibility(View.INVISIBLE);
         }
 
-        if(pazienteAttuale.equals(paziente.getUsername())) {
+        if (pazienteAttuale.equals(paziente.getUsername())) {
             holder.linearLayoutClassificaItem.setBackground(holder.itemView.getContext().getDrawable(R.drawable.stroke_selector));
-        } else {
         }
+
         holder.textViewPosizione.setText(String.valueOf(position + 1));
         holder.textViewUsernamePaziente.setText(paziente.getUsername());
         holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggio()));
@@ -63,14 +62,15 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
         return pazienti.size();
     }
 
-    public class PazienteViewHolder extends RecyclerView.ViewHolder {
 
+    public class PazienteViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewPosizione;
         public ImageView imageView;
         public TextView textViewUsernamePaziente;
         public TextView textViewPunteggio;
         public ImageView imageViewCorona;
         public LinearLayout linearLayoutClassificaItem;
+
         public PazienteViewHolder(View itemView) {
             super(itemView);
             textViewPosizione = itemView.findViewById(R.id.textViewPosizione);
@@ -81,6 +81,7 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
             linearLayoutClassificaItem = itemView.findViewById(R.id.linearLayoutClassificaItem);
         }
     }
+
 }
 
 
