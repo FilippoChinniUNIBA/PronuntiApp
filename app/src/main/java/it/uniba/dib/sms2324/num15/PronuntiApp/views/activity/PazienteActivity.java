@@ -33,30 +33,21 @@ public class PazienteActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         setContentView(R.layout.activity_paziente);
 
+        //Setup Navigazione
         navcontroller = Navigation.findNavController(this, R.id.fragmentContainerPaziente);
-
-        this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
-        mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("profilo"));
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
-
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-
-
         setOnBackPressedCallback(R.id.scenarioFragment);
 
-       //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-
-        //setBottomNavBar(R.menu.bottom_navbar_paziente, new NavigationNavBarSelectorPaziente(getSupportFragmentManager(), R.id.fragmentContainerPaziente, bottomNavigationView));
-        //setFirstFragment(R.id.fragmentContainerPaziente, new ScenarioFragment());
+        //Setup Dati
+        this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
+        this.mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("mPaziente"));
+        this.mPazienteViewModel.initMPersonaggi().thenAccept(aVoid -> mPazienteViewModel.initMClassifica());
     }
 
 

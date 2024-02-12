@@ -36,7 +36,6 @@ public class RegistrazioneFragment extends AbstractFragmentWithNavigation {
 
     private RegistrazioneViewModel mRegistrazioneViewModel;
 
-    public RegistrazioneFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

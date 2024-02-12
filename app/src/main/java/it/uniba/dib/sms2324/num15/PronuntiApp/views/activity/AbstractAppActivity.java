@@ -86,7 +86,6 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                 runOnUiThread(dialog::show);
             }
         }
-
     };
 
     private void riavviaApplicazione() {
@@ -108,18 +107,33 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
 
     public void navigaConProfilo(Profilo profilo, Context context) {
         if (profilo instanceof Logopedista) {
-            Intent intent = new Intent(context, LogopedistaActivity.class);
-            intent.putExtra("profilo", profilo);
+            Intent intent = buildIntentLogopedista((Logopedista) profilo, context);
             startActivity(intent);
         } else if (profilo instanceof Genitore) {
-            Intent intent = new Intent(context, GenitoreActivity.class);
-            intent.putExtra("profilo", profilo);
+            Intent intent = buildIntentGenitore((Genitore) profilo, context);
             startActivity(intent);
         } else if (profilo instanceof Paziente) {
-            Intent intent = new Intent(context, PazienteActivity.class);
-            intent.putExtra("profilo", profilo);
+            Intent intent = buildIntentPaziente((Paziente) profilo, context);
             startActivity(intent);
         }
+    }
+
+    private Intent buildIntentLogopedista(Logopedista logopedista, Context context) {
+        Intent intent = new Intent(context, LogopedistaActivity.class);
+        intent.putExtra("mLogopedista", logopedista);
+        return intent;
+    }
+
+    private Intent buildIntentGenitore(Genitore genitore, Context context) {
+        Intent intent = new Intent(context, GenitoreActivity.class);
+        intent.putExtra("mGenitore", genitore);
+        return intent;
+    }
+
+    private Intent buildIntentPaziente(Paziente paziente, Context context) {
+        Intent intent = new Intent(context, PazienteActivity.class);
+        intent.putExtra("mPaziente", paziente);
+        return intent;
     }
 
 }

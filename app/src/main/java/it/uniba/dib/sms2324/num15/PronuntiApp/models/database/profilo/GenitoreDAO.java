@@ -208,33 +208,39 @@ public class GenitoreDAO {
 	}
 
 	public CompletableFuture<Paziente> getPazienteByIdGenitore(String idGenitore) {
-		return CompletableFuture.supplyAsync(() -> {
-			DatabaseReference ref = db.getReference(CostantiNodiDB.LOGOPEDISTI);
-			Task<DataSnapshot> task = ref.get();
+		CompletableFuture<Paziente> future = new CompletableFuture();
 
-			Paziente result = null;
+		DatabaseReference ref = db.getReference(CostantiNodiDB.LOGOPEDISTI);
 
-			while (!task.isComplete()) {}
+		ref.get().addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				Paziente paziente = null;
+				for (DataSnapshot logopedistaSnapshot : task.getResult().getChildren()) {
+					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 
-			for (DataSnapshot logopedistaSnapshot : task.getResult().getChildren()) {
-				for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
-					DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
-					for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
+						DataSnapshot genitoreSnapshot = pazienteSnapshot.child(CostantiNodiDB.GENITORE);
+						for (DataSnapshot datoGenitoreSnapshot : genitoreSnapshot.getChildren()) {
 
-						if (datoGenitoreSnapshot.getKey().equals(idGenitore)) {
-							Map<String, Object> fromDatabaseMap = (Map<String, Object>) pazienteSnapshot.getValue();
-							result = new Paziente(fromDatabaseMap, pazienteSnapshot.getKey());
-							break;
+							if (datoGenitoreSnapshot.getKey().equals(idGenitore)) {
+								Map<String, Object> fromDatabaseMap = (Map<String, Object>) pazienteSnapshot.getValue();
+								paziente = new Paziente(fromDatabaseMap, pazienteSnapshot.getKey());
+								break;
+							}
 						}
+						if (paziente != null) break;
 					}
-					if (result != null) break;
+					if (paziente != null) break;
 				}
-				if (result != null) break;
-			}
 
-			Log.d("GenitoreDAO.getPazienteByIdGenitore()", (result == null) ? result.toString() : "null");
-			return result;
+				Log.d("GenitoreDAO.getPazienteByIdGenitore()", (paziente == null) ? paziente.toString() : "null");
+				future.complete(paziente);
+			} else {
+				future.completeExceptionally(task.getException());
+				Log.e("GenitoreDAO.getPazienteByIdGenitore()", "Errore nel recupero dei dati: " + task.getException());
+			}
 		});
+
+		return future;
 	}
 
 }

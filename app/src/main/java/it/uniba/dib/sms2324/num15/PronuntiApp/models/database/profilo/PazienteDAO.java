@@ -2,29 +2,22 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.DAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiNodiDB;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 public class PazienteDAO {
-
 	private final FirebaseDatabase db;
 	private final FirebaseAuth firebaseAuth;
 
@@ -157,7 +150,7 @@ public class PazienteDAO {
 		});
 	}
 
-	public CompletableFuture<Logopedista> getDatiLogopedistaByIdPaziente(String idPaziente) {
+	public CompletableFuture<Logopedista> getLogopedistaByIdPaziente(String idPaziente) {
 		CompletableFuture<Logopedista> future = new CompletableFuture<>();
 
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI);
@@ -173,7 +166,6 @@ public class PazienteDAO {
 							refLogopedista = logopedistaSnapshot.getRef();
 							Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
 							Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
-							logopedista.setPazienti(null);
 
 							Log.d("PazienteDAO.getDatiLogopedistaByIdPaziente()", logopedista.toString());
 							future.complete(logopedista);
@@ -190,5 +182,40 @@ public class PazienteDAO {
 
 		return future;
 	}
+
+	/*public CompletableFuture<Logopedista> getClassificaFromLogopedista(String idPaziente) {
+		CompletableFuture<Logopedista> future = new CompletableFuture<>();
+
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.LOGOPEDISTI);
+
+		ref.get().addOnCompleteListener(task -> {
+			if (task.isSuccessful()) {
+				DataSnapshot dataSnapshot = task.getResult();
+				DatabaseReference refLogopedista = null;
+
+				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
+					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
+
+						if (pazienteSnapshot.getKey().equals(idPaziente)) {
+							refLogopedista = logopedistaSnapshot.getRef();
+							Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
+							Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
+							//logopedista.setPazienti(null);
+
+							Log.d("PazienteDAO.getClassificaFromLogopedista()", logopedista.toString());
+							future.complete(logopedista);
+							break;
+						}
+					}
+					if (refLogopedista != null) break;
+				}
+			} else {
+				future.completeExceptionally(task.getException());
+				Log.e("PazienteDAO.getClassificaFromLogopedista()", "Errore nel recupero dei dati: " + task.getException());
+			}
+		});
+
+		return future;
+	}*/
 
 }

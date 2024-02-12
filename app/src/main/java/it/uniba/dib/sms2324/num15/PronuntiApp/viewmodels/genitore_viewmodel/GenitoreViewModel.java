@@ -7,7 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.AppuntamentoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
@@ -42,6 +45,27 @@ public class GenitoreViewModel extends ViewModel {
 		this.mListaAppuntamenti.setValue(appuntamenti);
 	}
 
+
+	public CompletableFuture<Void> initMPaziente() {
+		CompletableFuture<Void> future = new CompletableFuture<>();
+
+		GenitoreDAO genitoreDAO = new GenitoreDAO();
+
+		genitoreDAO.getPazienteByIdGenitore(this.mGenitore.getValue().getIdProfilo()).thenAccept(paziente -> {
+			mPaziente.setValue(paziente);
+			future.complete(null);
+		});
+
+		return future;
+	}
+
+	public void initMListaAppuntamenti() {
+		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
+
+		appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_PAZIENTE, this.mPaziente.getValue().getIdProfilo()).thenAccept(appuntamenti -> {
+			mListaAppuntamenti.setValue(appuntamenti);
+		});
+	}
 
 	public void aggiornaGenitoreRemoto() {
 		Genitore genitore = mGenitore.getValue();
