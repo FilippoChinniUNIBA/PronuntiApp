@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalDate;
@@ -54,6 +58,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_registrazione_paziente_genitore, container, false);
+        setToolBar(view, getString(R.string.registrazionePaziente));
 
         this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         this.mController = mLogopedistaViewModel.getRegistrazionePazienteGenitoreController();

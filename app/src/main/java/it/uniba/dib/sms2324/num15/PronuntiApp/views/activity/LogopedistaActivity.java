@@ -32,15 +32,15 @@ public class LogopedistaActivity extends AbstractAppActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                navcontroller.getGraph()).setFallbackOnNavigateUpListener(() -> navcontroller.navigateUp()).build();
+        //AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                //navcontroller.getGraph()).setFallbackOnNavigateUpListener(() -> navcontroller.navigateUp()).build();
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-        NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navcontroller, appBarConfiguration);
 
         setOnBackPressedCallback(R.id.pazientiFragment);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //setBottomNavBar(R.menu.bottom_navbar_logopedista, new NavigationNavBarSelectorLogopedista(getSupportFragmentManager(), R.id.frameLayoutLogopedista, bottomNavigationView));
         //setFirstFragment(R.id.frameLayoutLogopedista, new PazientiFragment());
     }

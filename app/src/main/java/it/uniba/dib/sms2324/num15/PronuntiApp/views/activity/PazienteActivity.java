@@ -53,7 +53,7 @@ public class PazienteActivity extends AbstractAppActivity {
 
         setOnBackPressedCallback(R.id.scenarioFragment);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+       //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 

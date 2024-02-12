@@ -16,11 +16,6 @@
             app:popUpTo="@id/pazientiFragment" />
     </fragment>
     <fragment
-        android:id="@+id/classificaFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.ClassificaFragment"
-        android:label="fragment_classifica"
-        tools:layout="@layout/fragment_classifica" />
-    <fragment
         android:id="@+id/appuntamentiLogopedistaFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti.AppuntamentiLogopedistaFragment"
         android:label="@string/i_tuoi_appuntamenti"

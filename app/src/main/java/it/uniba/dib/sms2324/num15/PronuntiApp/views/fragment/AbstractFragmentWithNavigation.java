@@ -5,9 +5,13 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+
+import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public abstract class AbstractFragmentWithNavigation extends Fragment {
     protected NavController navController;
@@ -22,6 +26,13 @@ public abstract class AbstractFragmentWithNavigation extends Fragment {
         if (getActivity() != null) {
             navController.navigate(idAction);
         }
+    }
+
+    public void setToolBar(View view, String title){
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }

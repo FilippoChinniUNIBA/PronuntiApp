@@ -5,10 +5,6 @@
         android:title="Pazienti"
         android:icon="@drawable/ic_pazienti"/>
     <item
-        android:id="@+id/classificaFragment2"
-        android:title="Classifica"
-        android:icon="@drawable/ic_classifica"/>
-    <item
         android:id="@+id/appuntamentiLogopedistaFragment2"
         android:title="Appuntamenti"
         android:icon="@drawable/ic_calendar"/>

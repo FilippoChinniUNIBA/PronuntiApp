@@ -35,6 +35,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_paziente, container, false);
+
         textViewUsernameProfilo = view.findViewById(R.id.textInputEditTextUsernameProfiloPaziente);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloPaziente);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloPaziente);
