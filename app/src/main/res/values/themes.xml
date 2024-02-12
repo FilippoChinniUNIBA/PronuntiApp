@@ -120,8 +120,8 @@
     </style>
 
     <style name="stylePosizioniScenario">
-        <item name="android:layout_width">120dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">110dp</item>
     </style>
 
     <style name="styleTextViewTime">

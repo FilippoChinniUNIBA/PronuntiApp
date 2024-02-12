@@ -1,29 +1,26 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextClock;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.ProfiloPazienteFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.TopBarFragment;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
@@ -35,6 +32,8 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
 	private ConstraintLayout constraintLayout;
 	private TopBarFragment topBarFragment;
+	private Vibrator vibrator;
+	private boolean isVibrating = false;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
@@ -62,22 +61,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 
 		curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
 		curvedLineView2to3 = view.findViewById(R.id.curvedLineView2to3);
-		personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
-				personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-				// Ora puoi ottenere l'altezza della BottomNavigationView in modo sicuro
-                /*int bottomNavHeight = ((PazienteActivity) getActivity()).getBottomNavBar().getHeight();
-                Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
-                */
-				// Abilita il drag dell'immagine
-				bottomHeight = personaggioImageView.getHeight()*0.2f;
-				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
-				enableImageDrag(personaggioImageView);
-			}
-		});
 
 		posizioneGioco3ImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -94,6 +77,28 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+		personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
+				personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+				// Ora puoi ottenere l'altezza della BottomNavigationView in modo sicuro
+                /*int bottomNavHeight = ((PazienteActivity) getActivity()).getBottomNavBar().getHeight();
+                Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
+                */
+				// Abilita il drag dell'immagine
+				bottomHeight = personaggioImageView.getHeight()*0.2f;
+				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
+				enableImageDrag(personaggioImageView);
+			}
+		});
+	}
+
 	private void setPersonaggioPosition() {
 		personaggioX = personaggioImageView.getX();
 		personaggioY = personaggioImageView.getY();
@@ -101,8 +106,20 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		personaggioHeight = personaggioImageView.getHeight();
 	}
 
-	private void highlightArea(ImageView imageView) {
+	private void highlightPosizione(ImageView imageView) {
+		ingrandisciPosizione(imageView);
+		vibrate();
 		imageView.setBackground(getContext().getDrawable(R.drawable.esercizio_highlight_background));
+	}
+
+	private void ingrandisciPosizione(ImageView imageView){
+		imageView.setScaleX(1.3f);
+		imageView.setScaleY(1.3f);
+	}
+
+	private void ridimensionaPosizione(ImageView imageView){
+		imageView.setScaleX(1f);
+		imageView.setScaleY(1f);
 	}
 
 	private boolean isPersonaggioInAreaPrimoEsercizio() {
@@ -165,18 +182,33 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 						float newY = y - yDelta;
 
 						if (isPersonaggioInAreaPrimoEsercizio()) {
-							highlightArea(posizioneGioco1ImageView);
+							ridimensionaPosizione(posizioneGioco2ImageView);
+							ridimensionaPosizione(posizioneGioco3ImageView);
 							posizioneGioco2ImageView.setBackground(null);
 							posizioneGioco3ImageView.setBackground(null);
+							highlightPosizione(posizioneGioco1ImageView);
+
 						} else if (isPersonaggioInAreaSecondaEsercizio()) {
-							highlightArea(posizioneGioco2ImageView);
+							ridimensionaPosizione(posizioneGioco1ImageView);
+							ridimensionaPosizione(posizioneGioco3ImageView);
 							posizioneGioco1ImageView.setBackground(null);
 							posizioneGioco3ImageView.setBackground(null);
+							highlightPosizione(posizioneGioco2ImageView);
+
 						} else if (isPersonaggioInAreaTerzoEsercizio()) {
-							highlightArea(posizioneGioco3ImageView);
+							ridimensionaPosizione(posizioneGioco1ImageView);
+							ridimensionaPosizione(posizioneGioco2ImageView);
 							posizioneGioco1ImageView.setBackground(null);
 							posizioneGioco2ImageView.setBackground(null);
+							highlightPosizione(posizioneGioco3ImageView);
+
 						} else {
+							Log.d("Personaggio", "non in area esercizio");
+							//isPersonaggioInAreaEsercizio = false;
+							isVibrating = false;
+							ridimensionaPosizione(posizioneGioco1ImageView);
+							ridimensionaPosizione(posizioneGioco2ImageView);
+							ridimensionaPosizione(posizioneGioco3ImageView);
 							posizioneGioco1ImageView.setBackground(null);
 							posizioneGioco2ImageView.setBackground(null);
 							posizioneGioco3ImageView.setBackground(null);
@@ -207,6 +239,14 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 				return true;
 			}
 		});
+	}
+
+	private void vibrate() {
+		if (!isVibrating) {
+			if (vibrator.hasVibrator())
+				vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+			isVibrating = true;
+		}
 	}
 
 	private int getScreenWidth() {
