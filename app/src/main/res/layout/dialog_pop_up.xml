@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:text="annulla"
             android:textColor="@color/primaryTextColor"
-            android:background="@color/hintTextColor"
+            android:background="@color/white"
             android:visibility="gone"
             />
     </LinearLayout>
