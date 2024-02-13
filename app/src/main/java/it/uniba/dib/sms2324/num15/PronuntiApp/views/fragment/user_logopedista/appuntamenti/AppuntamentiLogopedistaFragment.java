@@ -102,8 +102,8 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	@Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
 		closeCardUpButton.setOnClickListener(v -> {
 			cardViewAppuntamento.setVisibility(View.GONE);
@@ -229,11 +229,11 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	private boolean checkInputAppuntamento() {
-		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
+		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
 				mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
 				|| orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
 			Log.d("AppuntamentiLogopedistaFragment.checkInputAppuntamento()", (idPazienteSelezionato == null)
-					+ " " +idPazienteSelezionato.isEmpty()  + " " +!cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
+					+ " " +idPazienteSelezionato.isEmpty()  + " " + !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
 					mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti() ) + " " +
 					orarioAppuntamento.isEmpty() + " " + editTextDataAppuntemento.getText().toString().isEmpty());
 			showErrorInputDialog();

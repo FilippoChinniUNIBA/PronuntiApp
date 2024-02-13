@@ -1,20 +1,15 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +19,18 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
 
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
-    private List<Paziente> pazienti;
+    private List<Paziente> pazientiCopia;
     private List<Paziente> pazientiFull;
-    private CardView lastClickedCardView=null;
+    private CardView lastClickedCardView = null;
 
     public PazienteAdapter(List<Paziente> pazienti) {
-        this.pazienti = pazienti;
-
         if (pazienti == null) {
-            this.pazienti = new ArrayList<>();
+            this.pazientiCopia = new ArrayList<>();
             this.pazientiFull = new ArrayList<>();
         } else {
-            this.pazientiFull = new ArrayList<>(pazienti);
-        }//TODO per Nicola: qusto è il check che ti avevo detot se pazienti è null
+            this.pazientiCopia = new ArrayList<>(pazienti);
+            this.pazientiFull = new ArrayList<>(pazientiCopia);
+        }
     }
 
     @NonNull
@@ -48,7 +42,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
     @Override
     public void onBindViewHolder(@NonNull PazienteViewHolder holder, int position) {
-        Paziente paziente = pazienti.get(position);
+        Paziente paziente = pazientiCopia.get(position);
         holder.textViewNomePaziente.setText(paziente.getNome());
         holder.textViewCognomePaziente.setText(paziente.getCognome());
         holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
@@ -72,11 +66,11 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
     @Override
     public int getItemCount() {
-        return pazienti.size();
+        return pazientiCopia.size();
     }
 
     public Paziente getItem(int position) {
-        return pazienti.get(position);
+        return pazientiCopia.get(position);
     }
 
     public static class PazienteViewHolder extends RecyclerView.ViewHolder {
@@ -123,8 +117,10 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            pazienti.clear();
-            pazienti.addAll((List<Paziente>) filterResults.values);
+            pazientiCopia.clear();
+            Log.d("PazienteAdapter", pazientiCopia.toString());
+            Log.d("PazienteAdapter", pazientiFull.toString());
+            pazientiCopia.addAll((List<Paziente>) filterResults.values);
             notifyDataSetChanged();
         }
     }
