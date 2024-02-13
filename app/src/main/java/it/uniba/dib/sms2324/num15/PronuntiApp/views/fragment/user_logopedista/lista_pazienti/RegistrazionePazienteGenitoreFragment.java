@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.l
 
 import static it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.RegistrazioneViewModel.verificaRegistrazione;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -86,6 +87,8 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        editTextDataNascitaPaziente.setOnClickListener(v -> showDatePickerDialog());
 
         buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
             Logopedista mLogopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
@@ -206,6 +209,20 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
         infoDialog.show();
         infoDialog.setOnConfermaButtonClickListener(null);
+    }
+
+    private void showDatePickerDialog() {
+        LocalDate now = LocalDate.now();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
+            String date = formatDate(year, month, dayOfMonth);
+            editTextDataNascitaPaziente.setText(date);
+        }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
+        datePickerDialog.show();
+    }
+
+    private String formatDate(int year, int month, int dayOfMonth) {
+        LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
+        return selectedDate.toString();
     }
 
 }
