@@ -44,6 +44,7 @@ public class TopBarFragment extends Fragment {
 
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
+            //TODO: Set immagine paziente con il suo personaggio selezionato, dovra essere un livedata preso dal viewmodel
             textViewUsernamePaziente.setText(paziente.getUsername());
             textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
             coinsTextView.setText(String.valueOf(paziente.getValuta()));

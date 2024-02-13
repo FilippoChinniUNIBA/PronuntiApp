@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -60,10 +61,9 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	private ImageButton closeCardUpButton;
 	private View viewOverlaySelezionePaziente;
 	private String idPazienteSelezionato;
-
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private CreazioneAppuntamentoController mController;
-
+	private List<AppuntamentoCustom> appuntamentiVisualizzazione;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,8 +101,8 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	@Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
 		closeCardUpButton.setOnClickListener(v -> {
 			cardViewAppuntamento.setVisibility(View.GONE);
@@ -204,25 +204,17 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			public void afterTextChanged(Editable s) {}
 		});
 
-        /*addAppuntamentoButton.setOnClickListener(v -> {
-            Logopedista mLogopedista = logopedistaViewModel.getLogopedista();
-            String idLogopedista = mLogopedista.getIdProfilo();
-            eseguiAggiuntaPrenotazione(idLogopedista);
-
-        });*/
-
-
 	}
 
 	private void setUpAdapters() {
-		List<AppuntamentoCustom> appuntamentiVisualizzazione = new ArrayList<>();
+		appuntamentiVisualizzazione = new ArrayList<>();
 		Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
-		List<Paziente> listaPazienti = logopedista.getPazienti();
+		List<Paziente> listaPazienti = logopedista.getPazienti() != null ? logopedista.getPazienti() :new ArrayList<>();
 
 		for (Appuntamento appuntamento : mLogopedistaViewModel.getAppuntamentiLiveData().getValue()) {
 			for (Paziente paziente : listaPazienti) {
 				if (appuntamento.getRefIdPaziente().equals(paziente.getIdProfilo())) {
-					AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
+					AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(appuntamento.getIdAppuntamento(),paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
 					appuntamentiVisualizzazione.add(appuntamentoCustom);
 				}
 			}
@@ -236,7 +228,10 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	private boolean checkInputAppuntamento() {
-		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti()) || orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
+		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
+				mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
+				|| orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
+
 			showErrorInputDialog();
 			cardViewAppuntamento.setVisibility(View.VISIBLE);
 			addAppuntamentoButton.setVisibility(View.GONE);
@@ -259,6 +254,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		return false;
 	}
 
+	@SuppressLint("NotifyDataSetChanged")
 	private void eseguiAggiuntaPrenotazione(String idLogopedista) {
 		String luogoAppuntamento = editTextLuogo.getText().toString();
 		LocalDate dataAppuntamento = LocalDate.parse(editTextDataAppuntemento.getText().toString());
@@ -266,7 +262,15 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		String idPaziente = this.idPazienteSelezionato;
 
 		Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista, idPaziente, dataAppuntamento, orarioAppuntamentoEffettivo, luogoAppuntamento);
+		mLogopedistaViewModel.getAppuntamentiLiveData().getValue().add(appuntamento);
 		Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamento.toString());
+
+		//aggiunto paziente alla recycler view
+		String nomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[0];
+		String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
+		Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamentiVisualizzazione.toString());
+		adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(nomePaziente, cognomePaziente, editTextLuogo.getText().toString(), LocalDate.parse(editTextDataAppuntemento.getText().toString()), LocalTime.parse(orarioAppuntamento)));
+		Log.d("appuntamentiLogopedista", " "+adapterAppuntamenti.getItem(appuntamentiVisualizzazione.size() - 1));
 	}
 
 	private void handleTextViewSelection(TextView selectedTextView) {

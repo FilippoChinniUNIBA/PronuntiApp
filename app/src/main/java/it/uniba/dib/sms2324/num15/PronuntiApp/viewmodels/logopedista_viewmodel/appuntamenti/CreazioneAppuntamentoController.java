@@ -21,4 +21,9 @@ public class CreazioneAppuntamentoController {
         return appuntamento;
     }
 
+    static public void eliminazioneAppuntamento(String idAppuntamentoCustom){
+        AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
+        appuntamentoDAO.deleteById(idAppuntamentoCustom);
+    }
+
 }

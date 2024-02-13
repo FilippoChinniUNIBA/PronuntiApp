@@ -55,15 +55,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/information_patient"
             android:textColor="@color/black"
             android:textSize="@dimen/size_text_sub_subtitle_reg"
-            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore" />
+            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore"
+
+            />
 
 
         <com.google.android.material.card.MaterialCardView
@@ -71,13 +71,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/cardview_light_background"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore">
+            app:layout_constraintTop_toBottomOf="@+id/textViewSubInformazioniPaziente"
+            >
 
 
             <LinearLayout
@@ -261,13 +262,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/information_parent"
             android:textColor="@color/black"
             android:textSize="@dimen/size_text_sub_subtitle_reg"
-            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
@@ -278,11 +277,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/cardview_light_background"
             app:cardCornerRadius="8dp"
             app:cardElevation="4dp"
-            app:layout_constraintBottom_toTopOf="@id/buttonRegistraPazienteEGenitore"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore">

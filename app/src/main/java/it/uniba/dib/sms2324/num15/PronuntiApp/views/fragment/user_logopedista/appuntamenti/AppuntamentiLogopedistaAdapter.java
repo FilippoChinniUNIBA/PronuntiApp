@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,21 +10,25 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
 
 public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<AppuntamentiLogopedistaAdapter.AppuntamentiLogopedistaViewHolder> {
     private List<AppuntamentoCustom> appuntamentiFull;
-    private List<AppuntamentoCustom> appuntamenti;
+    private List<AppuntamentoCustom> appuntamentiCustom;
 
     public AppuntamentiLogopedistaAdapter(List<AppuntamentoCustom> appuntamentiFull) {
         this.appuntamentiFull = appuntamentiFull;
-        appuntamenti = new ArrayList<>(appuntamentiFull);
+        appuntamentiCustom = new ArrayList<>(appuntamentiFull);
     }
 
     @Override
@@ -34,13 +39,20 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public void onBindViewHolder(AppuntamentiLogopedistaViewHolder holder, int position) {
-        AppuntamentoCustom appuntamento = appuntamenti.get(position);
+        AppuntamentoCustom appuntamento = appuntamentiCustom.get(position);
 
         holder.textViewNomePaziente.setText(appuntamento.getNomePaziente());
         holder.textViewCognomePaziente.setText(appuntamento.getCognomePaziente());
         holder.textViewDataAppuntamento.setText(appuntamento.getDataAppuntamento().format(DateTimeFormatter.ofPattern("dd MMMM"))); // Modifica in base al tipo di dato previsto per data appuntamento
         holder.textViewOraAppuntamento.setText(appuntamento.getOraAppuntamento().format(DateTimeFormatter.ofPattern("HH:mm"))); // Modifica in base al tipo di dato previsto per orario appuntamento
         holder.textViewLuogoAppuntamento.setText(appuntamento.getLuogoAppuntamento());
+
+        //disabilita se la data è passata
+        if (appuntamento.getDataAppuntamento().isBefore(LocalDate.now()) && appuntamento.getOraAppuntamento().isBefore(LocalTime.now())) {
+            holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
+        } else {
+            holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
+        }
 
         holder.textViewNomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
         holder.textViewCognomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
@@ -52,7 +64,9 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             //TODO: rimuovi appuntamento dal db (lasciare le cose sotto)
 
             //TODO che è sta cosa? e cosa significa il TODO sopra?
-            appuntamenti.remove(position);
+            Log.d("App",appuntamento.toString());
+            CreazioneAppuntamentoController.eliminazioneAppuntamento(appuntamento.getIdAppuntamentoCustom());
+            appuntamentiCustom.remove(position);
             notifyDataSetChanged();
             Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);
         });
@@ -60,13 +74,19 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public int getItemCount() {
-        return appuntamenti.size();
+        return appuntamentiCustom.size();
     }
 
     public AppuntamentoCustom getItem(int position) {
-        return appuntamenti.get(position);
+        return appuntamentiCustom.get(position);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void addAppuntamento(AppuntamentoCustom appuntamento) {
+        appuntamentiCustom.add(appuntamento);
+        appuntamentiFull.add(appuntamento);
+        notifyDataSetChanged();
+    }
 
     public static class AppuntamentiLogopedistaViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNomePaziente;
@@ -77,7 +97,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         Button buttonRimuoviAppuntamento;
         LinearLayout llPazienteInAppuntamentiLogopedistaInfoAggiuntive;
         LinearLayout llPazienteInAppuntamentiLogopedistaPrincipale;
-
+        CardView cardViewAppuntamentoLogopedista;
         public AppuntamentiLogopedistaViewHolder(View itemView) {
             super(itemView);
             llPazienteInAppuntamentiLogopedistaPrincipale = itemView.findViewById(R.id.llPazienteInAppuntamentiLogopedistaPrincipale);
@@ -88,6 +108,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             textViewOraAppuntamento = itemView.findViewById(R.id.textViewOrarioAppuntamentoLogopedista);
             textViewLuogoAppuntamento = itemView.findViewById(R.id.textViewLuogoAppuntamentoLogopedista);
             buttonRimuoviAppuntamento = itemView.findViewById(R.id.buttonRimuoviAppuntamentoLogopedista);
+            cardViewAppuntamentoLogopedista = itemView.findViewById(R.id.cardViewPazienteInAppuntamentiLogopedista);
         }
 
         private void hideInfoAggiuntive() {
@@ -128,8 +149,8 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            appuntamenti.clear();
-            appuntamenti.addAll((List<AppuntamentoCustom>) filterResults.values);
+            appuntamentiCustom.clear();
+            appuntamentiCustom.addAll((List<AppuntamentoCustom>) filterResults.values);
             notifyDataSetChanged();
         }
     }

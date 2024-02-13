@@ -1,13 +1,14 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,19 +17,20 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
+
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
-    private List<Paziente> pazienti;
+    private List<Paziente> pazientiCopia;
     private List<Paziente> pazientiFull;
+    private CardView lastClickedCardView = null;
 
     public PazienteAdapter(List<Paziente> pazienti) {
-        this.pazienti = pazienti;
-
         if (pazienti == null) {
-            this.pazienti = new ArrayList<>();
+            this.pazientiCopia = new ArrayList<>();
             this.pazientiFull = new ArrayList<>();
         } else {
-            this.pazientiFull = new ArrayList<>(pazienti);
-        }//TODO per Nicola: qusto è il check che ti avevo detot se pazienti è null
+            this.pazientiCopia = new ArrayList<>(pazienti);
+            this.pazientiFull = new ArrayList<>(pazientiCopia);
+        }
     }
 
     @NonNull
@@ -40,20 +42,35 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
     @Override
     public void onBindViewHolder(@NonNull PazienteViewHolder holder, int position) {
-        Paziente paziente = pazienti.get(position);
+        Paziente paziente = pazientiCopia.get(position);
         holder.textViewNomePaziente.setText(paziente.getNome());
         holder.textViewCognomePaziente.setText(paziente.getCognome());
         holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
+
+        holder.textViewNomePaziente.setOnClickListener(v ->setCardViewColor(holder));
+        holder.textViewCognomePaziente.setOnClickListener(v ->setCardViewColor(holder));
+        holder.textViewDataNascitaPaziente.setOnClickListener(v ->setCardViewColor(holder));
+        holder.textViewSessoPaziente.setOnClickListener(v ->setCardViewColor(holder));
+        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v ->setCardViewColor(holder));
+    }
+
+    private void setCardViewColor(PazienteViewHolder holder) {
+        holder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.primaryColorSoft));
+        if(lastClickedCardView != null && lastClickedCardView != holder.cardViewPazienteInListaLogopedista){
+            lastClickedCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
+        }
+        lastClickedCardView = holder.cardViewPazienteInListaLogopedista;
+        //TODO per Nicola: questo è il metodo che ho aggiunto per gestire il click su un paziente
     }
 
     @Override
     public int getItemCount() {
-        return pazienti.size();
+        return pazientiCopia.size();
     }
 
     public Paziente getItem(int position) {
-        return pazienti.get(position);
+        return pazientiCopia.get(position);
     }
 
     public static class PazienteViewHolder extends RecyclerView.ViewHolder {
@@ -61,11 +78,11 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         TextView textViewCognomePaziente;
         TextView textViewDataNascitaPaziente;
         TextView textViewSessoPaziente;
-        LinearLayout linearLayoutPaziente;
+        CardView cardViewPazienteInListaLogopedista;
 
         public PazienteViewHolder(@NonNull View itemView) {
             super(itemView);
-            linearLayoutPaziente = itemView.findViewById(R.id.llPazienteInListaLogopedista);
+            cardViewPazienteInListaLogopedista = itemView.findViewById(R.id.cardViewPazienteInListaLogopedista);
             textViewNomePaziente = itemView.findViewById(R.id.textViewNomePaziente);
             textViewCognomePaziente = itemView.findViewById(R.id.textViewCognomePaziente);
             textViewDataNascitaPaziente = itemView.findViewById(R.id.textViewDataNascitaPaziente);
@@ -100,8 +117,8 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            pazienti.clear();
-            pazienti.addAll((List<Paziente>) filterResults.values);
+            pazientiCopia.clear();
+            pazientiCopia.addAll((List<Paziente>) filterResults.values);
             notifyDataSetChanged();
         }
     }
