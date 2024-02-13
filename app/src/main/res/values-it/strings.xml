@@ -147,6 +147,9 @@
     <string name="search_hint">Ricerca pazienti...</string>
     <string name="personaggi_sbloccati">Personaggi sbloccati</string>
     <string name="personaggi_acquistabili">Personaggi Acquistabili</string>
+    <string name="valutaInsufficiente">Non hai abbastanze monete per poter sbloccare questo personaggio!</string>
+    <string name="acquistoPersonaggioTitle">Acquisto Personaggio</string>
+    <string name="acquistoPersonaggioDescription">Sei sicuro di voler acquistare e sbloccare questo personaggio?</string>
 
 
 </resources>

@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
@@ -44,7 +46,9 @@ public class TopBarFragment extends Fragment {
 
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
-            //TODO: Set immagine paziente con il suo personaggio selezionato, dovra essere un livedata preso dal viewmodel
+            String immagine = mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().getValue();
+            Glide.with(this).asBitmap().load(immagine).into(imageViewPaziente);
+
             textViewUsernamePaziente.setText(paziente.getUsername());
             textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
             coinsTextView.setText(String.valueOf(paziente.getValuta()));

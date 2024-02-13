@@ -17,32 +17,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import org.checkerframework.checker.units.qual.N;
-
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.personaggi.PersonaggiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
     private Context context;
     private List<Personaggio> personaggiAcquistabili;
-    PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter;
-    NestedScrollView nestedScrollView;
-    PazienteViewModel mPazienteViewModel;
+    private PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter;
+    private NestedScrollView nestedScrollView;
 
-    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> personaggiAcquistabili, PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter, NestedScrollView nestedScrollView, PazienteViewModel mPazienteViewModel) {
+    private PersonaggiController mController;
+
+    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> personaggiAcquistabili, PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter, NestedScrollView nestedScrollView, PersonaggiController personaggiController) {
         this.context = context;
         this.personaggiAcquistabili = personaggiAcquistabili;
         this.personaggiSbloccatiAdapter = personaggiSbloccatiAdapter;
         this.nestedScrollView = nestedScrollView;
-        this.mPazienteViewModel = mPazienteViewModel;
+        this.mController = personaggiController;
     }
 
     @NonNull
@@ -55,59 +51,63 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Personaggio personaggio = personaggiAcquistabili.get(position);
+
         String idPersonaggio = personaggio.getIdPersonaggio();
         String urlPersonaggio = personaggio.getTexturePersonaggio();
         String nomePersonaggio = personaggio.getNomePersonaggio();
-        int costoSbloccopersonaggio =personaggio.getCostoSblocco();
+        int costoSbloccoPersonaggio =personaggio.getCostoSblocco();
         int costoPersonaggio = personaggio.getCostoSblocco();
+
         holder.textViewNomePersonaggio.setText(nomePersonaggio);
         Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(urlPersonaggio).into(holder.imageViewPersonaggio);
         holder.textViewCostoPersonaggio.setText(String.valueOf(costoPersonaggio));
 
-        holder.llAcquistaPersonaggio.setOnClickListener(v -> {
-            if(isCreditEnough(costoSbloccopersonaggio)){
+        holder.llAcquistaPersonaggio.setOnClickListener(v -> acquistoPersonaggio(costoSbloccoPersonaggio, personaggio, idPersonaggio));
+    }
+
+    private void acquistoPersonaggio(int costoSbloccoPersonaggio, Personaggio personaggio, String idPersonaggio) {
+        if (mController.isValutaSufficiente(costoSbloccoPersonaggio)) {
+
+            setRichiestaAcquisto().setOnConfermaButtonClickListener(() -> {
+                mController.updateSelezionePersonaggio(idPersonaggio);
+                mController.updateValutaPaziente(costoSbloccoPersonaggio);
+
                 refreshPersonaggi(personaggio);
                 getAnimator().start();
                 notifyDataSetChanged();
-                updatePersonaggiPaziente(idPersonaggio);
-            }else{
-                showInfoDialog();
-            }
-        });
+            });
+        } else {
+            showInfoDialog();
+        }
     }
 
     private void showInfoDialog(){
-        InfoDialog infoDialog = new InfoDialog(context,"Credito non sufficiente", context.getString(R.string.infoOk));
-        infoDialog.setOnConfermaButtonClickListener(()->{});
+        InfoDialog infoDialog = new InfoDialog(context,context.getString(R.string.valutaInsufficiente), context.getString(R.string.infoOk));
+        infoDialog.setOnConfermaButtonClickListener(() -> {});
         infoDialog.show();
     }
 
-    private boolean isCreditEnough(int costoSbloccopersonaggio){
-        return mPazienteViewModel.getPazienteLiveData().getValue().getValuta()>=costoSbloccopersonaggio;
-    }
-    private void updatePersonaggiPaziente(String idPersonaggio){
-        Map<String, Integer> personaggi = mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati();
-        Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
-        personaggiModificati.put(idPersonaggio, 2);
-        mPazienteViewModel.getPazienteLiveData().getValue().setPersonaggiSbloccati(personaggiModificati);
-        mPazienteViewModel.aggiornaTexturePersonaggioSelezionatoLiveData();
-        mPazienteViewModel.aggiornaPazienteRemoto();
+    private RichiestaConfermaDialog setRichiestaAcquisto() {
+        RichiestaConfermaDialog richiestaAcquisto = new RichiestaConfermaDialog(context, context.getString(R.string.acquistoPersonaggioTitle), context.getString(R.string.acquistoPersonaggioDescription));
+        richiestaAcquisto.setOnAnnullaButtonClickListener(() -> {});
+        richiestaAcquisto.show();
+
+        return richiestaAcquisto;
     }
 
-    public Map<String, Integer> eliminaPersonaggioSelezionato(Map<String, Integer> mappa) {
-
-        Map<String, Integer> nuovaMappa = new HashMap<>();
-        for (Map.Entry<String, Integer> entry : mappa.entrySet()) {
-            String chiave = entry.getKey();
-            int valore = Integer.parseInt(String.valueOf(entry.getValue()));
-            int nuovoValore = (valore == 2) ? 1 : valore;
-            nuovaMappa.put(chiave, nuovoValore);
-        }
-        return nuovaMappa;
-    }
     private void refreshPersonaggi(Personaggio personaggio){
         personaggiAcquistabili.remove(personaggio);
-        personaggiSbloccatiAdapter.addPersonaggisbloccato(personaggio);
+        personaggiSbloccatiAdapter.addPersonaggioSbloccato(personaggio);
+    }
+
+    private Animator getAnimator(){
+        ValueAnimator animator = ValueAnimator.ofInt(nestedScrollView.getScrollY(), 0);
+        animator.setDuration(1250);
+        animator.addUpdateListener(animation -> {
+            int value = (Integer) animation.getAnimatedValue();
+            nestedScrollView.scrollTo(0, value);
+        });
+        return animator;
     }
 
     @Override
@@ -115,29 +115,13 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
         return personaggiAcquistabili.size();
     }
 
-    private Animator getAnimator(){
-        ValueAnimator animator = ValueAnimator.ofInt(nestedScrollView.getScrollY(), 0); // L'ultimo parametro è la destinazione dello scroll
-        animator.setDuration(1250); // Durata dell'animazione in millisecondi (ad esempio 1000ms = 1 secondo)
-        animator.addUpdateListener(animation -> {
-            int value = (Integer) animation.getAnimatedValue();
-            nestedScrollView.scrollTo(0, value); // Imposta la posizione dello scroll durante l'animazione
-        });
-        return animator;
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageViewPersonaggio;
-        TextView textViewNomePersonaggio;
-
-        LinearLayout llAcquistaPersonaggio;
-
-        TextView textViewCostoPersonaggio;
-
-
-
-
-        LinearLayout llPersonaggioSelezionato; //DA NON VISUALIZZARE QUI
-        Button buttonPossiediPersonaggio;
+        private ImageView imageViewPersonaggio;
+        private TextView textViewNomePersonaggio;
+        private LinearLayout llAcquistaPersonaggio;
+        private TextView textViewCostoPersonaggio;
+        private LinearLayout llPersonaggioSelezionato; //DA NON VISUALIZZARE QUI
+        private Button buttonPossiediPersonaggio;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
