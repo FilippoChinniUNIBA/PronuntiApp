@@ -1,400 +1,425 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragment.user_logopedista.lista_pazienti.RegistrazionePazienteGenitoreFragment"
     android:background="@color/backgroundWhite"
-    >
+    tools:context=".views.fragment.user_logopedista.lista_pazienti.RegistrazionePazienteGenitoreFragment">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@id/toolBar"
-        style="@style/styleToolBar"
-        app:layout_constraintBottom_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
-        tools:ignore="MissingConstraints"
-        />
-    <!--
-    <TextView
-        android:id="@+id/textViewTitoloRegistrazionePazienteEGenitore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/app_name"
-        android:textColor="@color/primaryTextColor"
-        android:textSize="@dimen/headerTextSize"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginVertical="20dp"
-        />
-    -->
-    <TextView
-        android:id="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center"
-        android:text="@string/subtitle_registration_patient_parent"
-        android:textColor="@color/black"
-        android:textSize="@dimen/subHeaderTextSize"
-        app:layout_constraintBottom_toTopOf="@id/textViewSubInformazioniPaziente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar"
-        android:layout_marginHorizontal="10dp"
-        />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewSubInformazioniPaziente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/information_patient"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_text_sub_subtitle_reg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente" />
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewDataRegistrazionePaziente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
-        >
-
-
-        <LinearLayout
-            android:id="@+id/linearLayoutRegistrazionePaziente"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@id/toolBar"
+            style="@style/styleToolBar"
+            app:layout_constraintBottom_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
+            tools:ignore="MissingConstraints" />
+        <!--
+        <TextView
+            android:id="@+id/textViewTitoloRegistrazionePazienteEGenitore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/app_name"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/headerTextSize"
+            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginVertical="20dp"
+            />
+        -->
+        <TextView
+            android:id="@+id/textViewSubTitoloBenvenutiPazienteEGenitore"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="@string/subtitle_registration_patient_parent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/subHeaderTextSize"
+            app:layout_constraintBottom_toTopOf="@id/textViewSubInformazioniPaziente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
-
-            <!-- TextInputLayout e TextInputEditText per Nome -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextNomePaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/first_name_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Cognome -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextCognomePaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/last_name_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Email -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextEmailPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/email_hint"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Username -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextUsernamePaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/username_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Eta -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextEtaPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/age"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per sesso -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextSessoPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/gender_hint"
-                    android:inputType="text" />
-   </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDataNascitaPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/birth_date_hint"
-                    android:inputType="date" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-   <!-- TextInputLayout e TextInputEditText per Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextPasswordPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password_hint"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Conferma Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
-                android:layout_marginBottom="10dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextConfermaPasswordPaziente"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/confirm_password_hint"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/textViewSubTitoloGenitore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/information_parent"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_text_sub_subtitle_reg"
-        app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewDataRegistrazioneGenitore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="0dp"
-        app:cardBackgroundColor="@color/cardview_light_background"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonRegistraPazienteEGenitore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore">
-
-
-        <LinearLayout
-            android:id="@+id/linearLayoutRegistrazioneGenitore"
+        <TextView
+            android:id="@+id/textViewSubInformazioniPaziente"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/information_patient"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_text_sub_subtitle_reg"
+            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazionePaziente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloBenvenutiPazienteEGenitore" />
 
-            <!-- TextInputLayout e TextInputEditText per Nome -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewDataRegistrazionePaziente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewSubTitoloBenvenutiPazienteEGenitore">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutRegistrazionePaziente"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextNomeGenitore"
-                    style="@style/TextInputEditTextStyle"
+
+                <!-- TextInputLayout e TextInputEditText per Nome -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextNomePaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Cognome -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextCognomePaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/last_name_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextEmailPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email_hint"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Username -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextUsernamePaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/username_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Eta -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextEtaPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/age"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per sesso -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextSessoPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/gender_hint"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDataNascita"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/first_name_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    >
 
-            <!-- TextInputLayout e TextInputEditText per Cognome -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDataNascita"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/date"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextCognomeGenitore"
-                    style="@style/TextInputEditTextStyle"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imageButtonDataNascitaProfiloPaziente"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_datepicker"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginTop="-45dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toEndOf="@id/textInputLayoutDataNascita"
+                    app:layout_constraintTop_toTopOf="@id/textInputLayoutDataNascita"
+                    android:layout_gravity="end" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDataNascitaPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/birth_date_hint"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/last_name_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:passwordToggleEnabled="true">
 
-            <!-- TextInputLayout e TextInputEditText per Email -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextPasswordPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextEmailGenitore"
-                    style="@style/TextInputEditTextStyle"
+                <!-- TextInputLayout e TextInputEditText per Conferma Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email_hint"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginBottom="10dp"
+                    app:passwordToggleEnabled="true">
 
-            <!-- TextInputLayout e TextInputEditText per Username -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextConfermaPasswordPaziente"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/confirm_password_hint"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textViewSubTitoloGenitore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/information_parent"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_text_sub_subtitle_reg"
+            app:layout_constraintBottom_toTopOf="@id/cardViewDataRegistrazioneGenitore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazionePaziente" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewDataRegistrazioneGenitore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="0dp"
+            app:cardBackgroundColor="@color/cardview_light_background"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toTopOf="@id/buttonRegistraPazienteEGenitore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutRegistrazioneGenitore"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextUsernameGenitore"
-                    style="@style/TextInputEditTextStyle"
+                <!-- TextInputLayout e TextInputEditText per Nome -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextNomeGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/first_name_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Cognome -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextCognomeGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/last_name_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Email -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextEmailGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email_hint"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Username -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextUsernameGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/username_hint"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Telefono -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextTelefonoGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/phone_hint"
+                        android:inputType="phone" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- TextInputLayout e TextInputEditText per Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/username_hint"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:passwordToggleEnabled="true">
 
-            <!-- TextInputLayout e TextInputEditText per Telefono -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextPasswordGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password_hint"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextTelefonoGenitore"
-                    style="@style/TextInputEditTextStyle"
+                <!-- TextInputLayout e TextInputEditText per Conferma Password -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone_hint"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginBottom="10dp"
+                    app:passwordToggleEnabled="true">
 
-            <!-- TextInputLayout e TextInputEditText per Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextConfermaPasswordGenitore"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/confirm_password_hint"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextPasswordGenitore"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password_hint"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- TextInputLayout e TextInputEditText per Conferma Password -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
-                android:layout_marginBottom="10dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextConfermaPasswordGenitore"
-                    style="@style/TextInputEditTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/confirm_password_hint"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-    <Button
-        android:id="@+id/buttonRegistraPazienteEGenitore"
-        android:layout_width="296dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:text="@string/registraPaziente"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonRegistraPazienteEGenitore"
+            android:layout_width="296dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:text="@string/registraPaziente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardViewDataRegistrazioneGenitore" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

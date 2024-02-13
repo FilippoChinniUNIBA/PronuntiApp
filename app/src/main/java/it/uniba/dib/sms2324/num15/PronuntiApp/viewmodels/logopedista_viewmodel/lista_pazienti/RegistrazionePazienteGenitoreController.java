@@ -23,8 +23,8 @@ public class RegistrazionePazienteGenitoreController {
         put("-NqIFkOcaDJKFU_BhuH2", 0);     //Batman
         put("-NqIFkOqJ7eznb2BIubm", 2);     //Cane
         put("-NqIFkOuix-wiNRaxtlo", 0);     //Capitan America
-        put("-NqIFkP0yNyXQFp5VveX", 0);     //Cavaliere
-        put("-NqIFkP7u9RENb6CfQlG", 0);     //Cavaliera
+        put("-NqIFkP0yNyXQFp5VveX", 0);     //Cavaliera
+        put("-NqIFkP7u9RENb6CfQlG", 0);     //Cavaliere
         put("-NqIFkPCmPM-2sOY6O0e", 1);     //Coniglio
         put("-NqIFkPIJoJlQZ1iwgfj", 0);     //Draghetta
         put("-NqIFkPTTupPgYkYc74E", 0);     //Drago
