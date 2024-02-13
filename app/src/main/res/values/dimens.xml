@@ -12,4 +12,6 @@
     <dimen name="size_text_orario_appuntamento">21sp</dimen>
     <dimen name="size_text_giorno_appuntamento">17sp</dimen>
     <dimen name="nav_bar_height">65dp</dimen>
+    <dimen name="size_text_data_terapia">25sp</dimen>
+    <dimen name="size_text_info_scenario">14sp</dimen>
 </resources>

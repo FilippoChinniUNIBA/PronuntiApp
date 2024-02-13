@@ -14,7 +14,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.ModificaAppuntamentiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti.RegistrazionePazienteGenitoreController;
 
 public class LogopedistaViewModel extends ViewModel {
@@ -25,7 +25,7 @@ public class LogopedistaViewModel extends ViewModel {
 
 
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
-	private CreazioneAppuntamentoController mCreazioneAppuntamentoController;
+	private ModificaAppuntamentiController mModificaAppuntamentiController;
 
 
 	public LiveData<Logopedista> getLogopedistaLiveData() {
@@ -66,13 +66,26 @@ public class LogopedistaViewModel extends ViewModel {
 		Log.d("LogopedistaViewModel.aggiornaLogopedistaRemoto()", "Logopedista aggiornato: " + logopedista.toString());
 	}
 
-	public void aggiornaAppuntamentiRemoto() {
+	/*public void aggiornaAppuntamentiRemoto() {
 		List<Appuntamento> appuntamenti = mListaAppuntamenti.getValue();
 
 		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
 		appuntamentoDAO.updateListaAppuntamenti(appuntamenti);
 
 		Log.d("LogopedistaViewModel.aggiornaAppuntamentiRemoto()", "Appuntamenti aggiornati: " + appuntamenti.toString());
+	}*/
+
+	public void rimuoviAppuntamentoFromListaAppuntamentiLiveData(String idAppuntamento) {
+		List<Appuntamento> appuntamenti = mListaAppuntamenti.getValue();
+		for (Appuntamento appuntamento : appuntamenti) {
+			if (appuntamento.getIdAppuntamento().equals(idAppuntamento)) {
+				appuntamenti.remove(appuntamento);
+				break;
+			}
+		}
+		mListaAppuntamenti.setValue(appuntamenti);
+
+		Log.d("LogopedistaViewModel.rimuoviAppuntamentoFromListaAppuntamentiLiveData()", "Appuntamento rimosso: " + idAppuntamento);
 	}
 
 
@@ -83,11 +96,11 @@ public class LogopedistaViewModel extends ViewModel {
 		return this.mRegistrazionePazienteGenitoreController;
 	}
 
-	public CreazioneAppuntamentoController getCreazioneAppuntamentoController(){
-		if (this.mCreazioneAppuntamentoController == null) {
-			this.mCreazioneAppuntamentoController = new CreazioneAppuntamentoController();
+	public ModificaAppuntamentiController getModificaAppuntamentiController(){
+		if (this.mModificaAppuntamentiController == null) {
+			this.mModificaAppuntamentiController = new ModificaAppuntamentiController();
 		}
-		return this.mCreazioneAppuntamentoController;
+		return this.mModificaAppuntamentiController;
 	}
 
 }

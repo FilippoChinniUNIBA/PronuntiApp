@@ -58,6 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical"
+        android:paddingBottom="20dp"
         android:layout_marginBottom="@dimen/nav_bar_height"
         >
         <LinearLayout
@@ -99,13 +100,18 @@
                 android:layout_weight="1"
                 />
         </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/pazientiRecyclerView"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_paziente_in_lista_logopedista"
-            android:paddingHorizontal="10dp"
-            android:layout_marginBottom="@dimen/nav_bar_height"
-            />
+            android:layout_marginBottom="125dp"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pazientiRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_paziente_in_lista_logopedista"
+                android:paddingHorizontal="10dp"
+                />
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
