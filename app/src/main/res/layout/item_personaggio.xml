@@ -1,61 +1,87 @@
 <!-- res/layout/item_image.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="10dp"
-    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@color/primaryColorSoft"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="5dp"
+    app:cardElevation="8dp"
     >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:gravity="center"
+        android:paddingVertical="10dp"
+        >
+        <TextView
+            android:id="@+id/textViewNomePersonaggio"
+            android:text="Nome"
+            style="@style/NomePersonaggioStyle"
+            android:textAppearance="@style/styleTextPersonaggi"
+            />
 
-    <ImageView
-        android:id="@+id/imageViewPersonaggio"
-        android:src="@drawable/personaggio_default"
-        style="@style/PersonaggiStyle"
-        />
-    <LinearLayout
-        android:id="@+id/llAcquistaPersonaggio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
-        android:background="@drawable/rectangle_rounded_border_bkg"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="10dp"
-        android:visibility="visible"
-        >
-        <include layout="@layout/image_view_coins"/>
-        <TextView
-            android:id="@+id/textViewCostoPersonaggio"
+        <ImageView
+            android:id="@+id/imageViewPersonaggio"
+            android:src="@drawable/personaggio_default"
+            style="@style/PersonaggiStyle"
+            android:clipToOutline="true"
+            />
+        <LinearLayout
+            android:id="@+id/llAcquistaPersonaggio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100"
-            android:gravity="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/llPossiediPersonaggio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_margin="5dp"
-        android:layout_gravity="center"
-        android:background="@drawable/rectangle_rounded_border_bkg"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="10dp"
-        android:visibility="visible"
-        >
-        <TextView
-            android:id="@+id/textViewSelezionePersonaggio"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:visibility="visible"
+            >
+            <include layout="@layout/image_view_coins"/>
+            <TextView
+                android:id="@+id/textViewCostoPersonaggio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textAppearance="@style/styleTextPersonaggi"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llPossiediPersonaggio"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selezionato"
-            android:gravity="center" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingVertical="5dp"
+            android:visibility="visible"
+            >
+            <ImageView
+                android:id="@+id/imageViewSelectedPersonaggio"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/selected_personaggio"
+                />
+            <TextView
+                android:id="@+id/textViewSelezionePersonaggio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selezionato"
+                android:gravity="center"
+                android:textAppearance="@style/styleTextPersonaggi"
+                android:textSize="8sp"
+                />
+        </LinearLayout>
+
+
+
     </LinearLayout>
-    <TextView
-        android:id="@+id/textViewNomePersonaggio"
-        android:text="Nome"
-        style="@style/NomePersonaggioStyle"/>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

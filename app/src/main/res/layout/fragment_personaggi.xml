@@ -48,22 +48,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/coinsBackground"
+        android:background="@drawable/bunner_personaggi"
         >
         <TextView
             android:id="@+id/textViewPersonaggiSbloccati"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Personaggi Sbloccati"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_margin="10dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/white"
-            android:layout_gravity="center_vertical"/>
+            android:textSize="18sp"
+            android:textAppearance="@style/styleTextPersonaggi"
+            android:layout_marginTop="-10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPersonaggiSbloccati"
@@ -79,22 +78,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/coinsBackground"
+        android:background="@drawable/bunner_personaggi"
         >
         <TextView
             android:id="@+id/textViewPersonaggiAcquistabili"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Personaggi Acquistabili"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_margin="10dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/white"
-            android:layout_gravity="center_vertical"/>
+            android:textSize="16sp"
+            android:textAppearance="@style/styleTextPersonaggi"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="-10dp"
+            />
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPersonaggiAcquistabili"
