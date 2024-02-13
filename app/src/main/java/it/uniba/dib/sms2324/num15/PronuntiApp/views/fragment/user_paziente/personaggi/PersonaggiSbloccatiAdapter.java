@@ -16,18 +16,24 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiSbloccatiAdapter.ViewHolder> {
     private Context context;
     private List<Personaggio> personaggiSbloccati;
 
-    public PersonaggiSbloccatiAdapter(Context context, List<Personaggio> personaggiSbloccati) {
+    PazienteViewModel mPazienteViewModel;
+
+    public PersonaggiSbloccatiAdapter(Context context, List<Personaggio> personaggiSbloccati, PazienteViewModel mPazienteViewModel) {
         this.context = context;
         this.personaggiSbloccati = personaggiSbloccati;
+        this.mPazienteViewModel = mPazienteViewModel;
     }
 
     @NonNull
@@ -41,8 +47,9 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Personaggio personaggio = personaggiSbloccati.get(position);
-        String url = personaggio.getTexturePersonaggio();
+        String urlPersonaggio = personaggio.getTexturePersonaggio();
         String nomePersonaggio = personaggio.getNomePersonaggio();
+        String idPersonaggio = personaggio.getIdPersonaggio();
 
         if(position==0) {
             holder.buttonPossiediPersonaggio.setVisibility(View.GONE);
@@ -54,13 +61,32 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
         }
 
         holder.textViewNomePersonaggio.setText(nomePersonaggio);
-        Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(url).into(holder.imageViewPersonaggio);
+        Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(urlPersonaggio).into(holder.imageViewPersonaggio);
 
 
         holder.buttonPossiediPersonaggio.setOnClickListener(v -> {
             refreshPersonaggioSelezionato(personaggio,position);
-
+            updatePersonaggiPaziente(idPersonaggio);
         });
+    }
+    private void updatePersonaggiPaziente(String idPersonaggio){
+        Map<String, Integer> personaggi = mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati();
+        Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
+        personaggiModificati.put(idPersonaggio, 2);
+        mPazienteViewModel.getPazienteLiveData().getValue().setPersonaggiSbloccati(personaggiModificati);
+        mPazienteViewModel.aggiornaPazienteRemoto();
+    }
+
+    public Map<String, Integer> eliminaPersonaggioSelezionato(Map<String, Integer> mappa) {
+
+        Map<String, Integer> nuovaMappa = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : mappa.entrySet()) {
+            String chiave = entry.getKey();
+            int valore = Integer.parseInt(String.valueOf(entry.getValue()));
+            int nuovoValore = (valore == 2) ? 1 : valore;
+            nuovaMappa.put(chiave, nuovoValore);
+        }
+        return nuovaMappa;
     }
     private void refreshPersonaggioSelezionato(Personaggio personaggio,int position){
         Collections.swap(personaggiSbloccati,0,position);

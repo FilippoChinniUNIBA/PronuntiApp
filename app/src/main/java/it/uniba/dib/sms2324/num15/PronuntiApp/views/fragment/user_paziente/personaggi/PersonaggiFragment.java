@@ -113,8 +113,8 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         personaggiSbloccati = getSortedListPersonaggi(personaggi,idsPersonaggiSbloccati);
         personaggiAcquistabili = getSortedListPersonaggi(personaggi,idsPersonaggiAcquistabili);
 
-        PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter = new PersonaggiSbloccatiAdapter(getContext(),personaggiSbloccati);
-        PersonaggiAcquistabiliAdapter personaggiAcquistabiliAdapter = new PersonaggiAcquistabiliAdapter(getContext(), personaggiAcquistabili,personaggiSbloccatiAdapter,nestedScrollView);
+        PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter = new PersonaggiSbloccatiAdapter(getContext(),personaggiSbloccati,mPazienteViewModel);
+        PersonaggiAcquistabiliAdapter personaggiAcquistabiliAdapter = new PersonaggiAcquistabiliAdapter(getContext(), personaggiAcquistabili,personaggiSbloccatiAdapter,nestedScrollView,mPazienteViewModel);
 
         recyclerViewPersonaggiAcquistabili.setAdapter(personaggiAcquistabiliAdapter);
         recyclerViewPersonaggiSbloccati.setAdapter(personaggiSbloccatiAdapter);
