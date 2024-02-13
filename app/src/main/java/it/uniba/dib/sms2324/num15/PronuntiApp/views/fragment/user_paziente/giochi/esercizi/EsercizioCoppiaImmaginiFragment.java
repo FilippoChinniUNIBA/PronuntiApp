@@ -173,9 +173,18 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         if (mController.verificaSceltaImmagine(immagineScelta, correctImageView)) {
             esito = true;
             fineEsercizioView.setEsercizioCorretto(mEsercizioCoppiaImmagini.getRicompensaCorretto(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this);
+
+            //TODO togliere poi quando si fa il vero risultato dell'es
+            mPazienteViewModel.getPazienteLiveData().getValue().aggiungiAValuta(mEsercizioCoppiaImmagini.getRicompensaCorretto());
+            mPazienteViewModel.getPazienteLiveData().getValue().aggiungiAPunteggioTot(mEsercizioCoppiaImmagini.getRicompensaCorretto());
+            mPazienteViewModel.aggiornaPazienteRemoto();
         } else {
             esito = false;
             fineEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this);
+
+            //TODO togliere poi quando si fa il vero risultato dell'es
+            mPazienteViewModel.getPazienteLiveData().getValue().aggiungiAValuta(mEsercizioCoppiaImmagini.getRicompensaErrato());
+            mPazienteViewModel.getPazienteLiveData().getValue().aggiungiAPunteggioTot(mEsercizioCoppiaImmagini.getRicompensaErrato());
         }
 
         constraintLayoutEsercizioCoppiaImmagini.setVisibility(View.GONE);

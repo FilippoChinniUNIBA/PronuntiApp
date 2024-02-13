@@ -43,7 +43,6 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
         super.onViewCreated(view, savedInstanceState);
 
         mPazienteViewModel.getClassificaLiveData().observe(getViewLifecycleOwner(), classifica -> {
-            //mPazienteViewModel.aggiornaClassificaRemota(); //TODO filippo collegato a quello del metodo
 
             entryClassificaAdapter = new EntryClassificaAdapter(classifica, mPazienteViewModel.getPazienteLiveData().getValue().getUsername());
             recyclerViewClassifica.setAdapter(entryClassificaAdapter);

@@ -6,11 +6,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Iterator;
 import java.util.List;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.classifica.ClassificaController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioDenominazioneImmagineController;
@@ -57,16 +60,21 @@ public class PazienteViewModel extends ViewModel {
 		Paziente paziente = mPaziente.getValue();
 
 		PazienteDAO pazienteDAO = new PazienteDAO();
-		pazienteDAO.update(paziente);
+		pazienteDAO.update(paziente).thenAccept(pazienteAggiornato -> aggiornaClassificaLiveData());
 
 		Log.d("PazienteViewModel.aggiornaPazienteRemoto()", "Paziente aggiornato: " + paziente.toString());
 	}
 
-	public void aggiornaClassificaRemota() {
-		Paziente paziente = mPaziente.getValue();
+	public void aggiornaClassificaLiveData() {
+		PazienteDAO pazienteDAO = new PazienteDAO();
+		pazienteDAO.getLogopedistaByIdPaziente(getPazienteLiveData().getValue().getIdProfilo()).thenAccept(logopedista -> {
+			logopedista.aggiornaClassificaPazienti();
+			LogopedistaDAO logopedistaDAO = new LogopedistaDAO();
+			logopedistaDAO.update(logopedista);
 
-		//TODO vedere come fare
-		//mClassificaController.aggiornaClassificaRemota(paziente);
+			List<EntryClassifica> classifica = ClassificaController.costruisciClassifica(logopedista.getPazienti(), getListaPersonaggiLiveData().getValue());
+			setClassifica(classifica);
+		});
 	}
 
 
