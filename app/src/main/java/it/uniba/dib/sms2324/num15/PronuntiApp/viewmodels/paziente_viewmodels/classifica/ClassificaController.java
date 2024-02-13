@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.EntryClassifica;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica.EntryClassifica;
 
 public class ClassificaController {
 

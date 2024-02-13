@@ -38,7 +38,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.a
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazienteAdapter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.PazienteAdapter;
 
 public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigation {
 	private RecyclerView recyclerViewAppuntamenti;

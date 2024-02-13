@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +16,11 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 
 public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassificaAdapter.PazienteViewHolder> {
-    private List<EntryClassifica> pazienti;
+    private List<EntryClassifica> entriesPazienti;
     private String pazienteAttuale;
 
-    public EntryClassificaAdapter(List<EntryClassifica> pazienti, String pazienteAttuale) {
-        this.pazienti = pazienti;
+    public EntryClassificaAdapter(List<EntryClassifica> entriesPazienti, String pazienteAttuale) {
+        this.entriesPazienti = entriesPazienti;
         this.pazienteAttuale = pazienteAttuale;
     }
 
@@ -32,7 +32,7 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
 
     @Override
     public void onBindViewHolder(PazienteViewHolder holder, int position) {
-        EntryClassifica paziente = pazienti.get(position);
+        EntryClassifica entryPaziente = entriesPazienti.get(position);
 
         if (position == 0) {
             holder.imageViewCorona.setVisibility(View.VISIBLE);
@@ -47,19 +47,19 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
             holder.imageViewCorona.setVisibility(View.INVISIBLE);
         }
 
-        if (pazienteAttuale.equals(paziente.getUsername())) {
+        if (pazienteAttuale.equals(entryPaziente.getUsername())) {
             holder.linearLayoutClassificaItem.setBackground(holder.itemView.getContext().getDrawable(R.drawable.stroke_selector));
         }
 
         holder.textViewPosizione.setText(String.valueOf(position + 1));
-        holder.textViewUsernamePaziente.setText(paziente.getUsername());
-        holder.textViewPunteggio.setText(String.valueOf(paziente.getPunteggio()));
-        Picasso.get().load(paziente.getUrlImg()).into(holder.imageView);
+        holder.textViewUsernamePaziente.setText(entryPaziente.getUsername());
+        holder.textViewPunteggio.setText(String.valueOf(entryPaziente.getPunteggio()));
+        Picasso.get().load(entryPaziente.getImmaginePersonaggio()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return pazienti.size();
+        return entriesPazienti.size();
     }
 
 

@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica;
 
 import android.os.Bundle;
 
@@ -27,13 +27,13 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_classifica, container, false);
 
+        this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
+        this.mController = mPazienteViewModel.getClassificaController();
+
         setToolBar(view, getString(R.string.classifica));
 
         recyclerViewClassifica = view.findViewById(R.id.recyclerViewClassifica);
         recyclerViewClassifica.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
-        this.mController = mPazienteViewModel.getClassificaController();
 
         return view;
     }
@@ -42,13 +42,9 @@ public class ClassificaFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: costruire la classifica creando una lista di tipo EntryClassifica (username, punteggio, url_img)
-        // url_img si ottiene da personaggioDao ottenendo prima l'id del personaggio selezionato da Paziente paziente.getPersonaggiSbloccati() e
-        // poi cercare la chiave con il valore 2 (che significa selezionato)
-
-        //TODO: togliere TODO sopra
-
         mPazienteViewModel.getClassificaLiveData().observe(getViewLifecycleOwner(), classifica -> {
+            //mPazienteViewModel.aggiornaClassificaRemota(); //TODO filippo collegato a quello del metodo
+
             entryClassificaAdapter = new EntryClassificaAdapter(classifica, mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo());
             recyclerViewClassifica.setAdapter(entryClassificaAdapter);
         });

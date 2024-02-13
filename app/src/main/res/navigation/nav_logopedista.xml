@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/pazientiFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.PazientiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.PazientiFragment"
         android:label="@string/iTuoiPazienti"
         tools:layout="@layout/fragment_pazienti">
         <action
@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_profile_logopedista" />
     <fragment
         android:id="@+id/registrazionePazienteGenitoreFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.RegistrazionePazienteGenitoreFragment"
         android:label="@string/registrazionePaziente"
         tools:layout="@layout/fragment_registrazione_paziente_genitore">
         <action

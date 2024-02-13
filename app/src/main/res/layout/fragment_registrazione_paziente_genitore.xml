@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragment.user_logopedista.pazienti.RegistrazionePazienteGenitoreFragment"
+    tools:context=".views.fragment.user_logopedista.lista_pazienti.RegistrazionePazienteGenitoreFragment"
     android:background="@color/backgroundWhite"
     >
 

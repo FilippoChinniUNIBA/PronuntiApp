@@ -57,7 +57,7 @@
         tools:layout="@layout/fragment_personaggi" />
     <fragment
         android:id="@+id/classificaFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.ClassificaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica.ClassificaFragment"
         android:label="@string/classifica"
         tools:layout="@layout/fragment_classifica" />
 </navigation>
