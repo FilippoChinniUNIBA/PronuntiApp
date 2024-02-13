@@ -45,8 +45,8 @@ public class TopBarFragment extends Fragment {
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
                 textViewUsernamePaziente.setText(paziente.getUsername());
-//                textViewPunteggio.setText(paziente.getPunteggioTot());
-//                coinsTextView.setText(paziente.getValuta());
+                textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
+                coinsTextView.setText(String.valueOf(paziente.getValuta()));
 
         });
     }
