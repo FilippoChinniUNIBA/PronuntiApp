@@ -30,7 +30,7 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.image_view_personaggio, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_personaggio, parent, false);
         return new ViewHolder(view);
     }
 
