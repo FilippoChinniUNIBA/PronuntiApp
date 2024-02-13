@@ -14,6 +14,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.personaggi.PersonaggiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica.EntryClassifica;
 
 public class PazienteActivity extends AbstractAppActivity {
@@ -38,8 +39,7 @@ public class PazienteActivity extends AbstractAppActivity {
         this.mPazienteViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("mPaziente"));
         this.mPazienteViewModel.setPersonaggi((List<Personaggio>) getIntent().getSerializableExtra("mPersonaggi"));
         this.mPazienteViewModel.setClassifica((List<EntryClassifica>) getIntent().getSerializableExtra("mClassifica"));
-
-        //this.mPazienteViewModel.initMPersonaggi().thenAccept(aVoid -> mPazienteViewModel.initMClassifica());
+        this.mPazienteViewModel.setTexturePersonaggioSelezionato(PersonaggiController.getTexturePersonaggioSelezionato(mPazienteViewModel.getListaPersonaggiLiveData().getValue(), mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati()));
     }
 
 }
