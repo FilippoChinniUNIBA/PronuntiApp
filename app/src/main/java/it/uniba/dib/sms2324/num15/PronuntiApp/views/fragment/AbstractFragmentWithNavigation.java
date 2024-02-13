@@ -35,4 +35,10 @@ public abstract class AbstractFragmentWithNavigation extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void setToolBarNoTitle(View view){
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
 }

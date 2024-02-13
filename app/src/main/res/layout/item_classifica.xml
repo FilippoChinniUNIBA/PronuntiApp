@@ -14,8 +14,8 @@
         app:layout_constraintTop_toTopOf="@+id/linearLayoutClassificaItem"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="5dp"
-        android:layout_marginTop="-7dp"
-        android:rotation="-35"
+        android:layout_marginTop="-10dp"
+        android:rotation="-45"
         android:layout_marginStart="57dp"
         />
 

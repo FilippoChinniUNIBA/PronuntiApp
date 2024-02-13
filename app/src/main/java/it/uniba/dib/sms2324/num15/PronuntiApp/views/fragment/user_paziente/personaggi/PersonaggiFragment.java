@@ -48,7 +48,7 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         this.mController = mPazienteViewModel.getPersonaggiController();
 
-        setToolBar(view, getString(R.string.personaggi));
+        setToolBarNoTitle(view);
 
         /*
         TypedArray typedArray = getResources().obtainTypedArray(R.array.personaggi_images);
