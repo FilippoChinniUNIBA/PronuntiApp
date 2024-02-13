@@ -85,6 +85,11 @@ public class PazienteViewModel extends ViewModel {
 		});
 	}
 
+	public void aggiornaTexturePersonaggioSelezionatoLiveData() {
+		String newTexture = PersonaggiController.getTexturePersonaggioSelezionato(mListaPersonaggi.getValue(), mPaziente.getValue().getPersonaggiSbloccati());
+		setTexturePersonaggioSelezionato(newTexture);
+	}
+
 
 	public EsercizioDenominazioneImmagineController getEsercizioDenominazioneImmagineController() {
 		if (this.mEsercizioDenominazioneImmagineController == null) {
