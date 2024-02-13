@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel;
+package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

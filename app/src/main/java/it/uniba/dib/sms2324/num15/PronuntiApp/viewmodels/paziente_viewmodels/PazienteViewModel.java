@@ -24,11 +24,13 @@ public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<List<Personaggio>> mListaPersonaggi = new MutableLiveData<>();
 	private MutableLiveData<List<EntryClassifica>> mClassifica = new MutableLiveData<>();
 
+
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
 	private EsercizioSequenzaParoleController mEsercizioSequenzaParoleController;
 	private EsercizioCoppiaImmaginiController mEsercizioCoppiaImmaginiController;
 	private PersonaggiController mPersonaggiController;
 	private ClassificaController mClassificaController;
+
 
 	public LiveData<Paziente> getPazienteLiveData() {
 		return mPaziente;

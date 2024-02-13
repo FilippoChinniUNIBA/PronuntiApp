@@ -29,14 +29,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.atomic.AtomicReference;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.CreazioneAppuntamentoController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;

@@ -8,18 +8,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.AppuntamentiGenitoreController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.appuntamenti.AppuntamentiGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 

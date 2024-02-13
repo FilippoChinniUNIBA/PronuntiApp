@@ -7,22 +7,22 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.AppuntamentoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.appuntamenti.AppuntamentiGenitoreController;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitore = new MutableLiveData<>();
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
 	private MutableLiveData<List<Appuntamento>> mListaAppuntamenti = new MutableLiveData<>();
 
+
 	private AppuntamentiGenitoreController appuntamentiGenitoreController;
+
 
 	public LiveData<Genitore> getGenitoreLiveData() {
 		return mGenitore;

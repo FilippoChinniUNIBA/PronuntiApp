@@ -28,6 +28,8 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
         setToolBar(view, getString(R.string.tuoProfilo));
 
+        this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloLogopedista);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloLogopedista);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloLogopedista);
@@ -36,8 +38,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
-
-        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
@@ -62,7 +62,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         textInputEditTextTelefono.setEnabled(false);
         textInputEditTextIndirizzo.setText(logopedista.getIndirizzo());
         textInputEditTextIndirizzo.setEnabled(false);
-
     }
 
     @Override

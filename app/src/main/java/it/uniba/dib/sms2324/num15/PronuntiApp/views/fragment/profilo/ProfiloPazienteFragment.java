@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,23 +18,23 @@ import com.google.android.material.textfield.TextInputEditText;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private TextInputEditText textInputEditTextDataNascita;
     private EditText spinnerSesso;
     private TextView textViewDatiBambino;
     private ImageView textViewArrowDown;
-    LinearLayout linearLayoutDatiBambinoClick;
-    LinearLayout linearLayoutContainerBambino;
+    private LinearLayout linearLayoutDatiBambinoClick;
+    private LinearLayout linearLayoutContainerBambino;
 
-    //private PazienteViewModel mPazienteViewModel; //TODO cosa nuova filippo
     private GenitoreViewModel mGenitoreViewModel;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_paziente, container, false);
+
+        this.mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         textViewUsernameProfilo = view.findViewById(R.id.textInputEditTextUsernameProfiloPaziente);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloPaziente);
@@ -48,19 +47,16 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
 
-        this.mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
-
         //TODO prendere il paziente dal genitore dal viewmodelGenitore
+        //si può già fare: mGenitoreViewModel.getPazienteLiveData().getValue();
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
         linearLayoutDatiBambinoClick = view.findViewById(R.id.llDatiPazientiClick);
-        linearLayoutDatiBambinoClick.setOnClickListener(v->onDatiBambiniClick(view));
+        linearLayoutDatiBambinoClick.setOnClickListener(v->onDatiBambiniClick());
         linearLayoutContainerBambino = view.findViewById(R.id.linearLayoutProfiloPaziente);
 
         setData();
-
-
 
         return view;
     }
@@ -71,7 +67,7 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         setData();
     }
 
-    private void onDatiBambiniClick(View view) {
+    private void onDatiBambiniClick() {
         if (linearLayoutContainerBambino.getVisibility() == View.VISIBLE) {
             linearLayoutContainerBambino.setVisibility(View.GONE);
             textViewArrowDown.setRotation(0);
