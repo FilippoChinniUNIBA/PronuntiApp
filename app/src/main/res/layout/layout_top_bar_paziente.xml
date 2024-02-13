@@ -33,10 +33,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/red"
             >
             <TextView
                 android:id="@+id/textViewUsernamePaziente"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:layout_marginStart="10dp"
@@ -71,39 +72,41 @@
                     />
             </LinearLayout>
         </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upCoinsLayout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            >
+            <TextView
+                android:id="@+id/coinsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="2500"
+                android:background="@drawable/rectangle_rounded_border_bkg_coins"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:paddingVertical="2dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="15dp"
+                />
+
+            <ImageView
+                android:src="@drawable/ic_coins"
+                style="@style/CoinsIconStyle"
+                app:layout_constraintBottom_toTopOf="@+id/coinsTextView"
+                app:layout_constraintStart_toStartOf="@+id/coinsTextView"
+                android:layout_marginBottom="-27dp"
+                android:layout_marginStart="-10dp"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/upCoinsLayout"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_gravity="center"
-        >
-        <TextView
-            android:id="@+id/coinsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="2500"
-            android:background="@drawable/rectangle_rounded_border_bkg_coins"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:paddingVertical="2dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="15dp"
-            />
 
-        <ImageView
-            android:src="@drawable/ic_coins"
-            style="@style/CoinsIconStyle"
-            app:layout_constraintBottom_toTopOf="@+id/coinsTextView"
-            app:layout_constraintStart_toStartOf="@+id/coinsTextView"
-            android:layout_marginBottom="-27dp"
-            android:layout_marginStart="-10dp"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

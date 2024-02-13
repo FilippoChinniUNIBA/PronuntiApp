@@ -45,7 +45,8 @@ public class TopBarFragment extends Fragment {
         textViewPunteggio.setText("25000");
         coinsTextView.setText("2500");
         textViewUsernamePaziente.setText("Your username");
-
     }
+
+    //TODO funzioni per aggiornare i punteggi e le monete
 
 }

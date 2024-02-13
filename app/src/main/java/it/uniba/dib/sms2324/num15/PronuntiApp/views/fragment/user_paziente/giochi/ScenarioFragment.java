@@ -31,18 +31,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private CurvedLineView curvedLineView1to2, curvedLineView2to3;
 	private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
 	private ConstraintLayout constraintLayout;
-	private TopBarFragment topBarFragment;
 	private Vibrator vibrator;
 	private boolean isVibrating = false;
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
-
-		topBarFragment = new TopBarFragment();
-		FragmentManager fragmentManager = getChildFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.topBarLayout, topBarFragment);
-		fragmentTransaction.commit();
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
