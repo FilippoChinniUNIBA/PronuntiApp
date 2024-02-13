@@ -26,6 +26,7 @@
     <color name="yellowTheme">#FDCA70</color>
     <color name="primaryColorShadow">#B25D90EA</color>
     <color name="primaryColorSoft">#afbbdb</color>
+    <color name="navBarPaziente">#497ACF</color>
     <color name="backgroundClassificaSelector">#466FB8</color>
     <color name="backgroundButtonSelezionaPersonaggio">#E8B762</color>
     <color name="backgroundButtonSelezionatoPersonaggio">#F4C87B</color>

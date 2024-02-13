@@ -22,6 +22,14 @@
             <item name="android:shadowDy">2</item>
     </style>
 
+    <style name="styleNavBarPazienteButton">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
     <style name="styleToolBar" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
