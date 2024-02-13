@@ -6,19 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_scenario_neve"
-    tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment"
     android:fitsSystemWindows="true"
-    >
+    tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment">
 
-        <FrameLayout
-            android:id="@+id/topBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            />
+    <FrameLayout
+        android:id="@+id/topBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.CurvedLineView
         android:id="@+id/curvedLineView2to3"
@@ -46,18 +44,17 @@
     <ImageView
         android:id="@+id/posizione_primo_esercizio"
         style="@style/stylePosizioniScenario"
-        android:layout_marginStart="72dp"
-        android:layout_marginBottom="132dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="112dp"
         android:src="@drawable/igloo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/posizione_secondo_esercizio"
         style="@style/stylePosizioniScenario"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="312dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="320dp"
         android:src="@drawable/lago_inverno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -65,18 +62,17 @@
     <ImageView
         android:id="@+id/posizione_terzo_esercizio"
         style="@style/stylePosizioniScenario"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="508dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="528dp"
         android:src="@drawable/casa_natale"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewPersonaggio"
-        android:src="@drawable/batman"
         style="@style/PersonaggiStyle"
+        android:src="@drawable/batman"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
