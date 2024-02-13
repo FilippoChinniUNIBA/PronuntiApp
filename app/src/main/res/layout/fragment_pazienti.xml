@@ -104,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_paziente_in_lista_logopedista"
+            android:paddingHorizontal="10dp"
             android:layout_marginBottom="@dimen/nav_bar_height"
             />
     </LinearLayout>
