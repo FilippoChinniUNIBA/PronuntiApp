@@ -1,6 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica;
 
-public class EntryClassifica {
+import java.io.Serializable;
+
+public class EntryClassifica implements Serializable {
     private String username;
     private int punteggio;
     private String urlImg;

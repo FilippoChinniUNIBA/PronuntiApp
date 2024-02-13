@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +24,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneMancanteDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
@@ -113,8 +113,9 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
             Intent intent = buildIntentGenitore((Genitore) profilo, context);
             startActivity(intent);
         } else if (profilo instanceof Paziente) {
-            Intent intent = buildIntentPaziente((Paziente) profilo, context);
-            startActivity(intent);
+            InitPaziente.buildIntentPaziente((Paziente) profilo, context).thenAccept(intent -> {
+                startActivity(intent);
+            });
         }
     }
 
@@ -127,12 +128,6 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
     private Intent buildIntentGenitore(Genitore genitore, Context context) {
         Intent intent = new Intent(context, GenitoreActivity.class);
         intent.putExtra("mGenitore", genitore);
-        return intent;
-    }
-
-    private Intent buildIntentPaziente(Paziente paziente, Context context) {
-        Intent intent = new Intent(context, PazienteActivity.class);
-        intent.putExtra("mPaziente", paziente);
         return intent;
     }
 
