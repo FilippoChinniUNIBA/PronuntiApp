@@ -22,6 +22,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.Paz
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
+
     private GenitoreViewModel mGenitoreViewModel;
 
     @Override
@@ -29,7 +30,7 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
         View view=inflater.inflate(R.layout.fragment_profile_genitore, container, false);
         setToolBar(view, getString(R.string.tuoProfilo));
 
-        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+        this.mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloGenitore);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloGenitore);
@@ -53,7 +54,6 @@ public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
 
     @Override
     void setData() {
-
         Genitore genitore = mGenitoreViewModel.getGenitoreLiveData().getValue();
 
         textInputEditTextNome.setText(genitore.getNome());

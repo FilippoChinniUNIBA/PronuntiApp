@@ -7,22 +7,22 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.AppuntamentoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.appuntamenti.AppuntamentiGenitoreController;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitore = new MutableLiveData<>();
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
 	private MutableLiveData<List<Appuntamento>> mListaAppuntamenti = new MutableLiveData<>();
 
+
 	private AppuntamentiGenitoreController appuntamentiGenitoreController;
+
 
 	public LiveData<Genitore> getGenitoreLiveData() {
 		return mGenitore;
@@ -46,27 +46,6 @@ public class GenitoreViewModel extends ViewModel {
 	}
 
 
-	public CompletableFuture<Void> initMPaziente() {
-		CompletableFuture<Void> future = new CompletableFuture<>();
-
-		GenitoreDAO genitoreDAO = new GenitoreDAO();
-
-		genitoreDAO.getPazienteByIdGenitore(this.mGenitore.getValue().getIdProfilo()).thenAccept(paziente -> {
-			mPaziente.setValue(paziente);
-			future.complete(null);
-		});
-
-		return future;
-	}
-
-	public void initMListaAppuntamenti() {
-		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
-
-		appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_PAZIENTE, this.mPaziente.getValue().getIdProfilo()).thenAccept(appuntamenti -> {
-			mListaAppuntamenti.setValue(appuntamenti);
-		});
-	}
-
 	public void aggiornaGenitoreRemoto() {
 		Genitore genitore = mGenitore.getValue();
 
@@ -85,15 +64,6 @@ public class GenitoreViewModel extends ViewModel {
 		Log.d("GenitoreViewModel.aggiornaPazienteRemoto()", "Paziente aggiornato: " + paziente.toString());
 	}
 
-	/*public CompletableFuture<Paziente> getPazienteGenitore(String idGenitore){
-		GenitoreDAO genitoreDAO = new GenitoreDAO();
-
-		CompletableFuture<Paziente> future = new CompletableFuture<>();
-		genitoreDAO.getPazienteByIdGenitore(idGenitore).thenAccept(paziente -> {
-			future.complete(paziente);
-		});
-		return future;
-	}*/
 
 	public AppuntamentiGenitoreController getAppuntamentiControllerGenitore(){
 		if (this.appuntamentiGenitoreController == null){

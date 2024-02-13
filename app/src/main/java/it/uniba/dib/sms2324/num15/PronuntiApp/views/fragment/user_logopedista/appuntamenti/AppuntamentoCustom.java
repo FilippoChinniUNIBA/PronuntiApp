@@ -18,10 +18,6 @@ public class AppuntamentoCustom {
         this.oraAppuntamento = oraAppuntamento;
     }
 
-    public AppuntamentoCustom() {
-
-    }
-
     public String getNomePaziente() {
         return nomePaziente;
     }

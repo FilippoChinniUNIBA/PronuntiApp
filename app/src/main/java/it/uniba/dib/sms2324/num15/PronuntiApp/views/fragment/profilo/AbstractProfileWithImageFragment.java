@@ -45,17 +45,12 @@ public abstract class AbstractProfileWithImageFragment extends AsbtractProfileFr
 
 	@Override
 	void confermaModificaProfilo() {
-		//salvare in db
-		//save();
-
 		setData();
 
 		imageViewEditProfile.setVisibility(View.GONE);
 
 		buttonModificaProfilo.setText(getString(R.string.modify_profile));
 		buttonModificaProfilo.setOnClickListener(v -> modificaProfilo());
-
-		//imageViewProfile.setOnClickListener(v->{});
 	}
 
 }

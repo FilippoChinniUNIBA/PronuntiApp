@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel;
+package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti;
 
 import static it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.RegistrazioneViewModel.helperRegistrazione;
 

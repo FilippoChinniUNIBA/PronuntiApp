@@ -1,10 +1,9 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.pazienti;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 

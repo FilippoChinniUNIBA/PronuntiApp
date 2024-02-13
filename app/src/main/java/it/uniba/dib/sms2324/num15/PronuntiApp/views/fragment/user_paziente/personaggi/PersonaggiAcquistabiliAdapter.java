@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.personaggi;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -20,12 +19,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
     private Context context;
     private List<String> urls;
-    private List<String> nomiPersonaggi; // Aggiungi una lista per memorizzare i nomi dei personaggi
+    private List<String> nomiPersonaggi;
 
     public PersonaggiAcquistabiliAdapter(Context context, List<String> urls, List<String> nomiPersonaggi) {
         this.context = context;
         this.urls = urls;
-        this.nomiPersonaggi = nomiPersonaggi; // Inizializza la lista dei nomi dei personaggi
+        this.nomiPersonaggi = nomiPersonaggi;
     }
 
     @NonNull
@@ -38,8 +37,8 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String url = urls.get(position);
-        String nomePersonaggio = nomiPersonaggi.get(position); // Ottieni il nome del personaggio corrispondente
-        holder.textViewNomePersonaggio.setText(nomePersonaggio); // Imposta il nome del personaggio nel TextView
+        String nomePersonaggio = nomiPersonaggi.get(position);
+        holder.textViewNomePersonaggio.setText(nomePersonaggio);
         //Picasso.get().load(url).into(holder.imageViewPersonaggio);
         Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(url).into(holder.imageViewPersonaggio);
     }
@@ -59,4 +58,5 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
             textViewNomePersonaggio = itemView.findViewById(R.id.textViewNomePersonaggio);
         }
     }
+
 }

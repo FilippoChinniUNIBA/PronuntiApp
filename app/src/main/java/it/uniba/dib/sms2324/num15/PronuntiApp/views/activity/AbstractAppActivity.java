@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +19,16 @@ import androidx.navigation.NavController;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.concurrent.CompletableFuture;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitGenitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitLogopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneMancanteDialog;
 
 public abstract class AbstractAppActivity extends AppCompatActivity {
@@ -107,33 +111,18 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
 
     public void navigaConProfilo(Profilo profilo, Context context) {
         if (profilo instanceof Logopedista) {
-            Intent intent = buildIntentLogopedista((Logopedista) profilo, context);
-            startActivity(intent);
+            InitLogopedista.buildIntentLogopedista((Logopedista) profilo, context).thenAccept(intent -> {
+                startActivity(intent);
+            });
         } else if (profilo instanceof Genitore) {
-            Intent intent = buildIntentGenitore((Genitore) profilo, context);
-            startActivity(intent);
+            InitGenitore.buildIntentGenitore((Genitore) profilo, context).thenAccept(intent -> {
+                startActivity(intent);
+            });
         } else if (profilo instanceof Paziente) {
-            Intent intent = buildIntentPaziente((Paziente) profilo, context);
-            startActivity(intent);
+            InitPaziente.buildIntentPaziente((Paziente) profilo, context).thenAccept(intent -> {
+                startActivity(intent);
+            });
         }
-    }
-
-    private Intent buildIntentLogopedista(Logopedista logopedista, Context context) {
-        Intent intent = new Intent(context, LogopedistaActivity.class);
-        intent.putExtra("mLogopedista", logopedista);
-        return intent;
-    }
-
-    private Intent buildIntentGenitore(Genitore genitore, Context context) {
-        Intent intent = new Intent(context, GenitoreActivity.class);
-        intent.putExtra("mGenitore", genitore);
-        return intent;
-    }
-
-    private Intent buildIntentPaziente(Paziente paziente, Context context) {
-        Intent intent = new Intent(context, PazienteActivity.class);
-        intent.putExtra("mPaziente", paziente);
-        return intent;
     }
 
 }

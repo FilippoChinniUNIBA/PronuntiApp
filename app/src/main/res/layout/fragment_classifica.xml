@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.fragment.classifica.ClassificaFragment"
+    tools:context=".views.fragment.user_paziente.classifica.ClassificaFragment"
     android:background="@drawable/backround_classifica_custom"
     >
     <androidx.constraintlayout.widget.ConstraintLayout

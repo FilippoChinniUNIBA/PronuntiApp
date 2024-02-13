@@ -158,21 +158,21 @@ public class PazienteDAO {
 		ref.get().addOnCompleteListener(task -> {
 			if (task.isSuccessful()) {
 				DataSnapshot dataSnapshot = task.getResult();
-				DatabaseReference refLogopedista = null;
 
+				Logopedista logopedista = null;
 				for (DataSnapshot logopedistaSnapshot : dataSnapshot.getChildren()) {
-					for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
-						if (pazienteSnapshot.getKey().equals(idPaziente)) {
-							refLogopedista = logopedistaSnapshot.getRef();
-							Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
-							Logopedista logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
+						for (DataSnapshot pazienteSnapshot : logopedistaSnapshot.child(CostantiNodiDB.PAZIENTI).getChildren()) {
 
-							Log.d("PazienteDAO.getDatiLogopedistaByIdPaziente()", logopedista.toString());
-							future.complete(logopedista);
-							break;
+							if (pazienteSnapshot.getKey().equals(idPaziente)) {
+								Map<String, Object> fromDatabaseMap = (Map<String, Object>) logopedistaSnapshot.getValue();
+								logopedista = new Logopedista(fromDatabaseMap, logopedistaSnapshot.getKey());
+
+								Log.d("PazienteDAO.getDatiLogopedistaByIdPaziente()", logopedista.toString());
+								future.complete(logopedista);
+								break;
+							}
 						}
-					}
-					if (refLogopedista != null) break;
+						if (logopedista != null) break;
 				}
 			} else {
 				future.completeExceptionally(task.getException());

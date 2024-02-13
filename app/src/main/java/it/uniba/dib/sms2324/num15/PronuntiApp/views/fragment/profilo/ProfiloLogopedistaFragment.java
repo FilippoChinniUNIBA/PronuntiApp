@@ -19,6 +19,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment {
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
+
     private LogopedistaViewModel mLogopedistaViewModel;
 
 
@@ -26,6 +27,8 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile_logopedista, container, false);
         setToolBar(view, getString(R.string.tuoProfilo));
+
+        this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         textViewUsernameProfilo = view.findViewById(R.id.textViewUsernameProfiloLogopedista);
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloLogopedista);
@@ -35,8 +38,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
         buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloLogopedista);
         setPickMedia();
-
-        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         textInputEditTextTelefono = view.findViewById(R.id.textInputEditTextTelefonoProfiloLogopedista);
         textInputEditTextIndirizzo = view.findViewById(R.id.textInputEditTextIndirizzoProfiloLogopedista);
@@ -61,7 +62,6 @@ public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment
         textInputEditTextTelefono.setEnabled(false);
         textInputEditTextIndirizzo.setText(logopedista.getIndirizzo());
         textInputEditTextIndirizzo.setEnabled(false);
-
     }
 
     @Override

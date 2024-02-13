@@ -42,14 +42,16 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         holder.textViewOraAppuntamento.setText(appuntamento.getOraAppuntamento().format(DateTimeFormatter.ofPattern("HH:mm"))); // Modifica in base al tipo di dato previsto per orario appuntamento
         holder.textViewLuogoAppuntamento.setText(appuntamento.getLuogoAppuntamento());
 
-        holder.textViewNomePaziente.setOnClickListener(v -> {holder.hideInfoAggiuntive();});
-        holder.textViewCognomePaziente.setOnClickListener(v -> {holder.hideInfoAggiuntive();});
-        holder.textViewDataAppuntamento.setOnClickListener(v -> {holder.hideInfoAggiuntive();});
-        holder.textViewOraAppuntamento.setOnClickListener(v -> {holder.hideInfoAggiuntive();});
-        holder.llPazienteInAppuntamentiLogopedistaPrincipale.setOnClickListener(v -> {holder.hideInfoAggiuntive();});
+        holder.textViewNomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
+        holder.textViewCognomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
+        holder.textViewDataAppuntamento.setOnClickListener(v -> holder.hideInfoAggiuntive());
+        holder.textViewOraAppuntamento.setOnClickListener(v -> holder.hideInfoAggiuntive());
+        holder.llPazienteInAppuntamentiLogopedistaPrincipale.setOnClickListener(v -> holder.hideInfoAggiuntive());
 
         holder.buttonRimuoviAppuntamento.setOnClickListener(v -> {
             //TODO: rimuovi appuntamento dal db (lasciare le cose sotto)
+
+            //TODO che è sta cosa? e cosa significa il TODO sopra?
             appuntamenti.remove(position);
             notifyDataSetChanged();
             Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);
@@ -60,13 +62,13 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
     public int getItemCount() {
         return appuntamenti.size();
     }
+
     public AppuntamentoCustom getItem(int position) {
         return appuntamenti.get(position);
     }
 
 
     public static class AppuntamentiLogopedistaViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewNomePaziente;
         TextView textViewCognomePaziente;
         TextView textViewDataAppuntamento;
@@ -75,6 +77,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         Button buttonRimuoviAppuntamento;
         LinearLayout llPazienteInAppuntamentiLogopedistaInfoAggiuntive;
         LinearLayout llPazienteInAppuntamentiLogopedistaPrincipale;
+
         public AppuntamentiLogopedistaViewHolder(View itemView) {
             super(itemView);
             llPazienteInAppuntamentiLogopedistaPrincipale = itemView.findViewById(R.id.llPazienteInAppuntamentiLogopedistaPrincipale);
@@ -86,9 +89,8 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             textViewLuogoAppuntamento = itemView.findViewById(R.id.textViewLuogoAppuntamentoLogopedista);
             buttonRimuoviAppuntamento = itemView.findViewById(R.id.buttonRimuoviAppuntamentoLogopedista);
         }
+
         private void hideInfoAggiuntive() {
-
-
             if (llPazienteInAppuntamentiLogopedistaInfoAggiuntive.getVisibility() == View.VISIBLE) {
                 llPazienteInAppuntamentiLogopedistaInfoAggiuntive.setVisibility(View.GONE);
             } else {
@@ -104,7 +106,6 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
 
     private class AppuntamentiFilter extends Filter {
-
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<AppuntamentoCustom> filteredApppuntamenti = new ArrayList<>();
@@ -132,4 +133,5 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             notifyDataSetChanged();
         }
     }
+
 }

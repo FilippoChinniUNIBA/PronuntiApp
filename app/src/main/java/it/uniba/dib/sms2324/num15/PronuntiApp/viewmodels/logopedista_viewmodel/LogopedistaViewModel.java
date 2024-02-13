@@ -8,15 +8,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBAppuntamento;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.esercizio.TemplateEsercizioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.AppuntamentoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.scenariogioco.TemplateScenarioGiocoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti.RegistrazionePazienteGenitoreController;
 
 public class LogopedistaViewModel extends ViewModel {
 	private MutableLiveData<Logopedista> mLogopedista = new MutableLiveData<>();
@@ -24,8 +23,10 @@ public class LogopedistaViewModel extends ViewModel {
 	private MutableLiveData<List<TemplateScenarioGioco>> mListaTemplateScenariGioco = new MutableLiveData<>();
 	private MutableLiveData<List<Esercizio>> mListaTemplateEsercizi = new MutableLiveData<>();
 
+
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 	private CreazioneAppuntamentoController mCreazioneAppuntamentoController;
+
 
 	public LiveData<Logopedista> getLogopedistaLiveData() {
 		return mLogopedista;
@@ -55,30 +56,6 @@ public class LogopedistaViewModel extends ViewModel {
 		this.mListaTemplateEsercizi.setValue(templateEsercizi);
 	}
 
-
-	public void initMListaAppuntamenti() {
-		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
-
-		appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_LOGOPEDISTA, mLogopedista.getValue().getIdProfilo()).thenAccept(appuntamenti -> {
-			mListaAppuntamenti.setValue(appuntamenti);
-		});
-	}
-
-	public void initMListaTemplateScenariGioco() {
-		TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
-
-		templateScenarioGiocoDAO.getAll().thenAccept(templateScenariGioco -> {
-			mListaTemplateScenariGioco.setValue(templateScenariGioco);
-		});
-	}
-
-	public void initMListaTemplateEsercizi() {
-		TemplateEsercizioDAO templateEsercizioDAO = new TemplateEsercizioDAO();
-
-		templateEsercizioDAO.getAll().thenAccept(templateEsercizi -> {
-			mListaTemplateEsercizi.setValue(templateEsercizi);
-		});
-	}
 
 	public void aggiornaLogopedistaRemoto() {
 		Logopedista logopedista = mLogopedista.getValue();
