@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,16 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
 
 public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<AppuntamentiLogopedistaAdapter.AppuntamentiLogopedistaViewHolder> {
     private List<AppuntamentoCustom> appuntamentiFull;
-    private List<AppuntamentoCustom> appuntamenti;
+    private List<AppuntamentoCustom> appuntamentiCustom;
 
     public AppuntamentiLogopedistaAdapter(List<AppuntamentoCustom> appuntamentiFull) {
         this.appuntamentiFull = appuntamentiFull;
-        appuntamenti = new ArrayList<>(appuntamentiFull);
+        appuntamentiCustom = new ArrayList<>(appuntamentiFull);
     }
 
     @Override
@@ -41,7 +39,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public void onBindViewHolder(AppuntamentiLogopedistaViewHolder holder, int position) {
-        AppuntamentoCustom appuntamento = appuntamenti.get(position);
+        AppuntamentoCustom appuntamento = appuntamentiCustom.get(position);
 
         holder.textViewNomePaziente.setText(appuntamento.getNomePaziente());
         holder.textViewCognomePaziente.setText(appuntamento.getCognomePaziente());
@@ -68,7 +66,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             //TODO che è sta cosa? e cosa significa il TODO sopra?
             Log.d("App",appuntamento.toString());
             CreazioneAppuntamentoController.eliminazioneAppuntamento(appuntamento.getIdAppuntamentoCustom());
-            appuntamenti.remove(position);
+            appuntamentiCustom.remove(position);
             notifyDataSetChanged();
             Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);
         });
@@ -76,16 +74,16 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public int getItemCount() {
-        return appuntamenti.size();
+        return appuntamentiCustom.size();
     }
 
     public AppuntamentoCustom getItem(int position) {
-        return appuntamenti.get(position);
+        return appuntamentiCustom.get(position);
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void addAppuntamento(AppuntamentoCustom appuntamento) {
-        appuntamenti.add(appuntamento);
+        appuntamentiCustom.add(appuntamento);
         appuntamentiFull.add(appuntamento);
         notifyDataSetChanged();
     }
@@ -151,8 +149,8 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            appuntamenti.clear();
-            appuntamenti.addAll((List<AppuntamentoCustom>) filterResults.values);
+            appuntamentiCustom.clear();
+            appuntamentiCustom.addAll((List<AppuntamentoCustom>) filterResults.values);
             notifyDataSetChanged();
         }
     }
