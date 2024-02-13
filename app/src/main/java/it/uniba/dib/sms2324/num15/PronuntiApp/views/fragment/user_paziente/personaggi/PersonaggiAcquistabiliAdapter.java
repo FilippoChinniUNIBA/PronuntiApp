@@ -19,22 +19,29 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.checkerframework.checker.units.qual.N;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
     private Context context;
     private List<Personaggio> personaggiAcquistabili;
     PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter;
     NestedScrollView nestedScrollView;
+    PazienteViewModel mPazienteViewModel;
 
-    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> personaggiAcquistabili, PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter, NestedScrollView nestedScrollView) {
+    public PersonaggiAcquistabiliAdapter(Context context, List<Personaggio> personaggiAcquistabili, PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter, NestedScrollView nestedScrollView, PazienteViewModel mPazienteViewModel) {
         this.context = context;
         this.personaggiAcquistabili = personaggiAcquistabili;
         this.personaggiSbloccatiAdapter = personaggiSbloccatiAdapter;
         this.nestedScrollView = nestedScrollView;
+        this.mPazienteViewModel = mPazienteViewModel;
     }
 
     @NonNull
@@ -47,17 +54,45 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Personaggio personaggio = personaggiAcquistabili.get(position);
-        String url = personaggio.getTexturePersonaggio();
+        String idPersonaggio = personaggio.getIdPersonaggio();
+        String urlPersonaggio = personaggio.getTexturePersonaggio();
         String nomePersonaggio = personaggio.getNomePersonaggio();
+        int costoPersonaggio = personaggio.getCostoSblocco();
         holder.textViewNomePersonaggio.setText(nomePersonaggio);
-        Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(url).into(holder.imageViewPersonaggio);
+        Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(urlPersonaggio).into(holder.imageViewPersonaggio);
+        holder.textViewCostoPersonaggio.setText(String.valueOf(costoPersonaggio));
 
         holder.llAcquistaPersonaggio.setOnClickListener(v -> {
-            personaggiAcquistabili.remove(personaggio);
-            personaggiSbloccatiAdapter.addPersonaggisbloccato(personaggio);
+            refreshPersonaggi(personaggio);
             getAnimator().start();
             notifyDataSetChanged();
+            updatePersonaggiPaziente(idPersonaggio);
         });
+    }
+
+    private void updatePersonaggiPaziente(String idPersonaggio){
+        Map<String, Integer> personaggi = mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati();
+        Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
+        personaggiModificati.put(idPersonaggio, 2);
+        mPazienteViewModel.getPazienteLiveData().getValue().setPersonaggiSbloccati(personaggiModificati);
+        mPazienteViewModel.aggiornaTexturePersonaggioSelezionatoLiveData();
+        mPazienteViewModel.aggiornaPazienteRemoto();
+    }
+
+    public Map<String, Integer> eliminaPersonaggioSelezionato(Map<String, Integer> mappa) {
+
+        Map<String, Integer> nuovaMappa = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : mappa.entrySet()) {
+            String chiave = entry.getKey();
+            int valore = Integer.parseInt(String.valueOf(entry.getValue()));
+            int nuovoValore = (valore == 2) ? 1 : valore;
+            nuovaMappa.put(chiave, nuovoValore);
+        }
+        return nuovaMappa;
+    }
+    private void refreshPersonaggi(Personaggio personaggio){
+        personaggiAcquistabili.remove(personaggio);
+        personaggiSbloccatiAdapter.addPersonaggisbloccato(personaggio);
     }
 
     @Override
@@ -81,6 +116,10 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
 
         LinearLayout llAcquistaPersonaggio;
 
+        TextView textViewCostoPersonaggio;
+
+
+
 
         LinearLayout llPersonaggioSelezionato; //DA NON VISUALIZZARE QUI
         Button buttonPossiediPersonaggio;
@@ -93,6 +132,7 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
             llPersonaggioSelezionato = itemView.findViewById(R.id.llPersonaggioSelezionato);
             buttonPossiediPersonaggio = itemView.findViewById(R.id.buttonPossiediPersonaggio);
             llAcquistaPersonaggio = itemView.findViewById(R.id.llAcquistaPersonaggio);
+            textViewCostoPersonaggio = itemView.findViewById(R.id.textViewCostoPersonaggio);
 
             llPersonaggioSelezionato.setVisibility(View.GONE);
             buttonPossiediPersonaggio.setVisibility(View.GONE);
