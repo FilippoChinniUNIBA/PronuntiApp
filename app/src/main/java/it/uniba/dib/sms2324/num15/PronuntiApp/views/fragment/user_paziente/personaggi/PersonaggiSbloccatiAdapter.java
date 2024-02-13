@@ -71,13 +71,14 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
     }
     private void updatePersonaggiPaziente(String idPersonaggio){
         Map<String, Integer> personaggi = mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati();
-        Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
+        Map<String, Integer> personaggiModificati = deselezionaPersonaggioSelezionato(personaggi);
         personaggiModificati.put(idPersonaggio, 2);
         mPazienteViewModel.getPazienteLiveData().getValue().setPersonaggiSbloccati(personaggiModificati);
+        mPazienteViewModel.aggiornaTexturePersonaggioSelezionatoLiveData();
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
-    public Map<String, Integer> eliminaPersonaggioSelezionato(Map<String, Integer> mappa) {
+    public Map<String, Integer> deselezionaPersonaggioSelezionato(Map<String, Integer> mappa) {
 
         Map<String, Integer> nuovaMappa = new HashMap<>();
         for (Map.Entry<String, Integer> entry : mappa.entrySet()) {
