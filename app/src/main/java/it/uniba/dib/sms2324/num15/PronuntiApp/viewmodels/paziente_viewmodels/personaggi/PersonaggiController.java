@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
@@ -15,6 +16,7 @@ public class PersonaggiController {
 	public PersonaggiController(PazienteViewModel mPazienteViewModel) {
 		this.mPazienteViewModel = mPazienteViewModel;
 	}
+
 
 	public static String getTexturePersonaggioSelezionato(List<Personaggio> listaPersonaggi, Map<String, Integer> mappaPersonaggiSbloccati) {
 		Map<String, Integer> mappaConvertita = mappaPersonaggiSbloccati.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> Integer.parseInt(String.valueOf(e.getValue()))));
@@ -66,7 +68,10 @@ public class PersonaggiController {
 	}
 
 	public void updateValutaPaziente(int costoSbloccoPersonaggio) {
-		mPazienteViewModel.getPazienteLiveData().getValue().decrementaValuta(costoSbloccoPersonaggio);
+		Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
+		paziente.decrementaValuta(costoSbloccoPersonaggio);
+		mPazienteViewModel.setPaziente(paziente);
+
 		mPazienteViewModel.aggiornaPazienteRemoto();
 	}
 
