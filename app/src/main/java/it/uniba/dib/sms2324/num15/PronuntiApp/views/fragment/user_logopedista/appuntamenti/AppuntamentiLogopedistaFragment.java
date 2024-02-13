@@ -29,6 +29,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -225,6 +226,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 		adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiVisualizzazione);
 		recyclerViewAppuntamenti.setAdapter(adapterAppuntamenti);
+
 	}
 
 	private boolean checkInputAppuntamento() {

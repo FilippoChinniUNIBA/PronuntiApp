@@ -39,6 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingHorizontal="16dp"
+            tools:listitem="@layout/item_classifica"
         />
 
 
