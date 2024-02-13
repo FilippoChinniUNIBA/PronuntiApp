@@ -9,6 +9,7 @@ public class AppuntamentoCustom {
     private String luogoAppuntamento;
     private LocalDate dataAppuntamento;
     private LocalTime oraAppuntamento;
+    private String idAppuntamentoCustom;
 
     public AppuntamentoCustom(String nomePaziente, String cognomePaziente, String luogoAppuntamento, LocalDate dataAppuntamento, LocalTime oraAppuntamento) {
         this.nomePaziente = nomePaziente;
@@ -17,6 +18,16 @@ public class AppuntamentoCustom {
         this.dataAppuntamento = dataAppuntamento;
         this.oraAppuntamento = oraAppuntamento;
     }
+
+    public AppuntamentoCustom(String idAppuntamentoCustom,String nomePaziente, String cognomePaziente, String luogoAppuntamento, LocalDate dataAppuntamento, LocalTime oraAppuntamento) {
+        this.nomePaziente = nomePaziente;
+        this.cognomePaziente = cognomePaziente;
+        this.luogoAppuntamento = luogoAppuntamento;
+        this.dataAppuntamento = dataAppuntamento;
+        this.oraAppuntamento = oraAppuntamento;
+        this.idAppuntamentoCustom = idAppuntamentoCustom;
+    }
+
 
     public String getNomePaziente() {
         return nomePaziente;
@@ -58,6 +69,14 @@ public class AppuntamentoCustom {
         this.oraAppuntamento = oraAppuntamento;
     }
 
+    public String getIdAppuntamentoCustom() {
+        return idAppuntamentoCustom;
+    }
+
+    public void setIdAppuntamentoCustom(String idAppuntamentoCustom) {
+        this.idAppuntamentoCustom = idAppuntamentoCustom;
+    }
+
     @Override
     public String toString() {
         return "Appuntamento{" +
@@ -66,6 +85,7 @@ public class AppuntamentoCustom {
                 ", luogoAppuntamento='" + luogoAppuntamento + '\'' +
                 ", dataAppuntamento=" + dataAppuntamento +
                 ", oraAppuntamento=" + oraAppuntamento +
+                ", idAppuntamento"+ idAppuntamentoCustom+
                 '}';
     }
 

@@ -222,7 +222,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		for (Appuntamento appuntamento : mLogopedistaViewModel.getAppuntamentiLiveData().getValue()) {
 			for (Paziente paziente : listaPazienti) {
 				if (appuntamento.getRefIdPaziente().equals(paziente.getIdProfilo())) {
-					AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
+					AppuntamentoCustom appuntamentoCustom = new AppuntamentoCustom(appuntamento.getIdAppuntamento(),paziente.getNome(), paziente.getCognome(), appuntamento.getLuogo(), appuntamento.getData(), appuntamento.getOra());
 					appuntamentiVisualizzazione.add(appuntamentoCustom);
 				}
 			}
