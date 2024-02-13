@@ -20,15 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.ModificaAppuntamentiController;
 
 public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<AppuntamentiLogopedistaAdapter.AppuntamentiLogopedistaViewHolder> {
     private List<AppuntamentoCustom> appuntamentiFull;
     private List<AppuntamentoCustom> appuntamentiCustom;
 
-    public AppuntamentiLogopedistaAdapter(List<AppuntamentoCustom> appuntamentiFull) {
+    private LogopedistaViewModel mLogopedistaViewModel;
+
+
+    public AppuntamentiLogopedistaAdapter(List<AppuntamentoCustom> appuntamentiFull, LogopedistaViewModel logopedistaViewModel) {
         this.appuntamentiFull = appuntamentiFull;
         appuntamentiCustom = new ArrayList<>(appuntamentiFull);
+
+        this.mLogopedistaViewModel = logopedistaViewModel;
     }
 
     @Override
@@ -61,12 +67,12 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         holder.llPazienteInAppuntamentiLogopedistaPrincipale.setOnClickListener(v -> holder.hideInfoAggiuntive());
 
         holder.buttonRimuoviAppuntamento.setOnClickListener(v -> {
-            //TODO rimuovere dalla lista gli appuntamenti
-            Log.d("App",appuntamento.toString());
-            CreazioneAppuntamentoController.eliminazioneAppuntamento(appuntamento.getIdAppuntamentoCustom());
+            String idAppuntamentoToDelete = appuntamento.getIdAppuntamentoCustom();
+
+            ModificaAppuntamentiController.eliminazioneAppuntamento(idAppuntamentoToDelete);
+            mLogopedistaViewModel.rimuoviAppuntamentoFromListaAppuntamentiLiveData(idAppuntamentoToDelete);
             appuntamentiCustom.remove(position);
             notifyDataSetChanged();
-            Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);
         });
     }
 
