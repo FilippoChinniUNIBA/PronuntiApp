@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -56,13 +58,12 @@ public class PersonaggiSbloccatiAdapter extends RecyclerView.Adapter<PersonaggiS
 
 
         holder.buttonPossiediPersonaggio.setOnClickListener(v -> {
-            refreshPersonaggioSelezionato(personaggio);
+            refreshPersonaggioSelezionato(personaggio,position);
 
         });
     }
-    private void refreshPersonaggioSelezionato(Personaggio personaggio){
-        personaggiSbloccati.remove(personaggio);
-        personaggiSbloccati.add(0,personaggio);
+    private void refreshPersonaggioSelezionato(Personaggio personaggio,int position){
+        Collections.swap(personaggiSbloccati,0,position);
         notifyDataSetChanged();
     }
 

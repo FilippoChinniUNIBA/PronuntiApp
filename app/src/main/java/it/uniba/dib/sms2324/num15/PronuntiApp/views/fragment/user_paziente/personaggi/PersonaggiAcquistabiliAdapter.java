@@ -49,8 +49,10 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
         Personaggio personaggio = personaggiAcquistabili.get(position);
         String url = personaggio.getTexturePersonaggio();
         String nomePersonaggio = personaggio.getNomePersonaggio();
+        int costoPersonaggio = personaggio.getCostoSblocco();
         holder.textViewNomePersonaggio.setText(nomePersonaggio);
         Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(url).into(holder.imageViewPersonaggio);
+        holder.textViewCostoPersonaggio.setText(String.valueOf(costoPersonaggio));
 
         holder.llAcquistaPersonaggio.setOnClickListener(v -> {
             personaggiAcquistabili.remove(personaggio);
@@ -81,6 +83,10 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
 
         LinearLayout llAcquistaPersonaggio;
 
+        TextView textViewCostoPersonaggio;
+
+
+
 
         LinearLayout llPersonaggioSelezionato; //DA NON VISUALIZZARE QUI
         Button buttonPossiediPersonaggio;
@@ -93,6 +99,7 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
             llPersonaggioSelezionato = itemView.findViewById(R.id.llPersonaggioSelezionato);
             buttonPossiediPersonaggio = itemView.findViewById(R.id.buttonPossiediPersonaggio);
             llAcquistaPersonaggio = itemView.findViewById(R.id.llAcquistaPersonaggio);
+            textViewCostoPersonaggio = itemView.findViewById(R.id.textViewCostoPersonaggio);
 
             llPersonaggioSelezionato.setVisibility(View.GONE);
             buttonPossiediPersonaggio.setVisibility(View.GONE);
