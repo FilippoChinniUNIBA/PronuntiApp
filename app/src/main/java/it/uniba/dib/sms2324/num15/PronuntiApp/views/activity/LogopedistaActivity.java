@@ -12,8 +12,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.List;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 
 public class LogopedistaActivity extends AbstractAppActivity {
@@ -37,9 +42,13 @@ public class LogopedistaActivity extends AbstractAppActivity {
         //Setup Dati
         this.mLogopedistaViewModel = new ViewModelProvider(this).get(LogopedistaViewModel.class);
         this.mLogopedistaViewModel.setLogopedista((Logopedista) getIntent().getSerializableExtra("mLogopedista"));
-        this.mLogopedistaViewModel.initMListaAppuntamenti();
-        this.mLogopedistaViewModel.initMListaTemplateScenariGioco();
-        this.mLogopedistaViewModel.initMListaTemplateEsercizi();
+        this.mLogopedistaViewModel.setAppuntamenti((List<Appuntamento>) getIntent().getSerializableExtra("mAppuntamenti"));
+        this.mLogopedistaViewModel.setTemplateScenariGioco((List<TemplateScenarioGioco>) getIntent().getSerializableExtra("mTemplateScenariGioco"));
+        this.mLogopedistaViewModel.setTemplateEsercizi((List<Esercizio>) getIntent().getSerializableExtra("mTemplateEsercizi"));
+
+        //this.mLogopedistaViewModel.initMListaAppuntamenti();
+        //this.mLogopedistaViewModel.initMListaTemplateScenariGioco();
+        //this.mLogopedistaViewModel.initMListaTemplateEsercizi();
     }
 
 }

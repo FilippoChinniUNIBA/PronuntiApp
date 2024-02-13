@@ -27,6 +27,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitGenitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.init_controllers.InitPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.ConnessioneMancanteDialog;
 
@@ -110,8 +111,9 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
 
     public void navigaConProfilo(Profilo profilo, Context context) {
         if (profilo instanceof Logopedista) {
-            Intent intent = buildIntentLogopedista((Logopedista) profilo, context);
-            startActivity(intent);
+            InitLogopedista.buildIntentLogopedista((Logopedista) profilo, context).thenAccept(intent -> {
+                startActivity(intent);
+            });
         } else if (profilo instanceof Genitore) {
             InitGenitore.buildIntentGenitore((Genitore) profilo, context).thenAccept(intent -> {
                 startActivity(intent);
@@ -121,12 +123,6 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                 startActivity(intent);
             });
         }
-    }
-
-    private static Intent buildIntentLogopedista(Logopedista logopedista, Context context) {
-        Intent intent = new Intent(context, LogopedistaActivity.class);
-        intent.putExtra("mLogopedista", logopedista);
-        return intent;
     }
 
 }
