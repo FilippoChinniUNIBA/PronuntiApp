@@ -74,33 +74,25 @@
                 android:id="@+id/textViewPersonaggioSelezionato"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selezionato"
+                android:text="In uso"
                 android:gravity="center"
                 android:textAppearance="@style/styleTextPersonaggi"
-                android:textSize="8sp"
+                android:textSize="12sp"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/llPossiediPersonaggio"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonPossiediPersonaggio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:paddingVertical="5dp"
+            android:layout_marginTop="20dp"
             android:visibility="visible"
-            >
-            <TextView
-                android:id="@+id/textViewPersonaggioPosseduto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Seleziona"
-                android:gravity="center"
-                android:textAppearance="@style/styleTextPersonaggi"
-                android:textSize="8sp"
-                />
-        </LinearLayout>
-
+            android:text="Usa"
+            android:gravity="center"
+            android:textAppearance="@style/styleTextPersonaggi"
+            android:textSize="14sp"
+            android:background="@drawable/button_selector_personaggio_background"
+            />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
