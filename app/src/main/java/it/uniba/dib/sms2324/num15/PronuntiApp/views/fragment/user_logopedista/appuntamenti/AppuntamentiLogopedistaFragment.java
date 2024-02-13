@@ -64,7 +64,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private CreazioneAppuntamentoController mController;
-	List<AppuntamentoCustom> appuntamentiVisualizzazione;
+	private List<AppuntamentoCustom> appuntamentiVisualizzazione;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
