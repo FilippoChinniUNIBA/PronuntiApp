@@ -25,6 +25,7 @@ public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
 	private MutableLiveData<List<Personaggio>> mListaPersonaggi = new MutableLiveData<>();
 	private MutableLiveData<List<EntryClassifica>> mClassifica = new MutableLiveData<>();
+	private MutableLiveData<String> mTexturePersonaggioSelezionato = new MutableLiveData<>();
 
 
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
@@ -53,6 +54,13 @@ public class PazienteViewModel extends ViewModel {
 	}
 	public void setClassifica(List<EntryClassifica> classifica) {
 		this.mClassifica.setValue(classifica);
+	}
+
+	public LiveData<String> getTexturePersonaggioSelezionatoLiveData() {
+		return mTexturePersonaggioSelezionato;
+	}
+	public void setTexturePersonaggioSelezionato(String texturePersonaggioSelezionato) {
+		this.mTexturePersonaggioSelezionato.setValue(texturePersonaggioSelezionato);
 	}
 
 
