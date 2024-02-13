@@ -11,8 +11,8 @@ public class PersonaggiController {
 	//TODO qua dovrà andare roba come la azione di sblocco del personaggio
 
 	public static String getTexturePersonaggioSelezionato(List<Personaggio> listaPersonaggi, Map<String, Integer> mappaPersonaggiSbloccati) {
-		mappaPersonaggiSbloccati.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> Integer.parseInt(String.valueOf(e.getValue()))));
-		for (Map.Entry<String, Integer> entry : mappaPersonaggiSbloccati.entrySet()) {
+		Map<String, Integer> mappaConvertita = mappaPersonaggiSbloccati.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> Integer.parseInt(String.valueOf(e.getValue()))));
+		for (Map.Entry<String, Integer> entry : mappaConvertita.entrySet()) {
 
 			if (entry.getValue() == 2) {
 				for (Personaggio personaggio : listaPersonaggi) {
