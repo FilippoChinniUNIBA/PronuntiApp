@@ -20,6 +20,7 @@
     <string name="male">M</string>
     <string name="female">F</string>
     <string name="age">Età</string>
+    <string name="nameSurname">Nome e cognome</string>
     <string name="information_patient">Informazioni Paziente</string>
     <string name="information_parent">Informazioni Genitore</string>
     <string-array name="sesso_array">

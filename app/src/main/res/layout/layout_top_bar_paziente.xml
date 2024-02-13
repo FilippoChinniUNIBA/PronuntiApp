@@ -14,11 +14,11 @@
         android:id="@+id/topBarPaziente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangle_rounded_top_bar_paziente_bkg"
         android:layout_weight="2"
-        android:paddingVertical="5dp"
+        android:background="@drawable/rectangle_rounded_no_border_traslucent"
         android:paddingHorizontal="10dp"
-        >
+        android:paddingVertical="10dp">
+
         <ImageView
             android:id="@+id/imageViewPaziente"
             android:layout_width="48dp"
@@ -31,77 +31,79 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textViewUsernamePaziente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="marquee"
                 android:layout_marginStart="10dp"
+                android:ellipsize="marquee"
                 android:text="shiningraro_susshiningraru"
+                android:textAppearance="@style/styleTextPersonaggi"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                />
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="start"
-                android:paddingStart="10dp"
-                >
+                android:paddingStart="10dp">
+
                 <ImageView
-                    android:layout_gravity="center"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_experience_points"
-                    />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_experience_points" />
+
                 <TextView
                     android:id="@+id/textViewPunteggio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:textStyle="italic"
-                    android:text="25000"
-                    android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:textSize="15sp"
-                    />
+                    android:layout_marginEnd="10dp"
+                    android:paddingRight="2dp"
+                    android:text="25000"
+                    android:textAppearance="@style/styleTextPersonaggi"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/upCoinsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="end"
             android:layout_gravity="center"
+            android:gravity="end"
             android:paddingVertical="2dp"
-            android:paddingRight="10dp"
             android:paddingLeft="15dp"
-            >
+            android:paddingRight="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <ImageView
-                android:src="@drawable/ic_coins"
                 style="@style/CoinsIconStyle"
-                app:layout_constraintBottom_toTopOf="@+id/coinsTextView"
-                app:layout_constraintStart_toStartOf="@+id/coinsTextView"
                 android:layout_gravity="center"
                 android:layout_marginRight="5dp"
-                />
+                android:src="@drawable/ic_coins"
+                app:layout_constraintBottom_toTopOf="@+id/coinsTextView"
+                app:layout_constraintStart_toStartOf="@+id/coinsTextView" />
+
             <TextView
                 android:id="@+id/coinsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="2500"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_gravity="center"
-                />
+                android:text="2500"
+                android:textAppearance="@style/styleTextPersonaggi"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </LinearLayout>
 

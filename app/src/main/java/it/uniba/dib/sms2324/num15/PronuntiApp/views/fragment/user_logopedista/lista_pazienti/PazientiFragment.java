@@ -65,7 +65,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
             adapterPazienti = new PazienteAdapter(pazienti);
             recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
-            recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
+            //recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
 
             searchViewListaPazienti.setOnCloseListener(() -> {
                 addPazientiButton.setText("Paziente +");
