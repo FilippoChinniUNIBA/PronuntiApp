@@ -114,7 +114,7 @@ public class PazienteViewModel extends ViewModel {
 
 	public PersonaggiController getPersonaggiController() {
 		if(this.mPersonaggiController == null){
-			this.mPersonaggiController = new PersonaggiController();
+			this.mPersonaggiController = new PersonaggiController(this);
 		}
 		return this.mPersonaggiController;
 	}
