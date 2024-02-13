@@ -36,7 +36,7 @@ public class RegistrazionePazienteGenitoreController {
         put("-NqIFkPtcD7NHKpKOL0X", 0);     //Spiderman
         put("-NqIFkPxWAuHV9o40Idc", 0);     //Wonderwoman
     }};
-    private static final int VALUTA_INIZIALE_PAZIENTE = 50;
+    private static final int VALUTA_INIZIALE_PAZIENTE = 100;
 
     public Genitore registrazioneGenitore(String userId, String nome, String cognome, String username, String email, String password, String telefono, String idLogopedista, String idPaziente) {
         TipoUtente tipoUtente = TipoUtente.GENITORE;
