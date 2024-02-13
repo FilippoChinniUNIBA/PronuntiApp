@@ -118,8 +118,6 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             pazientiCopia.clear();
-            Log.d("PazienteAdapter", pazientiCopia.toString());
-            Log.d("PazienteAdapter", pazientiFull.toString());
             pazientiCopia.addAll((List<Paziente>) filterResults.values);
             notifyDataSetChanged();
         }

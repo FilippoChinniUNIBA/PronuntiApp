@@ -262,6 +262,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		String idPaziente = this.idPazienteSelezionato;
 
 		Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista, idPaziente, dataAppuntamento, orarioAppuntamentoEffettivo, luogoAppuntamento);
+		mLogopedistaViewModel.getAppuntamentiLiveData().getValue().add(appuntamento);
 		Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamento.toString());
 
 		//aggiunto paziente alla recycler view
