@@ -61,7 +61,6 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	private ImageButton closeCardUpButton;
 	private View viewOverlaySelezionePaziente;
 	private String idPazienteSelezionato;
-
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private CreazioneAppuntamentoController mController;
 	private List<AppuntamentoCustom> appuntamentiVisualizzazione;
@@ -210,7 +209,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	private void setUpAdapters() {
 		appuntamentiVisualizzazione = new ArrayList<>();
 		Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
-		List<Paziente> listaPazienti = logopedista.getPazienti();
+		List<Paziente> listaPazienti = logopedista.getPazienti() != null ? logopedista.getPazienti() :new ArrayList<>();
 
 		for (Appuntamento appuntamento : mLogopedistaViewModel.getAppuntamentiLiveData().getValue()) {
 			for (Paziente paziente : listaPazienti) {
@@ -232,10 +231,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
 				mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
 				|| orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
-			Log.d("AppuntamentiLogopedistaFragment.checkInputAppuntamento()", (idPazienteSelezionato == null)
-					+ " " +idPazienteSelezionato.isEmpty()  + " " + !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(),
-					mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti() ) + " " +
-					orarioAppuntamento.isEmpty() + " " + editTextDataAppuntemento.getText().toString().isEmpty());
+
 			showErrorInputDialog();
 			cardViewAppuntamento.setVisibility(View.VISIBLE);
 			addAppuntamentoButton.setVisibility(View.GONE);

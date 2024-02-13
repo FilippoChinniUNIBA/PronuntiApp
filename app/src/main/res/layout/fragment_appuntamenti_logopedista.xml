@@ -336,11 +336,11 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:elevation="2dp"
-        android:visibility="visible"
         android:layout_alignTop="@+id/nestedScrollViewAppuntamentiLogopedista"
         android:layout_marginTop="200dp"
         android:background="@drawable/rectangle_rounded_border_white_no_top_bkg"
         android:padding="2dp"
+        android:visibility="gone"
         >
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
