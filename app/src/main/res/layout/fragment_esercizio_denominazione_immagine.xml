@@ -58,6 +58,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cardViewImmagineEsercizioDenominazione"
             android:elevation="1dp"
+            android:textAppearance="@style/styleTextPersonaggi"
             />
 
         <androidx.cardview.widget.CardView
