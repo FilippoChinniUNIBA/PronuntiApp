@@ -19,6 +19,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 public class ProfiloLogopedistaFragment extends AbstractProfileWithImageFragment {
     private TextInputEditText textInputEditTextTelefono;
     private TextInputEditText textInputEditTextIndirizzo;
+
     private LogopedistaViewModel mLogopedistaViewModel;
 
 

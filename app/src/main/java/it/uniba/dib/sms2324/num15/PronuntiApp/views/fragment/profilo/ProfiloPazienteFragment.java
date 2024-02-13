@@ -28,7 +28,8 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
     private ImageView textViewArrowDown;
     LinearLayout linearLayoutDatiBambinoClick;
     LinearLayout linearLayoutContainerBambino;
-    private PazienteViewModel mPazienteViewModel;
+
+    //private PazienteViewModel mPazienteViewModel; //TODO cosa nuova filippo
     private GenitoreViewModel mGenitoreViewModel;
 
 

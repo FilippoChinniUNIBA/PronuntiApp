@@ -11,8 +11,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.List;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 
 public class GenitoreActivity extends AbstractAppActivity {
@@ -36,7 +40,10 @@ public class GenitoreActivity extends AbstractAppActivity {
         //Setup Dati
         this.mGenitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);
         this.mGenitoreViewModel.setGenitore((Genitore) getIntent().getSerializableExtra("mGenitore"));
-        this.mGenitoreViewModel.initMPaziente().thenAccept(aVoid -> mGenitoreViewModel.initMListaAppuntamenti());
+        this.mGenitoreViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("mPaziente"));
+        this.mGenitoreViewModel.setAppuntamenti((List<Appuntamento>) getIntent().getSerializableExtra("mAppuntamenti"));
+
+        //this.mGenitoreViewModel.initMPaziente().thenAccept(aVoid -> mGenitoreViewModel.initMListaAppuntamenti());
     }
 
 }

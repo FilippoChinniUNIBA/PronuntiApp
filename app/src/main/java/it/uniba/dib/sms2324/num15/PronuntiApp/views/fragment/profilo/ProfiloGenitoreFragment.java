@@ -22,6 +22,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.Paz
 
 public class ProfiloGenitoreFragment extends AbstractProfileWithImageFragment{
     private TextInputEditText textInputEditTextTelefono;
+
     private GenitoreViewModel mGenitoreViewModel;
 
     @Override
