@@ -135,7 +135,7 @@
     <string name="tuoProfilo">Il tuo profilo</string>
     <string name="classifica">Classifica</string>
     <string name="giochiBambini">Giochi del tuo bambino</string>
-    <string name="monitoraggio">Monitora il tuo bambino</string>
+    <string name="monitoraggio">Terapie del tuo bambino</string>
     <string name="gioco">Gioco</string>
     <string name="personaggi">Personaggi</string>
     <string name="logoutTitle">Eseguire il logout?</string>
@@ -145,6 +145,8 @@
     <string name="permissionDeniedInstructions">Questa funzionalità richiede i permessi per utilizzare il microfono. Se non ti compare il messaggio per autorizzare i permessi, dovrai concederli dalle impostazioni del dispositivo riguardanti l\'App</string>
     <string name="inputErratoAggiungiAppuntamento">Probabilmente hai sbagliato ad inserire dei dati. Assicurati che la data sia nel formato yyyy-mm-dd e seleziona un paziente nel sistema.</string>
     <string name="search_hint">Ricerca pazienti...</string>
+    <string name="personaggi_sbloccati">Personaggi sbloccati</string>
+    <string name="personaggi_acquistabili">Personaggi Acquistabili</string>
 
 
 </resources>

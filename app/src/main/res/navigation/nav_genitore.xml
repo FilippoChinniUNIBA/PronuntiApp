@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/monitoraggioFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.MonitoraggioFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.MonitoraggioFragment"
         android:label="@string/monitoraggio"
         tools:layout="@layout/fragment_monitoraggio" />
     <fragment
