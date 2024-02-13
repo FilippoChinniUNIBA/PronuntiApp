@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBLogopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.costantidatabase.CostantiDBPaziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
@@ -159,14 +158,6 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 	}
 
-	public void aggiungiAValuta(int valutaGuadagnata) {
-		this.valuta = this.valuta+valutaGuadagnata;
-	}
-
-	public void aggiungiAPunteggioTot(int punteggioGuadagnato) {
-		this.punteggioTot = this.punteggioTot+punteggioGuadagnato;
-	}
-
 	public void setPersonaggiSbloccati(Map<String, Integer> personaggiSbloccati) {
 		this.personaggiSbloccati = personaggiSbloccati;
 	}
@@ -246,6 +237,18 @@ public class Paziente extends AbstractProfilo {
 				", genitore=" + genitore +
 				", terapie=" + terapie +
 				'}';
+	}
+
+	public void incrementaValuta(int valutaGuadagnata) {
+		this.valuta += valutaGuadagnata;
+	}
+
+	public void decrementaValuta(int valutaSpesa) {
+		this.valuta -= valutaSpesa;
+	}
+
+	public void incrementaPunteggioTot(int punteggioGuadagnato) {
+		this.punteggioTot += punteggioGuadagnato;
 	}
 
 }
