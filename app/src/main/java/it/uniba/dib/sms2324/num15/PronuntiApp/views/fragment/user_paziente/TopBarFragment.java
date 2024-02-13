@@ -49,13 +49,10 @@ public class TopBarFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(),paziente -> {
-
                 textViewUsernamePaziente.setText(paziente.getUsername());
                 textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
                 coinsTextView.setText(String.valueOf(paziente.getValuta()));
-
         });
     }
 
