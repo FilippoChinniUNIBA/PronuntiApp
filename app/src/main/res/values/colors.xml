@@ -25,4 +25,6 @@
     <color name="sbagliato">#FF1313</color>
     <color name="yellowTheme">#FDCA70</color>
     <color name="primaryColorShadow">#B25D90EA</color>
+    <color name="primaryColorSoft">#afbbdb</color>
+    <color name="backgroundClassificaSelector">#466FB8</color>
 </resources>

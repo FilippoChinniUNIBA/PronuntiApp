@@ -33,6 +33,7 @@
         android:padding="2dp"
         >
         <LinearLayout
+            android:id="@+id/linearLayoutPosizione"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@drawable/rectangle_no_right_cornes_bkg"
@@ -55,6 +56,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutClassificaPaziente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"

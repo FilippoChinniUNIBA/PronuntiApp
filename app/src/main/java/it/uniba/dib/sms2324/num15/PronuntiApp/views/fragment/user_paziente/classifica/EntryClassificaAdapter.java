@@ -49,7 +49,9 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
         }
 
         if (pazienteAttuale.equals(entryPaziente.getUsername())) {
-            holder.linearLayoutClassificaItem.setBackground(holder.itemView.getContext().getDrawable(R.drawable.stroke_selector));
+            holder.linearLayoutClassificaPosizione.setBackground(holder.itemView.getContext().getDrawable(R.drawable.rectangle_no_right_corners_selector_bkg));
+            holder.linearLayoutClassificaPaziente.setBackground(holder.itemView.getContext().getDrawable(R.drawable.rectangle_no_left_corners_selector_bkg));
+
         }
 
         holder.textViewPosizione.setText(String.valueOf(position + 1));
@@ -70,7 +72,7 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
         public TextView textViewUsernamePaziente;
         public TextView textViewPunteggio;
         public ImageView imageViewCorona;
-        public LinearLayout linearLayoutClassificaItem;
+        public LinearLayout linearLayoutClassificaPosizione, linearLayoutClassificaPaziente;
 
         public PazienteViewHolder(View itemView) {
             super(itemView);
@@ -79,7 +81,8 @@ public class EntryClassificaAdapter extends RecyclerView.Adapter<EntryClassifica
             textViewUsernamePaziente = itemView.findViewById(R.id.textViewUsernamePaziente);
             textViewPunteggio = itemView.findViewById(R.id.textViewPunteggio);
             imageViewCorona = itemView.findViewById(R.id.imageViewCorona);
-            linearLayoutClassificaItem = itemView.findViewById(R.id.linearLayoutClassificaItem);
+            linearLayoutClassificaPosizione = itemView.findViewById(R.id.linearLayoutPosizione);
+            linearLayoutClassificaPaziente = itemView.findViewById(R.id.linearLayoutClassificaPaziente);
         }
     }
 
