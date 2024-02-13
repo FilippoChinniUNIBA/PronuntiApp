@@ -11,7 +11,7 @@ public class AppuntamentoCustom {
     private LocalTime oraAppuntamento;
     private String idAppuntamentoCustom;
 
-    public AppuntamentoCustom(String idAppuntamentoCustom,String nomePaziente, String cognomePaziente, String luogoAppuntamento, LocalDate dataAppuntamento, LocalTime oraAppuntamento) {
+    public AppuntamentoCustom(String idAppuntamentoCustom, String nomePaziente, String cognomePaziente, String luogoAppuntamento, LocalDate dataAppuntamento, LocalTime oraAppuntamento) {
         this.idAppuntamentoCustom = idAppuntamentoCustom;
         this.nomePaziente = nomePaziente;
         this.cognomePaziente = cognomePaziente;
@@ -86,7 +86,7 @@ public class AppuntamentoCustom {
                 ", luogoAppuntamento='" + luogoAppuntamento + '\'' +
                 ", dataAppuntamento=" + dataAppuntamento +
                 ", oraAppuntamento=" + oraAppuntamento +
-                ", idAppuntamento"+ idAppuntamentoCustom+
+                ", idAppuntamento="+ idAppuntamentoCustom+
                 '}';
     }
 

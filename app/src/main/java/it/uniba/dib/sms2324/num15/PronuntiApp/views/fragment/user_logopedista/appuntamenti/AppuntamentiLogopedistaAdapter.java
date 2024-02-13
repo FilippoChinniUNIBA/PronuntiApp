@@ -133,21 +133,21 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
     private class AppuntamentiFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            List<AppuntamentoCustom> filteredApppuntamenti = new ArrayList<>();
+            List<AppuntamentoCustom> filteredAppuntamenti = new ArrayList<>();
             if (charSequence == null || charSequence.length() == 0) {
-                filteredApppuntamenti.addAll(appuntamentiFull);
+                filteredAppuntamenti.addAll(appuntamentiFull);
             } else {
                 String query = charSequence.toString().toLowerCase();
                 for (AppuntamentoCustom appuntamento : appuntamentiFull) {
                     String nome = appuntamento.getNomePaziente().toLowerCase();
                     String cognome = appuntamento.getCognomePaziente().toLowerCase();
                     if (nome.contains(query) || cognome.contains(query)) {
-                        filteredApppuntamenti.add(appuntamento);
+                        filteredAppuntamenti.add(appuntamento);
                     }
                 }
             }
             FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredApppuntamenti;
+            filterResults.values = filteredAppuntamenti;
             return filterResults;
         }
 

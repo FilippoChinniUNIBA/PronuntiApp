@@ -37,6 +37,19 @@ public class AppuntamentoDAO implements DAO<Appuntamento> {
 		ref.child(dbKey).setValue(obj.toMap());
 	}
 
+	public CompletableFuture<Appuntamento> saveWithFuture(Appuntamento obj) {
+		CompletableFuture<Appuntamento> future = new CompletableFuture<>();
+
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.APPUNTAMENTI);
+		String dbKey = ref.push().getKey();
+		ref.child(dbKey).setValue(obj.toMap()).addOnCompleteListener(task -> {
+			obj.setIdAppuntamento(dbKey);
+			future.complete(obj);
+		});
+
+		return future;
+	}
+
 	@Override
 	public void update(Appuntamento obj) {
 		DatabaseReference ref = this.db.getReference(CostantiNodiDB.APPUNTAMENTI).child(obj.getIdAppuntamento());

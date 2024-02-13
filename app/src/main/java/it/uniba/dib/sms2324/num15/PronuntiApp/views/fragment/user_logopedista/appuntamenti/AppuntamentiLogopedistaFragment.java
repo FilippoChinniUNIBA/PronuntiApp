@@ -212,7 +212,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	private void setUpAdapters() {
 		appuntamentiVisualizzazione = new ArrayList<>();
 		Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
-		List<Paziente> listaPazienti = logopedista.getPazienti() != null ? logopedista.getPazienti() :new ArrayList<>();
+		List<Paziente> listaPazienti = logopedista.getPazienti() != null ? logopedista.getPazienti() : new ArrayList<>();
 
 		for (Appuntamento appuntamento : mLogopedistaViewModel.getAppuntamentiLiveData().getValue()) {
 			for (Paziente paziente : listaPazienti) {
@@ -263,12 +263,14 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		LocalTime orarioAppuntamentoEffettivo = LocalTime.parse(orarioAppuntamento);
 		String idPaziente = this.idPazienteSelezionato;
 
-		Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista, idPaziente, dataAppuntamento, orarioAppuntamentoEffettivo, luogoAppuntamento);
-		mLogopedistaViewModel.getAppuntamentiLiveData().getValue().add(appuntamento);
+		mController.creazioneAppuntamento(idLogopedista, idPaziente, dataAppuntamento, orarioAppuntamentoEffettivo, luogoAppuntamento)
+				.thenAccept(appuntamento -> {
+					mLogopedistaViewModel.getAppuntamentiLiveData().getValue().add(appuntamento);
 
-		String nomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[0];
-		String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
-		adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(nomePaziente, cognomePaziente, luogoAppuntamento, dataAppuntamento, orarioAppuntamentoEffettivo));
+					String nomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[0];
+					String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
+					adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(appuntamento.getIdAppuntamento(), nomePaziente, cognomePaziente, luogoAppuntamento, dataAppuntamento, orarioAppuntamentoEffettivo));
+				});
 	}
 
 	private void handleTextViewSelection(TextView selectedTextView) {
