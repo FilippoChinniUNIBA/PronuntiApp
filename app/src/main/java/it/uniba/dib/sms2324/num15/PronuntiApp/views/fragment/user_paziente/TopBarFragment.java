@@ -44,17 +44,10 @@ public class TopBarFragment extends Fragment {
 
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
-                textViewUsernamePaziente.setText(paziente.getUsername());
-                textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
-                coinsTextView.setText(String.valueOf(paziente.getValuta()));
-
+            textViewUsernamePaziente.setText(paziente.getUsername());
+            textViewPunteggio.setText(String.valueOf(paziente.getPunteggioTot()));
+            coinsTextView.setText(String.valueOf(paziente.getValuta()));
         });
     }
-
-
-
-    //TODO funzioni per aggiornare i punteggi e le monete
-
-
 
 }
