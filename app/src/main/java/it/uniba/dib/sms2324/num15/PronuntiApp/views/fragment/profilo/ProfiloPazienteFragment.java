@@ -40,15 +40,8 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
         textInputEditTextNome = view.findViewById(R.id.textInputEditTextNomeProfiloPaziente);
         textInputEditTextCognome = view.findViewById(R.id.textInputEditTextCognomeProfiloPaziente);
         textInputEditTextEmail = view.findViewById(R.id.textInputEditTextEmailProfiloPaziente);
-        //imageViewProfile = view.findViewById(R.id.imageViewProfile);
-        //imageViewEditProfile = view.findViewById(R.id.imageViewEditProfile);
-        //buttonModificaProfilo= view.findViewById(R.id.buttonModificaProfiloPaziente);
-        //setPickMedia();
         textInputEditTextDataNascita = view.findViewById(R.id.textInputEditTextDataNascitaProfiloPaziente);
         spinnerSesso = view.findViewById(R.id.spinnerSessoProfiloPaziente);
-
-        //TODO prendere il paziente dal genitore dal viewmodelGenitore
-        //si può già fare: mGenitoreViewModel.getPazienteLiveData().getValue();
 
         textViewDatiBambino = view.findViewById(R.id.textViewDatiBambino);
         textViewArrowDown = view.findViewById(R.id.arrowImageView);
@@ -101,8 +94,6 @@ public class ProfiloPazienteFragment extends AsbtractProfileFragment{
 
     @Override
     public void confermaModificaProfilo(){
-        //salvare in db
-        //save();
         setData();
    }
 
