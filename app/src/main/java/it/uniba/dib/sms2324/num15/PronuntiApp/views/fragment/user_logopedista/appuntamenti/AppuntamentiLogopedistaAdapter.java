@@ -52,6 +52,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             //TODO: rimuovi appuntamento dal db (lasciare le cose sotto)
 
             //TODO che è sta cosa? e cosa significa il TODO sopra?
+            //TODO: rimuovi appuntamento dal db
             appuntamenti.remove(position);
             notifyDataSetChanged();
             Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);

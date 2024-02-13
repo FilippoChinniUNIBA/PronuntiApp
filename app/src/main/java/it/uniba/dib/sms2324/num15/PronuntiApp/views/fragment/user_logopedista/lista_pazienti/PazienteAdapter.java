@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +22,11 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 
+
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazienti;
     private List<Paziente> pazientiFull;
+    private int lastClickedPosition = -1;
 
     public PazienteAdapter(List<Paziente> pazienti) {
         this.pazienti = pazienti;
@@ -45,6 +53,13 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         holder.textViewCognomePaziente.setText(paziente.getCognome());
         holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
+        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v ->{
+                holder.cardViewPazienteInListaLogopedista.setBackgroundResource(R.drawable.rectangle_rounded_border_selector_bkg);
+                if(lastClickedPosition != -1) {
+                    PazienteViewHolder lastClickedHolder = (PazienteViewHolder) holder.itemView.getTag();
+                    lastClickedHolder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
+                }
+        });
     }
 
     @Override
@@ -61,11 +76,11 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         TextView textViewCognomePaziente;
         TextView textViewDataNascitaPaziente;
         TextView textViewSessoPaziente;
-        LinearLayout linearLayoutPaziente;
+        MaterialCardView cardViewPazienteInListaLogopedista;
 
         public PazienteViewHolder(@NonNull View itemView) {
             super(itemView);
-            linearLayoutPaziente = itemView.findViewById(R.id.llPazienteInListaLogopedista);
+            cardViewPazienteInListaLogopedista = itemView.findViewById(R.id.cardViewPazienteInListaLogopedista);
             textViewNomePaziente = itemView.findViewById(R.id.textViewNomePaziente);
             textViewCognomePaziente = itemView.findViewById(R.id.textViewCognomePaziente);
             textViewDataNascitaPaziente = itemView.findViewById(R.id.textViewDataNascitaPaziente);
