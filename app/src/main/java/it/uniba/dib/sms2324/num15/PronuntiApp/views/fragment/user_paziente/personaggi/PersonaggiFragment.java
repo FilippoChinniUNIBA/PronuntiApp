@@ -4,7 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -25,16 +30,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWit
 public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     private RecyclerView recyclerViewPersonaggiSbloccati;
     private RecyclerView recyclerViewPersonaggiAcquistabili;
-    private TextView textViewPersonaggiSbloccati;
-    private TextView textViewPersonaggiAcquistabili;
-    private TextView textViewMonete;
 
-    private List<String> urlsPersonaggiSbloccati;
-    private List<String> urlsPersonaggiAcquistabili;
-    private List<String> nomiPersonaggiSbloccati;
-    private List<String> nomiPersonaggiAcquistabili;
+    private List<Personaggio> personaggiSbloccati;
+    private List<Personaggio> personaggiAcquistabili;
     private List<String> idsPersonaggiAcquistabili;
     private List<String> idsPersonaggiSbloccati;
+    private NestedScrollView nestedScrollView;
+
 
     private PazienteViewModel mPazienteViewModel;
     private PersonaggiController mController;
@@ -72,20 +74,22 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
 
 
         //TODO settare monete in onViewCreated
-        textViewMonete = view.findViewById(R.id.coinsTextView);
-        textViewPersonaggiSbloccati = view.findViewById(R.id.textViewPersonaggiSbloccati);
-        textViewPersonaggiAcquistabili = view.findViewById(R.id.textViewPersonaggiAcquistabili);
-
+        //textViewPersonaggiSbloccati = view.findViewById(R.id.textViewPersonaggiSbloccati);
+        //textViewPersonaggiAcquistabili = view.findViewById(R.id.textViewPersonaggiAcquistabili);
+        nestedScrollView = view.findViewById(R.id.nestedScrollViewPersonaggi);
         recyclerViewPersonaggiSbloccati = view.findViewById(R.id.recyclerViewPersonaggiSbloccati);
         recyclerViewPersonaggiAcquistabili = view.findViewById(R.id.recyclerViewPersonaggiAcquistabili);
         recyclerViewPersonaggiAcquistabili.setHasFixedSize(true);
 
-        urlsPersonaggiSbloccati = new ArrayList<>();
-        urlsPersonaggiAcquistabili = new ArrayList<>();
-        nomiPersonaggiAcquistabili = new ArrayList<>();
-        nomiPersonaggiSbloccati = new ArrayList<>();
         idsPersonaggiAcquistabili= new ArrayList<>();
         idsPersonaggiSbloccati = new ArrayList<>();
+        personaggiSbloccati = new ArrayList<>();
+        personaggiAcquistabili = new ArrayList<>();
+
+        // todo animare le transazioni
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        recyclerViewPersonaggiSbloccati.setItemAnimator(itemAnimator);
+        recyclerViewPersonaggiAcquistabili.setItemAnimator(itemAnimator);
 
         GridLayoutManager layoutManagerSbloccati = new GridLayoutManager(getContext(), 3);
         GridLayoutManager layoutManagerAcquistabili = new GridLayoutManager(getContext(), 3);
@@ -98,7 +102,6 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setAdapters();
     }
 
@@ -107,37 +110,76 @@ public class PersonaggiFragment extends AbstractFragmentWithNavigation {
         List<Personaggio> personaggi = mPazienteViewModel.getListaPersonaggiLiveData().getValue();
 
         setIdLists(personaggiPaziente);
-        setAttributes(personaggi);
+        personaggiSbloccati = getSortedListPersonaggi(personaggi,idsPersonaggiSbloccati);
+        personaggiAcquistabili = getSortedListPersonaggi(personaggi,idsPersonaggiAcquistabili);
 
-        PersonaggiAcquistabiliAdapter personaggiAcquistabiliAdapter = new PersonaggiAcquistabiliAdapter(getContext(), urlsPersonaggiAcquistabili, nomiPersonaggiAcquistabili);
-        PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter = new PersonaggiSbloccatiAdapter(getContext(), urlsPersonaggiSbloccati, nomiPersonaggiSbloccati);
+        PersonaggiSbloccatiAdapter personaggiSbloccatiAdapter = new PersonaggiSbloccatiAdapter(getContext(),personaggiSbloccati);
+        PersonaggiAcquistabiliAdapter personaggiAcquistabiliAdapter = new PersonaggiAcquistabiliAdapter(getContext(), personaggiAcquistabili,personaggiSbloccatiAdapter,nestedScrollView);
+
         recyclerViewPersonaggiAcquistabili.setAdapter(personaggiAcquistabiliAdapter);
         recyclerViewPersonaggiSbloccati.setAdapter(personaggiSbloccatiAdapter);
     }
 
-    private void setAttributes(List<Personaggio> personaggi) {
-        for (Personaggio personaggio : personaggi) {
-            if (idsPersonaggiSbloccati.contains(personaggio.getIdPersonaggio())) {
-                urlsPersonaggiSbloccati.add(personaggio.getTexturePersonaggio());
-                nomiPersonaggiSbloccati.add(personaggio.getNomePersonaggio());
-            } else {
-                urlsPersonaggiAcquistabili.add(personaggio.getTexturePersonaggio());
-                nomiPersonaggiAcquistabili.add(personaggio.getNomePersonaggio());
-            }
-        }
-    }
+    //Da mettere nel controller
 
-    public void setIdLists(Map<String, Integer> map) {
+
+    private void setIdLists(Map<String, Integer> map) {
+        setFirstId(map);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             String key = entry.getKey();
-
             int value = Integer.parseInt(String.valueOf(entry.getValue()));
-            if (value == 1 || value == 2) {
+            if (value == 1) {
                 idsPersonaggiSbloccati.add(key);
-            } else {
+            } else if (value == 0) {
                 idsPersonaggiAcquistabili.add(key);
             }
         }
     }
+    private void setFirstId(Map<String, Integer> map){
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            int value = Integer.parseInt(String.valueOf(entry.getValue()));
+            if (value == 2) {
+                idsPersonaggiSbloccati.add(key);
+            }
+        }
+    }
+
+    public static List<Personaggio> getSortedListPersonaggi(List<Personaggio> listaPersonaggi, List<String> listaId) {
+        //Utilizzo di hashmap per rendere l'ordinamento più efficiente
+        Map<String, Personaggio> mappaIdPersonaggio = new HashMap<>();
+        for (Personaggio personaggio : listaPersonaggi) {
+            mappaIdPersonaggio.put(personaggio.getIdPersonaggio(), personaggio);
+        }
+        List<Personaggio> listaOrdinata = new ArrayList<>();
+        for (String id : listaId) {
+            if (mappaIdPersonaggio.containsKey(id)) {
+                listaOrdinata.add(mappaIdPersonaggio.get(id));
+            }
+        }
+        return listaOrdinata;
+    }
+
+    /*private void setAttributes(List<Personaggio> personaggi) {
+        setFirstPersonaggio(personaggi);
+        for (Personaggio personaggio : personaggi) {
+            if (idsPersonaggiSbloccati.contains(personaggio.getIdPersonaggio())&&!urlsPersonaggiSbloccati.contains(personaggio.getTexturePersonaggio())) {
+                urlsPersonaggiSbloccati.add(personaggio.getTexturePersonaggio());
+                nomiPersonaggiSbloccati.add(personaggio.getNomePersonaggio());
+            } else if (!idsPersonaggiSbloccati.contains(personaggio.getIdPersonaggio())){
+                urlsPersonaggiAcquistabili.add(personaggio.getTexturePersonaggio());
+                nomiPersonaggiAcquistabili.add(personaggio.getNomePersonaggio());
+            }
+        }
+    }*/
+
+    /*private void setFirstPersonaggio(List<Personaggio> personaggi){
+        for (Personaggio personaggio : personaggi) {
+            if(idsPersonaggiSbloccati.get(0).equals(personaggio.getIdPersonaggio())){
+                urlsPersonaggiSbloccati.add(personaggio.getTexturePersonaggio());
+                nomiPersonaggiSbloccati.add(personaggio.getNomePersonaggio());
+            }
+        }
+    }*/
 
 }
