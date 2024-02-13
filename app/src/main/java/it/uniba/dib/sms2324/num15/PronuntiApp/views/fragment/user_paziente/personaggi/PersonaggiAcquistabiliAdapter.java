@@ -28,6 +28,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 
 public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<PersonaggiAcquistabiliAdapter.ViewHolder> {
     private Context context;
@@ -57,19 +58,33 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
         String idPersonaggio = personaggio.getIdPersonaggio();
         String urlPersonaggio = personaggio.getTexturePersonaggio();
         String nomePersonaggio = personaggio.getNomePersonaggio();
+        int costoSbloccopersonaggio =personaggio.getCostoSblocco();
         int costoPersonaggio = personaggio.getCostoSblocco();
         holder.textViewNomePersonaggio.setText(nomePersonaggio);
         Glide.with(context).asBitmap().apply(new RequestOptions().override(150, 150)).load(urlPersonaggio).into(holder.imageViewPersonaggio);
         holder.textViewCostoPersonaggio.setText(String.valueOf(costoPersonaggio));
 
         holder.llAcquistaPersonaggio.setOnClickListener(v -> {
-            refreshPersonaggi(personaggio);
-            getAnimator().start();
-            notifyDataSetChanged();
-            updatePersonaggiPaziente(idPersonaggio);
+            if(isCreditEnough(costoSbloccopersonaggio)){
+                refreshPersonaggi(personaggio);
+                getAnimator().start();
+                notifyDataSetChanged();
+                updatePersonaggiPaziente(idPersonaggio);
+            }else{
+                showInfoDialog();
+            }
         });
     }
 
+    private void showInfoDialog(){
+        InfoDialog infoDialog = new InfoDialog(context,"Credito non sufficiente", context.getString(R.string.infoOk));
+        infoDialog.setOnConfermaButtonClickListener(()->{});
+        infoDialog.show();
+    }
+
+    private boolean isCreditEnough(int costoSbloccopersonaggio){
+        return mPazienteViewModel.getPazienteLiveData().getValue().getValuta()>=costoSbloccopersonaggio;
+    }
     private void updatePersonaggiPaziente(String idPersonaggio){
         Map<String, Integer> personaggi = mPazienteViewModel.getPazienteLiveData().getValue().getPersonaggiSbloccati();
         Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
