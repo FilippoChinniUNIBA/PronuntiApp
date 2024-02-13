@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.CreazioneAppuntamentoController;
 
 public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<AppuntamentiLogopedistaAdapter.AppuntamentiLogopedistaViewHolder> {
     private List<AppuntamentoCustom> appuntamentiFull;
@@ -63,7 +65,8 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             //TODO: rimuovi appuntamento dal db (lasciare le cose sotto)
 
             //TODO che è sta cosa? e cosa significa il TODO sopra?
-            //TODO: rimuovi appuntamento dal db
+            Log.d("App",appuntamento.toString());
+            CreazioneAppuntamentoController.eliminazioneAppuntamento(appuntamento.getIdAppuntamentoCustom());
             appuntamenti.remove(position);
             notifyDataSetChanged();
             Log.d("AppuntamentiLogopedistaAdapter", "onBindViewHolder: rimuovi appuntamento " + appuntamento);
