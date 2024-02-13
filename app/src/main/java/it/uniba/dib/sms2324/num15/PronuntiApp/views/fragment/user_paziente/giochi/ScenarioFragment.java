@@ -18,8 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.squareup.picasso.Picasso;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.TopBarFragment;
 
@@ -33,9 +37,16 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private ConstraintLayout constraintLayout;
 	private Vibrator vibrator;
 	private boolean isVibrating = false;
+
+
+	private PazienteViewModel mPazienteViewModel;
+
+
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
+
+		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
@@ -46,7 +57,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		posizioneGioco3ImageView = view.findViewById(R.id.posizione_terzo_esercizio);
 
 		constraintLayout.setBackground(getContext().getDrawable(R.drawable.background_space_scenario));
-		personaggioImageView.setImageResource(R.drawable.batman);
 		posizioneGioco1ImageView.setImageResource(R.drawable.uranio);
 		posizioneGioco2ImageView.setImageResource(R.drawable.giove);
 		posizioneGioco3ImageView.setImageResource(R.drawable.earth);
@@ -73,6 +83,9 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		Picasso.get().load(mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().getValue()).into(personaggioImageView);
+
 		vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
 		personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -80,12 +93,8 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
 				personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-				// Ora puoi ottenere l'altezza della BottomNavigationView in modo sicuro
-                /*int bottomNavHeight = ((PazienteActivity) getActivity()).getBottomNavBar().getHeight();
-                Log.d("PazienteActivity", "BottomNavHeight: " + bottomNavHeight);
-                */
 				// Abilita il drag dell'immagine
-				bottomHeight = personaggioImageView.getHeight()*0.2f;
+				bottomHeight = personaggioImageView.getHeight() * 0.2f;
 				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
 				enableImageDrag(personaggioImageView);
 			}
