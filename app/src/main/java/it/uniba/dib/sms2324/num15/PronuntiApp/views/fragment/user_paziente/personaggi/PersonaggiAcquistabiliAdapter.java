@@ -75,6 +75,7 @@ public class PersonaggiAcquistabiliAdapter extends RecyclerView.Adapter<Personag
         Map<String, Integer> personaggiModificati = eliminaPersonaggioSelezionato(personaggi);
         personaggiModificati.put(idPersonaggio, 2);
         mPazienteViewModel.getPazienteLiveData().getValue().setPersonaggiSbloccati(personaggiModificati);
+        mPazienteViewModel.aggiornaTexturePersonaggioSelezionatoLiveData();
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
