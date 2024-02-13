@@ -159,6 +159,14 @@ public class Paziente extends AbstractProfilo {
 		this.punteggioTot = punteggioTot;
 	}
 
+	public void aggiungiAValuta(int valutaGuadagnata) {
+		this.valuta = this.valuta+valutaGuadagnata;
+	}
+
+	public void aggiungiAPunteggioTot(int punteggioGuadagnato) {
+		this.punteggioTot = this.punteggioTot+punteggioGuadagnato;
+	}
+
 	public void setPersonaggiSbloccati(Map<String, Integer> personaggiSbloccati) {
 		this.personaggiSbloccati = personaggiSbloccati;
 	}
