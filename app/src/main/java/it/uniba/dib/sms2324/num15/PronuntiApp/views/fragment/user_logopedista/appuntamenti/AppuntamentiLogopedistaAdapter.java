@@ -61,9 +61,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         holder.llPazienteInAppuntamentiLogopedistaPrincipale.setOnClickListener(v -> holder.hideInfoAggiuntive());
 
         holder.buttonRimuoviAppuntamento.setOnClickListener(v -> {
-            //TODO: rimuovi appuntamento dal db (lasciare le cose sotto)
-
-            //TODO che è sta cosa? e cosa significa il TODO sopra?
+            //TODO rimuovere dalla lista gli appuntamenti
             Log.d("App",appuntamento.toString());
             CreazioneAppuntamentoController.eliminazioneAppuntamento(appuntamento.getIdAppuntamentoCustom());
             appuntamentiCustom.remove(position);
