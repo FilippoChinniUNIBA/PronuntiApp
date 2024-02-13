@@ -46,27 +46,6 @@ public class GenitoreViewModel extends ViewModel {
 	}
 
 
-	public CompletableFuture<Void> initMPaziente() {
-		CompletableFuture<Void> future = new CompletableFuture<>();
-
-		GenitoreDAO genitoreDAO = new GenitoreDAO();
-
-		genitoreDAO.getPazienteByIdGenitore(this.mGenitore.getValue().getIdProfilo()).thenAccept(paziente -> {
-			mPaziente.setValue(paziente);
-			future.complete(null);
-		});
-
-		return future;
-	}
-
-	public void initMListaAppuntamenti() {
-		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
-
-		appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_PAZIENTE, this.mPaziente.getValue().getIdProfilo()).thenAccept(appuntamenti -> {
-			mListaAppuntamenti.setValue(appuntamenti);
-		});
-	}
-
 	public void aggiornaGenitoreRemoto() {
 		Genitore genitore = mGenitore.getValue();
 
@@ -85,15 +64,6 @@ public class GenitoreViewModel extends ViewModel {
 		Log.d("GenitoreViewModel.aggiornaPazienteRemoto()", "Paziente aggiornato: " + paziente.toString());
 	}
 
-	/*public CompletableFuture<Paziente> getPazienteGenitore(String idGenitore){
-		GenitoreDAO genitoreDAO = new GenitoreDAO();
-
-		CompletableFuture<Paziente> future = new CompletableFuture<>();
-		genitoreDAO.getPazienteByIdGenitore(idGenitore).thenAccept(paziente -> {
-			future.complete(paziente);
-		});
-		return future;
-	}*/
 
 	public AppuntamentiGenitoreController getAppuntamentiControllerGenitore(){
 		if (this.appuntamentiGenitoreController == null){

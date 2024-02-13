@@ -56,30 +56,6 @@ public class LogopedistaViewModel extends ViewModel {
 	}
 
 
-	public void initMListaAppuntamenti() {
-		AppuntamentoDAO appuntamentoDAO = new AppuntamentoDAO();
-
-		appuntamentoDAO.get(CostantiDBAppuntamento.REF_ID_LOGOPEDISTA, mLogopedista.getValue().getIdProfilo()).thenAccept(appuntamenti -> {
-			mListaAppuntamenti.setValue(appuntamenti);
-		});
-	}
-
-	public void initMListaTemplateScenariGioco() {
-		TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
-
-		templateScenarioGiocoDAO.getAll().thenAccept(templateScenariGioco -> {
-			mListaTemplateScenariGioco.setValue(templateScenariGioco);
-		});
-	}
-
-	public void initMListaTemplateEsercizi() {
-		TemplateEsercizioDAO templateEsercizioDAO = new TemplateEsercizioDAO();
-
-		templateEsercizioDAO.getAll().thenAccept(templateEsercizi -> {
-			mListaTemplateEsercizi.setValue(templateEsercizi);
-		});
-	}
-
 	public void aggiornaLogopedistaRemoto() {
 		Logopedista logopedista = mLogopedista.getValue();
 

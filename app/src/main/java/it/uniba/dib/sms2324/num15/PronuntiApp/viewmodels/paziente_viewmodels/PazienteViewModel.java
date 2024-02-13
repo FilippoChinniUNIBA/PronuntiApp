@@ -7,16 +7,17 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.personaggio.PersonaggioDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.classifica.ClassificaController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioDenominazioneImmagineController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioSequenzaParoleController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.personaggi.PersonaggiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.classifica.EntryClassifica;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.personaggi.PersonaggiFragment;
 
 public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
@@ -26,6 +27,7 @@ public class PazienteViewModel extends ViewModel {
 	private EsercizioDenominazioneImmagineController mEsercizioDenominazioneImmagineController;
 	private EsercizioSequenzaParoleController mEsercizioSequenzaParoleController;
 	private EsercizioCoppiaImmaginiController mEsercizioCoppiaImmaginiController;
+	private PersonaggiController mPersonaggiController;
 	private ClassificaController mClassificaController;
 
 	public LiveData<Paziente> getPazienteLiveData() {
@@ -49,26 +51,6 @@ public class PazienteViewModel extends ViewModel {
 		this.mClassifica.setValue(classifica);
 	}
 
-
-	public CompletableFuture<Void> initMPersonaggi() {
-		CompletableFuture<Void> future = new CompletableFuture<>();
-
-		PersonaggioDAO personaggioDAO = new PersonaggioDAO();
-		personaggioDAO.getAll().thenAccept(personaggi -> {
-			mListaPersonaggi.setValue(personaggi);
-			future.complete(null);
-		});
-
-		return future;
-	}
-
-	public void initMClassifica() {
-		PazienteDAO pazienteDAO = new PazienteDAO();
-
-		pazienteDAO.getLogopedistaByIdPaziente(this.mPaziente.getValue().getIdProfilo()).thenAccept(logopedista -> {
-			mClassifica.setValue(mClassificaController.costruisciClassifica(logopedista.getPazienti(), this.mListaPersonaggi.getValue()));
-		});
-	}
 
 	public void aggiornaPazienteRemoto() {
 		Paziente paziente = mPaziente.getValue();
@@ -106,6 +88,13 @@ public class PazienteViewModel extends ViewModel {
 			this.mEsercizioCoppiaImmaginiController = new EsercizioCoppiaImmaginiController();
 		}
 		return this.mEsercizioCoppiaImmaginiController;
+	}
+
+	public PersonaggiController getPersonaggiController() {
+		if(this.mPersonaggiController == null){
+			this.mPersonaggiController = new PersonaggiController();
+		}
+		return this.mPersonaggiController;
 	}
 
 	public ClassificaController getClassificaController() {

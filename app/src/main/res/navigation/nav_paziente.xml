@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/personaggiFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.PersonaggiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.personaggi.PersonaggiFragment"
         android:label="@string/personaggi"
         tools:layout="@layout/fragment_personaggi" />
     <fragment
