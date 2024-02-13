@@ -84,7 +84,9 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		Picasso.get().load(mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().getValue()).into(personaggioImageView);
+		mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
+			Picasso.get().load(texture).into(personaggioImageView);
+		});
 
 		vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
 		personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
