@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -257,6 +258,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 		return false;
 	}
 
+	@SuppressLint("NotifyDataSetChanged")
 	private void eseguiAggiuntaPrenotazione(String idLogopedista) {
 		String luogoAppuntamento = editTextLuogo.getText().toString();
 		LocalDate dataAppuntamento = LocalDate.parse(editTextDataAppuntemento.getText().toString());
@@ -265,10 +267,13 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 		Appuntamento appuntamento = mController.creazioneAppuntamento(idLogopedista, idPaziente, dataAppuntamento, orarioAppuntamentoEffettivo, luogoAppuntamento);
 		Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamento.toString());
+
+		//aggiunto paziente alla recycler view
 		String nomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[0];
 		String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
-		appuntamentiVisualizzazione.add(new AppuntamentoCustom(nomePaziente, cognomePaziente, editTextLuogo.getText().toString(), LocalDate.parse(editTextDataAppuntemento.getText().toString()), LocalTime.parse(orarioAppuntamento)));
-		adapterAppuntamenti.notifyDataSetChanged();
+		Log.d("AppuntamentiLogopedistaFragment.eseguiAggiuntaPrenotazione()", appuntamentiVisualizzazione.toString());
+		adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(nomePaziente, cognomePaziente, editTextLuogo.getText().toString(), LocalDate.parse(editTextDataAppuntemento.getText().toString()), LocalTime.parse(orarioAppuntamento)));
+		Log.d("appuntamentiLogopedista", " "+adapterAppuntamenti.getItem(appuntamentiVisualizzazione.size() - 1));
 	}
 
 	private void handleTextViewSelection(TextView selectedTextView) {

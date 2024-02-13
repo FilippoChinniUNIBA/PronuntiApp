@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.appuntamenti;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,11 @@ import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,13 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         holder.textViewOraAppuntamento.setText(appuntamento.getOraAppuntamento().format(DateTimeFormatter.ofPattern("HH:mm"))); // Modifica in base al tipo di dato previsto per orario appuntamento
         holder.textViewLuogoAppuntamento.setText(appuntamento.getLuogoAppuntamento());
 
+        //disabilita se la data è passata
+        if (appuntamento.getDataAppuntamento().isBefore(LocalDate.now()) && appuntamento.getOraAppuntamento().isBefore(LocalTime.now())) {
+            holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
+        } else {
+            holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
+        }
+
         holder.textViewNomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
         holder.textViewCognomePaziente.setOnClickListener(v -> holder.hideInfoAggiuntive());
         holder.textViewDataAppuntamento.setOnClickListener(v -> holder.hideInfoAggiuntive());
@@ -68,6 +79,12 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         return appuntamenti.get(position);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void addAppuntamento(AppuntamentoCustom appuntamento) {
+        appuntamenti.add(appuntamento);
+        appuntamentiFull.add(appuntamento);
+        notifyDataSetChanged();
+    }
 
     public static class AppuntamentiLogopedistaViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNomePaziente;
@@ -78,7 +95,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         Button buttonRimuoviAppuntamento;
         LinearLayout llPazienteInAppuntamentiLogopedistaInfoAggiuntive;
         LinearLayout llPazienteInAppuntamentiLogopedistaPrincipale;
-
+        CardView cardViewAppuntamentoLogopedista;
         public AppuntamentiLogopedistaViewHolder(View itemView) {
             super(itemView);
             llPazienteInAppuntamentiLogopedistaPrincipale = itemView.findViewById(R.id.llPazienteInAppuntamentiLogopedistaPrincipale);
@@ -89,6 +106,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
             textViewOraAppuntamento = itemView.findViewById(R.id.textViewOrarioAppuntamentoLogopedista);
             textViewLuogoAppuntamento = itemView.findViewById(R.id.textViewLuogoAppuntamentoLogopedista);
             buttonRimuoviAppuntamento = itemView.findViewById(R.id.buttonRimuoviAppuntamentoLogopedista);
+            cardViewAppuntamentoLogopedista = itemView.findViewById(R.id.cardViewPazienteInAppuntamentiLogopedista);
         }
 
         private void hideInfoAggiuntive() {

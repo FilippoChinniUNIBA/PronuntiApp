@@ -14,7 +14,7 @@
         android:id="@+id/nestedScrollViewAppuntamentiLogopedista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/nav_bar_height"
+        android:layout_above="@+id/buttonNuovoAppuntamentoLogopedista"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
-                app:cardElevation="16dp"
+                app:cardElevation="8dp"
                 >
 
                 <LinearLayout
@@ -304,6 +304,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="parent"
                 android:layout_marginHorizontal="15dp"
+                android:layout_marginBottom="20dp"
+                tools:listitem="@layout/item_paziente_in_lista_logopedista"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
