@@ -132,4 +132,9 @@ public class AppuntamentoDAO implements DAO<Appuntamento> {
 		}
 	}
 
+	public void deleteById(String idAppuntamento) {
+		DatabaseReference ref = this.db.getReference(CostantiNodiDB.APPUNTAMENTI).child(idAppuntamento);
+		ref.removeValue();
+	}
+
 }
