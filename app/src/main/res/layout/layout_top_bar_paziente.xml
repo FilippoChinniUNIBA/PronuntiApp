@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:id="@+id/topBarPaziente"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_rounded_top_bar_paziente_bkg"
         android:layout_weight="2"
