@@ -20,7 +20,6 @@ public class TopBarFragment extends Fragment {
     private ImageView imageViewPaziente;
     private TextView textViewUsernamePaziente;
     private TextView textViewPunteggio;
-    private ConstraintLayout upCoinsLayout;
     private TextView coinsTextView;
 
 
@@ -32,7 +31,6 @@ public class TopBarFragment extends Fragment {
         imageViewPaziente = view.findViewById(R.id.imageViewPaziente);
         textViewUsernamePaziente = view.findViewById(R.id.textViewUsernamePaziente);
         textViewPunteggio = view.findViewById(R.id.textViewPunteggio);
-        upCoinsLayout = view.findViewById(R.id.upCoinsLayout);
         coinsTextView = view.findViewById(R.id.coinsTextView);
 
         return view;
