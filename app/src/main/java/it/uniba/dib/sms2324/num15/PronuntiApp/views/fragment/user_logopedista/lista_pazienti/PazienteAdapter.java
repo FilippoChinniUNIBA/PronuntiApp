@@ -63,7 +63,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
     private void setCardViewColor(PazienteViewHolder holder) {
         holder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.primaryColorSoft));
-        if(lastClickedCardView != null) {
+        if(lastClickedCardView != null && lastClickedCardView != holder.cardViewPazienteInListaLogopedista){
             lastClickedCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
         }
         lastClickedCardView = holder.cardViewPazienteInListaLogopedista;

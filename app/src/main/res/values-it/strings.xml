@@ -144,6 +144,7 @@
     <string name="infoOk">Ok</string>
     <string name="permissionDeniedInstructions">Questa funzionalità richiede i permessi per utilizzare il microfono. Se non ti compare il messaggio per autorizzare i permessi, dovrai concederli dalle impostazioni del dispositivo riguardanti l\'App</string>
     <string name="inputErratoAggiungiAppuntamento">Probabilmente hai sbagliato ad inserire dei dati. Assicurati che la data sia nel formato yyyy-mm-dd e seleziona un paziente nel sistema.</string>
+    <string name="search_hint">Ricerca pazienti...</string>
 
 
 </resources>

@@ -168,5 +168,6 @@
     <string name="infoOk">Ok</string>
     <string name="permissionDeniedInstructions">This functionality requires permissions to use the microphone. If you don\'t see the messagge to concede the permissions, you have to autorize from the system settings relative to the App</string>
     <string name="inputErratoAggiungiAppuntamento">Probably you have miss or input wrong data. Make sure on correct format of date in yyyy-mm-gg and select a patient in the system.</string>
+    <string name="search_hint">Research patient...</string>
 
 </resources>
