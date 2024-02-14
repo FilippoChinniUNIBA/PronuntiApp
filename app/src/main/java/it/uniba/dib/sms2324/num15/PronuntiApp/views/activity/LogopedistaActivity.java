@@ -28,6 +28,8 @@ public class LogopedistaActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getColor(R.color.backgroundWhite));
+
         setContentView(R.layout.activity_logopedista);
 
         //Setup Navigazione

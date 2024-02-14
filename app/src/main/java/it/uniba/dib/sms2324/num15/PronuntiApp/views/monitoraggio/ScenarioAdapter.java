@@ -1,8 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
 
-import android.bluetooth.le.ScanSettings;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
 
@@ -50,37 +44,11 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         ScenarioGioco scenario = listaScenari.get(position);
         holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " "+scenario.getDataInizio().toString());
 
-        Log.d("ScenarioAdapter", "onBindViewHolder scenario: " + position + " " + scenario.getEsercizi().size());
-        for (int i = 0; i < scenario.getEsercizi().size(); i++) {
-            EsercizioEseguibile esercizio = scenario.getEsercizi().get(i);
+        RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
+        recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(context));
+        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi());
+        recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
-            if (counterEsercizi >= 3) {
-                counterEsercizi = 0;
-            }
-
-            Log.d("ScenarioAdapter", "onBindViewHolder esercizio: " + i + " " + esercizio.getIdEsercizio());
-            int id = 0;
-            /*
-            switch (i) {
-                case 0:
-                    id = R.id.fragmentContainerViewMonitoraggioEsercizio1 + i;
-                    break;
-                case 1:
-                    id = R.id.fragmentContainerViewMonitoraggioEsercizio2 + i;
-                    break;
-                case 2:
-                    id = R.id.fragmentContainerViewMonitoraggioEsercizio3 + i;
-                    break;
-            }*/
-            id = i+1;
-
-            // Crea un nuovo FragmentContainerView per ogni esercizio
-            FragmentContainerView fragmentContainerView = new FragmentContainerView(context);
-            fragmentContainerView.setId(id);
-            fragmentContainerView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            holder.linearLayoutInfoScenario.addView(fragmentContainerView);
-            fragmentManager.beginTransaction().add(id, new EsercizioScenarioFragment(esercizio, ++counterEsercizi)).commit();
-        }
     }
 
     @Override
@@ -93,7 +61,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         private CardView cardView;
         private TextView textViewDataScenario;
         private ImageView imageViewArrowDown;
-        private LinearLayout linearLayoutInfoScenario;
+        private RecyclerView recyclerViewEsercizi;
 
         public ScenarioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,18 +70,18 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
             textViewDataScenario = itemView.findViewById(R.id.textViewDataScenario);
             imageViewArrowDown = itemView.findViewById(R.id.imageViewArrowDown);
             imageViewArrowDown.setImageResource(R.drawable.ic_arrow_down_white);
-            linearLayoutInfoScenario = itemView.findViewById(R.id.linearLayoutInfoScenario);
-            //linearLayoutInfoScenario.setVisibility(View.GONE);
+            recyclerViewEsercizi = itemView.findViewById(R.id.recyclerViewEsercizi);
+            recyclerViewEsercizi.setVisibility(View.GONE);
             cardView.setOnClickListener(v -> toggleVisibility());
         }
 
 
         private void toggleVisibility() {
-            if (linearLayoutInfoScenario.getVisibility() == View.VISIBLE) {
-                linearLayoutInfoScenario.setVisibility(View.GONE);
+            if (recyclerViewEsercizi.getVisibility() == View.VISIBLE) {
+                recyclerViewEsercizi.setVisibility(View.GONE);
                 imageViewArrowDown.setRotation(0);
             } else {
-                linearLayoutInfoScenario.setVisibility(View.VISIBLE);
+                recyclerViewEsercizi.setVisibility(View.VISIBLE);
                 imageViewArrowDown.setRotation(180);
             }
         }

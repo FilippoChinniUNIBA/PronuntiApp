@@ -26,6 +26,8 @@ public class GenitoreActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getColor(R.color.backgroundWhite));
+
         setContentView(R.layout.activity_genitore);
 
         //Setup Navigazione
