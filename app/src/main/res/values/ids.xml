@@ -1,0 +1,6 @@
+<resources>
+    <item name="fragmentContainerViewMonitoraggioEsercizio1" type="id"/>
+    <item name="fragmentContainerViewMonitoraggioEsercizio2" type="id"/>
+    <item name="fragmentContainerViewMonitoraggioEsercizio3" type="id"/>
+    <!-- Aggiungi altri ID secondo necessità -->
+</resources>
