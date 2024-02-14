@@ -20,7 +20,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
-
     private List<ScenarioGioco> listaScenari;
     private FragmentManager fragmentManager;
     private Context context;
@@ -42,7 +41,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     @Override
     public void onBindViewHolder(@NonNull ScenarioViewHolder holder, int position) {
         ScenarioGioco scenario = listaScenari.get(position);
-        holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " "+scenario.getDataInizio().toString());
+        holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " " + scenario.getDataInizio().toString());
 
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(context));
