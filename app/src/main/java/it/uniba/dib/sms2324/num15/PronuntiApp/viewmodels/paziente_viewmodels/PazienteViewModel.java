@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +15,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.Logopedist
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.personaggio.Personaggio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.classifica.ClassificaController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
@@ -47,6 +51,43 @@ public class PazienteViewModel extends ViewModel {
 	}
 	public void setPersonaggi(List<Personaggio> listaPersonaggi) {
 		this.mListaPersonaggi.setValue(listaPersonaggi);
+	}
+
+	public ScenarioGioco getScenarioPaziente(LocalDate dataCorrente){
+		List<Terapia> terapie = mPaziente.getValue().getTerapie();
+		for(Terapia terapia:terapie){
+			LocalDate dataInizio = terapia.getDataInizio();
+			LocalDate dataFine = terapia.getDataFine();
+			if((dataCorrente.isEqual(dataInizio) || dataCorrente.isAfter(dataInizio)) && (dataCorrente.isEqual(dataFine) || dataCorrente.isBefore(dataFine))){
+				List<ScenarioGioco> scenariTerapia = terapia.getScenariGioco();
+				for (ScenarioGioco scenarioTerapia : scenariTerapia){
+					if(dataCorrente.isEqual(scenarioTerapia.getDataInizio())){
+						return scenarioTerapia;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	public List<ScenarioGioco> getScenariPaziente(){
+		List<ScenarioGioco> scenariPaziente = new ArrayList<>();
+		LocalDate dataCorrente = LocalDate.now();
+		List<Terapia> terapie = mPaziente.getValue().getTerapie();
+		for(Terapia terapia:terapie){
+			LocalDate dataFine = terapia.getDataFine();
+			LocalDate dataInizio = terapia.getDataInizio();
+			if((dataInizio.isEqual(dataCorrente)||dataInizio.isAfter(dataCorrente))&&(dataFine.isEqual(dataCorrente) || dataFine.isBefore(dataCorrente))){
+				List<ScenarioGioco> scenariTerapia = terapia.getScenariGioco();
+				for (ScenarioGioco scenarioTerapia : scenariTerapia){
+					LocalDate dataInizioScenario = scenarioTerapia.getDataInizio();
+					if(dataInizioScenario.isEqual(dataCorrente)||dataInizioScenario.isBefore(dataCorrente)){
+						scenariPaziente.add(scenarioTerapia);
+					}
+				}
+			}
+		}
+		return scenariPaziente;
 	}
 
 	public LiveData<List<EntryClassifica>> getClassificaLiveData() {
