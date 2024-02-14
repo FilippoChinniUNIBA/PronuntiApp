@@ -48,7 +48,6 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public void onBindViewHolder(AppuntamentiLogopedistaViewHolder holder, int position) {
-        //TODO far vedere gli appuntamenti appena inseriti;
         appuntamentiCustom.sort((v1, v2) -> {
             int compareDate = v1.getDataAppuntamento().compareTo(v2.getDataAppuntamento());
             if(compareDate == 0){
@@ -67,7 +66,7 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
         LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
         LocalDateTime appuntamentoDateTime = LocalDateTime.of(appuntamento.getDataAppuntamento(), appuntamento.getOraAppuntamento());
-        //disabilita se la data è passata
+
         if (appuntamentoDateTime.isBefore(now) || appuntamentoDateTime.isEqual(now)){
             holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
         } else {
@@ -99,7 +98,6 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         return appuntamentiCustom.get(position);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void addAppuntamento(AppuntamentoCustom appuntamento) {
         appuntamentiCustom.add(appuntamento);
         appuntamentiFull.add(appuntamento);
@@ -107,15 +105,15 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
     }
 
     public static class AppuntamentiLogopedistaViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewNomePaziente;
-        TextView textViewCognomePaziente;
-        TextView textViewDataAppuntamento;
-        TextView textViewOraAppuntamento;
-        TextView textViewLuogoAppuntamento;
-        Button buttonRimuoviAppuntamento;
-        LinearLayout llPazienteInAppuntamentiLogopedistaInfoAggiuntive;
-        LinearLayout llPazienteInAppuntamentiLogopedistaPrincipale;
-        CardView cardViewAppuntamentoLogopedista;
+        private TextView textViewNomePaziente;
+        private TextView textViewCognomePaziente;
+        private TextView textViewDataAppuntamento;
+        private TextView textViewOraAppuntamento;
+        private TextView textViewLuogoAppuntamento;
+        private Button buttonRimuoviAppuntamento;
+        private LinearLayout llPazienteInAppuntamentiLogopedistaInfoAggiuntive;
+        private LinearLayout llPazienteInAppuntamentiLogopedistaPrincipale;
+        private CardView cardViewAppuntamentoLogopedista;
         public AppuntamentiLogopedistaViewHolder(View itemView) {
             super(itemView);
             llPazienteInAppuntamentiLogopedistaPrincipale = itemView.findViewById(R.id.llPazienteInAppuntamentiLogopedistaPrincipale);
