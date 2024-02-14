@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -342,6 +343,21 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 				}
 		);
 	}*/
+
+	private void showDatePickerDialog() {
+		LocalDate now = LocalDate.now();
+		DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
+			String date = formatDate(year, month, dayOfMonth);
+			//TODO aggiungere astrazione del setText
+			//editTextDataNascitaPaziente.setText(date);
+		}, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
+		datePickerDialog.show();
+	}
+
+	private String formatDate(int year, int month, int dayOfMonth) {
+		LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
+		return selectedDate.toString();
+	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
