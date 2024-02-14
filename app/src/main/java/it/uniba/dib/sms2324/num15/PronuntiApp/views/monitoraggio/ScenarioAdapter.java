@@ -50,27 +50,29 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         ScenarioGioco scenario = listaScenari.get(position);
         holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " "+scenario.getDataInizio().toString());
 
-        if(counterEsercizi>3) {
-            counterEsercizi = 0;
-        }
-
-        for(int i=0; i<scenario.getEsercizi().size(); i++) {
+        Log.d("ScenarioAdapter", "onBindViewHolder scenario: " + position + " " + scenario.getEsercizi().size());
+        for (int i = 0; i < scenario.getEsercizi().size(); i++) {
             EsercizioEseguibile esercizio = scenario.getEsercizi().get(i);
 
+            if (counterEsercizi >= 3) {
+                counterEsercizi = 0;
+            }
 
-            Log.d("ScenarioAdapter", "onBindViewHolder esercizio: " +i+ " "+esercizio.getIdEsercizio());
+            Log.d("ScenarioAdapter", "onBindViewHolder esercizio: " + i + " " + esercizio.getIdEsercizio());
             int id = 0;
+            /*
             switch (i) {
                 case 0:
                     id = R.id.fragmentContainerViewMonitoraggioEsercizio1 + i;
                     break;
                 case 1:
-                    id = R.id.fragmentContainerViewMonitoraggioEsercizio2 +i ;
+                    id = R.id.fragmentContainerViewMonitoraggioEsercizio2 + i;
                     break;
                 case 2:
-                    id = R.id.fragmentContainerViewMonitoraggioEsercizio3 +i;
+                    id = R.id.fragmentContainerViewMonitoraggioEsercizio3 + i;
                     break;
-            }
+            }*/
+            id = i+1;
 
             // Crea un nuovo FragmentContainerView per ogni esercizio
             FragmentContainerView fragmentContainerView = new FragmentContainerView(context);

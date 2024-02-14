@@ -88,7 +88,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
             List<EsercizioEseguibile> esercizi = new ArrayList<>();
             esercizi.add(esercizioCoppiaImmagini);
             esercizi.add(esercizioDenominazioneImmagine);
-            esercizi.add(esercizioCoppiaImmagini);
+            esercizi.add(esercizioSequenzaParole);
 
             // Istanza di uno scenario
             ScenarioGioco scenario = new ScenarioGioco(
