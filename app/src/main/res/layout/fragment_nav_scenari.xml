@@ -24,7 +24,6 @@
                 android:id="@+id/buttonIndietroScenario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_constraintStart_toStartOf="parent"
                 android:layout_gravity=""
                 android:layout_weight="1"
                 android:background="@android:color/transparent"

@@ -64,7 +64,7 @@ public class PazienteActivity extends AbstractAppActivity {
 
         //onclick navBar custom
         navBarGiochi.setOnClickListener(v -> {
-            Navigation.findNavController(this, R.id.fragmentContainerPaziente).navigate(R.id.scenarioFragment);
+            Navigation.findNavController(this, R.id.fragmentContainerPaziente).navigate(R.id.scenariFragment);
             resetNavBarButtons(R.id.scenarioFragment);
         });
         navBarPersonaggi.setOnClickListener(v -> {
@@ -89,7 +89,7 @@ public class PazienteActivity extends AbstractAppActivity {
 
 
     private void resetNavBarButtons(int id){
-        if(id == R.id.scenarioFragment){
+        if(id == R.id.scenariFragment){
             selectorNavBarButton(navBarGiochi, R.drawable.ic_game);
             navBarClassifica.setScaleX(1f);
             navBarClassifica.setScaleY(1f);
