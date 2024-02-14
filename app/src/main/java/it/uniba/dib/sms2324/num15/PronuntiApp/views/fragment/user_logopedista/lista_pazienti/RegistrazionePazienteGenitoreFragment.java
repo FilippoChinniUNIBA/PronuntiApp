@@ -25,6 +25,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti.RegistrazionePazienteGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
 public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithNavigation {
     private TextInputEditText editTextNomePaziente;
@@ -88,7 +89,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        editTextDataNascitaPaziente.setOnClickListener(v -> showDatePickerDialog());
+        editTextDataNascitaPaziente.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataNascitaPaziente));
 
         buttonRegistraPazienteEGenitore.setOnClickListener(v -> {
             Logopedista mLogopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
@@ -209,20 +210,6 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
         infoDialog.show();
         infoDialog.setOnConfermaButtonClickListener(null);
-    }
-
-    private void showDatePickerDialog() {
-        LocalDate now = LocalDate.now();
-        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
-            String date = formatDate(year, month, dayOfMonth);
-            editTextDataNascitaPaziente.setText(date);
-        }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
-        datePickerDialog.show();
-    }
-
-    private String formatDate(int year, int month, int dayOfMonth) {
-        LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
-        return selectedDate.toString();
     }
 
 }

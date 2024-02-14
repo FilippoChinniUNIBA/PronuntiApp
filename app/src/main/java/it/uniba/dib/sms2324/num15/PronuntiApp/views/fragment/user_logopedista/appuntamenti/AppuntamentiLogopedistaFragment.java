@@ -40,6 +40,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.L
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.PazienteAdapter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
 public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigation {
 	private RecyclerView recyclerViewAppuntamenti;
@@ -192,7 +193,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
 		});
 
-		editTextDataAppuntemento.setOnClickListener(v -> showDatePickerDialog());
+		editTextDataAppuntemento.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataAppuntemento));
 
 		searchViewAppuntamentiLogopedista.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -288,20 +289,6 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			}
 		}
 		orarioAppuntamento = selectedTextView.getText().toString();
-	}
-
-	private void showDatePickerDialog() {
-		LocalDate now = LocalDate.now();
-		datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
-			String date = formatDate(year, month, dayOfMonth);
-			editTextDataAppuntemento.setText(date);
-		}, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
-		datePickerDialog.show();
-	}
-
-	private String formatDate(int year, int month, int dayOfMonth) {
-		LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
-		return selectedDate.toString();
 	}
 
 	private void showErrorInputDialog(){

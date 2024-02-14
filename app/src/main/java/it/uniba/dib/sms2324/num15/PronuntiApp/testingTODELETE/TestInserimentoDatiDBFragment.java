@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -48,6 +49,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.classifica.Classifica;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
 public class TestInserimentoDatiDBFragment extends Fragment {
 	private TextInputEditText dataInizioTerapia;
@@ -165,6 +167,10 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 		bottoneFilePicker_immagineEsercizioCorretta.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_6));
 		bottoneFilePicker_immagineEsercizioErrata.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_7));
 		bottoneFilePicker_audioRegistrato.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_8));
+
+		dataInizioTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataInizioTerapia));
+		dataFineTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataFineTerapia));
+		dataInizioScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataInizioScenario));
 
 
 		this.bottoneInserisciDati = view.findViewById(R.id.buttonSalvaTerapia);
@@ -302,63 +308,6 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 		startActivityForResult(Intent.createChooser(intent, "Select Picture or Audio"), requestCode);
 	}
 
-	/*private ActivityResultLauncher<String> createFilePickerLauncher(int requestCode) {
-		return registerForActivityResult(
-				new ActivityResultContracts.GetContent(),
-				uri -> {
-
-					ComandiFirebaseStorage comandiFirebaseStorage = new ComandiFirebaseStorage();
-					comandiFirebaseStorage.uploadFileAndGetLink(uri, "TEST/TERPIA_TEST").thenAccept(link -> {
-
-						switch (requestCode) {
-							case PICK_FILE_REQUEST_1:
-								immagineSfondoScenario.setText(link);
-								break;
-							case PICK_FILE_REQUEST_2:
-								immagineEsercizio.setText(link);
-								break;
-							case PICK_FILE_REQUEST_3:
-								audioAiuto.setText(link);
-								break;
-							case PICK_FILE_REQUEST_4:
-								audioEsercizio.setText(link);
-								break;
-							case PICK_FILE_REQUEST_5:
-								audioEsercizioImmagine.setText(link);
-								break;
-							case PICK_FILE_REQUEST_6:
-								immagineEsercizioCorretta.setText(link);
-								break;
-							case PICK_FILE_REQUEST_7:
-								immagineEsercizioErrata.setText(link);
-								break;
-							case PICK_FILE_REQUEST_8:
-								audioRegistrato.setText(link);
-								break;
-							default:
-								Log.d("TestInserimentoDatiDBFragment", "Errore nel file picker");
-								break;
-						}
-					});
-				}
-		);
-	}*/
-
-	private void showDatePickerDialog() {
-		LocalDate now = LocalDate.now();
-		DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), (view, year, month, dayOfMonth) -> {
-			String date = formatDate(year, month, dayOfMonth);
-			//TODO aggiungere astrazione del setText
-			//editTextDataNascitaPaziente.setText(date);
-		}, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
-		datePickerDialog.show();
-	}
-
-	private String formatDate(int year, int month, int dayOfMonth) {
-		LocalDate selectedDate = LocalDate.of(year, month + 1, dayOfMonth);
-		return selectedDate.toString();
-	}
-
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -408,5 +357,47 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 			});
 		}
 	}
+
+	/*private ActivityResultLauncher<String> createFilePickerLauncher(int requestCode) {
+		return registerForActivityResult(
+				new ActivityResultContracts.GetContent(),
+				uri -> {
+
+					ComandiFirebaseStorage comandiFirebaseStorage = new ComandiFirebaseStorage();
+					comandiFirebaseStorage.uploadFileAndGetLink(uri, "TEST/TERPIA_TEST").thenAccept(link -> {
+
+						switch (requestCode) {
+							case PICK_FILE_REQUEST_1:
+								immagineSfondoScenario.setText(link);
+								break;
+							case PICK_FILE_REQUEST_2:
+								immagineEsercizio.setText(link);
+								break;
+							case PICK_FILE_REQUEST_3:
+								audioAiuto.setText(link);
+								break;
+							case PICK_FILE_REQUEST_4:
+								audioEsercizio.setText(link);
+								break;
+							case PICK_FILE_REQUEST_5:
+								audioEsercizioImmagine.setText(link);
+								break;
+							case PICK_FILE_REQUEST_6:
+								immagineEsercizioCorretta.setText(link);
+								break;
+							case PICK_FILE_REQUEST_7:
+								immagineEsercizioErrata.setText(link);
+								break;
+							case PICK_FILE_REQUEST_8:
+								audioRegistrato.setText(link);
+								break;
+							default:
+								Log.d("TestInserimentoDatiDBFragment", "Errore nel file picker");
+								break;
+						}
+					});
+				}
+		);
+	}*/
 
 }
