@@ -32,5 +32,23 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //TODO naviga a scenario precedente
+        buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente());
+
+        //TODO naviga a scenario successivo
+        buttonIndietroScenario.setOnClickListener(v -> navigaScenarioSuccessivo());
+    }
+
+    private void navigaScenarioSuccessivo() {
+        getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, new ScenarioFragment(
+                //TODO passare ScenarioGioco
+        )).commit();
+    }
+
+    private void navigaScenarioPrecedente() {
+        getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, new ScenarioFragment(
+                //TODO passare ScenarioGioco
+        )).commit();
     }
 }
