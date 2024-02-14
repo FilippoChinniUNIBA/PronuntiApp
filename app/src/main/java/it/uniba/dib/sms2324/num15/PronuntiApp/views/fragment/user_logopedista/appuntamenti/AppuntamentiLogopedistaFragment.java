@@ -231,14 +231,8 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	private boolean checkInputAppuntamento() {
-		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty()
-				|| !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
-				|| orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
+		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || editTextAppuntamentoPaziente.getText().toString().isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti()) || orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
 
-			Log.d("AppuntamentiLogopedista", "checkInputAppuntamento: input errato");
-			Log.d("AppuntamentiLogopedista", "checkInputAppuntamento" + (idPazienteSelezionato == null) + idPazienteSelezionato.isEmpty()
-					+ !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
-					+ orarioAppuntamento.isEmpty() + editTextDataAppuntemento.getText().toString().isEmpty());
 			showErrorInputDialog();
 			cardViewAppuntamento.setVisibility(View.VISIBLE);
 			addAppuntamentoButton.setVisibility(View.GONE);
@@ -275,8 +269,11 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 					String nomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[0];
 					String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
 					adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(appuntamento.getIdAppuntamento(), nomePaziente, cognomePaziente, luogoAppuntamento, dataAppuntamento, orarioAppuntamentoEffettivo));
+
+					editTextAppuntamentoPaziente.setText("");
+					editTextLuogo.setText("");
+					editTextDataAppuntemento.setText("");
 				});
-		editTextAppuntamentoPaziente.setText("");
 	}
 
 	private void handleTextViewSelection(TextView selectedTextView) {

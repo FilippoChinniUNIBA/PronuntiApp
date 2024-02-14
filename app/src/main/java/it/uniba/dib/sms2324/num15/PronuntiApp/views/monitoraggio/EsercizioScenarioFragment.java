@@ -22,8 +22,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.gio
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class EsercizioScenarioFragment extends AbstractFragmentWithNavigation {
-
-
     private EsercizioEseguibile esercizio;
     private TextView textViewTipoEsercizio;
     private TextView textViewNumeroEsercizio;

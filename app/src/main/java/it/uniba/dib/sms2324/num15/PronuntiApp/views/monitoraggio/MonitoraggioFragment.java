@@ -31,8 +31,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
     private List<ScenarioGioco> listaScenari;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_monitoraggio, container, false);
 
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
@@ -88,7 +87,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
             List<EsercizioEseguibile> esercizi = new ArrayList<>();
             esercizi.add(esercizioCoppiaImmagini);
             esercizi.add(esercizioDenominazioneImmagine);
-            esercizi.add(esercizioCoppiaImmagini);
+            esercizi.add(esercizioSequenzaParole);
 
             // Istanza di uno scenario
             ScenarioGioco scenario = new ScenarioGioco(
@@ -107,11 +106,9 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
 
         }
 
-
         // Creazione e settaggio dell'adapter
         ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, getParentFragmentManager(), getContext());
         recyclerViewScenari.setAdapter(adapter);
-
     }
 
 }
