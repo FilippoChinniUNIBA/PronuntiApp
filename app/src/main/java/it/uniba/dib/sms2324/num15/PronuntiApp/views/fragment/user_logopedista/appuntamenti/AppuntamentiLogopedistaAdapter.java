@@ -18,6 +18,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -34,7 +37,6 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
     public AppuntamentiLogopedistaAdapter(List<AppuntamentoCustom> appuntamentiFull, LogopedistaViewModel logopedistaViewModel) {
         this.appuntamentiFull = appuntamentiFull;
         appuntamentiCustom = new ArrayList<>(appuntamentiFull);
-
         this.mLogopedistaViewModel = logopedistaViewModel;
     }
 
@@ -46,6 +48,15 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
 
     @Override
     public void onBindViewHolder(AppuntamentiLogopedistaViewHolder holder, int position) {
+        //TODO far vedere gli appuntamenti appena inseriti;
+        appuntamentiCustom.sort((v1, v2) -> {
+            int compareDate = v1.getDataAppuntamento().compareTo(v2.getDataAppuntamento());
+            if(compareDate == 0){
+                return v1.getOraAppuntamento().compareTo(v2.getOraAppuntamento());
+            }
+            return compareDate;
+        });
+
         AppuntamentoCustom appuntamento = appuntamentiCustom.get(position);
 
         holder.textViewNomePaziente.setText(appuntamento.getNomePaziente());
