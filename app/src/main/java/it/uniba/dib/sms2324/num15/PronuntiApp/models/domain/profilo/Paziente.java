@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo;
 import android.util.Log;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,6 +250,13 @@ public class Paziente extends AbstractProfilo {
 
 	public void incrementaPunteggioTot(int punteggioGuadagnato) {
 		this.punteggioTot += punteggioGuadagnato;
+	}
+
+	public void addTerapia(Terapia terapia) {
+		if (this.terapie == null) {
+			this.terapie = new ArrayList<>();
+		}
+		this.terapie.add(terapia);
 	}
 
 }
