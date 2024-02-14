@@ -49,6 +49,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 
 		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
+		Log.d("Scenario",mPazienteViewModel.getPazienteLiveData().getValue().toString());
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
