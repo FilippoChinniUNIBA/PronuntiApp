@@ -2,33 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- ConstraintLayout wrapper -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearWrapper"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <!-- LinearLayout -->
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/myLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/buttonSinistraScenario"
+                android:id="@+id/buttonIndietroScenario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_constraintStart_toStartOf="parent"
@@ -38,7 +31,7 @@
                 android:src="@drawable/ic_arrow_back" />
 
             <TextView
-                android:id="@+id/textViewScenario"
+                android:id="@+id/textViewDataScenario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SCENARIO">
@@ -46,7 +39,7 @@
             </TextView>
 
             <ImageButton
-                android:id="@+id/buttonDestraScenario"
+                android:id="@+id/buttonAvantiScenario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -55,6 +48,6 @@
                 android:scaleX="-1"
                 android:src="@drawable/ic_arrow_back" />
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
