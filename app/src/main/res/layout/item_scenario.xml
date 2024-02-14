@@ -1,5 +1,4 @@
-<androidx.cardview.widget.CardView
-    android:id="@+id/cardViewScenario"
+<androidx.cardview.widget.CardView android:id="@+id/cardViewScenario"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +8,7 @@
     android:layout_marginHorizontal="10dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,6 +46,7 @@
                 />
         </LinearLayout>
 
+        <!--
         <LinearLayout
             android:id="@+id/linearLayoutInfoScenario"
             android:layout_width="match_parent"
@@ -63,6 +63,19 @@
             android:elevation="1dp"
             >
         </LinearLayout>
+        -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEsercizi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutTitleScenario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/primaryColorSoftScuro"
+            tools:listitem="@layout/item_esercizio"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

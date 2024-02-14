@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/scenarioFragment"
+    app:startDestination="@id/scenariFragment"
     >
     <fragment
-        android:id="@+id/scenarioFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenarioFragment"
-        tools:layout="@layout/fragment_scenario">
+        android:id="@+id/scenariFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.ScenariFragment"
+        tools:layout="@layout/fragment_scenari">
         <action
             android:id="@+id/action_scenarioFragment_to_esercizioSequenzaParole"
             app:destination="@id/esercizioSequenzaParole"
-            app:popUpTo="@id/scenarioFragment"
+            app:popUpTo="@id/scenariFragment"
             />
         <action
             android:id="@+id/action_scenarioFragment_to_esercizioCoppiaImmagini2"
             app:destination="@id/esercizioCoppiaImmagini"
-            app:popUpTo="@id/scenarioFragment" />
+            app:popUpTo="@id/scenariFragment" />
         <action
             android:id="@+id/action_scenarioFragment_to_esercizioDenominazioneImmagineFragment2"
             app:destination="@id/esercizioDenominazioneImmagineFragment"
-            app:popUpTo="@id/scenarioFragment" />
+            app:popUpTo="@id/scenariFragment" />
     </fragment>
     <fragment
         android:id="@+id/esercizioCoppiaImmagini"
@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_esercizio_coppia_immagini">
         <action
             android:id="@+id/action_esercizioCoppiaImmagini_to_scenarioFragment"
-            app:destination="@id/scenarioFragment" />
+            app:destination="@id/scenariFragment" />
     </fragment>
     <fragment
         android:id="@+id/esercizioSequenzaParole"
@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_esercizio_sequenza_parole">
         <action
             android:id="@+id/action_esercizioSequenzaParole_to_scenarioFragment"
-            app:destination="@id/scenarioFragment" />
+            app:destination="@id/scenariFragment" />
     </fragment>
     <fragment
         android:id="@+id/esercizioDenominazioneImmagineFragment"
@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_esercizio_denominazione_immagine">
         <action
             android:id="@+id/action_esercizioDenominazioneImmagineFragment_to_scenarioFragment"
-            app:destination="@id/scenarioFragment" />
+            app:destination="@id/scenariFragment" />
     </fragment>
     <fragment
         android:id="@+id/personaggiFragment"

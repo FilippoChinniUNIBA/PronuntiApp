@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +16,9 @@ public class AutenticazioneActivity extends AbstractAppActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setStatusBarColor(getColor(R.color.backgroundWhite));
+
+
         setContentView(R.layout.activity_autenticazione);
 
         this.mLoginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
