@@ -26,7 +26,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
-
     private List<ScenarioGioco> listaScenari;
     private FragmentManager fragmentManager;
     private Context context;
@@ -48,7 +47,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     @Override
     public void onBindViewHolder(@NonNull ScenarioViewHolder holder, int position) {
         ScenarioGioco scenario = listaScenari.get(position);
-        holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " "+scenario.getDataInizio().toString());
+        holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " " + scenario.getDataInizio().toString());
 
         Log.d("ScenarioAdapter", "onBindViewHolder scenario: " + position + " " + scenario.getEsercizi().size());
         for (int i = 0; i < scenario.getEsercizi().size(); i++) {

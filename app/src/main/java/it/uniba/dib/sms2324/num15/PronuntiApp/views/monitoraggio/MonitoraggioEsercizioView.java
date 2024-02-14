@@ -14,7 +14,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class MonitoraggioEsercizioView extends AbstractFragmentWithNavigation {
-
     private TextView textNumber;
     private TextView textDenomination;
     private ImageView imageCheck;
