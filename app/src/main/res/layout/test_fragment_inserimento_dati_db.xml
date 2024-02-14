@@ -14,6 +14,7 @@
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!-- Terapia -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,35 +35,84 @@
             </LinearLayout>
 
             <!-- TextInputLayout e TextInputEditText per Data inizio -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDataInizioTerapia"
-                    style="@style/TextInputEditTextStyle"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDataInizioTerapia"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/startDate"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDataInizioTerapia"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/startDate"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imageButtonDataInizioTerapia"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="-40dp"
+                    android:layout_marginTop="21dp"
+                    android:background="@drawable/ic_datepicker"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toEndOf="@id/textInputLayoutDataInizioTerapia"
+                    app:layout_constraintTop_toTopOf="@id/textInputLayoutDataInizioTerapia" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- TextInputLayout e TextInputEditText per Data fine-->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDataFineTerapia"
-                    style="@style/TextInputEditTextStyle"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDataFineTerapia"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/endDate"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDataFineTerapia"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/endDate"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imageButtonDataFineTerapia"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="-40dp"
+                    android:layout_marginTop="21dp"
+                    android:background="@drawable/ic_datepicker"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toEndOf="@id/textInputLayoutDataFineTerapia"
+                    app:layout_constraintTop_toTopOf="@id/textInputLayoutDataFineTerapia" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- ScenarioGioco -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,6 +133,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Sfondo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,8 +149,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Immagine sfondo"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -109,6 +162,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Tappa 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,8 +178,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="ImmagineTappa 1"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -135,6 +191,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Tappa 2 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,8 +207,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="ImmagineTappa 2"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -161,6 +220,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Tappa 3 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -176,8 +236,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="ImmagineTappa 3"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -187,20 +249,46 @@
                     android:text="File Picker" />
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/TextInputLayoutStyle"
+            <!-- TextInputLayout e TextInputEditText per Data assegnazione -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditTextDataInizioScenario"
-                    style="@style/TextInputEditTextStyle"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutDataInizioScenario"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Data assegnazione"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEditTextDataInizioScenario"
+                        style="@style/TextInputEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Data assegnazione"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imageButtonDataInizioScenario"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="-40dp"
+                    android:layout_marginTop="21dp"
+                    android:background="@drawable/ic_datepicker"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toEndOf="@id/textInputLayoutDataInizioScenario"
+                    app:layout_constraintTop_toTopOf="@id/textInputLayoutDataInizioScenario" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- TextInputLayout e TextInputEditText per ricompensa finale -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -215,6 +303,7 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per id template scenario gioco -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -230,6 +319,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <!-- Esercizio (attributi generici) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,6 +340,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Ricompensa Corretto -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -264,6 +355,7 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Ricompensa Errato -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -278,6 +370,7 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Id template esercizio -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -292,6 +385,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Esercizio Denominazione Immagine -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -313,6 +407,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Esercizio -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -328,8 +423,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Immagine esercizio"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -339,6 +436,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Parole Esercizio -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -353,6 +451,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Audio Esercizio -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -368,8 +467,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Audio aiuto"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -379,6 +480,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- Esercizio Sequenza Parole -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -400,6 +502,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Audio esercizio -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -415,8 +518,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Audio esercizio"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -426,6 +531,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Parola 1 -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -440,6 +546,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Parola 2 -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -454,6 +561,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Parola 3 -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -468,6 +576,7 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Esecizio Coppia Immagini -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -489,6 +598,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Audio Esercizio immagine -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -504,8 +614,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Audio esercizio immagine"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -515,6 +627,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Esercizio Corretta -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -530,8 +643,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Immagine esercizio corretta"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -541,6 +656,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Immagine Esercizio Errata -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -556,8 +672,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Immagine esercizio errata"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -567,6 +685,7 @@
                     android:text="File Picker" />
             </LinearLayout>
 
+            <!-- Risultato Esercizio -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -587,6 +706,7 @@
                     android:background="@android:color/darker_gray" />
             </LinearLayout>
 
+            <!-- Esito esercizio -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -605,6 +725,7 @@
                     android:layout_gravity="center" />
             </LinearLayout>
 
+            <!-- TextInputLayout e TextInputEditText per count Aiuti -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -619,6 +740,7 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- TextInputLayout e TextInputEditText per Audio Registrato -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -634,8 +756,10 @@
                         style="@style/TextInputEditTextStyle"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:hint="Audio registrato"
-                        android:inputType="text" />
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button

@@ -269,12 +269,12 @@ public class TestInserimentoDatiDBFragment extends Fragment {
 		*/
 
 		//Test save
-		/*PazienteDAO pazienteDAO = new PazienteDAO();
+		PazienteDAO pazienteDAO = new PazienteDAO();
 		pazienteDAO.getById("JVE3VGm5IZTnK83DzthuAeW46842").thenAccept(paziente -> {
 			paziente.addTerapia(terapia);
 			pazienteDAO.update(paziente);
 			Log.d("TEST PROVA MATTA", "Terapia salvata: " + terapia.toString());
-		});*/
+		});
 
 		//Test get
 		PazienteDAO pazienteDAO2 = new PazienteDAO();
