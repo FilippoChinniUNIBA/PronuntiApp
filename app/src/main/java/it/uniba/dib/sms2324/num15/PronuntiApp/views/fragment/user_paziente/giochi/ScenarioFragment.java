@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,6 +31,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.TopBa
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float xDelta, yDelta;
 	private float bottomHeight;
+	private float topHeight;
 	private ImageView personaggioImageView;
 	private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
 	private CurvedLineView curvedLineView1to2, curvedLineView2to3;
@@ -94,10 +96,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 			public void onGlobalLayout() {
 				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
 				personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-				// Abilita il drag dell'immagine
-				bottomHeight = personaggioImageView.getHeight() * 0.2f;
-				Log.d("Altezza minima personaggio", String.valueOf(bottomHeight));
+				int dp=125;
+				topHeight= TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+				bottomHeight = getResources().getDimension(R.dimen.nav_bar_height);
+				bottomHeight += bottomHeight*0.2f;
+				// Abilita il drag dell'immagine del personaggio
 				enableImageDrag(personaggioImageView);
 			}
 		});
@@ -223,7 +226,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 							v.setX(newX);
 						}
 
-						if (newY > 0 && newY < getScreenHeight() - v.getHeight() - bottomHeight) {
+						if (newY > topHeight && newY < getScreenHeight() - bottomHeight) {
 							v.setY(newY);
 						}
 

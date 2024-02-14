@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -53,8 +54,10 @@ public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<Appunta
         holder.textViewOraAppuntamento.setText(appuntamento.getOraAppuntamento().format(DateTimeFormatter.ofPattern("HH:mm"))); // Modifica in base al tipo di dato previsto per orario appuntamento
         holder.textViewLuogoAppuntamento.setText(appuntamento.getLuogoAppuntamento());
 
+        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+        LocalDateTime appuntamentoDateTime = LocalDateTime.of(appuntamento.getDataAppuntamento(), appuntamento.getOraAppuntamento());
         //disabilita se la data è passata
-        if (appuntamento.getDataAppuntamento().isBefore(LocalDate.now()) && appuntamento.getOraAppuntamento().isBefore(LocalTime.now())) {
+        if (appuntamentoDateTime.isBefore(now) || appuntamentoDateTime.isEqual(now)){
             holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
         } else {
             holder.cardViewAppuntamentoLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));

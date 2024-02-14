@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -33,8 +34,10 @@ public class AppuntamentoGenitoreAdapter extends RecyclerView.Adapter<Appuntamen
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		Appuntamento appuntamento = appuntamenti.get(position);
-
-		if (appuntamento.getData().isBefore(LocalDate.now()) && appuntamento.getOra().isBefore(LocalTime.now())) {
+		LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+		LocalDateTime appuntamentoDateTime = LocalDateTime.of(appuntamento.getData(), appuntamento.getOra());
+		//disabilita se la data è passata
+		if (appuntamentoDateTime.isBefore(now) || appuntamentoDateTime.isEqual(now)){
 			holder.cardViewAppuntamentoGenitore.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
 		} else {
 			holder.cardViewAppuntamentoGenitore.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));

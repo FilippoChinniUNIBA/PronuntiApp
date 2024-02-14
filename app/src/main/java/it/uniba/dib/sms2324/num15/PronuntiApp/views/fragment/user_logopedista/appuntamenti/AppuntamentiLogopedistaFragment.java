@@ -130,7 +130,6 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			viewOverlaySelezionePaziente.setVisibility(View.GONE);
 			cardViewAppuntamento.setVisibility(View.GONE);
 			addAppuntamentoButton.setVisibility(View.VISIBLE);
-
 			if (checkInputAppuntamento()) {
 				eseguiAggiuntaPrenotazione(mLogopedistaViewModel.getLogopedistaLiveData().getValue().getIdProfilo());
 			}
@@ -185,7 +184,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 					idPazienteSelezionato = paziente.getIdProfilo();
 					editTextAppuntamentoPaziente.setText(paziente.getNome() + " " + paziente.getCognome());
 					linearLayoutPazienteAppuntamentoLogopedista.setVisibility(View.GONE);
-					viewOverlaySelezionePaziente.setVisibility(View.VISIBLE);
+					viewOverlaySelezionePaziente.setVisibility(View.GONE);
 				}
 			}
 
@@ -232,8 +231,14 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 	}
 
 	private boolean checkInputAppuntamento() {
-		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty() || !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti()) || orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
+		if (idPazienteSelezionato == null || idPazienteSelezionato.isEmpty()
+				|| !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
+				|| orarioAppuntamento.isEmpty() || editTextDataAppuntemento.getText().toString().isEmpty()) {
 
+			Log.d("AppuntamentiLogopedista", "checkInputAppuntamento: input errato");
+			Log.d("AppuntamentiLogopedista", "checkInputAppuntamento" + (idPazienteSelezionato == null) + idPazienteSelezionato.isEmpty()
+					+ !cercaPazienteInLista(editTextAppuntamentoPaziente.getText().toString(), mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti())
+					+ orarioAppuntamento.isEmpty() + editTextDataAppuntemento.getText().toString().isEmpty());
 			showErrorInputDialog();
 			cardViewAppuntamento.setVisibility(View.VISIBLE);
 			addAppuntamentoButton.setVisibility(View.GONE);
@@ -271,6 +276,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 					String cognomePaziente = editTextAppuntamentoPaziente.getText().toString().split(" ")[1];
 					adapterAppuntamenti.addAppuntamento(new AppuntamentoCustom(appuntamento.getIdAppuntamento(), nomePaziente, cognomePaziente, luogoAppuntamento, dataAppuntamento, orarioAppuntamentoEffettivo));
 				});
+		editTextAppuntamentoPaziente.setText("");
 	}
 
 	private void handleTextViewSelection(TextView selectedTextView) {
