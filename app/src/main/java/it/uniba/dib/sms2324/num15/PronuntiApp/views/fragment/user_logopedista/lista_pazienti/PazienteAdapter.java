@@ -29,6 +29,15 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
             this.pazientiFull = new ArrayList<>();
         } else {
             this.pazientiCopia = new ArrayList<>(pazienti);
+            pazientiCopia.sort((p1,p2)-> {
+                int confrontoCognome = p1.getCognome().compareTo(p2.getCognome());
+                if(confrontoCognome == 0){
+                    return p1.getNome().compareTo(p2.getCognome());
+                }else {
+                    return confrontoCognome;
+                }
+            });
+
             this.pazientiFull = new ArrayList<>(pazientiCopia);
         }
     }
