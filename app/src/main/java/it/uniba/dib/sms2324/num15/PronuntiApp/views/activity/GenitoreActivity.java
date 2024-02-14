@@ -44,8 +44,6 @@ public class GenitoreActivity extends AbstractAppActivity {
         this.mGenitoreViewModel.setGenitore((Genitore) getIntent().getSerializableExtra("mGenitore"));
         this.mGenitoreViewModel.setPaziente((Paziente) getIntent().getSerializableExtra("mPaziente"));
         this.mGenitoreViewModel.setAppuntamenti((List<Appuntamento>) getIntent().getSerializableExtra("mAppuntamenti"));
-
-        //this.mGenitoreViewModel.initMPaziente().thenAccept(aVoid -> mGenitoreViewModel.initMListaAppuntamenti());
     }
 
 }

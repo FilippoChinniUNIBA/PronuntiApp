@@ -47,10 +47,6 @@ public class LogopedistaActivity extends AbstractAppActivity {
         this.mLogopedistaViewModel.setAppuntamenti((List<Appuntamento>) getIntent().getSerializableExtra("mAppuntamenti"));
         this.mLogopedistaViewModel.setTemplateScenariGioco((List<TemplateScenarioGioco>) getIntent().getSerializableExtra("mTemplateScenariGioco"));
         this.mLogopedistaViewModel.setTemplateEsercizi((List<Esercizio>) getIntent().getSerializableExtra("mTemplateEsercizi"));
-
-        //this.mLogopedistaViewModel.initMListaAppuntamenti();
-        //this.mLogopedistaViewModel.initMListaTemplateScenariGioco();
-        //this.mLogopedistaViewModel.initMListaTemplateEsercizi();
     }
 
 }

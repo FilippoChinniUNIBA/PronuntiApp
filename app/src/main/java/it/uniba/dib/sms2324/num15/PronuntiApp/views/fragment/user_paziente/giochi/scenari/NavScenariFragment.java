@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,19 +18,21 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     private ImageButton buttonIndietroScenario;
     private ImageButton buttonAvantiScenario;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         super.onCreateView(inflater, container, savedInstanceState);
-         View view = inflater.inflate(R.layout.fragment_nav_scenari,container,false);
-         textViewDataScenario = view.findViewById(R.id.textViewDataScenario);
-         buttonIndietroScenario = view.findViewById(R.id.buttonIndietroScenario);
-         buttonAvantiScenario = view.findViewById(R.id.buttonAvantiScenario);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_nav_scenari, container, false);
+
+        textViewDataScenario = view.findViewById(R.id.textViewDataScenario);
+        buttonIndietroScenario = view.findViewById(R.id.buttonIndietroScenario);
+        buttonAvantiScenario = view.findViewById(R.id.buttonAvantiScenario);
+
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         //TODO naviga a scenario precedente
@@ -51,4 +53,5 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
                 //TODO passare ScenarioGioco
         )).commit();
     }
+
 }

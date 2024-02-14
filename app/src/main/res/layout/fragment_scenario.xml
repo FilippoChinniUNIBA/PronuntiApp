@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_scenario_neve"
     android:fitsSystemWindows="true"
-    tools:context=".views.fragment.user_paziente.giochi.ScenarioFragment">
+    tools:context=".views.fragment.user_paziente.giochi.scenari.ScenarioFragment">
 
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.CurvedLineView
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.CurvedLineView
         android:id="@+id/curvedLineView2to3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.CurvedLineView
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.CurvedLineView
         android:id="@+id/curvedLineView1to2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

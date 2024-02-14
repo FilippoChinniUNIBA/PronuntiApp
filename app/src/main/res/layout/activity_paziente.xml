@@ -8,7 +8,7 @@
     tools:context=".views.activity.PazienteActivity"
     >
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerPaziente"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
