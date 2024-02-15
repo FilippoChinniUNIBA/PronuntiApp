@@ -37,7 +37,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private Vibrator vibrator;
 	private boolean isVibrating = false;
 
-
 	private PazienteViewModel mPazienteViewModel;
 
 
@@ -46,7 +45,9 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 
 		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
-		Log.d("Scenario",mPazienteViewModel.getPazienteLiveData().getValue().toString());
+
+		//TODO con questo logo crasha
+		//Log.d("Scenario",mPazienteViewModel.getPazienteLiveData().getValue().toString());
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 

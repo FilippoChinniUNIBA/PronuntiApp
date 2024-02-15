@@ -59,12 +59,12 @@ public class PazienteActivity extends AbstractAppActivity {
         navBarClassifica = findViewById(R.id.bottom_nav_classifica);
 
         //primo fragment
-        highlightNavBarButton(R.id.scenarioFragment);
+        highlightNavBarButton(R.id.scenariFragment);
 
         //onclick navBar custom
         navBarGiochi.setOnClickListener(v -> {
             Navigation.findNavController(this, R.id.fragmentContainerPaziente).navigate(R.id.scenariFragment);
-            resetNavBarButtons(R.id.scenarioFragment);
+            resetNavBarButtons(R.id.scenariFragment);
         });
         navBarPersonaggi.setOnClickListener(v -> {
             Navigation.findNavController(this, R.id.fragmentContainerPaziente).navigate(R.id.personaggiFragment);
@@ -75,8 +75,8 @@ public class PazienteActivity extends AbstractAppActivity {
             resetNavBarButtons(R.id.classificaFragment);
         });
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-        setOnBackPressedCallback(R.id.scenarioFragment);
+        //NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
+        setOnBackPressedCallback(R.id.scenariFragment);
 
         //Setup Dati
         this.mPazienteViewModel = new ViewModelProvider(this).get(PazienteViewModel.class);
@@ -156,7 +156,7 @@ public class PazienteActivity extends AbstractAppActivity {
 
     private void highlightNavBarButton(int id){
         Log.d("PazienteActivity.highlightNavBarButton()", "id: " + id);
-        if (id == R.id.scenarioFragment) {
+        if (id == R.id.scenariFragment) {
             selectorNavBarButton(navBarGiochi, R.drawable.ic_game);
             navBarClassifica.setScaleX(1f);
             navBarClassifica.setScaleY(1f);

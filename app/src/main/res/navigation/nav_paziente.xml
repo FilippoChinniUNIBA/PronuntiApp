@@ -60,4 +60,9 @@
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica.ClassificaFragment"
         android:label="@string/classifica"
         tools:layout="@layout/fragment_classifica" />
+    <fragment
+        android:id="@+id/scenarioFragment3"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.ScenarioFragment"
+        android:label="fragment_scenario"
+        tools:layout="@layout/fragment_scenario" />
 </navigation>

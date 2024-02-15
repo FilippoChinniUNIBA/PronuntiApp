@@ -85,7 +85,6 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             imageViewCheckEsercizio = itemView.findViewById(R.id.imageViewCheckEsercizio);
             imageViewWrongEsercizio = itemView.findViewById(R.id.imageViewWrongEsercizio);
             imageViewNonEseguito = itemView.findViewById(R.id.imageViewNonEseguito);
-
         }
     }
 
