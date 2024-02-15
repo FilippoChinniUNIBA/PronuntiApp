@@ -19,6 +19,7 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class PazientiFragment extends AbstractFragmentWithNavigation {
@@ -26,7 +27,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
     private PazienteAdapter adapterPazienti;
     private Button addPazientiButton;
     private SearchView searchViewListaPazienti;
-
+    private PazienteViewModel mPazienteViewModel;
     private LogopedistaViewModel mLogopedistaViewModel;
 
 
@@ -35,6 +36,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
         View view = inflater.inflate(R.layout.fragment_pazienti, container, false);
 
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         initViews(view);
 
@@ -62,7 +64,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
             List<Paziente> pazienti = logopedista.getPazienti();
             Log.d("PazientiFragment.loadData()", "pazienti: " + ((pazienti == null) ? "null" : pazienti.toString()));
 
-            adapterPazienti = new PazienteAdapter(pazienti);
+            adapterPazienti = new PazienteAdapter(pazienti,mPazienteViewModel);
             recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
             //recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));

@@ -30,7 +30,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.a
 public class AppuntamentiLogopedistaAdapter extends RecyclerView.Adapter<AppuntamentiLogopedistaAdapter.AppuntamentiLogopedistaViewHolder> {
     private List<AppuntamentoCustom> appuntamentiFull;
     private List<AppuntamentoCustom> appuntamentiCustom;
-
     private LogopedistaViewModel mLogopedistaViewModel;
 
 

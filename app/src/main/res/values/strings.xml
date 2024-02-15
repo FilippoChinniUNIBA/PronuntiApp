@@ -140,6 +140,9 @@
     <string name="erroreRegistrazioneGenitorePasswordDifformi">Password and Confirm Password do not match (Parent)</string>
     <string name="erroreRegistrazionePazienteAutenticazione">Error in Database; probably the child (patient) email is already in use. Also check if the email is in the correct format</string>
     <string name="erroreRegistrazioneGenitoreAutenticazione">Error in Database; probably the parent email is already in use. Also check if the email is in the correct format</string>
+    <string name="erroreCreazioneTerapiaCampiIncompleti">Missing or incomplete fields</string>
+    <string name="erroreCreazioneTerapiaDataNonValida">Invalid Date</string>
+    <string name="erroreCreazioneTerapiaOrdineDateNonValido">Invalid Date Order</string>
     <string name="addPatient">Patient +</string>
     <string name="sex">Sex</string>
     <string name="surname">Surname</string>

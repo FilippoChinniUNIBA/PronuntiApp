@@ -16,6 +16,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.ModificaAppuntamentiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti.RegistrazionePazienteGenitoreController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.terapie.TerapieController;
 
 public class LogopedistaViewModel extends ViewModel {
 	private MutableLiveData<Logopedista> mLogopedista = new MutableLiveData<>();
@@ -26,7 +27,7 @@ public class LogopedistaViewModel extends ViewModel {
 
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 	private ModificaAppuntamentiController mModificaAppuntamentiController;
-
+	private TerapieController mTerapieController;
 
 	public LiveData<Logopedista> getLogopedistaLiveData() {
 		return mLogopedista;
@@ -101,6 +102,13 @@ public class LogopedistaViewModel extends ViewModel {
 			this.mModificaAppuntamentiController = new ModificaAppuntamentiController();
 		}
 		return this.mModificaAppuntamentiController;
+	}
+
+	public TerapieController getTerapieController(){
+		if(this.mTerapieController == null){
+			this.mTerapieController = new TerapieController();
+		}
+		return this.mTerapieController;
 	}
 
 }

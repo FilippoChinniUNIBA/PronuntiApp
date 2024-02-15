@@ -115,6 +115,9 @@
     <string name="erroreRegistrazioneGenitorePasswordDifformi">Password e Conferma Password non coincidono (Genitore)</string>
     <string name="erroreRegistrazionePazienteAutenticazione">Errore Database: probabilmente email del bambino (paziente) già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
     <string name="erroreRegistrazioneGenitoreAutenticazione">Errore Database: probabilmente email del genitore già in uso. Controllare inoltre che l\'email sia nel formato corretto</string>
+    <string name="erroreCreazioneTerapiaCampiIncompleti">Campi mancanti o incompleti</string>
+    <string name="erroreCreazioneTerapiaDataNonValida">Data non valida</string>
+    <string name="erroreCreazioneTerapiaOrdineDateNonValido">Ordine Date non valido</string>
     <string name="subTitleLogin">Bentornato!\nEffettua il login per continuare</string>
     <string name="subtitle_registration_patient_parent">Ciao Dottore.\nInserisci qui i dati del nuovo Paziente</string>
     <string name="addPatient">Paziente +</string>
