@@ -37,7 +37,7 @@ public class GenitoreActivity extends AbstractAppActivity {
         bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_LABELED);
 
         NavigationUI.setupWithNavController(bottomNavigationView, navcontroller);
-        setOnBackPressedCallback(R.id.monitoraggioFragment2);
+        setOnBackPressedCallback(R.id.terapieFragment);
 
         //Setup Dati
         this.mGenitoreViewModel = new ViewModelProvider(this).get(GenitoreViewModel.class);

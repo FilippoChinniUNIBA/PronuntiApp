@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class NavTerapieFragment extends AbstractFragmentWithNavigation {
+public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
 
     private ImageButton imageButtonProssimaTerapia;
     private ImageButton imageButtonTerapiaPrecedente;
@@ -35,10 +35,12 @@ public class NavTerapieFragment extends AbstractFragmentWithNavigation {
 
         imageButtonProssimaTerapia.setOnClickListener(v -> {
             //TODO implementare funzionalità per passare alla terapia successiva
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioGenitoreFragment()).commit();
         });
 
         imageButtonTerapiaPrecedente.setOnClickListener(v -> {
             //TODO implementare funzionalità per passare alla terapia precedente
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioGenitoreFragment()).commit();
         });
 
     }

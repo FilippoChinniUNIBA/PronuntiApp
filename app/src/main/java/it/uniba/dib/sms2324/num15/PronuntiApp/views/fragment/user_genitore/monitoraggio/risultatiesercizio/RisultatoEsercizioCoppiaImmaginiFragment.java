@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.risultatiesercizio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,63 +13,57 @@ import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioSequenzaParoleController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
-    private ImageView imageViewCheck;
-    private ImageView imageViewWrong;
-    private ImageButton playButtonRisposta;
-    private ImageButton pauseButtonRisposta;
+public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigation {
+
+
+    private SeekBar seekBarEsercizioCoppiaImmagini;
+    private AudioRecorder audioRecorder;
+    private MediaPlayer mMediaPlayer;
+    private AudioPlayerLink audioPlayerLink;
+    private EsercizioCoppiaImmagini mEsercizioCoppiaImmagini;
     private ImageButton imageButtonPlay;
     private ImageButton imageButtonPause;
-    private SeekBar seekBarEsercizioSequenzaParole;
+    private ImageView imageViewCheck;
+    private ImageView imageViewWrong;
 
-    private AudioRecorder audioRecorder;
-    private AudioPlayerLink audioPlayerLink;
-    private MediaPlayer mMediaPlayer;
 
-    private EsercizioSequenzaParole mEsercizioSequenzaParole;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_risultato_es_sequenza_parole, container, false);
+        View view = inflater.inflate(R.layout.fragment_risultato_es_coppia_immagini, container, false);
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
 
         //TODO prendere esercizio da id passato da fragment chiamante
-        seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
+        seekBarEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
 
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
-        playButtonRisposta = view.findViewById(R.id.imageButtonAvviaAudioRegistrato);
-        pauseButtonRisposta = view.findViewById(R.id.imageButtonPausaAudioRegistrato);
-        pauseButtonRisposta.setVisibility(View.GONE);
 
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
-
+        this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
 
         this.audioRecorder = initAudioRecorder();
-        this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
+        this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
         if (isCorrect()) {
@@ -82,9 +76,6 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
 
         imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
         imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
-
-        playButtonRisposta.setOnClickListener(v -> playAudio());
-        pauseButtonRisposta.setOnClickListener(v -> stopAudio());
     }
 
     private AudioRecorder initAudioRecorder() {
@@ -108,7 +99,7 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
             imageButtonPause.setVisibility(View.GONE);
         });
 
-        seekBarEsercizioSequenzaParole.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBarEsercizioCoppiaImmagini.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
@@ -128,15 +119,15 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
         });
 
         mMediaPlayer.setOnSeekCompleteListener(mediaPlayer ->
-                seekBarEsercizioSequenzaParole.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration())));
+                seekBarEsercizioCoppiaImmagini.setProgress((int) (mediaPlayer.getCurrentPosition() * 100 / mediaPlayer.getDuration())));
 
         final int delay = 5;
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (mMediaPlayer != null && mMediaPlayer.isPlaying() && seekBarEsercizioSequenzaParole != null) {
-                    seekBarEsercizioSequenzaParole.setProgress((int) (mMediaPlayer.getCurrentPosition() * 100 / mMediaPlayer.getDuration()));
+                if (mMediaPlayer != null && mMediaPlayer.isPlaying() && seekBarEsercizioCoppiaImmagini != null) {
+                    seekBarEsercizioCoppiaImmagini.setProgress((int) (mMediaPlayer.getCurrentPosition() * 100 / mMediaPlayer.getDuration()));
                 }
                 handler.postDelayed(this, delay);
             }
@@ -150,21 +141,10 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
         audioPlayerLink.stopAudio();
     }
 
-    private void playAudio() {
-        playButtonRisposta.setVisibility(View.GONE);
-        pauseButtonRisposta.setVisibility(View.VISIBLE);
-        //TODO riproduzione audio
-    }
-
-    private void stopAudio() {
-        playButtonRisposta.setVisibility(View.VISIBLE);
-        pauseButtonRisposta.setVisibility(View.GONE);
-        //TODO ferma riproduzione audio
-    }
-
     private boolean isCorrect() {
         //TODO prendere esito risultato da viewmodel
         return false;
     }
+
 
 }

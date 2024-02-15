@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.risultatiesercizio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio;
 
 import android.os.Bundle;
 import android.util.Log;

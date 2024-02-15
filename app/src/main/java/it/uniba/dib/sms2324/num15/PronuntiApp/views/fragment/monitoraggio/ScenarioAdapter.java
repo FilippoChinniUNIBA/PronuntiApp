@@ -1,19 +1,17 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -22,8 +20,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
     private List<ScenarioGioco> listaScenari;
     private NavigateTo navigateTo;
+    private int idNavToEsercizioDenominazioneImmagine;
+    private int idNavToEsercizioCoppiaImmagini;
+    private int idNavToEsercizioSequenzaParole;
 
-    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo) {
+
+    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
     }
@@ -38,12 +40,12 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     @Override
     public void onBindViewHolder(@NonNull ScenarioViewHolder holder, int position) {
         ScenarioGioco scenario = listaScenari.get(position);
-        holder.textViewGiornoScenario.setText(Integer.toString(scenario.getDataInizio().getDayOfMonth()));
-        holder.textViewMeseAnnoScenario.setText(scenario.getDataInizio().getMonth().toString() + " " + scenario.getDataInizio().getYear());
+        holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
+        holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
 
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
-        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo);
+        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole);
         recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
     }

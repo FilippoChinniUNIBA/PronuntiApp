@@ -155,5 +155,6 @@
     <string name="acquistoPersonaggioDescription">Sei sicuro di voler acquistare e sbloccare questo personaggio?</string>
     <string name="risultatoEsercizio">Risultato esercizio</string>
     <string name="terapia">Terapia</string>
+    <string name="scenarioDel">Scenario del:</string>
 
 </resources>

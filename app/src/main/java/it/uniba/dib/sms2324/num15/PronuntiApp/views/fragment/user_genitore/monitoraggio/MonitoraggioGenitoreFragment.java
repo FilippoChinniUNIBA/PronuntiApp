@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,15 +20,14 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioC
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.NavigateTo;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.ScenarioAdapter;
 
 
-public class MonitoraggioFragment extends AbstractFragmentWithNavigation implements NavigateTo {
+public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
     private String idTerapiaScelta;
@@ -98,7 +94,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
         }
 
         // Creazione e settaggio dell'adapter
-        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this);
+        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment);
         recyclerViewScenari.setAdapter(adapter);
     }
 

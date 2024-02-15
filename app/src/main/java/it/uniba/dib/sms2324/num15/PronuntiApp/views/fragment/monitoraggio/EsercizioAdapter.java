@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,9 +24,16 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
     private List<EsercizioEseguibile> listaEsercizi;
     private NavigateTo navigateTo;
 
-    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo) {
+    private int idNavToEsercizioDenominazioneImmagine;
+    private int idNavToEsercizioCoppiaImmagini;
+    private int idNavToEsercizioSequenzaParole;
+
+    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
         this.listaEsercizi = listaEsercizi;
         this.navigateTo = navigateTo;
+        this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
+        this.idNavToEsercizioCoppiaImmagini = idNavToEsercizioCoppiaImmagini;
+        this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
     }
 
     @NonNull
@@ -64,24 +71,30 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             holder.imageViewCheckEsercizio.setVisibility(View.VISIBLE);
             holder.imageViewWrongEsercizio.setVisibility(View.GONE);
             holder.imageViewNonEseguito.setVisibility(View.GONE);
+            setUpOnClickCardView(holder, esercizio, position);
         } else {
             holder.imageViewCheckEsercizio.setVisibility(View.GONE);
             holder.imageViewWrongEsercizio.setVisibility(View.VISIBLE);
             holder.imageViewNonEseguito.setVisibility(View.GONE);
+            setUpOnClickCardView(holder, esercizio, position);
         }
 
+
+    }
+
+    private void setUpOnClickCardView(EsercizioViewHolder holder, EsercizioEseguibile esercizio, int position) {
         holder.itemView.setOnClickListener(v->{
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
                 //((EsercizioDenominazioneImmagine) esercizio).setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(true, "risposta data", 1));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioDenominazioneImmagineFragment,"indiceEsercizioDenominazioneImmagine", position);
+                navigateToEsercizio(idNavToEsercizioDenominazioneImmagine,"indiceEsercizioDenominazioneImmagine", position);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
                 //((EsercizioCoppiaImmagini) esercizio).setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(true));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioCoppiaImmaginiFragment,"indiceEsercizioCoppiaImmagini", position);
+                navigateToEsercizio(idNavToEsercizioCoppiaImmagini,"indiceEsercizioCoppiaImmagini", position);
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
                 //((EsercizioSequenzaParole) esercizio).setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(true, "risposta data"));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioSequenzaParoleFragment,"indiceEsercizioSequenzaParole", position);
+                navigateToEsercizio(idNavToEsercizioSequenzaParole,"indiceEsercizioSequenzaParole", position);
             }
         });
     }

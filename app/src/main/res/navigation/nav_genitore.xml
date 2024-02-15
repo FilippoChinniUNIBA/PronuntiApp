@@ -3,26 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_genitore"
-    app:startDestination="@id/monitoraggioFragment2">
+    app:startDestination="@id/terapieFragment">
 
-    <fragment
-        android:id="@+id/monitoraggioFragment2"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.MonitoraggioFragment"
-        android:label="@string/monitoraggio"
-        tools:layout="@layout/fragment_monitoraggio" >
-        <action
-            android:id="@+id/action_monitoraggioFragment2_to_risultatoEsercizioSequenzaParoleFragment"
-            app:destination="@id/risultatoEsercizioSequenzaParoleFragment"
-            app:popUpTo="@id/monitoraggioFragment2" />
-        <action
-            android:id="@+id/action_monitoraggioFragment2_to_risultatoEsercizioDenominazioneImmagineFragment"
-            app:destination="@id/risultatoEsercizioDenominazioneImmagineFragment"
-            app:popUpTo="@id/monitoraggioFragment2" />
-        <action
-            android:id="@+id/action_monitoraggioFragment2_to_risultatoEsercizioCoppiaImmaginiFragment"
-            app:destination="@id/risultatoEsercizioCoppiaImmaginiFragment"
-            app:popUpTo="@id/monitoraggioFragment2" />
-    </fragment>
     <fragment
         android:id="@+id/appuntamentiGenitoreFragment2"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.appuntamenti.AppuntamentiGenitoreFragment"
@@ -35,14 +17,31 @@
         tools:layout="@layout/fragment_profile_genitore" />
     <fragment
         android:id="@+id/risultatoEsercizioSequenzaParoleFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment"
         android:label="RisultatoEsercizioSequenzaParoleFragment" />
     <fragment
         android:id="@+id/risultatoEsercizioDenominazioneImmagineFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment"
         android:label="RisultatoEsercizioDenominazioneImmagineFragment" />
     <fragment
         android:id="@+id/risultatoEsercizioCoppiaImmaginiFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio.risultatiesercizio.RisultatoEsercizioCoppiaImmaginiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioCoppiaImmaginiFragment"
         android:label="RisultatoEsercizioCoppiaImmaginiFragment" />
+    <fragment
+        android:id="@+id/terapieFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.TerapieGenitoreFragment"
+        android:label="TerapieFragment" >
+        <action
+            android:id="@+id/action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment"
+            app:destination="@id/risultatoEsercizioCoppiaImmaginiFragment"
+            app:popUpTo="@id/terapieFragment" />
+        <action
+            android:id="@+id/action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment"
+            app:destination="@id/risultatoEsercizioSequenzaParoleFragment"
+            app:popUpTo="@id/terapieFragment" />
+        <action
+            android:id="@+id/action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment"
+            app:destination="@id/risultatoEsercizioDenominazioneImmagineFragment"
+            app:popUpTo="@id/terapieFragment" />
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio;
 
 import android.os.Bundle;
 
