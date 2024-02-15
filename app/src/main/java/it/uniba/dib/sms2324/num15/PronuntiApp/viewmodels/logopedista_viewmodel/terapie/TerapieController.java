@@ -10,6 +10,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
 public class TerapieController {
 
+
+//TODO come effettuare l'aggiunta della terapia capire cosa restituire dopo
 /*
     public Terapia aggiungiTerapia(String idPaziente,String idTerapia, LocalDate dataInizio, LocalDate datafine){
 
