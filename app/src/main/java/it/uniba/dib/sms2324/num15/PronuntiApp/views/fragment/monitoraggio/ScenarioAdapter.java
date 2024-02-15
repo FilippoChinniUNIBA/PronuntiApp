@@ -30,7 +30,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
 
 
     public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
-        //TODO ordinare listaScenari per data crescente
+        //TODO ordinare listaScenari per data decrescente (di regola lo sono già, controllare come sono quando li si prende da db)
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
     }
