@@ -1,9 +1,11 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio;
 
+import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,11 +13,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
     private List<ScenarioGioco> listaScenari;
@@ -26,6 +30,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
 
 
     public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
+        //TODO ordinare listaScenari per data crescente
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
     }
@@ -42,12 +47,44 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         ScenarioGioco scenario = listaScenari.get(position);
         holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
         holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
+        holder.linearLayoutTitleScenario.setOnClickListener(v -> toggleVisibility(holder));
 
+        if(scenario.getDataInizio().isBefore(LocalDate.now())) {
+            holder.cardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
+            holder.imageViewModificaDataScenario.setVisibility(View.INVISIBLE);
+        }
+
+        else {
+            //puoi modificare data scenario
+            holder.linearLayoutModificaDataScenario.setOnClickListener(v -> {
+                LocalDate now = LocalDate.now();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(holder.itemView.getContext(), (view, year, month, dayOfMonth) -> {
+                    LocalDate date = LocalDate.parse(LocalDate.of(year, month + 1, dayOfMonth).toString());
+                    scenario.setDataInizio(date);
+                    holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
+                    holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
+
+                    //TODO aggiornare la data nel db (come già fatto negli altri adapter)
+                    scenario.setDataInizio(date);
+                }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
+                datePickerDialog.show();
+            });
+        }
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
         EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole);
         recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
+    }
+
+    private void toggleVisibility(ScenarioViewHolder holder) {
+        if (holder.recyclerViewEsercizi.getVisibility() == View.VISIBLE) {
+            holder.recyclerViewEsercizi.setVisibility(View.GONE);
+            holder.imageViewArrowDown.setRotation(0);
+        } else {
+            holder.recyclerViewEsercizi.setVisibility(View.VISIBLE);
+            holder.imageViewArrowDown.setRotation(180);
+        }
     }
 
     @Override
@@ -62,6 +99,9 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         private TextView textViewMeseAnnoScenario;
         private ImageView imageViewArrowDown;
         private RecyclerView recyclerViewEsercizi;
+        private LinearLayout linearLayoutTitleScenario;
+        private LinearLayout linearLayoutModificaDataScenario;
+        private ImageView imageViewModificaDataScenario;
 
         public ScenarioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,22 +109,13 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
             cardView = itemView.findViewById(R.id.cardViewScenario);
             textViewGiornoScenario = itemView.findViewById(R.id.textViewGiornoScenario);
             textViewMeseAnnoScenario = itemView.findViewById(R.id.textViewMeseAnnoScenario);
+            linearLayoutTitleScenario = itemView.findViewById(R.id.linearLayoutTitleScenario);
+            linearLayoutModificaDataScenario = itemView.findViewById(R.id.linearLayoutModificaDataScenario);
             imageViewArrowDown = itemView.findViewById(R.id.imageViewArrowDown);
             imageViewArrowDown.setImageResource(R.drawable.ic_arrow_down_white);
+            imageViewModificaDataScenario = itemView.findViewById(R.id.imageViewModificaDataScenario);
             recyclerViewEsercizi = itemView.findViewById(R.id.recyclerViewEsercizi);
             recyclerViewEsercizi.setVisibility(View.GONE);
-            cardView.setOnClickListener(v -> toggleVisibility());
-        }
-
-
-        private void toggleVisibility() {
-            if (recyclerViewEsercizi.getVisibility() == View.VISIBLE) {
-                recyclerViewEsercizi.setVisibility(View.GONE);
-                imageViewArrowDown.setRotation(0);
-            } else {
-                recyclerViewEsercizi.setVisibility(View.VISIBLE);
-                imageViewArrowDown.setRotation(180);
-            }
         }
     }
 }
