@@ -34,7 +34,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWit
 public class MonitoraggioFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
-    private PazienteViewModel mPazienteViewModel;
     private String idTerapiaScelta;
     private Terapia terapiaScelta;
 
@@ -46,7 +45,6 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
         recyclerViewScenari.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
 
         return view;
@@ -111,7 +109,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
         navigateTo(id, bundle);
     }
 
-    private void monitoraggioTerapie(){
+    /*private void monitoraggioTerapie(){
 
         Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
 
@@ -120,7 +118,7 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
                 this.terapiaScelta = terapia;
             }
         }
-    }
+    }*/
 
 
 

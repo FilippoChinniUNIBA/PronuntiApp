@@ -68,7 +68,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private ModificaAppuntamentiController mController;
-	private PazienteViewModel mPazienteViewModel;
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +77,6 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 		this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 		this.mController = mLogopedistaViewModel.getModificaAppuntamentiController();
-		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
 		closeCardUpButton = view.findViewById(R.id.imageButtonArrowUpAppuntamentoLogopedista);
 		nestedScrollView = view.findViewById(R.id.nestedScrollViewAppuntamentiLogopedista);
