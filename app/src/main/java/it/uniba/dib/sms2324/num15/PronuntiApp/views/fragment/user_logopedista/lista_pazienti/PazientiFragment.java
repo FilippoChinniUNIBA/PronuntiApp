@@ -64,7 +64,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
             List<Paziente> pazienti = logopedista.getPazienti();
             Log.d("PazientiFragment.loadData()", "pazienti: " + ((pazienti == null) ? "null" : pazienti.toString()));
 
-            adapterPazienti = new PazienteAdapter(pazienti,mPazienteViewModel);
+            adapterPazienti = new PazienteAdapter(pazienti);
             recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
             //recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
