@@ -60,10 +60,11 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
         editTextDataInizioTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataInizioTerapia));
         editTextDataFineTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataFineTerapia));
         //buttonFilePickerTerapia.setOnClickListener(v-> startFilePicker);
+        //TODO capire a cosa serve il file picker in creazione della terapia
 
+        //TODO implementare la navigazione;
         buttonVaiCreaScenario.setOnClickListener(v-> {
             Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
-
             eseguiAggiuntaTerapia();
 
             /*for(Paziente paziente : logopedista.getPazienti()){
@@ -71,6 +72,7 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
                     paziente.getTerapie().add(terapiaAggiunta);
                 }
             }*/
+
             mLogopedistaViewModel.aggiornaLogopedistaRemoto();
         });
 
