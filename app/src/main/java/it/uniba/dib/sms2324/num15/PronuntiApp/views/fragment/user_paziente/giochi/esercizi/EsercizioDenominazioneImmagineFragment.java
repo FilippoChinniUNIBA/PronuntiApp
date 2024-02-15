@@ -14,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -30,17 +29,13 @@ import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioDenominazioneImmagineController;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment;
 
 public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWithNavigation {
     private ImageButton buttonAiutiImageView;
@@ -52,8 +47,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private ScaleAnimation animazioneButtonMic;
     private View viewAnimationMic, viewConfirmMic, viewStopMic;
     private ImageView imageViewConfermaRegistrazione;
-    private LinearLayout linearLayoutEsercizioDenominazioneImmagine;
-    private ConstraintLayout constraintLayoutEsercizioImmagineButtons;
+    private ConstraintLayout constraintLayoutEsercizioDenominazione;
     private FineEsercizioView fineEsercizioView;
 
 
@@ -63,7 +57,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private EsercizioDenominazioneImmagineController mController;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_esercizio_denominazione_immagine, container, false);
@@ -71,10 +64,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         this.mController = mPazienteViewModel.getEsercizioDenominazioneImmagineController();
 
-        constraintLayoutEsercizioImmagineButtons = view.findViewById(R.id.constraintLayoutEsercizioImmagineButtons);
-
-        linearLayoutEsercizioDenominazioneImmagine = view.findViewById(R.id.linearLayoutEsercizioDenominazioneImmagine);
-        linearLayoutEsercizioDenominazioneImmagine.setVisibility(View.VISIBLE);
+        constraintLayoutEsercizioDenominazione = view.findViewById(R.id.constraintLayoutEsercizioDenominazioneImmagine);
+        constraintLayoutEsercizioDenominazione.setVisibility(View.VISIBLE);
 
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
 
@@ -99,24 +90,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*savedInstanceState = getArguments();
-        Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);*/
-        //TODO l'esercizio deve essere preso dalla classe chiamante (passare indice dell'esercizio tramite Bundle)
-        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(
-                2500,
-                200,
-                "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be",
-                "pinguino",
-                "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
-
-        //this.mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
-
-        /*
-        if(mEsercizioDenominazioneImmagine.getRisultatoEsercizio() != null) {
-            Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "risultato denominazione esercizio null");
-            constraintLayoutEsercizioImmagineButtons.setVisibility(View.INVISIBLE);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewRisultatiEsercizioDenominaizoneImmagine, new RisultatoEsercizioDenominazioneImmagineFragment()).commit();
-        }*/
+        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
+        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be", "pinguino", "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
 
         this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
 
@@ -136,15 +111,18 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     }
 
     private void avviaPrimaRegistrazione() {
-        if (richiestaPermessi()) {
-            avviaRegistrazione();
-
-            imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
-            viewStopMic.setVisibility(View.VISIBLE);
-            viewConfirmMic.setVisibility(View.GONE);
-
-            Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
+        if (!checkPermissions(requireActivity())) {
+            requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
+            return;
         }
+
+        avviaRegistrazione();
+
+        imageViewConfermaRegistrazione.setVisibility(View.INVISIBLE);
+        viewStopMic.setVisibility(View.VISIBLE);
+        viewConfirmMic.setVisibility(View.GONE);
+
+        Toast.makeText(getContext(), getContext().getString(R.string.startedRecording), Toast.LENGTH_SHORT).show();
     }
 
     private void avviaRegistrazione() {
@@ -214,7 +192,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
             fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
         }
 
-        linearLayoutEsercizioDenominazioneImmagine.setVisibility(View.GONE);
+        constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
 
         File temp = mController.convertiAudio(audioRecorder.getAudioFile(), new File(getContext().getFilesDir(), "tempAudioConvertito.mp3"));
         //TODO salvare il file temp su Storage e ottenere link
@@ -234,13 +212,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         richiestaConfermaDialog.setOnConfermaButtonClickListener(this::avviaRegistrazione);
         richiestaConfermaDialog.setOnAnnullaButtonClickListener(() -> {});
         richiestaConfermaDialog.show();
-    }
-
-    private AudioRecorder initAudioRecorder() {
-        File cartellaApp = getContext().getFilesDir();
-        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
-
-        return new AudioRecorder(audioRegistrazione);
     }
 
     private void setAnimazioneRegistrazione() {
@@ -291,41 +262,26 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     }
 
 
-    private boolean richiestaPermessi() {
-        if (!checkPermissions(requireActivity())) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.RECORD_AUDIO)) {
-                setPermissionDialog();
-            } else {
-                requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private boolean checkPermissions(Activity currentactivity) {
         int recordAudioPermission = ContextCompat.checkSelfPermission(currentactivity, Manifest.permission.RECORD_AUDIO);
         return recordAudioPermission == PackageManager.PERMISSION_GRANTED;
     }
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
+    private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     this.audioRecorder = initAudioRecorder();
                     avviaPrimaRegistrazione();
                 } else {
-                    InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.permissionDeniedInstructions), getString(R.string.infoOk));
-                    infoDialog.show();
-                    infoDialog.setOnConfermaButtonClickListener(() -> navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment));
+                    navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment);
                 }
             });
 
-    private void setPermissionDialog() {
-        PermessiDialog permessiDialog = new PermessiDialog(getContext(), getString(R.string.permissionDeniedDescription));
-        permessiDialog.show();
-        permessiDialog.setOnConfermaButtonClickListener(() -> requestPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO));
-        permessiDialog.setOnAnnullaButtonClickListener(() -> navigateTo(R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment));
+    private AudioRecorder initAudioRecorder() {
+        File cartellaApp = getContext().getFilesDir();
+        File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
+
+        return new AudioRecorder(audioRegistrazione);
     }
 
 }

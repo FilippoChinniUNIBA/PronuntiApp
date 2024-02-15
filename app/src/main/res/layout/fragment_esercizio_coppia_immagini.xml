@@ -58,7 +58,6 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayoutImmaginiEsercizioCoppiaImmagini"
             android:layout_marginBottom="0dp"
             android:elevation="1dp"
-            android:textAppearance="@style/styleTextPersonaggi"
             />
 
         <LinearLayout
@@ -159,7 +158,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/playButtonDomanda"
+                android:id="@+id/playButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@android:color/transparent"
@@ -172,7 +171,7 @@
                 android:layout_gravity="center"
                 />
             <ImageButton
-                android:id="@+id/pauseButtonDomanda"
+                android:id="@+id/pauseButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@android:color/transparent"
