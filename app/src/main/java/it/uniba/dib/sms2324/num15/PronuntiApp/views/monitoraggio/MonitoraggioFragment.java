@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +23,21 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioC
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 
 public class MonitoraggioFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
+    private PazienteViewModel mPazienteViewModel;
+    private String idTerapiaScelta;
+    private Terapia terapiaScelta;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +46,9 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
         recyclerViewScenari.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
+
+
         return view;
     }
 
@@ -44,7 +56,9 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        monitoraggioTerapie();
         listaScenari = new ArrayList<>();
+        listaScenari.addAll(terapiaScelta.getScenariGioco());
 
         //TODO prendere scenari da viewModel
         for(int i=0; i<100; i++) {
@@ -96,4 +110,18 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
         setArguments(bundle);
         navigateTo(id, bundle);
     }
+
+    private void monitoraggioTerapie(){
+
+        Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
+
+        for (Terapia terapia : paziente.getTerapie()) {
+            if (terapia.getIdTerapia().equals(idTerapiaScelta)) {
+                this.terapiaScelta = terapia;
+            }
+        }
+    }
+
+
+
 }
