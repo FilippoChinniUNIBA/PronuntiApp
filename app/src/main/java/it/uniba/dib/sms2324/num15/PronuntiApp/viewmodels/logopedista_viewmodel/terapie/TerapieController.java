@@ -3,15 +3,22 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.
 import java.time.LocalDate;
 import java.util.List;
 
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.terapia.TerapiaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
 public class TerapieController {
 
+/*
+    public Terapia aggiungiTerapia(String idPaziente,String idTerapia, LocalDate dataInizio, LocalDate datafine){
 
-    public void aggiungiTerapia(String idPaziente){
-
+        TerapiaDAO terapiaDAO = new TerapiaDAO();
+        Terapia terapia = new Terapia(idTerapia,dataInizio,datafine);
+        //terapiaDAO.save(terapia);
+        return terapia;
     }
+ */
 
     public int verificaCorrettezzaCampiTerapia(String dataInizio, String dataFine){
 

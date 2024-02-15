@@ -17,8 +17,10 @@ import java.time.LocalDate;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.terapie.TerapieController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
@@ -30,6 +32,7 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
     private Button buttonFilePickerTerapia;
     private Button buttonVaiCreaScenario;
     private LogopedistaViewModel mLogopedistaViewModel;
+    private PazienteViewModel mPazienteViewModel;
     private TerapieController mController;
 
     @Override
@@ -45,6 +48,7 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
 
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mController = mLogopedistaViewModel.getTerapieController();
+        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         return view;
     }
@@ -62,7 +66,11 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
 
             eseguiAggiuntaTerapia();
 
-
+            /*for(Paziente paziente : logopedista.getPazienti()){
+                if(paziente.getIdProfilo().equals(mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo())){
+                    paziente.getTerapie().add(terapiaAggiunta);
+                }
+            }*/
             mLogopedistaViewModel.aggiornaLogopedistaRemoto();
         });
 
@@ -78,24 +86,23 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
         }else{
             LocalDate dataInizioTerapia = LocalDate.parse(editTextDataInizioTerapia.getText().toString());
             LocalDate dataFineTerapia = LocalDate.parse(editTextDataFineTerapia.getText().toString());
-
-
+            String idPaziente = mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo();
+            //mController.aggiungiTerapia(idPaziente,idTerapia,dataInizioTerapia,dataFineTerapia);
         }
 
 
     }
     public void creaDialogErroreCampi(int tipoErrore) {
-        //TODO scrivere messaggi errore per le date in terapia;
         String messaggioErrore = "";
         switch (tipoErrore) {
             case 1:
-                //messaggioErrore = getString(R.string.erroreCreazioneTerapiaCampiIncompleti);
+                messaggioErrore = getString(R.string.erroreCreazioneTerapiaCampiIncompleti);
                 break;
             case 2:
-                //messaggioErrore = getString(R.string.erroreDataPassata);
+                messaggioErrore = getString(R.string.erroreCreazioneTerapiaDataNonValida);
                 break;
             case 3:
-                //messaggioErrore = getString(R.string.erroreDateInOrdineIncorretto);
+                messaggioErrore = getString(R.string.erroreCreazioneTerapiaOrdineDateNonValido);
                 break;
         }
         InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
