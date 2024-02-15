@@ -75,7 +75,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         imageButtonImmagine2=view.findViewById(R.id.imageView2ImmagineEsercizioCoppiaImmagini);
 
 
-        this.correctImageView = new Random().nextInt(2) + 1;    //intero casuale tra 1 e 2
+        this.correctImageView = mController.generaPosizioneImmagineCorretta();
 
         return view;
     }
@@ -129,10 +129,14 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         firstClickReproduced = true;
         textViewEsercizioPlaySuggestion.setVisibility(View.GONE);
         imageButtonImmagine1.setOnClickListener(v -> {
+            v.setOnClickListener(null);
+            imageButtonImmagine2.setOnClickListener(null);
             borderImageSelector(fl1ImmagineEsercizioCoppiaImmagini);
             new Handler().postDelayed(() -> completaEsercizio(1), 1000);
         });
         imageButtonImmagine2.setOnClickListener(v -> {
+            v.setOnClickListener(null);
+            imageButtonImmagine1.setOnClickListener(null);
             borderImageSelector(fl2ImmagineEsercizioCoppiaImmagini);
             new Handler().postDelayed(() -> completaEsercizio(2), 1000);
         });

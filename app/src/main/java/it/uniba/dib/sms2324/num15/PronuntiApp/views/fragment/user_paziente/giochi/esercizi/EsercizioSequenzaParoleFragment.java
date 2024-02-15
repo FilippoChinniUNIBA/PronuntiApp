@@ -45,7 +45,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDial
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
-
     private FineEsercizioView fineEsercizioView;
     private ConstraintLayout constraintLayoutEsercizioSequenzaParole;
     private SeekBar seekBarEsercizioSequenzaParole;
