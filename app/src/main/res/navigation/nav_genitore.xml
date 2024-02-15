@@ -13,7 +13,8 @@
         <action
             android:id="@+id/action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2"
             app:destination="@id/esercizioDenominazioneImmagineFragment2"
-            app:popUpTo="@id/monitoraggioFragment2" />
+            app:popUpTo="@id/monitoraggioFragment2" >
+        </action>
         <action
             android:id="@+id/action_monitoraggioFragment2_to_esercizioSequenzaParoleFragment"
             app:destination="@id/esercizioSequenzaParoleFragment"

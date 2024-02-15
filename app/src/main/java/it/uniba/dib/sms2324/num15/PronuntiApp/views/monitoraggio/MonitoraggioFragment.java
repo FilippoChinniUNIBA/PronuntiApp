@@ -26,7 +26,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 
-public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
+public class MonitoraggioFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
 
@@ -103,8 +103,14 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation{
         }
 
         // Creazione e settaggio dell'adapter
-        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, getParentFragmentManager(), getContext());
+        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this);
         recyclerViewScenari.setAdapter(adapter);
     }
 
+    @Override
+    public void navigateToEsercizio(int id, Bundle bundle){
+        Log.d("MonitoraggioFragment", "navigateToEsercizio: ");
+        setArguments(bundle);
+        navigateTo(id, bundle);
+    }
 }

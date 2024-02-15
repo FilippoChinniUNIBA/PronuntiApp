@@ -26,9 +26,11 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioch
 public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.EsercizioViewHolder> {
 
     private List<EsercizioEseguibile> listaEsercizi;
+    private NavigateTo navigateTo;
 
-    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi) {
+    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo) {
         this.listaEsercizi = listaEsercizi;
+        this.navigateTo = navigateTo;
     }
 
     @NonNull
@@ -74,15 +76,16 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
                 //TODO: apri il fragment per l'esercizio probabilmente bisogna passare l'oggetto Esercizio
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("esercizioDenominazioneImmagine", (Parcelable) esercizio);
-
+                bundle.putSerializable("esercizioDenominazioneImmagine", esercizio);
+                Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
+                navigateTo.navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2, bundle);
                 //new EsercizioDenominazioneImmagineFragment((EsercizioDenominazioneImmagine) esercizio);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
-                new EsercizioCoppiaImmaginiFragment();
+                //new EsercizioCoppiaImmaginiFragment();
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
-                new EsercizioSequenzaParoleFragment();
+                //new EsercizioSequenzaParoleFragment();
             }
         });
     }

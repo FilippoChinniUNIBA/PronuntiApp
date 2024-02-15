@@ -21,14 +21,11 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
     private List<ScenarioGioco> listaScenari;
-    private FragmentManager fragmentManager;
-    private Context context;
-    private int counterEsercizi=0;
+    private NavigateTo navigateTo;
 
-    public ScenarioAdapter(List<ScenarioGioco> listaScenari, FragmentManager fragmentManager, Context context) {
+    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo) {
         this.listaScenari = listaScenari;
-        this.fragmentManager = fragmentManager;
-        this.context = context;
+        this.navigateTo = navigateTo;
     }
 
     @NonNull
@@ -45,8 +42,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         holder.textViewMeseAnnoScenario.setText(scenario.getDataInizio().getMonth().toString() + " " + scenario.getDataInizio().getYear());
 
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
-        recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(context));
-        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi());
+        recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
+        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo);
         recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
     }

@@ -27,6 +27,11 @@ public abstract class AbstractFragmentWithNavigation extends Fragment {
             navController.navigate(idAction);
         }
     }
+    public void navigateTo(int idAction, Bundle bundle) {
+        if (getActivity() != null) {
+            navController.navigate(idAction, bundle);
+        }
+    }
 
     public void setToolBar(View view, String title){
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolBar);
