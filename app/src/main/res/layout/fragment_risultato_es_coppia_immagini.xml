@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_beach"
+        android:background="@drawable/background_space_scenario"
         />
 
     <View
@@ -37,7 +37,7 @@
         android:id="@+id/textViewEsercizioCoppiaImmagini"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titleEsercizioSequenzaParole"
+        android:text="@string/titleEsercizioCoppiaImmagini"
         android:padding="10dp"
         android:textSize="@dimen/size_text_title_esercizio"
         android:textColor="@color/white"
@@ -46,13 +46,13 @@
         android:layout_marginTop="80dp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/seekBarScorrimentoAudioEsercizioSequenzaParole"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarScorrimentoAudioEsercizioCoppiaImmagini"
         android:layout_marginBottom="0dp"
         android:elevation="1dp"
         />
 
     <android.widget.SeekBar
-        android:id="@+id/seekBarScorrimentoAudioEsercizioSequenzaParole"
+        android:id="@+id/seekBarScorrimentoAudioEsercizioCoppiaImmagini"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRisultatoEsercizioSequenzaParole"
-        app:layout_constraintTop_toBottomOf="@+id/seekBarScorrimentoAudioEsercizioSequenzaParole"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarScorrimentoAudioEsercizioCoppiaImmagini"
         android:elevation="1dp">
 
         <ImageButton
@@ -133,6 +133,7 @@
             android:orientation="horizontal"
             android:paddingVertical="5dp"
             android:gravity="center"
+            android:layout_marginBottom="100dp"
             >
 
             <ImageView
@@ -152,41 +153,6 @@
                 android:visibility="gone"
                 />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="100dp"
-            >
-            <ImageButton
-                android:id="@+id/imageButtonAvviaAudioRegistrato"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_play"
-                android:scaleType="centerCrop"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                />
-            <ImageButton
-                android:id="@+id/imageButtonPausaAudioRegistrato"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_pause"
-                android:scaleType="centerCrop"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                />
-            <TextView
-                android:id="@+id/textAudioRegistrato"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/subHeaderTextSize"
-                android:text="Rispostata data"
-                android:paddingStart="20dp"
-                />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

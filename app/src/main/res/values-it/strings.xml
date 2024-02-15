@@ -153,6 +153,6 @@
     <string name="valutaInsufficiente">Non hai abbastanze monete per poter sbloccare questo personaggio!</string>
     <string name="acquistoPersonaggioTitle">Acquisto Personaggio</string>
     <string name="acquistoPersonaggioDescription">Sei sicuro di voler acquistare e sbloccare questo personaggio?</string>
-
+    <string name="risultatoEsercizio">Risultato esercizio</string>
 
 </resources>

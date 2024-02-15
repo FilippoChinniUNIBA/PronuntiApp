@@ -1,7 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +18,6 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioC
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmaginiFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment;
 
 public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.EsercizioViewHolder> {
 
@@ -77,23 +69,23 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         holder.itemView.setOnClickListener(v->{
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
-                ((EsercizioDenominazioneImmagine) esercizio).setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(true, "risposta data", 1));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2,"esercizioDenominazioneImmagine", esercizio);
+                //((EsercizioDenominazioneImmagine) esercizio).setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(true, "risposta data", 1));
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioDenominazioneImmagineFragment,"indiceEsercizioDenominazioneImmagine", position);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
-                ((EsercizioCoppiaImmagini) esercizio).setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(true));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioCoppiaImmaginiFragment,"esercizioCoppiaImmagini", esercizio);
+                //((EsercizioCoppiaImmagini) esercizio).setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(true));
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioCoppiaImmaginiFragment,"indiceEsercizioCoppiaImmagini", position);
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
-                ((EsercizioSequenzaParole) esercizio).setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(true, "risposta data"));
-                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioSequenzaParoleFragment,"esercizioSequenzaParole", esercizio);
+                //((EsercizioSequenzaParole) esercizio).setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(true, "risposta data"));
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_risultatoEsercizioSequenzaParoleFragment,"indiceEsercizioSequenzaParole", position);
             }
         });
     }
 
-    private void navigateToEsercizio(int id,String stringSerializable, EsercizioEseguibile esercizio) {
+    private void navigateToEsercizio(int id,String stringSerializable, int posizioneInLista) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(stringSerializable, esercizio);
+        bundle.putSerializable(stringSerializable, posizioneInLista);
         Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
         navigateTo.navigateToEsercizio(id, bundle);
     }
