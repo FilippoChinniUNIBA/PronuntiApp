@@ -55,6 +55,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         }
 
         else {
+            holder.cardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
+            holder.imageViewModificaDataScenario.setVisibility(View.VISIBLE);
             //puoi modificare data scenario
             holder.linearLayoutModificaDataScenario.setOnClickListener(v -> {
                 LocalDate now = LocalDate.now();
@@ -66,6 +68,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
 
                     //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);
+                    notifyDataSetChanged();
                 }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
                 datePickerDialog.show();
             });
