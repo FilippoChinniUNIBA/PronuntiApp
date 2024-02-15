@@ -59,6 +59,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private EsercizioDenominazioneImmagineController mController;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_esercizio_denominazione_immagine, container, false);
@@ -93,7 +94,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         super.onViewCreated(view, savedInstanceState);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be", "pinguino", "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
+        this.mEsercizioDenominazioneImmagine = savedInstanceState.getParcelable("esercizioDenominazioneImmagine");
 
         this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
 

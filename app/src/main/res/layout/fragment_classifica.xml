@@ -12,7 +12,7 @@
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@id/toolBar"
-            style="@style/styleToolBar"
+            style="@style/styleToolBarPaziente"
             app:layout_constraintBottom_toTopOf="@+id/imageViewCupClassifica"
             tools:ignore="MissingConstraints"
             />

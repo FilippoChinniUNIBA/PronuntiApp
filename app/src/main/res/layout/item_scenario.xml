@@ -15,35 +15,65 @@
         android:layout_gravity="center"
         android:paddingTop="5dp"
         >
+        <TextView
+            android:id="@+id/textViewTitleScenario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Scenario del:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/subHeaderTextSize"
+            android:gravity="center"
+            />
         <LinearLayout
             android:id="@+id/linearLayoutTitleScenario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleScenario"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:paddingStart="20dp"
             android:layout_marginBottom="5dp"
+            android:paddingStart="30dp"
             >
-
             <TextView
-                android:id="@+id/textViewDataScenario"
+                android:id="@+id/textViewGiornoScenario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Scenario del"
-                android:layout_marginEnd="10dp"
+                android:background="@android:color/transparent"
                 android:textColor="@color/white"
-                android:textSize="16sp"
                 android:textStyle="bold"
+                android:textSize="@dimen/headerTextSize"
+                android:text="28"
+                android:layout_marginEnd="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                >
+            <TextView
+                android:id="@+id/textViewMeseAnnoScenario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:textColor="@color/meseAnnoAppuntamento"
+                android:textSize="@dimen/subHeaderTextSize"
+                android:text="Marzo 2023"
+                android:textAllCaps="true"
+                android:layout_weight="2"
                 />
             <ImageView
                 android:id="@+id/imageViewArrowDown"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_arrow_down_white"
-                android:layout_gravity="center"
+                android:layout_gravity="end"
+                android:layout_weight="1"
                 />
+            </LinearLayout>
         </LinearLayout>
 
         <!--
@@ -75,6 +105,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/primaryColorSoftScuro"
             tools:listitem="@layout/item_esercizio"
+            android:visibility="gone"
             />
 
 

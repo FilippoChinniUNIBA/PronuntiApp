@@ -41,7 +41,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     @Override
     public void onBindViewHolder(@NonNull ScenarioViewHolder holder, int position) {
         ScenarioGioco scenario = listaScenari.get(position);
-        holder.textViewDataScenario.setText(holder.textViewDataScenario.getText() + " " + scenario.getDataInizio().toString());
+        holder.textViewGiornoScenario.setText(Integer.toString(scenario.getDataInizio().getDayOfMonth()));
+        holder.textViewMeseAnnoScenario.setText(scenario.getDataInizio().getMonth().toString() + " " + scenario.getDataInizio().getYear());
 
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(context));
@@ -58,7 +59,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     public class ScenarioViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
-        private TextView textViewDataScenario;
+        private TextView textViewGiornoScenario;
+        private TextView textViewMeseAnnoScenario;
         private ImageView imageViewArrowDown;
         private RecyclerView recyclerViewEsercizi;
 
@@ -66,7 +68,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
             super(itemView);
 
             cardView = itemView.findViewById(R.id.cardViewScenario);
-            textViewDataScenario = itemView.findViewById(R.id.textViewDataScenario);
+            textViewGiornoScenario = itemView.findViewById(R.id.textViewGiornoScenario);
+            textViewMeseAnnoScenario = itemView.findViewById(R.id.textViewMeseAnnoScenario);
             imageViewArrowDown = itemView.findViewById(R.id.imageViewArrowDown);
             imageViewArrowDown.setImageResource(R.drawable.ic_arrow_down_white);
             recyclerViewEsercizi = itemView.findViewById(R.id.recyclerViewEsercizi);

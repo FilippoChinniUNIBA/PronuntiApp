@@ -23,7 +23,7 @@
         >
         <androidx.appcompat.widget.Toolbar
             android:id="@id/toolBar"
-            style="@style/styleToolBar"
+            style="@style/styleToolBarPaziente"
             android:layout_width="35dp"
             android:gravity="center_vertical"
             android:paddingTop="9dp"

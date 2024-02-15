@@ -1,5 +1,8 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.monitoraggio;
 
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioC
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmaginiFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment;
 
 public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.EsercizioViewHolder> {
 
@@ -40,6 +46,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         if(esercizio instanceof EsercizioDenominazioneImmagine) {
             holder.textViewTipoEsercizio.setText("Denominazione immagine");
+            //action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2
         }
         else if(esercizio instanceof EsercizioCoppiaImmagini) {
             holder.textViewTipoEsercizio.setText("Coppia immagini");
@@ -62,6 +69,22 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             holder.imageViewWrongEsercizio.setVisibility(View.VISIBLE);
             holder.imageViewNonEseguito.setVisibility(View.GONE);
         }
+
+        holder.itemView.setOnClickListener(v->{
+            if(esercizio instanceof EsercizioDenominazioneImmagine) {
+                //TODO: apri il fragment per l'esercizio probabilmente bisogna passare l'oggetto Esercizio
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("esercizioDenominazioneImmagine", (Parcelable) esercizio);
+
+                //new EsercizioDenominazioneImmagineFragment((EsercizioDenominazioneImmagine) esercizio);
+            }
+            else if(esercizio instanceof EsercizioCoppiaImmagini) {
+                new EsercizioCoppiaImmaginiFragment();
+            }
+            else if(esercizio instanceof EsercizioSequenzaParole) {
+                new EsercizioSequenzaParoleFragment();
+            }
+        });
     }
 
     @Override
@@ -79,7 +102,6 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         public EsercizioViewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewNumeroEsercizio = itemView.findViewById(R.id.textViewNumeroEsercizio);
             textViewTipoEsercizio = itemView.findViewById(R.id.textViewTipoEsercizio);
             imageViewCheckEsercizio = itemView.findViewById(R.id.imageViewCheckEsercizio);

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".views.monitoraggio.MonitoraggioFragment"
     android:background="@color/backgroundWhite"
+    android:layout_marginBottom="@dimen/nav_bar_height"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,6 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_scenario"
+            android:layout_marginBottom="10dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

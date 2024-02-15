@@ -1,49 +1,73 @@
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/relativeLayoutEsercizio"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="25dp"
-    android:paddingVertical="5dp"
     android:background="@color/primaryColorSoftScuro"
     >
-    <TextView
-        android:id="@+id/textViewNumeroEsercizio"
+    <LinearLayout
+        android:id="@+id/linearLayoutEsercizio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1°"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/subHeaderTextSize"
-        />
-    <TextView
-        android:id="@+id/textViewTipoEsercizio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Denominazione immagine"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size_text_info_scenario"
-        android:layout_marginEnd="10dp"
-        />
-    <ImageView
-        android:id="@+id/imageViewCheckEsercizio"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_check"
-        android:layout_gravity="center"
-        />
-    <ImageView
-        android:id="@+id/imageViewWrongEsercizio"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_wrong"
-        android:layout_gravity="center"
-        />
-    <ImageView
-        android:id="@+id/imageViewNonEseguito"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_non_eseguito"
-        android:layout_gravity="center"
-        />
-</LinearLayout>
+        android:paddingStart="25dp"
+        android:paddingVertical="10dp"
+        android:weightSum="10"
+        >
+        <TextView
+            android:id="@+id/textViewNumeroEsercizio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1°"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/subHeaderTextSize"
+            />
+        <TextView
+            android:id="@+id/textViewTipoEsercizio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Denominazione immagine"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_text_info_scenario"
+            android:layout_marginEnd="10dp"
+            />
+        <ImageView
+            android:id="@+id/imageViewCheckEsercizio"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_check"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:id="@+id/imageViewWrongEsercizio"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_wrong"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:id="@+id/imageViewNonEseguito"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_non_eseguito"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_toRightOf="@+id/linearLayoutEsercizio"
+        android:gravity="end|center_vertical"
+        android:paddingEnd="20dp"
+        >
+        <ImageView
+            android:id="@+id/imageViewSeeMoreEsercizio"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_goto"
+            android:rotation="90"
+            />
+    </LinearLayout>
+</RelativeLayout>
