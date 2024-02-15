@@ -93,7 +93,6 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO esercizio passato tramite bundle fatto, ma bisogna farlo in tutti i fragment esercizio
         savedInstanceState = getArguments();
         Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);
         this.mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");

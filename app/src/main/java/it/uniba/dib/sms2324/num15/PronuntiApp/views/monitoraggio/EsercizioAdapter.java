@@ -74,20 +74,22 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         holder.itemView.setOnClickListener(v->{
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
-                //TODO: apri il fragment per l'esercizio probabilmente bisogna passare l'oggetto Esercizio
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("esercizioDenominazioneImmagine", esercizio);
-                Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
-                navigateTo.navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2, bundle);
-                //new EsercizioDenominazioneImmagineFragment((EsercizioDenominazioneImmagine) esercizio);
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2,"esercizioDenominazioneImmagine", esercizio);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
-                //new EsercizioCoppiaImmaginiFragment();
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioCoppiaImmaginiFragment,"esercizioCoppiaImmagini", esercizio);
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
-                //new EsercizioSequenzaParoleFragment();
+                navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioSequenzaParoleFragment,"esercizioSequenzaParole", esercizio);
             }
         });
+    }
+
+    private void navigateToEsercizio(int id,String stringSerializable, EsercizioEseguibile esercizio) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(stringSerializable, esercizio);
+        Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
+        navigateTo.navigateToEsercizio(id, bundle);
     }
 
     @Override

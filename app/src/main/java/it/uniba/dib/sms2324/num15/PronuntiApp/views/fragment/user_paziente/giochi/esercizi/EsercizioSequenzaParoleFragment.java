@@ -98,8 +98,9 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
+        savedInstanceState = getArguments();
+        Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);
+        this.mEsercizioSequenzaParole = (EsercizioSequenzaParole) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
 
         this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 

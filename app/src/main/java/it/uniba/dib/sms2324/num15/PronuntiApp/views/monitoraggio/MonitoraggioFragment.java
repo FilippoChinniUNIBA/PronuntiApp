@@ -48,16 +48,8 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
 
         //TODO prendere scenari da viewModel
         for(int i=0; i<100; i++) {
-            EsercizioCoppiaImmagini esercizioCoppiaImmagini = new EsercizioCoppiaImmagini(
-                    "id_esercizio_coppia_immagini",
-                    10,
-                    5,
-                    "audio_esercizio_coppia_immagini.mp3",
-                    "immagine_corretta.jpg",
-                    "immagine_errata.jpg",
-                    "ref_id_template_esercizio_coppia_immagini",
-                    null
-            );
+            EsercizioCoppiaImmagini esercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+
 
             EsercizioDenominazioneImmagine esercizioDenominazioneImmagine=new EsercizioDenominazioneImmagine(
                     2500,
@@ -68,17 +60,8 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
 
 
             // Istanza di EsercizioSequenzaParole
-            EsercizioSequenzaParole esercizioSequenzaParole = new EsercizioSequenzaParole(
-                    "id_esercizio_sequenza_parole",
-                    10,
-                    5,
-                    "audio_esercizio_sequenza_parole.mp3",
-                    "parola1",
-                    "parola2",
-                    "parola3",
-                    "ref_id_template_esercizio_sequenza_parole",
-                    null
-            );
+            EsercizioSequenzaParole esercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
+
 
             List<EsercizioEseguibile> esercizi = new ArrayList<>();
             esercizi.add(esercizioCoppiaImmagini);
