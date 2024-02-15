@@ -29,22 +29,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutEsercizioSequenzaParole"
+    <View
+        android:id="@+id/viewClickForSuggestion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        />
+    <LinearLayout
+        android:id="@+id/linearLayoutEsercizioSequenzaParole"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <View
-            android:id="@+id/viewClickForSuggestion"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        >
 
         <TextView
             android:id="@+id/textViewEsercizioCoppiaImmagini"
@@ -78,39 +79,46 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="100dp"
             />
 
         <TextView
             android:id="@+id/textViewEsercizioMicSuggestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:paddingHorizontal="15dp"
             android:gravity="center"
             android:textColor="@color/white"
             android:text="@string/suggestionSequenzaParole"
-            app:layout_constraintTop_toBottomOf="@+id/seekBarScorrimentoAudioEsercizioSequenzaParole"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAvviaRegistrazione"
             android:padding="10dp"
             android:background="#61000000"
             android:elevation="1dp"
             android:visibility="invisible"
+            android:layout_marginTop="50dp"
             />
 
-        <FrameLayout
-            android:id="@+id/frameLayoutPlayPauseEsercizioSequenzaParole"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayoutButtonsEsercizioSequenzaParole"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/ic_suggestion"
-            android:tooltipText="@string/suggestEsercizioDenominazione"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:elevation="1dp">
-
-            <ImageButton
-                android:id="@+id/playButton"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            >
+            <FrameLayout
+                android:id="@+id/frameLayoutPlayPauseEsercizioSequenzaParole"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:elevation="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                >
+                <ImageButton
+                android:id="@+id/playButtonDomanda"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
@@ -121,8 +129,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageButton
-                android:id="@+id/pauseButton"
+                <ImageButton
+                android:id="@+id/pauseButtonDomanda"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@android:color/transparent"
@@ -134,100 +142,110 @@
                 android:layout_gravity="center"
                 android:visibility="gone"
                 />
-        </FrameLayout>
+            </FrameLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutButtonsRegistrazione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="30dp"
+                >
+                <View
+                android:id="@+id/viewAnimationMic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:background="@drawable/red_animation_backgraund"
+                app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
+                app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
+                app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
+                android:elevation="1dp"
+                />
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/confermaRegistrazioneImageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:contentDescription="@string/CheckAnswer"
+                    android:src="@drawable/ic_check"
+                    android:tooltipText="@string/CheckAnswer"
+                    android:layout_weight="1"
+                    android:layout_gravity="bottom"
+                    app:layout_constraintBottom_toTopOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
+                    android:layout_marginEnd="-0dp"
+                    android:layout_marginBottom="-30dp"
+                    android:background="@null"
+                    android:elevation="2dp"
+                    android:visibility="invisible"
+                    />
+                <ImageButton
+                    android:id="@+id/buttonAvviaRegistrazione"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_button_mic_background"
+                    android:padding="20dp"
+                    android:src="@drawable/ic_mic"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="70dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.243"
+                    android:elevation="1dp"
+                    android:tooltipText="@string/micDenominazioneImmagine"
+                />
+                <View
+                    android:id="@+id/viewConfirmMic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@null"
+                    app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
+                    android:elevation="11dp"
+                    android:visibility="gone"
+                    />
+                <View
+                    android:id="@+id/viewStopRegMic"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@null"
+                    app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
+                    android:elevation="11dp"
+                    android:visibility="gone"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/viewAnimationMic"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@drawable/red_animation_backgraund"
-            app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
-            android:elevation="1dp"
+            <ImageButton
+                android:scaleType="centerInside"
+                android:id="@+id/buttonCompletaEsercizio"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_check"
+                android:tooltipText="@string/CheckAnswer"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@null"
+                android:elevation="1dp"
+                />
+        </LinearLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerViewRisultatiEsercizioSequenceParole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             />
 
-        <ImageButton
-            android:id="@+id/buttonAvviaRegistrazione"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:background="@drawable/circle_button_mic_background"
-            android:padding="20dp"
-            android:src="@drawable/ic_mic"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="40dp"
-            app:layout_constraintEnd_toStartOf="@+id/buttonCompletaEsercizio"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toEndOf="@+id/frameLayoutPlayPauseEsercizioSequenzaParole"
-            app:layout_constraintVertical_bias="0.243"
-            android:elevation="1dp"
-            android:tooltipText="@string/micDenominazioneImmagine"
-            />
-
-
-        <ImageView
-            android:scaleType="centerCrop"
-            android:id="@+id/confermaRegistrazioneImageView"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:contentDescription="@string/CheckAnswer"
-            android:src="@drawable/ic_check"
-            android:tooltipText="@string/CheckAnswer"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            app:layout_constraintBottom_toTopOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
-            android:layout_marginEnd="-0dp"
-            android:layout_marginBottom="-30dp"
-            android:background="@null"
-            android:elevation="2dp"
-            android:visibility="invisible"
-            />
-
-        <View
-            android:id="@+id/viewConfirmMic"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@null"
-            app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
-            android:elevation="11dp"
-            android:visibility="gone"
-            />
-        <View
-            android:id="@+id/viewStopRegMic"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="@null"
-            app:layout_constraintStart_toStartOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintEnd_toEndOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintTop_toTopOf="@id/buttonAvviaRegistrazione"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonAvviaRegistrazione"
-            android:elevation="11dp"
-            android:visibility="gone"
-            />
-
-        <ImageButton
-            android:scaleType="centerCrop"
-            android:id="@+id/buttonCompletaEsercizio"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_check"
-            android:tooltipText="@string/CheckAnswer"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            android:background="@null"
-            android:elevation="1dp"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

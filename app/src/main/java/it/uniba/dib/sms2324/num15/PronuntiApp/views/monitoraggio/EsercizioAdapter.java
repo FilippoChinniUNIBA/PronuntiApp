@@ -19,9 +19,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioC
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioCoppiaImmaginiFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioDenominazioneImmagineFragment;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.EsercizioSequenzaParoleFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment;
 
 public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.EsercizioViewHolder> {
 
@@ -48,7 +52,6 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         if(esercizio instanceof EsercizioDenominazioneImmagine) {
             holder.textViewTipoEsercizio.setText("Denominazione immagine");
-            //action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2
         }
         else if(esercizio instanceof EsercizioCoppiaImmagini) {
             holder.textViewTipoEsercizio.setText("Coppia immagini");
@@ -74,12 +77,15 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
 
         holder.itemView.setOnClickListener(v->{
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
+                ((EsercizioDenominazioneImmagine) esercizio).setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(true, "risposta data", 1));
                 navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioDenominazioneImmagineFragment2,"esercizioDenominazioneImmagine", esercizio);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
+                ((EsercizioCoppiaImmagini) esercizio).setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(true));
                 navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioCoppiaImmaginiFragment,"esercizioCoppiaImmagini", esercizio);
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
+                ((EsercizioSequenzaParole) esercizio).setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(true, "risposta data"));
                 navigateToEsercizio(R.id.action_monitoraggioFragment2_to_esercizioSequenzaParoleFragment,"esercizioSequenzaParole", esercizio);
             }
         });

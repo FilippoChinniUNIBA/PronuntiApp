@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +28,10 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.google_cloud_speech_to_text_api.SpeechToTextAPI;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -43,10 +40,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment;
 
 public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
     private FineEsercizioView fineEsercizioView;
-    private ConstraintLayout constraintLayoutEsercizioSequenzaParole;
+    private LinearLayout linearLayoutEsercizioSequenzaParole;
     private SeekBar seekBarEsercizioSequenzaParole;
     private ImageButton imageButtonPlay, imageButtonPause;
     private View viewAnimazioneMic, viewConfirmMic, viewStopMic;
@@ -55,6 +54,8 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     private ScaleAnimation animazioneButtonMic;
     private TextView textViewEsercizioMicSuggestion;
     private View viewClickForSuggestion;
+    private ConstraintLayout constraintLayoutButtonsRegistrazione;
+    private LinearLayout linearLayoutButtonsEsercizioSequenzaParole;
 
     private boolean firstClickReproduced = false;
 
@@ -78,10 +79,12 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
         textViewEsercizioMicSuggestion = view.findViewById(R.id.textViewEsercizioMicSuggestion);
         viewClickForSuggestion = view.findViewById(R.id.viewClickForSuggestion);
-        constraintLayoutEsercizioSequenzaParole = view.findViewById(R.id.constraintLayoutEsercizioSequenzaParole);
+        linearLayoutButtonsEsercizioSequenzaParole = view.findViewById(R.id.linearLayoutButtonsEsercizioSequenzaParole);
+        linearLayoutEsercizioSequenzaParole = view.findViewById(R.id.linearLayoutEsercizioSequenzaParole);
+        constraintLayoutButtonsRegistrazione = view.findViewById(R.id.constraintLayoutButtonsRegistrazione);
         seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
-        imageButtonPlay = view.findViewById(R.id.playButton);
-        imageButtonPause = view.findViewById(R.id.pauseButton);
+        imageButtonPlay = view.findViewById(R.id.playButtonDomanda);
+        imageButtonPause = view.findViewById(R.id.pauseButtonDomanda);
         viewAnimazioneMic = view.findViewById(R.id.viewAnimationMic);
         viewConfirmMic = view.findViewById(R.id.viewConfirmMic);
         viewStopMic = view.findViewById(R.id.viewStopRegMic);
@@ -98,12 +101,20 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        savedInstanceState = getArguments();
-        Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);
-        this.mEsercizioSequenzaParole = (EsercizioSequenzaParole) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
-
+        //this.mEsercizioSequenzaParole = (EsercizioSequenzaParole) savedInstanceState.getSerializable("esercizioSequenzaParole");
+        //TODO l'esercizio deve essere preso dalla classe chiamante (passare indice dell'esercizio tramite Bundle)
+        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");;
         this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 
+
+        /*
+        if(mEsercizioSequenzaParole.getRisultatoEsercizio() != null){
+            viewClickForSuggestion.setVisibility(View.GONE);
+            constraintLayoutButtonsRegistrazione.setVisibility(View.GONE);
+            buttonCompletaEsercizio.setVisibility(View.GONE);
+            linearLayoutButtonsEsercizioSequenzaParole.setMargins(0, 0, 0, 0);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewRisultatiEsercizioSequenceParole, new RisultatoEsercizioSequenzaParoleFragment()).commit();
+        }*/
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
@@ -200,7 +211,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
             fineEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this);
         }
 
-        constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
+        linearLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
 
         File temp = mController.convertiAudio(audioRecorder.getAudioFile(), new File(getContext().getFilesDir(), "tempAudioConvertito.mp3"));
         //TODO salvare il file temp su Storage e ottenere link

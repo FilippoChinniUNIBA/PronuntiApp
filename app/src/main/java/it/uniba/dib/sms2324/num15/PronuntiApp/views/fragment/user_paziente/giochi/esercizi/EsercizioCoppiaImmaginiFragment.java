@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import java.util.Random;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -70,8 +70,8 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
         textViewEsercizioCoppiaImmagini = view.findViewById(R.id.textViewEsercizioCoppiaImmagini);
         textViewEsercizioPlaySuggestion = view.findViewById(R.id.textViewEsercizioPlaySuggestion);
         seekBarScorrimentoAudioEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
-        playButton = view.findViewById(R.id.playButton);
-        pauseButton = view.findViewById(R.id.pauseButton);
+        playButton = view.findViewById(R.id.playButtonDomanda);
+        pauseButton = view.findViewById(R.id.pauseButtonDomanda);
         imageButtonImmagine1=view.findViewById(R.id.imageView1ImmagineEsercizioCoppiaImmagini);
         imageButtonImmagine2=view.findViewById(R.id.imageView2ImmagineEsercizioCoppiaImmagini);
 
@@ -85,9 +85,13 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //TODO l'esercizio deve essere preso dalla classe chiamante (passare indice dell'esercizio tramite Bundle)
+        this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+
+        /*
         savedInstanceState = getArguments();
         Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);
-        this.mEsercizioCoppiaImmagini = (EsercizioCoppiaImmagini) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
+        this.mEsercizioCoppiaImmagini = (EsercizioCoppiaImmagini) savedInstanceState.getSerializable("esercizioCoppiaImmagini");*/
 
         this.mController.setEsercizioCoppiaImmagini(mEsercizioCoppiaImmagini);
 
@@ -123,7 +127,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
     public void stoppaRiproduzioneAudio() {
         playButton.setVisibility(View.VISIBLE);
         pauseButton.setVisibility(View.GONE);
-        audioPlayerLink.playAudio();
+        audioPlayerLink.stopAudio();
     }
 
     @SuppressLint("ClickableViewAccessibility")

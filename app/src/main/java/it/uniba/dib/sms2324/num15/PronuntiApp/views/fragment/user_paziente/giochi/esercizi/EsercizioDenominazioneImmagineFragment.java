@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -29,6 +30,7 @@ import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
@@ -38,6 +40,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment;
 
 public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWithNavigation {
     private ImageButton buttonAiutiImageView;
@@ -49,7 +52,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private ScaleAnimation animazioneButtonMic;
     private View viewAnimationMic, viewConfirmMic, viewStopMic;
     private ImageView imageViewConfermaRegistrazione;
-    private ConstraintLayout constraintLayoutEsercizioDenominazione;
+    private LinearLayout linearLayoutEsercizioDenominazioneImmagine;
+    private ConstraintLayout constraintLayoutEsercizioImmagineButtons;
     private FineEsercizioView fineEsercizioView;
 
 
@@ -67,8 +71,10 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         this.mController = mPazienteViewModel.getEsercizioDenominazioneImmagineController();
 
-        constraintLayoutEsercizioDenominazione = view.findViewById(R.id.constraintLayoutEsercizioDenominazioneImmagine);
-        constraintLayoutEsercizioDenominazione.setVisibility(View.VISIBLE);
+        constraintLayoutEsercizioImmagineButtons = view.findViewById(R.id.constraintLayoutEsercizioImmagineButtons);
+
+        linearLayoutEsercizioDenominazioneImmagine = view.findViewById(R.id.linearLayoutEsercizioDenominazioneImmagine);
+        linearLayoutEsercizioDenominazioneImmagine.setVisibility(View.VISIBLE);
 
         fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
 
@@ -93,9 +99,24 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        savedInstanceState = getArguments();
-        Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);
-        this.mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
+        /*savedInstanceState = getArguments();
+        Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "Esercizio: " + savedInstanceState);*/
+        //TODO l'esercizio deve essere preso dalla classe chiamante (passare indice dell'esercizio tramite Bundle)
+        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(
+                2500,
+                200,
+                "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be",
+                "pinguino",
+                "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
+
+        //this.mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) savedInstanceState.getSerializable("esercizioDenominazioneImmagine");
+
+        /*
+        if(mEsercizioDenominazioneImmagine.getRisultatoEsercizio() != null) {
+            Log.d("EsercizioDenominazioneImmagineFragment.onViewCreated()", "risultato denominazione esercizio null");
+            constraintLayoutEsercizioImmagineButtons.setVisibility(View.INVISIBLE);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewRisultatiEsercizioDenominaizoneImmagine, new RisultatoEsercizioDenominazioneImmagineFragment()).commit();
+        }*/
 
         this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
 
@@ -193,7 +214,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
             fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
         }
 
-        constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
+        linearLayoutEsercizioDenominazioneImmagine.setVisibility(View.GONE);
 
         File temp = mController.convertiAudio(audioRecorder.getAudioFile(), new File(getContext().getFilesDir(), "tempAudioConvertito.mp3"));
         //TODO salvare il file temp su Storage e ottenere link
