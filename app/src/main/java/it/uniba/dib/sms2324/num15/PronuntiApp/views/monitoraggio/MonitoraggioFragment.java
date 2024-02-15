@@ -55,10 +55,10 @@ public class MonitoraggioFragment extends AbstractFragmentWithNavigation impleme
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        monitoraggioTerapie();
+        //TODO predere idTerapia tramite bundle;
+        //monitoraggioTerapie();
         listaScenari = new ArrayList<>();
-        listaScenari.addAll(terapiaScelta.getScenariGioco());
+        //listaScenari.addAll(terapiaScelta.getScenariGioco());
 
         //TODO prendere scenari da viewModel
         for(int i=0; i<100; i++) {
