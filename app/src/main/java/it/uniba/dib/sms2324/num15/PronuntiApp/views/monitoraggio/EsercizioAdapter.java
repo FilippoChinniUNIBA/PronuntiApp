@@ -57,6 +57,9 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             holder.imageViewCheckEsercizio.setVisibility(View.GONE);
             holder.imageViewWrongEsercizio.setVisibility(View.GONE);
             holder.imageViewNonEseguito.setVisibility(View.VISIBLE);
+            holder.imageViewSeeMoreEsercizio.setVisibility(View.GONE);
+            holder.imageViewSeeMoreEsercizio.setVisibility(View.INVISIBLE);
+            holder.itemView.setOnClickListener(null);
         } else if (esercizio.getRisultatoEsercizio().isEsitoCorretto()) {
             holder.imageViewCheckEsercizio.setVisibility(View.VISIBLE);
             holder.imageViewWrongEsercizio.setVisibility(View.GONE);
@@ -102,6 +105,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
         private ImageView imageViewCheckEsercizio;
         private ImageView imageViewWrongEsercizio;
         private ImageView imageViewNonEseguito;
+        private ImageView imageViewSeeMoreEsercizio;
 
         public EsercizioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -110,6 +114,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             imageViewCheckEsercizio = itemView.findViewById(R.id.imageViewCheckEsercizio);
             imageViewWrongEsercizio = itemView.findViewById(R.id.imageViewWrongEsercizio);
             imageViewNonEseguito = itemView.findViewById(R.id.imageViewNonEseguito);
+            imageViewSeeMoreEsercizio = itemView.findViewById(R.id.imageViewSeeMoreEsercizio);
         }
     }
 
