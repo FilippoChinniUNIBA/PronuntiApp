@@ -22,9 +22,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
     private List<Paziente> pazientiCopia;
     private List<Paziente> pazientiFull;
     private CardView lastClickedCardView = null;
-    private PazienteViewModel mPazienteViewModel;
-
-    public PazienteAdapter(List<Paziente> pazienti, PazienteViewModel pazienteViewModel) {
+    public PazienteAdapter(List<Paziente> pazienti) {
         if (pazienti == null) {
             this.pazientiCopia = new ArrayList<>();
             this.pazientiFull = new ArrayList<>();
@@ -41,7 +39,6 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
             this.pazientiFull = new ArrayList<>(pazientiCopia);
         }
-        this.mPazienteViewModel = pazienteViewModel;
     }
 
     @NonNull
@@ -59,21 +56,21 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
 
-        holder.textViewNomePaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
-        holder.textViewCognomePaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
-        holder.textViewDataNascitaPaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
-        holder.textViewSessoPaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
-        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v -> selezionePaziente(holder,paziente));
+        holder.textViewNomePaziente.setOnClickListener(v -> selezionePaziente(holder));
+        holder.textViewCognomePaziente.setOnClickListener(v -> selezionePaziente(holder));
+        holder.textViewDataNascitaPaziente.setOnClickListener(v -> selezionePaziente(holder));
+        holder.textViewSessoPaziente.setOnClickListener(v -> selezionePaziente(holder));
+        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v -> selezionePaziente(holder));
     }
 
-    private void selezionePaziente(PazienteViewHolder holder,Paziente paziente) {
+    private void selezionePaziente(PazienteViewHolder holder) {
         holder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.primaryColorSoft));
         if(lastClickedCardView != null && lastClickedCardView != holder.cardViewPazienteInListaLogopedista){
             lastClickedCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
         }
         lastClickedCardView = holder.cardViewPazienteInListaLogopedista;
 
-        mPazienteViewModel.setPaziente(paziente);
+        //TODO passare tramite bundle l'id del paziente al prossimo fragment
 
         //TODO per Nicola: questo è il metodo che ho aggiunto per gestire il click su un paziente
     }

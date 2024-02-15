@@ -225,7 +225,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			}
 		}
 
-		adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(listaPazienti,mPazienteViewModel);
+		adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(listaPazienti);
 		recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
 
 		adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiVisualizzazione, mLogopedistaViewModel);

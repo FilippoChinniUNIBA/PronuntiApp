@@ -32,7 +32,7 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
     private Button buttonFilePickerTerapia;
     private Button buttonVaiCreaScenario;
     private LogopedistaViewModel mLogopedistaViewModel;
-    private PazienteViewModel mPazienteViewModel;
+    private String idPaziente;
     private TerapieController mController;
 
     @Override
@@ -48,7 +48,6 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
 
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         mController = mLogopedistaViewModel.getTerapieController();
-        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
         return view;
     }
@@ -56,14 +55,13 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        //TODO ricevere da bundle idPaziente in modo tale da effettuare aggiunta terapia
         editTextDataInizioTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataInizioTerapia));
         editTextDataFineTerapia.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), editTextDataFineTerapia));
-        //buttonFilePickerTerapia.setOnClickListener(v-> startFilePicker);
 
+        //TODO implementare la navigazione;
         buttonVaiCreaScenario.setOnClickListener(v-> {
             Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
-
             eseguiAggiuntaTerapia();
 
             /*for(Paziente paziente : logopedista.getPazienti()){
@@ -71,6 +69,7 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
                     paziente.getTerapie().add(terapiaAggiunta);
                 }
             }*/
+
             mLogopedistaViewModel.aggiornaLogopedistaRemoto();
         });
 
@@ -86,7 +85,6 @@ public class CreazioneTerapiaFragment extends AbstractFragmentWithNavigation {
         }else{
             LocalDate dataInizioTerapia = LocalDate.parse(editTextDataInizioTerapia.getText().toString());
             LocalDate dataFineTerapia = LocalDate.parse(editTextDataFineTerapia.getText().toString());
-            String idPaziente = mPazienteViewModel.getPazienteLiveData().getValue().getIdProfilo();
             //mController.aggiungiTerapia(idPaziente,idTerapia,dataInizioTerapia,dataFineTerapia);
         }
 
