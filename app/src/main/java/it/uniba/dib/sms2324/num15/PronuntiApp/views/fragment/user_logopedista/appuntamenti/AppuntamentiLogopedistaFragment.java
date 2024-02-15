@@ -37,6 +37,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.ModificaAppuntamentiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.PazienteAdapter;
@@ -67,7 +68,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 	private LogopedistaViewModel mLogopedistaViewModel;
 	private ModificaAppuntamentiController mController;
-
+	private PazienteViewModel mPazienteViewModel;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 
 		this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 		this.mController = mLogopedistaViewModel.getModificaAppuntamentiController();
+		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
 
 		closeCardUpButton = view.findViewById(R.id.imageButtonArrowUpAppuntamentoLogopedista);
 		nestedScrollView = view.findViewById(R.id.nestedScrollViewAppuntamentiLogopedista);
@@ -223,7 +225,7 @@ public class AppuntamentiLogopedistaFragment extends AbstractFragmentWithNavigat
 			}
 		}
 
-		adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(listaPazienti);
+		adapterPazientiAppuntamentoLogopedista = new PazienteAdapter(listaPazienti,mPazienteViewModel);
 		recyclerViewPazienteAppuntamentoLogopedista.setAdapter(adapterPazientiAppuntamentoLogopedista);
 
 		adapterAppuntamenti = new AppuntamentiLogopedistaAdapter(appuntamentiVisualizzazione, mLogopedistaViewModel);

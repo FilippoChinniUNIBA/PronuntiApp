@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,16 @@ import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 
 
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazientiCopia;
     private List<Paziente> pazientiFull;
     private CardView lastClickedCardView = null;
+    private PazienteViewModel mPazienteViewModel;
 
-    public PazienteAdapter(List<Paziente> pazienti) {
+    public PazienteAdapter(List<Paziente> pazienti, PazienteViewModel pazienteViewModel) {
         if (pazienti == null) {
             this.pazientiCopia = new ArrayList<>();
             this.pazientiFull = new ArrayList<>();
@@ -40,6 +41,7 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
 
             this.pazientiFull = new ArrayList<>(pazientiCopia);
         }
+        this.mPazienteViewModel = pazienteViewModel;
     }
 
     @NonNull
@@ -57,19 +59,22 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         holder.textViewDataNascitaPaziente.setText(paziente.getDataNascita().toString());
         holder.textViewSessoPaziente.setText(Character.toString(paziente.getSesso()));
 
-        holder.textViewNomePaziente.setOnClickListener(v ->setCardViewColor(holder));
-        holder.textViewCognomePaziente.setOnClickListener(v ->setCardViewColor(holder));
-        holder.textViewDataNascitaPaziente.setOnClickListener(v ->setCardViewColor(holder));
-        holder.textViewSessoPaziente.setOnClickListener(v ->setCardViewColor(holder));
-        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v ->setCardViewColor(holder));
+        holder.textViewNomePaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
+        holder.textViewCognomePaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
+        holder.textViewDataNascitaPaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
+        holder.textViewSessoPaziente.setOnClickListener(v -> selezionePaziente(holder,paziente));
+        holder.cardViewPazienteInListaLogopedista.setOnClickListener(v -> selezionePaziente(holder,paziente));
     }
 
-    private void setCardViewColor(PazienteViewHolder holder) {
+    private void selezionePaziente(PazienteViewHolder holder,Paziente paziente) {
         holder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.primaryColorSoft));
         if(lastClickedCardView != null && lastClickedCardView != holder.cardViewPazienteInListaLogopedista){
             lastClickedCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
         }
         lastClickedCardView = holder.cardViewPazienteInListaLogopedista;
+
+        mPazienteViewModel.setPaziente(paziente);
+
         //TODO per Nicola: questo è il metodo che ho aggiunto per gestire il click su un paziente
     }
 
