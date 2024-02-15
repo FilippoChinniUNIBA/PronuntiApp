@@ -178,5 +178,6 @@
     <string name="acquistoPersonaggioTitle">Character Purchase</string>
     <string name="acquistoPersonaggioDescription">Are you sure you want to buy and unlock this character?</string>
     <string name="risultatoEsercizio">Result excersize</string>
+    <string name="terapia">Therapy</string>
 
 </resources>
