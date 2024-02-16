@@ -2,13 +2,13 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.l
 
 import static it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.RegistrazioneViewModel.verificaRegistrazione;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -36,7 +36,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
     private TextInputEditText editTextConfermaPasswordPaziente;
     private TextInputEditText editTextEtaPaziente;
     private TextInputEditText editTextDataNascitaPaziente;
-    private TextInputEditText editTextSessoPaziente;
+    private Spinner spinnerSessoPaziente;
 
     private TextInputEditText editTextNomeGenitore;
     private TextInputEditText editTextCognomeGenitore;
@@ -69,7 +69,7 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
         this.editTextPasswordPaziente = view.findViewById(R.id.textInputEditTextPasswordPaziente);
         this.editTextConfermaPasswordPaziente = view.findViewById(R.id.textInputEditTextConfermaPasswordPaziente);
         this.editTextEtaPaziente = view.findViewById(R.id.textInputEditTextEtaPaziente);
-        this.editTextSessoPaziente = view.findViewById(R.id.textInputEditTextSessoPaziente);
+        this.spinnerSessoPaziente = view.findViewById(R.id.spinnerSessoPaziente);
         this.editTextDataNascitaPaziente = view.findViewById(R.id.textInputEditTextDataNascitaPaziente);
 
         this.editTextNomeGenitore = view.findViewById(R.id.textInputEditTextNomeGenitore);
@@ -119,12 +119,12 @@ public class RegistrazionePazienteGenitoreFragment extends AbstractFragmentWithN
 
         CompletableFuture<Paziente> futurePaziente = new CompletableFuture<>();
 
-        int statusCampiValidi = mController.verificaCorrettezzaCampiPaziente(nomePaziente, cognomePaziente, emailPaziente, usernamePaziente, passwordPaziente, confermaPasswordPaziente, editTextEtaPaziente.getText().toString(), editTextDataNascitaPaziente.getText().toString(), editTextSessoPaziente.getText().toString());
+        int statusCampiValidi = mController.verificaCorrettezzaCampiPaziente(nomePaziente, cognomePaziente, emailPaziente, usernamePaziente, passwordPaziente, confermaPasswordPaziente, editTextEtaPaziente.getText().toString(), editTextDataNascitaPaziente.getText().toString(), spinnerSessoPaziente.getSelectedItem().toString());
         if (statusCampiValidi != 0) {
             creaDialogErroreCampi(statusCampiValidi);
         }
         else {
-            char sessoPaziente = editTextSessoPaziente.getText().toString().charAt(0);
+            char sessoPaziente = spinnerSessoPaziente.getSelectedItem().toString().charAt(0);
             LocalDate dataNascitaPaziente = LocalDate.parse(editTextDataNascitaPaziente.getText().toString());
             int etaPaziente = Integer.parseInt(editTextEtaPaziente.getText().toString());
 

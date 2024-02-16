@@ -21,8 +21,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.NavigateTo;
 
-public class PazientiFragment extends AbstractFragmentWithNavigation {
+public class PazientiFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewListaPazienti;
     private PazienteAdapter adapterPazienti;
     private Button addPazientiButton;
@@ -64,7 +65,7 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
             List<Paziente> pazienti = logopedista.getPazienti();
             Log.d("PazientiFragment.loadData()", "pazienti: " + ((pazienti == null) ? "null" : pazienti.toString()));
 
-            adapterPazienti = new PazienteAdapter(pazienti);
+            adapterPazienti = new PazienteAdapter(pazienti, this);
             recyclerViewListaPazienti.setAdapter(adapterPazienti);
 
             //recyclerViewListaPazienti.addOnItemTouchListener(new PazienteTouchListener(requireContext(), recyclerViewListaPazienti));
@@ -102,5 +103,10 @@ public class PazientiFragment extends AbstractFragmentWithNavigation {
         if(searchViewListaPazienti.isIconified())
             addPazientiButton.setText("Paziente +");
         else addPazientiButton.setText("+");
+    }
+
+    @Override
+    public void navigateToId(int id, Bundle bundle) {
+        navigateTo(id, bundle);
     }
 }

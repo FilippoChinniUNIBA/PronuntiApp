@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +10,9 @@ import androidx.annotation.Nullable;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.MonitoraggioLogopedistaFragment;
 
-public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
+public class TerapieLogopedistaFragment extends AbstractFragmentWithNavigation {
 
 
     @Nullable
@@ -20,11 +21,7 @@ public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
          super.onCreateView(inflater, container, savedInstanceState);
          View view = inflater.inflate(R.layout.fragment_terapie, container, false);
 
-         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
-         params.setMargins(0, 0, 0, getContext().getResources().getDimensionPixelSize(R.dimen.nav_bar_height));
-         view.findViewById(R.id.fragmentContainerViewMonitoraggio).setLayoutParams(params);
-
-         getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioGenitoreFragment()).commit();
+         getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioLogopedistaFragment()).commit();
 
          return view;
 

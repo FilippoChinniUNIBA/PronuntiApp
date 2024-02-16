@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.terapie;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

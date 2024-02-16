@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +27,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.Naviga
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.ScenarioAdapter;
 
 
-public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation implements NavigateTo {
+public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
     private String idTerapiaScelta;

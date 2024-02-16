@@ -121,6 +121,7 @@
     <string name="subTitleLogin">Bentornato!\nEffettua il login per continuare</string>
     <string name="subtitle_registration_patient_parent">Ciao Dottore.\nInserisci qui i dati del nuovo Paziente</string>
     <string name="addPatient">Paziente +</string>
+    <string name="addTerapia">Terapia +</string>
     <string name="sex">Sesso</string>
     <string name="surname">Cognome</string>
     <string name="name">Nome</string>

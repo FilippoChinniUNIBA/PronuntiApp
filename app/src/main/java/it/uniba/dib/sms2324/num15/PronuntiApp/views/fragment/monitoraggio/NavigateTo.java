@@ -4,6 +4,6 @@ import android.os.Bundle;
 
 public interface NavigateTo {
 
-    void navigateToEsercizio(int id, Bundle bundle);
+    void navigateToId(int id, Bundle bundle);
 
 }

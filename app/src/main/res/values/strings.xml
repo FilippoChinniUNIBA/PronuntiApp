@@ -144,6 +144,7 @@
     <string name="erroreCreazioneTerapiaDataNonValida">Invalid Date</string>
     <string name="erroreCreazioneTerapiaOrdineDateNonValido">Invalid Date Order</string>
     <string name="addPatient">Patient +</string>
+    <string name="addTerapia">Therapy +</string>
     <string name="sex">Sex</string>
     <string name="surname">Surname</string>
     <string name="name">Name</string>

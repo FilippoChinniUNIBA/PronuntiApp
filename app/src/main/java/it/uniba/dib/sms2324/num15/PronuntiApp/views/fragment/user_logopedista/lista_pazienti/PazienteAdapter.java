@@ -15,14 +15,16 @@ import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.NavigateTo;
 
 
 public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.PazienteViewHolder> {
     private List<Paziente> pazientiCopia;
     private List<Paziente> pazientiFull;
     private CardView lastClickedCardView = null;
-    public PazienteAdapter(List<Paziente> pazienti) {
+    private NavigateTo navigateTo;
+    public PazienteAdapter(List<Paziente> pazienti, NavigateTo navigateTo) {
+        this.navigateTo = navigateTo;
         if (pazienti == null) {
             this.pazientiCopia = new ArrayList<>();
             this.pazientiFull = new ArrayList<>();
@@ -64,15 +66,17 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
     }
 
     private void selezionePaziente(PazienteViewHolder holder) {
+        //metodo di onclick sul paziente nella lista dei pazienti
         holder.cardViewPazienteInListaLogopedista.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.primaryColorSoft));
         if(lastClickedCardView != null && lastClickedCardView != holder.cardViewPazienteInListaLogopedista){
             lastClickedCardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.colorPrimary));
         }
         lastClickedCardView = holder.cardViewPazienteInListaLogopedista;
 
-        //TODO passare tramite bundle l'id del paziente al prossimo fragment
+        //TODO passare tramite bundle l'id del paziente al prossimo fragment (ora sta passando null)
+        //che sarebbe pazientiCopia.get(holder.getAdapterPosition()).getIdProfilo();
+        navigateTo.navigateToId(R.id.action_pazientiFragment_to_schedaPazienteFragment, null);
 
-        //TODO per Nicola: questo è il metodo che ho aggiunto per gestire il click su un paziente
     }
 
     @Override

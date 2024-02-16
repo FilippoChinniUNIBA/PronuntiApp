@@ -103,7 +103,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
         Bundle bundle = new Bundle();
         bundle.putSerializable(stringSerializable, posizioneInLista);
         Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
-        navigateTo.navigateToEsercizio(id, bundle);
+        navigateTo.navigateToId(id, bundle);
     }
 
     @Override

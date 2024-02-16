@@ -42,7 +42,7 @@
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:text="@string/subtitle_registration_patient_parent"
-            android:textColor="@color/black"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/subHeaderTextSize"
             app:layout_constraintBottom_toTopOf="@id/textViewSubInformazioniPaziente"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,40 +147,66 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/username_hint"
-                        android:inputType="textPersonName" />
+                        android:inputType="textPersonName"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- TextInputLayout e TextInputEditText per Eta -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutStyle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextEtaPaziente"
-                        style="@style/TextInputEditTextStyle"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    >
+                    <!-- TextInputLayout e TextInputEditText per Eta -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/TextInputLayoutStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/age"
-                        android:inputType="number" />
+                        android:layout_weight="1"
+                        >
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEditTextEtaPaziente"
+                            style="@style/TextInputEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/age"
+                            android:inputType="number" />
 
-                <!-- TextInputLayout e TextInputEditText per sesso -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/TextInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditTextSessoPaziente"
-                        style="@style/TextInputEditTextStyle"
+                    <!-- TextInputLayout e Spinner per Sesso -->
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/gender_hint"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="-21dp"
+                        android:layout_weight="1"
+                        >
+                        <Spinner
+                            android:id="@+id/spinnerSessoPaziente"
+                            style="@style/SpinnerStyle"
+                            android:entries="@array/sesso_array"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/hintTextColorDisabled"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            />
+                        <EditText
+                            android:id="@+id/editTextSessoProfiloPaziente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_hint"
+                            android:layout_marginStart="17dp"
+                            android:paddingHorizontal="2dp"
+                            android:textColor="@color/hintTextColor"
+                            android:background="@color/white"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
                 <!-- TextInputLayout e TextInputEditText per Data di Nascita -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -283,7 +309,8 @@
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore">
+            app:layout_constraintTop_toBottomOf="@id/textViewSubTitoloGenitore"
+            >
 
 
             <LinearLayout
@@ -292,7 +319,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="16dp"
+                >
 
                 <!-- TextInputLayout e TextInputEditText per Nome -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -408,6 +436,7 @@
             android:id="@+id/buttonRegistraPazienteEGenitore"
             android:layout_width="296dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="70dp"
             android:text="@string/registraPaziente"
             app:layout_constraintBottom_toBottomOf="parent"

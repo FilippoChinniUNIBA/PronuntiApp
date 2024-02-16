@@ -14,6 +14,10 @@
             android:id="@+id/action_pazientiFragment_to_registrazionePazienteGenitoreFragment"
             app:destination="@id/registrazionePazienteGenitoreFragment"
             app:popUpTo="@id/pazientiFragment" />
+        <action
+            android:id="@+id/action_pazientiFragment_to_schedaPazienteFragment"
+            app:destination="@id/schedaPazienteFragment"
+            app:popUpTo="@id/pazientiFragment" />
     </fragment>
     <fragment
         android:id="@+id/appuntamentiLogopedistaFragment2"
@@ -34,4 +38,8 @@
             android:id="@+id/action_registrazionePazienteGenitoreFragment_to_pazientiFragment"
             app:destination="@id/pazientiFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/schedaPazienteFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.SchedaPazienteFragment"
+        android:label="schedaPazienteFragment" />
 </navigation>
