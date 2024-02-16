@@ -23,6 +23,7 @@ import java.util.List;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenari;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenariController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
@@ -32,8 +33,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     private int idNavToEsercizioDenominazioneImmagine;
     private int idNavToEsercizioCoppiaImmagini;
     private int idNavToEsercizioSequenzaParole;
-    private GenitoreViewModel mGenitoreViewModel;
-    private ModificaDataScenariController mController;
+    private ModificaDataScenari mController;
     private int indiceTerapia;
 
      
@@ -67,6 +67,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         if(scenario.getDataInizio().isBefore(LocalDate.now())) {
             holder.cardView.setCardBackgroundColor(holder.itemView.getContext().getColor(R.color.hintTextColorDisabled));
             holder.imageViewModificaDataScenario.setVisibility(View.INVISIBLE);
+            Log.d("ScenarioAdapter",""+scenario.getDataInizio().toString());
         }
 
         else {
@@ -76,7 +77,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
             holder.linearLayoutModificaDataScenario.setOnClickListener(v -> {
                 LocalDate now = LocalDate.now();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(holder.itemView.getContext(), (view, year, month, dayOfMonth) -> {
-                    LocalDate date = LocalDate.parse(LocalDate.of(year, month , dayOfMonth).toString());
+                    LocalDate date = LocalDate.parse(LocalDate.of(year, month+1, dayOfMonth).toString());
                     scenario.setDataInizio(date);
                     holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
                     holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
@@ -90,7 +91,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
                     //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);
                     notifyDataSetChanged();
-                }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
+                }, now.getYear(), now.getMonthValue()-1, now.getDayOfMonth());
                 datePickerDialog.show();
             });
         }

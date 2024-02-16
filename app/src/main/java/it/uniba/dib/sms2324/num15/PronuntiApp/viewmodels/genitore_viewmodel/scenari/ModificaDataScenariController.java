@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 
-public class ModificaDataScenariController {
+public class ModificaDataScenariController implements ModificaDataScenari{
     private GenitoreViewModel mGenitoreViewModel;
     public ModificaDataScenariController(GenitoreViewModel mGenitoreViewModel) {
         this.mGenitoreViewModel = mGenitoreViewModel;

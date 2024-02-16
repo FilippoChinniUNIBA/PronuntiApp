@@ -97,8 +97,12 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
 
         //TODO riga commentata perchè serve un controller nel adapter per modificare la data dello scenario;
         // Creazione e settaggio dell'adapter
-        //ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment, );
-        //recyclerViewScenari.setAdapter(adapter);
+        //al posto che passare null e 0 passare il controller (che bsigona creare in modo che estenda ModificaDataSCenari e l'indice della terapia
+        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment,
+                R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment,
+                R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment, null, 0);
+
+        recyclerViewScenari.setAdapter(adapter);
     }
 
     @Override
