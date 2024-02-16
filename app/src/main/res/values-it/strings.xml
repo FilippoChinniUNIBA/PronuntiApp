@@ -157,5 +157,36 @@
     <string name="risultatoEsercizio">Risultato esercizio</string>
     <string name="terapia">Terapia</string>
     <string name="scenarioDel">Scenario del:</string>
+    <string name="creaTerapia">Nuova terapia per </string>
+    <string name="immagine_da_indovinare">Immagine da indovinare:</string>
+    <string name="registra_audio_di_aiuto">Registra audio di aiuto</string>
+    <string name="risposta">Risposta</string>
+    <string name="ricompensa_corretto">Ricompensa corretto</string>
+    <string name="ricompensa_errato">Ricompensa errato</string>
+    <string name="denominazione_immagine">Denominazione immagine</string>
+    <string name="sequenza_parole">Sequenza parole</string>
+    <string name="registra_audio_da_ripetere">Registra audio da ripetere</string>
+    <string name="_1_parola_da_indovinare">1° parola da indovinare</string>
+    <string name="_2_parola_da_indovinare">2° parola da indovinare</string>
+    <string name="_3_parola_da_indovinare">3° parola da indovinare</string>
+    <string name="coppiaImmagini">Coppia immagini</string>
+    <string name="registra_audio_immagine">Registra l\'audio da associare all\'immagine</string>
+    <string name="immagine_corretta">Immagine corretta</string>
+    <string name="immagine_errata">Immagine errata</string>
+    <string name="esercizio">Esercizio</string>
+    <string name="usa_un_template">Usa un template</string>
+    <string name="crealo_dall_inizio">Crealo dall\'inizio</string>
+    <string name="quale_parole_il_paziente_dovr_indovinare">Quale parole il paziente dovrà indovinare?</string>
+    <string name="quali_sono_le_parole_che_il_paziente_dovr_ripetere">Quali sono le parole che il paziente dovrà ripetere?</string>
+    <string name="quale_immagine_il_paziente_dovr_associare_all_audio">Quale immagine il paziente dovrà associare all\'audio?</string>
+    <string name="scenario_di_gioco">Scenario di Gioco</string>
+    <string name="data_assegnazione">Data assegnazione</string>
+    <string name="ricompensa_finale">Ricompensa finale</string>
+    <string name="scegli_sfondo_scenario">Scegli sfondo scenario</string>
+    <string name="immagine_tappa_1">Immagine tappa 1</string>
+    <string name="immagine_tappa_2">Immagine tappa 2</string>
+    <string name="immagine_tappa_3">Immagine tappa 3</string>
+    <string name="add_scenario">Scenario +</string>
+    <string name="salva_scenario">Salva scenario</string>
 
 </resources>

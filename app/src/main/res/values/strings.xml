@@ -181,5 +181,36 @@
     <string name="risultatoEsercizio">Result excersize</string>
     <string name="terapia">Therapy</string>
     <string name="scenarioDel">Scenery of:</string>
+    <string name="creaTerapia">New therapy to </string>
+    <string name="immagine_da_indovinare">Pics to guess:</string>
+    <string name="registra_audio_di_aiuto">Record helping audio</string>
+    <string name="risposta">Answer</string>
+    <string name="ricompensa_corretto">Fair reward</string>
+    <string name="ricompensa_errato">Misreward</string>
+    <string name="denominazione_immagine">Pics denomination</string>
+    <string name="sequenza_parole">Words sequence</string>
+    <string name="registra_audio_da_ripetere">Record audio to repeat</string>
+    <string name="_1_parola_da_indovinare">1° word to guess</string>
+    <string name="_2_parola_da_indovinare">2° word to guess</string>
+    <string name="_3_parola_da_indovinare">3° word to guess</string>
+    <string name="coppiaImmagini">Couple pics</string>
+    <string name="registra_audio_immagine">Record audio to be associated with the pic </string>
+    <string name="immagine_corretta">Correct pic</string>
+    <string name="immagine_errata">Wrong pic</string>
+    <string name="esercizio">Exercize </string>
+    <string name="usa_un_template">Use a template</string>
+    <string name="crealo_dall_inizio">Create it from the beginning </string>
+    <string name="quale_parole_il_paziente_dovr_indovinare">What word the patient should guess?</string>
+    <string name="quali_sono_le_parole_che_il_paziente_dovr_ripetere">What words the patient should repeat?</string>
+    <string name="quale_immagine_il_paziente_dovr_associare_all_audio">What pic the patient should recognized from the audio?</string>
+    <string name="scenario_di_gioco">Game scenary</string>
+    <string name="data_assegnazione">Assignment date</string>
+    <string name="ricompensa_finale">Final reward</string>
+    <string name="scegli_sfondo_scenario">Choose background scenary</string>
+    <string name="immagine_tappa_1">Pics stage 1</string>
+    <string name="immagine_tappa_2">Pics stage 2</string>
+    <string name="immagine_tappa_3">Pics stage 3</string>
+    <string name="add_scenario">Scenary +</string>
+    <string name="salva_scenario">Save scenary</string>
 
 </resources>

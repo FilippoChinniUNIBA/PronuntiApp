@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@id/toolBar"
-        style="@style/styleToolBar"
-        android:layout_above="@+id/fragmentContainerViewTerapie"
-        tools:ignore="MissingConstraints"
-        />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerViewTerapie"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
+    android:layout_marginBottom="@dimen/nav_bar_height"
+    >
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewTerapieLogopedista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonAddTerapia"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
-        android:background="@color/red"
-        />
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@id/toolBar"
+                style="@style/styleToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backgroundWhite"
+                />
 
-    <Button
-        android:id="@+id/buttonAddTerapia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="20dp"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:text="@string/addTerapia"
-        android:layout_marginBottom="@dimen/nav_bar_height"
-        android:background="@color/colorPrimary"
-        />
-
-
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerViewTerapie"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+        <Button
+            android:id="@+id/buttonAddTerapia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:textAllCaps="true"
+            android:text="@string/addTerapia"
+            android:layout_alignParentBottom="true"
+            android:textSize="18sp"
+            />
 </RelativeLayout>

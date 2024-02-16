@@ -41,5 +41,19 @@
     <fragment
         android:id="@+id/schedaPazienteFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.SchedaPazienteFragment"
-        android:label="schedaPazienteFragment" />
+        android:label="schedaPazienteFragment" >
+        <action
+            android:id="@+id/action_schedaPazienteFragment_to_creazioneTerapiaFragment"
+            app:destination="@id/creazioneTerapieFragment"
+            app:popUpTo="@id/schedaPazienteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creazioneTerapieFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie.CreazioneTerapieFragment"
+        android:label="fragment_creazione_terapia"
+        tools:layout="@layout/fragment_creazione_terapia" >
+        <action
+            android:id="@+id/action_creazioneTerapiaFragment_to_schedaPazienteFragment"
+            app:destination="@id/schedaPazienteFragment" />
+    </fragment>
 </navigation>
