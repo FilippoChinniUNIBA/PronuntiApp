@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +23,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioE
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.NavigateTo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.ScenarioAdapter;
@@ -40,7 +42,6 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
 
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
         recyclerViewScenari.setLayoutManager(new LinearLayoutManager(getContext()));
-
 
 
         return view;
@@ -93,9 +94,11 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
 
         }
 
+
+        //TODO riga commentata perchè serve un controller nel adapter per modificare la data dello scenario;
         // Creazione e settaggio dell'adapter
-        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment);
-        recyclerViewScenari.setAdapter(adapter);
+        //ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment, );
+        //recyclerViewScenari.setAdapter(adapter);
     }
 
     @Override

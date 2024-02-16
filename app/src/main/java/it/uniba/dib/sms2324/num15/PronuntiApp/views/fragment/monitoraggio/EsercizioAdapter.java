@@ -27,13 +27,19 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
     private int idNavToEsercizioDenominazioneImmagine;
     private int idNavToEsercizioCoppiaImmagini;
     private int idNavToEsercizioSequenzaParole;
+    private int indiceTerapia;
+    private int indiceScenario;
 
-    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
+    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, int indiceTerapia, int indiceScenario) {
         this.listaEsercizi = listaEsercizi;
         this.navigateTo = navigateTo;
         this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
         this.idNavToEsercizioCoppiaImmagini = idNavToEsercizioCoppiaImmagini;
         this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
+        Log.d("EsercizioAdapterCostruttore","Ex"+idNavToEsercizioDenominazioneImmagine);
+
+        this.indiceScenario = indiceScenario;
+        this.indiceTerapia = indiceTerapia;
     }
 
     @NonNull
@@ -86,22 +92,26 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
         holder.itemView.setOnClickListener(v->{
             if(esercizio instanceof EsercizioDenominazioneImmagine) {
                 //((EsercizioDenominazioneImmagine) esercizio).setRisultatoEsercizio(new RisultatoEsercizioDenominazioneImmagine(true, "risposta data", 1));
-                navigateToEsercizio(idNavToEsercizioDenominazioneImmagine,"indiceEsercizioDenominazioneImmagine", position);
+                Log.d("EsercizioAdapter",""+idNavToEsercizioDenominazioneImmagine);
+                navigateToEsercizio(idNavToEsercizioDenominazioneImmagine,position);
             }
             else if(esercizio instanceof EsercizioCoppiaImmagini) {
                 //((EsercizioCoppiaImmagini) esercizio).setRisultatoEsercizio(new RisultatoEsercizioCoppiaImmagini(true));
-                navigateToEsercizio(idNavToEsercizioCoppiaImmagini,"indiceEsercizioCoppiaImmagini", position);
+                navigateToEsercizio(idNavToEsercizioCoppiaImmagini,position);
             }
             else if(esercizio instanceof EsercizioSequenzaParole) {
                 //((EsercizioSequenzaParole) esercizio).setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(true, "risposta data"));
-                navigateToEsercizio(idNavToEsercizioSequenzaParole,"indiceEsercizioSequenzaParole", position);
+                navigateToEsercizio(idNavToEsercizioSequenzaParole,position);
             }
         });
     }
 
-    private void navigateToEsercizio(int id,String stringSerializable, int posizioneInLista) {
+    private void navigateToEsercizio(int id, int posizioneInLista) {
+        //TODO passare indice terapia, indice dello scenario e indice esercizio
         Bundle bundle = new Bundle();
-        bundle.putSerializable(stringSerializable, posizioneInLista);
+        bundle.putInt("indiceEsercizio",posizioneInLista);
+        bundle.putInt("indiceTerapia",indiceTerapia);
+        bundle.putInt("indiceScenario",indiceScenario);
         Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
         navigateTo.navigateToId(id, bundle);
     }
