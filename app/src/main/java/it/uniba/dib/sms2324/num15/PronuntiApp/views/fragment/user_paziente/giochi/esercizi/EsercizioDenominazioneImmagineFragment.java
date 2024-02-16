@@ -26,10 +26,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -57,6 +61,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private int countAiuti = 3;
     private PazienteViewModel mPazienteViewModel;
     private EsercizioDenominazioneImmagineController mController;
+    private Bundle bundle;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;
 
     @Override
@@ -91,25 +96,29 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        bundle = getArguments();
+        mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
+            List<Terapia> terapie = paziente.getTerapie();
+            int sizeTerapie = terapie.size();
+            ScenarioGioco scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioDenominazioneImmagine = new EsercizioDenominazioneImmagine(2500, 200, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be", "pinguino", "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
-
-        this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
+            this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
 
 
-        this.audioRecorder = initAudioRecorder();
-        Picasso.get().load(mEsercizioDenominazioneImmagine.getImmagineEsercizio()).into(immagineEsercizioDenominazioneImageView);
+            this.audioRecorder = initAudioRecorder();
+            Picasso.get().load(mEsercizioDenominazioneImmagine.getImmagineEsercizio()).into(immagineEsercizioDenominazioneImageView);
 
 
-        buttonAvviaRegistrazione.setOnClickListener(v -> avviaPrimaRegistrazione());
-        viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
-        viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
+            buttonAvviaRegistrazione.setOnClickListener(v -> avviaPrimaRegistrazione());
+            viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
+            viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
 
-        buttonAiutiImageView.setOnClickListener(v -> riproduciAiuti(mEsercizioDenominazioneImmagine.getAudioAiuto()));
-        viewOverlayBackground.setOnClickListener(v -> mostraSuggerimento());
+            buttonAiutiImageView.setOnClickListener(v -> riproduciAiuti(mEsercizioDenominazioneImmagine.getAudioAiuto()));
+            viewOverlayBackground.setOnClickListener(v -> mostraSuggerimento());
 
-        buttonCompletaEsercizioImageView.setOnClickListener(v -> invalidConferma());
+            buttonCompletaEsercizioImageView.setOnClickListener(v -> invalidConferma());
+        });
     }
 
     private void avviaPrimaRegistrazione() {

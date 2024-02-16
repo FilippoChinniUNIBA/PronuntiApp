@@ -31,9 +31,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.google_cloud_speech_to_text_api.SpeechToTextAPI;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
@@ -66,6 +69,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     private PazienteViewModel mPazienteViewModel;
     private EsercizioSequenzaParoleController mController;
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
+    private Bundle bundle;
 
 
     @Override
@@ -98,26 +102,30 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
+        bundle = getArguments();
+        mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
+            List<Terapia> terapie = paziente.getTerapie();
+            int sizeTerapie = terapie.size();
+            ScenarioGioco scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            mEsercizioSequenzaParole = (EsercizioSequenzaParole) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
+            this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 
-        this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 
+            this.audioRecorder = initAudioRecorder();
+            this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
+            this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        this.audioRecorder = initAudioRecorder();
-        this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
-        this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
+            imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
+            imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
 
-        imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
-        imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
+            imageButtonAvviaRegistrazione.setOnClickListener(v -> invalidRegistrazione());
+            viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
+            viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
 
-        imageButtonAvviaRegistrazione.setOnClickListener(v -> invalidRegistrazione());
-        viewStopMic.setOnClickListener(v -> stoppaRegistrazione());
-        viewConfirmMic.setOnClickListener(v -> sovrascriviAudio());
+            viewClickForSuggestion.setOnClickListener(v -> mostraSuggerimento());
 
-        viewClickForSuggestion.setOnClickListener(v -> mostraSuggerimento());
-
-        buttonCompletaEsercizio.setOnClickListener(v -> invalidConferma());
+            buttonCompletaEsercizio.setOnClickListener(v -> invalidConferma());
+        });
     }
 
     private void avviaPrimaRegistrazione(){

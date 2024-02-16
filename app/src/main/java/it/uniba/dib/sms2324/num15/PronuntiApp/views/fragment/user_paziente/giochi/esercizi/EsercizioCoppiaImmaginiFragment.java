@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import java.util.List;
 import java.util.Random;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,10 +29,13 @@ import com.squareup.picasso.Picasso;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.ScenarioFragment;
 
 public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigation {
     private TextView textViewEsercizioCoppiaImmagini, textViewEsercizioPlaySuggestion;
@@ -53,6 +58,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
     private PazienteViewModel mPazienteViewModel;
     private EsercizioCoppiaImmaginiController mController;
     private EsercizioCoppiaImmagini mEsercizioCoppiaImmagini;
+    private Bundle bundle;
 
 
     @Override
@@ -83,29 +89,35 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigat
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        bundle = getArguments();
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+        mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
+            List<Terapia> terapie = paziente.getTerapie();
+            int sizeTerapie = terapie.size();
+            ScenarioGioco scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            mEsercizioCoppiaImmagini = (EsercizioCoppiaImmagini) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
-        this.mController.setEsercizioCoppiaImmagini(mEsercizioCoppiaImmagini);
+
+            this.mController.setEsercizioCoppiaImmagini(mEsercizioCoppiaImmagini);
 
 
-        this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
-        this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
+            this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
+            this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        if (correctImageView == 1) {
-            Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioCorretta()).into(imageButtonImmagine1);
-            Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioErrata()).into(imageButtonImmagine2);
-        } else {
-            Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioCorretta()).into(imageButtonImmagine2);
-            Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioErrata()).into(imageButtonImmagine1);
-        }
+            if (correctImageView == 1) {
+                Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioCorretta()).into(imageButtonImmagine1);
+                Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioErrata()).into(imageButtonImmagine2);
+            } else {
+                Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioCorretta()).into(imageButtonImmagine2);
+                Picasso.get().load(mEsercizioCoppiaImmagini.getImmagineEsercizioErrata()).into(imageButtonImmagine1);
+            }
 
-        playButton.setOnClickListener(v -> avviaRiproduzioneAudio());
-        pauseButton.setOnClickListener(v -> stoppaRiproduzioneAudio());
+            playButton.setOnClickListener(v -> avviaRiproduzioneAudio());
+            pauseButton.setOnClickListener(v -> stoppaRiproduzioneAudio());
 
-        imageButtonImmagine1.setOnClickListener(v -> mostraSuggerimento());
-        imageButtonImmagine2.setOnClickListener(v -> mostraSuggerimento());
+            imageButtonImmagine1.setOnClickListener(v -> mostraSuggerimento());
+            imageButtonImmagine2.setOnClickListener(v -> mostraSuggerimento());
+        });
     }
 
     private void avviaRiproduzioneAudio() {

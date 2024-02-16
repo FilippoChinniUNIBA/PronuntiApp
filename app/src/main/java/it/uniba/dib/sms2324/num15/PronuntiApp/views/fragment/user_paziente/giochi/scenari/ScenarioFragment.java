@@ -2,6 +2,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioc
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -19,9 +20,19 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
@@ -36,18 +47,16 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private ConstraintLayout constraintLayout;
 	private Vibrator vibrator;
 	private boolean isVibrating = false;
-
 	private PazienteViewModel mPazienteViewModel;
+	private Bundle bundle;
+	private ScenarioGioco scenarioGioco;
 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
-
+		bundle = getArguments();
 		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
-
-		//TODO con questo logo crasha
-		//Log.d("Scenario",mPazienteViewModel.getPazienteLiveData().getValue().toString());
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
@@ -57,10 +66,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		posizioneGioco2ImageView = view.findViewById(R.id.posizione_secondo_esercizio);
 		posizioneGioco3ImageView = view.findViewById(R.id.posizione_terzo_esercizio);
 
+		/*
 		constraintLayout.setBackground(getContext().getDrawable(R.drawable.background_space_scenario));
 		posizioneGioco1ImageView.setImageResource(R.drawable.uranio);
 		posizioneGioco2ImageView.setImageResource(R.drawable.giove);
-		posizioneGioco3ImageView.setImageResource(R.drawable.earth);
+		posizioneGioco3ImageView.setImageResource(R.drawable.earth);*/
 
 
 		curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
@@ -89,20 +99,55 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 			Picasso.get().load(texture).into(personaggioImageView);
 		});
 
-		vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-		personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
-				personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				int dp=125;
-				topHeight= TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
-				bottomHeight = getResources().getDimension(R.dimen.nav_bar_height);
-				bottomHeight += bottomHeight*0.2f;
-				// Abilita il drag dell'immagine del personaggio
-				enableImageDrag(personaggioImageView);
-			}
+		mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
+
+			List<Terapia> terapie = paziente.getTerapie();
+			int scenarioIndex = bundle.getInt("indiceScenarioCorrente");
+			scenarioGioco = terapie.get(terapie.size()-1).getScenariGioco().get(scenarioIndex);
+
+			String immagineSfondo = scenarioGioco.getImmagineSfondo();
+			String immagineTappa1 = scenarioGioco.getImmagineTappa1();
+			String immagineTappa2 = scenarioGioco.getImmagineTappa2();
+			String immagineTappa3 = scenarioGioco.getImmagineTappa3();
+			Glide.with(this).load(immagineSfondo).centerCrop().into(new CustomTarget<Drawable>() {
+				@Override
+				public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+					constraintLayout.setBackground(resource);
+				}
+				@Override
+				public void onLoadCleared(@Nullable Drawable placeholder) {}
+			});
+			Glide.with(this).load(immagineTappa1).centerCrop().into(posizioneGioco1ImageView);
+			Glide.with(this).load(immagineTappa2).centerCrop().into(posizioneGioco2ImageView);
+			Glide.with(this).load(immagineTappa3).centerCrop().into(posizioneGioco3ImageView);
+
+			mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
+				Picasso.get().load(texture).into(personaggioImageView);
+			});
+
+			vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+			personaggioImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					// Rimuovi il listener una volta che la vista è stata completamente inizializzata
+					personaggioImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					int dp=125;
+					topHeight= TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+					bottomHeight = getResources().getDimension(R.dimen.nav_bar_height);
+					bottomHeight += bottomHeight*0.2f;
+					// Abilita il drag dell'immagine del personaggio
+					enableImageDrag(personaggioImageView);
+				}
+			});
 		});
+	}
+
+	private boolean inCompletato(int index){
+		if(scenarioGioco.getEsercizi().get(index).getRisultatoEsercizio()==null){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	private void setPersonaggioPosition() {
@@ -232,19 +277,32 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 						break;
 
 					case MotionEvent.ACTION_UP:
-						//controlla dove sta il personaggio e naviga al gioco corrispondente
+						List<EsercizioEseguibile> esercizioEseguibileList = scenarioGioco.getEsercizi();
 						if (isPersonaggioInAreaPrimoEsercizio()) {
-							Log.d("Personaggio", "in area primo esercizio in esecuzione");
-							navigateTo(R.id.action_scenarioFragment_to_esercizioDenominazioneImmagineFragment2);
+							verificaEssercizio(esercizioEseguibileList.get(0),0 );
 						} else if (isPersonaggioInAreaSecondaEsercizio()) {
-							navigateTo(R.id.action_scenarioFragment_to_esercizioCoppiaImmagini2);
+							verificaEssercizio(esercizioEseguibileList.get(1),1 );
 						} else if (isPersonaggioInAreaTerzoEsercizio()) {
-							navigateTo(R.id.action_scenarioFragment_to_esercizioSequenzaParole);
+							verificaEssercizio(esercizioEseguibileList.get(2),2 );
 						}
+
 				}
 				return true;
 			}
 		});
+	}
+
+	private void verificaEssercizio(EsercizioEseguibile esercizioEseguibile,int index){
+		if(esercizioEseguibile instanceof EsercizioDenominazioneImmagine){
+			bundle.putInt("indiceEsercizio",index);
+			navigateTo(R.id.action_scenarioFragment_to_esercizioDenominazioneImmagineFragment2,bundle);
+		}else if(esercizioEseguibile instanceof EsercizioSequenzaParole){
+			bundle.putInt("indiceEsercizio",index);
+			navigateTo(R.id.action_scenarioFragment_to_esercizioSequenzaParole,bundle);
+		}else{
+			bundle.putInt("indiceEsercizio",index);
+			navigateTo(R.id.action_scenarioFragment_to_esercizioCoppiaImmagini2,bundle);
+		}
 	}
 
 	private void vibrate() {

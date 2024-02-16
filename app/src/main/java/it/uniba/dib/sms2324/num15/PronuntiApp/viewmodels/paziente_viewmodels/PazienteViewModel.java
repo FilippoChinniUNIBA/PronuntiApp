@@ -8,8 +8,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.LogopedistaDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
@@ -53,23 +59,42 @@ public class PazienteViewModel extends ViewModel {
 		this.mListaPersonaggi.setValue(listaPersonaggi);
 	}
 
-	public ScenarioGioco getScenarioPaziente(LocalDate dataCorrente){
+	public List<Integer> getScenariPaziente(){
+		LocalDate dataCorrente = LocalDate.now();
 		List<Terapia> terapie = mPaziente.getValue().getTerapie();
-		for(Terapia terapia:terapie){
-			LocalDate dataInizio = terapia.getDataInizio();
-			LocalDate dataFine = terapia.getDataFine();
-			if((dataCorrente.isEqual(dataInizio) || dataCorrente.isAfter(dataInizio)) && (dataCorrente.isEqual(dataFine) || dataCorrente.isBefore(dataFine))){
-				List<ScenarioGioco> scenariTerapia = terapia.getScenariGioco();
-				for (ScenarioGioco scenarioTerapia : scenariTerapia){
-					if(dataCorrente.isEqual(scenarioTerapia.getDataInizio())){
-						return scenarioTerapia;
-					}
-				}
-			}
-		}
-		return null;
+		int terapieSize = terapie.size();
+		Terapia terapia = terapie.get(terapieSize-1);
+		List<ScenarioGioco> scenariGiocoTerapia = terapia.getScenariGioco();
+		List<IndexDate> indexDateScenariGioco = filterScenariGioco(scenariGiocoTerapia,dataCorrente);
+		indexDateScenariGioco.sort(Comparator.comparing(IndexDate::getDate));
+		List<Integer> listaIndici = getIndexList(indexDateScenariGioco);
+		Collections.reverse(listaIndici);
+		return listaIndici;
 	}
 
+	private static List<Integer> getIndexList(List<IndexDate> indexDateScenariGioco){
+		List<Integer> indexList = new ArrayList<>();
+		for(IndexDate indexDateScenarioGioco : indexDateScenariGioco){
+			int index = indexDateScenarioGioco.getIndex();
+			indexList.add(index);
+		}
+		return indexList;
+	}
+
+
+	private List<IndexDate> filterScenariGioco(List<ScenarioGioco> scenariGioco,LocalDate dataCorrente){
+		List<IndexDate> IndiciScenariFiltrati = new ArrayList<>();
+		for (int index=0; index<scenariGioco.size(); index++){
+			ScenarioGioco scenarioGioco = scenariGioco.get(index);
+			LocalDate dataInizioScenario = scenarioGioco.getDataInizio();
+			if (!dataInizioScenario.isAfter(dataCorrente)){
+				IndexDate indexDate = new IndexDate(index,dataInizioScenario);
+				IndiciScenariFiltrati.add(indexDate);
+			}
+		}
+		return IndiciScenariFiltrati;
+	}
+	/*
 	public List<ScenarioGioco> getScenariPaziente(){
 		List<ScenarioGioco> scenariPaziente = new ArrayList<>();
 		LocalDate dataCorrente = LocalDate.now();
@@ -88,7 +113,7 @@ public class PazienteViewModel extends ViewModel {
 			}
 		}
 		return scenariPaziente;
-	}
+	}*/
 
 	public LiveData<List<EntryClassifica>> getClassificaLiveData() {
 		return mClassifica;
@@ -165,6 +190,22 @@ public class PazienteViewModel extends ViewModel {
 			this.mClassificaController = new ClassificaController();
 		}
 		return this.mClassificaController;
+	}
+
+	class IndexDate{
+		private int index;
+		private LocalDate date;
+
+		public IndexDate(int index, LocalDate date){
+			this.date = date;
+			this.index = index;
+		}
+		public LocalDate getDate() {
+			return date;
+		}
+		public int getIndex() {
+			return index;
+		}
 	}
 
 }
