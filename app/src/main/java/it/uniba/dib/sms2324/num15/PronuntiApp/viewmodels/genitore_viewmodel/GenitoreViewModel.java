@@ -15,7 +15,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.appuntamenti.AppuntamentiGenitoreController;
-import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenariController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenariGenitoreController;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitore = new MutableLiveData<>();
@@ -24,7 +24,7 @@ public class GenitoreViewModel extends ViewModel {
 
 
 	private AppuntamentiGenitoreController appuntamentiGenitoreController;
-	private ModificaDataScenariController modificaDataScenariController;
+	private ModificaDataScenariGenitoreController modificaDataScenariGenitoreController;
 
 
 	public LiveData<Genitore> getGenitoreLiveData() {
@@ -88,11 +88,11 @@ public class GenitoreViewModel extends ViewModel {
 		return this.appuntamentiGenitoreController;
 	}
 
-	public ModificaDataScenariController getModificaDataScenariController(){
-		if(this.modificaDataScenariController == null){
-			this.modificaDataScenariController = new ModificaDataScenariController(this);
+	public ModificaDataScenariGenitoreController getModificaDataScenariController(){
+		if(this.modificaDataScenariGenitoreController == null){
+			this.modificaDataScenariGenitoreController = new ModificaDataScenariGenitoreController(this);
 		}
-		return this.modificaDataScenariController;
+		return this.modificaDataScenariGenitoreController;
 	}
 
 }
