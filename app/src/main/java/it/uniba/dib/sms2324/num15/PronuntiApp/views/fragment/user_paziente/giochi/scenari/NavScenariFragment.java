@@ -9,21 +9,31 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+
+import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class NavScenariFragment extends AbstractFragmentWithNavigation {
     private TextView textViewDataScenario;
     private ImageButton buttonIndietroScenario;
     private ImageButton buttonAvantiScenario;
+    private PazienteViewModel mPazienteViewModel;
+    private int currentScenarioIndex = 0;
+    private int maxSize;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_nav_scenari, container, false);
-
+        mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         textViewDataScenario = view.findViewById(R.id.textViewDataScenario);
         buttonIndietroScenario = view.findViewById(R.id.buttonIndietroScenario);
         buttonAvantiScenario = view.findViewById(R.id.buttonAvantiScenario);
@@ -34,24 +44,62 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
+            List<Integer> scenariIndexListmPazienteViewModel = mPazienteViewModel.getScenariPaziente();
+            maxSize = scenariIndexListmPazienteViewModel.size()-1;
+            currentScenarioIndex = maxSize;
 
-        //TODO naviga a scenario precedente
-        buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente());
+            List<Terapia> terapie = paziente.getTerapie();
+            int sizeTerapie = terapie.size();
+            textViewDataScenario.setText(terapie.get(sizeTerapie-1).getScenariGioco().get(currentScenarioIndex).getDataInizio().toString());
 
-        //TODO naviga a scenario successivo
-        buttonIndietroScenario.setOnClickListener(v -> navigaScenarioSuccessivo());
+            buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente(scenariIndexListmPazienteViewModel));
+            buttonAvantiScenario.setOnClickListener(v -> navigaScenarioSuccessivo(scenariIndexListmPazienteViewModel));
+        });
     }
 
-    private void navigaScenarioSuccessivo() {
-        getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, new ScenarioFragment(
-                //TODO passare ScenarioGioco
-        )).commit();
+    private void navigaScenarioSuccessivo(List<Integer> listaIndici) {
+        if(currentScenarioIndex+1<=maxSize) {
+
+            Bundle bundle = new Bundle();
+            ScenarioFragment scenarioFragment = new ScenarioFragment();
+            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
+            currentScenarioIndex +=1;
+            scenarioFragment.setArguments(bundle);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
+        }else{
+            showInfoDialog(true);
+        }
     }
 
-    private void navigaScenarioPrecedente() {
-        getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, new ScenarioFragment(
-                //TODO passare ScenarioGioco
-        )).commit();
+    private void navigaScenarioPrecedente(List<Integer> listaIndici) {
+        if(currentScenarioIndex-1>=0) {
+
+            Bundle bundle = new Bundle();
+            ScenarioFragment scenarioFragment = new ScenarioFragment();
+            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
+            currentScenarioIndex-=1;
+            scenarioFragment.setArguments(bundle);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
+        }else{
+            showInfoDialog(false);
+        }
+    }
+
+    private void showInfoDialog(boolean error){
+        //todo Aggiungere Strings
+        String erroreIndietro = "Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli successivi.";
+        String erroreAvanti = "Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli precedenti.";
+        String buttonString = "Ok";
+        if(error){
+            InfoDialog infoDialog = new InfoDialog(requireActivity(),erroreAvanti,buttonString);
+            infoDialog.setOnConfermaButtonClickListener(() -> {});
+            infoDialog.show();
+        }else{
+            InfoDialog infoDialog = new InfoDialog(requireActivity(),erroreIndietro,buttonString);
+            infoDialog.setOnConfermaButtonClickListener(() -> {});
+            infoDialog.show();
+        }
     }
 
 }
