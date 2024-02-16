@@ -24,13 +24,16 @@ public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
 
     private FragmentContainerView fragmentContainerViewMonitoraggio;
     private GenitoreViewModel mGenitoreViewModel;
-
+    private FragmentContainerView fragmentContainerViewNavTerapie;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          super.onCreateView(inflater, container, savedInstanceState);
          View view = inflater.inflate(R.layout.fragment_terapie, container, false);
+
+         fragmentContainerViewNavTerapie = view.findViewById(R.id.fragmentContainerViewNavTerapie);
+
 
         fragmentContainerViewMonitoraggio = view.findViewById(R.id.fragmentContainerViewMonitoraggio);
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
@@ -45,6 +48,8 @@ public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNavTerapie,new NavTerapieGenitoreFragment()).commit();
 
         mGenitoreViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
