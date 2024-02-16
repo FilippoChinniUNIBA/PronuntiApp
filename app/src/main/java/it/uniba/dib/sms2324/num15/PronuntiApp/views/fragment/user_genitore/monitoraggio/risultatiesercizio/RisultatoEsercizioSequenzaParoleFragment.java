@@ -18,9 +18,13 @@ import androidx.lifecycle.ViewModelProvider;
 import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.AbstractEsercizio;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioSequenzaParoleController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
@@ -37,7 +41,10 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
     private AudioRecorder audioRecorder;
     private AudioPlayerLink audioPlayerLink;
     private MediaPlayer mMediaPlayer;
-
+    private int indiceEsercizio;
+    private int indiceTerapia;
+    private int indiceScenario;
+    private GenitoreViewModel mGenitoreViewModel;
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +52,17 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
+        savedInstanceState = getArguments();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("indiceEsercizio") && savedInstanceState.containsKey("indiceScenario") && savedInstanceState.containsKey("indiceTerapia")) {
+            indiceEsercizio = savedInstanceState.getInt("indiceEsercizio");
+            indiceScenario = savedInstanceState.getInt("indiceScenario");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+        } else {
+            indiceTerapia = 0;
+            indiceEsercizio = 0;
+            indiceScenario = 0;
+        }
 
         //TODO prendere esercizio da id passato da fragment chiamante
         seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
@@ -57,6 +75,8 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
         pauseButtonRisposta = view.findViewById(R.id.imageButtonPausaAudioRegistrato);
         pauseButtonRisposta.setVisibility(View.GONE);
 
+        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+
         return view;
     }
 
@@ -65,7 +85,8 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
         super.onViewCreated(view, savedInstanceState);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
+        this.mEsercizioSequenzaParole = getEsercizioSequenzaParoleFromViewModel(indiceEsercizio,indiceScenario,indiceTerapia);
+        //this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
 
 
         this.audioRecorder = initAudioRecorder();
@@ -153,18 +174,23 @@ public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWi
     private void playAudio() {
         playButtonRisposta.setVisibility(View.GONE);
         pauseButtonRisposta.setVisibility(View.VISIBLE);
-        //TODO riproduzione audio
+        audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getRisultatoEsercizio().getAudioRegistrato());
+        audioPlayerLink.playAudio();
     }
 
     private void stopAudio() {
         playButtonRisposta.setVisibility(View.VISIBLE);
         pauseButtonRisposta.setVisibility(View.GONE);
-        //TODO ferma riproduzione audio
+        audioPlayerLink.stopAudio();
     }
 
     private boolean isCorrect() {
-        //TODO prendere esito risultato da viewmodel
-        return false;
+        return mEsercizioSequenzaParole.getRisultatoEsercizio().isEsitoCorretto();
     }
+
+    private EsercizioSequenzaParole getEsercizioSequenzaParoleFromViewModel(int indiceEsercizio, int indiceScenario, int indiceTerapia){
+         return (EsercizioSequenzaParole) mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio);
+    }
+
 
 }

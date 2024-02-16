@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio;
 
 import android.app.DatePickerDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenariController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ScenarioViewHolder> {
@@ -27,12 +32,21 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     private int idNavToEsercizioDenominazioneImmagine;
     private int idNavToEsercizioCoppiaImmagini;
     private int idNavToEsercizioSequenzaParole;
+    private GenitoreViewModel mGenitoreViewModel;
+    private ModificaDataScenariController mController;
+    private int indiceTerapia;
 
+     
 
-    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole) {
-        //TODO ordinare listaScenari per data decrescente (di regola lo sono già, controllare come sono quando li si prende da db)
+    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia) {
+        listaScenari.sort(Comparator.comparing(ScenarioGioco::getDataInizio).reversed());
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
+        this.mController = mController;
+        this.indiceTerapia = indiceTerapia;
+        this.idNavToEsercizioCoppiaImmagini = idNavToEsercizioCoppiaImmagini;
+        this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
+        this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
     }
 
     @NonNull
@@ -45,6 +59,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     @Override
     public void onBindViewHolder(@NonNull ScenarioViewHolder holder, int position) {
         ScenarioGioco scenario = listaScenari.get(position);
+
         holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
         holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
         holder.linearLayoutTitleScenario.setOnClickListener(v -> toggleVisibility(holder));
@@ -61,10 +76,16 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
             holder.linearLayoutModificaDataScenario.setOnClickListener(v -> {
                 LocalDate now = LocalDate.now();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(holder.itemView.getContext(), (view, year, month, dayOfMonth) -> {
-                    LocalDate date = LocalDate.parse(LocalDate.of(year, month + 1, dayOfMonth).toString());
+                    LocalDate date = LocalDate.parse(LocalDate.of(year, month , dayOfMonth).toString());
                     scenario.setDataInizio(date);
                     holder.textViewGiornoScenario.setText(DateTimeFormatter.ofPattern("dd").format(scenario.getDataInizio()));
                     holder.textViewMeseAnnoScenario.setText(DateTimeFormatter.ofPattern("MMMM yyyy").format(scenario.getDataInizio()));
+
+                    Log.d("ScenarioAdapter",""+scenario.toString());
+
+
+                    //TODO aggiornare data scenari
+                   // mController.modificaDataScenari(date,indiceTerapia,position);
 
                     //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);
@@ -75,7 +96,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         }
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
-        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole);
+        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole,indiceTerapia,position);
         recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
     }

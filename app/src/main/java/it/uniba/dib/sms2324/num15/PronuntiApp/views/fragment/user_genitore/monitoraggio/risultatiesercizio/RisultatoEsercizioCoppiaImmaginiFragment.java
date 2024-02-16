@@ -13,13 +13,16 @@ import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigation {
@@ -34,6 +37,10 @@ public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWi
     private ImageButton imageButtonPause;
     private ImageView imageViewCheck;
     private ImageView imageViewWrong;
+    private int indiceEsercizio;
+    private int indiceScenario;
+    private int indiceTerapia;
+    private GenitoreViewModel mGenitoreViewModel;
 
 
     @Override
@@ -42,6 +49,17 @@ public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWi
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
+        savedInstanceState = getArguments();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("indiceEsercizio") && savedInstanceState.containsKey("indiceScenario") && savedInstanceState.containsKey("indiceTerapia")) {
+            indiceEsercizio = savedInstanceState.getInt("indiceEsercizio");
+            indiceScenario = savedInstanceState.getInt("indiceScenario");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+        } else {
+            indiceTerapia = 0;
+            indiceEsercizio = 0;
+            indiceScenario = 0;
+        }
 
         //TODO prendere esercizio da id passato da fragment chiamante
         seekBarEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
@@ -50,6 +68,8 @@ public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWi
 
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
+
+        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         return view;
     }
@@ -60,7 +80,9 @@ public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWi
         super.onViewCreated(view, savedInstanceState);
 
         //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+        //this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+
+        this.mEsercizioCoppiaImmagini = getEsercizioCoppiaImmaginiFromViewModel(indiceEsercizio,indiceScenario,indiceTerapia);
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
@@ -142,9 +164,14 @@ public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWi
     }
 
     private boolean isCorrect() {
-        //TODO prendere esito risultato da viewmodel
-        return false;
+        return this.mEsercizioCoppiaImmagini.getRisultatoEsercizio().isEsitoCorretto();
+
     }
 
+    private EsercizioCoppiaImmagini getEsercizioCoppiaImmaginiFromViewModel(int indiceEsercizio, int indiceScenario, int indiceTerapia){
+        Log.d("RisultatoDenominazione", ":"+ indiceEsercizio);
+
+        return (EsercizioCoppiaImmagini) mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio);
+    }
 
 }

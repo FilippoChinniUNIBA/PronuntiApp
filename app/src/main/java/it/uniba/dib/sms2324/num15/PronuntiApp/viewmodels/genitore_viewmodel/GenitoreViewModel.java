@@ -13,7 +13,9 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDA
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Appuntamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Genitore;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.appuntamenti.AppuntamentiGenitoreController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.scenari.ModificaDataScenariController;
 
 public class GenitoreViewModel extends ViewModel {
 	private MutableLiveData<Genitore> mGenitore = new MutableLiveData<>();
@@ -22,6 +24,7 @@ public class GenitoreViewModel extends ViewModel {
 
 
 	private AppuntamentiGenitoreController appuntamentiGenitoreController;
+	private ModificaDataScenariController modificaDataScenariController;
 
 
 	public LiveData<Genitore> getGenitoreLiveData() {
@@ -64,12 +67,32 @@ public class GenitoreViewModel extends ViewModel {
 		Log.d("GenitoreViewModel.aggiornaPazienteRemoto()", "Paziente aggiornato: " + paziente.toString());
 	}
 
+	public Terapia getTerapiaByIndiceFromPaziente(int indiceTerapia){
+		return mPaziente.getValue().getTerapie().get(indiceTerapia);
+	}
+
+	public int getIndiceUltimaTerapia() {
+
+		if (mPaziente.getValue() != null) {
+			if (mPaziente.getValue().getTerapie().size() != 0) {
+				return (mPaziente.getValue().getTerapie().size()) - 1;
+			}
+		}
+			return -1;
+	}
 
 	public AppuntamentiGenitoreController getAppuntamentiControllerGenitore(){
 		if (this.appuntamentiGenitoreController == null){
 			this.appuntamentiGenitoreController = new AppuntamentiGenitoreController();
 		}
 		return this.appuntamentiGenitoreController;
+	}
+
+	public ModificaDataScenariController getModificaDataScenariController(){
+		if(this.modificaDataScenariController == null){
+			this.modificaDataScenariController = new ModificaDataScenariController(this);
+		}
+		return this.modificaDataScenariController;
 	}
 
 }

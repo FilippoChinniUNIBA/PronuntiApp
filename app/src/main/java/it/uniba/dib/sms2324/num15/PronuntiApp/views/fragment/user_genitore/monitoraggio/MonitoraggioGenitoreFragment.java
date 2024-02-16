@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioE
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.NavigateTo;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.ScenarioAdapter;
@@ -30,18 +33,31 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.monitoraggio.Scenar
 public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation implements NavigateTo {
     private RecyclerView recyclerViewScenari;
     private List<ScenarioGioco> listaScenari;
-    private String idTerapiaScelta;
-    private Terapia terapiaScelta;
-
+    private int indiceTerapia;
+    private GenitoreViewModel mGenitoreViewModel;
+    private TextView textViewDataInizioTerapia;
+    private TextView textViewDataFineTerapia;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater,container,savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_monitoraggio, container, false);
+
+        savedInstanceState = getArguments();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey("indiceTerapiaScelta")) {
+            indiceTerapia = (Integer) savedInstanceState.getInt("indiceTerapiaScelta");
+        } else {
+            indiceTerapia = 0;
+        }
+
+        mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
+
+        textViewDataInizioTerapia = view.findViewById(R.id.textViewDataInizioTerapia);
+        textViewDataFineTerapia= view.findViewById(R.id.textViewDataFineTerapia);
 
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
         recyclerViewScenari.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
 
         return view;
     }
@@ -49,73 +65,41 @@ public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //TODO predere idTerapia tramite bundle;
-        //monitoraggioTerapie();
-        listaScenari = new ArrayList<>();
-        //listaScenari.addAll(terapiaScelta.getScenariGioco());
 
-        //TODO prendere scenari da viewModel
-        for(int i=0; i<100; i++) {
-            EsercizioCoppiaImmagini esercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+        listaScenari = monitoraggioTerapie();
+        setTextViewDataInizioTerapia();
+        setTextViewDataFineTerapia();
+        Log.d("Monitoraggio genitore",""+ R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment);
 
 
-            EsercizioDenominazioneImmagine esercizioDenominazioneImmagine=new EsercizioDenominazioneImmagine(
-                    2500,
-                    200,
-                    "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/pinguino.jpg?alt=media&token=8792af2e-2a3d-4366-9d86-56746a42d2be",
-                    "pinguino",
-                    "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/help.mp3?alt=media&token=89cbfacf-2a02-46c5-986d-29b2d7e2fcdd");
-
-
-            // Istanza di EsercizioSequenzaParole
-            EsercizioSequenzaParole esercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
-
-
-            List<EsercizioEseguibile> esercizi = new ArrayList<>();
-            esercizi.add(esercizioCoppiaImmagini);
-            esercizi.add(esercizioDenominazioneImmagine);
-            esercizi.add(esercizioSequenzaParole);
-
-            // Istanza di uno scenario
-            ScenarioGioco scenario = new ScenarioGioco(
-                    "idScenario123",
-                    "sfondo.jpg",
-                    "tappa1.jpg",
-                    "tappa2.jpg",
-                    "tappa3.jpg",
-                    LocalDate.now().minusDays(i),
-                    100, // Ricompensa finale
-                    esercizi, // Lista di esercizi
-                    "refTemplate123"
-            );
-
-            listaScenari.add(scenario);
-
-        }
-
-        // Creazione e settaggio dell'adapter
-        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment);
+        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment,mGenitoreViewModel.getModificaDataScenariController(),indiceTerapia);
         recyclerViewScenari.setAdapter(adapter);
     }
 
     @Override
     public void navigateToId(int id, Bundle bundle){
         Log.d("MonitoraggioFragment", "navigateToEsercizio: ");
-        setArguments(bundle);
         navigateTo(id, bundle);
     }
 
-    /*private void monitoraggioTerapie(){
-
-        Paziente paziente = mPazienteViewModel.getPazienteLiveData().getValue();
-
-        for (Terapia terapia : paziente.getTerapie()) {
-            if (terapia.getIdTerapia().equals(idTerapiaScelta)) {
-                this.terapiaScelta = terapia;
-            }
+    private List<ScenarioGioco> monitoraggioTerapie(){
+        if(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie() != null) {
+            Terapia terapiaScelta = mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia);
+            return new ArrayList<>(terapiaScelta.getScenariGioco());
         }
-    }*/
+        return new ArrayList<>();
+    }
 
+    private void setTextViewDataInizioTerapia() {
+        if (mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie() != null) {
+            textViewDataInizioTerapia.setText(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getDataInizio().toString());
+        }
 
+    }
 
+    private void setTextViewDataFineTerapia(){
+        if (mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie() != null) {
+            textViewDataFineTerapia.setText(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getDataFine().toString());
+        }
+    }
 }

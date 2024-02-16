@@ -110,6 +110,10 @@ public class Terapia implements Persistente<Terapia> {
 		);
 	}
 
+	public void setScenario(int posizione, ScenarioGioco scenarioGioco){
+		this.scenariGioco.set(posizione,scenarioGioco);
+	}
+
 	@Override
 	public String toString() {
 		return "Terapia{" +
