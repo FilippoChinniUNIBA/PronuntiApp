@@ -72,7 +72,7 @@ public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation
         Log.d("Monitoraggio genitore",""+ R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment);
 
 
-        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment,mGenitoreViewModel.getModificaDataScenariController(),indiceTerapia,"");
+        ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_terapieFragment_to_risultatoEsercizioDenominazioneImmagineFragment, R.id.action_terapieFragment_to_risultatoEsercizioCoppiaImmaginiFragment, R.id.action_terapieFragment_to_risultatoEsercizioSequenzaParoleFragment,mGenitoreViewModel.getModificaDataScenariController(),indiceTerapia,"",0);
         recyclerViewScenari.setAdapter(adapter);
     }
 

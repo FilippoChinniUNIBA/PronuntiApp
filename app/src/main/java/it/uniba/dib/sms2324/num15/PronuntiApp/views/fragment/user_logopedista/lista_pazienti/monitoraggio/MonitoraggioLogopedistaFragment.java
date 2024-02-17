@@ -84,7 +84,7 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
                 ,
                 R.id.action_schedaPazienteFragment_to_risultatoEsercizioCoppiaImmaginiLogopedistaFragment,
                 R.id.action_schedaPazienteFragment_to_risultatoEsercizioSequenzaParoleLogopedistaFragment
-                , null, indiceTerapia,idPaziente);
+                , mLogopedistaViewModel.getModificaDataScenariLogopedistaController(), indiceTerapia,idPaziente,indicePaziente);
 
         recyclerViewScenari.setAdapter(adapter);
     }

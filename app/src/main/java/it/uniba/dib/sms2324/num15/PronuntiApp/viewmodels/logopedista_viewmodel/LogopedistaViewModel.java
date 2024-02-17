@@ -28,6 +28,7 @@ public class LogopedistaViewModel extends ViewModel {
 	private RegistrazionePazienteGenitoreController mRegistrazionePazienteGenitoreController;
 	private ModificaAppuntamentiController mModificaAppuntamentiController;
 	private TerapieController mTerapieController;
+	private ModificaDataScenariLogopedistaController mModificaDataScenariLogopedistaController;
 
 	public LiveData<Logopedista> getLogopedistaLiveData() {
 		return mLogopedista;
@@ -111,6 +112,13 @@ public class LogopedistaViewModel extends ViewModel {
 			this.mTerapieController = new TerapieController();
 		}
 		return this.mTerapieController;
+	}
+
+	public ModificaDataScenariLogopedistaController getModificaDataScenariLogopedistaController(){
+		if(this.mModificaDataScenariLogopedistaController == null){
+			this.mModificaDataScenariLogopedistaController = new ModificaDataScenariLogopedistaController(this);
+		}
+		return this.mModificaDataScenariLogopedistaController;
 	}
 
 }

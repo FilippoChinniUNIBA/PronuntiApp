@@ -32,10 +32,11 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     private ModificaDataScenariController mController;
     private int indiceTerapia;
     private String idPaziente;
+    private int indicePaziente;
 
      
 
-    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia, String idPaziente) {
+    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia, String idPaziente, int indicePaziente) {
         listaScenari.sort(Comparator.comparing(ScenarioGioco::getDataInizio).reversed());
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
@@ -45,6 +46,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
         this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
         this.idPaziente = idPaziente;
+        this.indicePaziente = indicePaziente;
     }
 
     @NonNull
@@ -84,7 +86,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
 
 
                     //TODO aggiornare data scenari
-                    //mController.modificaDataScenari(date,indiceTerapia,position);
+                    mController.modificaDataScenari(date,indiceTerapia,position,idPaziente,indicePaziente);
 
                     //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);

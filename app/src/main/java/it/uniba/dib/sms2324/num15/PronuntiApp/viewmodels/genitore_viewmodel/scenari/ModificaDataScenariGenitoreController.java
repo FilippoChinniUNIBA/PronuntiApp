@@ -12,11 +12,9 @@ public class ModificaDataScenariGenitoreController implements ModificaDataScenar
         this.mGenitoreViewModel = mGenitoreViewModel;
     }
 
-    public void modificaDataScenari(LocalDate date, int indiceTerapia,int position){
+    public void modificaDataScenari(LocalDate date, int indiceTerapia,int position, String idPaziente, int indicePaziente){
         mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(position).setDataInizio(date);
-
         Log.d("ScenarioAdapter",""+ mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(position).toString());
-
         mGenitoreViewModel.aggiornaPazienteRemoto();
     }
 
