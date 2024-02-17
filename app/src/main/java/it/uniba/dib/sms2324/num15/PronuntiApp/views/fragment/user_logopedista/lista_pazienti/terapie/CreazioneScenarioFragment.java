@@ -169,18 +169,19 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     }
 
     private void saveScenario(){
+        //prendo esercizi dai fragmentFigli
+        EsercizioEseguibile es1 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio1)).getEsercizio();
+        EsercizioEseguibile es2 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio2)).getEsercizio();
+        EsercizioEseguibile es3 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio3)).getEsercizio();
+
         if(dataScenario.getText().toString().isEmpty() || ricompensaFinale.getText().toString().isEmpty() || imgPos1Uri==null
-                || imgPos2Uri==null || imgPos3Uri==null || imgBackgroundUri==null || esercizi==null || esercizi.isEmpty()){
+                || imgPos2Uri==null || imgPos3Uri==null || imgBackgroundUri==null || es1==null || es2==null || es3==null){
             showErrorDialog();
         }
         else {
             dataInizio = dataScenario.getText().toString();
             ricompensa = Integer.parseInt(ricompensaFinale.getText().toString());
 
-            //prendo esercizi dai fragmentFigli
-            EsercizioEseguibile es1 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio1)).getEsercizio();
-            EsercizioEseguibile es2 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio2)).getEsercizio();
-            EsercizioEseguibile es3 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio3)).getEsercizio();
             esercizi.add(es1);
             esercizi.add(es2);
             esercizi.add(es3);
@@ -193,10 +194,6 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
 
             getParentFragmentManager().beginTransaction().remove(this).commit();
         }
-    }
-
-    private ScenarioGioco getScenario(){
-        return scenario;
     }
 
     private void useTemplate(){

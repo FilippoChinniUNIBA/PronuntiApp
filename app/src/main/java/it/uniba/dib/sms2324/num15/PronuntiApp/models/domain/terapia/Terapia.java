@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia;
 import android.util.Log;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class Terapia implements Persistente<Terapia> {
 	public Terapia(LocalDate dataInizio, LocalDate dataFine) {
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
+		scenariGioco = new ArrayList<>();
 	}
 
 	public Terapia(Map<String,Object> fromDatabaseMap, String fromDatabaseKey){
@@ -110,8 +112,8 @@ public class Terapia implements Persistente<Terapia> {
 		);
 	}
 
-	public void setScenario(int posizione, ScenarioGioco scenarioGioco){
-		this.scenariGioco.set(posizione,scenarioGioco);
+	public void addScenario(ScenarioGioco scenarioGioco){
+		this.scenariGioco.add(scenarioGioco);
 	}
 
 	@Override

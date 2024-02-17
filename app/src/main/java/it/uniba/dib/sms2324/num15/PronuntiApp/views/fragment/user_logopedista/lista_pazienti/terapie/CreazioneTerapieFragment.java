@@ -28,7 +28,6 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
     private Button buttonAddScenario;
     private Button buttonSalvataggioTerapia;
     private Terapia terapia;
-    private int position;
     private boolean isFirstScenario = true;
 
     @Nullable
@@ -38,7 +37,7 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         View view = inflater.inflate(R.layout.fragment_creazione_terapia, container, false);
         //TODO ricevere da bundle idPaziente
 
-        //TODO passare il nome e cognome del paziente preso dal viewModel
+        //TODO passare qua il nome e cognome del paziente preso dal viewModel
         setToolBar(view,getString(R.string.creaTerapia) + " " + "Giovanni Vocestupida");
 
         dataFine = view.findViewById(R.id.textInputEditTextDataInizioTerapia);
@@ -91,13 +90,13 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         //terapia
         Log.d("Terapia",terapia.toString());
         navigateTo(R.id.action_creazioneTerapiaFragment_to_schedaPazienteFragment);
+        //TODO controllare che effettivamente viene salvata in db e viene mostrata in scheda paziente
     }
 
     @Override
     public void saveScenario(ScenarioGioco scenarioGioco) {
-        //TODO non so cosa sia questo position però suppongo che deve essere solo incrementato visto che la terapia è nuova
         Log.d("Terapia","terapia in saveScenario: " + terapia.toString());
-        terapia.setScenario(position++,scenarioGioco);
+        terapia.addScenario(scenarioGioco);
         buttonAddScenario.setVisibility(View.VISIBLE);
         buttonSalvataggioTerapia.setVisibility(View.VISIBLE);
 
