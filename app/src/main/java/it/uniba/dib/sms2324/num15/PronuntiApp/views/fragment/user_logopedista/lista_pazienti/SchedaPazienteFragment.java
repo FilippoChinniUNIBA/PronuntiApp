@@ -62,27 +62,31 @@ public class SchedaPazienteFragment extends AbstractFragmentWithNavigation {
 
         int indicePaziente = 0;
 
+        int indiceTerapia = -1;
+
         Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
         for (Paziente paziente: logopedista.getPazienti()) {
             if (paziente.getIdProfilo().equals(idPaziente)) {
-
-                int indiceTerapia = paziente.getTerapie().size() - 1;
-                if (indiceTerapia != -1) {
-                    bundle.putString("idPaziente",idPaziente);
-                    bundle.putInt("indicePaziente",indicePaziente);
-                    indicePaziente++;
-                    bundle.putInt("indiceTerapia",indiceTerapia);
-                    break;
+                if (paziente.getTerapie() != null) {
+                    indiceTerapia = paziente.getTerapie().size() - 1;
+                    if (indiceTerapia != -1) {
+                        bundle.putString("idPaziente", idPaziente);
+                        bundle.putInt("indicePaziente", indicePaziente);
+                        indicePaziente++;
+                        bundle.putInt("indiceTerapia", indiceTerapia);
+                        break;
+                    }
                 }
             }
-            indicePaziente ++;
+                indicePaziente++;
         }
 
-        TerapieLogopedistaFragment terapieLogopedistaFragment = new TerapieLogopedistaFragment();
-        terapieLogopedistaFragment.setArguments(bundle);
+        if(indiceTerapia != -1) {
+            TerapieLogopedistaFragment terapieLogopedistaFragment = new TerapieLogopedistaFragment();
+            terapieLogopedistaFragment.setArguments(bundle);
 
-        getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewTerapie, terapieLogopedistaFragment).commit();
-
+            getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewTerapie, terapieLogopedistaFragment).commit();
+        }
 
         addTerapiaButton.setOnClickListener(v -> {
             //TODO passare tramite bundle l'dindice del paziente e della terapia (ora sta passando null)

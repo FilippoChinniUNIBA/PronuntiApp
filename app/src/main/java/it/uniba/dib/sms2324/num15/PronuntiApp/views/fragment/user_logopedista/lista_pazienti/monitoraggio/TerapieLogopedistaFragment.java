@@ -50,7 +50,6 @@ public class TerapieLogopedistaFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(),logopedista -> {
         Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
             for (Paziente paziente: logopedista.getPazienti()) {
                 if (paziente.getIdProfilo().equals(idPaziente)){
@@ -61,9 +60,6 @@ public class TerapieLogopedistaFragment extends AbstractFragmentWithNavigation {
                     }
                 }
             }
-
-        //});
-
     }
 
     public void cambiaFragmentMonitoraggioLogopedista(int indiceTerapia){
@@ -82,9 +78,6 @@ public class TerapieLogopedistaFragment extends AbstractFragmentWithNavigation {
             monitoraggioLogopedistaFragment.setArguments(bundle);
 
             getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, monitoraggioLogopedistaFragment).replace(R.id.fragmentContainerViewNavTerapie,navTerapieLogopedistFragment).commit();
-
-
-
         }
     }
 
