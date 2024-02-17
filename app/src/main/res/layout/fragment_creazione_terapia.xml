@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingHorizontal="10dp"
     android:background="@color/backgroundWhite"
+    android:layout_marginBottom="@dimen/nav_bar_height"
     >
 
     <androidx.core.widget.NestedScrollView

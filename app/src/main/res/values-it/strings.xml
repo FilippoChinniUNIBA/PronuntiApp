@@ -34,8 +34,8 @@
     <string name="child_data">Dati del bambino</string>
     <string name="actualSelectedCharacter"><b>ATTUALE</b></string>
     <string name="notSelectedCharacter">SELEZIONA</string>
-    <string name="startDate">Data inizio</string>
-    <string name="endDate">Data fine</string>
+    <string name="startDate">Data inizio terapia</string>
+    <string name="endDate">Data fine terapia</string>
     <string name="id">Id</string>
     <string name="errorConnectionDescription">La connessione Internet non è disponibile. Verifica la tua connessione, non puoi utilizzare l\'App senza connessione Internet.</string>
     <string name="next">Avanti</string>
@@ -45,6 +45,7 @@
     <string name="errorPermissionOption1">Richiedimeli di nuovo</string>
     <string name="errorPermissionOption2">Non voglio concederli</string>
     <string name="confirm">Conferma</string>
+    <string name="confermato">confermato</string>
     <string name="cancel">Annulla</string>
     <string name="startRecording">Avvia Registrazione</string>
     <string name="stopRecording">Ferma Registrazione</string>
@@ -161,8 +162,8 @@
     <string name="immagine_da_indovinare">Immagine da indovinare:</string>
     <string name="registra_audio_di_aiuto">Registra audio di aiuto</string>
     <string name="risposta">Risposta</string>
-    <string name="ricompensa_corretto">Ricompensa corretto</string>
-    <string name="ricompensa_errato">Ricompensa errato</string>
+    <string name="ricompensa_corretto">Monete corretto</string>
+    <string name="ricompensa_errato">Monete errato</string>
     <string name="denominazione_immagine">Denominazione immagine</string>
     <string name="sequenza_parole">Sequenza parole</string>
     <string name="registra_audio_da_ripetere">Registra audio da ripetere</string>
@@ -183,10 +184,11 @@
     <string name="data_assegnazione">Data assegnazione</string>
     <string name="ricompensa_finale">Ricompensa finale</string>
     <string name="scegli_sfondo_scenario">Scegli sfondo scenario</string>
-    <string name="immagine_tappa_1">Immagine tappa 1</string>
-    <string name="immagine_tappa_2">Immagine tappa 2</string>
-    <string name="immagine_tappa_3">Immagine tappa 3</string>
+    <string name="immagine_tappa_1">Scegli tappa 1</string>
+    <string name="immagine_tappa_2">Scegli tappa 2</string>
+    <string name="immagine_tappa_3">Scegli tappa 3</string>
     <string name="add_scenario">Scenario +</string>
     <string name="salva_scenario">Salva scenario</string>
-
+    <string name="costruzione_scenario">Costruzione scenario</string>
+    <string name="compilaPrimaTutto">Compila tutti i campi prima di confermare!</string>
 </resources>

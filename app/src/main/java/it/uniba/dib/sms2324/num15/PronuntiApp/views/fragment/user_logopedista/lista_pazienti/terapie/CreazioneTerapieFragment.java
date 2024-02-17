@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +12,24 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDate;
+
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
-public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation {
+public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation implements SaveScenario{
 
     private TextInputEditText dataInizio;
     private TextInputEditText dataFine;
     private Button buttonAddScenario;
     private Button buttonSalvataggioTerapia;
+    private Terapia terapia;
+    private int position;
+    private boolean isFirstScenario = true;
 
     @Nullable
     @Override
@@ -38,7 +47,6 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation {
         buttonAddScenario = view.findViewById(R.id.buttonAddScenario);
         buttonSalvataggioTerapia = view.findViewById(R.id.buttonSalvaTerapia);
 
-        //TODO Nicola da mostrare dopo quando non loso
         buttonSalvataggioTerapia.setVisibility(View.GONE);
 
         return view;
@@ -51,20 +59,48 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation {
         dataInizio.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataInizio));
         dataFine.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataFine));
 
-        buttonAddScenario.setOnClickListener(v -> {
-            //TODO Nicola da mostrare dinuovo quando clicchi su salva terapia
-            buttonAddScenario.setVisibility(View.GONE);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNuovoScenario, new CreazioneScenarioFragment()).commit();
-            }
-        );
+        buttonAddScenario.setOnClickListener(v -> addScenario());
 
         buttonSalvataggioTerapia.setOnClickListener(v-> saveTerapia());
     }
+    private void showErrorDialog(){
+        InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
+        infoDialog.setOnConfermaButtonClickListener(null);
+        infoDialog.show();
+    }
+    private void addScenario(){
+        if(dataInizio.getText().toString().isEmpty() || dataFine.getText().toString().isEmpty()){
+            showErrorDialog();
+        }
+        else {
+            if(isFirstScenario){
+                Log.d("Terapia","isFristScenario");
+                terapia = new Terapia(LocalDate.parse(dataInizio.getText().toString()), LocalDate.parse(dataFine.getText().toString()));
+                isFirstScenario = false;
+            }
+            Log.d("Terapia",terapia.toString());
+            buttonAddScenario.setVisibility(View.GONE);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNuovoScenario, new CreazioneScenarioFragment(this)).commit();
+            buttonSalvataggioTerapia.setVisibility(View.GONE);
+        }
+    }
 
     private void saveTerapia(){
-        //TODO implementare funzionalità per salvare la terapia facendo il get dei dati inseriti
-
+        //TODO implementare funzionalità per salvare la terapia in db
+        // la terapia è già stata creata e dovrebbe stare in "terapia"
+        //terapia
+        Log.d("Terapia",terapia.toString());
         navigateTo(R.id.action_creazioneTerapiaFragment_to_schedaPazienteFragment);
+    }
+
+    @Override
+    public void saveScenario(ScenarioGioco scenarioGioco) {
+        //TODO non so cosa sia questo position però suppongo che deve essere solo incrementato visto che la terapia è nuova
+        Log.d("Terapia","terapia in saveScenario: " + terapia.toString());
+        terapia.setScenario(position++,scenarioGioco);
+        buttonAddScenario.setVisibility(View.VISIBLE);
+        buttonSalvataggioTerapia.setVisibility(View.VISIBLE);
 
     }
+
 }

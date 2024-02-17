@@ -3,12 +3,14 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.l
 import static android.app.Activity.RESULT_OK;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,11 +30,16 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.ComandiFirebaseStorage;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
 
@@ -66,9 +73,17 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     private String imgPos3Uri;
     private String imgBackgroundUri;
     private String dataInizio;
-    private String ricompensa;
+    private int ricompensa;
 
+    private List<EsercizioEseguibile> esercizi;
+    private ScenarioGioco scenario;
 
+    //interfaccia di callBack per salvare lo scenario
+    private SaveScenario mCallback;
+
+    public CreazioneScenarioFragment(SaveScenario mCallback) {
+        this.mCallback = mCallback;
+    }
 
     @Nullable
     @Override
@@ -76,6 +91,8 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_creazione_scenario, container, false);
+
+        esercizi=new ArrayList<>();
 
         dataScenario = view.findViewById(R.id.textInputEditTextDataInizioScenario);
         ricompensaFinale = view.findViewById(R.id.textInputEditTextRicompensaFinaleScenario);
@@ -120,7 +137,6 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
         buttonChooseImgPos2.setVisibility(View.GONE);
         buttonChooseImgPos3.setVisibility(View.GONE);
 
-
         constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
 
         dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
@@ -134,6 +150,7 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
 
         buttonChooseBackground.setOnClickListener(v -> {
             startFilePicker(PICK_FILE_REQUEST_4);
+            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
             buttonChooseImgPos1.setVisibility(View.VISIBLE);
             buttonChooseImgPos2.setVisibility(View.VISIBLE);
             buttonChooseImgPos3.setVisibility(View.VISIBLE);
@@ -145,24 +162,41 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
 
         buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
     }
+    private void showErrorDialog(){
+        InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
+        infoDialog.setOnConfermaButtonClickListener(null);
+        infoDialog.show();
+    }
 
     private void saveScenario(){
-        //TODO implementare funzionalità per salvare lo scenario della terapia facendo il get dei dati inseriti
-        //fare anche un if per constrollare che tutti i campi siano avvolari, altrimenti usare un dialog per dire l'errore
+        if(dataScenario.getText().toString().isEmpty() || ricompensaFinale.getText().toString().isEmpty() || imgPos1Uri==null
+                || imgPos2Uri==null || imgPos3Uri==null || imgBackgroundUri==null || esercizi==null || esercizi.isEmpty()){
+            showErrorDialog();
+        }
+        else {
+            dataInizio = dataScenario.getText().toString();
+            ricompensa = Integer.parseInt(ricompensaFinale.getText().toString());
 
-        //DATI DA PASSARE AL COSTRUTTORE DI SCENARIO
-        /*
-        dataInizio = dataScenario.getText().toString();
-        ricompensa = ricompensaFinale.getText().toString();
-        imgPos1Uri;
-        imgPos2Uri;
-        imgPos3Uri;
-        imgBackgroundUri;
-        gli esercizi inzialmente devono essere eseriti come null e poi messi con i setter nell'adapter
-        */
+            //prendo esercizi dai fragmentFigli
+            EsercizioEseguibile es1 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio1)).getEsercizio();
+            EsercizioEseguibile es2 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio2)).getEsercizio();
+            EsercizioEseguibile es3 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio3)).getEsercizio();
+            esercizi.add(es1);
+            esercizi.add(es2);
+            esercizi.add(es3);
+            Log.d("CreazioneScenarioFragment", "saveScenario: "+esercizi.toString());
 
-        getParentFragmentManager().beginTransaction().remove(this).commit();
+            //TODO non so a cosa serve ma non c'è un costruttore senza idTemplate (ma non serve nella creazione da 0 di uno scenario)
+            String refTemplate = "0";
+            scenario = new ScenarioGioco(imgBackgroundUri, imgPos1Uri, imgPos2Uri, imgPos3Uri, LocalDate.parse(dataInizio), ricompensa, esercizi, refTemplate);
+            mCallback.saveScenario(scenario);
 
+            getParentFragmentManager().beginTransaction().remove(this).commit();
+        }
+    }
+
+    private ScenarioGioco getScenario(){
+        return scenario;
     }
 
     private void useTemplate(){
@@ -179,8 +213,6 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
         linearLayoutCreazioneScenario.setVisibility(View.VISIBLE);
         buttonNextScenario.setVisibility(View.GONE);
         buttonPreviousScenario.setVisibility(View.GONE);
-        constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
-
     }
 
     private void prossimoTemplateScenario(){

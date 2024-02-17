@@ -35,8 +35,8 @@
     <string name="child_data">Child data</string>
     <string name="actualSelectedCharacter"><b>SELECTED</b></string>
     <string name="notSelectedCharacter">SELECT</string>
-    <string name="startDate">Start date</string>
-    <string name="endDate">End date</string>
+    <string name="startDate">Start date teraphy</string>
+    <string name="endDate">End date teraphy</string>
     <string name="id">Id</string>
     <string name="next">Avanti</string>
     <string name="errorConnectionDescription">Internet connection is not available. Check your connection, you can\'t use the App without Internet connection</string>
@@ -46,6 +46,7 @@
     <string name="errorPermissionOption1">Request them again</string>
     <string name="errorPermissionOption2">I don\'t want to give them</string>
     <string name="confirm">Confirm</string>
+    <string name="confermato">confirmed</string>
     <string name="cancel">Cancel</string>
     <string name="infoTitle">Attention</string>
     <string name="startRecording">Start Recording</string>
@@ -212,5 +213,7 @@
     <string name="immagine_tappa_3">Pics stage 3</string>
     <string name="add_scenario">Scenary +</string>
     <string name="salva_scenario">Save scenary</string>
+    <string name="costruzione_scenario">Creation scenary</string>
+    <string name="compilaPrimaTutto">Fill in all fields before confirming!</string>
 
 </resources>

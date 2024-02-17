@@ -17,7 +17,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:padding="10dp"
-        android:layout_marginBottom="@dimen/nav_bar_height">
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -98,7 +98,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/ricompensa_finale"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:layout_marginBottom="20dp"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- SCELGI TEMPLATE O CREA NUOVO SCENARIO -->
@@ -139,7 +141,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        >
                         <Button
                             android:id="@+id/buttonOpenFilePickerImmagineSfondo"
                             android:layout_width="match_parent"
@@ -186,10 +189,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
                     android:paddingHorizontal="20dp"
+
                     android:gravity="center"
                     >
+
                     <ImageButton
                         android:id="@+id/buttonTemplateScenarioBack"
                         android:layout_width="0dp"
@@ -205,9 +209,20 @@
                         android:layout_width="200dp"
                         android:layout_height="400dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-
+                        android:layout_marginTop="10dp"
                         >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/costruzione_scenario"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:textColor="@color/white"
+                            android:background="#80000000"
+                            />
 
                         <ImageView
                             android:id="@+id/primaTappaCreazioneScenario"
@@ -251,14 +266,31 @@
                         />
                 </LinearLayout>
 
-                <!--Esercizi
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewEserciziCreazioneScenario"
+
+                <!--FragmentContainerView Esercizio1-->
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentContainerViewEsercizio1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_creazione_esercizio"
-                    />-->
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie.CreazioneEsercizioFragment"
+                    />
+
+                <!--FragmentContainerView Esercizio2-->
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentContainerViewEsercizio2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie.CreazioneEsercizioFragment"
+                    />
+
+                <!--FragmentContainerView Esercizio3-->
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentContainerViewEsercizio3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie.CreazioneEsercizioFragment"
+                    />
+
 
                 <!--Buttone conferma scenario-->
                 <Button
@@ -269,6 +301,7 @@
                     android:text="@string/salva_scenario"
                     android:layout_alignParentBottom="true"
                     />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
