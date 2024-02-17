@@ -33,7 +33,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
                 />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

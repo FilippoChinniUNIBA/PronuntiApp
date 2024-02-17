@@ -31,10 +31,11 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
     private int idNavToEsercizioSequenzaParole;
     private ModificaDataScenariController mController;
     private int indiceTerapia;
+    private String idPaziente;
 
      
 
-    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia) {
+    public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia, String idPaziente) {
         listaScenari.sort(Comparator.comparing(ScenarioGioco::getDataInizio).reversed());
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
@@ -43,6 +44,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         this.idNavToEsercizioCoppiaImmagini = idNavToEsercizioCoppiaImmagini;
         this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
         this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
+        this.idPaziente = idPaziente;
     }
 
     @NonNull
@@ -82,7 +84,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
 
 
                     //TODO aggiornare data scenari
-                   // mController.modificaDataScenari(date,indiceTerapia,position);
+                    //mController.modificaDataScenari(date,indiceTerapia,position);
 
                     //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);
@@ -93,7 +95,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
         }
         RecyclerView recyclerViewEsercizi = holder.recyclerViewEsercizi;
         recyclerViewEsercizi.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext()));
-        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole,indiceTerapia,position);
+        EsercizioAdapter esercizioAdapter = new EsercizioAdapter(scenario.getEsercizi(), navigateTo, idNavToEsercizioDenominazioneImmagine, idNavToEsercizioCoppiaImmagini, idNavToEsercizioSequenzaParole,indiceTerapia,position,idPaziente);
         recyclerViewEsercizi.setAdapter(esercizioAdapter);
 
     }

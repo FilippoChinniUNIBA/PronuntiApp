@@ -77,6 +77,8 @@
     <string name="titleEsercizioSequenzaParole">What is audio say?\nTry to repeat!</string>
     <string name="suggestionSequenzaParole">Reproduce the audio with bottom left button, then record the same phrase! </string>
     <string name="titleEsercizioDenominazioneImmagine">What is in the image?</string>
+    <string name="lastTherapy">This is the last therapy, you can only see following therapies</string>
+    <string name="firstTherapy">This is the first therapy, you can only see previous therapies </string>
     <string name="subTitleLogin">Welcome back!\nEnter your credentials to access the application</string>
     <string name="date">Date</string>
     <string name="place">Place</string>

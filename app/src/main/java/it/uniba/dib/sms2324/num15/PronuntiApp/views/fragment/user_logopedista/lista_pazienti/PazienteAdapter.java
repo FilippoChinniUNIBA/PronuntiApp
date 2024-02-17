@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,9 +74,15 @@ public class PazienteAdapter extends RecyclerView.Adapter<PazienteAdapter.Pazien
         }
         lastClickedCardView = holder.cardViewPazienteInListaLogopedista;
 
-        //TODO passare tramite bundle l'id del paziente al prossimo fragment (ora sta passando null)
-        //che sarebbe pazientiCopia.get(holder.getAdapterPosition()).getIdProfilo();
-        navigateTo.navigateToId(R.id.action_pazientiFragment_to_schedaPazienteFragment, null);
+        String idPazienteSelezionato = pazientiCopia.get(holder.getAdapterPosition()).getIdProfilo();
+        String nomePazienteSelezionato = pazientiCopia.get(holder.getAdapterPosition()).getNome();
+        String cognomePazienteSelezionato = pazientiCopia.get(holder.getAdapterPosition()).getCognome();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("idPaziente",idPazienteSelezionato);
+        bundle.putString("nomePaziente",nomePazienteSelezionato);
+        bundle.putString("cognomePaziente",cognomePazienteSelezionato);
+        navigateTo.navigateToId(R.id.action_pazientiFragment_to_schedaPazienteFragment, bundle);
 
     }
 

@@ -90,6 +90,8 @@ public class LogopedistaViewModel extends ViewModel {
 	}
 
 
+
+
 	public RegistrazionePazienteGenitoreController getRegistrazionePazienteGenitoreController() {
 		if (this.mRegistrazionePazienteGenitoreController == null) {
 			this.mRegistrazionePazienteGenitoreController = new RegistrazionePazienteGenitoreController();

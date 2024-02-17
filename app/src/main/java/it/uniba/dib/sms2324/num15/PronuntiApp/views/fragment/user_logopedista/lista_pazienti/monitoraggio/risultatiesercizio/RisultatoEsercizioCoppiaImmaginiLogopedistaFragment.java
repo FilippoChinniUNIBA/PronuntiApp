@@ -13,13 +13,16 @@ import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends AbstractFragmentWithNavigation {
@@ -34,6 +37,11 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
     private ImageButton imageButtonPause;
     private ImageView imageViewCheck;
     private ImageView imageViewWrong;
+    private String idPaziente;
+    private int indiceTerapia;
+    private int indiceEsercizio;
+    private int indiceScenario;
+    private LogopedistaViewModel mLogopedistaViewModel;
 
 
     @Override
@@ -42,8 +50,21 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
+        savedInstanceState = getArguments();
 
-        //TODO prendere esercizio da id passato da fragment chiamante
+        if (savedInstanceState != null && savedInstanceState.containsKey("indiceEsercizio") && savedInstanceState.containsKey("indiceScenario") && savedInstanceState.containsKey("indiceTerapia")) {
+            indiceEsercizio = savedInstanceState.getInt("indiceEsercizio");
+            indiceScenario = savedInstanceState.getInt("indiceScenario");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+            idPaziente = savedInstanceState.getString("idPaziente");
+        } else {
+            indiceTerapia = 0;
+            indiceEsercizio = 0;
+            indiceScenario = 0;
+        }
+
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+
         seekBarEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
@@ -59,8 +80,7 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
+        this.mEsercizioCoppiaImmagini = getEsercizioCoppiaImmaginiFromViewModel();
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
@@ -142,9 +162,17 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
     }
 
     private boolean isCorrect() {
-        //TODO prendere esito risultato da viewmodel
-        return false;
+        return mEsercizioCoppiaImmagini.getRisultatoEsercizio().isEsitoCorretto();
     }
 
+    private EsercizioCoppiaImmagini getEsercizioCoppiaImmaginiFromViewModel(){
+
+        for (Paziente pazienti : mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti()) {
+            if(pazienti.getIdProfilo().equals(idPaziente)){
+                return (EsercizioCoppiaImmagini) pazienti.getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio);
+            }
+        }
+        return new EsercizioCoppiaImmagini(0,0,"","","");
+    }
 
 }

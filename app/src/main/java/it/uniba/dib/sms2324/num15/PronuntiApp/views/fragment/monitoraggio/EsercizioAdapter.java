@@ -29,6 +29,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
     private int idNavToEsercizioSequenzaParole;
     private int indiceTerapia;
     private int indiceScenario;
+    private String idPaziente = String.valueOf(0);
 
     public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, int indiceTerapia, int indiceScenario) {
         this.listaEsercizi = listaEsercizi;
@@ -38,6 +39,19 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
         this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
         Log.d("EsercizioAdapterCostruttore","Ex"+idNavToEsercizioDenominazioneImmagine);
 
+        this.indiceScenario = indiceScenario;
+        this.indiceTerapia = indiceTerapia;
+    }
+
+    public EsercizioAdapter(List<EsercizioEseguibile> listaEsercizi, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, int indiceTerapia, int indiceScenario, String idPaziente) {
+        this.listaEsercizi = listaEsercizi;
+        this.navigateTo = navigateTo;
+        this.idNavToEsercizioDenominazioneImmagine = idNavToEsercizioDenominazioneImmagine;
+        this.idNavToEsercizioCoppiaImmagini = idNavToEsercizioCoppiaImmagini;
+        this.idNavToEsercizioSequenzaParole = idNavToEsercizioSequenzaParole;
+        Log.d("EsercizioAdapterCostruttore","Ex"+idNavToEsercizioDenominazioneImmagine);
+
+        this.idPaziente = idPaziente;
         this.indiceScenario = indiceScenario;
         this.indiceTerapia = indiceTerapia;
     }
@@ -107,11 +121,11 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
     }
 
     private void navigateToEsercizio(int id, int posizioneInLista) {
-        //TODO passare indice terapia, indice dello scenario e indice esercizio
         Bundle bundle = new Bundle();
         bundle.putInt("indiceEsercizio",posizioneInLista);
         bundle.putInt("indiceTerapia",indiceTerapia);
         bundle.putInt("indiceScenario",indiceScenario);
+        bundle.putString("idPaziente",idPaziente);
         Log.d("EsercizioAdapter", "onBindViewHolder bundle: "+bundle);
         navigateTo.navigateToId(id, bundle);
     }

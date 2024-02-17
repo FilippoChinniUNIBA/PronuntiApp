@@ -61,7 +61,6 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
             indiceScenario = 0;
         }
 
-        //TODO prendere esercizio da id passato da fragment chiamante
         seekBarEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
@@ -78,9 +77,6 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        //this.mEsercizioCoppiaImmagini = new EsercizioCoppiaImmagini(50,20,"https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.mp3?alt=media&token=db982084-a8eb-48be-b5ae-a81ceb334ea4","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d","https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
 
         this.mEsercizioCoppiaImmagini = getEsercizioCoppiaImmaginiFromViewModel(indiceEsercizio,indiceScenario,indiceTerapia);
 

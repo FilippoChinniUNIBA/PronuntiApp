@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
@@ -58,8 +59,9 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
                 MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
                 nuovoFragmentMonitoraggio.setArguments(bundle);
                 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+            }else{
+                creaDialogErroreCampi(1);
             }
-            //TODO dialog
         });
 
         imageButtonTerapiaPrecedente.setOnClickListener(v -> {
@@ -70,9 +72,28 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
                 MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
                 nuovoFragmentMonitoraggio.setArguments(bundle);
                 getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+            }else{
+                creaDialogErroreCampi(2);
             }
+
         });
 
     }
+
+    public void creaDialogErroreCampi(int tipoErrore) {
+        String messaggioErrore = "";
+        switch (tipoErrore) {
+            case 1:
+                messaggioErrore = getString(R.string.firstTherapy);
+                break;
+            case 2:
+                messaggioErrore = getString(R.string.lastTherapy);
+                break;
+        }
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
+        infoDialog.show();
+        infoDialog.setOnConfermaButtonClickListener(null);
+    }
+
 
 }

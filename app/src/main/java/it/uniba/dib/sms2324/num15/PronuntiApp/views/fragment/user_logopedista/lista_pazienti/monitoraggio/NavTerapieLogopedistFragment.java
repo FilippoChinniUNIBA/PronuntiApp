@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,23 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.MonitoraggioGenitoreFragment;
 
 public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation {
 
     private ImageButton imageButtonProssimaTerapia;
     private ImageButton imageButtonTerapiaPrecedente;
+    private LogopedistaViewModel mLogoPedistaViewModel;
+    private int indiceTerapia;
+    private String idPaziente;
+    private int indicePaziente;
 
 
     @Nullable
@@ -26,6 +36,10 @@ public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation
         imageButtonProssimaTerapia = view.findViewById(R.id.buttonAvantiTerapia);
         imageButtonTerapiaPrecedente = view.findViewById(R.id.buttonIndietroTerapia);
 
+        savedInstanceState = getArguments();
+        indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+        idPaziente = savedInstanceState.getString("idPaziente");
+        indicePaziente = savedInstanceState.getInt("indicePaziente");
         return view;
     }
 
@@ -33,16 +47,57 @@ public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        int indiceultimaTerapia = indiceTerapia;
+
+        Bundle bundle = new Bundle();
+
         imageButtonProssimaTerapia.setOnClickListener(v -> {
-            //TODO implementare funzionalità per passare alla terapia successiva
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioLogopedistaFragment()).commit();
+            if (indiceTerapia != indiceultimaTerapia) {
+                indiceTerapia++;
+                Log.d("NavTerapieGenitore",""+indiceTerapia);
+                bundle.putInt("indiceTerapia",indiceTerapia);
+                bundle.putString("idPaziente",idPaziente);
+                bundle.putInt("indicePaziente",indicePaziente);
+                MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
+                nuovoFragmentMonitoraggio.setArguments(bundle);
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+            }else{
+                creaDialogErroreCampi(1);
+            }
         });
 
         imageButtonTerapiaPrecedente.setOnClickListener(v -> {
-            //TODO implementare funzionalità per passare alla terapia precedente
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, new MonitoraggioLogopedistaFragment()).commit();
+            if (indiceTerapia != 0) {
+                indiceTerapia--;
+                Log.d("NavTerapieGenitore",""+indiceTerapia);
+                bundle.putInt("indiceTerapia",indiceTerapia);
+                bundle.putString("idPaziente",idPaziente);
+                bundle.putInt("indicePaziente",indicePaziente);
+                MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
+                nuovoFragmentMonitoraggio.setArguments(bundle);
+                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+            }
+            else {
+                creaDialogErroreCampi(2);
+            }
         });
 
     }
+
+    public void creaDialogErroreCampi(int tipoErrore) {
+        String messaggioErrore = "";
+        switch (tipoErrore) {
+            case 1:
+                messaggioErrore = getString(R.string.firstTherapy);
+                break;
+            case 2:
+                messaggioErrore = getString(R.string.lastTherapy);
+                break;
+        }
+        InfoDialog infoDialog = new InfoDialog(getContext(), messaggioErrore, getString(R.string.tastoRiprova));
+        infoDialog.show();
+        infoDialog.setOnConfermaButtonClickListener(null);
+    }
+
 
 }

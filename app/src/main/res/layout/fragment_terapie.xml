@@ -11,7 +11,6 @@
         android:id="@+id/fragmentContainerViewNavTerapie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.NavTerapieGenitoreFragment"
         />
 
     <androidx.fragment.app.FragmentContainerView

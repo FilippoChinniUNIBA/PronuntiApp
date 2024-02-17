@@ -13,13 +13,17 @@ import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
 public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends AbstractFragmentWithNavigation {
@@ -34,6 +38,12 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
     private AudioRecorder audioRecorder;
     private AudioPlayerLink audioPlayerLink;
     private MediaPlayer mMediaPlayer;
+    private int indiceTerapia;
+    private int indiceEsercizio;
+    private int indiceScenario;
+    private String idPaziente;
+    private LogopedistaViewModel mLogopedistaViewModel;
+
 
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
     @Override
@@ -42,8 +52,21 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
+        savedInstanceState = getArguments();
 
-        //TODO prendere esercizio da id passato da fragment chiamante
+        if (savedInstanceState != null && savedInstanceState.containsKey("indiceEsercizio") && savedInstanceState.containsKey("indiceScenario") && savedInstanceState.containsKey("indiceTerapia")) {
+            indiceEsercizio = savedInstanceState.getInt("indiceEsercizio");
+            indiceScenario = savedInstanceState.getInt("indiceScenario");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+            idPaziente = savedInstanceState.getString("idPaziente");
+        } else {
+            indiceTerapia = 0;
+            indiceEsercizio = 0;
+            indiceScenario = 0;
+        }
+
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
+
         seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
@@ -61,9 +84,7 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
-        this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
-
+        this.mEsercizioSequenzaParole = getmEsercizioSequenzaParoleFromViewModel();
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
@@ -150,18 +171,27 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
     private void playAudio() {
         playButtonRisposta.setVisibility(View.GONE);
         pauseButtonRisposta.setVisibility(View.VISIBLE);
-        //TODO riproduzione audio
+        audioPlayerLink.playAudio();
     }
 
     private void stopAudio() {
         playButtonRisposta.setVisibility(View.VISIBLE);
         pauseButtonRisposta.setVisibility(View.GONE);
-        //TODO ferma riproduzione audio
+        audioPlayerLink.stopAudio();
     }
 
     private boolean isCorrect() {
-        //TODO prendere esito risultato da viewmodel
-        return false;
+        return mEsercizioSequenzaParole.getRisultatoEsercizio().isEsitoCorretto();
+    }
+
+    private EsercizioSequenzaParole getmEsercizioSequenzaParoleFromViewModel(){
+
+        for (Paziente pazienti : mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti()) {
+            if(pazienti.getIdProfilo().equals(idPaziente)){
+                return (EsercizioSequenzaParole) pazienti.getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio);
+            }
+        }
+        return new EsercizioSequenzaParole(0,0,"","","","");
     }
 
 }

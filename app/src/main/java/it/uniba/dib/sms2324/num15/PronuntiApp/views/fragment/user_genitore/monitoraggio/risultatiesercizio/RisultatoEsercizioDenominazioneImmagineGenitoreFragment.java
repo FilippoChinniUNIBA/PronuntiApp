@@ -54,7 +54,6 @@ public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends Abs
             indiceScenario = 0;
         }
 
-        //TODO prendere esercizio da id passato da fragment chiamante
         immagineEsercizioDenominazioneImageView = view.findViewById(R.id.imageViewImmagineEsercizioDenominazione);
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);

@@ -60,7 +60,6 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
             indiceScenario = 0;
         }
 
-        //TODO prendere esercizio da id passato da fragment chiamante
         seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
@@ -80,10 +79,7 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //TODO: in sto fragment l'esercizio dovrebbe essere passato dalla classe chiamante
         this.mEsercizioSequenzaParole = getEsercizioSequenzaParoleFromViewModel(indiceEsercizio,indiceScenario,indiceTerapia);
-        //this.mEsercizioSequenzaParole = new EsercizioSequenzaParole(50, 20, "https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/cane_carota_gatto.mp3?alt=media&token=f5058c6f-9ea2-4ffc-8189-e1aef88e69cc", "cane", "carota", "gatto");
-
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
