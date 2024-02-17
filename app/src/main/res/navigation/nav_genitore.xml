@@ -17,15 +17,15 @@
         tools:layout="@layout/fragment_profile_genitore" />
     <fragment
         android:id="@+id/risultatoEsercizioSequenzaParoleFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleGenitoreFragment"
         android:label="RisultatoEsercizioSequenzaParoleFragment" />
     <fragment
         android:id="@+id/risultatoEsercizioDenominazioneImmagineFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineGenitoreFragment"
         android:label="RisultatoEsercizioDenominazioneImmagineFragment" />
     <fragment
         android:id="@+id/risultatoEsercizioCoppiaImmaginiFragment"
-        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioCoppiaImmaginiFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio.RisultatoEsercizioCoppiaImmaginiGenitoreFragment"
         android:label="RisultatoEsercizioCoppiaImmaginiFragment" />
     <fragment
         android:id="@+id/terapieFragment"

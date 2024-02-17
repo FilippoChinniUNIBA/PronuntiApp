@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="Risultato"
+        android:text="@string/risultatoEsercizio"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="@dimen/headerTextSize"
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="@dimen/subHeaderTextSize"
-            android:text="Aiuti utilizzati: 2"
+            android:text="@string/aiutiUtilizzati"
             android:paddingStart="20dp"
             />
 
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="@dimen/subHeaderTextSize"
-            android:text="Risposta data"
+            android:text="@string/rispostaData"
             android:paddingStart="20dp"
             />
     </LinearLayout>

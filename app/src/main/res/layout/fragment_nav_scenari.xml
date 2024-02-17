@@ -4,30 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <!-- ConstraintLayout wrapper -->
 
 
         <!-- LinearLayout -->
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:paddingVertical="5dp"
             android:id="@+id/myLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#80000000"
+            >
 
             <ImageButton
                 android:id="@+id/buttonIndietroScenario"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_gravity=""
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_arrow_back" />
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back_white"
+                android:scaleType="centerInside"
+                />
 
             <TextView
                 android:id="@+id/textViewDataScenario"
@@ -35,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:textAppearance="@style/styleTextPersonaggi"
                 android:text="12-03-2020">
 
             </TextView>
@@ -43,12 +49,14 @@
             <ImageButton
                 android:id="@+id/buttonAvantiScenario"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="24dp"
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:scaleX="-1"
-                android:src="@drawable/ic_arrow_back" />
+                android:src="@drawable/ic_back_white"
+                android:scaleType="centerInside"
+                />
         </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

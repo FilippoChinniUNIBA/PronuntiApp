@@ -19,13 +19,12 @@ import java.io.File;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.genitore_viewmodel.GenitoreViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class RisultatoEsercizioCoppiaImmaginiFragment extends AbstractFragmentWithNavigation {
+public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFragmentWithNavigation {
 
 
     private SeekBar seekBarEsercizioCoppiaImmagini;

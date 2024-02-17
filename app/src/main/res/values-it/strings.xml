@@ -53,6 +53,8 @@
     <string name="StartAnswer"> Riproduci Registrazione</string>
     <string name="StopAnswer">Ferma Registrazione</string>
     <string name="getHelp">Clicca qui per ricerevere un aiuto!</string>
+    <string name="aiutiUtilizzati">Aiuti utilizzati: </string>
+    <string name="rispostaData">Risposta data</string>
     <string name="showHelp">Clicca per ricevere un aiuto</string>
     <string name="suggestEsercizioDenominazione">Clicca sul microfono e pronuncia l\'elemento nell\'immagine!</string>
     <string name="checkAnswer">Verifica</string>
@@ -191,4 +193,6 @@
     <string name="salva_scenario">Salva scenario</string>
     <string name="costruzione_scenario">Costruzione scenario</string>
     <string name="compilaPrimaTutto">Compila tutti i campi prima di confermare!</string>
+    <string name="iniziataIl">Iniziata il</string>
+    <string name="terminaIl">Termina il</string>
 </resources>

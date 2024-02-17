@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.monitoraggio.risultatiesercizio;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.risultatiesercizio;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPla
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class RisultatoEsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
+public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends AbstractFragmentWithNavigation {
     private ImageView imageViewCheck;
     private ImageView imageViewWrong;
     private ImageButton playButtonRisposta;

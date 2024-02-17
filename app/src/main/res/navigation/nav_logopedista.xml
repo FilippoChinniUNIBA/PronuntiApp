@@ -46,6 +46,18 @@
             android:id="@+id/action_schedaPazienteFragment_to_creazioneTerapiaFragment"
             app:destination="@id/creazioneTerapieFragment"
             app:popUpTo="@id/schedaPazienteFragment" />
+        <action
+            android:id="@+id/action_schedaPazienteFragment_to_risultatoEsercizioSequenzaParoleLogopedistaFragment"
+            app:destination="@id/risultatoEsercizioSequenzaParoleLogopedistaFragment"
+            app:popUpTo="@id/schedaPazienteFragment" />
+        <action
+            android:id="@+id/action_schedaPazienteFragment_to_risultatoEsercizioDenominazioneImmagineLogopedistaFragment"
+            app:destination="@id/risultatoEsercizioDenominazioneImmagineLogopedistaFragment"
+            app:popUpTo="@id/schedaPazienteFragment" />
+        <action
+            android:id="@+id/action_schedaPazienteFragment_to_risultatoEsercizioCoppiaImmaginiLogopedistaFragment"
+            app:destination="@id/risultatoEsercizioCoppiaImmaginiLogopedistaFragment"
+            app:popUpTo="@id/schedaPazienteFragment" />
     </fragment>
     <fragment
         android:id="@+id/creazioneTerapieFragment"
@@ -56,4 +68,16 @@
             android:id="@+id/action_creazioneTerapiaFragment_to_schedaPazienteFragment"
             app:destination="@id/schedaPazienteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/risultatoEsercizioCoppiaImmaginiLogopedistaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.risultatiesercizio.RisultatoEsercizioCoppiaImmaginiLogopedistaFragment"
+        android:label="RisultatoEsercizioCoppiaImmaginiLogopedistaFragment" />
+    <fragment
+        android:id="@+id/risultatoEsercizioDenominazioneImmagineLogopedistaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.risultatiesercizio.RisultatoEsercizioDenominazioneImmagineLogopedistaFragment"
+        android:label="RisultatoEsercizioDenominazioneImmagineLogopedistaFragment" />
+    <fragment
+        android:id="@+id/risultatoEsercizioSequenzaParoleLogopedistaFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleLogopedistaFragment"
+        android:label="RisultatoEsercizioSequenzaParoleLogopedistaFragment" />
 </navigation>

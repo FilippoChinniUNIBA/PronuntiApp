@@ -55,6 +55,8 @@
     <string name="StartAnswer">Start Answer</string>
     <string name="StopAnswer">Stop Answer</string>
     <string name="getHelp">Click here for help!</string>
+    <string name="aiutiUtilizzati">Aid used: </string>
+    <string name="rispostaData">Answer given</string>
     <string name="showHelp">Click for help!</string>
     <string name="suggestEsercizioDenominazione">Click on the microphone and pronounce the element in the image!</string>
     <string name="checkAnswer">Check</string>
@@ -179,7 +181,7 @@
     <string name="valutaInsufficiente">You do not have enough money to unlock this character!</string>
     <string name="acquistoPersonaggioTitle">Character Purchase</string>
     <string name="acquistoPersonaggioDescription">Are you sure you want to buy and unlock this character?</string>
-    <string name="risultatoEsercizio">Result excersize</string>
+    <string name="risultatoEsercizio">Result exercize</string>
     <string name="terapia">Therapy</string>
     <string name="scenarioDel">Scenery of:</string>
     <string name="creaTerapia">New therapy to </string>
@@ -215,5 +217,7 @@
     <string name="salva_scenario">Save scenary</string>
     <string name="costruzione_scenario">Creation scenary</string>
     <string name="compilaPrimaTutto">Fill in all fields before confirming!</string>
+    <string name="iniziataIl">Started in</string>
+    <string name="terminaIl">Finish in</string>
 
 </resources>
