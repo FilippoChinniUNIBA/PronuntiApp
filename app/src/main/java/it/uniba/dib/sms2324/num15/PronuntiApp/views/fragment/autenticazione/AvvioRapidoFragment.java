@@ -63,7 +63,7 @@ public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
             loginActivityProfilo(EMAIL_PAZIENTE_PREDEFINITO, PASSWORD_PAZIENTE_PREDEFINITO);
         });
 
-        view.findViewById(R.id.testPortaleTestButton).setOnClickListener(v -> startActivity(new Intent(getActivity(), TEST_Activity.class)));
+        //view.findViewById(R.id.testPortaleTestButton).setOnClickListener(v -> startActivity(new Intent(getActivity(), TEST_Activity.class)));
 
     }
 

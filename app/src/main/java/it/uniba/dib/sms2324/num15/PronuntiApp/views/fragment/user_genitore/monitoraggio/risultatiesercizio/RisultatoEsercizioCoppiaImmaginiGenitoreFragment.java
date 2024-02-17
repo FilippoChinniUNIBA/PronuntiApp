@@ -1,5 +1,6 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_genitore.monitoraggio.risultatiesercizio;
 
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -171,6 +172,21 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
         Log.d("RisultatoDenominazione", ":"+ indiceEsercizio);
 
         return (EsercizioCoppiaImmagini) mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Blocca l'orientamento in portrait
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Sblocca l'orientamento quando il fragment non è più visibile
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
     }
 
 }

@@ -2,6 +2,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioc
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -21,6 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.squareup.picasso.Picasso;
@@ -117,9 +120,23 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 				@Override
 				public void onLoadCleared(@Nullable Drawable placeholder) {}
 			});
-			Glide.with(this).load(immagineTappa1).centerCrop().into(posizioneGioco1ImageView);
-			Glide.with(this).load(immagineTappa2).centerCrop().into(posizioneGioco2ImageView);
-			Glide.with(this).load(immagineTappa3).centerCrop().into(posizioneGioco3ImageView);
+
+
+
+			Glide.with(this).load(immagineTappa1).centerInside().into(posizioneGioco1ImageView);
+			Glide.with(this).load(immagineTappa2).centerInside().into(posizioneGioco2ImageView);
+			Glide.with(this).load(immagineTappa3).centerInside().into(posizioneGioco3ImageView);
+
+			//se è completato disattivalo
+			if (isCompletato(0)) {
+				diableImageView(posizioneGioco1ImageView);
+			}
+			if (isCompletato(1)) {
+				diableImageView(posizioneGioco2ImageView);
+			}
+			if (isCompletato(2)) {
+				diableImageView(posizioneGioco3ImageView);
+			}
 
 			mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
 				Picasso.get().load(texture).into(personaggioImageView);
@@ -142,11 +159,20 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		});
 	}
 
-	private boolean inCompletato(int index){
-		if(scenarioGioco.getEsercizi().get(index).getRisultatoEsercizio()==null){
-			return false;
-		}else{
+	private void diableImageView(ImageView view) {
+		ColorMatrix colorMatrix = new ColorMatrix();
+		colorMatrix.setSaturation(0);
+		ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+		view.setColorFilter(filter);
+	}
+
+	private boolean isCompletato(int index){
+		if(scenarioGioco.getEsercizi().get(index).getRisultatoEsercizio()!=null){
+			Log.d("Esercizio", "completato");
 			return true;
+		}else{
+			Log.d("Esercizio", "non completato");
+			return false;
 		}
 	}
 
@@ -232,21 +258,21 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 						float newX = x - xDelta;
 						float newY = y - yDelta;
 
-						if (isPersonaggioInAreaPrimoEsercizio()) {
+						if (isPersonaggioInAreaPrimoEsercizio() && !isCompletato(0)) {
 							ridimensionaPosizione(posizioneGioco2ImageView);
 							ridimensionaPosizione(posizioneGioco3ImageView);
 							posizioneGioco2ImageView.setBackground(null);
 							posizioneGioco3ImageView.setBackground(null);
 							highlightPosizione(posizioneGioco1ImageView);
 
-						} else if (isPersonaggioInAreaSecondaEsercizio()) {
+						} else if (isPersonaggioInAreaSecondaEsercizio() && !isCompletato(1)) {
 							ridimensionaPosizione(posizioneGioco1ImageView);
 							ridimensionaPosizione(posizioneGioco3ImageView);
 							posizioneGioco1ImageView.setBackground(null);
 							posizioneGioco3ImageView.setBackground(null);
 							highlightPosizione(posizioneGioco2ImageView);
 
-						} else if (isPersonaggioInAreaTerzoEsercizio()) {
+						} else if (isPersonaggioInAreaTerzoEsercizio() && !isCompletato(2)) {
 							ridimensionaPosizione(posizioneGioco1ImageView);
 							ridimensionaPosizione(posizioneGioco2ImageView);
 							posizioneGioco1ImageView.setBackground(null);
@@ -278,11 +304,11 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 
 					case MotionEvent.ACTION_UP:
 						List<EsercizioEseguibile> esercizioEseguibileList = scenarioGioco.getEsercizi();
-						if (isPersonaggioInAreaPrimoEsercizio()) {
+						if (isPersonaggioInAreaPrimoEsercizio() && !isCompletato(0)) {
 							verificaEssercizio(esercizioEseguibileList.get(0),0 );
-						} else if (isPersonaggioInAreaSecondaEsercizio()) {
+						} else if (isPersonaggioInAreaSecondaEsercizio() && !isCompletato(1)) {
 							verificaEssercizio(esercizioEseguibileList.get(1),1 );
-						} else if (isPersonaggioInAreaTerzoEsercizio()) {
+						} else if (isPersonaggioInAreaTerzoEsercizio() && !isCompletato(2)) {
 							verificaEssercizio(esercizioEseguibileList.get(2),2 );
 						}
 

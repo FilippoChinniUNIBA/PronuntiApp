@@ -7,11 +7,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
     android:layout_marginBottom="@dimen/nav_bar_height"
+    android:background="@color/backgroundWhite"
     >
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollViewTerapieLogopedista"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/buttonAddTerapia"
         >
         <LinearLayout
@@ -30,7 +31,7 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerViewTerapie"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.TerapieLogopedistaFragment"
                 />
