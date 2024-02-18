@@ -41,14 +41,17 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
         super.onViewCreated(view, savedInstanceState);
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), Void -> {
             List<Integer> scenariGiocoValidi = mPazienteViewModel.getScenariPaziente();
-            Bundle bundle = new Bundle();
-            ScenarioFragment scenarioFragment = new ScenarioFragment();
-            bundle.putInt("indiceScenarioCorrente", scenariGiocoValidi.get(scenariGiocoValidi.size()-1));
-            scenarioFragment.setArguments(bundle);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
+            if(scenariGiocoValidi!=null) {
+                Bundle bundle = new Bundle();
+                ScenarioFragment scenarioFragment = new ScenarioFragment();
+                bundle.putInt("indiceScenarioCorrente", scenariGiocoValidi.get(scenariGiocoValidi.size() - 1));
+                scenarioFragment.setArguments(bundle);
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
+            }else{
+                AssenzaScenariFragment assenzaScenariFragment = new AssenzaScenariFragment();
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, assenzaScenariFragment).commit();
+            }
         });
-
-
     }
 
 

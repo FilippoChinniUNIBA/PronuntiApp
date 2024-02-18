@@ -17,6 +17,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Templa
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.appuntamenti.ModificaAppuntamentiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.lista_pazienti.RegistrazionePazienteGenitoreController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.terapie.TerapieController;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 
 public class LogopedistaViewModel extends ViewModel {
 	private MutableLiveData<Logopedista> mLogopedista = new MutableLiveData<>();
@@ -90,6 +92,25 @@ public class LogopedistaViewModel extends ViewModel {
 		Log.d("LogopedistaViewModel.rimuoviAppuntamentoFromListaAppuntamentiLiveData()", "Appuntamento rimosso: " + idAppuntamento);
 	}
 
+	public Paziente getPazienteById(String id){
+		List<Paziente> pazienti = mLogopedista.getValue().getPazienti();
+		Paziente pazienteTrovato = null;
+		for (Paziente paziente: pazienti){
+			if(paziente.getIdProfilo().equals(id)){
+				pazienteTrovato = paziente;
+			}
+		}
+		return pazienteTrovato;
+	}
+
+	public void addTerapiaInPaziente(Terapia terapia, String idPaziente){
+		List<Paziente> pazienti = mLogopedista.getValue().getPazienti();
+		for (Paziente paziente: pazienti){
+			if(paziente.getIdProfilo().equals(idPaziente)){
+				paziente.addTerapia(terapia);
+			}
+		}
+	}
 
 
 

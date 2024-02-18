@@ -62,14 +62,23 @@ public class PazienteViewModel extends ViewModel {
 	public List<Integer> getScenariPaziente(){
 		LocalDate dataCorrente = LocalDate.now();
 		List<Terapia> terapie = mPaziente.getValue().getTerapie();
-		int terapieSize = terapie.size();
-		Terapia terapia = terapie.get(terapieSize-1);
-		List<ScenarioGioco> scenariGiocoTerapia = terapia.getScenariGioco();
-		List<IndexDate> indexDateScenariGioco = filterScenariGioco(scenariGiocoTerapia,dataCorrente);
-		indexDateScenariGioco.sort(Comparator.comparing(IndexDate::getDate));
-		List<Integer> listaIndici = getIndexList(indexDateScenariGioco);
-		Collections.reverse(listaIndici);
-		return listaIndici;
+		if(terapie!=null){
+			int terapieSize = terapie.size();
+			Terapia terapia = terapie.get(terapieSize - 1);
+			List<ScenarioGioco> scenariGiocoTerapia = terapia.getScenariGioco();
+			List<IndexDate> indexDateScenariGioco = filterScenariGioco(scenariGiocoTerapia, dataCorrente);
+			indexDateScenariGioco.sort(Comparator.comparing(IndexDate::getDate));
+			List<Integer> listaIndici = getIndexList(indexDateScenariGioco);
+			Collections.reverse(listaIndici);
+			if (!listaIndici.isEmpty()) {
+				return listaIndici;
+			} else {
+				return null;
+			}
+		}else {
+			return null;
+		}
+
 	}
 
 	private static List<Integer> getIndexList(List<IndexDate> indexDateScenariGioco){

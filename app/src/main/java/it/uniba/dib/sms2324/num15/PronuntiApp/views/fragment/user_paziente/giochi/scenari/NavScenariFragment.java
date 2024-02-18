@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -25,6 +27,7 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     private ImageButton buttonIndietroScenario;
     private ImageButton buttonAvantiScenario;
     private PazienteViewModel mPazienteViewModel;
+    private LinearLayout linearLayout;
     private int currentScenarioIndex = 0;
     private int maxSize;
 
@@ -37,6 +40,7 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
         textViewDataScenario = view.findViewById(R.id.textViewDataScenario);
         buttonIndietroScenario = view.findViewById(R.id.buttonIndietroScenario);
         buttonAvantiScenario = view.findViewById(R.id.buttonAvantiScenario);
+        linearLayout = view.findViewById(R.id.myLinearLayout);
 
         return view;
     }
@@ -46,15 +50,18 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
         super.onViewCreated(view, savedInstanceState);
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Integer> scenariIndexListmPazienteViewModel = mPazienteViewModel.getScenariPaziente();
-            maxSize = scenariIndexListmPazienteViewModel.size()-1;
-            currentScenarioIndex = maxSize;
+            if(scenariIndexListmPazienteViewModel!= null) {
+                maxSize = scenariIndexListmPazienteViewModel.size() - 1;
+                currentScenarioIndex = maxSize;
 
-            List<Terapia> terapie = paziente.getTerapie();
-            int sizeTerapie = terapie.size();
-            textViewDataScenario.setText(terapie.get(sizeTerapie-1).getScenariGioco().get(currentScenarioIndex).getDataInizio().toString());
-
-            buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente(scenariIndexListmPazienteViewModel));
-            buttonAvantiScenario.setOnClickListener(v -> navigaScenarioSuccessivo(scenariIndexListmPazienteViewModel));
+                List<Terapia> terapie = paziente.getTerapie();
+                int sizeTerapie = terapie.size();
+                textViewDataScenario.setText(terapie.get(sizeTerapie - 1).getScenariGioco().get(currentScenarioIndex).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente(scenariIndexListmPazienteViewModel));
+                buttonAvantiScenario.setOnClickListener(v -> navigaScenarioSuccessivo(scenariIndexListmPazienteViewModel));
+            }else{
+                linearLayout.setVisibility(View.GONE);
+            }
         });
     }
 

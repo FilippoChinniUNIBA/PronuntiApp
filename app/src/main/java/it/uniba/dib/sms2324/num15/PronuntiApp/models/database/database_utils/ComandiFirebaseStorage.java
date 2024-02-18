@@ -23,6 +23,7 @@ public class ComandiFirebaseStorage {
 	public static final String ESERCIZI_COPPIA_IMMAGINI = "esercizi_coppia_immagini";
 	public static final String AUDIO_REGISTRATI_DENOMINAZIONE_IMMAGINE = ESERCIZI_DENOMINAZIONE_IMMAGINE + "/audio_registrati";
 	public static final String AUDIO_REGISTRATI_SEQUENZA_PAROLE = ESERCIZI_SEQUENZA_PAROLE + "/audio_registrati";
+	public static final String AUDIO_REGISTRATI_COPPIA_IMMAGINI = ESERCIZI_COPPIA_IMMAGINI + "/audio_registrati";
 
 
 	private final FirebaseStorage storage;

@@ -36,9 +36,11 @@ import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.ComandiFirebaseStorage;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.scenariogioco.TemplateScenarioGiocoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
@@ -77,6 +79,10 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
 
     private List<EsercizioEseguibile> esercizi;
     private ScenarioGioco scenario;
+    private List<TemplateScenarioGioco> templateScenari;
+    private int currentIndexTemplateScenari = 0;
+    private int sizeTemplateScenari;
+    private boolean sceltaScenari = false;
 
     //interfaccia di callBack per salvare lo scenario
     private SaveScenario mCallback;
@@ -123,44 +129,49 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     }
 
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
+        templateScenarioGiocoDAO.getAll().thenAccept(result -> {
+            templateScenari = result;
+            sizeTemplateScenari = result.size();
 
-        //TODO prendere tutti i template scenario da db
+            linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
+            linearLayoutCreazioneScenario.setVisibility(View.GONE);
+            buttonNextScenario.setVisibility(View.GONE);
+            buttonPreviousScenario.setVisibility(View.GONE);
+            buttonChooseImgPos1.setVisibility(View.GONE);
+            buttonChooseImgPos2.setVisibility(View.GONE);
+            buttonChooseImgPos3.setVisibility(View.GONE);
 
-        linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
-        linearLayoutCreazioneScenario.setVisibility(View.GONE);
-        buttonNextScenario.setVisibility(View.GONE);
-        buttonPreviousScenario.setVisibility(View.GONE);
-        buttonChooseImgPos1.setVisibility(View.GONE);
-        buttonChooseImgPos2.setVisibility(View.GONE);
-        buttonChooseImgPos3.setVisibility(View.GONE);
+            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
 
-        constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
+            dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
 
-        dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
+            buttonUseTemplate.setOnClickListener(v -> useTemplate());
+            buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
 
-        buttonUseTemplate.setOnClickListener(v -> useTemplate());
-        buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
+            buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
+            buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
+            buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
 
-        buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
-        buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
-        buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
+            buttonChooseBackground.setOnClickListener(v -> {
+                        startFilePicker(PICK_FILE_REQUEST_4);
+                        constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
+                        buttonChooseImgPos1.setVisibility(View.VISIBLE);
+                        buttonChooseImgPos2.setVisibility(View.VISIBLE);
+                        buttonChooseImgPos3.setVisibility(View.VISIBLE);
+                    }
+            );
 
-        buttonChooseBackground.setOnClickListener(v -> {
-            startFilePicker(PICK_FILE_REQUEST_4);
-            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
-            buttonChooseImgPos1.setVisibility(View.VISIBLE);
-            buttonChooseImgPos2.setVisibility(View.VISIBLE);
-            buttonChooseImgPos3.setVisibility(View.VISIBLE);
-            }
-        );
+            buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
+            buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
 
-        buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
-        buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
+            buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
+        });
 
-        buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
     }
     private void showErrorDialog(){
         InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
@@ -173,6 +184,12 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
         EsercizioEseguibile es1 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio1)).getEsercizio();
         EsercizioEseguibile es2 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio2)).getEsercizio();
         EsercizioEseguibile es3 = ((CreazioneEsercizioFragment) getChildFragmentManager().findFragmentById(R.id.fragmentContainerViewEsercizio3)).getEsercizio();
+        if(sceltaScenari) {
+            imgPos1Uri = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa1();
+            imgPos2Uri = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa2();
+            imgPos3Uri = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa3();
+            imgBackgroundUri = templateScenari.get(currentIndexTemplateScenari).getImmagineSfondo();
+        }
 
         if(dataScenario.getText().toString().isEmpty() || ricompensaFinale.getText().toString().isEmpty() || imgPos1Uri==null
                 || imgPos2Uri==null || imgPos3Uri==null || imgBackgroundUri==null || es1==null || es2==null || es3==null){
@@ -197,6 +214,7 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     }
 
     private void useTemplate(){
+        sceltaScenari =true;
         linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.GONE);
         linearLayoutCreazioneScenario.setVisibility(View.GONE);
         buttonNextScenario.setVisibility(View.VISIBLE);
@@ -213,33 +231,36 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     }
 
     private void prossimoTemplateScenario(){
-        //TODO implementare funzionalità per passare al template succesivo
-        //(meglio avere una istanza di TemplateScenario templateScenarioScelto
-        // così in modificaCostruzioneScenarioConTemplate() si assegnano i suoi attributi alle variabili URI)
+        if(currentIndexTemplateScenari+1<sizeTemplateScenari){
+            currentIndexTemplateScenari +=1;
+        }else{
+            currentIndexTemplateScenari =0;
+        }
         modificaCostruzioneScenarioConTemplate();
     }
 
     private void precedenteTemplateScenario(){
-        //TODO implementare funzionalità per passare al template precedente
-        //(meglio avere una istanza di TemplateScenario templateScenarioScelto
-        // così in modificaCostruzioneScenarioConTemplate() si assegnano i suoi attributi alle variabili URI)
+        if(currentIndexTemplateScenari-1 >= 0){
+            currentIndexTemplateScenari -=1;
+        }else{
+            currentIndexTemplateScenari = sizeTemplateScenari-1;
+        }
         modificaCostruzioneScenarioConTemplate();
 
     }
 
     private void modificaCostruzioneScenarioConTemplate(){
-        //TODO inserire le vere immagini dei template nelle imageview
-        Uri uri1= Uri.parse("https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d");
-        Uri uri2= Uri.parse("https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/macchina.jpg?alt=media&token=88ac2ae0-d403-41b0-adfd-2a1e106a3462");
-        Uri uri3= Uri.parse("https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d");
-        Uri uri4= Uri.parse("https://firebasestorage.googleapis.com/v0/b/pronuntiapp-32bf6.appspot.com/o/struzzo.jpg?alt=media&token=50abcf18-c404-48c1-bb3a-b37436898b8d");
+        String img1 = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa1();
+        String img2 = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa2();
+        String img3 = templateScenari.get(currentIndexTemplateScenari).getImmagineTappa3();
+        String imgSfondo = templateScenari.get(currentIndexTemplateScenari).getImmagineSfondo();
 
-        Glide.with(getContext()).load(uri1).into(imgPos1);
-        Glide.with(getContext()).load(uri2).into(imgPos2);
-        Glide.with(getContext()).load(uri3).into(imgPos3);
+        Glide.with(getContext()).load(img1).into(imgPos1);
+        Glide.with(getContext()).load(img2).into(imgPos2);
+        Glide.with(getContext()).load(img3).into(imgPos3);
         Glide.with(getContext())
                 .asBitmap()
-                .load(uri4)
+                .load(imgSfondo)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {

@@ -20,6 +20,10 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
+import androidx.lifecycle.ViewModelProvider;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
+
 
 public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation implements SaveScenario{
 
@@ -29,23 +33,24 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
     private Button buttonSalvataggioTerapia;
     private Terapia terapia;
     private boolean isFirstScenario = true;
+    private LogopedistaViewModel mLogopedistaViewModel;
+    private Bundle bundle;
+    private String idPaziente;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_creazione_terapia, container, false);
-        //TODO ricevere da bundle idPaziente
-
-        //TODO passare qua il nome e cognome del paziente preso dal viewModel
-        setToolBar(view,getString(R.string.creaTerapia) + " " + "Giovanni Vocestupida");
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
         dataFine = view.findViewById(R.id.textInputEditTextDataInizioTerapia);
         dataInizio = view.findViewById(R.id.textInputEditTextDataFineTerapia);
 
         buttonAddScenario = view.findViewById(R.id.buttonAddScenario);
         buttonSalvataggioTerapia = view.findViewById(R.id.buttonSalvaTerapia);
-
+        bundle = getArguments();
+        idPaziente = bundle.getString("idPaziente");
         buttonSalvataggioTerapia.setVisibility(View.GONE);
 
         return view;
@@ -54,13 +59,22 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(), Void -> {
+            Log.d("idPaziente",idPaziente);
+            Paziente paziente = mLogopedistaViewModel.getPazienteById(idPaziente);
+            String nomePaziente = paziente.getNome();
+            String cognomePaziente = paziente.getCognome();
+            setToolBar(view,getString(R.string.creaTerapia) + " " + nomePaziente+" "+cognomePaziente);
 
-        dataInizio.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataInizio));
-        dataFine.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataFine));
+            dataInizio.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataInizio));
+            dataFine.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataFine));
 
-        buttonAddScenario.setOnClickListener(v -> addScenario());
+            buttonAddScenario.setOnClickListener(v -> addScenario());
 
-        buttonSalvataggioTerapia.setOnClickListener(v-> saveTerapia());
+            buttonSalvataggioTerapia.setOnClickListener(v-> saveTerapia(idPaziente,nomePaziente,cognomePaziente));
+        });
+
+
     }
     private void showErrorDialog(){
         InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
@@ -84,13 +98,15 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         }
     }
 
-    private void saveTerapia(){
-        //TODO implementare funzionalità per salvare la terapia in db
-        // la terapia è già stata creata e dovrebbe stare in "terapia"
-        //terapia
-        Log.d("Terapia",terapia.toString());
-        navigateTo(R.id.action_creazioneTerapiaFragment_to_schedaPazienteFragment);
-        //TODO controllare che effettivamente viene salvata in db e viene mostrata in scheda paziente
+    private void saveTerapia(String idPaziente,String nome,String cognome){
+        //todo prima di inserire una terapia bisogan checkare le date
+        mLogopedistaViewModel.addTerapiaInPaziente(terapia,idPaziente);
+        mLogopedistaViewModel.aggiornaLogopedistaRemoto();
+        Bundle bundle1 = new Bundle();
+        bundle1.putString("idPaziente",idPaziente);
+        bundle1.putString("nomePaziente",nome);
+        bundle1.putString("cognomePaziente",cognome);
+        navigateTo(R.id.action_creazioneTerapiaFragment_to_schedaPazienteFragment,bundle1);
     }
 
     @Override

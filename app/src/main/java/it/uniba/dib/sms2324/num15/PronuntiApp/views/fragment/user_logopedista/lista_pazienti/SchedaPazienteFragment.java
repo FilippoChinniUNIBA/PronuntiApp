@@ -89,8 +89,9 @@ public class SchedaPazienteFragment extends AbstractFragmentWithNavigation {
         }
 
         addTerapiaButton.setOnClickListener(v -> {
-            //TODO passare tramite bundle l'dindice del paziente e della terapia (ora sta passando null)
-            navigateTo(R.id.action_schedaPazienteFragment_to_creazioneTerapiaFragment, bundle);
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("idPaziente",idPaziente);
+            navigateTo(R.id.action_schedaPazienteFragment_to_creazioneTerapiaFragment, bundle1);
         });
 
     }
