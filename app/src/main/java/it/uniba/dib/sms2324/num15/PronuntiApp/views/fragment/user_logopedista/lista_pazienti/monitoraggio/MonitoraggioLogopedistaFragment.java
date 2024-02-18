@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
     private TextView textViewDataInizioTerapia;
     private TextView textViewDataFineTerapia;
 
+    private Button buttonAddScenario;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
 
         recyclerViewScenari = view.findViewById(R.id.recyclerViewScenari);
         recyclerViewScenari.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        buttonAddScenario = view.findViewById(R.id.buttonAddScenario);
 
         textViewDataInizioTerapia = view.findViewById(R.id.textViewDataInizioTerapia);
         textViewDataFineTerapia = view.findViewById(R.id.textViewDataFineTerapia);
@@ -79,6 +84,8 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
         setTextViewDataInizioTerapia();
         setTextViewDataFineTerapia();
 
+        buttonAddScenario.setOnClickListener(v -> navigateToAddScenario());
+
         //TODO riga commentata perchè serve un controller nel adapter per modificare la data dello scenario;
         ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_schedaPazienteFragment_to_risultatoEsercizioDenominazioneImmagineLogopedistaFragment
                 ,
@@ -87,6 +94,15 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
                 , mLogopedistaViewModel.getModificaDataScenariLogopedistaController(), indiceTerapia,idPaziente,indicePaziente);
 
         recyclerViewScenari.setAdapter(adapter);
+    }
+
+    private void navigateToAddScenario() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("idPaziente", idPaziente);
+        bundle.putInt("indiceTerapia", indiceTerapia);
+        navigateToId(R.id.action_schedaPazienteFragment_to_creazioneScenarioFragment, bundle);
+
     }
 
     @Override

@@ -87,9 +87,19 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     //interfaccia di callBack per salvare lo scenario
     private SaveScenario mCallback;
 
+    //solo quando crei uno scenario per terapia esistente
+    private String idPaziente;
+    private int indiceTerapia;
+
     public CreazioneScenarioFragment(SaveScenario mCallback) {
         this.mCallback = mCallback;
     }
+
+    public CreazioneScenarioFragment() {
+        super();
+        mCallback = null;
+    }
+
 
     @Nullable
     @Override
@@ -97,6 +107,18 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_creazione_scenario, container, false);
+        view.findViewById(R.id.toolBar).setVisibility(View.GONE);
+
+        //retrive dati dal bundle
+        //TODO prendere la terapia vera da viewModel per salvare il nuovo scenario che crei qua, vedere funzione saveScenario in fondo
+        savedInstanceState = getArguments();
+        if(savedInstanceState!=null) {
+            setToolBar(view,getString(R.string.nuovoScenario));
+            idPaziente = savedInstanceState.getString("idPaziente");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+            view.findViewById(R.id.toolBar).setVisibility(View.VISIBLE);
+        }
+
 
         esercizi=new ArrayList<>();
 
@@ -204,12 +226,23 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
             esercizi.add(es3);
             Log.d("CreazioneScenarioFragment", "saveScenario: "+esercizi.toString());
 
+
             //TODO non so a cosa serve ma non c'è un costruttore senza idTemplate (ma non serve nella creazione da 0 di uno scenario)
             String refTemplate = "0";
             scenario = new ScenarioGioco(imgBackgroundUri, imgPos1Uri, imgPos2Uri, imgPos3Uri, LocalDate.parse(dataInizio), ricompensa, esercizi, refTemplate);
-            mCallback.saveScenario(scenario);
 
-            getParentFragmentManager().beginTransaction().remove(this).commit();
+            if(mCallback == null){
+                //TODO se sei arrivato qua tramite il navigateToAddScenario() di MonitoraggioLogopedistaFragment allora non hai invocato il costruttore con
+                // l'interfaccia di callBack, quindi devi salvare lo scenario nella terapia che ti riprendi tramite i dati presi dal Bundle (sta giò fatto il get delle variabili)
+
+                //salvare scenario nella terapia
+
+                navigateTo(R.id.action_creazioneScenarioFragment_to_schedaPazienteFragment);
+            }
+            else {
+                mCallback.saveScenario(scenario);
+                getParentFragmentManager().beginTransaction().remove(this).commit();
+            }
         }
     }
 

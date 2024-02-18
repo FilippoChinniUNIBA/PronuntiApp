@@ -192,6 +192,7 @@
     <string name="immagine_tappa_2">Scegli tappa 2</string>
     <string name="immagine_tappa_3">Scegli tappa 3</string>
     <string name="add_scenario">Scenario +</string>
+    <string name="nuovoScenario">Nuovo scenario</string>
     <string name="salva_scenario">Salva scenario</string>
     <string name="costruzione_scenario">Costruzione scenario</string>
     <string name="compilaPrimaTutto">Compila tutti i campi prima di confermare!</string>

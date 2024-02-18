@@ -58,6 +58,10 @@
             android:id="@+id/action_schedaPazienteFragment_to_risultatoEsercizioCoppiaImmaginiLogopedistaFragment"
             app:destination="@id/risultatoEsercizioCoppiaImmaginiLogopedistaFragment"
             app:popUpTo="@id/schedaPazienteFragment" />
+        <action
+            android:id="@+id/action_schedaPazienteFragment_to_creazioneScenarioFragment"
+            app:destination="@id/creazioneScenarioFragment"
+            app:popUpTo="@id/schedaPazienteFragment" />
     </fragment>
     <fragment
         android:id="@+id/creazioneTerapieFragment"
@@ -80,4 +84,12 @@
         android:id="@+id/risultatoEsercizioSequenzaParoleLogopedistaFragment"
         android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.monitoraggio.risultatiesercizio.RisultatoEsercizioSequenzaParoleLogopedistaFragment"
         android:label="RisultatoEsercizioSequenzaParoleLogopedistaFragment" />
+    <fragment
+        android:id="@+id/creazioneScenarioFragment"
+        android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.lista_pazienti.terapie.CreazioneScenarioFragment"
+        android:label="CreazioneScenarioFragment" >
+        <action
+            android:id="@+id/action_creazioneScenarioFragment_to_schedaPazienteFragment"
+            app:destination="@id/schedaPazienteFragment" />
+    </fragment>
 </navigation>

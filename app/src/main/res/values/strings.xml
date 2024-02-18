@@ -216,6 +216,7 @@
     <string name="immagine_tappa_2">Pics stage 2</string>
     <string name="immagine_tappa_3">Pics stage 3</string>
     <string name="add_scenario">Scenary +</string>
+    <string name="nuovoScenario">New scenary</string>
     <string name="salva_scenario">Save scenary</string>
     <string name="costruzione_scenario">Creation scenary</string>
     <string name="compilaPrimaTutto">Fill in all fields before confirming!</string>
