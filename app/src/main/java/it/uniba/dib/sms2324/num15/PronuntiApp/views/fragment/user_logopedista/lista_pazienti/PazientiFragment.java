@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
@@ -62,7 +63,10 @@ public class PazientiFragment extends AbstractFragmentWithNavigation implements 
     private void loadData() {
         mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(), logopedista -> {
 
-            List<Paziente> pazienti = logopedista.getPazienti();
+            List<Paziente> pazienti = new ArrayList<>();
+            if(logopedista.getPazienti() != null) {
+                pazienti = logopedista.getPazienti();
+            }
             Log.d("PazientiFragment.loadData()", "pazienti: " + ((pazienti == null) ? "null" : pazienti.toString()));
 
             adapterPazienti = new PazienteAdapter(pazienti, this);
