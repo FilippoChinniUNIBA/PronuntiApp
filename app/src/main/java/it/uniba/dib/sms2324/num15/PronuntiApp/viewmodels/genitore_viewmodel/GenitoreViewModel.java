@@ -74,7 +74,7 @@ public class GenitoreViewModel extends ViewModel {
 	public int getIndiceUltimaTerapia() {
 
 		if (mPaziente.getValue() != null) {
-			if (mPaziente.getValue().getTerapie().size() != 0) {
+			if (mPaziente.getValue().getTerapie() != null) {
 				return (mPaziente.getValue().getTerapie().size()) - 1;
 			}
 		}

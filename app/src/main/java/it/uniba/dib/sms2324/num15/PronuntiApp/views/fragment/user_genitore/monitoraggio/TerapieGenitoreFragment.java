@@ -53,7 +53,9 @@ public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
 
         mGenitoreViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
-            mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().sort(Comparator.comparing(Terapia::getDataInizio));
+            if(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie() != null) {
+                mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().sort(Comparator.comparing(Terapia::getDataInizio));
+            }
 
             int risultatoIndice = mGenitoreViewModel.getIndiceUltimaTerapia();
 
