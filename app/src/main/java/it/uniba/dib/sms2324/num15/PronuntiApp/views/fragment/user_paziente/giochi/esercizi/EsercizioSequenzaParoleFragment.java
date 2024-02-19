@@ -27,17 +27,13 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.google_cloud_speech_to_text_api.SpeechToTextAPI;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -47,8 +43,8 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigation {
-    private FineEsercizioView fineEsercizioView;
+public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioFineScenario {
+    private FineScenarioEsercizioView fineScenarioEsercizioView;
     private ConstraintLayout constraintLayoutEsercizioSequenzaParole;
     private SeekBar seekBarEsercizioSequenzaParole;
     private ImageButton imageButtonPlay, imageButtonPause;
@@ -69,8 +65,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     private PazienteViewModel mPazienteViewModel;
     private EsercizioSequenzaParoleController mController;
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
-    private Bundle bundle;
-
+    private ScenarioGioco scenarioGioco;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,7 +74,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
         this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
         this.mController = mPazienteViewModel.getEsercizioSequenzaParoleController();
 
-        fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
+        fineScenarioEsercizioView = view.findViewById(R.id.fineEsercizioView);
         textViewEsercizioMicSuggestion = view.findViewById(R.id.textViewEsercizioMicSuggestion);
         viewClickForSuggestion = view.findViewById(R.id.viewClickForSuggestion);
         constraintLayoutEsercizioSequenzaParole = view.findViewById(R.id.constraintLayoutEsercizioSequenzaParole);
@@ -102,11 +97,11 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bundle = getArguments();
+        Bundle bundle = getArguments();
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
             int sizeTerapie = terapie.size();
-            ScenarioGioco scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
             mEsercizioSequenzaParole = (EsercizioSequenzaParole) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
             this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 
@@ -200,11 +195,25 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmentWithNavigat
 
         if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
             esito = true;
-            fineEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this);
+
+            if(checkFineScenario(scenarioGioco)){
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("checkFineScenario", true);
+                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
+            }
+            else
+                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
         }
         else{
             esito = false;
-            fineEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this);
+
+            if(checkFineScenario(scenarioGioco)){
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("checkFineScenario", true);
+                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
+            }
+            else
+                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
         }
 
         constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);

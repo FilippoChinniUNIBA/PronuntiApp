@@ -9,21 +9,25 @@
     app:layout_constraintBottom_toBottomOf="parent"
     android:elevation="5dp"
     android:background="#80000000"
-       >
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_gravity="center"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingVertical="20dp"
         >
         <TextView
             android:id="@+id/textViewEsercizioCorretto"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/corretto"
             android:text="@string/corretto"
             android:textSize="@dimen/size_text_esercizio"
             android:textAllCaps="true"
             android:textStyle="bold"
+            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,14 +38,35 @@
             android:textAppearance="@style/styleTextPersonaggi"
             />
         <TextView
+            android:id="@+id/textViewFineScenario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/complimentiTerminatoScenario"
+            android:gravity="center"
+            android:textSize="@dimen/size_text_title_esercizio"
+            android:paddingHorizontal="30dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/linearLayoutCoinsFineEsercizio"
+            android:background="@android:color/transparent"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="@style/styleTextPersonaggi"
+            />
+        <TextView
             android:id="@+id/textViewEsercizioSbagliato"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/sbagliato"
             android:text="@string/sbagliato"
             android:textAllCaps="true"
             android:textStyle="bold"
+
             android:textSize="@dimen/size_text_esercizio"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,5 +126,5 @@
                 />
             -->
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </FrameLayout>

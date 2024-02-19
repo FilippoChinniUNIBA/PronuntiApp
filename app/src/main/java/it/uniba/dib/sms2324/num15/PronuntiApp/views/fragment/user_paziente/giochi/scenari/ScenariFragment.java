@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,22 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), Void -> {
             List<Integer> scenariGiocoValidi = mPazienteViewModel.getScenariPaziente();
             if(scenariGiocoValidi!=null) {
-                Bundle bundle = new Bundle();
+                Bundle bundle = getArguments();
+                Log.d("Bundle", "onViewCreated fine scenario: " + bundle);
+
+                //se c'è checkFineScenario, allora è stato completato uno scenario e si deve mostrare la schermata di fine esercizio
+                if(bundle != null) {
+                    if(bundle.containsKey("checkFineScenario") && bundle.getBoolean("checkFineScenario")) {
+                        bundle.putBoolean("checkFineScenario", true);
+                    }
+                }
+                else {
+                    bundle = new Bundle();
+                }
                 ScenarioFragment scenarioFragment = new ScenarioFragment();
                 bundle.putInt("indiceScenarioCorrente", scenariGiocoValidi.get(scenariGiocoValidi.size() - 1));
                 scenarioFragment.setArguments(bundle);

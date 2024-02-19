@@ -7,7 +7,19 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_scenario_neve"
     android:fitsSystemWindows="true"
-    tools:context=".views.fragment.user_paziente.giochi.scenari.ScenarioFragment">
+    tools:context=".views.fragment.user_paziente.giochi.scenari.ScenarioFragment"
+    >
+
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineScenarioEsercizioView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fineScenarioView"
+        android:elevation="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.CurvedLineView
         android:id="@+id/curvedLineView2to3"

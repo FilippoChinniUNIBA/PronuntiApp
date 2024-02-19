@@ -23,7 +23,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.squareup.picasso.Picasso;
@@ -38,6 +37,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineScenarioEsercizioView;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float xDelta, yDelta;
@@ -53,6 +53,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private PazienteViewModel mPazienteViewModel;
 	private Bundle bundle;
 	private ScenarioGioco scenarioGioco;
+	private FineScenarioEsercizioView fineScenarioEsercizioView;
 
 
 	@Override
@@ -60,6 +61,9 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		View view = inflater.inflate(R.layout.fragment_scenario, container, false);
 		bundle = getArguments();
 		this.mPazienteViewModel = new ViewModelProvider(requireActivity()).get(PazienteViewModel.class);
+
+		fineScenarioEsercizioView= view.findViewById(R.id.fineScenarioView);
+		fineScenarioEsercizioView.setVisibility(View.GONE);
 
 		constraintLayout = view.findViewById(R.id.constraintLayoutScenario);
 
@@ -129,13 +133,13 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 
 			//se è completato disattivalo
 			if (isCompletato(0)) {
-				diableImageView(posizioneGioco1ImageView);
+				disableImageView(posizioneGioco1ImageView);
 			}
 			if (isCompletato(1)) {
-				diableImageView(posizioneGioco2ImageView);
+				disableImageView(posizioneGioco2ImageView);
 			}
 			if (isCompletato(2)) {
-				diableImageView(posizioneGioco3ImageView);
+				disableImageView(posizioneGioco3ImageView);
 			}
 
 			mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
@@ -156,10 +160,29 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 					enableImageDrag(personaggioImageView);
 				}
 			});
+
+			Bundle bundleFineScenario = getArguments();
+			Log.d("Bundle", "onViewCreated fine scenario: " + bundleFineScenario);
+			if(bundleFineScenario != null) {
+				if(bundleFineScenario.containsKey("checkFineScenario") && bundleFineScenario.getBoolean("checkFineScenario")) {
+					showFineScenario();
+				}
+			}
+
 		});
 	}
 
-	private void diableImageView(ImageView view) {
+	private void showFineScenario(){
+		fineScenarioEsercizioView.setVisibility(View.VISIBLE);
+
+		Log.d("FineScenario", "fine scenario" + scenarioGioco.getEsercizi().toString());
+
+		//TODO passare i coins corretti per la fine dello scenario
+		// aggiornare i coins e punteggio del paziente
+		fineScenarioEsercizioView.showFineScenario(10, posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView);
+	}
+
+	private void disableImageView(ImageView view) {
 		ColorMatrix colorMatrix = new ColorMatrix();
 		colorMatrix.setSaturation(0);
 		ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);

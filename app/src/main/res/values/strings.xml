@@ -62,6 +62,7 @@
     <string name="checkAnswer">Check</string>
     <string name="micDenominazioneImmagine">Click to respond!</string>
     <string name="corretto">Correct!</string>
+    <string name="complimentiTerminatoScenario">Congratulation!\nYou\'ve finished all games in this date!</string>"
     <string name="sbagliato">Wrong!</string>
     <string name="aidRemaining"> aid remaning </string>
     <string name="noAidRemaining">No aid remaning!</string>

@@ -29,7 +29,6 @@ import java.io.File;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
@@ -43,7 +42,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWithNavigation {
+public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEsercizioFineScenario {
     private ImageButton buttonAiutiImageView;
     private ImageButton buttonCompletaEsercizioImageView;
     private ImageButton buttonAvviaRegistrazione;
@@ -54,15 +53,15 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     private View viewAnimationMic, viewConfirmMic, viewStopMic;
     private ImageView imageViewConfermaRegistrazione;
     private ConstraintLayout constraintLayoutEsercizioDenominazione;
-    private FineEsercizioView fineEsercizioView;
+    private FineScenarioEsercizioView fineScenarioEsercizioView;
 
 
     private AudioRecorder audioRecorder;
     private int countAiuti = 3;
     private PazienteViewModel mPazienteViewModel;
     private EsercizioDenominazioneImmagineController mController;
-    private Bundle bundle;
     private EsercizioDenominazioneImmagine mEsercizioDenominazioneImmagine;
+    private ScenarioGioco scenarioGioco;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
         constraintLayoutEsercizioDenominazione = view.findViewById(R.id.constraintLayoutEsercizioDenominazioneImmagine);
         constraintLayoutEsercizioDenominazione.setVisibility(View.VISIBLE);
 
-        fineEsercizioView = view.findViewById(R.id.fineEsercizioView);
+        fineScenarioEsercizioView = view.findViewById(R.id.fineEsercizioView);
 
         buttonAiutiImageView = view.findViewById(R.id.buttonAiuti);
         buttonCompletaEsercizioImageView = view.findViewById(R.id.buttonCompletaEsercizio);
@@ -96,11 +95,11 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bundle = getArguments();
+        Bundle bundle = getArguments();
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
             int sizeTerapie = terapie.size();
-            ScenarioGioco scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
             mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
             this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
@@ -193,11 +192,25 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmentWith
 
         if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
             esito = true;
-            fineEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
+
+            if(checkFineScenario(scenarioGioco)){
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("checkFineScenario", true);
+                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
+            }
+            else
+                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, null);
         }
         else {
             esito = false;
-            fineEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this);
+
+            if(checkFineScenario(scenarioGioco)) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("checkFineScenario", true);
+                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
+            }
+            else
+                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, null);
         }
 
         constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);

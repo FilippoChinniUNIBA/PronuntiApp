@@ -3,6 +3,8 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.gioc
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.media.Image;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -17,18 +19,18 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerRaw;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 
-public class FineEsercizioView extends FrameLayout {
+public class FineScenarioEsercizioView extends FrameLayout {
     private FrameLayout frameLayoutFineEsercizio;
     private ImageView imageViewUpCoin;
-    private TextView textViewCoins, textViewEsercizioCorretto, textViewEsercizioSbagliato;
+    private TextView textViewCoins, textViewEsercizioCorretto, textViewEsercizioSbagliato, textViewFineScenario;
 
 
-    public FineEsercizioView(Context context) {
+    public FineScenarioEsercizioView(Context context) {
         super(context);
         initView(context);
     }
 
-    public FineEsercizioView(Context context, AttributeSet attrs) {
+    public FineScenarioEsercizioView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
@@ -37,6 +39,8 @@ public class FineEsercizioView extends FrameLayout {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_fine_esercizio, this, true);
 
+        textViewFineScenario = view.findViewById(R.id.textViewFineScenario);
+        textViewFineScenario.setVisibility(View.GONE);
         frameLayoutFineEsercizio = view.findViewById(R.id.frameLayoutFineEsercizioDenominazioneImmagineFine);
         frameLayoutFineEsercizio.setVisibility(View.GONE);
         imageViewUpCoin = view.findViewById(R.id.imageViewUpCoinFineEsercizio);
@@ -45,7 +49,22 @@ public class FineEsercizioView extends FrameLayout {
         textViewEsercizioSbagliato = view.findViewById(R.id.textViewEsercizioSbagliato);
     }
 
-    public void setEsercizioCorretto(int coins, int idNagiation, AbstractFragmentWithNavigation fragment) {
+    public void showFineScenario(int coins, ImageView imageView1, ImageView imageView2, ImageView imageView3) {
+        AudioPlayerRaw audioPlayerRaw = new AudioPlayerRaw(getContext(), R.raw.coins_sound);
+        audioPlayerRaw.playAudio();
+
+        frameLayoutFineEsercizio.setVisibility(View.VISIBLE);
+        imageViewUpCoin.setVisibility(View.VISIBLE);
+        textViewFineScenario.setVisibility(View.VISIBLE);
+
+        imageView1.setVisibility(View.GONE);
+        imageView2.setVisibility(View.GONE);
+        imageView3.setVisibility(View.GONE);
+
+        animazioneIncrementoValutaFineScenario(coins, imageView1, imageView2, imageView3);
+    }
+
+    public void setEsercizioCorretto(int coins, int idNagiation, AbstractFragmentWithNavigation fragment, Bundle bundle) {
         AudioPlayerRaw audioPlayerRaw = new AudioPlayerRaw(getContext(), R.raw.correct_sound);
         audioPlayerRaw.playAudio();
 
@@ -53,10 +72,10 @@ public class FineEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioCorretto.setVisibility(View.VISIBLE);
 
-        animazioneIncrementoValuta(coins, idNagiation, fragment);
+        animazioneIncrementoValuta(coins, idNagiation, fragment, bundle);
     }
 
-    public void setEsercizioSbagliato(int coins, int idNagiation, AbstractFragmentWithNavigation fragment) {
+    public void setEsercizioSbagliato(int coins, int idNagiation, AbstractFragmentWithNavigation fragment, Bundle bundle) {
         AudioPlayerRaw audioPlayerRaw = new AudioPlayerRaw(getContext(), R.raw.error_sound);
         audioPlayerRaw.playAudio();
 
@@ -64,10 +83,10 @@ public class FineEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewEsercizioSbagliato.setVisibility(View.VISIBLE);
 
-        animazioneIncrementoValuta(coins, idNagiation, fragment);
+        animazioneIncrementoValuta(coins, idNagiation, fragment, bundle);
     }
 
-    private void animazioneIncrementoValuta(int targetCoins, int idNagiation, AbstractFragmentWithNavigation fragment) {
+    private void animazioneIncrementoValuta(int targetCoins, int idNagiation, AbstractFragmentWithNavigation fragment, Bundle bundle) {
         ValueAnimator animator = ValueAnimator.ofInt(0, targetCoins);
         animator.setDuration(4000);
         animator.addUpdateListener(valueAnimator -> {
@@ -82,7 +101,37 @@ public class FineEsercizioView extends FrameLayout {
 
             @Override
             public void onAnimationEnd(@NonNull Animator animation) {
-                new Handler().postDelayed(()->{fragment.navigateTo(idNagiation);},1000);
+                new Handler().postDelayed(()->{fragment.navigateTo(idNagiation, bundle);},1000);
+            }
+            @Override
+            public void onAnimationCancel(@NonNull Animator animation) {}
+
+            @Override
+            public void onAnimationRepeat(@NonNull Animator animation) {}
+        });
+
+    }
+
+    private void animazioneIncrementoValutaFineScenario(int targetCoins, ImageView imageView1, ImageView imageView2, ImageView imageView3) {
+        ValueAnimator animator = ValueAnimator.ofInt(0, targetCoins);
+        animator.setDuration(4000);
+        animator.addUpdateListener(valueAnimator -> {
+            int animatedValue = (int) valueAnimator.getAnimatedValue();
+            textViewCoins.setText(String.valueOf(animatedValue));
+        });
+
+        animator.start();
+
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(@NonNull Animator animation) {}
+
+            @Override
+            public void onAnimationEnd(@NonNull Animator animation) {
+                frameLayoutFineEsercizio.setVisibility(View.GONE);
+                imageView1.setVisibility(View.VISIBLE);
+                imageView2.setVisibility(View.VISIBLE);
+                imageView3.setVisibility(View.VISIBLE);
             }
             @Override
             public void onAnimationCancel(@NonNull Animator animation) {}
