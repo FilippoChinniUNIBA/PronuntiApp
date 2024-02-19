@@ -94,16 +94,12 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     }
 
     private void showInfoDialog(boolean error){
-        //todo Aggiungere Strings
-        String erroreIndietro = "Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli successivi.";
-        String erroreAvanti = "Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli precedenti.";
-        String buttonString = "Ok";
         if(error){
-            InfoDialog infoDialog = new InfoDialog(requireActivity(),erroreAvanti,buttonString);
+            InfoDialog infoDialog = new InfoDialog(requireActivity(),getString(R.string.navScenariNoticeForward),getString(R.string.ok));
             infoDialog.setOnConfermaButtonClickListener(() -> {});
             infoDialog.show();
         }else{
-            InfoDialog infoDialog = new InfoDialog(requireActivity(),erroreIndietro,buttonString);
+            InfoDialog infoDialog = new InfoDialog(requireActivity(),getString(R.string.navScenariNoticeBackward),getString(R.string.ok));
             infoDialog.setOnConfermaButtonClickListener(() -> {});
             infoDialog.show();
         }

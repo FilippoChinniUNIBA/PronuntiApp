@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,14 +139,14 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
     private void setTextViewDataInizioTerapia() {
         //qui utilizzo indice paziente anche se potrei utilizzare un foreach, chiedere chiarimenti
         if (mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie() != null) {
-            textViewDataInizioTerapia.setText(mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie().get(indiceTerapia).getDataInizio().toString());
+            textViewDataInizioTerapia.setText(mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie().get(indiceTerapia).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
 
     }
 
     private void setTextViewDataFineTerapia(){
         if (mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie() != null) {
-            textViewDataFineTerapia.setText(mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie().get(indiceTerapia).getDataFine().toString());
+            textViewDataFineTerapia.setText(mLogopedistaViewModel.getLogopedistaLiveData().getValue().getPazienti().get(indicePaziente).getTerapie().get(indiceTerapia).getDataFine().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         }
     }
 

@@ -84,6 +84,10 @@
     <string name="date">Date</string>
     <string name="place">Place</string>
     <string name="insertPaziente" >Insert patient</string>
+    <string name="insertDate" >Start date must be on or after than end date</string>
+    <string name="navScenariNoticeBackward" >It seems that there are no other exercises in this therapy, try to see the next ones.</string>
+    <string name="navScenariNoticeForward" >It seems that there are no other exercises in this therapy, try to see the previous ones.</string>
+    <string name="ok" >OK</string>
 
     <string-array name="character_names">
         <item>Girl</item>

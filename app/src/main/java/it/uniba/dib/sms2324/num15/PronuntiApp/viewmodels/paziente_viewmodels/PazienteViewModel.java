@@ -30,6 +30,13 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.gio
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioSequenzaParoleController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.personaggi.PersonaggiController;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.classifica.EntryClassifica;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioCoppiaImmagini;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioDenominazioneImmagine;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 
 public class PazienteViewModel extends ViewModel {
 	private MutableLiveData<Paziente> mPaziente = new MutableLiveData<>();
@@ -165,6 +172,21 @@ public class PazienteViewModel extends ViewModel {
 		setTexturePersonaggioSelezionato(newTexture);
 	}
 
+	public void setRisultatoEsercizioCoppiaImmaginePaziente(int indiceScenarioCorrente, int indiceEsercizio,RisultatoEsercizioCoppiaImmagini risultato){
+		int sizeTerapie = mPaziente.getValue().getTerapie().size();
+		EsercizioCoppiaImmagini esercizio = (EsercizioCoppiaImmagini) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+		esercizio.setRisultatoEsercizio(risultato);
+	}
+	public void setRisultatoEsercizioDenominazioneImmaginiPaziente(int indiceScenarioCorrente, int indiceEsercizio, RisultatoEsercizioDenominazioneImmagine risultato){
+		int sizeTerapie = mPaziente.getValue().getTerapie().size();
+		EsercizioDenominazioneImmagine esercizio = (EsercizioDenominazioneImmagine) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+		esercizio.setRisultatoEsercizio(risultato);
+	}
+	public void setRisultatoEsercizioSequenzaParolePaziente(int indiceScenarioCorrente, int indiceEsercizio, RisultatoEsercizioSequenzaParole risultato){
+		int sizeTerapie = mPaziente.getValue().getTerapie().size();
+		EsercizioSequenzaParole esercizio = (EsercizioSequenzaParole) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+		esercizio.setRisultatoEsercizio(risultato);
+	}
 
 	public EsercizioDenominazioneImmagineController getEsercizioDenominazioneImmagineController() {
 		if (this.mEsercizioDenominazioneImmagineController == null) {

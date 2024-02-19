@@ -25,15 +25,18 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-
+import android.net.Uri;
 import java.io.File;
 import java.util.List;
-
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicReference;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.ComandiFirebaseStorage;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.risultato.RisultatoEsercizioSequenzaParole;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.ffmpegkit_api.AudioConverter;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_recorder.AudioRecorder;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
@@ -66,6 +69,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     private EsercizioSequenzaParoleController mController;
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
     private ScenarioGioco scenarioGioco;
+    private Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,7 +101,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Bundle bundle = getArguments();
+        bundle = getArguments();
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
             int sizeTerapie = terapie.size();
@@ -191,44 +195,62 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     }
 
     private void completaEsercizio(){
-        boolean esito;
+        uploadFileRegistrato().thenAccept(link -> {
+            boolean esito;
 
-        if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
-            esito = true;
-
-            if(checkFineScenario(scenarioGioco)){
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("checkFineScenario", true);
-                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
+            if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
+                esito = true;
+                mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaCorretto());
+                mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaCorretto());
+                if (checkFineScenario(scenarioGioco)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("checkFineScenario", true);
+                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
+                } else
+                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
+            } else {
+                esito = false;
+                mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaErrato());
+                mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaErrato());
+                if (checkFineScenario(scenarioGioco)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("checkFineScenario", true);
+                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
+                } else
+                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
             }
-            else
-                fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
-        }
-        else{
-            esito = false;
 
-            if(checkFineScenario(scenarioGioco)){
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("checkFineScenario", true);
-                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
-            }
-            else
-                fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
-        }
+            constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
 
-        constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
 
-        File temp = mController.convertiAudio(audioRecorder.getAudioFile(), new File(getContext().getFilesDir(), "tempAudioConvertito.mp3"));
-        //TODO salvare il file temp su Storage e ottenere link
-        String audioRegistrato = "";
+            Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
+            //mEsercizioSequenzaParole.setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(esito, audioRegistrato));
+            Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioSequenzaParole);
+            Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
-        Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
-        mEsercizioSequenzaParole.setRisultatoEsercizio(new RisultatoEsercizioSequenzaParole(esito, audioRegistrato));
-        Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioSequenzaParole);
-        Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
+            RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
+            mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("IndiceSecnarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
+            mPazienteViewModel.aggiornaPazienteRemoto();
+        });
 
-        //TODO aggiornamento del paziente con l'esito dell'esercizio
+    }
+    private CompletableFuture<String> uploadFileRegistrato(){
+        CompletableFuture<String> future = new CompletableFuture<>();
 
+        File fileConvertito = new File(getContext().getFilesDir(), "tempAudioConvertito.mp3");
+        AudioConverter.convertiAudio(audioRecorder.getAudioFile(), fileConvertito);
+        ComandiFirebaseStorage comandiFirebaseStorage = new ComandiFirebaseStorage();
+        AtomicReference<String> audioRegistrato = new AtomicReference<>();
+        String directoryCorrente = ComandiFirebaseStorage.AUDIO_REGISTRATI_DENOMINAZIONE_IMMAGINE;
+
+        comandiFirebaseStorage.uploadFileAndGetLink(Uri.fromFile(fileConvertito), directoryCorrente)
+                .thenAccept(value ->{
+                    audioRegistrato.set(value);
+                })
+                .thenRun(() -> {
+                    future.complete(audioRegistrato.get());
+                });
+        return future;
     }
 
     private void sovrascriviAudio() {

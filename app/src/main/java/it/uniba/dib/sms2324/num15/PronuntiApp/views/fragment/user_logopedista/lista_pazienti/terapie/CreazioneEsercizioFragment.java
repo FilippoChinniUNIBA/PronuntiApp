@@ -643,7 +643,7 @@ public class CreazioneEsercizioFragment extends AbstractFragmentWithNavigation {
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
-
+                    this.audioRecorder = initAudioRecorder();
                 } else {
                     InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.permissionDeniedInstructions), getString(R.string.infoOk));
                     infoDialog.show();

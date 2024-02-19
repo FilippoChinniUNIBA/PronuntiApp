@@ -77,6 +77,10 @@
     <string name="date">Data</string>
     <string name="place">Luogo</string>
     <string name="insertPaziente" >Inserisci il paziente</string>
+    <string name="insertDate" >La data d\'inizio deve essere successiva o uguale alla data di fine</string>
+    <string name="navScenariNoticeBackward" >Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli successivi.</string>
+    <string name="navScenariNoticeForward" >Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli precedenti.</string>
+    <string name="ok" >OK</string>
 
     <string-array name="character_names">
         <item>Bambina</item>

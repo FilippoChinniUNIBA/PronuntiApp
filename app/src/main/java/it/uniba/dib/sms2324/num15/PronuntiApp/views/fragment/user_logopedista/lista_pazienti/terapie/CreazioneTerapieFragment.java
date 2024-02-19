@@ -44,8 +44,8 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         View view = inflater.inflate(R.layout.fragment_creazione_terapia, container, false);
         mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
-        dataFine = view.findViewById(R.id.textInputEditTextDataInizioTerapia);
-        dataInizio = view.findViewById(R.id.textInputEditTextDataFineTerapia);
+        dataFine = view.findViewById(R.id.textInputEditTextDataFineTerapia);
+        dataInizio = view.findViewById(R.id.textInputEditTextDataInizioTerapia);
 
         buttonAddScenario = view.findViewById(R.id.buttonAddScenario);
         buttonSalvataggioTerapia = view.findViewById(R.id.buttonSalvaTerapia);
@@ -76,14 +76,16 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
 
 
     }
-    private void showErrorDialog(){
+    private void showErrorDialog(int messaggio){
         InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
         infoDialog.setOnConfermaButtonClickListener(null);
         infoDialog.show();
     }
     private void addScenario(){
         if(dataInizio.getText().toString().isEmpty() || dataFine.getText().toString().isEmpty()){
-            showErrorDialog();
+            showErrorDialog(R.string.compilaPrimaTutto);
+        }else if(LocalDate.parse(dataInizio.getText().toString()).isAfter(LocalDate.parse(dataFine.getText().toString()))){
+            showErrorDialog(R.string.insertDate);
         }
         else {
             if(isFirstScenario){
@@ -99,7 +101,6 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
     }
 
     private void saveTerapia(String idPaziente,String nome,String cognome){
-        //todo prima di inserire una terapia bisogan checkare le date
         mLogopedistaViewModel.addTerapiaInPaziente(terapia,idPaziente);
         mLogopedistaViewModel.aggiornaLogopedistaRemoto();
         Bundle bundle1 = new Bundle();
