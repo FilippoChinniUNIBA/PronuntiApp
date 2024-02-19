@@ -85,10 +85,8 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
                     Log.d("ScenarioAdapter",""+scenario.toString());
 
 
-                    //TODO aggiornare data scenari
                     mController.modificaDataScenari(date,indiceTerapia,position,idPaziente,indicePaziente);
 
-                    //TODO aggiornare la data nel db (come già fatto negli altri adapter)
                     scenario.setDataInizio(date);
                     notifyDataSetChanged();
                 }, now.getYear(), now.getMonthValue()-1, now.getDayOfMonth());

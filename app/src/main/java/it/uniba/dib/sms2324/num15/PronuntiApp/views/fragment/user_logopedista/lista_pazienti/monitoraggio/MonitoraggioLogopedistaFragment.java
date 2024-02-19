@@ -86,7 +86,6 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
 
         buttonAddScenario.setOnClickListener(v -> navigateToAddScenario());
 
-        //TODO riga commentata perchè serve un controller nel adapter per modificare la data dello scenario;
         ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_schedaPazienteFragment_to_risultatoEsercizioDenominazioneImmagineLogopedistaFragment
                 ,
                 R.id.action_schedaPazienteFragment_to_risultatoEsercizioCoppiaImmaginiLogopedistaFragment,
