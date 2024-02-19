@@ -174,12 +174,12 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 
 	private void showFineScenario(){
 		fineScenarioEsercizioView.setVisibility(View.VISIBLE);
-
 		Log.d("FineScenario", "fine scenario" + scenarioGioco.getEsercizi().toString());
-
-		//TODO passare i coins corretti per la fine dello scenario
-		// aggiornare i coins e punteggio del paziente
-		fineScenarioEsercizioView.showFineScenario(10, posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView);
+		int ricompensaFinale = scenarioGioco.getRicompensaFinale();
+		fineScenarioEsercizioView.showFineScenario(ricompensaFinale, posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView);
+		int valutaAttuale = mPazienteViewModel.getPazienteLiveData().getValue().getValuta();
+		mPazienteViewModel.getPazienteLiveData().getValue().setValuta(valutaAttuale+ricompensaFinale);
+		mPazienteViewModel.aggiornaPazienteRemoto();
 	}
 
 	private void disableImageView(ImageView view) {

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,8 +40,11 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.database_utils.Com
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.scenariogioco.TemplateScenarioGiocoDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.Esercizio;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.esercizio.EsercizioEseguibile;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Paziente;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.TemplateScenarioGioco;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
+import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.logopedista_viewmodel.LogopedistaViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.DatePickerCustom;
@@ -85,7 +89,10 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     private boolean sceltaScenari = false;
 
     //interfaccia di callBack per salvare lo scenario
+    private LogopedistaViewModel mLogopedistaViewModel;
     private SaveScenario mCallback;
+    private Bundle bundle;
+
 
     //solo quando crei uno scenario per terapia esistente
     private String idPaziente;
@@ -105,17 +112,17 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
+        //mLogopedistaViewModel.getLogopedistaLiveData().observe();
         View view = inflater.inflate(R.layout.fragment_creazione_scenario, container, false);
+        mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
         view.findViewById(R.id.toolBar).setVisibility(View.GONE);
 
-        //retrive dati dal bundle
-        //TODO prendere la terapia vera da viewModel per salvare il nuovo scenario che crei qua, vedere funzione saveScenario in fondo
-        savedInstanceState = getArguments();
-        if(savedInstanceState!=null) {
+
+        bundle = getArguments();
+        if(bundle!=null) {
             setToolBar(view,getString(R.string.nuovoScenario));
-            idPaziente = savedInstanceState.getString("idPaziente");
-            indiceTerapia = savedInstanceState.getInt("indiceTerapia");
+            idPaziente = bundle.getString("idPaziente");
+            indiceTerapia = bundle.getInt("indiceTerapia");
             view.findViewById(R.id.toolBar).setVisibility(View.VISIBLE);
         }
 
@@ -155,45 +162,46 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
-        templateScenarioGiocoDAO.getAll().thenAccept(result -> {
-            templateScenari = result;
-            sizeTemplateScenari = result.size();
+        mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(),logopedista -> {
+            TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
+            templateScenarioGiocoDAO.getAll().thenAccept(result -> {
+                templateScenari = result;
+                sizeTemplateScenari = result.size();
 
-            linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
-            linearLayoutCreazioneScenario.setVisibility(View.GONE);
-            buttonNextScenario.setVisibility(View.GONE);
-            buttonPreviousScenario.setVisibility(View.GONE);
-            buttonChooseImgPos1.setVisibility(View.GONE);
-            buttonChooseImgPos2.setVisibility(View.GONE);
-            buttonChooseImgPos3.setVisibility(View.GONE);
+                linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
+                linearLayoutCreazioneScenario.setVisibility(View.GONE);
+                buttonNextScenario.setVisibility(View.GONE);
+                buttonPreviousScenario.setVisibility(View.GONE);
+                buttonChooseImgPos1.setVisibility(View.GONE);
+                buttonChooseImgPos2.setVisibility(View.GONE);
+                buttonChooseImgPos3.setVisibility(View.GONE);
 
-            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
+                constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
 
-            dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
+                dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
 
-            buttonUseTemplate.setOnClickListener(v -> useTemplate());
-            buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
+                buttonUseTemplate.setOnClickListener(v -> useTemplate());
+                buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
 
-            buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
-            buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
-            buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
+                buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
+                buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
+                buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
 
-            buttonChooseBackground.setOnClickListener(v -> {
-                        startFilePicker(PICK_FILE_REQUEST_4);
-                        constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
-                        buttonChooseImgPos1.setVisibility(View.VISIBLE);
-                        buttonChooseImgPos2.setVisibility(View.VISIBLE);
-                        buttonChooseImgPos3.setVisibility(View.VISIBLE);
-                    }
-            );
+                buttonChooseBackground.setOnClickListener(v -> {
+                            startFilePicker(PICK_FILE_REQUEST_4);
+                            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
+                            buttonChooseImgPos1.setVisibility(View.VISIBLE);
+                            buttonChooseImgPos2.setVisibility(View.VISIBLE);
+                            buttonChooseImgPos3.setVisibility(View.VISIBLE);
+                        }
+                );
 
-            buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
-            buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
+                buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
+                buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
 
-            buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
+                buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
+            });
         });
-
     }
     private void showErrorDialog(){
         InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
@@ -226,18 +234,15 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
             esercizi.add(es3);
             Log.d("CreazioneScenarioFragment", "saveScenario: "+esercizi.toString());
 
-
-            //TODO non so a cosa serve ma non c'è un costruttore senza idTemplate (ma non serve nella creazione da 0 di uno scenario)
             String refTemplate = "0";
             scenario = new ScenarioGioco(imgBackgroundUri, imgPos1Uri, imgPos2Uri, imgPos3Uri, LocalDate.parse(dataInizio), ricompensa, esercizi, refTemplate);
 
             if(mCallback == null){
-                //TODO se sei arrivato qua tramite il navigateToAddScenario() di MonitoraggioLogopedistaFragment allora non hai invocato il costruttore con
-                // l'interfaccia di callBack, quindi devi salvare lo scenario nella terapia che ti riprendi tramite i dati presi dal Bundle (sta giò fatto il get delle variabili)
+                Paziente paziente = mLogopedistaViewModel.getPazienteById(idPaziente);
+                paziente.getTerapie().get(indiceTerapia).addScenario(scenario);
+                mLogopedistaViewModel.aggiornaLogopedistaRemoto();
 
-                //salvare scenario nella terapia
-
-                navigateTo(R.id.action_creazioneScenarioFragment_to_schedaPazienteFragment);
+                navigateTo(R.id.action_creazioneScenarioFragment_to_schedaPazienteFragment,bundle);
             }
             else {
                 mCallback.saveScenario(scenario);

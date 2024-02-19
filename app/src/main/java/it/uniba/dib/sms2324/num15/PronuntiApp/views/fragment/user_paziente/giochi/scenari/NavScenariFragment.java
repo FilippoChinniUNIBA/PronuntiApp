@@ -70,8 +70,8 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
 
             Bundle bundle = new Bundle();
             ScenarioFragment scenarioFragment = new ScenarioFragment();
-            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
             currentScenarioIndex +=1;
+            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
             scenarioFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
         }else{
@@ -84,8 +84,8 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
 
             Bundle bundle = new Bundle();
             ScenarioFragment scenarioFragment = new ScenarioFragment();
-            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
             currentScenarioIndex-=1;
+            bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
             scenarioFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
         }else{

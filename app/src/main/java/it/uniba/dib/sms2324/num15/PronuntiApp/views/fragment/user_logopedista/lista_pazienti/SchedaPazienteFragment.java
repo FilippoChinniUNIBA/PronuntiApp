@@ -40,13 +40,11 @@ public class SchedaPazienteFragment extends AbstractFragmentWithNavigation {
 
         if(savedInstanceState != null){
             idPaziente = savedInstanceState.getString("idPaziente");
-            nomePaziente = savedInstanceState.getString("nomePaziente");
-            cognomePaziente = savedInstanceState.getString("cognomePaziente");
         }
 
         this.mLogopedistaViewModel = new ViewModelProvider(requireActivity()).get(LogopedistaViewModel.class);
 
-        setToolBar(view, nomePaziente+" "+cognomePaziente);
+
 
         addTerapiaButton = view.findViewById(R.id.buttonAddTerapia);
 
@@ -65,6 +63,11 @@ public class SchedaPazienteFragment extends AbstractFragmentWithNavigation {
         int indiceTerapia = -1;
 
         Logopedista logopedista = mLogopedistaViewModel.getLogopedistaLiveData().getValue();
+        Paziente paziente1 = mLogopedistaViewModel.getPazienteById(idPaziente);
+
+        setToolBar(view, paziente1.getNome()+" "+paziente1.getCognome());
+
+
         for (Paziente paziente: logopedista.getPazienti()) {
             if (paziente.getIdProfilo().equals(idPaziente)) {
                 if (paziente.getTerapie() != null) {
