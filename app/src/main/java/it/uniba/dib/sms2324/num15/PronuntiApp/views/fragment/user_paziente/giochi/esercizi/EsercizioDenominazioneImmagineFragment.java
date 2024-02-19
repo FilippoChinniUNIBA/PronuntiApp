@@ -203,6 +203,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
                 esito = true;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
+                setEsitoEsercizio(esito, link);
+
                 if (checkFineScenario(scenarioGioco)) {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
@@ -213,6 +215,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
                 esito = false;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioDenominazioneImmagine.getRicompensaErrato());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioDenominazioneImmagine.getRicompensaErrato());
+                setEsitoEsercizio(esito, link);
+
                 if (checkFineScenario(scenarioGioco)) {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
@@ -228,12 +232,13 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
             Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioDenominazioneImmagine);
             Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
-            RisultatoEsercizioDenominazioneImmagine risultatoEsercizioDenominazioneImmagine = new RisultatoEsercizioDenominazioneImmagine(esito,link,aiutiDisponibili-countAiuti);
-            mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("IndiceSecnarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
-            mPazienteViewModel.aggiornaPazienteRemoto();
         });
-
     }
+
+    private void setEsitoEsercizio(boolean esito, String link){
+        RisultatoEsercizioDenominazioneImmagine risultatoEsercizioDenominazioneImmagine = new RisultatoEsercizioDenominazioneImmagine(esito,link,aiutiDisponibili-countAiuti);
+        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("IndiceSecnarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
+        mPazienteViewModel.aggiornaPazienteRemoto();    }
 
     private CompletableFuture<String> uploadFileRegistrato(){
         CompletableFuture<String> future = new CompletableFuture<>();

@@ -45,7 +45,7 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
             List<Integer> scenariGiocoValidi = mPazienteViewModel.getScenariPaziente();
             if(scenariGiocoValidi!=null) {
                 Bundle bundle = getArguments();
-                Log.d("Bundle", "onViewCreated fine scenario: " + bundle);
+                Log.d("Bundle", "onViewCreated SCENARI fine scenario: " + bundle);
 
                 //se c'è checkFineScenario, allora è stato completato uno scenario e si deve mostrare la schermata di fine esercizio
                 if(bundle != null) {

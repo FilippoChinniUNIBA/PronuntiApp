@@ -128,10 +128,12 @@ public class FineScenarioEsercizioView extends FrameLayout {
 
             @Override
             public void onAnimationEnd(@NonNull Animator animation) {
-                frameLayoutFineEsercizio.setVisibility(View.GONE);
-                imageView1.setVisibility(View.VISIBLE);
-                imageView2.setVisibility(View.VISIBLE);
-                imageView3.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(()->{
+                    frameLayoutFineEsercizio.setVisibility(View.GONE);
+                    imageView1.setVisibility(View.VISIBLE);
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView3.setVisibility(View.VISIBLE);
+                },1000);
             }
             @Override
             public void onAnimationCancel(@NonNull Animator animation) {}

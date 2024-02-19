@@ -83,24 +83,26 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
 		curvedLineView2to3 = view.findViewById(R.id.curvedLineView2to3);
 
-		posizioneGioco3ImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
-				posizioneGioco3ImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
-				curvedLineView1to2.setStartPoint(posizioneGioco1ImageView.getX() + posizioneGioco1ImageView.getWidth() / 2, posizioneGioco1ImageView.getY() + posizioneGioco1ImageView.getHeight() / 2);
-				curvedLineView1to2.setEndPoint(posizioneGioco2ImageView.getX() + posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + posizioneGioco2ImageView.getHeight() / 2);
-				curvedLineView2to3.setStartPoint(posizioneGioco2ImageView.getX() + posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + posizioneGioco2ImageView.getHeight() / 2);
-				curvedLineView2to3.setEndPoint(posizioneGioco3ImageView.getX() + posizioneGioco3ImageView.getWidth() / 2, posizioneGioco3ImageView.getY() + posizioneGioco3ImageView.getHeight() / 2);
-			}
-		});
 		return view;
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		posizioneGioco3ImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
+				posizioneGioco3ImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+				curvedLineView1to2.setStartPoint(posizioneGioco1ImageView.getX() + (float) posizioneGioco1ImageView.getWidth() / 2, posizioneGioco1ImageView.getY() + (float) posizioneGioco1ImageView.getHeight() / 2);
+				curvedLineView1to2.setEndPoint(posizioneGioco2ImageView.getX() + (float) posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + (float) posizioneGioco2ImageView.getHeight() / 2);
+				curvedLineView2to3.setStartPoint(posizioneGioco2ImageView.getX() + (float) posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + (float) posizioneGioco2ImageView.getHeight() / 2);
+				curvedLineView2to3.setEndPoint(posizioneGioco3ImageView.getX() + (float) posizioneGioco3ImageView.getWidth() / 2, posizioneGioco3ImageView.getY() + (float) posizioneGioco3ImageView.getHeight() / 2);
+			}
+		});
 
 		mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
 			Picasso.get().load(texture).into(personaggioImageView);
@@ -191,10 +193,10 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 
 	private boolean isCompletato(int index){
 		if(scenarioGioco.getEsercizi().get(index).getRisultatoEsercizio()!=null){
-			Log.d("Esercizio", "completato");
+			Log.d("Esercizio", index + " completato");
 			return true;
 		}else{
-			Log.d("Esercizio", "non completato");
+			Log.d("Esercizio", index + " non completato");
 			return false;
 		}
 	}

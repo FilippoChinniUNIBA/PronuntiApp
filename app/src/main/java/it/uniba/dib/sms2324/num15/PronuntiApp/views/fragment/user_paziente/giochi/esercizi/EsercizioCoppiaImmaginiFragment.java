@@ -189,6 +189,8 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
             esito = true;
             mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioCoppiaImmagini.getRicompensaCorretto());
             mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioCoppiaImmagini.getRicompensaCorretto());
+            setEsitoEsercizio(esito);
+
             if(checkFineScenario(scenarioGioco)){
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("checkFineScenario", true);
@@ -202,6 +204,8 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
             esito = false;
             mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioCoppiaImmagini.getRicompensaErrato());
             mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioCoppiaImmagini.getRicompensaErrato());
+            setEsitoEsercizio(esito);
+
             if(checkFineScenario(scenarioGioco)){
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("checkFineScenario", true);
@@ -218,10 +222,13 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
         Log.d("EsercizioCoppiaImmaginiFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioCoppiaImmagini);
         Log.d("EsercizioCoppiaImmaginiFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
+
+    }
+
+    private void setEsitoEsercizio(Boolean esito){
         RisultatoEsercizioCoppiaImmagini risultatoEsercizioCoppiaImmagini = new RisultatoEsercizioCoppiaImmagini(esito);
         mPazienteViewModel.setRisultatoEsercizioCoppiaImmaginePaziente(bundle.getInt("IndiceSecnarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioCoppiaImmagini);
         mPazienteViewModel.aggiornaPazienteRemoto();
-
     }
 
     private void borderImageSelector(FrameLayout immagine){

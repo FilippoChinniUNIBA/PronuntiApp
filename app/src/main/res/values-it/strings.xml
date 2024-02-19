@@ -62,7 +62,7 @@
     <string name="checkAnswer">Verifica</string>
     <string name="micDenominazioneImmagine">Clicca per rispondere!</string>
     <string name="corretto">Corretto!</string>
-    <string name="complimentiTerminatoScenario">Complimenti!\nHai completato tutti io giochi di questa giornata!</string>"
+    <string name="complimentiTerminatoScenario">Complimenti!\nHai completato tutti i giochi di questa giornata!</string>"
     <string name="sbagliato">Sbagliato</string>
     <string name="aidRemaining"> aiuti rimasti</string>
     <string name="noAidRemaining">Nessun aiuto rimasto!</string>

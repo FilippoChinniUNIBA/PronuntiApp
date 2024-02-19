@@ -8,15 +8,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
-import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
@@ -97,12 +94,21 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
         if(error){
             InfoDialog infoDialog = new InfoDialog(requireActivity(),getString(R.string.navScenariNoticeForward),getString(R.string.ok));
             infoDialog.setOnConfermaButtonClickListener(() -> {});
+            setDialogUI(infoDialog);
             infoDialog.show();
         }else{
             InfoDialog infoDialog = new InfoDialog(requireActivity(),getString(R.string.navScenariNoticeBackward),getString(R.string.ok));
             infoDialog.setOnConfermaButtonClickListener(() -> {});
+            setDialogUI(infoDialog);
             infoDialog.show();
         }
+    }
+
+    private void setDialogUI(InfoDialog dialog){
+        dialog.createCustome().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Nasconde la barra di navigazione
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // Imposta la modalità a schermo intero
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY); // Mantiene la modalità a schermo intero quando l'utente interagisce con l'app
     }
 
 }

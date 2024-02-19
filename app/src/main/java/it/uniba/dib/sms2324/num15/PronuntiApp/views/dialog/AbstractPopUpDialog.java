@@ -37,6 +37,14 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 		buttonAnnulla = view.findViewById(R.id.buttonAnnullaPopUp);
 	}
 
+
+	public AlertDialog createCustome() {
+		if (alertDialog == null) {
+			alertDialog = create();
+		}
+		return alertDialog;
+	}
+
 	@Override
 	public AlertDialog show() {
 		if (alertDialog == null) {
@@ -82,6 +90,7 @@ public abstract class AbstractPopUpDialog extends AlertDialog.Builder {
 			alertDialog.dismiss();
 		});
 	}
+
 
 	public interface OnConfermaButtonClickListener {
 		void onConfermaButtonClicked();

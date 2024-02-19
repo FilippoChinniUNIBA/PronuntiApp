@@ -202,6 +202,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
                 esito = true;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaCorretto());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaCorretto());
+                setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
@@ -212,6 +213,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
                 esito = false;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaErrato());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaErrato());
+                setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
@@ -228,12 +230,16 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
             Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mEsercizioSequenzaParole);
             Log.d("EsercizioSequenzaParoleFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
-            RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
-            mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("IndiceSecnarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
-            mPazienteViewModel.aggiornaPazienteRemoto();
-        });
 
+        });
     }
+
+    private void setEsitoEsercizio(Boolean esito, String link){
+        RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
+        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("IndiceSecnarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
+        mPazienteViewModel.aggiornaPazienteRemoto();
+    }
+
     private CompletableFuture<String> uploadFileRegistrato(){
         CompletableFuture<String> future = new CompletableFuture<>();
 
