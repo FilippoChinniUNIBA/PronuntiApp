@@ -58,6 +58,9 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
                 }
                 ScenarioFragment scenarioFragment = new ScenarioFragment();
                 bundle.putInt("indiceScenarioCorrente", scenariGiocoValidi.get(scenariGiocoValidi.size() - 1));
+                if(bundle.containsKey("indiceScenarioGioco")){
+                    bundle.putInt("indiceScenarioCorrente",bundle.getInt("indiceScenarioGioco"));
+                }
                 scenarioFragment.setArguments(bundle);
                 getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
             }else{

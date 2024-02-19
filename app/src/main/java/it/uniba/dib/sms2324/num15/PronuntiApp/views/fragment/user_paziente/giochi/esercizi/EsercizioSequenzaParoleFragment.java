@@ -70,6 +70,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
     private ScenarioGioco scenarioGioco;
     private Bundle bundle;
+    private int indiceScenario;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +103,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
         super.onViewCreated(view, savedInstanceState);
 
         bundle = getArguments();
+        indiceScenario = bundle.getInt("indiceScenarioCorrente");
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
             int sizeTerapie = terapie.size();
@@ -197,29 +199,29 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     private void completaEsercizio(){
         uploadFileRegistrato().thenAccept(link -> {
             boolean esito;
-
+            Bundle bundle = new Bundle();
+            bundle.putInt("indiceScenarioGioco",indiceScenario);
             if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
                 esito = true;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaCorretto());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaCorretto());
                 setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
-                    Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
                 } else
-                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
+                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
             } else {
                 esito = false;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioSequenzaParole.getRicompensaErrato());
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaErrato());
                 setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
-                    Bundle bundle = new Bundle();
+
                     bundle.putBoolean("checkFineScenario", true);
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
                 } else
-                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, null);
+                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
             }
 
             constraintLayoutEsercizioSequenzaParole.setVisibility(View.GONE);
@@ -236,7 +238,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
 
     private void setEsitoEsercizio(Boolean esito, String link){
         RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
-        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("IndiceSecnarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
+        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("indiceScenarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 

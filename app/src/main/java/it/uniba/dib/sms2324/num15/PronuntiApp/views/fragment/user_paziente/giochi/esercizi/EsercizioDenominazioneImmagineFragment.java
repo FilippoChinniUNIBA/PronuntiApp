@@ -70,6 +70,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
     private ScenarioGioco scenarioGioco;
     private int aiutiDisponibili = 3;
     private Bundle bundle;
+    private int indiceScenario;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,10 +105,11 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bundle = getArguments();
+        indiceScenario = bundle.getInt("indiceScenarioCorrente");
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
             int sizeTerapie = terapie.size();
-            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(indiceScenario);
             mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
             this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
@@ -198,7 +200,8 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
     private void completaEsercizio() {
         uploadFileRegistrato().thenAccept(link -> {
             boolean esito;
-
+            Bundle bundle = new Bundle();
+            bundle.putInt("indiceScenarioGioco",indiceScenario);
             if (mController.verificaAudio(audioRecorder.getAudioFile(), getContext())) {
                 esito = true;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioDenominazioneImmagine.getRicompensaCorretto());
@@ -206,11 +209,10 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
                 setEsitoEsercizio(esito, link);
 
                 if (checkFineScenario(scenarioGioco)) {
-                    Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
                 } else
-                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, null);
+                    fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
             } else {
                 esito = false;
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(mEsercizioDenominazioneImmagine.getRicompensaErrato());
@@ -218,11 +220,10 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
                 setEsitoEsercizio(esito, link);
 
                 if (checkFineScenario(scenarioGioco)) {
-                    Bundle bundle = new Bundle();
                     bundle.putBoolean("checkFineScenario", true);
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
                 } else
-                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, null);
+                    fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
             }
 
             constraintLayoutEsercizioDenominazione.setVisibility(View.GONE);
@@ -237,7 +238,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
 
     private void setEsitoEsercizio(boolean esito, String link){
         RisultatoEsercizioDenominazioneImmagine risultatoEsercizioDenominazioneImmagine = new RisultatoEsercizioDenominazioneImmagine(esito,link,aiutiDisponibili-countAiuti);
-        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("IndiceSecnarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
+        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
         mPazienteViewModel.aggiornaPazienteRemoto();    }
 
     private CompletableFuture<String> uploadFileRegistrato(){

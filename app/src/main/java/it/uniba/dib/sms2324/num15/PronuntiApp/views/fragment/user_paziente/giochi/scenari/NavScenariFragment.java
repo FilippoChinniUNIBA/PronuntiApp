@@ -1,6 +1,7 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,7 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
             ScenarioFragment scenarioFragment = new ScenarioFragment();
             currentScenarioIndex-=1;
             bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
+            Log.d("NavindiceScenarioCorrente","NavindiceScenarioCorrente "+listaIndici.get(currentScenarioIndex));
             scenarioFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
         }else{

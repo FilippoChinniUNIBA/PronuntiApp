@@ -103,7 +103,8 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 				curvedLineView2to3.setEndPoint(posizioneGioco3ImageView.getX() + (float) posizioneGioco3ImageView.getWidth() / 2, posizioneGioco3ImageView.getY() + (float) posizioneGioco3ImageView.getHeight() / 2);
 			}
 		});
-
+		int scenarioIndex = bundle.getInt("indiceScenarioCorrente");
+		Log.d("indiceScenarioCorrente","indiceScenarioCorrente "+String.valueOf(scenarioIndex));
 		mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
 			Picasso.get().load(texture).into(personaggioImageView);
 		});
@@ -111,7 +112,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
 			List<Terapia> terapie = paziente.getTerapie();
-			int scenarioIndex = bundle.getInt("indiceScenarioCorrente");
+
 			scenarioGioco = terapie.get(terapie.size()-1).getScenariGioco().get(scenarioIndex);
 
 			String immagineSfondo = scenarioGioco.getImmagineSfondo();
