@@ -245,7 +245,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
 
     private void setEsitoEsercizio(Boolean esito, String link){
         RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
-        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("indiceScenarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
+        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("indiceScenarioCorrente"), bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"), risultatoEsercizioSequenzaParole);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 

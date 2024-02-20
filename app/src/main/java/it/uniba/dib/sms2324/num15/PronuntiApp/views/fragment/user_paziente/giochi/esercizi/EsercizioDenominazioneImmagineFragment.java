@@ -247,7 +247,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
 
     private void setEsitoEsercizio(boolean esito, String link){
         RisultatoEsercizioDenominazioneImmagine risultatoEsercizioDenominazioneImmagine = new RisultatoEsercizioDenominazioneImmagine(esito,link,aiutiDisponibili-countAiuti);
-        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
+        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"),risultatoEsercizioDenominazioneImmagine);
         mPazienteViewModel.aggiornaPazienteRemoto();    }
 
     private CompletableFuture<String> uploadFileRegistrato(){

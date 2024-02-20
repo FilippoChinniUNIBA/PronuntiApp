@@ -196,19 +196,16 @@ public class PazienteViewModel extends ViewModel {
 		setTexturePersonaggioSelezionato(newTexture);
 	}
 
-	public void setRisultatoEsercizioCoppiaImmaginePaziente(int indiceScenarioCorrente, int indiceEsercizio,RisultatoEsercizioCoppiaImmagini risultato){
-		int sizeTerapie = mPaziente.getValue().getTerapie().size();
-		EsercizioCoppiaImmagini esercizio = (EsercizioCoppiaImmagini) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+	public void setRisultatoEsercizioCoppiaImmaginePaziente(int indiceScenarioCorrente, int indiceEsercizio,int indiceTerapia,RisultatoEsercizioCoppiaImmagini risultato){
+		EsercizioCoppiaImmagini esercizio = (EsercizioCoppiaImmagini) mPaziente.getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
 		esercizio.setRisultatoEsercizio(risultato);
 	}
-	public void setRisultatoEsercizioDenominazioneImmaginiPaziente(int indiceScenarioCorrente, int indiceEsercizio, RisultatoEsercizioDenominazioneImmagine risultato){
-		int sizeTerapie = mPaziente.getValue().getTerapie().size();
-		EsercizioDenominazioneImmagine esercizio = (EsercizioDenominazioneImmagine) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+	public void setRisultatoEsercizioDenominazioneImmaginiPaziente(int indiceScenarioCorrente, int indiceEsercizio,int indiceTerapia, RisultatoEsercizioDenominazioneImmagine risultato){
+		EsercizioDenominazioneImmagine esercizio = (EsercizioDenominazioneImmagine) mPaziente.getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
 		esercizio.setRisultatoEsercizio(risultato);
 	}
-	public void setRisultatoEsercizioSequenzaParolePaziente(int indiceScenarioCorrente, int indiceEsercizio, RisultatoEsercizioSequenzaParole risultato){
-		int sizeTerapie = mPaziente.getValue().getTerapie().size();
-		EsercizioSequenzaParole esercizio = (EsercizioSequenzaParole) mPaziente.getValue().getTerapie().get(sizeTerapie-1).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
+	public void setRisultatoEsercizioSequenzaParolePaziente(int indiceScenarioCorrente, int indiceEsercizio,int indiceTerapia, RisultatoEsercizioSequenzaParole risultato){
+		EsercizioSequenzaParole esercizio = (EsercizioSequenzaParole) mPaziente.getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenarioCorrente).getEsercizi().get(indiceEsercizio);
 		esercizio.setRisultatoEsercizio(risultato);
 	}
 

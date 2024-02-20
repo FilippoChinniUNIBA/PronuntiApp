@@ -235,7 +235,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
 
     private void setEsitoEsercizio(Boolean esito){
         RisultatoEsercizioCoppiaImmagini risultatoEsercizioCoppiaImmagini = new RisultatoEsercizioCoppiaImmagini(esito);
-        mPazienteViewModel.setRisultatoEsercizioCoppiaImmaginePaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioCoppiaImmagini);
+        mPazienteViewModel.setRisultatoEsercizioCoppiaImmaginePaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"),risultatoEsercizioCoppiaImmagini);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
