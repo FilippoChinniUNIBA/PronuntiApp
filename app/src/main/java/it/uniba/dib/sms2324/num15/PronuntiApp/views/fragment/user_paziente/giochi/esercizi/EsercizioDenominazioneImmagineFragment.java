@@ -210,6 +210,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
 
                 if (checkFineScenario(scenarioGioco)) {
                     bundle.putBoolean("checkFineScenario", true);
+                    addRicompensaScenario();
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
                 } else
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioDenominazioneImmagine.getRicompensaCorretto(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
@@ -221,6 +222,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
 
                 if (checkFineScenario(scenarioGioco)) {
                     bundle.putBoolean("checkFineScenario", true);
+                    addRicompensaScenario();
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
                 } else
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioDenominazioneImmagine.getRicompensaErrato(), R.id.action_esercizioDenominazioneImmagineFragment_to_scenarioFragment, this, bundle);
@@ -234,6 +236,12 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
             Log.d("EsercizioDenominazioneImmagineFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
         });
+    }
+
+    private void  addRicompensaScenario(){
+        int ricompensaFinale = scenarioGioco.getRicompensaFinale();
+        mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
+        mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
     private void setEsitoEsercizio(boolean esito, String link){

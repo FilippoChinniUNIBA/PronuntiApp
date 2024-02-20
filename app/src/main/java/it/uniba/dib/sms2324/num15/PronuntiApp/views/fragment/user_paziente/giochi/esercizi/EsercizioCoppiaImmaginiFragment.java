@@ -195,6 +195,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
 
             if(checkFineScenario(scenarioGioco)){
                 bundle.putBoolean("checkFineScenario", true);
+                addRicompensaScenario();
                 fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioCoppiaImmagini.getRicompensaCorretto(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this, bundle);
             }
             else {
@@ -209,6 +210,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
 
             if(checkFineScenario(scenarioGioco)){
                 bundle.putBoolean("checkFineScenario", true);
+                addRicompensaScenario();
                 fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this, bundle);
             }
             else  fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioCoppiaImmagini.getRicompensaErrato(), R.id.action_esercizioCoppiaImmagini_to_scenarioFragment, this, bundle);
@@ -223,6 +225,12 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
         Log.d("EsercizioCoppiaImmaginiFragment.completaEsercizio()", "Esercizio completato: " + mPazienteViewModel.getPazienteLiveData().getValue());
 
 
+    }
+
+    private void  addRicompensaScenario(){
+        int ricompensaFinale = scenarioGioco.getRicompensaFinale();
+        mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
+        mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
     private void setEsitoEsercizio(Boolean esito){

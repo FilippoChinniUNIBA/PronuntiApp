@@ -208,6 +208,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
                 setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
                     bundle.putBoolean("checkFineScenario", true);
+                    addRicompensaScenario();
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
                 } else
                     fineScenarioEsercizioView.setEsercizioCorretto(mEsercizioSequenzaParole.getRicompensaCorretto(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
@@ -217,8 +218,8 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
                 mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(mEsercizioSequenzaParole.getRicompensaErrato());
                 setEsitoEsercizio(esito, link);
                 if (checkFineScenario(scenarioGioco)) {
-
                     bundle.putBoolean("checkFineScenario", true);
+                    addRicompensaScenario();
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
                 } else
                     fineScenarioEsercizioView.setEsercizioSbagliato(mEsercizioSequenzaParole.getRicompensaErrato(), R.id.action_esercizioSequenzaParole_to_scenarioFragment, this, bundle);
@@ -234,6 +235,12 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
 
 
         });
+    }
+
+    private void  addRicompensaScenario(){
+        int ricompensaFinale = scenarioGioco.getRicompensaFinale();
+        mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
+        mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
     private void setEsitoEsercizio(Boolean esito, String link){
