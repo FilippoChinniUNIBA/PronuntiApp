@@ -180,8 +180,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		Log.d("FineScenario", "fine scenario" + scenarioGioco.getEsercizi().toString());
 		int ricompensaFinale = scenarioGioco.getRicompensaFinale();
 		fineScenarioEsercizioView.showFineScenario(ricompensaFinale, posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView);
-		int valutaAttuale = mPazienteViewModel.getPazienteLiveData().getValue().getValuta();
-		mPazienteViewModel.getPazienteLiveData().getValue().setValuta(valutaAttuale+ricompensaFinale);
+		mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
 		mPazienteViewModel.aggiornaPazienteRemoto();
 	}
 
