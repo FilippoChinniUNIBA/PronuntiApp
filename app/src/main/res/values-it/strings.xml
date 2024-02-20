@@ -81,6 +81,7 @@
     <string name="navScenariNoticeBackward" >Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli successivi.</string>
     <string name="navScenariNoticeForward" >Sembra che non ci siano altri esercizi in questa terapia, prova a vedere quelli precedenti.</string>
     <string name="ok" >OK</string>
+    <string name="checkDate" >Non è possibile inserire la terapia e relativi scenari in queste date, perché un\'altra terapia è già prevista per il paziente nel periodo selezionato.</string>
 
     <string-array name="character_names">
         <item>Bambina</item>

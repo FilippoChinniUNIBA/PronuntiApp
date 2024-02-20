@@ -71,6 +71,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
     private int aiutiDisponibili = 3;
     private Bundle bundle;
     private int indiceScenario;
+    private int indiceTerapia;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,10 +107,10 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
         super.onViewCreated(view, savedInstanceState);
         bundle = getArguments();
         indiceScenario = bundle.getInt("indiceScenarioCorrente");
+        indiceTerapia = bundle.getInt("indiceTerapia");
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
-            int sizeTerapie = terapie.size();
-            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(indiceScenario);
+            scenarioGioco = terapie.get(indiceTerapia).getScenariGioco().get(indiceScenario);
             mEsercizioDenominazioneImmagine = (EsercizioDenominazioneImmagine) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
             this.mController.setEsercizioDenominazioneImmagine(mEsercizioDenominazioneImmagine);
@@ -246,7 +247,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
 
     private void setEsitoEsercizio(boolean esito, String link){
         RisultatoEsercizioDenominazioneImmagine risultatoEsercizioDenominazioneImmagine = new RisultatoEsercizioDenominazioneImmagine(esito,link,aiutiDisponibili-countAiuti);
-        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioDenominazioneImmagine);
+        mPazienteViewModel.setRisultatoEsercizioDenominazioneImmaginiPaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"),risultatoEsercizioDenominazioneImmagine);
         mPazienteViewModel.aggiornaPazienteRemoto();    }
 
     private CompletableFuture<String> uploadFileRegistrato(){

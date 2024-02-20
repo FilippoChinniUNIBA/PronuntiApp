@@ -59,7 +59,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
     private EsercizioCoppiaImmagini mEsercizioCoppiaImmagini;
     private ScenarioGioco scenarioGioco;
     private Bundle bundle;
-    private int sizeTerapie;
+    private int indiceTerapia;
     private int indiceScenario;
 
     @Override
@@ -92,10 +92,10 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
         super.onViewCreated(view, savedInstanceState);
         bundle = getArguments();
         indiceScenario = bundle.getInt("indiceScenarioCorrente");
+        indiceTerapia = bundle.getInt("indiceTerapia");
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
-            sizeTerapie = terapie.size();
-            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            scenarioGioco = terapie.get(indiceTerapia).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
             mEsercizioCoppiaImmagini = (EsercizioCoppiaImmagini) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
 
 
@@ -235,7 +235,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
 
     private void setEsitoEsercizio(Boolean esito){
         RisultatoEsercizioCoppiaImmagini risultatoEsercizioCoppiaImmagini = new RisultatoEsercizioCoppiaImmagini(esito);
-        mPazienteViewModel.setRisultatoEsercizioCoppiaImmaginePaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),risultatoEsercizioCoppiaImmagini);
+        mPazienteViewModel.setRisultatoEsercizioCoppiaImmaginePaziente(bundle.getInt("indiceScenarioCorrente"),bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"),risultatoEsercizioCoppiaImmagini);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 

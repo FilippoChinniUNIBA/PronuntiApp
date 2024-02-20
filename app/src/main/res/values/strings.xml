@@ -88,6 +88,7 @@
     <string name="navScenariNoticeBackward" >It seems that there are no other exercises in this therapy, try to see the next ones.</string>
     <string name="navScenariNoticeForward" >It seems that there are no other exercises in this therapy, try to see the previous ones.</string>
     <string name="ok" >OK</string>
+    <string name="checkDate" >It is not possible to enter the therapy and related scenarios on these dates, because another therapy is already planned for the patient in the selected period.</string>
 
     <string-array name="character_names">
         <item>Girl</item>

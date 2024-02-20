@@ -71,7 +71,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
     private ScenarioGioco scenarioGioco;
     private Bundle bundle;
     private int indiceScenario;
-
+    private int indiceTerapia;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_esercizio_sequenza_parole, container, false);
@@ -104,10 +104,10 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
 
         bundle = getArguments();
         indiceScenario = bundle.getInt("indiceScenarioCorrente");
+        indiceTerapia = bundle.getInt("indiceTerapia");
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Terapia> terapie = paziente.getTerapie();
-            int sizeTerapie = terapie.size();
-            scenarioGioco = terapie.get(sizeTerapie-1).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
+            scenarioGioco = terapie.get(indiceTerapia).getScenariGioco().get(bundle.getInt("indiceScenarioCorrente"));
             mEsercizioSequenzaParole = (EsercizioSequenzaParole) scenarioGioco.getEsercizi().get(bundle.getInt("indiceEsercizio"));
             this.mController.setEsercizioSequenzaParole(mEsercizioSequenzaParole);
 
@@ -245,7 +245,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
 
     private void setEsitoEsercizio(Boolean esito, String link){
         RisultatoEsercizioSequenzaParole risultatoEsercizioSequenzaParole = new RisultatoEsercizioSequenzaParole(esito, link);
-        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("indiceScenarioCorrente"), bundle.getInt("indiceEsercizio"), risultatoEsercizioSequenzaParole);
+        mPazienteViewModel.setRisultatoEsercizioSequenzaParolePaziente(bundle.getInt("indiceScenarioCorrente"), bundle.getInt("indiceEsercizio"),bundle.getInt("indiceTerapia"), risultatoEsercizioSequenzaParole);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
