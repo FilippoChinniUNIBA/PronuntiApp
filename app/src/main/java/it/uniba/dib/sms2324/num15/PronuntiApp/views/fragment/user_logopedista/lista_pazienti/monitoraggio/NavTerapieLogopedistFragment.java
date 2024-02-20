@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation
     private int indiceTerapia;
     private String idPaziente;
     private int indicePaziente;
+    private LinearLayout linearLayout;
 
 
     @Nullable
@@ -40,6 +42,8 @@ public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation
         indiceTerapia = savedInstanceState.getInt("indiceTerapia");
         idPaziente = savedInstanceState.getString("idPaziente");
         indicePaziente = savedInstanceState.getInt("indicePaziente");
+
+        linearLayout = view.findViewById(R.id.myLinearLayout);
         return view;
     }
 
@@ -51,37 +55,41 @@ public class NavTerapieLogopedistFragment extends AbstractFragmentWithNavigation
 
         Bundle bundle = new Bundle();
 
-        imageButtonProssimaTerapia.setOnClickListener(v -> {
-            if (indiceTerapia != indiceultimaTerapia) {
-                indiceTerapia++;
-                Log.d("NavTerapieGenitore",""+indiceTerapia);
-                bundle.putInt("indiceTerapia",indiceTerapia);
-                bundle.putString("idPaziente",idPaziente);
-                bundle.putInt("indicePaziente",indicePaziente);
-                MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
-                nuovoFragmentMonitoraggio.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
-            }else{
-                creaDialogErroreCampi(1);
-            }
-        });
+        if(indiceTerapia!=-1) {
 
-        imageButtonTerapiaPrecedente.setOnClickListener(v -> {
-            if (indiceTerapia != 0) {
-                indiceTerapia--;
-                Log.d("NavTerapieGenitore",""+indiceTerapia);
-                bundle.putInt("indiceTerapia",indiceTerapia);
-                bundle.putString("idPaziente",idPaziente);
-                bundle.putInt("indicePaziente",indicePaziente);
-                MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
-                nuovoFragmentMonitoraggio.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
-            }
-            else {
-                creaDialogErroreCampi(2);
-            }
-        });
+            imageButtonProssimaTerapia.setOnClickListener(v -> {
+                if (indiceTerapia != indiceultimaTerapia) {
+                    indiceTerapia++;
+                    Log.d("NavTerapieGenitore", "" + indiceTerapia);
+                    bundle.putInt("indiceTerapia", indiceTerapia);
+                    bundle.putString("idPaziente", idPaziente);
+                    bundle.putInt("indicePaziente", indicePaziente);
+                    MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
+                    nuovoFragmentMonitoraggio.setArguments(bundle);
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, nuovoFragmentMonitoraggio).commit();
+                } else {
+                    creaDialogErroreCampi(1);
+                }
+            });
 
+            imageButtonTerapiaPrecedente.setOnClickListener(v -> {
+                if (indiceTerapia != 0) {
+                    indiceTerapia--;
+                    Log.d("NavTerapieGenitore", "" + indiceTerapia);
+                    bundle.putInt("indiceTerapia", indiceTerapia);
+                    bundle.putString("idPaziente", idPaziente);
+                    bundle.putInt("indicePaziente", indicePaziente);
+                    MonitoraggioLogopedistaFragment nuovoFragmentMonitoraggio = new MonitoraggioLogopedistaFragment();
+                    nuovoFragmentMonitoraggio.setArguments(bundle);
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio, nuovoFragmentMonitoraggio).commit();
+                } else {
+                    creaDialogErroreCampi(2);
+                }
+            });
+
+        }else{
+            linearLayout.setVisibility(View.GONE);
+        }
     }
 
     public void creaDialogErroreCampi(int tipoErrore) {

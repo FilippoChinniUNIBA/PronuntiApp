@@ -46,7 +46,7 @@ public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation
         savedInstanceState = getArguments();
 
         if (savedInstanceState != null && savedInstanceState.containsKey("indiceTerapiaScelta")) {
-            indiceTerapia = (Integer) savedInstanceState.getInt("indiceTerapiaScelta");
+            indiceTerapia = savedInstanceState.getInt("indiceTerapiaScelta");
         } else {
             indiceTerapia = 0;
         }
@@ -79,7 +79,6 @@ public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation
 
     @Override
     public void navigateToId(int id, Bundle bundle){
-        Log.d("MonitoraggioFragment", "navigateToEsercizio: ");
         navigateTo(id, bundle);
     }
 

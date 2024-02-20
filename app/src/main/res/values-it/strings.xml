@@ -27,8 +27,8 @@
         <item>@string/male</item>
         <item>@string/female</item>
     </string-array>
-    <string name="lastTherapy">Questa è l\'ultima terapia, puoi vedere solo terapie successive</string>
-    <string name="firstTherapy">Questa è la prima terapia, puoi vedere solo terapie precedenti</string>
+    <string name="lastTherapy">Questa è l\'ultima terapia, puoi vedere solo terapie successive (o non ci sono terapie)</string>
+    <string name="firstTherapy">Questa è la prima terapia, puoi vedere solo terapie precedenti (o non ci sono terapie)</string>
     <string name="gender_hint">Sesso</string>
     <string name="patient">Paziente</string>
     <string name="parent">Genitore</string>

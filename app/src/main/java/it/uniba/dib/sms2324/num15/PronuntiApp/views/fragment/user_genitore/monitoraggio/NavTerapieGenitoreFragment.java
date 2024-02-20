@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
     private ImageButton imageButtonProssimaTerapia;
     private ImageButton imageButtonTerapiaPrecedente;
     private GenitoreViewModel mGenitoreViewModel;
+    private LinearLayout linearLayout;
 
 
     @Nullable
@@ -37,8 +39,16 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
         mGenitoreViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
-            indiceTerapia = mGenitoreViewModel.getIndiceUltimaTerapia();
+            if(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie()!=null) {
+                this.indiceTerapia = mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().size() - 1;
+            }else {
+                this.indiceTerapia = -1;
+            }
         });
+
+        Log.d("Boh",""+indiceTerapia);
+
+        linearLayout = view.findViewById(R.id.myLinearLayout);
 
         return view;
     }
@@ -47,36 +57,40 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d("NavTerapieGenitore",""+indiceTerapia);
 
         Bundle bundle = new Bundle();
 
-        imageButtonProssimaTerapia.setOnClickListener(v -> {
-            if (indiceTerapia != mGenitoreViewModel.getIndiceUltimaTerapia() && indiceTerapia != -1) {
-                indiceTerapia++;
-                Log.d("NavTerapieGenitore",""+indiceTerapia);
-                bundle.putInt("indiceTerapiaScelta",indiceTerapia);
-                MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
-                nuovoFragmentMonitoraggio.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
-            }else{
-                creaDialogErroreCampi(1);
-            }
-        });
+        if(indiceTerapia != -1){
+            imageButtonProssimaTerapia.setOnClickListener(v -> {
+                if (indiceTerapia != mGenitoreViewModel.getIndiceUltimaTerapia() && indiceTerapia != -1) {
+                    indiceTerapia++;
+                    Log.d("NavTerapieGenitore",""+indiceTerapia);
+                    bundle.putInt("indiceTerapiaScelta",indiceTerapia);
+                    MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
+                    nuovoFragmentMonitoraggio.setArguments(bundle);
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+                }else{
+                    creaDialogErroreCampi(1);
+                }
+            });
 
-        imageButtonTerapiaPrecedente.setOnClickListener(v -> {
-            if (indiceTerapia != 0 && indiceTerapia != -1) {
-                indiceTerapia--;
-                Log.d("NavTerapieGenitore",""+indiceTerapia);
-                bundle.putInt("indiceTerapiaScelta",indiceTerapia);
-                MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
-                nuovoFragmentMonitoraggio.setArguments(bundle);
-                getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
-            }else{
-                creaDialogErroreCampi(2);
-            }
+            imageButtonTerapiaPrecedente.setOnClickListener(v -> {
+                if (indiceTerapia != 0 && indiceTerapia != -1) {
+                    indiceTerapia--;
+                    Log.d("NavTerapieGenitore",""+indiceTerapia);
+                    bundle.putInt("indiceTerapiaScelta",indiceTerapia);
+                    MonitoraggioGenitoreFragment nuovoFragmentMonitoraggio = new MonitoraggioGenitoreFragment();
+                    nuovoFragmentMonitoraggio.setArguments(bundle);
+                    getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewMonitoraggio,nuovoFragmentMonitoraggio).commit();
+                }else{
+                    creaDialogErroreCampi(2);
+                }
 
-        });
+            });
+
+        }else{
+            linearLayout.setVisibility(View.GONE);
+        }
 
     }
 

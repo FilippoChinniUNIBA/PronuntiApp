@@ -13,7 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
@@ -50,6 +54,8 @@ public class TerapieGenitoreFragment extends AbstractFragmentWithNavigation {
         super.onViewCreated(view, savedInstanceState);
 
         getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNavTerapie,new NavTerapieGenitoreFragment()).commit();
+
+
 
         mGenitoreViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
