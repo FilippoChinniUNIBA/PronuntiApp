@@ -24,10 +24,11 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@id/toolBar"
             style="@style/styleToolBarPaziente"
-            android:layout_width="35dp"
+            android:layout_width="0dp"
             android:gravity="center_vertical"
-            android:paddingTop="9dp"
+            android:paddingTop="10dp"
             tools:ignore="MissingConstraints"
+            android:layout_weight="0.7"
         />
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/topBarLayout"
@@ -39,10 +40,11 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/logoutFragmentContainer"
             android:name="it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.profilo.LogoutFragment"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="7dp"
             android:layout_gravity="end|center_vertical"
+            android:layout_weight="1.3"
             />
     </LinearLayout>
     <LinearLayout

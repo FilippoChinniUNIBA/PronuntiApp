@@ -163,7 +163,6 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
         linearLayoutCreazioneScenario.setVisibility(View.GONE);
         buttonNextScenario.setVisibility(View.GONE);

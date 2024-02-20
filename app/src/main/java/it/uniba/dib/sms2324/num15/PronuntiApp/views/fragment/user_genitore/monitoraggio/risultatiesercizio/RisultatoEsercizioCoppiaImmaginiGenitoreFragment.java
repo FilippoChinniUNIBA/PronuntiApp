@@ -49,6 +49,8 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
 
+        navController.navigateUp();
+
         savedInstanceState = getArguments();
 
         if (savedInstanceState != null && savedInstanceState.containsKey("indiceEsercizio") && savedInstanceState.containsKey("indiceScenario") && savedInstanceState.containsKey("indiceTerapia")) {
