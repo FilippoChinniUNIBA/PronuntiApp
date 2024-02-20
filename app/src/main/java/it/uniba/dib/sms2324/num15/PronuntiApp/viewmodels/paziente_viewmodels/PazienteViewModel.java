@@ -76,7 +76,7 @@ public class PazienteViewModel extends ViewModel {
 			List<IndexDate> indexDateScenariGioco = filterScenariGioco(scenariGiocoTerapia, dataCorrente);
 			indexDateScenariGioco.sort(Comparator.comparing(IndexDate::getDate));
 			List<Integer> listaIndici = getIndexList(indexDateScenariGioco);
-			Collections.reverse(listaIndici);
+			//Collections.reverse(listaIndici);
 			if (!listaIndici.isEmpty()) {
 				return listaIndici;
 			} else {
