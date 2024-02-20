@@ -104,6 +104,7 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 			}
 		});
 		int scenarioIndex = bundle.getInt("indiceScenarioCorrente");
+		int terapiaIndex = bundle.getInt("indiceTerapia");
 		Log.d("indiceScenarioCorrente","indiceScenarioCorrente "+String.valueOf(scenarioIndex));
 		mPazienteViewModel.getTexturePersonaggioSelezionatoLiveData().observe(getViewLifecycleOwner(), texture -> {
 			Picasso.get().load(texture).into(personaggioImageView);
@@ -112,8 +113,8 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
 
 			List<Terapia> terapie = paziente.getTerapie();
-
-			scenarioGioco = terapie.get(terapie.size()-1).getScenariGioco().get(scenarioIndex);
+			Terapia terapia  = terapie.get(terapiaIndex);
+			scenarioGioco = terapia.getScenariGioco().get(scenarioIndex);
 
 			String immagineSfondo = scenarioGioco.getImmagineSfondo();
 			String immagineTappa1 = scenarioGioco.getImmagineTappa1();

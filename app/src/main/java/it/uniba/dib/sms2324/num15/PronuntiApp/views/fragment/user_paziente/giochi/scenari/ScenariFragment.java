@@ -44,6 +44,7 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), Void -> {
             List<Integer> scenariGiocoValidi = mPazienteViewModel.getScenariPaziente();
             if(scenariGiocoValidi!=null) {
+                int terapiaIndex = mPazienteViewModel.getTerapiaPazienteIndex();
                 Bundle bundle = getArguments();
                 Log.d("Bundle", "onViewCreated SCENARI fine scenario: " + bundle);
 
@@ -58,6 +59,7 @@ public class ScenariFragment extends AbstractFragmentWithNavigation {
                 }
                 ScenarioFragment scenarioFragment = new ScenarioFragment();
                 bundle.putInt("indiceScenarioCorrente", scenariGiocoValidi.get(scenariGiocoValidi.size() - 1));
+                bundle.putInt("indiceTerapia",terapiaIndex);
                 if(bundle.containsKey("indiceScenarioGioco")){
                     bundle.putInt("indiceScenarioCorrente",bundle.getInt("indiceScenarioGioco"));
                 }
