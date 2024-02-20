@@ -53,7 +53,6 @@ public class MonitoraggioGenitoreFragment extends AbstractFragmentWithNavigation
 
         mGenitoreViewModel = new ViewModelProvider(requireActivity()).get(GenitoreViewModel.class);
 
-        view.findViewById(R.id.buttonAddTerapia).setVisibility(View.GONE);
 
         textViewDataInizioTerapia = view.findViewById(R.id.textViewDataInizioTerapia);
         textViewDataFineTerapia= view.findViewById(R.id.textViewDataFineTerapia);
