@@ -115,9 +115,7 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
 
     private void setDialogUI(InfoDialog dialog){
         dialog.createCustome().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // Nasconde la barra di navigazione
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN // Imposta la modalità a schermo intero
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY); // Mantiene la modalità a schermo intero quando l'utente interagisce con l'app
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
 }

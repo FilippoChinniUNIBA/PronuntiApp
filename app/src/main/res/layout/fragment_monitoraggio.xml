@@ -98,6 +98,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/recyclerViewScenari"
+            android:visibility="gone"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewScenari"

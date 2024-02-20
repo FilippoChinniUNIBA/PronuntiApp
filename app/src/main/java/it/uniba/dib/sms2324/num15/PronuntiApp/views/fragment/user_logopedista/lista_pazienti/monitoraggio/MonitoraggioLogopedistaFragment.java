@@ -85,6 +85,7 @@ public class MonitoraggioLogopedistaFragment extends AbstractFragmentWithNavigat
         setTextViewDataInizioTerapia();
         setTextViewDataFineTerapia();
 
+        buttonAddScenario.setVisibility(View.VISIBLE);
         buttonAddScenario.setOnClickListener(v -> navigateToAddScenario());
 
         ScenarioAdapter adapter = new ScenarioAdapter(listaScenari, this, R.id.action_schedaPazienteFragment_to_risultatoEsercizioDenominazioneImmagineLogopedistaFragment
