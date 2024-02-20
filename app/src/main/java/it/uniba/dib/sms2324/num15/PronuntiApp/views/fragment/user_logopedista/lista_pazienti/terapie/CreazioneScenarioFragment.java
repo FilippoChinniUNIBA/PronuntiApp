@@ -162,47 +162,50 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
+        linearLayoutCreazioneScenario.setVisibility(View.GONE);
+        buttonNextScenario.setVisibility(View.GONE);
+        buttonPreviousScenario.setVisibility(View.GONE);
+        buttonChooseImgPos1.setVisibility(View.GONE);
+        buttonChooseImgPos2.setVisibility(View.GONE);
+        buttonChooseImgPos3.setVisibility(View.GONE);
+
+        buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
+        buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
+        buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
+
+        constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
+
+        buttonChooseBackground.setOnClickListener(v -> {
+                    startFilePicker(PICK_FILE_REQUEST_4);
+                    constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
+                    buttonChooseImgPos1.setVisibility(View.VISIBLE);
+                    buttonChooseImgPos2.setVisibility(View.VISIBLE);
+                    buttonChooseImgPos3.setVisibility(View.VISIBLE);
+                }
+        );
+
+        dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
+
+        buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
+
+        buttonUseTemplate.setOnClickListener(v -> useTemplate());
+        buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
+
+        buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
+        buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
+
         mLogopedistaViewModel.getLogopedistaLiveData().observe(getViewLifecycleOwner(),logopedista -> {
             TemplateScenarioGiocoDAO templateScenarioGiocoDAO = new TemplateScenarioGiocoDAO();
             templateScenarioGiocoDAO.getAll().thenAccept(result -> {
                 templateScenari = result;
                 sizeTemplateScenari = result.size();
-
-                linearLayoutSceltaTemplateOCreaScenario.setVisibility(View.VISIBLE);
-                linearLayoutCreazioneScenario.setVisibility(View.GONE);
-                buttonNextScenario.setVisibility(View.GONE);
-                buttonPreviousScenario.setVisibility(View.GONE);
-                buttonChooseImgPos1.setVisibility(View.GONE);
-                buttonChooseImgPos2.setVisibility(View.GONE);
-                buttonChooseImgPos3.setVisibility(View.GONE);
-
-                constraintLayoutCostruzioneImmagineScenario.setVisibility(View.GONE);
-
-                dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
-
-                buttonUseTemplate.setOnClickListener(v -> useTemplate());
-                buttonCreateScenarioFromStart.setOnClickListener(v -> createScenarioFromStart());
-
-                buttonChooseImgPos1.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_1));
-                buttonChooseImgPos2.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_2));
-                buttonChooseImgPos3.setOnClickListener(v -> startFilePicker(PICK_FILE_REQUEST_3));
-
-                buttonChooseBackground.setOnClickListener(v -> {
-                            startFilePicker(PICK_FILE_REQUEST_4);
-                            constraintLayoutCostruzioneImmagineScenario.setVisibility(View.VISIBLE);
-                            buttonChooseImgPos1.setVisibility(View.VISIBLE);
-                            buttonChooseImgPos2.setVisibility(View.VISIBLE);
-                            buttonChooseImgPos3.setVisibility(View.VISIBLE);
-                        }
-                );
-
-                buttonNextScenario.setOnClickListener(v -> prossimoTemplateScenario());
-                buttonPreviousScenario.setOnClickListener(v -> precedenteTemplateScenario());
-
-                buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
             });
         });
     }
+
     private void showErrorDialog(){
         InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
         infoDialog.setOnConfermaButtonClickListener(null);
