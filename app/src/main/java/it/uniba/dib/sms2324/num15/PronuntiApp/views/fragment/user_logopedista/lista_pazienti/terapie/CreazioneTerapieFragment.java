@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
+import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Logopedista;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.ScenarioGioco;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
@@ -72,12 +74,13 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
             buttonAddScenario.setOnClickListener(v -> addScenario());
 
             buttonSalvataggioTerapia.setOnClickListener(v-> saveTerapia(idPaziente,nomePaziente,cognomePaziente));
+
         });
 
 
     }
     private void showErrorDialog(int messaggio){
-        InfoDialog infoDialog = new InfoDialog(getContext(), getString(R.string.compilaPrimaTutto), getString(R.string.tastoRiprova));
+        InfoDialog infoDialog = new InfoDialog(getContext(), getString(messaggio), getString(R.string.tastoRiprova));
         infoDialog.setOnConfermaButtonClickListener(null);
         infoDialog.show();
     }
@@ -86,6 +89,8 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
             showErrorDialog(R.string.compilaPrimaTutto);
         }else if(LocalDate.parse(dataInizio.getText().toString()).isAfter(LocalDate.parse(dataFine.getText().toString()))){
             showErrorDialog(R.string.insertDate);
+        }else if(verificaDate(mLogopedistaViewModel)){
+            showErrorDialog(R.string.checkDate);
         }
         else {
             if(isFirstScenario){
@@ -98,6 +103,21 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
             getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNuovoScenario, new CreazioneScenarioFragment(this)).commit();
             buttonSalvataggioTerapia.setVisibility(View.GONE);
         }
+    }
+
+    private boolean verificaDate(LogopedistaViewModel logopedistaViewModel){
+        Paziente paziente = logopedistaViewModel.getPazienteById(idPaziente);
+        List<Terapia> terapiePaziente = paziente.getTerapie();
+        LocalDate dataInizioNuovaTerapia = LocalDate.parse(dataInizio.getText().toString());
+        LocalDate dataFineNuovaTerapia = LocalDate.parse(dataFine.getText().toString());
+        for (Terapia terapiaPaziente : terapiePaziente){
+            LocalDate dataInizioTerapiaEsistente = terapiaPaziente.getDataInizio();
+            LocalDate dataFineTerapiaEsistente = terapiaPaziente.getDataFine();
+            if ((dataInizioNuovaTerapia.isEqual(dataInizioTerapiaEsistente) || dataFineNuovaTerapia.isAfter(dataInizioTerapiaEsistente)) || (dataFineNuovaTerapia.isEqual(dataFineTerapiaEsistente) || dataFineNuovaTerapia.isBefore(dataFineTerapiaEsistente))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void saveTerapia(String idPaziente,String nome,String cognome){
