@@ -66,12 +66,24 @@ public class PazienteViewModel extends ViewModel {
 		this.mListaPersonaggi.setValue(listaPersonaggi);
 	}
 
+	public Integer getTerapiaPazienteIndex(){
+		LocalDate dataCorrente = LocalDate.now();
+		List<Terapia> terapie = mPaziente.getValue().getTerapie();
+		if(terapie!=null) {
+			List<IndexDate> indexDateTerapie = filterTerapie(terapie, dataCorrente);
+			indexDateTerapie.sort(Comparator.comparing(IndexDate::getDate));
+			List<Integer> listaIndiciTerapie = getIndexList(indexDateTerapie);
+			int sizeListaIndiciTerapie = listaIndiciTerapie.size();
+			return listaIndiciTerapie.get(sizeListaIndiciTerapie - 1);
+		}
+		return null;
+	}
+
 	public List<Integer> getScenariPaziente(){
 		LocalDate dataCorrente = LocalDate.now();
 		List<Terapia> terapie = mPaziente.getValue().getTerapie();
 		if(terapie!=null){
-			int terapieSize = terapie.size();
-			Terapia terapia = terapie.get(terapieSize - 1);
+			Terapia terapia = terapie.get(getTerapiaPazienteIndex());
 			List<ScenarioGioco> scenariGiocoTerapia = terapia.getScenariGioco();
 			List<IndexDate> indexDateScenariGioco = filterScenariGioco(scenariGiocoTerapia, dataCorrente);
 			indexDateScenariGioco.sort(Comparator.comparing(IndexDate::getDate));
@@ -85,13 +97,12 @@ public class PazienteViewModel extends ViewModel {
 		}else {
 			return null;
 		}
-
 	}
 
-	private static List<Integer> getIndexList(List<IndexDate> indexDateScenariGioco){
+	private static List<Integer> getIndexList(List<IndexDate> indexDate){
 		List<Integer> indexList = new ArrayList<>();
-		for(IndexDate indexDateScenarioGioco : indexDateScenariGioco){
-			int index = indexDateScenarioGioco.getIndex();
+		for(IndexDate currentIndexDate : indexDate){
+			int index = currentIndexDate.getIndex();
 			indexList.add(index);
 		}
 		return indexList;
@@ -109,6 +120,19 @@ public class PazienteViewModel extends ViewModel {
 			}
 		}
 		return IndiciScenariFiltrati;
+	}
+
+	private List<IndexDate> filterTerapie (List<Terapia> terapie,LocalDate dataCorrente){
+		List<IndexDate> indiciTerapieFiltrati = new ArrayList<>();
+		for (int index=0; index<terapie.size(); index++){
+			Terapia terapia = terapie.get(index);
+			LocalDate dataInizioTerapia = terapia.getDataInizio();
+			if (!dataInizioTerapia.isAfter(dataCorrente)){
+				IndexDate indexDate = new IndexDate(index,dataInizioTerapia);
+				indiciTerapieFiltrati.add(indexDate);
+			}
+		}
+		return indiciTerapieFiltrati;
 	}
 	/*
 	public List<ScenarioGioco> getScenariPaziente(){

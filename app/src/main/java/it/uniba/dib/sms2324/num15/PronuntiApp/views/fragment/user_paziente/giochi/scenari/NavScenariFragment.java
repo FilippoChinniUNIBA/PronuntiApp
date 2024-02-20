@@ -28,8 +28,8 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
     private LinearLayout linearLayout;
     private int currentScenarioIndex = 0;
     private int maxSize;
-    private List<Terapia> terapie;
-    private int sizeTerapie;
+    private Terapia terapia;
+    private int terapiaIndex;
 
 
     @Override
@@ -51,12 +51,13 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
         mPazienteViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             List<Integer> scenariIndexListmPazienteViewModel = mPazienteViewModel.getScenariPaziente();
             if(scenariIndexListmPazienteViewModel!= null) {
+                terapiaIndex = mPazienteViewModel.getTerapiaPazienteIndex();
                 maxSize = scenariIndexListmPazienteViewModel.size() - 1;
                 currentScenarioIndex = maxSize;
 
-                terapie = paziente.getTerapie();
-                sizeTerapie = terapie.size();
-                textViewDataScenario.setText(terapie.get(sizeTerapie - 1).getScenariGioco().get(scenariIndexListmPazienteViewModel.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                List<Terapia> terapie = paziente.getTerapie();
+                terapia = terapie.get(terapiaIndex);
+                textViewDataScenario.setText(terapia.getScenariGioco().get(scenariIndexListmPazienteViewModel.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 buttonIndietroScenario.setOnClickListener(v -> navigaScenarioPrecedente(scenariIndexListmPazienteViewModel));
                 buttonAvantiScenario.setOnClickListener(v -> navigaScenarioSuccessivo(scenariIndexListmPazienteViewModel));
             }else{
@@ -72,7 +73,8 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
             ScenarioFragment scenarioFragment = new ScenarioFragment();
             currentScenarioIndex +=1;
             bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
-            textViewDataScenario.setText(terapie.get(sizeTerapie - 1).getScenariGioco().get(listaIndici.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            bundle.putInt("indiceTerapia",terapiaIndex);
+            textViewDataScenario.setText(terapia.getScenariGioco().get(listaIndici.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             scenarioFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
         }else{
@@ -82,12 +84,13 @@ public class NavScenariFragment extends AbstractFragmentWithNavigation {
 
     private void navigaScenarioPrecedente(List<Integer> listaIndici) {
         if(currentScenarioIndex-1>=0) {
-            textViewDataScenario.setText(terapie.get(sizeTerapie - 1).getScenariGioco().get(currentScenarioIndex).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            textViewDataScenario.setText(terapia.getScenariGioco().get(currentScenarioIndex).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             Bundle bundle = new Bundle();
             ScenarioFragment scenarioFragment = new ScenarioFragment();
             currentScenarioIndex-=1;
             bundle.putInt("indiceScenarioCorrente", listaIndici.get(currentScenarioIndex));
-            textViewDataScenario.setText(terapie.get(sizeTerapie - 1).getScenariGioco().get(listaIndici.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            bundle.putInt("indiceTerapia",terapiaIndex);
+            textViewDataScenario.setText(terapia.getScenariGioco().get(listaIndici.get(currentScenarioIndex)).getDataInizio().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             Log.d("NavindiceScenarioCorrente","NavindiceScenarioCorrente "+listaIndici.get(currentScenarioIndex));
             scenarioFragment.setArguments(bundle);
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_scenari_singolo, scenarioFragment).commit();
