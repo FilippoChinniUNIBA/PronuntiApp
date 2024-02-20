@@ -94,7 +94,7 @@ public class RisultatoEsercizioDenominazioneImmagineLogopedistaFragment extends 
     private void playAudio() {
         playButton.setVisibility(View.GONE);
         pauseButton.setVisibility(View.VISIBLE);
-        this.audioPlayerLink = new AudioPlayerLink(mEsercizioDenominazioneImmagine.getAudioAiuto());
+        this.audioPlayerLink = new AudioPlayerLink(mEsercizioDenominazioneImmagine.getRisultatoEsercizio().getAudioRegistrato());
         audioPlayerLink.playAudio();
     }
 

@@ -37,6 +37,7 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
 
     private AudioRecorder audioRecorder;
     private AudioPlayerLink audioPlayerLink;
+    private AudioPlayerLink audioPlayerLinkRegistrazione;
     private MediaPlayer mMediaPlayer;
     private int indiceTerapia;
     private int indiceEsercizio;
@@ -88,6 +89,8 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
+        this.audioPlayerLinkRegistrazione = new AudioPlayerLink(mEsercizioSequenzaParole.getRisultatoEsercizio().getAudioRegistrato());
+
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
         if (isCorrect()) {
@@ -171,13 +174,13 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
     private void playAudio() {
         playButtonRisposta.setVisibility(View.GONE);
         pauseButtonRisposta.setVisibility(View.VISIBLE);
-        audioPlayerLink.playAudio();
+        audioPlayerLinkRegistrazione.playAudio();
     }
 
     private void stopAudio() {
         playButtonRisposta.setVisibility(View.VISIBLE);
         pauseButtonRisposta.setVisibility(View.GONE);
-        audioPlayerLink.stopAudio();
+        audioPlayerLinkRegistrazione.stopAudio();
     }
 
     private boolean isCorrect() {
