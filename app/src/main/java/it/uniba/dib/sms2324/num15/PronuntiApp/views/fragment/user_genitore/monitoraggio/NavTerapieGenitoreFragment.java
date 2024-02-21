@@ -40,15 +40,12 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
 
         mGenitoreViewModel.getPazienteLiveData().observe(getViewLifecycleOwner(), paziente -> {
             if(mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie()!=null) {
-                this.indiceTerapia = mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().size() - 1;
+                this.indiceTerapia = mGenitoreViewModel.getIndiceUltimaTerapia();
             }else {
                 this.indiceTerapia = -1;
             }
         });
 
-        Log.d("Boh",""+indiceTerapia);
-
-        linearLayout = view.findViewById(R.id.myLinearLayout);
 
         return view;
     }
@@ -57,11 +54,9 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         Bundle bundle = new Bundle();
 
-        if(indiceTerapia != -1){
-            imageButtonProssimaTerapia.setOnClickListener(v -> {
+         imageButtonProssimaTerapia.setOnClickListener(v -> {
                 if (indiceTerapia != mGenitoreViewModel.getIndiceUltimaTerapia() && indiceTerapia != -1) {
                     indiceTerapia++;
                     Log.d("NavTerapieGenitore",""+indiceTerapia);
@@ -87,10 +82,6 @@ public class NavTerapieGenitoreFragment extends AbstractFragmentWithNavigation {
                 }
 
             });
-
-        }else{
-            linearLayout.setVisibility(View.GONE);
-        }
 
     }
 

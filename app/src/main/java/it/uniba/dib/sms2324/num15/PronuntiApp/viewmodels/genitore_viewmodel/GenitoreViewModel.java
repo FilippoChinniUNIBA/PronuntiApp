@@ -6,7 +6,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.GenitoreDAO;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.database.profilo.PazienteDAO;
@@ -71,11 +74,16 @@ public class GenitoreViewModel extends ViewModel {
 		return mPaziente.getValue().getTerapie().get(indiceTerapia);
 	}
 
+	/* nel metodo di sotto faccio il count delle terapie con una data successiva a quella odierna e la sottraggo al numero di
+	elementi nella lista di terapie totali - 1, per ottenere l'indice dell'ultima terapia che però non ha data successiva a quella
+	odierna, ho usato isAfter() perchè con isBefore() non contava la terapia con data inizio oggi.*/
+
 	public int getIndiceUltimaTerapia() {
 
 		if (mPaziente.getValue() != null) {
 			if (mPaziente.getValue().getTerapie() != null) {
-				return (mPaziente.getValue().getTerapie().size()) - 1;
+				mPaziente.getValue().getTerapie().sort(Comparator.comparing(Terapia::getDataInizio));
+				return mPaziente.getValue().getTerapie().size()-((int) mPaziente.getValue().getTerapie().stream().filter(terapia -> terapia.getDataInizio().isAfter(LocalDate.now())).count()) -1;
 			}
 		}
 			return -1;
