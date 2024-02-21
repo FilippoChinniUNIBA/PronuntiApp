@@ -100,7 +100,15 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
             }
             Log.d("Terapia",terapia.toString());
             buttonAddScenario.setVisibility(View.GONE);
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNuovoScenario, new CreazioneScenarioFragment(this)).commit();
+
+            //passare data minima e massima per datePicker
+            bundle = new Bundle();
+            bundle.putString("dataInizio",dataInizio.getText().toString());
+            bundle.putString("dataFine",dataFine.getText().toString());
+            CreazioneScenarioFragment creazioneScenarioFragment = new CreazioneScenarioFragment(this);
+            creazioneScenarioFragment.setArguments(bundle);
+
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewNuovoScenario, creazioneScenarioFragment).commit();
             buttonSalvataggioTerapia.setVisibility(View.GONE);
         }
     }
@@ -110,10 +118,11 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         List<Terapia> terapiePaziente = paziente.getTerapie();
         LocalDate dataInizioNuovaTerapia = LocalDate.parse(dataInizio.getText().toString());
         LocalDate dataFineNuovaTerapia = LocalDate.parse(dataFine.getText().toString());
+
         for (Terapia terapiaPaziente : terapiePaziente){
             LocalDate dataInizioTerapiaEsistente = terapiaPaziente.getDataInizio();
             LocalDate dataFineTerapiaEsistente = terapiaPaziente.getDataFine();
-            if ((dataInizioNuovaTerapia.isEqual(dataInizioTerapiaEsistente) || dataFineNuovaTerapia.isAfter(dataInizioTerapiaEsistente)) || (dataFineNuovaTerapia.isEqual(dataFineTerapiaEsistente) || dataFineNuovaTerapia.isBefore(dataFineTerapiaEsistente))) {
+            if ((dataInizioNuovaTerapia.isEqual(dataInizioTerapiaEsistente) || dataInizioNuovaTerapia.isBefore(dataInizioTerapiaEsistente)) || (dataFineNuovaTerapia.isEqual(dataFineTerapiaEsistente) || dataFineNuovaTerapia.isBefore(dataFineTerapiaEsistente))) {
                 return true;
             }
         }

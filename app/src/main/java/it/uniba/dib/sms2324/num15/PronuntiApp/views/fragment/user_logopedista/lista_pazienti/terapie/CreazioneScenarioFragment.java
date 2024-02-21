@@ -3,6 +3,7 @@ package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_logopedista.l
 import static android.app.Activity.RESULT_OK;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +34,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,6 +101,10 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
     private String idPaziente;
     private int indiceTerapia;
 
+    //solo quando crei uno scenario per terapia nuova
+    private LocalDate dataInizioTerapia;
+    private LocalDate dataFineTerapia;
+
     public CreazioneScenarioFragment(SaveScenario mCallback) {
         this.mCallback = mCallback;
     }
@@ -120,10 +127,23 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
 
         bundle = getArguments();
         if(bundle!=null) {
-            setToolBar(view,getString(R.string.nuovoScenario));
-            idPaziente = bundle.getString("idPaziente");
-            indiceTerapia = bundle.getInt("indiceTerapia");
-            view.findViewById(R.id.toolBar).setVisibility(View.VISIBLE);
+            //arrivi a questo fragmment da monitoraggio paziente
+            if (mCallback == null){
+                setToolBar(view, getString(R.string.nuovoScenario));
+                idPaziente = bundle.getString("idPaziente");
+                indiceTerapia = bundle.getInt("indiceTerapia");
+                view.findViewById(R.id.toolBar).setVisibility(View.VISIBLE);
+                Paziente paziente = mLogopedistaViewModel.getPazienteById(idPaziente);
+
+                Log.d("CreazioneScenarioFragment", "onCreateView: "+paziente.getTerapie().get(indiceTerapia));
+                dataInizioTerapia = paziente.getTerapie().get(indiceTerapia).getDataInizio();
+                dataFineTerapia = paziente.getTerapie().get(indiceTerapia).getDataFine();
+            }
+            //arrivi a questo fragment da creazione terapia
+            else {
+                dataInizioTerapia = LocalDate.parse(bundle.getString("dataInizio"));
+                dataFineTerapia = LocalDate.parse(bundle.getString("dataFine"));
+            }
         }
 
 
@@ -186,7 +206,7 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
                 }
         );
 
-        dataScenario.setOnClickListener(v -> DatePickerCustom.showDatePickerDialog(getContext(), dataScenario));
+        dataScenario.setOnClickListener(v -> showDatePickerDialog(getContext(), dataScenario));
 
         buttonSalvataggioScenario.setOnClickListener(v -> saveScenario());
 
@@ -203,6 +223,23 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
                 sizeTemplateScenari = result.size();
             });
         });
+    }
+
+    public void showDatePickerDialog(Context context, TextView textField) {
+        LocalDate now = LocalDate.now();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, (view, year, month, dayOfMonth) -> {
+            String date = LocalDate.of(year, month + 1, dayOfMonth).toString();
+            textField.setText(date);
+        }, now.getYear(), now.getMonthValue() - 1, now.getDayOfMonth());
+
+        //set min e max date
+        ZoneId zoneId = ZoneId.systemDefault();
+        long minDateMillis = dataInizioTerapia.atStartOfDay(zoneId).toInstant().toEpochMilli();
+        long maxDateMillis = dataFineTerapia.atStartOfDay(zoneId).toInstant().toEpochMilli();
+
+        datePickerDialog.getDatePicker().setMinDate(minDateMillis);
+        datePickerDialog.getDatePicker().setMaxDate(maxDateMillis);
+        datePickerDialog.show();
     }
 
     private void showErrorDialog(){
