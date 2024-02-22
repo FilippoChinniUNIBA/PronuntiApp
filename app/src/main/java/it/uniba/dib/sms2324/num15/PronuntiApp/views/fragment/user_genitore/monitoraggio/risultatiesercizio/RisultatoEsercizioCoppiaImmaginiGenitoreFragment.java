@@ -48,8 +48,8 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
         View view = inflater.inflate(R.layout.fragment_risultato_es_coppia_immagini, container, false);
 
         setToolBar(view, getString(R.string.risultatoEsercizio));
-
-        navController.navigateUp();
+        // a che serve questo?
+        //navController.navigateUp();
 
         savedInstanceState = getArguments();
 

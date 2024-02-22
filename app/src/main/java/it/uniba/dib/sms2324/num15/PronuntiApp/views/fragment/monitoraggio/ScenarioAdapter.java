@@ -37,7 +37,7 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.Scenar
      
 
     public ScenarioAdapter(List<ScenarioGioco> listaScenari, NavigateTo navigateTo, int idNavToEsercizioDenominazioneImmagine, int idNavToEsercizioCoppiaImmagini, int idNavToEsercizioSequenzaParole, ModificaDataScenariController mController, int indiceTerapia, String idPaziente, int indicePaziente) {
-        listaScenari.sort(Comparator.comparing(ScenarioGioco::getDataInizio).reversed());
+
         this.listaScenari = listaScenari;
         this.navigateTo = navigateTo;
         this.mController = mController;
