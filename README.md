@@ -8,8 +8,8 @@ Caso di Studio di gruppo di **Sviluppo di Mobile Software**
 - Diego Amati&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - 764467 - d.amati6@studenti.uniba.it
 - Nicola Balzano&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                       - 754694 - n.balzano2@studenti.uniba.it
 
-#### Altre Info
-- I materiali relativi alla Consegna sono tutti presenti su [Cartella Consegna SMS - ABCD]()
+### Consegna <br>
+I materiali relativi alla Consegna sono tutti presenti su [Cartella Consegna SMS - ABCD]()
 #### Link Utili (Versioni Google Docs delle Documentazioni)
 [Documentazione SMS - Sviluppo](https://docs.google.com/document/d/1MxPoTQ4-u34BvvMwY7dz4-nAXZBiK7o3bSSQS1MC34k/edit?usp=drive_link)<br>
 [Documentazione SMS - Progettazione Icona](https://docs.google.com/document/d/1THEak-fdt5yi9-NPtGX5_4eC0jSdUH3LI5cWFlz5MNc/edit?usp=drive_link)<br>
