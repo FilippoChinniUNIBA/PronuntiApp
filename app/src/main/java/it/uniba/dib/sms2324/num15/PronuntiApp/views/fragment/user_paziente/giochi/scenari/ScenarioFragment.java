@@ -45,7 +45,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float topHeight;
 	private ImageView personaggioImageView;
 	private ImageView posizioneGioco1ImageView, posizioneGioco2ImageView, posizioneGioco3ImageView;
-	private CurvedLineView curvedLineView1to2, curvedLineView2to3;
 	private float personaggioX, personaggioY, personaggioWidth, personaggioHeight;
 	private ConstraintLayout constraintLayout;
 	private Vibrator vibrator;
@@ -80,8 +79,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 		posizioneGioco3ImageView.setImageResource(R.drawable.earth);*/
 
 
-		curvedLineView1to2 = view.findViewById(R.id.curvedLineView1to2);
-		curvedLineView2to3 = view.findViewById(R.id.curvedLineView2to3);
 
 
 		return view;
@@ -91,18 +88,6 @@ public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		posizioneGioco3ImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				// Rimuovi il listener una volta che la vista è stata completamente inizializzata
-				posizioneGioco3ImageView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-				curvedLineView1to2.setStartPoint(posizioneGioco1ImageView.getX() + (float) posizioneGioco1ImageView.getWidth() / 2, posizioneGioco1ImageView.getY() + (float) posizioneGioco1ImageView.getHeight() / 2);
-				curvedLineView1to2.setEndPoint(posizioneGioco2ImageView.getX() + (float) posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + (float) posizioneGioco2ImageView.getHeight() / 2);
-				curvedLineView2to3.setStartPoint(posizioneGioco2ImageView.getX() + (float) posizioneGioco2ImageView.getWidth() / 2, posizioneGioco2ImageView.getY() + (float) posizioneGioco2ImageView.getHeight() / 2);
-				curvedLineView2to3.setEndPoint(posizioneGioco3ImageView.getX() + (float) posizioneGioco3ImageView.getWidth() / 2, posizioneGioco3ImageView.getY() + (float) posizioneGioco3ImageView.getHeight() / 2);
-			}
-		});
 		int scenarioIndex = bundle.getInt("indiceScenarioCorrente");
 		int terapiaIndex = bundle.getInt("indiceTerapia");
 		Log.d("indiceScenarioCorrente","indiceScenarioCorrente "+String.valueOf(scenarioIndex));

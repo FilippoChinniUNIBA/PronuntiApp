@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fineScenarioView"
-        android:background="#61C51A1A"
         android:elevation="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,27 +21,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.CurvedLineView
-        android:id="@+id/curvedLineView2to3"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/line_posizioni"
+        app:layout_constraintTop_toBottomOf="@+id/posizione_secondo_esercizio"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginBottom="175dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_marginStart="125dp"
+        />
 
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.scenari.CurvedLineView
-        android:id="@+id/curvedLineView1to2"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/line_posizioni"
+        app:layout_constraintBottom_toTopOf="@+id/posizione_secondo_esercizio"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="65dp"
+        android:layout_marginTop="250dp"
+        android:scaleX="-1"
+        />
 
 
     <ImageView
