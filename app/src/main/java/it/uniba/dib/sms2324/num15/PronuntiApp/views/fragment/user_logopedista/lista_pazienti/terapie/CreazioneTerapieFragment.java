@@ -118,13 +118,15 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         List<Terapia> terapiePaziente = paziente.getTerapie();
         LocalDate dataInizioNuovaTerapia = LocalDate.parse(dataInizio.getText().toString());
         LocalDate dataFineNuovaTerapia = LocalDate.parse(dataFine.getText().toString());
-
-        for (Terapia terapiaPaziente : terapiePaziente){
-            LocalDate dataInizioTerapiaEsistente = terapiaPaziente.getDataInizio();
-            LocalDate dataFineTerapiaEsistente = terapiaPaziente.getDataFine();
-            if ((dataInizioNuovaTerapia.isEqual(dataInizioTerapiaEsistente) || dataInizioNuovaTerapia.isBefore(dataInizioTerapiaEsistente)) || (dataFineNuovaTerapia.isEqual(dataFineTerapiaEsistente) || dataFineNuovaTerapia.isBefore(dataFineTerapiaEsistente))) {
-                return true;
+        if(terapiePaziente ==null) {
+            for (Terapia terapiaPaziente : terapiePaziente) {
+                LocalDate dataInizioTerapiaEsistente = terapiaPaziente.getDataInizio();
+                LocalDate dataFineTerapiaEsistente = terapiaPaziente.getDataFine();
+                if ((dataInizioNuovaTerapia.isEqual(dataInizioTerapiaEsistente) || dataInizioNuovaTerapia.isBefore(dataInizioTerapiaEsistente)) || (dataFineNuovaTerapia.isEqual(dataFineTerapiaEsistente) || dataFineNuovaTerapia.isBefore(dataFineTerapiaEsistente))) {
+                    return true;
+                }
             }
+            return false;
         }
         return false;
     }
