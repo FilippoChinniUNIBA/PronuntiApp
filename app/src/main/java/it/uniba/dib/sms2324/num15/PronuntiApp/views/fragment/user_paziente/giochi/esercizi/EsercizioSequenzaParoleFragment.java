@@ -256,7 +256,7 @@ public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioF
         AudioConverter.convertiAudio(audioRecorder.getAudioFile(), fileConvertito);
         ComandiFirebaseStorage comandiFirebaseStorage = new ComandiFirebaseStorage();
         AtomicReference<String> audioRegistrato = new AtomicReference<>();
-        String directoryCorrente = ComandiFirebaseStorage.AUDIO_REGISTRATI_DENOMINAZIONE_IMMAGINE;
+        String directoryCorrente = ComandiFirebaseStorage.AUDIO_REGISTRATI_SEQUENZA_PAROLE;
 
         comandiFirebaseStorage.uploadFileAndGetLink(Uri.fromFile(fileConvertito), directoryCorrente)
                 .thenAccept(value ->{

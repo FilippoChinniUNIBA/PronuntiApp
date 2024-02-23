@@ -368,7 +368,7 @@ public class CreazioneScenarioFragment extends AbstractFragmentWithNavigation {
             Uri uri = data.getData();
 
             ComandiFirebaseStorage comandiFirebaseStorage = new ComandiFirebaseStorage();
-            comandiFirebaseStorage.uploadFileAndGetLink(uri, "TEST/TERPIA_TEST").thenAccept(link -> {
+            comandiFirebaseStorage.uploadFileAndGetLink(uri, ComandiFirebaseStorage.SCENARIGIOCO).thenAccept(link -> {
 
                 switch (requestCode) {
                     case PICK_FILE_REQUEST_1:
