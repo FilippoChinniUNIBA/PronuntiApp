@@ -142,7 +142,7 @@
                 android:layout_height="48dp"
                 android:src="@drawable/ic_check"
                 android:layout_gravity="center"
-                android:visibility="visible"
+                android:visibility="gone"
                 />
             <ImageView
                 android:id="@+id/imageViewWrongEsercizio"
@@ -152,7 +152,14 @@
                 android:layout_gravity="center"
                 android:visibility="gone"
                 />
-
+            <ImageView
+                android:id="@+id/imageViewNonSvoltoEsercizio"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_non_eseguito"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

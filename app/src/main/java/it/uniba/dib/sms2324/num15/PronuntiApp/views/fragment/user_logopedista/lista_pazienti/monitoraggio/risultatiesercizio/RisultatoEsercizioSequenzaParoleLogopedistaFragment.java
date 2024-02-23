@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,8 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
     private String idPaziente;
     private LogopedistaViewModel mLogopedistaViewModel;
 
+    private LinearLayout linearLayoutRispostaData;
+    private ImageView imageViewNonSvoltoEsercizio;
 
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
     @Override
@@ -74,6 +77,8 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
 
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
+        linearLayoutRispostaData = view.findViewById(R.id.linearLayoutRispostaData);
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
         playButtonRisposta = view.findViewById(R.id.imageButtonAvviaAudioRegistrato);
         pauseButtonRisposta = view.findViewById(R.id.imageButtonPausaAudioRegistrato);
         pauseButtonRisposta.setVisibility(View.GONE);
@@ -89,23 +94,35 @@ public class RisultatoEsercizioSequenzaParoleLogopedistaFragment extends Abstrac
 
         this.audioRecorder = initAudioRecorder();
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
-        this.audioPlayerLinkRegistrazione = new AudioPlayerLink(mEsercizioSequenzaParole.getRisultatoEsercizio().getAudioRegistrato());
 
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        if (isCorrect()) {
-            imageViewCheck.setVisibility(View.VISIBLE);
+        if(isNonSvolto()) {
+            linearLayoutRispostaData.setVisibility(View.INVISIBLE);
             imageViewWrong.setVisibility(View.GONE);
-        } else {
             imageViewCheck.setVisibility(View.GONE);
-            imageViewWrong.setVisibility(View.VISIBLE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        }
+        else {
+            if (isCorrect()) {
+                imageViewCheck.setVisibility(View.VISIBLE);
+                imageViewWrong.setVisibility(View.GONE);
+            } else {
+                imageViewCheck.setVisibility(View.GONE);
+                imageViewWrong.setVisibility(View.VISIBLE);
+            }
+            playButtonRisposta.setOnClickListener(v -> playAudio());
+            pauseButtonRisposta.setOnClickListener(v -> stopAudio());
+            this.audioPlayerLinkRegistrazione = new AudioPlayerLink(mEsercizioSequenzaParole.getRisultatoEsercizio().getAudioRegistrato());
+
         }
 
         imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
         imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
+    }
 
-        playButtonRisposta.setOnClickListener(v -> playAudio());
-        pauseButtonRisposta.setOnClickListener(v -> stopAudio());
+    private boolean isNonSvolto() {
+        return this.mEsercizioSequenzaParole.getRisultatoEsercizio() == null;
     }
 
     private AudioRecorder initAudioRecorder() {

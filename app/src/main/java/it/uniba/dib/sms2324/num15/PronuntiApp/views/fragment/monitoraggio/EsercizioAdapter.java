@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -84,14 +85,16 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             holder.imageViewCheckEsercizio.setVisibility(View.GONE);
             holder.imageViewWrongEsercizio.setVisibility(View.GONE);
             holder.imageViewNonEseguito.setVisibility(View.VISIBLE);
-            holder.imageViewSeeMoreEsercizio.setVisibility(View.GONE);
-            holder.imageViewSeeMoreEsercizio.setVisibility(View.INVISIBLE);
-            holder.itemView.setOnClickListener(null);
+            holder.imageViewSeeMoreEsercizio.setVisibility(View.VISIBLE);
+            //non svolto mostra solo l'esercizio
+            setUpOnClickCardView(holder, esercizio, position);
+
         } else if (esercizio.getRisultatoEsercizio().isEsitoCorretto()) {
             holder.imageViewCheckEsercizio.setVisibility(View.VISIBLE);
             holder.imageViewWrongEsercizio.setVisibility(View.GONE);
             holder.imageViewNonEseguito.setVisibility(View.GONE);
             setUpOnClickCardView(holder, esercizio, position);
+
         } else {
             holder.imageViewCheckEsercizio.setVisibility(View.GONE);
             holder.imageViewWrongEsercizio.setVisibility(View.VISIBLE);
@@ -143,6 +146,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
         private ImageView imageViewWrongEsercizio;
         private ImageView imageViewNonEseguito;
         private ImageView imageViewSeeMoreEsercizio;
+        private RelativeLayout relativeLayoutEsercizio;
 
         public EsercizioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -152,6 +156,7 @@ public class EsercizioAdapter extends RecyclerView.Adapter<EsercizioAdapter.Eser
             imageViewWrongEsercizio = itemView.findViewById(R.id.imageViewWrongEsercizio);
             imageViewNonEseguito = itemView.findViewById(R.id.imageViewNonEseguito);
             imageViewSeeMoreEsercizio = itemView.findViewById(R.id.imageViewSeeMoreEsercizio);
+            relativeLayoutEsercizio = itemView.findViewById(R.id.relativeLayoutEsercizio);
         }
     }
 

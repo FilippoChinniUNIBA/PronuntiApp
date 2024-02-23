@@ -37,6 +37,7 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
     private ImageButton imageButtonPause;
     private ImageView imageViewCheck;
     private ImageView imageViewWrong;
+    private ImageView imageViewNonSvoltoEsercizio;
     private int indiceEsercizio;
     private int indiceScenario;
     private int indiceTerapia;
@@ -66,7 +67,7 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
         seekBarEsercizioCoppiaImmagini = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioCoppiaImmagini);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
-
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
 
@@ -86,7 +87,12 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        if (isCorrect()) {
+        if(isNonSvolto()){
+            imageViewCheck.setVisibility(View.GONE);
+            imageViewWrong.setVisibility(View.GONE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        }
+        else if (isCorrect()) {
             imageViewCheck.setVisibility(View.VISIBLE);
             imageViewWrong.setVisibility(View.GONE);
         } else {
@@ -163,7 +169,10 @@ public class RisultatoEsercizioCoppiaImmaginiGenitoreFragment extends AbstractFr
 
     private boolean isCorrect() {
         return this.mEsercizioCoppiaImmagini.getRisultatoEsercizio().isEsitoCorretto();
+    }
 
+    private boolean isNonSvolto() {
+        return this.mEsercizioCoppiaImmagini.getRisultatoEsercizio() == null;
     }
 
     private EsercizioCoppiaImmagini getEsercizioCoppiaImmaginiFromViewModel(int indiceEsercizio, int indiceScenario, int indiceTerapia){

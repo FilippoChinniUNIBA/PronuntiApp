@@ -42,6 +42,7 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
     private int indiceEsercizio;
     private int indiceScenario;
     private LogopedistaViewModel mLogopedistaViewModel;
+    private ImageView imageViewNonSvoltoEsercizio;
 
 
     @Override
@@ -71,6 +72,7 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
 
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
 
         return view;
     }
@@ -86,7 +88,12 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioCoppiaImmagini.getAudioEsercizio());
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        if (isCorrect()) {
+        if(isNonSvolto()){
+            imageViewCheck.setVisibility(View.GONE);
+            imageViewWrong.setVisibility(View.GONE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        }
+        else if (isCorrect()) {
             imageViewCheck.setVisibility(View.VISIBLE);
             imageViewWrong.setVisibility(View.GONE);
         } else {
@@ -96,6 +103,10 @@ public class RisultatoEsercizioCoppiaImmaginiLogopedistaFragment extends Abstrac
 
         imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
         imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
+    }
+
+    private boolean isNonSvolto() {
+        return this.mEsercizioCoppiaImmagini.getRisultatoEsercizio() == null;
     }
 
     private AudioRecorder initAudioRecorder() {

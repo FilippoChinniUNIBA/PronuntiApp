@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,8 @@ public class RisultatoEsercizioDenominazioneImmagineLogopedistaFragment extends 
     private String idPaziente;
     private LogopedistaViewModel mLogopedistaViewModel;
     private AudioPlayerLink audioPlayerLink;
+    private LinearLayout linearLayoutRispostaData;
+    private ImageView imageViewNonSvoltoEsercizio;
 
 
     @Override
@@ -62,6 +65,8 @@ public class RisultatoEsercizioDenominazioneImmagineLogopedistaFragment extends 
         immagineEsercizioDenominazioneImageView = view.findViewById(R.id.imageViewImmagineEsercizioDenominazione);
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
+        linearLayoutRispostaData = view.findViewById(R.id.linearLayoutRispostaData);
         textAiutiUtilizzati = view.findViewById(R.id.textAiutiUtilizzati);
         playButton = view.findViewById(R.id.imageButtonAvviaAudioRegistrato);
         pauseButton = view.findViewById(R.id.imageButtonPausaAudioRegistrato);
@@ -76,19 +81,31 @@ public class RisultatoEsercizioDenominazioneImmagineLogopedistaFragment extends 
         this.mEsercizioDenominazioneImmagine = getmEsercizioDenominazioneImmagineFromViewModel();
         Picasso.get().load(mEsercizioDenominazioneImmagine.getImmagineEsercizio()).into(immagineEsercizioDenominazioneImageView);
 
-        if (isCorrect()) {
-            imageViewCheck.setVisibility(View.VISIBLE);
-            imageViewWrong.setVisibility(View.GONE);
-        } else {
+        if (isNonSvolto()) {
             imageViewCheck.setVisibility(View.GONE);
-            imageViewWrong.setVisibility(View.VISIBLE);
+            imageViewWrong.setVisibility(View.GONE);
+            textAiutiUtilizzati.setVisibility(View.GONE);
+            linearLayoutRispostaData.setVisibility(View.INVISIBLE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        } else {
+            if (isCorrect()) {
+                imageViewCheck.setVisibility(View.VISIBLE);
+                imageViewWrong.setVisibility(View.GONE);
+            } else {
+                imageViewCheck.setVisibility(View.GONE);
+                imageViewWrong.setVisibility(View.VISIBLE);
+            }
+            textAiutiUtilizzati.setText("Aiuti utilizzati: " + mEsercizioDenominazioneImmagine.getRisultatoEsercizio().getCountAiuti());
         }
 
-        textAiutiUtilizzati.setText("Aiuti utilizzati: " + mEsercizioDenominazioneImmagine.getRisultatoEsercizio().getCountAiuti());
 
         playButton.setOnClickListener(v -> playAudio());
         pauseButton.setOnClickListener(v -> stopAudio());
 
+    }
+
+    private boolean isNonSvolto() {
+        return this.mEsercizioDenominazioneImmagine.getRisultatoEsercizio() == null;
     }
 
     private void playAudio() {

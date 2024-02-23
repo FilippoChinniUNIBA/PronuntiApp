@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWit
 public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends AbstractFragmentWithNavigation {
     private ImageView imageViewCheck;
     private ImageView imageViewWrong;
+    private ImageView imageViewNonSvoltoEsercizio;
     private TextView textAiutiUtilizzati;
     private ImageButton playButton;
     private ImageButton pauseButton;
@@ -35,6 +37,7 @@ public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends Abs
     private int indiceTerapia;
     private GenitoreViewModel mGenitoreViewModel;
     private AudioPlayerLink audioPlayerLink;
+    private LinearLayout linearLayoutRispostaData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends Abs
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
         textAiutiUtilizzati = view.findViewById(R.id.textAiutiUtilizzati);
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
+        linearLayoutRispostaData = view.findViewById(R.id.linearLayoutRispostaData);
         playButton = view.findViewById(R.id.imageButtonAvviaAudioRegistrato);
         pauseButton = view.findViewById(R.id.imageButtonPausaAudioRegistrato);
         pauseButton.setVisibility(View.GONE);
@@ -71,19 +76,27 @@ public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends Abs
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.mEsercizioDenominazioneImmagine = getEsercizioDenominazioneFromViewModel(indiceEsercizio,indiceScenario,indiceTerapia);
+        this.mEsercizioDenominazioneImmagine = getEsercizioDenominazioneFromViewModel(indiceEsercizio, indiceScenario, indiceTerapia);
 
         Picasso.get().load(mEsercizioDenominazioneImmagine.getImmagineEsercizio()).into(immagineEsercizioDenominazioneImageView);
 
-        if (isCorrect()) {
-            imageViewCheck.setVisibility(View.VISIBLE);
-            imageViewWrong.setVisibility(View.GONE);
-        } else {
+        if (isNonSvolto()) {
             imageViewCheck.setVisibility(View.GONE);
-            imageViewWrong.setVisibility(View.VISIBLE);
+            imageViewWrong.setVisibility(View.GONE);
+            textAiutiUtilizzati.setVisibility(View.GONE);
+            linearLayoutRispostaData.setVisibility(View.INVISIBLE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        } else {
+            if (isCorrect()) {
+                imageViewCheck.setVisibility(View.VISIBLE);
+                imageViewWrong.setVisibility(View.GONE);
+            } else {
+                imageViewCheck.setVisibility(View.GONE);
+                imageViewWrong.setVisibility(View.VISIBLE);
+            }
+            int aiuti = mEsercizioDenominazioneImmagine.getRisultatoEsercizio().getCountAiuti();
+            textAiutiUtilizzati.setText(textAiutiUtilizzati.getText().toString() + " " + aiuti);
         }
-        int aiuti = mEsercizioDenominazioneImmagine.getRisultatoEsercizio().getCountAiuti();
-        textAiutiUtilizzati.setText( textAiutiUtilizzati.getText().toString()+" "+aiuti);
 
         playButton.setOnClickListener(v -> playAudio());
         pauseButton.setOnClickListener(v -> stopAudio());
@@ -106,7 +119,9 @@ public class RisultatoEsercizioDenominazioneImmagineGenitoreFragment extends Abs
     private boolean isCorrect() {
         return mEsercizioDenominazioneImmagine.getRisultatoEsercizio().isEsitoCorretto();
     }
-
+    private boolean isNonSvolto() {
+        return this.mEsercizioDenominazioneImmagine.getRisultatoEsercizio() == null;
+    }
     private EsercizioDenominazioneImmagine getEsercizioDenominazioneFromViewModel(int indiceEsercizio, int indiceScenario, int indiceTerapia){
         Log.d("RisultatoDenominazione", ":"+ indiceEsercizio);
         Log.d("RisultatoSequenzaParole", ":"+  mGenitoreViewModel.getPazienteLiveData().getValue().getTerapie().get(indiceTerapia).getScenariGioco().get(indiceScenario).getEsercizi().get(indiceEsercizio).toString());

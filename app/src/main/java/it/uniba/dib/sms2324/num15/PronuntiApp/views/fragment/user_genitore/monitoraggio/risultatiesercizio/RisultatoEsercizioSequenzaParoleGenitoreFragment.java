@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,8 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
     private int indiceScenario;
     private GenitoreViewModel mGenitoreViewModel;
     private EsercizioSequenzaParole mEsercizioSequenzaParole;
+    private LinearLayout linearLayoutRispostaData;
+    private ImageView imageViewNonSvoltoEsercizio;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_risultato_es_sequenza_parole, container, false);
@@ -63,7 +66,9 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
         seekBarEsercizioSequenzaParole = view.findViewById(R.id.seekBarScorrimentoAudioEsercizioSequenzaParole);
         imageButtonPlay = view.findViewById(R.id.playButton);
         imageButtonPause = view.findViewById(R.id.pauseButton);
+        linearLayoutRispostaData = view.findViewById(R.id.linearLayoutRispostaData);
 
+        imageViewNonSvoltoEsercizio = view.findViewById(R.id.imageViewNonSvoltoEsercizio);
         imageViewCheck = view.findViewById(R.id.imageViewCheckEsercizio);
         imageViewWrong = view.findViewById(R.id.imageViewWrongEsercizio);
         playButtonRisposta = view.findViewById(R.id.imageButtonAvviaAudioRegistrato);
@@ -85,19 +90,26 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
         this.audioPlayerLink = new AudioPlayerLink(mEsercizioSequenzaParole.getAudioEsercizio());
         this.mMediaPlayer = audioPlayerLink.getMediaPlayer();
 
-        if (isCorrect()) {
-            imageViewCheck.setVisibility(View.VISIBLE);
+        if(isNonSvolto()) {
+            linearLayoutRispostaData.setVisibility(View.INVISIBLE);
             imageViewWrong.setVisibility(View.GONE);
-        } else {
             imageViewCheck.setVisibility(View.GONE);
-            imageViewWrong.setVisibility(View.VISIBLE);
+            imageViewNonSvoltoEsercizio.setVisibility(View.VISIBLE);
+        }
+        else {
+            if (isCorrect()) {
+                imageViewCheck.setVisibility(View.VISIBLE);
+                imageViewWrong.setVisibility(View.GONE);
+            } else {
+                imageViewCheck.setVisibility(View.GONE);
+                imageViewWrong.setVisibility(View.VISIBLE);
+            }
+            playButtonRisposta.setOnClickListener(v -> playAudio());
+            pauseButtonRisposta.setOnClickListener(v -> stopAudio());
         }
 
         imageButtonPlay.setOnClickListener(v -> avviaRiproduzioneAudio());
         imageButtonPause.setOnClickListener(v -> stoppaRiproduzioneAudio());
-
-        playButtonRisposta.setOnClickListener(v -> playAudio());
-        pauseButtonRisposta.setOnClickListener(v -> stopAudio());
     }
 
     private AudioRecorder initAudioRecorder() {
@@ -105,6 +117,10 @@ public class RisultatoEsercizioSequenzaParoleGenitoreFragment extends AbstractFr
         File audioRegistrazione = new File(cartellaApp, "tempAudioRegistrato");
 
         return new AudioRecorder(audioRegistrazione);
+    }
+
+    private boolean isNonSvolto() {
+        return this.mEsercizioSequenzaParole.getRisultatoEsercizio() == null;
     }
 
     private void avviaRiproduzioneAudio() {
