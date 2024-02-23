@@ -243,6 +243,7 @@ public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEse
     private void  addRicompensaScenario(){
         int ricompensaFinale = scenarioGioco.getRicompensaFinale();
         mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
+        mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(ricompensaFinale);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 

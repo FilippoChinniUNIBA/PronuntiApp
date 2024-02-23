@@ -230,6 +230,7 @@ public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioF
     private void  addRicompensaScenario(){
         int ricompensaFinale = scenarioGioco.getRicompensaFinale();
         mPazienteViewModel.getPazienteLiveData().getValue().incrementaValuta(ricompensaFinale);
+        mPazienteViewModel.getPazienteLiveData().getValue().incrementaPunteggioTot(ricompensaFinale);
         mPazienteViewModel.aggiornaPazienteRemoto();
     }
 
