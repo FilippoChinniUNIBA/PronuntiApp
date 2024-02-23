@@ -49,6 +49,7 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
         registerReceiver(networkChangeReceiver, filter);
     }
 
+
     protected void setOnBackPressedCallback(int id) {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             private boolean doubleBackToExit= false;
@@ -59,6 +60,8 @@ public abstract class AbstractAppActivity extends AppCompatActivity {
                 } else if (navcontroller.getCurrentDestination().getId() == id) {
                     doubleBackToExit = true;
                     Toast.makeText(getApplicationContext(),getString(R.string.closeApp) , Toast.LENGTH_SHORT).show();
+                }
+                else if (navcontroller.navigateUp()) {
                 }
                 else {
                     navcontroller.navigate(id);

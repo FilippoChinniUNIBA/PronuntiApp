@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/posizione_secondo_esercizio"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="65dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginTop="260dp"
         android:scaleX="-1"
         />
