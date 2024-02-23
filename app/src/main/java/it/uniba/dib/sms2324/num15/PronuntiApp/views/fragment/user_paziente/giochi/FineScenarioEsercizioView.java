@@ -1,4 +1,4 @@
-package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi;
+package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -57,9 +57,9 @@ public class FineScenarioEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewFineScenario.setVisibility(View.VISIBLE);
 
-        imageView1.setVisibility(View.GONE);
-        imageView2.setVisibility(View.GONE);
-        imageView3.setVisibility(View.GONE);
+        imageView1.setVisibility(View.INVISIBLE);
+        imageView2.setVisibility(View.INVISIBLE);
+        imageView3.setVisibility(View.INVISIBLE);
 
         animazioneIncrementoValutaFineScenario(coins, imageView1, imageView2, imageView3);
     }

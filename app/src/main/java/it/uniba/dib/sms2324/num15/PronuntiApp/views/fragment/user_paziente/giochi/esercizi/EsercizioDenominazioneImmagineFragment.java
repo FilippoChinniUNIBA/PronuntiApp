@@ -41,11 +41,12 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.gio
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+
 import android.net.Uri;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.external_api.ffmpegkit_api.AudioConverter;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.FineScenarioEsercizioView;
 
 
 public class EsercizioDenominazioneImmagineFragment extends AbstractFragmenteEsercizioFineScenario {

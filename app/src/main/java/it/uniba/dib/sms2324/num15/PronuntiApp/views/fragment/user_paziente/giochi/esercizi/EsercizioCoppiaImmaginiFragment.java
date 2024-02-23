@@ -34,7 +34,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.utils.audio_player.AudioPlayerLink;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.giochi.EsercizioCoppiaImmaginiController;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.FineScenarioEsercizioView;
 
 public class EsercizioCoppiaImmaginiFragment extends AbstractFragmenteEsercizioFineScenario {
     private TextView textViewEsercizioCoppiaImmagini, textViewEsercizioPlaySuggestion;

@@ -37,7 +37,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.scenariogioco.Scenar
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.terapia.Terapia;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.PazienteViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineScenarioEsercizioView;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.FineScenarioEsercizioView;
 
 public class ScenarioFragment extends AbstractFragmentWithNavigation {
 	private float xDelta, yDelta;

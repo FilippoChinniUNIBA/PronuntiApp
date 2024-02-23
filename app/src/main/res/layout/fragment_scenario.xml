@@ -10,7 +10,7 @@
     tools:context=".views.fragment.user_paziente.giochi.scenari.ScenarioFragment"
     >
 
-    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.esercizi.FineScenarioEsercizioView
+    <it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.FineScenarioEsercizioView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fineScenarioView"

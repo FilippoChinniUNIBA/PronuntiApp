@@ -44,7 +44,7 @@ import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.paziente_viewmodels.gio
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.PermessiDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.RichiestaConfermaDialog;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.user_paziente.giochi.FineScenarioEsercizioView;
 
 public class EsercizioSequenzaParoleFragment extends AbstractFragmenteEsercizioFineScenario {
     private FineScenarioEsercizioView fineScenarioEsercizioView;
