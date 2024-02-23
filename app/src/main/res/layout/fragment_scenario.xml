@@ -32,18 +32,19 @@
         android:layout_marginStart="125dp"
         />
 
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="265dp"
+        android:layout_marginEnd="72dp"
+        android:scaleX="-1"
+        android:scaleY="1.2"
         android:src="@drawable/line_posizioni"
         app:layout_constraintBottom_toTopOf="@+id/posizione_secondo_esercizio"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="70dp"
-        android:layout_marginTop="260dp"
-        android:scaleX="-1"
-        />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.614" />
 
     <ImageView
         android:id="@+id/posizione_primo_esercizio"
