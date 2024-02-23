@@ -53,9 +53,9 @@
             android:windowSoftInputMode="adjustPan"
             />
 
-        <activity android:name=".testingTODELETE.TEST_Activity"
+        <!--<activity android:name=".testingTODELETE.TEST_Activity"
             android:theme="@style/Theme.PronuntiAppActionBar"
-            />
+            />-->
 
     </application>
 
