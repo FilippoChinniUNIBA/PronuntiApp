@@ -118,7 +118,7 @@ public class CreazioneTerapieFragment extends AbstractFragmentWithNavigation imp
         List<Terapia> terapiePaziente = paziente.getTerapie();
         LocalDate dataInizioNuovaTerapia = LocalDate.parse(dataInizio.getText().toString());
         LocalDate dataFineNuovaTerapia = LocalDate.parse(dataFine.getText().toString());
-        if(terapiePaziente ==null) {
+        if(terapiePaziente !=null) {
             for (Terapia terapiaPaziente : terapiePaziente) {
                 LocalDate dataInizioTerapiaEsistente = terapiaPaziente.getDataInizio();
                 LocalDate dataFineTerapiaEsistente = terapiaPaziente.getDataFine();
