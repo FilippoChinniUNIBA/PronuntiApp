@@ -57,10 +57,11 @@ public class FineScenarioEsercizioView extends FrameLayout {
         imageViewUpCoin.setVisibility(View.VISIBLE);
         textViewFineScenario.setVisibility(View.VISIBLE);
 
+        /*
         imageView1.setVisibility(View.INVISIBLE);
         imageView2.setVisibility(View.INVISIBLE);
         imageView3.setVisibility(View.INVISIBLE);
-
+        */
         animazioneIncrementoValutaFineScenario(coins, imageView1, imageView2, imageView3);
     }
 
