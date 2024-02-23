@@ -1,6 +1,5 @@
 package it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.autenticazione;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +14,11 @@ import java.util.concurrent.CompletableFuture;
 import it.uniba.dib.sms2324.num15.PronuntiApp.R;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.autenticazione.AuthSharedPreferences;
 import it.uniba.dib.sms2324.num15.PronuntiApp.models.domain.profilo.Profilo;
-import it.uniba.dib.sms2324.num15.PronuntiApp.testingTODELETE.TEST_Activity;
 import it.uniba.dib.sms2324.num15.PronuntiApp.viewmodels.autenticazione_viewmodel.LoginViewModel;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.activity.AbstractAppActivity;
-import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.FragmentCaricamento;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.dialog.InfoDialog;
 import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.AbstractFragmentWithNavigation;
+import it.uniba.dib.sms2324.num15.PronuntiApp.views.fragment.utils_fragments.FragmentCaricamento;
 
 public class AvvioRapidoFragment extends AbstractFragmentWithNavigation {
     private static final String EMAIL_LOGOPEDISTA_PREDEFINITO = "predefinito@logopedista.it";
